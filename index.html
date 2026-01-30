@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domine a Era da IA | Newscale Consulting</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --beige: #D0D0CA;
+            --dark-teal: #14373C;
+            --terracotta: #B06E4A;
+            --muted-green: #435D51;
+            --white: #FAFAF8;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: var(--beige);
+            color: var(--dark-teal);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 24px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Subtle texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 540px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Decorative element */
+        .decorative-line {
+            width: 60px;
+            height: 2px;
+            background: var(--terracotta);
+            margin: 0 auto 48px;
+            opacity: 0;
+            animation: fadeSlideUp 0.8s ease forwards;
+            animation-delay: 0.1s;
+        }
+
+        .headline {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(2.8rem, 8vw, 4rem);
+            font-weight: 400;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+            opacity: 0;
+            animation: fadeSlideUp 0.8s ease forwards;
+            animation-delay: 0.2s;
+        }
+
+        .subheadline {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(1.4rem, 4vw, 1.8rem);
+            font-weight: 400;
+            font-style: italic;
+            color: var(--muted-green);
+            margin-bottom: 32px;
+            opacity: 0;
+            animation: fadeSlideUp 0.8s ease forwards;
+            animation-delay: 0.35s;
+        }
+
+        .description {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--dark-teal);
+            opacity: 0.85;
+            margin-bottom: 40px;
+            max-width: 420px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            animation: fadeSlideUp 0.8s ease forwards;
+            animation-delay: 0.5s;
+        }
+
+        .form-container {
+            margin-bottom: 48px;
+            opacity: 0;
+            animation: fadeSlideUp 0.8s ease forwards;
+            animation-delay: 0.65s;
+        }
+
+        .email-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            max-width: 380px;
+            margin: 0 auto;
+        }
+
+        .email-input {
+            width: 100%;
+            padding: 18px 24px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            background: var(--white);
+            color: var(--dark-teal);
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 16px rgba(20, 55, 60, 0.06);
+        }
+
+        .email-input::placeholder {
+            color: #8A9A9C;
+        }
+
+        .email-input:focus {
+            border-color: var(--terracotta);
+            box-shadow: 0 4px 24px rgba(176, 110, 74, 0.15);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px 32px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--white);
+            background: var(--terracotta);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .submit-btn:hover {
+            background: #9A5E3F;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(176, 110, 74, 0.3);
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .social-proof {
+            margin-bottom: 56px;
+            padding: 24px 28px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 12px;
+            border-left: 3px solid var(--terracotta);
+            text-align: left;
+            opacity: 0;
+            animation: fadeSlideUp 0.8s ease forwards;
+            animation-delay: 0.8s;
+        }
+
+        .social-proof-quote {
+            font-size: 1rem;
+            font-style: italic;
+            line-height: 1.6;
+            color: var(--dark-teal);
+            margin-bottom: 12px;
+        }
+
+        .social-proof-author {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--muted-green);
+            letter-spacing: 0.02em;
+        }
+
+        .signature {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            opacity: 0;
+            animation: fadeSlideUp 0.8s ease forwards;
+            animation-delay: 0.95s;
+        }
+
+        .signature-photo {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--muted-green);
+            border: 3px solid var(--white);
+            box-shadow: 0 4px 12px rgba(20, 55, 60, 0.12);
+            object-fit: cover;
+            /* Placeholder - replace src with actual photo */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .signature-text {
+            text-align: left;
+        }
+
+        .signature-name {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.1rem;
+            color: var(--dark-teal);
+            margin-bottom: 2px;
+        }
+
+        .signature-company {
+            font-size: 0.8rem;
+            color: var(--muted-green);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 480px) {
+            body {
+                padding: 32px 20px;
+                justify-content: flex-start;
+                padding-top: 60px;
+            }
+
+            .decorative-line {
+                margin-bottom: 36px;
+            }
+
+            .headline {
+                margin-bottom: 8px;
+            }
+
+            .subheadline {
+                margin-bottom: 24px;
+            }
+
+            .description {
+                margin-bottom: 32px;
+                font-size: 1rem;
+            }
+
+            .form-container {
+                margin-bottom: 40px;
+            }
+
+            .email-input,
+            .submit-btn {
+                padding: 16px 20px;
+            }
+
+            .social-proof {
+                margin-bottom: 40px;
+                padding: 20px 22px;
+            }
+
+            .signature-photo {
+                width: 48px;
+                height: 48px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="decorative-line"></div>
+        
+        <h1 class="headline">Domine a Era da IA</h1>
+        
+        <p class="subheadline">Para quem não é programador</p>
+        
+        <p class="description">
+            5 emails. 5 dias. Uma virada de chave na forma como você usa inteligência artificial no trabalho e no dia a dia.
+        </p>
+        
+        <div class="form-container">
+            <form class="email-form" action="#" method="POST">
+                <input 
+                    type="email" 
+                    class="email-input" 
+                    placeholder="Seu melhor email"
+                    required
+                    autocomplete="email"
+                >
+                <button type="submit" class="submit-btn">Quero Começar</button>
+            </form>
+        </div>
+        
+        <div class="social-proof">
+            <p class="social-proof-quote">"Reduzi meu planejamento semanal de 2 horas para 10 minutos."</p>
+            <p class="social-proof-author">— Jennifer Lima</p>
+        </div>
+        
+        <div class="signature">
+            <!-- Replace the div below with an actual img tag when you have the photo -->
+            <!-- <img src="sua-foto.jpg" alt="Bruna Santanna" class="signature-photo"> -->
+            <div class="signature-photo">B</div>
+            <div class="signature-text">
+                <p class="signature-name">Bruna Santanna</p>
+                <p class="signature-company">Newscale Consulting</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
