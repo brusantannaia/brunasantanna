@@ -1,1 +1,1713 @@
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca de Prompts | Bruna Santanna</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --cream: #F5F3EE;
+            --warm-white: #FDFCFA;
+            --charcoal: #2A2A2A;
+            --sage: #7D8B7A;
+            --terracotta: #C17A5A;
+            --terracotta-dark: #A66548;
+            --soft-brown: #8B7355;
+            --light-sage: #E8EBE6;
+            --border: rgba(125, 139, 122, 0.2);
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.025;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .gate-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
+        .gate-container {
+            max-width: 580px;
+            width: 100%;
+            text-align: center;
+        }
+        .brand-tag {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--sage);
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards;
+        }
+        .gate-headline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 10vw, 4.5rem);
+            font-weight: 400;
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.1s;
+        }
+        .gate-headline em {
+            font-style: italic;
+            color: var(--terracotta);
+        }
+        .gate-subheadline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--soft-brown);
+            margin-bottom: 32px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.2s;
+        }
+        .gate-description {
+            font-size: 1.05rem;
+            line-height: 1.75;
+            color: var(--charcoal);
+            opacity: 0.8;
+            max-width: 460px;
+            margin: 0 auto 40px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.3s;
+        }
+        .gate-stats {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            margin-bottom: 48px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.4s;
+        }
+        .stat { text-align: center; }
+        .stat-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 500;
+            color: var(--terracotta);
+            line-height: 1;
+        }
+        .stat-label {
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--sage);
+            margin-top: 4px;
+        }
+        .form-wrapper {
+            background: var(--warm-white);
+            padding: 40px 36px;
+            border-radius: 16px;
+            box-shadow: 0 4px 40px rgba(42, 42, 42, 0.06);
+            margin-bottom: 32px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.5s;
+        }
+        .form-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        .form-subtitle {
+            font-size: 0.9rem;
+            color: var(--sage);
+            margin-bottom: 24px;
+        }
+        .email-form {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .email-input {
+            width: 100%;
+            padding: 18px 22px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            background: var(--cream);
+            color: var(--charcoal);
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        .email-input::placeholder { color: #9CA3A0; }
+        .email-input:focus {
+            border-color: var(--terracotta);
+            background: var(--warm-white);
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 18px 32px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--warm-white);
+            background: var(--terracotta);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .submit-btn:hover {
+            background: var(--terracotta-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(193, 122, 90, 0.25);
+        }
+        .privacy-note {
+            font-size: 0.8rem;
+            color: var(--sage);
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.6s;
+        }
+        .library-section {
+            padding: 100px 24px 120px;
+            position: relative;
+            z-index: 1;
+        }
+        .library-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 80px;
+        }
+        .library-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.2rem, 6vw, 3rem);
+            font-weight: 400;
+            margin-bottom: 16px;
+        }
+        .library-intro {
+            font-size: 1.1rem;
+            color: var(--soft-brown);
+            line-height: 1.7;
+        }
+        .category-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 60px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .category-btn {
+            padding: 12px 24px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            color: var(--charcoal);
+            background: var(--warm-white);
+            border: 1.5px solid var(--border);
+            border-radius: 100px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .category-btn:hover, .category-btn.active {
+            background: var(--charcoal);
+            color: var(--warm-white);
+            border-color: var(--charcoal);
+        }
+        .prompts-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .category-section { margin-bottom: 80px; }
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+        .category-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--light-sage);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+        }
+        .category-info h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        .category-info p {
+            font-size: 0.9rem;
+            color: var(--sage);
+        }
+        .prompts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 24px;
+        }
+        .prompt-card {
+            background: var(--warm-white);
+            border-radius: 16px;
+            padding: 28px;
+            border: 1px solid var(--border);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .prompt-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--terracotta);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+        .prompt-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(42, 42, 42, 0.08);
+        }
+        .prompt-card:hover::before { transform: scaleY(1); }
+        .prompt-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9rem;
+            color: var(--terracotta);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .prompt-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        .prompt-description {
+            font-size: 0.92rem;
+            color: var(--soft-brown);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        .prompt-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .tag {
+            font-size: 0.72rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            padding: 6px 12px;
+            background: var(--light-sage);
+            color: var(--sage);
+            border-radius: 100px;
+            font-weight: 500;
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(42, 42, 42, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0.95);
+            width: 90%;
+            max-width: 700px;
+            max-height: 85vh;
+            background: var(--warm-white);
+            border-radius: 20px;
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        .modal-header {
+            padding: 28px 32px 20px;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+        }
+        .modal-close {
+            position: absolute;
+            top: 24px; right: 24px;
+            width: 40px; height: 40px;
+            background: var(--cream);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .modal-close:hover {
+            background: var(--charcoal);
+            color: var(--warm-white);
+        }
+        .modal-close svg { width: 18px; height: 18px; }
+        .modal-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 500;
+            padding-right: 48px;
+            margin-bottom: 8px;
+        }
+        .modal-category {
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--terracotta);
+            font-weight: 500;
+        }
+        .modal-body {
+            padding: 28px 32px;
+            max-height: calc(85vh - 200px);
+            overflow-y: auto;
+        }
+        .modal-description {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--soft-brown);
+            margin-bottom: 24px;
+        }
+        .prompt-content {
+            background: var(--cream);
+            border-radius: 12px;
+            padding: 24px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.85rem;
+            line-height: 1.7;
+            color: var(--charcoal);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            border: 1px solid var(--border);
+        }
+        .modal-footer {
+            padding: 20px 32px;
+            border-top: 1px solid var(--border);
+        }
+        .copy-btn {
+            width: 100%;
+            padding: 16px 24px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--warm-white);
+            background: var(--terracotta);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .copy-btn:hover { background: var(--terracotta-dark); }
+        .copy-btn.copied { background: var(--sage); }
+        .footer {
+            text-align: center;
+            padding: 60px 24px;
+            border-top: 1px solid var(--border);
+            background: var(--warm-white);
+        }
+        .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        .footer-tagline {
+            font-size: 0.9rem;
+            color: var(--sage);
+            margin-bottom: 24px;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+        }
+        .footer-links a {
+            font-size: 0.85rem;
+            color: var(--soft-brown);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .footer-links a:hover { color: var(--terracotta); }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 768px) {
+            .gate-stats { gap: 32px; }
+            .stat-number { font-size: 2rem; }
+            .form-wrapper { padding: 32px 24px; }
+            .prompts-grid { grid-template-columns: 1fr; }
+            .modal { width: 95%; max-height: 90vh; }
+            .modal-header, .modal-body, .modal-footer { padding-left: 24px; padding-right: 24px; }
+            .category-nav { gap: 8px; }
+            .category-btn { padding: 10px 18px; font-size: 0.8rem; }
+        }
+        @media (max-width: 480px) {
+            .gate-section { padding: 40px 20px; }
+            .gate-stats { flex-direction: column; gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <section class="gate-section">
+        <div class="gate-container">
+            <p class="brand-tag">Bruna Santanna • Newscale Consulting</p>
+            <h1 class="gate-headline">Biblioteca de <em>Prompts</em></h1>
+            <p class="gate-subheadline">Para transformar sua relação com a IA</p>
+            <p class="gate-description">
+                19 prompts estratégicos testados e refinados para você usar no dia a dia. 
+                Não são comandos básicos — são frameworks de pensamento que mudam resultados.
+            </p>
+            <div class="gate-stats">
+                <div class="stat">
+                    <div class="stat-number">19</div>
+                    <div class="stat-label">Prompts</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">Categorias</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">Possibilidades</div>
+                </div>
+            </div>
+            <div class="form-wrapper">
+                <h3 class="form-title">Acesso gratuito</h3>
+                <p class="form-subtitle">Inscreva-se e desbloqueie a biblioteca completa</p>
+                <form class="email-form" id="gateForm">
+                    <input type="email" class="email-input" placeholder="Seu melhor e-mail" required id="emailInput">
+                    <button type="submit" class="submit-btn">Quero os Prompts</button>
+                </form>
+            </div>
+            <p class="privacy-note">Zero spam. Só conteúdo que vale seu tempo.</p>
+        </div>
+    </section>
+
+    <section class="library-section" id="library">
+        <div class="library-header">
+            <h2 class="library-title">Sua nova forma de usar IA</h2>
+            <p class="library-intro">
+                Cada prompt foi desenhado para extrair o máximo da inteligência artificial.
+                Clique em qualquer card para ver o prompt completo.
+            </p>
+        </div>
+
+        <nav class="category-nav">
+            <button class="category-btn active" data-category="all">Todos</button>
+            <button class="category-btn" data-category="contexto">Contexto</button>
+            <button class="category-btn" data-category="estrategia">Estratégia</button>
+            <button class="category-btn" data-category="critica">Crítica</button>
+            <button class="category-btn" data-category="produtividade">Produtividade</button>
+            <button class="category-btn" data-category="transformacao">Transformação</button>
+            <button class="category-btn" data-category="vida">Vida Real</button>
+        </nav>
+
+        <div class="prompts-container">
+            <div class="category-section" data-category="contexto">
+                <div class="category-header">
+                    <div class="category-icon">🎯</div>
+                    <div class="category-info">
+                        <h2>Contexto Rico</h2>
+                        <p>Faça a IA entender quem você é antes de entregar</p>
+                    </div>
+                </div>
+                <div class="prompts-grid">
+                    <div class="prompt-card" data-prompt="1">
+                        <div class="prompt-number">Parte 1</div>
+                        <h3 class="prompt-title">Contexto Completo</h3>
+                        <p class="prompt-description">Faça a IA te conhecer profundamente antes de criar qualquer coisa. Resultado: outputs que parecem feitos por você.</p>
+                        <div class="prompt-tags"><span class="tag">Personalização</span><span class="tag">Fundação</span></div>
+                    </div>
+                    <div class="prompt-card" data-prompt="5">
+                        <div class="prompt-number">Parte 5</div>
+                        <h3 class="prompt-title">Deixe a IA te Entrevistar</h3>
+                        <p class="prompt-description">Inverta o jogo: em vez de você explicar, deixe a IA fazer as perguntas certas.</p>
+                        <div class="prompt-tags"><span class="tag">Clareza</span><span class="tag">Descoberta</span></div>
+                    </div>
+                    <div class="prompt-card" data-prompt="6">
+                        <div class="prompt-number">Parte 6</div>
+                        <h3 class="prompt-title">Fluxo de Pensamento em Voz</h3>
+                        <p class="prompt-description">Fale sem parar por 10 minutos. A IA organiza seu caos mental em plano de ação estruturado.</p>
+                        <div class="prompt-tags"><span class="tag">Clareza Mental</span><span class="tag">Modo Voz</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-section" data-category="estrategia">
+                <div class="category-header">
+                    <div class="category-icon">♟️</div>
+                    <div class="category-info">
+                        <h2>Pensamento Estratégico</h2>
+                        <p>Use a IA para tomar decisões melhores, não só executar tarefas</p>
+                    </div>
+                </div>
+                <div class="prompts-grid">
+                    <div class="prompt-card" data-prompt="3">
+                        <div class="prompt-number">Parte 3</div>
+                        <h3 class="prompt-title">Análise em 3 Níveis</h3>
+                        <p class="prompt-description">Análise superficial, estratégica e transformacional. Descubra oportunidades perdidas.</p>
+                        <div class="prompt-tags"><span class="tag">Análise</span><span class="tag">Visão 360°</span></div>
+                    </div>
+                    <div class="prompt-card" data-prompt="9">
+                        <div class="prompt-number">Parte 9</div>
+                        <h3 class="prompt-title">Segunda Opinião Estratégica</h3>
+                        <p class="prompt-description">IA como conselheiro que revela pontos cegos e faz red team das suas ideias.</p>
+                        <div class="prompt-tags"><span class="tag">Decisões</span><span class="tag">Red Team</span></div>
+                    </div>
+                    <div class="prompt-card" data-prompt="4">
+                        <div class="prompt-number">Parte 4</div>
+                        <h3 class="prompt-title">Pesquisa Profunda</h3>
+                        <p class="prompt-description">Pesquisa em camadas: do essencial ao avançado. Inclui perspectivas contrárias.</p>
+                        <div class="prompt-tags"><span class="tag">Pesquisa</span><span class="tag">Insights</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-section" data-category="critica">
+                <div class="category-header">
+                    <div class="category-icon">🔥</div>
+                    <div class="category-info">
+                        <h2>Feedback Brutal</h2>
+                        <p>Peça crítica de verdade, não validação</p>
+                    </div>
+                </div>
+                <div class="prompts-grid">
+                    <div class="prompt-card" data-prompt="8">
+                        <div class="prompt-number">Parte 8</div>
+                        <h3 class="prompt-title">Crítica Brutal Antes de Enviar</h3>
+                        <p class="prompt-description">Analise clareza, confiança, impacto e riscos. Gap entre intenção e resultado.</p>
+                        <div class="prompt-tags"><span class="tag">Revisão</span><span class="tag">Qualidade</span></div>
+                    </div>
+                    <div class="prompt-card" data-prompt="10">
+                        <div class="prompt-number">Parte 10</div>
+                        <h3 class="prompt-title">Chefe Ultra Exigente</h3>
+                        <p class="prompt-description">Simule apresentar para o chefe mais difícil. 5 rodadas de teste de stress.</p>
+                        <div class="prompt-tags"><span class="tag">Simulação</span><span class="tag">Stress Test</span></div>
+                    </div>
+                    <div class="prompt-card" data-prompt="18">
+                        <div class="prompt-number">Parte 18</div>
+                        <h3 class="prompt-title">Perguntas que Você Tem Medo</h3>
+                        <p class="prompt-description">5 níveis de perguntas difíceis para situações travadas há tempos.</p>
+                        <div class="prompt-tags"><span class="tag">Desbloqueio</span><span class="tag">Honestidade</span></div>
+                    </div>
+                    <div class="prompt-card" data-prompt="19">
+                        <div class="prompt-number">Parte 19</div>
+                        <h3 class="prompt-title">Espelho das Perguntas Pequenas</h3>
+                        <p class="prompt-description">Análise do seu padrão de uso de IA. Onde você está subcapacitando a ferramenta.</p>
+                        <div class="prompt-tags"><span class="tag">Meta-análise</span><span class="tag">Evolução</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-section" data-category="produtividade">
+                <div class="category-header">
+                    <div class="category-icon">⚡</div>
+                    <div class="category-info">
+                        <h2>Produtividade Real</h2>
+                        <p>Faça mais com menos — de verdade</p>
+                    </div>
+                </div>
+                <div class="prompts-grid">
+                    <div class="prompt-card" data-prompt="2">
+                        <div class="prompt-number">Parte 2</div>
+                        <h3 class="prompt-title">Iteração até a Perfeição</h3>
+                        <p class="prompt-description">Processo de 6 passos para refinar qualquer ideia. Nunca aceite a primeira versão.</p>
+                        <div class="prompt-tags"><span class="tag">Refinamento</span><span class="tag">Qualidade</span></div>
+                    </div>
+                    <div class="prompt-card" data-prompt="7">
+                        <div class="prompt-number">Parte 7</div>
+                        <h3 class="prompt-title">5 Versões Radicalmente Diferentes</h3>
+                        <p class="prompt-description">Técnica, emocional, provocativa, minimalista e criativa. Ângulos completamente diferentes.</p>
+                        <div class="prompt-tags"><span class="tag">Criatividade</span><span class="tag">Opções</span></div>
+                    </div>
+                    <div class="prompt-card" data-prompt="14">
+                        <div class="prompt-number">Parte 14</div>
+                        <h3 class="prompt-title">Matriz: Faz, Delega, Automatiza, Exclui</h3>
+                        <p class="prompt-description">Descubra o que você nem deveria estar fazendo. Inclui detecção de blind spots.</p>
+                        <div class="prompt-tags"><span class="tag">Priorização</span><span class="tag">Delegação</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-section" data-category="transformacao">
+                <div class="category-header">
+                    <div class="category-icon">🦋</div>
+                    <div class="category-info">
+                        <h2>Transformação Pessoal</h2>
+                        <p>Use IA para se tornar quem você quer ser</p>
+                    </div>
+                </div>
+                <div class="prompts-grid">
+                    <div class="prompt-card" data-prompt="11">
+                        <div class="prompt-number">Parte 11</div>
+                        <h3 class="prompt-title">Destruidora de Desculpas</h3>
+                        <p class="prompt-description">A IA vai expor suas desculpas, classificá-las e criar plano à prova de sabotagem.</p>
+                        <div class="prompt-tags"><span class="tag">Accountability</span><span class="tag">Ação</span></div>
+                    </div>
+                    <div class="prompt-card" data-prompt="15">
+                        <div class="prompt-number">Parte 15</div>
+                        <h3 class="prompt-title">Moodboard Reverso do Ano</h3>
+                        <p class="prompt-description">Planeje o ano pela ENERGIA, não por metas. Gere moodboard visual e faça engenharia reversa.</p>
+                        <div class="prompt-tags"><span class="tag">Planejamento</span><span class="tag">Visual</span></div>
+                    </div>
+                    <div class="prompt-card" data-prompt="16">
+                        <div class="prompt-number">Parte 16</div>
+                        <h3 class="prompt-title">Output vs Outcome</h3>
+                        <p class="prompt-description">Ressignifique seu valor profissional. Separe o que a IA faz do que só você pode decidir.</p>
+                        <div class="prompt-tags"><span class="tag">Identidade</span><span class="tag">Carreira</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-section" data-category="vida">
+                <div class="category-header">
+                    <div class="category-icon">🏠</div>
+                    <div class="category-info">
+                        <h2>Vida Real</h2>
+                        <p>IA no dia a dia: viagens, casa, conversas difíceis</p>
+                    </div>
+                </div>
+                <div class="prompts-grid">
+                    <div class="prompt-card" data-prompt="viagem">
+                        <div class="prompt-number">Bônus</div>
+                        <h3 class="prompt-title">Planejamento de Viagem Contextual</h3>
+                        <p class="prompt-description">Contexto completo + experiências anteriores = recomendações personalizadas.</p>
+                        <div class="prompt-tags"><span class="tag">Viagem</span><span class="tag">Família</span></div>
+                    </div>
+                    <div class="prompt-card" data-prompt="apartamento">
+                        <div class="prompt-number">Bônus</div>
+                        <h3 class="prompt-title">Reorganização de Apartamento</h3>
+                        <p class="prompt-description">De fotos e problemas até lista de compras estratégica com cronograma.</p>
+                        <div class="prompt-tags"><span class="tag">Casa</span><span class="tag">Organização</span></div>
+                    </div>
+                    <div class="prompt-card" data-prompt="conversa">
+                        <div class="prompt-number">Bônus</div>
+                        <h3 class="prompt-title">Preparação para Conversa Difícil</h3>
+                        <p class="prompt-description">Crie persona sintética da pessoa e faça role play completo.</p>
+                        <div class="prompt-tags"><span class="tag">Comunicação</span><span class="tag">Simulação</span></div>
+                    </div>
+                    <div class="prompt-card" data-prompt="universal">
+                        <div class="prompt-number">Template</div>
+                        <h3 class="prompt-title">Estrutura Universal "Eu sou X que quer Y"</h3>
+                        <p class="prompt-description">O template definitivo para qualquer pedido complexo.</p>
+                        <div class="prompt-tags"><span class="tag">Framework</span><span class="tag">Essencial</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p class="footer-logo">Bruna Santanna</p>
+        <p class="footer-tagline">Transformando a relação das pessoas com IA</p>
+        <div class="footer-links">
+            <a href="https://instagram.com/brunasantanna" target="_blank">Instagram</a>
+            <a href="#">Newsletter</a>
+            <a href="#">Newscale Consulting</a>
+        </div>
+    </footer>
+
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="modal" id="modal">
+        <div class="modal-header">
+            <button class="modal-close" id="modalClose">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+            <p class="modal-category" id="modalCategory">Categoria</p>
+            <h3 class="modal-title" id="modalTitle">Título do Prompt</h3>
+        </div>
+        <div class="modal-body">
+            <p class="modal-description" id="modalDescription">Descrição completa do prompt.</p>
+            <div class="prompt-content" id="modalPrompt">Conteúdo do prompt aqui...</div>
+        </div>
+        <div class="modal-footer">
+            <button class="copy-btn" id="copyBtn">Copiar Prompt</button>
+        </div>
+    </div>
+
+    <script src="prompts-data.js"></script>
+</body>
+<script>
+// ===== PROMPTS DATA =====
+const promptsData = {
+    "1": {
+        category: "Contexto Rico",
+        title: "Contexto Completo",
+        description: "Use este prompt ANTES de qualquer pedido importante. Faça a IA te conhecer profundamente para que os outputs pareçam feitos por você, não por máquina genérica.",
+        prompt: `Antes de você criar qualquer coisa pra mim, preciso que você entenda meu contexto completo.
+
+Eu sou [descrição: idade, profissão, momento de vida].
+Meu público é [descrição detalhada: quem são, o que fazem, principais dores].
+Meu tom de comunicação é [descreve: formal/informal, técnico/acessível, sério/descontraído].
+Coisas que EU NUNCA faria: [lista comportamentos, palavras, abordagens que você rejeita].
+Coisas que eu SEMPRE faço: [padrões, palavras, jeitos seus de se comunicar].
+
+Exemplos do meu trabalho anterior:
+[cola 2-3 exemplos de posts, emails, textos seus]
+
+Agora que você me conhece melhor, [faz o pedido específico].
+
+Mas antes de entregar, me pergunta o que você ainda precisa saber pra fazer isso do MEU jeito, não do jeito genérico de IA.`
+    },
+    "2": {
+        category: "Produtividade",
+        title: "Iteração até a Perfeição",
+        description: "Processo estruturado de 6 passos para refinar qualquer ideia até ela ficar realmente boa. Nunca mais aceite a primeira versão.",
+        prompt: `Vou te dar uma ideia inicial e quero que a gente itere juntos até ficar perfeita.
+
+Ideia inicial: [descreve sua ideia]
+
+Processo:
+1. Primeiro, me devolve 3 interpretações diferentes dessa ideia - uma mais ousada, uma mais segura, uma completamente diferente do que eu pedi
+2. Eu vou escolher uma ou te dar feedback
+3. Aí você me faz 5 perguntas pra refinar
+4. Depois disso, cria a primeira versão
+5. Eu te dou feedback de novo
+6. Você ajusta E me mostra o que mudou e por quê
+
+Não me entrega a primeira coisa que vier na sua cabeça. Vamos trabalhar nisso juntos até ficar realmente bom.`
+    },
+    "3": {
+        category: "Estratégia",
+        title: "Análise em 3 Níveis",
+        description: "Análise superficial → estratégica → transformacional. Descubra oportunidades perdidas e suposições que devem ser questionadas.",
+        prompt: `Preciso que você analise meu trabalho de forma estratégica, não só operacional.
+
+Aqui está [documento/projeto/conteúdo]: [anexa ou descreve]
+
+Quero que você faça:
+
+NÍVEL 1 - Análise superficial:
+- O que funciona aqui?
+- O que não funciona?
+- O que falta?
+
+NÍVEL 2 - Análise estratégica:
+- Que oportunidades eu estou perdendo?
+- Que riscos eu não estou vendo?
+- Como isso se compara com o que as melhores pessoas da minha área estão fazendo?
+
+NÍVEL 3 - Análise transformacional:
+- Se você fosse refazer isso do zero sabendo o que sabe, o que mudaria completamente?
+- Que suposições eu fiz que deveriam ser questionadas?
+- Qual a versão 10x melhor disso?
+
+Me dá os 3 níveis, não só o primeiro.`
+    },
+    "4": {
+        category: "Estratégia",
+        title: "Pesquisa Profunda",
+        description: "Pesquisa em camadas que vai além do Google. Inclui perspectivas contrárias, gaps de informação e recomendações práticas.",
+        prompt: `Preciso de uma pesquisa profunda sobre [tema], mas não quero um resumo genérico do Google.
+
+Contexto do que eu preciso:
+- Estou em [situação/projeto]
+- Meu objetivo com essa informação é [objetivo]
+- Meu nível de conhecimento atual sobre o tema é [iniciante/intermediário/avançado]
+- Vou usar isso para [finalidade]
+
+O que eu NÃO quero:
+- Informação básica que eu já sei
+- Listas genéricas
+- Conteúdo superficial
+
+O que eu QUERO:
+- Insights que eu não encontraria numa busca rápida
+- Padrões e conexões entre diferentes fontes
+- Perspectivas contrárias ou polêmicas sobre o assunto
+- Gaps na informação disponível (o que NINGUÉM está falando?)
+- Recomendações práticas baseadas no que você encontrar
+
+Formato: Me entrega em camadas - começa com o essencial, depois vai aprofundando. Quero poder parar em qualquer camada se eu já tiver o que preciso.`
+    },
+    "5": {
+        category: "Contexto Rico",
+        title: "Deixe a IA te Entrevistar",
+        description: "Inverta o jogo: em vez de você explicar, deixe a IA fazer as perguntas certas para entender seu problema de verdade.",
+        prompt: `Eu tenho um projeto/problema/ideia, mas não sei nem por onde começar a te explicar direito.
+
+Em vez de eu tentar adivinhar o que você precisa saber, eu quero que VOCÊ me entreviste.
+
+O que preciso:
+[descreve em 2-3 frases o que você quer criar/resolver]
+
+Agora me faz 15-20 perguntas pra entender:
+- Meu contexto completo
+- O que eu já tentei
+- Minhas limitações (tempo, dinheiro, habilidades)
+- O que eu realmente quero alcançar (não o que eu disse que quero, mas o resultado de verdade por trás disso)
+- Meus medos sobre isso
+- Por que isso é importante agora
+- O que acontece se eu não fizer nada
+
+Faz as perguntas uma de cada vez ou em blocos de 3-5.
+Depois que eu responder todas, AÍ você me dá a solução/plano/conteúdo completo.
+
+E quando me entregar, explica como minhas respostas mudaram o que você criou pra mim.`
+    },
+    "6": {
+        category: "Contexto Rico",
+        title: "Fluxo de Pensamento em Voz",
+        description: "Fale por 10 minutos sem parar. A IA organiza seu caos mental em plano estruturado. Perfeito para o modo de voz.",
+        prompt: `Vou usar a função de voz e falar sem parar por 5-10 minutos sobre [tema/problema/projeto].
+
+Não me interrompe. Não me corrige. Só escuta.
+
+Eu vou:
+- Reclamar
+- Mudar de assunto
+- Contradizer o que eu disse antes
+- Falar coisas que não fazem sentido
+- Ter ideias no meio da fala
+- Desabafar
+- Pular de uma coisa pra outra
+
+Quando eu terminar de falar, você vai:
+
+1. IDENTIFICAR os 3-5 temas principais que eu mencionei (mesmo que eu não tenha percebido que eram temas)
+
+2. EXTRAIR insights - coisas que eu disse nas entrelinhas, padrões no meu pensamento, preocupações recorrentes
+
+3. ORGANIZAR num plano estruturado:
+   - O que você entendeu que EU realmente quero
+   - Os obstáculos reais (não os que eu acho que são)
+   - Um plano de ação em ordem de prioridade
+   - Perguntas que eu ainda preciso responder
+
+4. Me devolver isso em formato de conversa, não em lista de bullets chata.
+
+Pronto pra me ouvir? Começa gravando.`
+    },
+    "7": {
+        category: "Produtividade",
+        title: "5 Versões Radicalmente Diferentes",
+        description: "Veja o mesmo conteúdo por 5 ângulos: técnico, emocional, provocativo, minimalista e criativo. Para quando você precisa de opções reais.",
+        prompt: `Preciso ver esse [conteúdo/texto/ideia] de ângulos completamente diferentes pra decidir qual caminho seguir.
+
+Conteúdo base: [descreve ou cola]
+
+Cria 5 versões RADICALMENTE diferentes:
+
+VERSÃO 1 - Ultra técnica
+Tom professoral, dados, referências, zero emoção. Como se fosse pra um PhD.
+
+VERSÃO 2 - Ultra emocional  
+Storytelling forte, vulnerabilidade, conexão humana. Foca no sentir, não no entender.
+
+VERSÃO 3 - Provocativa/Polêmica
+Questiona suposições, vai contra o senso comum, cutuca. Pode até incomodar um pouco.
+
+VERSÃO 4 - Minimalista/Direta
+Máxima clareza, mínimas palavras. Vai direto ao ponto sem enrolação.
+
+VERSÃO 5 - Criativa/Inesperada
+Usa metáforas, analogias estranhas, formatos não-convencionais. Surpreende.
+
+Depois de criar as 5, me diz:
+- Quando cada versão funcionaria melhor
+- Que público se conectaria mais com cada uma
+- Se dá pra misturar elementos de mais de uma
+
+Não me dá 5 versões parecidas com palavras trocadas. Quero DIFERENÇAS REAIS.`
+    },
+    "8": {
+        category: "Crítica",
+        title: "Crítica Brutal Antes de Enviar",
+        description: "Análise impiedosa de clareza, confiança, impacto e riscos. Descubra o gap entre intenção e resultado.",
+        prompt: `Vou te mostrar algo que eu criei e preciso que você seja absolutamente brutal na crítica. Sem me poupar.
+
+[anexa/descreve o conteúdo]
+
+Contexto:
+- Vai ser enviado para: [descreve destinatário/público]
+- Objetivo: [o que você quer alcançar]
+- Tom esperado: [formal/informal/técnico/etc]
+- Stakes: [o que está em jogo - é um email casual ou uma apresentação que vale milhões?]
+
+Agora destrua isso analisando:
+
+**CLAREZA**
+- Tem alguma frase que você teve que ler 2x pra entender?
+- Tem jargão desnecessário?
+- A estrutura ajuda ou atrapalha?
+
+**CONFIANÇA**
+- Onde eu pareço inseguro?
+- Onde eu usei muitas palavras pra dizer algo simples? (isso grita insegurança)
+- Onde eu me desculpei sem motivo?
+
+**IMPACTO**
+- Qual a frase mais forte? (deveria estar no começo)
+- Qual a mais fraca? (deveria sair)
+- Tá longo demais? Curto demais?
+
+**RISCOS**
+- O que pode ser mal interpretado?
+- Que objeções vão surgir que eu não endereçei?
+- O que eu assumi que o leitor sabe mas talvez não saiba?
+
+**GAP ENTRE INTENÇÃO E RESULTADO**
+- O que eu QUIS dizer
+- O que realmente TÁ dito
+- Onde tem diferença entre os dois?
+
+Depois da crítica, me mostra uma versão melhorada E explica cada mudança que você fez.`
+    },
+    "9": {
+        category: "Estratégia",
+        title: "Segunda Opinião Estratégica",
+        description: "IA como conselheiro que revela pontos cegos, faz red team das suas ideias e te ajuda a ver cenários ignorados.",
+        prompt: `Preciso tomar uma decisão e quero você como segunda opinião estratégica, não como um "sim" automático.
+
+**A DECISÃO:**
+[descreve em detalhes a situação e a decisão que você precisa tomar]
+
+**CONTEXTO COMPLETO:**
+- O que me trouxe até aqui
+- O que já tentei
+- Pressões externas que estou sofrendo
+- Meus vieses pessoais que eu RECONHEÇO que tenho
+- O que eu quero que a resposta seja (seja honesto)
+- Prazo para decidir
+
+**PROCESSO:**
+
+FASE 1 - Me faz ver meus pontos cegos
+- Que ângulos eu claramente NÃO estou vendo?
+- Que suposições eu fiz que podem estar erradas?
+- Que informação eu deveria ter mas não tenho?
+
+FASE 2 - Questions over answers
+Me dá 10 perguntas que eu deveria estar fazendo antes de decidir. Não me dá respostas ainda, só perguntas.
+
+FASE 3 - Cenários
+Monta 3 cenários:
+- Best case se eu fizer X
+- Worst case se eu fizer X  
+- O que acontece se eu NÃO decidir nada agora
+
+FASE 4 - Red team
+Agora finge que você é MEU INIMIGO e quer que eu tome a pior decisão. Que decisão você me faria tomar e por quê? (isso revela os riscos)
+
+FASE 5 - Recomendação final
+Baseado em tudo isso, o que você faria se fosse você? E por quê?
+
+Seja direto. Seja honesto. Não me diga o que eu quero ouvir.`
+    },
+    "10": {
+        category: "Crítica",
+        title: "Chefe Ultra Exigente",
+        description: "Simule apresentar para o chefe mais difícil do mundo. 5 rodadas de teste de stress antes do mundo real.",
+        prompt: `Preciso testar se meu [projeto/proposta/ideia] está realmente bom ou se estou me enganando.
+
+Você vai ser meu chefe ultra exigente. O tipo de pessoa que:
+- Fez isso 1000 vezes
+- Não aceita enrolação
+- Vê furos na argumentação imediatamente
+- Não tem medo de ser direto
+- Se importa com o resultado, não com meu ego
+
+**CARACTERÍSTICAS DESSE CHEFE:**
+[descreve o estilo: é agressivo? É frio? É Sarcástico? É técnico? Quanto mais específico, melhor]
+
+**O QUE VOU APRESENTAR:**
+[descreve ou anexa seu projeto/proposta]
+
+**SEU TRABALHO:**
+
+RODADA 1 - Primeiras impressões (2 minutos)
+Me faz as 5 perguntas imediatas que vem na cabeça desse chefe quando ele vê isso pela primeira vez.
+
+RODADA 2 - Análise profunda (olhando os detalhes)
+Aponta 7-10 problemas, furos, inconsistências, ou pontos fracos. Seja específico.
+
+RODADA 3 - Teste de stress
+"E se [cenário difícil acontecer]? Como você lidaria com isso?"
+Me faz 5 perguntas de "e se" pra testar se eu pensei nos cenários difíceis.
+
+RODADA 4 - Comparação
+"Já vi projetos parecidos. Por que o seu seria melhor?"
+Me faz justificar por que isso não é mais do mesmo.
+
+RODADA 5 - Decisão final
+Baseado nas minhas respostas (ou falta delas), você aprovaria isso? Por que sim ou por que não?
+
+Não pegue leve. Eu PRECISO saber se isso está bom de verdade.`
+    },
+    "11": {
+        category: "Transformação",
+        title: "Destruidora de Desculpas",
+        description: "Exponha suas desculpas, classifique-as e crie um plano à prova de sabotagem. Para metas que você está adiando.",
+        prompt: `Eu tenho uma meta que eu continuo adiando e eu SEI que é porque eu to me sabotando com desculpas.
+
+**A META:**
+[descreve em detalhes o que você quer alcançar]
+
+**POR QUE É IMPORTANTE:**
+[explica o impacto real de conseguir isso]
+
+**POR QUE EU AINDA NÃO FIZ:**
+[seja brutalmente honesto sobre as desculpas que você usa]
+
+**SEU TRABALHO:**
+
+PARTE 1 - Exposição das desculpas
+Lista TODAS as desculpas que eu provavelmente vou usar nas próximas semanas pra não fazer isso. Incluindo:
+- As óbvias que eu já falei
+- As sutis que eu nem percebo que uso
+- As "legítimas" (que parecem motivos reais mas são desculpas disfarçadas)
+
+PARTE 2 - Classificação
+Separa as desculpas em:
+- Obstáculos reais que precisam ser resolvidos
+- Desculpas que são puro medo
+- Desculpas que são perfeccionismo
+- Desculpas que são falta de clareza
+
+PARTE 3 - Destruição sistemática
+Para cada desculpa, me dá:
+- Por que ela é BS (ou por que não é)
+- Se for obstáculo real: solução concreta
+- Se for medo: reframe do medo
+- Quanto tempo/energia/dinheiro realmente levaria pra resolver isso (spoiler: menos do que eu imagino)
+
+PARTE 4 - Plano à prova de sabotagem
+Cria um plano que:
+- Elimina as desculpas ANTES delas aparecerem
+- Tem checkpoints de "não tem mais pra onde correr"
+- Inclui consequências se eu não fizer (que EU mesmo vou impor)
+- É tão simples que não dá pra eu dizer "é complicado demais"
+
+PARTE 5 - Accountability statement
+Me escreve um texto em primeira pessoa que eu vou salvar e ler toda vez que eu começar a inventar desculpa de novo. Tipo um tapa na cara do futuro eu que vai querer desistir.
+
+Seja duro. Eu PRECISO disso.`
+    },
+    "14": {
+        category: "Produtividade",
+        title: "Matriz: Faz, Delega, Automatiza, Exclui",
+        description: "Pegue sua lista de tarefas e descubra o que você nem deveria estar fazendo. Inclui detecção de blind spots.",
+        prompt: `Estou soterrado de tarefas e sei que muitas delas eu nem deveria estar fazendo.
+
+**TODAS AS MINHAS TAREFAS DESTA SEMANA:**
+[lista completa - literalmente tudo, até as pequenas]
+
+**MEU CONTEXTO:**
+- Função/papel: [o que você faz]
+- Horas reais disponíveis: [seja honesto]
+- Nível de energia: [alto/médio/baixo]
+- Recursos disponíveis: [orçamento, ferramentas, pessoas]
+- O que EU faço melhor que qualquer um: [seus superpoderes]
+- O que eu ODEIO fazer: [suas fraquezas/tédio]
+
+**SEU TRABALHO - Matriz de decisão:**
+
+Para CADA tarefa, me diz:
+
+**FAZ** (você mesmo, é insubstituível)
+- Por que só você pode/deve fazer
+- Quanto tempo realmente leva (vs quanto tempo você ACHA que leva)
+- Quando fazer (ordem de prioridade)
+
+**DELEGA** (outra pessoa faz melhor/mais barato)
+- Para quem delegar (pessoa real ou tipo de pessoa)
+- O que explicar pra pessoa
+- Como garantir que vai ser bem feito
+- Quanto tempo você ganha delegando
+
+**AUTOMATIZA** (tecnologia/IA resolve)
+- Qual ferramenta/IA usar
+- Setup necessário (tempo investido uma vez)
+- ROI (quanto tempo economiza depois)
+
+**EXCLUI** (nem precisava estar na lista)
+- Por que isso tá na sua lista?
+- O que acontece se você NÃO fizer?
+- Quem colocou isso na sua cabeça que era importante?
+
+**Depois da matriz completa:**
+
+Me dá:
+1. Quanto tempo você TEM vs quanto você PRECISA (revelando que talvez você tá tentando fazer coisa demais)
+2. Padrão: que TIPO de tarefa você deveria parar de aceitar daqui pra frente?
+3. Uma semana reformulada: como seria sua semana se você seguisse essa matriz?
+
+**EXTRA:** Me faz 3 perguntas sobre tarefas que eu NÃO coloquei na lista mas provavelmente deveria estar fazendo (blind spots).`
+    },
+    "15": {
+        category: "Transformação",
+        title: "Moodboard Reverso do Ano",
+        description: "Planeje o ano pela ENERGIA, não por metas. Gere um moodboard visual e faça engenharia reversa.",
+        prompt: `Quero planejar meu ano de um jeito completamente diferente. Não começando com metas, mas com ENERGIA.
+
+**FASE 1 - Captura de energia**
+
+Me conta sobre:
+- 3 momentos onde você sentiu que estava VIBRANDO. Não importa o contexto - trabalho, pessoal, random. Quando você sentiu "é ISSO"?
+- 3 conversas que te marcaram. O que te acendeu nelas?
+- Lugares/ambientes onde você se sente mais você
+- Coisas que você faz e o tempo voa (vs coisas que drenam)
+- Se você pudesse teletransportar pra algum lugar agora e fazer algo, o quê seria?
+- Interesses/hobbies/obsessões atuais (até as esquisitas)
+- Como você quer se SENTIR mais vezes? (não "o que quer fazer", mas como quer se sentir)
+- O que você quer MENOS? (o que drena, irrita, pesa)
+
+**FASE 2 - Geração do Moodboard**
+
+Baseado em tudo que eu te contei, cria uma imagem de moodboard que VISUALMENTE representa essa energia.
+
+Inclui:
+- Paleta de cores que reflita a vibe
+- Elementos visuais que conectem com os temas
+- Texturas, ambientes, objetos
+- Palavras-chave estratégicas
+
+**FASE 3 - Engenharia reversa**
+
+Se coloca no lugar de uma pessoa que é ESSA versão do moodboard. É 31 de dezembro. Essa pessoa VIVEU o ano que reflete essa energia.
+
+Me conta:
+1. Trimestre a trimestre: O que ela fez em cada trimestre que a levou até aqui?
+2. Padrões: Que hábitos/rotinas ela tinha que sustentaram essa energia?
+3. Não-negociáveis: O que ela PAROU de fazer/aceitar que abriu espaço pra isso?
+4. Surpresas: Que oportunidades apareceram PORQUE ela estava nessa energia?
+5. Obstáculos superados: Que desafios ela enfrentou e como manteve a energia mesmo assim?
+
+**FASE 4 - Word of the Year**
+
+Baseado em TUDO isso, me sugere 10 palavras ou frases que poderiam ser meu mantra do ano.
+
+**FASE 5 - Sistema de decisão**
+
+Cria um framework de decisão baseado nessa energia: Quando eu tiver uma oportunidade/convite/proposta, que perguntas eu me faço pra saber se alinha com essa energia ou se vai me desviar?
+
+Me dá 5-7 perguntas filtro.
+
+**IMPORTANTE:** Não me dá metas do tipo "ganhar X dinheiro" ou "perder X quilos". Quero ENERGIA e EXPERIÊNCIA primeiro. As metas vêm depois, como consequência.`
+    },
+    "16": {
+        category: "Transformação",
+        title: "Output vs Outcome",
+        description: "Ressignifique seu valor profissional. Separe o que a IA faz do que só você pode decidir.",
+        prompt: `Eu sinto que meu valor tá muito atrelado a "fazer coisas" e a IA tá me fazendo questionar minha identidade profissional.
+
+Preciso ressignificar meu valor.
+
+**CONTEXTO BRUTAL:**
+- Minha função/trabalho: [o que você faz]
+- % do meu tempo que gasto "produzindo coisas": [seja honesto]
+- Coisas que eu faço que a IA já faz melhor/mais rápido: [lista]
+- Meu medo real: [seja honesto - "se a IA faz isso, pra que eu sirvo?"]
+- Como eu media meu valor até agora: [horas trabalhadas? Volume produzido? Quantos emails respondi?]
+
+**EXERCÍCIO - Duas listas:**
+
+**LISTA 1: O QUE A IA PODE FAZER (output)**
+Me ajuda a listar tudo que a IA já pode fazer igual ou melhor que eu
+
+**LISTA 2: O QUE SÓ EU POSSO DECIDIR (outcome)**
+Me ajuda a listar o que É INSUBSTITUÍVEL em mim:
+- Julgamento baseado em experiência vivida
+- Leitura de dinâmica humana
+- Decisões com ambiguidade moral
+- Construção de confiança
+- Priorização baseada em contexto político/emocional
+
+**DEPOIS DAS LISTAS:**
+
+**REFRAME #1 - Meu novo papel**
+"Seu valor não é [output antigo], é [outcome novo]"
+Me dá 3 versões desse reframe.
+
+**REFRAME #2 - Como eu me apresento**
+- ANTES: "Eu faço X, Y, Z" (output)
+- DEPOIS: "Eu garanto/decido/construo X, Y, Z" (outcome)
+
+**REFRAME #3 - Como eu mudo minha rotina**
+- Que tarefas da Lista 1 eu delego pra IA imediatamente?
+- Que tempo isso libera?
+- Como eu uso esse tempo nas coisas da Lista 2?
+
+**STATEMENT DE IDENTIDADE:**
+
+Me escreve um parágrafo em primeira pessoa que eu posso reler toda vez que a síndrome de impostor aparecer:
+
+"Meu valor não está em [output]. Está em [outcome]. A IA me torna mais poderoso porque [razão]. Pessoas vão me contratar/valorizar não porque eu faço X rápido, mas porque eu [decisão/julgamento único]."
+
+**PERGUNTA FINAL:**
+Se eu parasse de "fazer" e começasse só a "decidir/julgar/guiar", o que mudaria na minha vida profissional?`
+    },
+    "18": {
+        category: "Crítica",
+        title: "Perguntas que Você Tem Medo de Fazer",
+        description: "5 níveis de perguntas difíceis para situações travadas. Das que você evita às que ninguém teria coragem de fazer.",
+        prompt: `Eu tenho uma situação que tá travada há tempos e eu SEI que é porque eu tô evitando encarar a verdade.
+
+**A SITUAÇÃO:**
+[descreve o problema/projeto/objetivo que não sai do lugar]
+
+**HISTÓRICO:**
+- Há quanto tempo isso tá travado: [tempo]
+- Quantas vezes eu já tentei: [número]
+- Formas que eu tentei: [lista abordagens]
+- Como cada tentativa falhou: [seja específico]
+- Padrão que EU vejo nas falhas: [se conseguir identificar]
+
+**CONTEXTO EMOCIONAL (importante):**
+- Por que isso importa tanto pra mim?
+- O que eu perco se não resolver?
+- O que eu GANHO mantendo isso do jeito que tá? (benefício oculto de não mudar)
+
+**SEU TRABALHO - Me faça as perguntas difíceis:**
+
+**NÍVEL 1 - Perguntas que eu tô evitando ativamente**
+Me faz 5 perguntas que você SABE que eu não quero responder mas preciso.
+
+**NÍVEL 2 - Contradições que eu não tô vendo**
+Aponta onde eu tô me contradizendo:
+- Coisas que eu digo que quero vs como eu gasto meu tempo
+- Valores que eu digo ter vs decisões que eu tomo
+- Prioridades que eu declaro vs o que eu realmente priorizo
+
+**NÍVEL 3 - O que eu não tô admitindo**
+Complete essas frases baseado no que eu te contei:
+- "Você diz que quer X, mas na verdade quer Y"
+- "Você acha que o problema é X, mas o problema real é Y"
+- "Você tá esperando X acontecer, mas você sabe que precisa fazer Y"
+
+**NÍVEL 4 - A pergunta que NINGUÉM faria**
+Qual a pergunta que, se alguém fizesse pra mim, eu ficaria defensivo/incomodado mas saberia que é a pergunta certa?
+
+Me faz essa pergunta.
+
+**NÍVEL 5 - Diagnóstico sem filtro**
+Baseado em tudo:
+- Qual é o VERDADEIRO motivo disso estar travado?
+- Qual a conversa que eu preciso ter (comigo ou com alguém) que eu tô evitando?
+- Qual o primeiro passo que eu JÁ SEI que preciso dar mas tô fingindo que não sei?
+
+**DEPOIS DO DIAGNÓSTICO:**
+
+Me dá:
+1. Um plano que presume que EU SOU o problema (não fatores externos)
+2. Prazo realista: quanto tempo isso levaria se eu parasse de me sabotar?
+3. Métricas de honestidade: como eu saberia se tô me enrolando de novo?
+
+Seja brutalmente honesto. Eu PRECISO sair desse loop.`
+    },
+    "19": {
+        category: "Crítica",
+        title: "Espelho das Perguntas Pequenas",
+        description: "Análise do seu padrão de uso de IA. Descubra onde você está subcapacitando a ferramenta.",
+        prompt: `Eu tenho usado IA mas sinto que tô usando ela do jeito mais preguiçoso possível.
+
+**AUTODIAGNÓSTICO:**
+
+Exemplos do que eu costumo pedir:
+- [lista seus pedidos típicos]
+
+**ANÁLISE IMPIEDOSA:**
+
+**PARTE 1 - O que minhas perguntas revelam sobre mim**
+Baseado no padrão das minhas perguntas:
+- Que tipo de pensador eu sou? (operacional vs estratégico? reativo vs proativo?)
+- Onde eu tô subcapacitando a IA?
+- Onde EU tô me subcapacitando?
+- Que oportunidades eu tô consistentemente perdendo?
+
+**PARTE 2 - Upgrade de perguntas**
+
+Pega 5 perguntas típicas que eu faço e me mostra:
+- Versão atual (pequena)
+- Versão 10x maior (estratégica)
+- Por que a versão 10x é melhor
+
+**PARTE 3 - Perguntas que eu DEVERIA estar fazendo**
+
+Me dá 10 perguntas/pedidos que alguém no MEU papel/contexto deveria estar fazendo pra IA mas provavelmente não tá:
+- Estratégia (não só execução)
+- Análise (não só pesquisa)
+- Desenvolvimento pessoal (não só trabalho)
+- Criatividade (não só eficiência)
+- Questionamento (não só confirmação)
+
+**PARTE 4 - Meu plano de evolução**
+
+Cria um "ladder" de sofisticação:
+- NÍVEL 1 (onde eu tô agora)
+- NÍVEL 2
+- NÍVEL 3
+- NÍVEL 4
+- NÍVEL 5 (uso que muda resultado, não só processo)
+
+Para cada nível: exemplo de pergunta, que mentalidade preciso ter, que resultado esperar.
+
+**META-PERGUNTA:**
+
+"Se você pudesse me fazer UMA pergunta sobre como eu uso IA que me faria perceber meu maior ponto cego, qual seria?"
+
+Me faz essa pergunta agora.`
+    },
+    "viagem": {
+        category: "Vida Real",
+        title: "Planejamento de Viagem Contextual",
+        description: "Contexto completo da família + experiências anteriores = recomendações personalizadas, não lista genérica.",
+        prompt: `Preciso planejar uma viagem mas tô exausto só de pensar em pesquisar tudo.
+
+**CONTEXTO FAMILIAR:**
+- Número de pessoas: [x]
+- Idades: [lista]
+- Restrições alimentares: [lista]
+- Restrições de mobilidade: [se houver]
+- Interesses individuais: [pessoa 1 gosta de X, pessoa 2 gosta de Y...]
+- Dinâmica familiar: [energéticos? Preferem relaxar? Gostam de aventura?]
+
+**EXPERIÊNCIAS ANTERIORES:**
+- Últimas 3 viagens que fizemos: [lugares]
+- O que amamos nessas viagens: [lista específica - "praia vazia", não só "praia"]
+- O que foi ruim nessas viagens: [lista específica]
+- Viagens dos sonhos que já consideramos mas não fomos: [lista]
+
+**PARÂMETROS DESTA VIAGEM:**
+- Mês/época: [quando]
+- Duração: [dias]
+- Orçamento total: [seja realista]
+- Saindo de: [cidade]
+- Tipo de vibe: [aventura/relax/cultural/mix?]
+
+**NECESSIDADES NÃO-NEGOCIÁVEIS:**
+[ex: precisa ter wifi, não pode ter conexões longas, hotel precisa ser silencioso, etc]
+
+**SEU TRABALHO:**
+
+**FASE 1 - Recomendações**
+Me dá 3 destinos que fazem sentido baseado em TODO esse contexto.
+
+Para cada destino:
+- Por que faz sentido pra NOSSA família especificamente
+- O que cada pessoa do grupo vai amar
+- Possível ponto de atrito
+- Estimativa de custo real
+
+**FASE 2 - Plano detalhado do destino escolhido**
+
+Quando eu escolher um, cria:
+- Roteiro dia a dia (flexível)
+- Logística (voos, hotel, transporte)
+- Checklist do que providenciar
+- Plano B para imprevistos
+- Dicas não-óbvias
+
+Não me dá lista genérica do TripAdvisor. Quero plano customizado pra NOSSA realidade.`
+    },
+    "apartamento": {
+        category: "Vida Real",
+        title: "Reorganização de Apartamento",
+        description: "De fotos e problemas do espaço anterior até lista de compras estratégica com cronograma.",
+        prompt: `Acabei de me mudar / quero reorganizar meu espaço e tô completamente perdido.
+
+**SOBRE O ESPAÇO:**
+- Metragem: [m²]
+- Cômodos: [lista]
+- Fotos: [anexa se possível, se não, descreve detalhadamente]
+- Iluminação natural: [onde entra luz, horários]
+- Problemas estruturais: [pilares no meio, teto baixo, etc]
+
+**CONTEXTO DE VIDA:**
+- Quem mora: [quantas pessoas, rotinas]
+- Trabalho em casa: [sim/não, quantas horas]
+- Hobbies que preciso acomodar: [lista]
+- Pets: [se houver]
+- Frequência de visitas: [recebe gente sempre ou raramente?]
+
+**PROBLEMAS NO ESPAÇO ANTERIOR:**
+- Falta de armazenamento específico: [o que ficava bagunçado]
+- Problemas de fluxo: [o que era chato no dia a dia]
+- Frustrações: [o que te irritava todo dia]
+- O que você SEMPRE quis ter mas nunca teve: [lista]
+
+**ORÇAMENTO:**
+- Total disponível: [R$X]
+- Aberto a móveis usados/customização: [sim/não]
+
+**SEU TRABALHO:**
+
+**FASE 1 - Diagnóstico**
+- Que erro eu vou repetir se não prestar atenção?
+- Que oportunidade esse espaço tem que eu talvez não esteja vendo?
+
+**FASE 2 - Planta de layout**
+Me dá 2-3 opções de layout com justificativa
+
+**FASE 3 - Lista de compras estratégica**
+Dividida em: URGENTE, IMPORTANTE, DESEJÁVEL
+Com links e faixa de preço
+
+**FASE 4 - Hacks específicos**
+Baseado nos MEUS problemas
+
+**FASE 5 - Plano de ação**
+Cronograma semana a semana`
+    },
+    "conversa": {
+        category: "Vida Real",
+        title: "Preparação para Conversa Difícil",
+        description: "Crie uma persona sintética da pessoa e faça role play completo antes da conversa real.",
+        prompt: `Preciso ter uma conversa difícil e tô adiando porque não sei como abordar.
+
+**CONTEXTO DA SITUAÇÃO:**
+- Pessoa envolvida: [relação - chefe, colega, parceiro, familiar, amigo]
+- Histórico: [como a relação tem sido]
+- O problema: [o que precisa ser dito]
+- Por que tá difícil: [medo de X, preocupação com Y]
+- O que eu quero alcançar: [objetivo real]
+- O que eu NÃO quero que aconteça: [piores cenários]
+
+**SOBRE A PESSOA:**
+- Estilo de comunicação: [direta? Emotiva? Defensiva? Racional?]
+- Como costuma reagir a feedback: [bem? Mal? Depende?]
+- Valores importantes pra ela: [o que ela prioriza]
+- Possíveis gatilhos: [o que deixa ela na defensiva]
+- Contexto atual dela: [tá passando por algo?]
+
+**SEU TRABALHO:**
+
+**FASE 1 - Criação da Persona Sintética**
+Cria uma simulação realista dessa pessoa com prováveis reações
+
+**FASE 2 - Preparação estratégica**
+Roteiro em 5 fases + frases preparadas para diferentes cenários
+
+**FASE 3 - Simulação da conversa**
+Você VAI SER essa pessoa. Vamos fazer role play completo.
+
+**FASE 4 - Cenários e contingências**
+O que fazer se vai bem, se vai mal, se fica no meio termo
+
+**FASE 5 - Checklist pré-conversa**
+Estado emocional ideal, timing, ambiente, expectativas
+
+**ÚLTIMA PERGUNTA:**
+"Qual a chance dessa conversa dar errado porque EU tô sendo o problema sem perceber?"`
+    },
+    "universal": {
+        category: "Framework",
+        title: "Estrutura Universal 'Eu sou X que quer Y'",
+        description: "O template definitivo para qualquer pedido complexo. Use essa estrutura sempre.",
+        prompt: `[TEMPLATE UNIVERSAL PARA QUALQUER PEDIDO]
+
+Use esta estrutura sempre que for pedir algo complexo pra IA:
+
+**EU SOU:**
+[Descrição detalhada: idade, contexto, momento de vida, função, limitações, superpoderes]
+
+Quanto mais contexto, melhor:
+- Não: "Sou designer"
+- Sim: "Sou designer gráfica de 32 anos, trabalho sozinha, atendo pequenos negócios, tenho mais demanda do que tempo, sou perfeccionista o que me atrasa, forte em branding mas fraca em motion design"
+
+**ESTOU TENTANDO:**
+[Objetivo específico com contexto do POR QUÊ]
+
+Não: "Criar um site"
+Sim: "Criar um site que converta leads qualificados pro meu serviço de coaching porque atualmente 80% das consultas que recebo são de pessoas que não podem pagar"
+
+**JÁ TENTEI:**
+[Lista específica do que você já fez]
+- O que tentou
+- Como tentou
+- Por quanto tempo
+- Por que parou/falhou
+- O que aprendeu
+
+**ESTOU PREOCUPADO(A) COM:**
+[Medos, obstáculos, objeções]
+- Medos reais
+- Limitações
+- Objeções internas
+- Pressões externas
+
+**CONTEXTO ADICIONAL:**
+- Prazo: [quando precisa estar pronto]
+- Orçamento: [quanto pode investir]
+- Recursos disponíveis: [tempo, ferramentas, pessoas]
+- Nível de habilidade: [iniciante/intermediário/avançado]
+- O que define sucesso: [métricas específicas]
+
+**O QUE EU PRECISO DE VOCÊ:**
+Seja específico no FORMATO de resposta que quer:
+- "Me dá X opções e ranqueia explicando prós e contras"
+- "Me faz perguntas primeiro antes de sugerir"
+- "Me dá um plano passo a passo"
+- "Me dá uma análise crítica do que eu já fiz"
+- "Me faz role play pra eu praticar"
+- "Me dá uma segunda opinião brutal"
+
+---
+
+**USE ESSA ESTRUTURA SEMPRE.**
+Quanto mais contexto, melhor o output.`
+    }
+};
+
+// ===== DOM ELEMENTS =====
+const gateForm = document.getElementById('gateForm');
+const emailInput = document.getElementById('emailInput');
+const modalOverlay = document.getElementById('modalOverlay');
+const modal = document.getElementById('modal');
+const modalClose = document.getElementById('modalClose');
+const modalCategory = document.getElementById('modalCategory');
+const modalTitle = document.getElementById('modalTitle');
+const modalDescription = document.getElementById('modalDescription');
+const modalPrompt = document.getElementById('modalPrompt');
+const copyBtn = document.getElementById('copyBtn');
+const categoryBtns = document.querySelectorAll('.category-btn');
+const categorySections = document.querySelectorAll('.category-section');
+const promptCards = document.querySelectorAll('.prompt-card');
+
+let currentPromptId = null;
+
+// ===== GATE FORM =====
+gateForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = emailInput.value;
+    
+    localStorage.setItem('biblioteca_email', email);
+    localStorage.setItem('biblioteca_unlocked', 'true');
+    
+    document.getElementById('library').scrollIntoView({ behavior: 'smooth' });
+    
+    const btn = gateForm.querySelector('.submit-btn');
+    btn.textContent = 'Acesso Liberado!';
+    btn.style.background = '#7D8B7A';
+    
+    setTimeout(() => {
+        btn.textContent = 'Quero os Prompts';
+        btn.style.background = '';
+    }, 2000);
+});
+
+// ===== CATEGORY FILTER =====
+categoryBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        categoryBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const category = btn.dataset.category;
+
+        if (category === 'all') {
+            categorySections.forEach(section => section.style.display = 'block');
+        } else {
+            categorySections.forEach(section => {
+                section.style.display = section.dataset.category === category ? 'block' : 'none';
+            });
+        }
+    });
+});
+
+// ===== MODAL =====
+promptCards.forEach(card => {
+    card.addEventListener('click', () => {
+        const promptId = card.dataset.prompt;
+        const data = promptsData[promptId];
+
+        if (data) {
+            currentPromptId = promptId;
+            modalCategory.textContent = data.category;
+            modalTitle.textContent = data.title;
+            modalDescription.textContent = data.description;
+            modalPrompt.textContent = data.prompt;
+
+            modalOverlay.classList.add('active');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    });
+});
+
+function closeModal() {
+    modalOverlay.classList.remove('active');
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    copyBtn.textContent = 'Copiar Prompt';
+    copyBtn.classList.remove('copied');
+}
+
+modalClose.addEventListener('click', closeModal);
+modalOverlay.addEventListener('click', closeModal);
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+// ===== COPY BUTTON =====
+copyBtn.addEventListener('click', async () => {
+    const data = promptsData[currentPromptId];
+    if (data) {
+        try {
+            await navigator.clipboard.writeText(data.prompt);
+            copyBtn.textContent = 'Copiado!';
+            copyBtn.classList.add('copied');
+            setTimeout(() => {
+                copyBtn.textContent = 'Copiar Prompt';
+                copyBtn.classList.remove('copied');
+            }, 2000);
+        } catch (err) {
+            console.error('Failed to copy:', err);
+        }
+    }
+});
+
+// ===== CHECK IF ALREADY UNLOCKED =====
+if (localStorage.getItem('biblioteca_unlocked') === 'true') {
+    const savedEmail = localStorage.getItem('biblioteca_email');
+    if (savedEmail) emailInput.value = savedEmail;
+}
+</script></body></html>
