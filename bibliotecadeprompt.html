@@ -32,7 +32,7 @@
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulance type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
             opacity: 0.025;
             pointer-events: none;
             z-index: 0;
@@ -163,27 +163,76 @@
             line-height: 1.6;
         }
         
-        /* Override ConvertKit styles */
+        /* OVERRIDE CONVERTKIT STYLES - MAKE IT BIGGER */
+        .formkit-form[data-uid="c035757f14"] {
+            max-width: 100% !important;
+        }
+        
+        .formkit-form[data-uid="c035757f14"] .formkit-fields {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 14px !important;
+        }
+        
+        .formkit-form[data-uid="c035757f14"] .formkit-field {
+            width: 100% !important;
+            flex: none !important;
+        }
+        
+        .formkit-form[data-uid="c035757f14"] .formkit-input {
+            width: 100% !important;
+            padding: 18px 22px !important;
+            font-family: 'Outfit', sans-serif !important;
+            font-size: 1rem !important;
+            border-radius: 10px !important;
+            background: var(--cream) !important;
+            border: 1.5px solid var(--border) !important;
+            color: var(--charcoal) !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        .formkit-form[data-uid="c035757f14"] .formkit-input:focus {
+            border-color: var(--terracotta) !important;
+            background: var(--warm-white) !important;
+            outline: none !important;
+        }
+        
+        .formkit-form[data-uid="c035757f14"] .formkit-input::placeholder {
+            color: #9CA3A0 !important;
+        }
+        
         .formkit-form[data-uid="c035757f14"] .formkit-submit {
+            width: 100% !important;
+            padding: 18px 32px !important;
             background-color: var(--terracotta) !important;
             font-family: 'Outfit', sans-serif !important;
+            font-size: 0.95rem !important;
             font-weight: 500 !important;
             letter-spacing: 0.06em !important;
             text-transform: uppercase !important;
             border-radius: 10px !important;
-            padding: 18px 32px !important;
+            border: none !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+            flex: none !important;
         }
+        
         .formkit-form[data-uid="c035757f14"] .formkit-submit:hover {
             background-color: var(--terracotta-dark) !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 8px 24px rgba(193, 122, 90, 0.25) !important;
         }
-        .formkit-form[data-uid="c035757f14"] .formkit-input {
-            font-family: 'Outfit', sans-serif !important;
-            border-radius: 10px !important;
-            background: var(--cream) !important;
-            border-color: var(--border) !important;
+        
+        .formkit-form[data-uid="c035757f14"] .formkit-submit > span {
+            padding: 0 !important;
         }
+        
         .formkit-form[data-uid="c035757f14"] .formkit-powered-by-convertkit-container {
             display: none !important;
+        }
+        
+        .formkit-form[data-uid="c035757f14"] [data-style="clean"] {
+            padding: 0 !important;
         }
         
         .privacy-note {
@@ -629,9 +678,9 @@
                         <ul class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert"></ul>
                         <div data-element="fields" data-stacked="false" class="seva-fields formkit-fields">
                             <div class="formkit-field">
-                                <input class="formkit-input" name="email_address" aria-label="seu melhor e-mail (aqui não tem SPAM!)" placeholder="seu melhor e-mail (aqui não tem SPAM!)" required="" type="email" style="color: rgb(0, 0, 0); border-color: rgb(227, 227, 227); border-radius: 4px; font-weight: 400;">
+                                <input class="formkit-input" name="email_address" aria-label="seu melhor e-mail (aqui não tem SPAM!)" placeholder="seu melhor e-mail (aqui não tem SPAM!)" required="" type="email">
                             </div>
-                            <button data-element="submit" class="formkit-submit formkit-submit" style="color: rgb(255, 255, 255); background-color: rgb(176, 110, 74); border-radius: 4px; font-weight: 400;">
+                            <button data-element="submit" class="formkit-submit formkit-submit">
                                 <div class="formkit-spinner">
                                     <div></div><div></div><div></div>
                                 </div>
@@ -665,8 +714,6 @@
         </nav>
 
         <div class="prompts-container">
-            <!-- Aqui vão todos os cards de prompts -->
-            <!-- Por brevidade, não estou incluindo todos novamente, mas eles estariam aqui -->
             <div class="category-section" data-category="contexto">
                 <div class="category-header">
                     <div class="category-icon">🎯</div>
@@ -679,12 +726,12 @@
                     <div class="prompt-card" data-prompt="1">
                         <div class="prompt-number">Parte 1</div>
                         <h3 class="prompt-title">Contexto Completo</h3>
-                        <p class="prompt-description">Faça a IA te conhecer profundamente antes de criar qualquer coisa.</p>
-                        <div class="prompt-tags"><span class="tag">Personalização</span></div>
+                        <p class="prompt-description">Faça a IA te conhecer profundamente antes de criar qualquer coisa. Resultado: outputs que parecem feitos por você.</p>
+                        <div class="prompt-tags"><span class="tag">Personalização</span><span class="tag">Fundação</span></div>
                     </div>
                 </div>
             </div>
-            <!-- ... mais categorias ... -->
+            <!-- Adicione as outras categorias e cards aqui -->
         </div>
     </section>
 
@@ -698,7 +745,8 @@
                 <p class="bio-role">Especialista em Inteligência Artificial</p>
                 <p>
                     Fundadora da Newscale Consulting, ajudo profissionais e empresas a transformarem sua relação com IA. 
-                    Minha missão é democratizar o acesso ao conhecimento estratégico sobre inteligência artificial.
+                    Minha missão é democratizar o acesso ao conhecimento estratégico sobre inteligência artificial, 
+                    mostrando que IA não é sobre tecnologia — é sobre amplificar o que há de mais humano em você.
                 </p>
                 <div class="bio-social">
                     <a href="https://instagram.com/brusantanna.ai" target="_blank">Instagram</a>
@@ -738,13 +786,13 @@
     </div>
 
     <script>
-        // Dados dos prompts (versão resumida - você deve incluir todos)
+        // Dados dos prompts (você deve incluir todos os 19 prompts aqui)
         const promptsData = {
             "1": {
                 category: "Contexto Rico",
                 title: "Contexto Completo",
-                description: "Faça a IA te conhecer profundamente.",
-                prompt: "Antes de você criar qualquer coisa..."
+                description: "Use este prompt ANTES de qualquer pedido importante. Faça a IA te conhecer profundamente.",
+                prompt: "Antes de você criar qualquer coisa pra mim, preciso que você entenda meu contexto completo..."
             }
             // ... adicione todos os outros prompts aqui
         };
@@ -769,7 +817,6 @@
             const form = document.querySelector('.formkit-form');
             if (form) {
                 form.addEventListener('submit', function(e) {
-                    // Wait a bit for ConvertKit to process
                     setTimeout(() => {
                         const successMessage = document.querySelector('.formkit-alert-success');
                         if (successMessage) {
