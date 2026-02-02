@@ -137,6 +137,31 @@
             color: var(--sage);
             margin-bottom: 24px;
         }
+        .course-highlight {
+            background: var(--light-sage);
+            padding: 20px 24px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            text-align: left;
+        }
+        .course-highlight h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--terracotta);
+            margin-bottom: 8px;
+        }
+        .course-highlight .course-subtitle {
+            font-size: 0.85rem;
+            color: var(--soft-brown);
+            font-style: italic;
+            margin-bottom: 12px;
+        }
+        .course-highlight p {
+            font-size: 0.9rem;
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
         .email-form {
             display: flex;
             flex-direction: column;
@@ -189,6 +214,11 @@
             padding: 100px 24px 120px;
             position: relative;
             z-index: 1;
+            display: none; /* STARTS HIDDEN */
+        }
+        .library-section.unlocked {
+            display: block;
+            animation: fadeIn 0.6s ease forwards;
         }
         .library-header {
             text-align: center;
@@ -448,11 +478,75 @@
         }
         .copy-btn:hover { background: var(--terracotta-dark); }
         .copy-btn.copied { background: var(--sage); }
+        
+        /* BIO SECTION */
+        .bio-section {
+            padding: 80px 24px;
+            background: var(--warm-white);
+            border-top: 1px solid var(--border);
+        }
+        .bio-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+        .bio-image {
+            flex-shrink: 0;
+        }
+        .bio-image img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--light-sage);
+        }
+        .bio-content h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--charcoal);
+        }
+        .bio-content .bio-role {
+            font-size: 0.9rem;
+            color: var(--terracotta);
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+        .bio-content p {
+            font-size: 1rem;
+            line-height: 1.75;
+            color: var(--soft-brown);
+            margin-bottom: 24px;
+        }
+        .bio-social {
+            display: flex;
+            gap: 16px;
+        }
+        .bio-social a {
+            padding: 10px 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--charcoal);
+            background: var(--light-sage);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .bio-social a:hover {
+            background: var(--terracotta);
+            color: var(--warm-white);
+        }
+        
         .footer {
             text-align: center;
             padding: 60px 24px;
             border-top: 1px solid var(--border);
-            background: var(--warm-white);
+            background: var(--cream);
         }
         .footer-logo {
             font-family: 'Cormorant Garamond', serif;
@@ -477,10 +571,16 @@
             transition: color 0.3s ease;
         }
         .footer-links a:hover { color: var(--terracotta); }
+        
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(24px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
         @media (max-width: 768px) {
             .gate-stats { gap: 32px; }
             .stat-number { font-size: 2rem; }
@@ -490,6 +590,17 @@
             .modal-header, .modal-body, .modal-footer { padding-left: 24px; padding-right: 24px; }
             .category-nav { gap: 8px; }
             .category-btn { padding: 10px 18px; font-size: 0.8rem; }
+            .bio-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .bio-image img {
+                width: 140px;
+                height: 140px;
+            }
+            .bio-social {
+                justify-content: center;
+            }
         }
         @media (max-width: 480px) {
             .gate-section { padding: 40px 20px; }
@@ -523,10 +634,17 @@
             </div>
             <div class="form-wrapper">
                 <h3 class="form-title">Acesso gratuito</h3>
-                <p class="form-subtitle">Inscreva-se e desbloqueie a biblioteca completa</p>
+                <p class="form-subtitle">Inscreva-se e desbloqueie a biblioteca + curso grátis</p>
+                
+                <div class="course-highlight">
+                    <h4>🎓 Domine a Era da IA</h4>
+                    <p class="course-subtitle">Para quem não é programador</p>
+                    <p>5 emails. 5 dias. Uma virada de chave na forma como você usa inteligência artificial no trabalho e no dia a dia.</p>
+                </div>
+                
                 <form class="email-form" id="gateForm">
                     <input type="email" class="email-input" placeholder="Seu melhor e-mail" required id="emailInput">
-                    <button type="submit" class="submit-btn">Quero os Prompts</button>
+                    <button type="submit" class="submit-btn">Desbloquear Biblioteca + Curso</button>
                 </form>
             </div>
             <p class="privacy-note">Zero spam. Só conteúdo que vale seu tempo.</p>
@@ -747,13 +865,35 @@
         </div>
     </section>
 
+    <section class="bio-section">
+        <div class="bio-container">
+            <div class="bio-image">
+                <img src="https://via.placeholder.com/180" alt="Bruna Santanna">
+            </div>
+            <div class="bio-content">
+                <h3>Bruna Santanna</h3>
+                <p class="bio-role">Especialista em Inteligência Artificial</p>
+                <p>
+                    Fundadora da Newscale Consulting, ajudo profissionais e empresas a transformarem sua relação com IA. 
+                    Minha missão é democratizar o acesso ao conhecimento estratégico sobre inteligência artificial, 
+                    mostrando que IA não é sobre tecnologia — é sobre amplificar o que há de mais humano em você.
+                </p>
+                <div class="bio-social">
+                    <a href="https://instagram.com/brusantanna.ai" target="_blank">Instagram</a>
+                    <a href="https://newscale.tech" target="_blank">Newscale</a>
+                    <a href="https://linkedin.com/in/brunasantanna" target="_blank">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer class="footer">
         <p class="footer-logo">Bruna Santanna</p>
         <p class="footer-tagline">Transformando a relação das pessoas com IA</p>
         <div class="footer-links">
-            <a href="https://instagram.com/brunasantanna" target="_blank">Instagram</a>
-            <a href="#">Newsletter</a>
-            <a href="#">Newscale Consulting</a>
+            <a href="https://instagram.com/brusantanna.ai" target="_blank">Instagram</a>
+            <a href="https://newscale.tech" target="_blank">Newscale Consulting</a>
+            <a href="mailto:contato@newscale.tech">Contato</a>
         </div>
     </footer>
 
@@ -1613,27 +1753,51 @@ const copyBtn = document.getElementById('copyBtn');
 const categoryBtns = document.querySelectorAll('.category-btn');
 const categorySections = document.querySelectorAll('.category-section');
 const promptCards = document.querySelectorAll('.prompt-card');
+const librarySection = document.getElementById('library');
 
 let currentPromptId = null;
+
+// ===== CHECK IF ALREADY UNLOCKED ON PAGE LOAD =====
+window.addEventListener('DOMContentLoaded', function() {
+    if (localStorage.getItem('biblioteca_unlocked') === 'true') {
+        librarySection.classList.add('unlocked');
+        const savedEmail = localStorage.getItem('biblioteca_email');
+        if (savedEmail) emailInput.value = savedEmail;
+    }
+});
 
 // ===== GATE FORM =====
 gateForm.addEventListener('submit', function(e) {
     e.preventDefault();
     const email = emailInput.value;
     
+    if (!email || !email.includes('@')) {
+        alert('Por favor, insira um email válido.');
+        return;
+    }
+    
+    // Save to localStorage
     localStorage.setItem('biblioteca_email', email);
     localStorage.setItem('biblioteca_unlocked', 'true');
     
-    document.getElementById('library').scrollIntoView({ behavior: 'smooth' });
+    // Unlock library
+    librarySection.classList.add('unlocked');
     
+    // Smooth scroll to library
+    setTimeout(() => {
+        librarySection.scrollIntoView({ behavior: 'smooth' });
+    }, 300);
+    
+    // Button feedback
     const btn = gateForm.querySelector('.submit-btn');
-    btn.textContent = 'Acesso Liberado!';
+    const originalText = btn.textContent;
+    btn.textContent = '✓ Biblioteca Desbloqueada!';
     btn.style.background = '#7D8B7A';
     
     setTimeout(() => {
-        btn.textContent = 'Quero os Prompts';
+        btn.textContent = originalText;
         btn.style.background = '';
-    }, 2000);
+    }, 3000);
 });
 
 // ===== CATEGORY FILTER =====
@@ -1657,6 +1821,13 @@ categoryBtns.forEach(btn => {
 // ===== MODAL =====
 promptCards.forEach(card => {
     card.addEventListener('click', () => {
+        // Check if unlocked
+        if (!librarySection.classList.contains('unlocked')) {
+            alert('Por favor, insira seu email para acessar os prompts.');
+            document.querySelector('.email-input').focus();
+            return;
+        }
+        
         const promptId = card.dataset.prompt;
         const data = promptsData[promptId];
 
@@ -1692,7 +1863,7 @@ copyBtn.addEventListener('click', async () => {
     if (data) {
         try {
             await navigator.clipboard.writeText(data.prompt);
-            copyBtn.textContent = 'Copiado!';
+            copyBtn.textContent = '✓ Copiado!';
             copyBtn.classList.add('copied');
             setTimeout(() => {
                 copyBtn.textContent = 'Copiar Prompt';
@@ -1700,13 +1871,16 @@ copyBtn.addEventListener('click', async () => {
             }, 2000);
         } catch (err) {
             console.error('Failed to copy:', err);
+            // Fallback for older browsers
+            const textArea = document.createElement('textarea');
+            textArea.value = data.prompt;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            copyBtn.textContent = '✓ Copiado!';
         }
     }
 });
-
-// ===== CHECK IF ALREADY UNLOCKED =====
-if (localStorage.getItem('biblioteca_unlocked') === 'true') {
-    const savedEmail = localStorage.getItem('biblioteca_email');
-    if (savedEmail) emailInput.value = savedEmail;
-}
-</script></body></html>
+</script>
+</html>
