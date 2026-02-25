@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Time Virada IA — 3 Agentes que trabalham com você</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700;1,9..144,900&family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+/* ─── RESET ─── */
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --ink:#1A1814;
+  --ink2:#2E2A25;
+  --cream:#F7F4EE;
+  --paper:#FDFBF7;
+  --sand:#EDE8DF;
+  --mist:#C4BDB0;
+  --terra:#A85C38;
+  --terra-h:#8A4828;
+  --terra-l:#C4845E;
+  --terra-f:rgba(168,92,56,.08);
+  --terra-f2:rgba(168,92,56,.14);
+  --forest:#0E2B30;
+  --forest2:#163840;
+  --sage:#6B7A6E;
+  --border:rgba(180,170,155,.22);
+  --border2:rgba(180,170,155,.38);
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--cream);color:var(--ink);
+  line-height:1.65;overflow-x:hidden;
+}
+/* grain overlay */
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:900;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.025'/%3E%3C/svg%3E");
+}
+
+/* ─── LAYOUT ─── */
+.w{max-width:580px;margin:0 auto;padding:0 22px;text-align:center;}
+
+/* ─── STICKY NAV ─── */
+.snav{
+  position:fixed;top:0;left:0;right:0;z-index:800;
+  background:rgba(247,244,238,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border2);
+  padding:12px 20px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  translate:0 -100%;transition:translate .45s cubic-bezier(.4,0,.2,1);
+}
+.snav.vis{translate:0 0;}
+.snav-brand{font-family:'Fraunces',serif;font-size:.9rem;font-weight:600;color:var(--ink2);white-space:nowrap;}
+.snav-cta{
+  flex-shrink:0;padding:9px 18px;
+  font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--paper);background:var(--terra);border:none;border-radius:8px;cursor:pointer;text-decoration:none;
+  transition:background .25s;
+}
+.snav-cta:hover{background:var(--terra-h);}
+
+/* ─── SECTION PADDING ─── */
+.sec{padding:70px 0;}
+.sec-alt{background:var(--paper);}
+.sec-dark{background:var(--forest);color:var(--paper);}
+.sec-ink{background:var(--ink);color:var(--paper);}
+
+/* ─── TYPE ─── */
+.lbl{
+  font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--terra);margin-bottom:10px;display:block;font-weight:600;
+}
+.lbl-light{color:rgba(196,132,94,.7);}
+.lbl-dim{color:rgba(196,189,176,.45);}
+
+.h1{
+  font-family:'Fraunces',serif;
+  font-size:clamp(3.5rem,11vw,6rem);
+  font-weight:300;line-height:.92;letter-spacing:-.03em;
+}
+.h2{
+  font-family:'Fraunces',serif;
+  font-size:clamp(1.9rem,6vw,2.8rem);
+  font-weight:700;line-height:1.05;letter-spacing:-.02em;margin-bottom:18px;
+}
+.h3{
+  font-family:'Fraunces',serif;
+  font-size:clamp(1.35rem,4.5vw,1.75rem);
+  font-weight:600;line-height:1.2;
+}
+em.terra{font-style:italic;color:var(--terra);}
+em.terra-l{font-style:italic;color:var(--terra-l);}
+
+/* ─── HERO ─── */
+.hero{
+  min-height:100svh;display:flex;flex-direction:column;justify-content:center;
+  padding:88px 22px 64px;position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 80% 55% at 110% -10%,rgba(168,92,56,.09) 0%,transparent 65%),
+    radial-gradient(ellipse 70% 70% at -10% 110%,rgba(14,43,48,.07) 0%,transparent 65%);
+}
+.hero-inner{position:relative;z-index:1;max-width:580px;margin:0 auto;width:100%;}
+
+/* pre-tag */
+.pre-tag{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--terra);margin-bottom:28px;
+  opacity:0;animation:fadeUp .65s ease forwards;
+}
+.pre-dot{width:5px;height:5px;border-radius:50%;background:currentColor;animation:pulse 2.2s ease infinite;}
+
+/* headline */
+.hero-headline{
+  margin-bottom:28px;
+  opacity:0;animation:fadeUp .65s ease forwards .1s;
+}
+.hero-hl-a{
+  font-family:'Fraunces',serif;
+  font-size:clamp(1.15rem,4vw,1.55rem);
+  font-weight:700;font-style:italic;
+  color:var(--sage);display:block;margin-bottom:10px;line-height:1.4;
+}
+.hero-hl-b{
+  font-family:'Fraunces',serif;
+  font-size:clamp(3.4rem,11vw,5.8rem);
+  font-weight:900;line-height:.88;letter-spacing:-.035em;
+  color:var(--ink);display:block;
+}
+.hero-hl-b span{font-style:italic;color:var(--terra);}
+.hero-hl-c{
+  font-family:'Fraunces',serif;
+  font-size:clamp(1.15rem,3.8vw,1.5rem);
+  font-weight:700;font-style:italic;
+  color:var(--ink2);display:block;margin-top:14px;line-height:1.45;
+}
+
+/* promessa badge */
+.promessa-badge{
+  display:inline-flex;align-items:flex-start;gap:12px;
+  background:var(--paper);border:1px solid var(--border2);
+  border-radius:14px;padding:16px 18px;margin-bottom:28px;
+  opacity:0;animation:fadeUp .65s ease forwards .2s;
+}
+.pb-icon{font-size:1.3rem;flex-shrink:0;margin-top:1px;}
+.pb-text{font-size:.88rem;color:var(--ink2);line-height:1.6;}
+.pb-text strong{color:var(--ink);font-weight:600;}
+
+/* agent trio */
+.agent-trio{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+  margin-bottom:28px;
+  opacity:0;animation:fadeUp .65s ease forwards .28s;
+}
+.at-card{
+  background:var(--paper);border:1px solid var(--border2);border-radius:12px;
+  padding:14px 10px;text-align:center;
+}
+.at-card.bonus{background:rgba(14,43,48,.05);border-color:rgba(14,43,48,.14);}
+.at-icon{font-size:1.5rem;margin-bottom:4px;}
+.at-name{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:700;color:var(--ink);display:block;}
+.at-role{font-size:.58rem;letter-spacing:.09em;text-transform:uppercase;color:var(--terra);margin-top:1px;display:block;font-weight:600;}
+.at-card.bonus .at-role{color:var(--forest2);}
+
+/* price row */
+.hero-price{
+  display:flex;align-items:flex-end;gap:14px;margin-bottom:22px;flex-wrap:wrap;
+  opacity:0;animation:fadeUp .65s ease forwards .35s;
+}
+.hp-from{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:400;color:var(--mist);text-decoration:line-through;line-height:1;}
+.hp-now{line-height:1;}
+.hp-val{font-family:'Fraunces',serif;font-size:clamp(2.6rem,8vw,3.5rem);font-weight:900;color:var(--terra);line-height:.95;}
+.hp-sub{font-size:.7rem;color:var(--sage);margin-top:3px;}
+
+.btn-hero{
+  display:block;width:100%;padding:19px 24px;
+  font-size:.82rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--paper);background:var(--terra);
+  border:none;border-radius:12px;cursor:pointer;text-decoration:none;text-align:center;
+  transition:background .28s,transform .3s,box-shadow .3s;
+  position:relative;overflow:hidden;
+  opacity:0;animation:fadeUp .65s ease forwards .42s;
+}
+.btn-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.13) 0%,transparent 55%);}
+.btn-hero:hover{background:var(--terra-h);transform:translateY(-2px);box-shadow:0 14px 40px rgba(168,92,56,.3);}
+.hero-lock{font-size:.68rem;color:var(--mist);margin-top:9px;opacity:0;animation:fadeUp .65s ease forwards .5s;}
+
+/* ─── BREAKTHROUGH SECTION: amplifica o estado mental ─── */
+.amplify{padding:60px 0;}
+.amp-line{
+  font-family:'Fraunces',serif;
+  font-size:clamp(1.6rem,5.5vw,2.3rem);
+  font-weight:700;line-height:1.25;color:var(--ink);
+  margin-bottom:8px;
+}
+.amp-line i{font-style:italic;color:var(--terra);}
+.amp-sub{font-size:.9rem;color:var(--sage);line-height:1.75;margin-bottom:20px;}
+.amp-loop{
+  background:var(--paper);border:1px solid var(--border2);
+  border-radius:14px;padding:18px 20px;
+  font-size:.88rem;color:var(--ink2);line-height:1.8;
+}
+.amp-loop strong{display:block;font-family:'Fraunces',serif;font-size:1.05rem;font-weight:500;color:var(--ink);margin-bottom:4px;}
+
+/* ─── NEGAÇÃO (TESE PARTE 1) ─── */
+.negacao{padding:60px 0;background:var(--ink);}
+.neg-intro{font-size:.88rem;color:rgba(247,244,238,.5);margin-bottom:18px;line-height:1.7;}
+.neg-list{display:flex;flex-direction:column;gap:0;}
+.neg-item{
+  font-family:'Fraunces',serif;
+  font-size:clamp(1rem,3.5vw,1.3rem);font-weight:400;
+  color:rgba(247,244,238,.3);line-height:1.1;
+  padding:14px 0;border-bottom:1px solid rgba(247,244,238,.06);
+  text-decoration:line-through;text-decoration-color:rgba(168,92,56,.4);
+  letter-spacing:-.01em;
+}
+.neg-reveal{
+  padding:22px 20px;
+  background:rgba(168,92,56,.1);border:1px solid rgba(168,92,56,.2);
+  border-radius:14px;margin-top:22px;
+}
+.nr-headline{
+  font-family:'Fraunces',serif;
+  font-size:clamp(1.45rem,5vw,2rem);font-weight:700;font-style:normal;
+  color:var(--paper);line-height:1.35;margin-bottom:8px;
+}
+.nr-sub{font-size:.84rem;color:rgba(247,244,238,.55);line-height:1.7;}
+/* TÍTULO GRANDE */
+.negacao .sec-title{
+  font-family:'Fraunces',serif;
+  font-size:clamp(2.8rem,9vw,4.5rem);
+  font-weight:900;line-height:.95;letter-spacing:-.025em;
+  color:var(--paper);margin-bottom:20px;
+}
+
+/* ─── HISTÓRIA ORIGEM ─── */
+.historia{padding:70px 0;background:var(--paper);}
+/* foto placeholder */
+.hist-photo{margin:20px 0 24px;}
+.hist-photo-inner{
+  width:160px;height:160px;border-radius:50%;
+  background:var(--sand);border:2px dashed var(--border2);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto;
+}
+.hist-photo-label{font-size:.65rem;color:var(--mist);letter-spacing:.1em;text-transform:uppercase;}
+.hist-card{
+  background:var(--cream);border:1px solid var(--border2);
+  border-radius:18px;padding:26px 22px;margin:20px 0;
+  position:relative;
+}
+.hist-quote{
+  position:absolute;top:-12px;left:20px;
+  font-size:3.5rem;font-family:'Fraunces',serif;
+  color:var(--terra);line-height:1;opacity:.3;
+}
+.hist-text{
+  font-family:'Fraunces',serif;
+  font-size:clamp(.9rem,3vw,1rem);
+  font-weight:700;font-style:italic;line-height:1.65;
+  color:var(--ink2);
+}
+.hist-text strong{font-style:normal;font-weight:500;color:var(--ink);}
+.hist-byline{
+  display:flex;align-items:center;gap:10px;margin-top:16px;
+  padding-top:14px;border-top:1px solid var(--border);
+}
+.hb-name{font-size:.78rem;font-weight:600;color:var(--ink);display:block;}
+.hb-role{font-size:.68rem;color:var(--sage);}
+
+/* ─── PROVA (o que faltava) ─── */
+.prova{padding:70px 0;}
+
+.proof-hero{
+  background:var(--forest);border-radius:18px;
+  padding:24px 20px;margin-bottom:16px;
+  position:relative;overflow:hidden;
+}
+.proof-hero::after{
+  content:'';position:absolute;
+  bottom:-40px;right:-40px;width:160px;height:160px;
+  background:radial-gradient(circle,rgba(168,92,56,.15) 0%,transparent 70%);
+}
+.ph-tag{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--terra-l);font-weight:600;margin-bottom:10px;display:block;}
+.ph-num{
+  font-family:'Fraunces',serif;
+  font-size:clamp(2.8rem,9vw,4rem);font-weight:900;color:var(--paper);
+  line-height:.95;margin-bottom:6px;
+}
+.ph-num span{font-style:italic;color:var(--terra-l);}
+.ph-desc{font-size:.84rem;color:rgba(196,189,176,.65);line-height:1.6;}
+
+.proof-grid{display:flex;flex-direction:column;gap:12px;}
+.proof-card{
+  background:var(--paper);border:1px solid var(--border2);
+  border-radius:14px;padding:18px 18px;
+}
+.pc-label{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--terra);margin-bottom:6px;display:block;}
+.pc-title{
+  font-family:'Fraunces',serif;
+  font-size:1.1rem;font-weight:700;color:var(--ink);margin-bottom:6px;line-height:1.2;
+}
+.pc-body{font-size:.83rem;color:var(--sage);line-height:1.65;}
+.pc-metric{
+  display:inline-flex;align-items:center;gap:5px;
+  background:var(--terra-f2);border-radius:100px;
+  padding:5px 12px;margin-top:10px;
+  font-size:.72rem;font-weight:600;color:var(--terra-h);
+}
+
+/* ─── MÉTODO (o que faltava) ─── */
+.metodo{padding:70px 0;background:var(--paper);}
+.method-intro{font-size:.9rem;color:var(--sage);line-height:1.75;margin-bottom:28px;}
+.method-steps{display:flex;flex-direction:column;gap:0;position:relative;margin-bottom:28px;}
+.method-steps::before{
+  content:'';position:absolute;left:22px;top:28px;bottom:28px;
+  width:1px;background:linear-gradient(to bottom,var(--terra) 0%,var(--terra-l) 50%,rgba(14,43,48,.3) 100%);
+}
+.ms-step{
+  display:flex;gap:16px;padding:16px 0;position:relative;
+}
+.ms-step:first-child{padding-top:0;}
+.ms-step:last-child{padding-bottom:0;}
+.ms-num{
+  width:44px;height:44px;border-radius:50%;
+  background:var(--paper);border:2px solid var(--terra);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;z-index:1;
+  font-family:'Fraunces',serif;font-size:1.1rem;font-weight:500;color:var(--terra);
+}
+.ms-num.forest-step{border-color:var(--forest);color:var(--forest);}
+.ms-body{padding-top:8px;}
+.ms-title{
+  font-family:'Fraunces',serif;
+  font-size:1.1rem;font-weight:700;color:var(--ink);display:block;margin-bottom:3px;
+}
+.ms-desc{font-size:.82rem;color:var(--sage);line-height:1.55;}
+
+.method-arrow{
+  text-align:center;padding:10px 0;
+  font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--terra);font-weight:600;
+}
+
+/* ─── AGENT CARDS ─── */
+.agents{padding:70px 0;}
+.agent-card{
+  border:1px solid var(--border2);border-radius:20px;overflow:hidden;
+  background:var(--paper);margin-bottom:18px;
+  transition:transform .35s cubic-bezier(.4,0,.2,1),box-shadow .35s;
+}
+.agent-card:hover{transform:translateY(-4px);box-shadow:0 16px 44px rgba(26,24,20,.09);}
+
+.ac-head{padding:22px 20px 16px;display:flex;gap:14px;align-items:flex-start;}
+.ac-icon-wrap{
+  width:50px;height:50px;border-radius:12px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:1.5rem;
+}
+.ac-icon-terra{background:rgba(168,92,56,.1);}
+.ac-icon-forest{background:rgba(14,43,48,.08);}
+.ac-meta{}
+.ac-name{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:700;color:var(--ink);line-height:1;}
+.ac-role{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--terra);margin-top:2px;}
+.ac-tagline{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:300;
+  font-size:1rem;color:var(--sage);padding:0 20px;margin-bottom:10px;
+}
+.ac-body{padding:0 20px 18px;}
+.ac-desc{font-size:.85rem;color:var(--ink2);line-height:1.7;margin-bottom:12px;}
+.ac-list{display:flex;flex-direction:column;gap:5px;}
+.ac-li{font-size:.8rem;color:var(--ink2);line-height:1.45;padding-left:14px;position:relative;}
+.ac-li::before{content:'·';position:absolute;left:3px;color:var(--terra);font-size:1rem;line-height:1.3;}
+.ac-foot{
+  border-top:1px solid var(--border);padding:12px 20px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.ac-val{font-size:.72rem;color:var(--mist);}
+.ac-val b{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:400;color:var(--ink2);}
+.badge{font-size:.6rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:5px 11px;border-radius:100px;}
+.badge-terra{background:rgba(168,92,56,.11);color:var(--terra-h);}
+
+/* BONUS */
+.bonus-card{
+  border-radius:20px;overflow:hidden;margin-bottom:18px;
+  background:linear-gradient(145deg,var(--forest) 0%,#122830 100%);
+  position:relative;
+}
+.bonus-tag{
+  background:var(--terra);color:var(--paper);
+  font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:5px 13px;border-radius:100px;
+  display:inline-block;margin:22px 20px 0;
+}
+.bc-head{padding:12px 20px 14px;display:flex;gap:12px;align-items:flex-start;}
+.bc-icon{width:50px;height:50px;border-radius:12px;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;}
+.bc-name{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:700;color:var(--paper);line-height:1;}
+.bc-role{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:rgba(196,132,94,.9);margin-top:2px;}
+.bc-tagline{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:.98rem;color:rgba(253,251,247,.45);padding:0 20px;margin-bottom:10px;}
+.bc-body{padding:0 20px;}
+.bc-list{display:flex;flex-direction:column;gap:5px;margin-bottom:12px;}
+.bc-li{font-size:.8rem;color:rgba(253,251,247,.65);padding-left:14px;position:relative;line-height:1.45;}
+.bc-li::before{content:'·';position:absolute;left:3px;color:var(--terra-l);font-size:1rem;line-height:1.3;}
+.bc-punch{
+  font-family:'Fraunces',serif;font-style:italic;
+  font-size:1.1rem;color:var(--paper);margin-bottom:14px;font-weight:300;
+}
+.bc-foot{border-top:1px solid rgba(255,255,255,.07);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;margin-top:2px;}
+.bc-val{font-size:.72rem;color:rgba(196,189,176,.3);text-decoration:line-through;}
+.badge-forest{background:rgba(196,132,94,.15);color:var(--terra-l);}
+
+/* ─── CUSTO DA INAÇÃO ─── */
+.inacao{padding:70px 0;background:var(--ink);}
+.in-calc{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);
+  border-radius:16px;padding:22px 20px;margin:20px 0;
+}
+.in-row{
+  display:flex;align-items:baseline;justify-content:space-between;
+  padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05);gap:10px;
+}
+.in-row:last-child{border-bottom:none;}
+.in-item{font-size:.82rem;color:rgba(247,244,238,.5);}
+.in-val{font-family:'Fraunces',serif;font-size:1.2rem;font-weight:300;color:rgba(247,244,238,.8);white-space:nowrap;}
+.in-total .in-item{color:var(--paper);font-weight:600;}
+.in-total .in-val{color:var(--terra-l);font-size:1.6rem;}
+.in-callout{
+  font-family:'Fraunces',serif;
+  font-size:clamp(1.35rem,4.5vw,1.9rem);font-weight:700;font-style:normal;
+  color:var(--paper);line-height:1.4;margin:20px 0 8px;
+}
+.in-callout strong{font-style:normal;color:var(--terra-l);}
+.in-sub{font-size:.84rem;color:rgba(196,189,176,.45);line-height:1.65;}
+
+/* ─── STACK VALOR ─── */
+.stack{padding:70px 0;background:var(--paper);}
+.stack-table{
+  border:1px solid var(--border2);border-radius:16px;overflow:hidden;margin:22px 0;
+}
+.srow{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 20px;border-bottom:1px solid var(--border);gap:10px;
+}
+.srow:last-child{border-bottom:none;}
+.srow.total{background:var(--forest);color:var(--paper);}
+.sitem{font-size:.85rem;color:var(--ink);}
+.sitem.bonusline{font-weight:600;color:var(--terra-h);}
+.sprice{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:300;color:var(--mist);text-decoration:line-through;white-space:nowrap;flex-shrink:0;}
+.srow.total .sitem{color:var(--paper);font-weight:600;}
+.srow.total .sprice{text-decoration:none;color:var(--terra-l);font-size:1.4rem;}
+
+.quick-win{
+  background:var(--terra-f);border:1px solid rgba(168,92,56,.14);
+  border-radius:14px;padding:18px 18px;margin-bottom:18px;
+}
+.qw-title{
+  font-family:'Fraunces',serif;
+  font-size:1.05rem;font-weight:700;color:var(--ink);margin-bottom:4px;
+}
+.qw-body{font-size:.83rem;color:var(--ink2);line-height:1.65;}
+
+/* ─── 3 CAMINHOS ─── */
+.caminhos{padding:70px 0;}
+.cam-grid{display:flex;flex-direction:column;gap:12px;margin:18px 0;}
+.cam-card{
+  border-radius:14px;padding:18px 18px;
+  border:1px solid var(--border2);
+}
+.cam-card.best{background:var(--paper);border-color:var(--terra);}
+.cam-card.neutral{background:var(--paper);opacity:.7;}
+.cam-card.bad{background:rgba(14,43,48,.04);border-color:rgba(14,43,48,.12);}
+.cam-num{
+  font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;
+  color:var(--terra);margin-bottom:6px;display:block;
+}
+.cam-num.bad-num{color:var(--sage);}
+.cam-title{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:700;color:var(--ink);margin-bottom:6px;}
+.cam-steps{font-size:.82rem;color:var(--sage);line-height:1.7;}
+.cam-steps span{color:var(--terra);font-weight:600;}
+
+/* ─── FILTRO ─── */
+.filtro{padding:60px 0;background:var(--forest);}
+.filtro-intro{font-size:.9rem;color:rgba(196,189,176,.5);margin-bottom:18px;line-height:1.7;}
+.filtro-list{display:flex;flex-direction:column;gap:8px;margin-bottom:22px;}
+.fi-not{
+  font-family:'Fraunces',serif;
+  font-size:clamp(.9rem,3vw,1rem);font-weight:700;font-style:italic;
+  color:rgba(247,244,238,.25);line-height:1.2;
+  text-decoration:line-through;text-decoration-color:rgba(168,92,56,.3);
+  padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05);
+}
+.filtro-reveal{
+  background:rgba(168,92,56,.09);border:1px solid rgba(168,92,56,.18);
+  border-radius:14px;padding:18px 18px;
+}
+.fr-text{
+  font-family:'Fraunces',serif;
+  font-size:clamp(1.2rem,4vw,1.65rem);font-weight:700;color:var(--paper);
+  line-height:1.4;margin-bottom:6px;
+}
+.fr-sub{font-size:.82rem;color:rgba(196,189,176,.5);line-height:1.65;font-style:italic;}
+
+/* ─── FINAL CTA ─── */
+.finalcta{padding:70px 0;background:var(--paper);}
+.cta-block{
+  border:1px solid var(--border2);border-radius:20px;overflow:hidden;
+  background:var(--paper);
+}
+.cta-top{
+  background:var(--ink);padding:30px 22px;text-align:center;
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+.ct-from{font-size:.72rem;text-decoration:line-through;color:rgba(196,189,176,.3);margin-bottom:2px;}
+.ct-price{
+  font-family:'Fraunces',serif;
+  font-size:clamp(3.5rem,11vw,5rem);font-weight:900;color:var(--terra-l);line-height:.9;
+}
+.ct-inst{font-size:.76rem;color:rgba(196,189,176,.35);margin-top:6px;}
+.cta-list{padding:22px 22px 4px;}
+.cl-item{
+  display:flex;align-items:center;gap:10px;
+  font-size:.85rem;color:var(--ink2);padding:9px 0;
+  border-bottom:1px solid var(--border);line-height:1.35;
+}
+.cl-item:last-child{border-bottom:none;}
+.cl-check{color:var(--terra);font-size:.85rem;flex-shrink:0;}
+.cl-item.bonus-item{font-weight:600;color:var(--terra-h);}
+.cta-bottom{padding:20px 22px;}
+.btn-cta{
+  display:block;width:100%;padding:19px 24px;
+  font-size:.82rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--paper);background:var(--terra);
+  border:none;border-radius:12px;cursor:pointer;text-decoration:none;text-align:center;
+  transition:background .28s,transform .3s,box-shadow .3s;
+  position:relative;overflow:hidden;margin-bottom:10px;
+}
+.btn-cta::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.13) 0%,transparent 55%);}
+.btn-cta:hover{background:var(--terra-h);transform:translateY(-2px);box-shadow:0 14px 40px rgba(168,92,56,.3);}
+.cta-lock{font-size:.68rem;color:var(--mist);text-align:center;}
+
+.urgency-strip{
+  background:rgba(168,92,56,.07);border:1px solid rgba(168,92,56,.14);
+  border-radius:12px;padding:14px 16px;margin-top:16px;
+  font-size:.8rem;color:var(--ink2);line-height:1.65;
+}
+.urgency-strip strong{color:var(--terra);font-weight:600;}
+
+/* ─── FOOTER ─── */
+.footer{background:var(--ink);padding:44px 22px;text-align:center;}
+.foot-logo{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:300;color:rgba(247,244,238,.6);margin-bottom:3px;}
+.foot-tag{font-size:.68rem;letter-spacing:.04em;color:rgba(247,244,238,.25);margin-bottom:18px;}
+.foot-links{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;}
+.foot-links a{font-size:.68rem;color:rgba(247,244,238,.25);text-decoration:none;transition:color .3s;}
+.foot-links a:hover{color:var(--terra-l);}
+
+
+/* ─── LORA: corpo de texto, subtítulos, depoimentos ─── */
+.hero-hl-a,.hero-hl-c,.hist-text,.amp-sub,.method-intro,
+.pb-text,.ac-desc,.ac-li,.ac-tagline,.bc-desc,.bc-li,.bc-tagline,.bc-punch,
+.neg-intro,.nr-sub,.ms-desc,.ph-desc,.pc-body,.cam-steps,
+.fi-not,.fr-sub,.qw-body,.in-sub,.urgency-strip{
+  font-family:'Lora',serif;font-style:normal;font-weight:400;
+}
+/* subtítulo hero: Lora regular limpo */
+.hero-hl-c{font-size:clamp(.95rem,3.2vw,1.15rem);font-weight:400;line-height:1.7;color:var(--ink2);}
+/* hist-text: Lora normal, limpo */
+.hist-text{font-style:normal;font-size:clamp(.92rem,3vw,1rem);line-height:1.85;font-weight:400;}
+.hist-text strong{font-style:normal;font-weight:600;color:var(--ink);}
+
+/* left-align overrides */
+.neg-item,.neg-intro,.nr-sub,.hist-text,.amp-loop,.in-row,.in-item,.in-val,
+.ac-desc,.ac-li,.ac-tagline,.bc-tagline,.bc-li,.bc-punch,.bc-desc,
+.cam-steps,.cam-title,.cam-num,.fi-not,.fr-sub,.cl-item,.pc-body,.ph-desc,
+.ms-desc,.hist-byline,.foot-links,.amp-sub,.method-intro,.in-sub,
+.snav,.snav-brand,.snav-cta,.ac-head,.bc-head,.ac-foot,.bc-foot,
+.srow,.qw-body,.urgency-strip,.pb-text{text-align:left;}
+/* keep stack table items left */
+.sitem,.sprice{text-align:left;}
+.sprice{text-align:right;}
+/* hero left-aligns on mobile for readability */
+@media(max-width:480px){
+  .hero-inner{text-align:left;}
+  .hero-price{justify-content:flex-start;}
+  .pre-tag{text-align:left;}
+}
+/* ─── MOBILE FIXES ─── */
+@media(max-width:480px){
+  .agent-trio{grid-template-columns:repeat(3,1fr);}
+  .at-name{font-size:.9rem;}
+  .at-role{font-size:.5rem;}
+  .hero-hl-b{font-size:clamp(3rem,14vw,5rem);}
+  .hero-hl-c br{display:none;}
+  .in-row{flex-direction:column;gap:2px;align-items:flex-start;}
+  .in-val{font-size:1rem;}
+  .srow{flex-wrap:wrap;}
+  .hist-photo-inner{width:140px;height:140px;}
+  .bc-head{flex-wrap:wrap;}
+  .snav-brand{font-size:.78rem;}
+  .negacao .sec-title{font-size:clamp(2.2rem,10vw,3.5rem);}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.45;transform:scale(.75);}}
+
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s cubic-bezier(.4,0,.2,1),transform .6s cubic-bezier(.4,0,.2,1);}
+.reveal.in{opacity:1;transform:translateY(0);}
+.rd1{transition-delay:.07s;} .rd2{transition-delay:.14s;} .rd3{transition-delay:.21s;}
+</style>
+</head>
+<body>
+
+<!-- STICKY NAV -->
+<nav class="snav" id="snav">
+  <span class="snav-brand">Virada IA · @brusantanna.ai</span>
+  <a href="#cta" class="snav-cta">Quero meu Time</a>
+</nav>
+
+<!-- ════════════════════════════════
+     HERO
+     Breakthrough Advertising: começa onde a pessoa JÁ ESTÁ mentalmente.
+     Ela não precisa ser convencida que a IA importa. Ela sente o gap.
+     A copy amplifica esse gap antes de oferecer a solução.
+════════════════════════════════ -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+
+    <p class="pre-tag">
+      <span class="pre-dot"></span>
+      por @brusantanna.ai · Virada IA
+    </p>
+
+    <!-- HEADLINE: fala com o estado mental (BA: tap into the existing desire) -->
+    <div class="hero-headline">
+      <span class="hero-hl-a">Você já sabe que deveria estar usando IA melhor.</span>
+      <span class="hero-hl-b">TIME<br>VIRADA <span>IA</span></span>
+      <span class="hero-hl-c">3 Agentes Personalizados para diagnosticar,<br>estruturar e aplicar IA no seu negócio —<br>de forma prática e imediata.</span>
+    </div>
+
+    <!-- PROMESSA PRIMÁRIA (Douglas Bloco 1): resultado + prazo + remoção de atrito -->
+    <div class="promessa-badge">
+      <div class="pb-icon">⚡</div>
+      <div class="pb-text">
+        <strong>Descubra onde você está perdendo dinheiro no seu negócio — e comece a usar IA de verdade — em menos de 24 horas.</strong>
+        Sem estudar tecnologia. Sem depender de ninguém. Sem complexidade.
+      </div>
+    </div>
+
+    <!-- visual trio -->
+    <div class="agent-trio">
+      <div class="at-card"><div class="at-icon">🔍</div><span class="at-name">Vitória</span><span class="at-role">Diagnóstico</span></div>
+      <div class="at-card"><div class="at-icon">🧠</div><span class="at-name">Lúcio</span><span class="at-role">Estratégia</span></div>
+      <div class="at-card bonus"><div class="at-icon">🎁</div><span class="at-name">Midas</span><span class="at-role">Bônus</span></div>
+    </div>
+
+    <!-- price -->
+    <div class="hero-price">
+      <div class="hp-from">R$1.185</div>
+      <div>→</div>
+      <div class="hp-now">
+        <div class="hp-val">R$197</div>
+        <div class="hp-sub">Acesso imediato · 3 agentes prontos</div>
+      </div>
+    </div>
+
+    <a href="#cta" class="btn-hero">Quero meu Time Virada IA agora</a>
+    <p class="hero-lock">🔒 Compra segura · Acesso imediato após confirmação</p>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     BREAKTHROUGH: AMPLIFICA O ESTADO MENTAL
+     BA: não explica o produto. Amplifica a frustração que já existe.
+     A pessoa que lê isso pensa: "é exatamente isso."
+════════════════════════════════ -->
+<section class="amplify">
+  <div class="w">
+    <span class="lbl reveal">o loop que você está vivendo</span>
+    <p class="amp-line reveal">Você já entendeu que a IA <i>muda tudo.</i></p>
+    <p class="amp-sub reveal">Você sabe que poderia automatizar, ganhar tempo, reduzir custo, tomar decisões melhores. Você viu os casos. Você tentou.</p>
+
+    <div class="amp-loop reveal">
+      <strong>O que acontece na prática:</strong>
+      Você testa uma ferramenta. Salva um prompt. Assiste um tutorial. Começa com entusiasmo.<br><br>
+      E depois de uma semana usando do jeito errado — ou não usando nada — você volta para o manual.<br><br>
+      <strong style="color:var(--ink);">Não porque IA não funciona. Porque você ainda não estruturou.</strong>
+    </div>
+
+    <!-- BA: dados que confirmam que o problema não é dela, é sistêmico -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:22px;">
+      <div class="reveal" style="text-align:center;padding:14px 8px;background:var(--paper);border:1px solid var(--border2);border-radius:12px;">
+        <div style="font-family:'Fraunces',serif;font-size:2.2rem;font-weight:300;color:var(--terra);line-height:1;">84%</div>
+        <div style="font-size:.62rem;color:var(--sage);margin-top:3px;line-height:1.4;">nunca usaram IA</div>
+      </div>
+      <div class="reveal rd1" style="text-align:center;padding:14px 8px;background:var(--paper);border:1px solid var(--border2);border-radius:12px;">
+        <div style="font-family:'Fraunces',serif;font-size:2.2rem;font-weight:300;color:var(--terra);line-height:1;">82%</div>
+        <div style="font-size:.62rem;color:var(--sage);margin-top:3px;line-height:1.4;">sem uso estratégico</div>
+      </div>
+      <div class="reveal rd2" style="text-align:center;padding:14px 8px;background:var(--paper);border:1px solid var(--border2);border-radius:12px;">
+        <div style="font-family:'Fraunces',serif;font-size:2.2rem;font-weight:300;color:var(--terra);line-height:1;">4%</div>
+        <div style="font-size:.62rem;color:var(--sage);margin-top:3px;line-height:1.4;">maturidade real</div>
+      </div>
+    </div>
+    <p class="reveal" style="font-size:.62rem;color:var(--mist);margin-top:8px;line-height:1.6;">Fontes: Pew Research Center, U.S. Census Bureau – Business Trends and Outlook Survey, relatórios Deloitte e McKinsey.</p>
+
+    <div class="reveal" style="border-left:2.5px solid var(--terra);padding-left:16px;margin-top:22px;">
+      <p style="font-family:'Fraunces',serif;font-size:1.3rem;font-weight:400;font-style:italic;color:var(--ink);line-height:1.4;">Você não está atrasado. Você está <strong style="font-style:normal;">cedo.</strong></p>
+      <p style="font-size:.84rem;color:var(--sage);margin-top:5px;">E quem estrutura agora acumula vantagem enquanto 96% ainda hesitam.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     BLOCO 2 PARTE 1: NEGAÇÃO (Douglas)
+     BA: separa de tudo que a pessoa já viu e rejeitou antes
+════════════════════════════════ -->
+<section class="negacao">
+  <div class="w">
+    <span class="lbl lbl-dim reveal">o que isso não é</span>
+    <h2 class="sec-title reveal">O que isso<br><em style="font-style:italic;color:var(--terra-l);">não é.</em></h2>
+    <p class="neg-intro reveal">Você já comprou curso. Já salvou lista de ferramentas. Já baixou prompt pack. Nenhum disso funcionou de verdade. Então antes de continuar:</p>
+
+    <div class="neg-list reveal">
+      <p class="neg-item">Curso de IA com 40 horas de conteúdo</p>
+      <p class="neg-item">Lista de ferramentas que você vai salvar e nunca usar</p>
+      <p class="neg-item">Prompt genérico copiado do Google</p>
+      <p class="neg-item">Ebook com dicas rasas que ChatGPT gera em 10 segundos</p>
+      <p class="neg-item">Consultoria que entrega PDF bonito e zero implementação</p>
+    </div>
+
+    <div class="neg-reveal reveal">
+      <p class="nr-headline">É um time de especialistas de IA prontos para trabalhar com você — agora.</p>
+      <p class="nr-sub">Não é teoria. Não é conteúdo. É execução. Você abre, usa, e o resultado começa a aparecer nas primeiras horas.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     BLOCO 2 PARTE 2: HISTÓRIA DE ORIGEM (Douglas)
+════════════════════════════════ -->
+<section class="historia sec-alt">
+  <div class="w">
+    <span class="lbl reveal">a história por trás</span>
+    <h2 class="h2 reveal">Quem está<br><em class="terra">por trás do time</em></h2>
+
+    <!-- ESPAÇO PARA FOTO -->
+    <div class="hist-photo reveal">
+      <div class="hist-photo-inner">
+        <span class="hist-photo-label">Sua foto aqui</span>
+      </div>
+    </div>
+
+    <div class="hist-card reveal">
+      <div class="hist-quote">"</div>
+      <p class="hist-text">
+        Sou formada em Marketing pela ESPM. Passei por grandes empresas como SulAmérica e Whirlpool. Durante 8 anos, tive minha própria joalheria, a Casa Kahla.<br><br>
+        Sempre fui aquela empresária que faz de tudo: marketing, vendas, operação, financeiro. Se algo precisava ser resolvido, passava por mim.<br><br>
+        Quando a IA começou a ganhar força, percebi imediatamente que o impacto seria enorme. Mas como qualquer empresário ocupado, eu não tinha tempo para aprender tudo o que queria.<br><br>
+        Só consegui mergulhar de verdade quando parei tudo — na minha licença maternidade.<br><br>
+        Foi ali que eu estudei profundamente. Testei ferramentas. Implementei automações. Criei agentes. Reestruturei processos. E os resultados vieram rápido. Mais clareza. Mais organização. Mais eficiência. Menos desperdício.<br><br>
+        E aconteceu algo inesperado: <strong>eu me apaixonei.</strong><br><br>
+        Não pela tecnologia em si. Mas pelo poder que ela entrega ao empresário que sabe usar.<br><br>
+        Quanto mais eu mergulhava, mais percebia uma verdade simples: a maioria dos empresários nunca terá tempo para fazer esse mergulho. IA muda toda semana. Novos modelos. Novas ferramentas. Atualizações constantes. Acompanhar tudo exige dedicação intensa.<br><br>
+        Foi exatamente isso que eu fiz. E continuo fazendo até hoje.<br><br>
+        Mas nenhum empresário deveria precisar fazer esse caminho sozinho.<br><br>
+        Foi aí que decidi que minha carreira seria ajudar empresários a usar IA de forma estratégica — sem precisar passar pelo mesmo processo que eu passei.<br><br>
+        <strong>Você não precisa aprender IA como eu aprendi.<br>Precisa ter acesso à estrutura que eu construí.</strong><br><br>
+        Aprender é preparação infinita. Usar é vantagem acumulativa.
+      </p>
+      <div class="hist-byline">
+        <div>
+          <span class="hb-name">Bruna Santanna</span>
+          <span class="hb-role">@brusantanna.ai · Virada IA</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     BLOCO 2 PARTE 3: PROVA (o que faltava)
+     Douglas: "Nunca peça nada antes de mostrar recibos."
+     BA: prova específica, com números — não vaga
+════════════════════════════════ -->
+<section class="prova">
+  <div class="w">
+    <span class="lbl reveal">a prova</span>
+    <h2 class="h2 reveal">Não é teoria.<br><em class="terra">São resultados reais.</em></h2>
+
+    <!-- prova maior em destaque -->
+    <div class="proof-hero reveal">
+      <span class="ph-tag">Resultado de conteúdo</span>
+      <div class="ph-num">+<span>10.000</span></div>
+      <p class="ph-desc">seguidores e mais de 10 milhões de visualizações na série <em>"Coisas que você ainda não está pedindo pra IA"</em> — mostrando o que a maioria nunca imaginou ser possível com IA.</p>
+    </div>
+
+    <div class="proof-grid">
+      <!-- case médico -->
+      <div class="proof-card reveal">
+        <span class="pc-label">Case de implementação</span>
+        <p class="pc-title">Clínica COLO · 15 enfermeiras · 300 páginas de protocolo</p>
+        <p class="pc-body">Desenvolvi um sistema de IA que lê prontuários, analisa exames e cruza tudo com um protocolo interno de 300 páginas, gerando automaticamente roteiros personalizados para cada atendimento. O resultado foi a liberação de mais de 30 horas semanais da equipe — com mais padronização e menos retrabalho.</p>
+        <span class="pc-metric">→ +30 horas semanais liberadas</span>
+      </div>
+
+      <!-- uso pessoal -->
+      <div class="proof-card reveal">
+        <span class="pc-label">Uso pessoal diário</span>
+        <p class="pc-title">Os mesmos agentes que uso no meu negócio todo dia</p>
+        <p class="pc-body">Vitória e Lúcio não são produtos criados pra vender. São as ferramentas que eu uso para gerir a NewScale e o Virada IA. Você está comprando o que funciona — não o que parece bonito numa apresentação.</p>
+        <span class="pc-metric">→ Testados e atualizados continuamente</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     BLOCO 3 PARTE 1: MÉTODO NOMEADO (o que faltava)
+     Douglas: "Quando você comunica o método, a pessoa pensa
+     'eu consigo me ver fazendo isso' — e a venda está 75% feita."
+════════════════════════════════ -->
+<section class="metodo sec-alt">
+  <div class="w">
+    <span class="lbl reveal">o método</span>
+    <h2 class="h2 reveal">Como o Time<br><em class="terra">trabalha com você</em></h2>
+    <p class="method-intro reveal">Três etapas claras. Cada agente resolve uma fase específica. Você não precisa entender tecnologia — só precisa usar.</p>
+
+    <div class="method-steps">
+      <div class="ms-step reveal">
+        <div class="ms-num">1</div>
+        <div class="ms-body">
+          <span class="ms-title">Diagnóstico — Vitória</span>
+          <span class="ms-desc">Você responde perguntas sobre seu negócio. Vitória mapeia onde está perdendo tempo e dinheiro, calcula o custo da inação em reais e entrega prioridades com prompts prontos.</span>
+        </div>
+      </div>
+      <div class="ms-step reveal">
+        <div class="ms-num">2</div>
+        <div class="ms-body">
+          <span class="ms-title">Estruturação — Lúcio</span>
+          <span class="ms-desc">Você fala o que quer resolver — pode ser áudio bagunçado, ideia incompleta, qualquer coisa. Lúcio organiza, faz perguntas estratégicas, te dá a estratégia e o passo a passo para você usar a IA, e ainda gera o prompt certo com explicação de por que funciona.</span>
+        </div>
+      </div>
+      <div class="ms-step reveal">
+        <div class="ms-num ms-num forest-step">3</div>
+        <div class="ms-body">
+          <span class="ms-title">Receita — Midas <span style="font-size:.68rem;background:rgba(14,43,48,.08);padding:2px 8px;border-radius:100px;color:var(--forest);font-weight:600;letter-spacing:.06em;text-transform:uppercase;vertical-align:middle;">BÔNUS</span></span>
+          <span class="ms-desc">Oportunidade mapeada? Hora de transformar em dinheiro. Midas monta propostas comerciais profissionais com cálculo de custo da inação do cliente — você para de mandar orçamento no WhatsApp.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="method-arrow reveal">Diagnóstico → Estrutura → Receita</div>
+
+    <div class="reveal" style="background:var(--ink);border-radius:14px;padding:18px 18px;text-align:center;">
+      <p style="font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;font-style:italic;color:var(--paper);line-height:1.4;">Você diz o que precisa. O Time resolve.</p>
+      <p style="font-size:.78rem;color:rgba(196,189,176,.4);margin-top:5px;">Nas primeiras 24 horas você já tem diagnóstico e clareza.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     BLOCO 3 PARTE 2: ENTREGÁVEIS (Douglas)
+     Cada componente com valor isolado
+════════════════════════════════ -->
+<section class="agents">
+  <div class="w">
+    <span class="lbl reveal">o que você recebe</span>
+    <h2 class="h2 reveal">Seu <em class="terra">Time</em> completo</h2>
+
+    <!-- VITÓRIA -->
+    <div class="agent-card reveal">
+      <div class="ac-head">
+        <div class="ac-icon-wrap ac-icon-terra">🔍</div>
+        <div class="ac-meta">
+          <p class="ac-name">Vitória</p>
+          <p class="ac-role">Diagnóstico Estratégico de IA</p>
+        </div>
+      </div>
+      <p class="ac-tagline">Sua consultora. Ela descobre onde o dinheiro está escorregando.</p>
+      <div class="ac-body">
+        <p class="ac-desc">Você responde perguntas simples sobre seu negócio. Vitória mapeia onde você está perdendo tempo e dinheiro, calcula o custo da inação em reais e entrega um diagnóstico completo com ações imediatas — incluindo prompts prontos.</p>
+        <div class="ac-list">
+          <p class="ac-li">Mapeamento de onde você perde tempo e dinheiro</p>
+          <p class="ac-li">Cálculo do custo da inação em reais</p>
+          <p class="ac-li">Prioridade estratégica clara para implementar IA</p>
+          <p class="ac-li">Prompts prontos para usar imediatamente</p>
+        </div>
+      </div>
+      <div class="ac-foot">
+        <span class="ac-val">Valor isolado: <b>R$297</b></span>
+        <span class="badge badge-terra">Incluído</span>
+      </div>
+    </div>
+
+    <!-- LÚCIO -->
+    <div class="agent-card reveal">
+      <div class="ac-head">
+        <div class="ac-icon-wrap ac-icon-forest">🧠</div>
+        <div class="ac-meta">
+          <p class="ac-name">Lúcio</p>
+          <p class="ac-role">Arquiteto de Prompts e Estratégia</p>
+        </div>
+      </div>
+      <p class="ac-tagline">Seu mentor provocador. Transforma ideia bagunçada em prompt extraordinário.</p>
+      <div class="ac-body">
+        <p class="ac-desc">Pode mandar áudio. Pode mandar ideia incompleta. Lúcio não aceita pedido raso — ele te desafia a pensar mais fundo, organiza o contexto, te dá a estratégia e o passo a passo para usar a IA, e ainda gera prompts estruturados com explicação de por que funcionam.</p>
+        <div class="ac-list">
+          <p class="ac-li">Aceita áudios e ideias bagunçadas</p>
+          <p class="ac-li">Faz perguntas estratégicas para extrair o melhor</p>
+          <p class="ac-li">Indica quais IAs usar em cada situação</p>
+          <p class="ac-li">Te ensina a pensar diferente sobre IA — enquanto executa</p>
+          <p class="ac-li">Prompts estruturados com passo a passo aplicável</p>
+        </div>
+      </div>
+      <div class="ac-foot">
+        <span class="ac-val">Valor isolado: <b>R$297</b></span>
+        <span class="badge badge-terra">Incluído</span>
+      </div>
+    </div>
+
+    <!-- VIDEOAULA + BIBLIOTECA -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px;" class="reveal">
+      <div style="border:1px solid var(--border2);border-radius:16px;padding:16px 14px;background:var(--paper);">
+        <div style="font-size:1.4rem;margin-bottom:8px;">🎬</div>
+        <p style="font-family:'Fraunces',serif;font-size:1rem;font-weight:500;color:var(--ink);margin-bottom:4px;">Videoaula de Ativação</p>
+        <p style="font-size:.75rem;color:var(--sage);line-height:1.5;margin-bottom:10px;">Em menos de 1 hora você está usando tudo — passo a passo, sem enrolação.</p>
+        <div class="ac-foot" style="padding:10px 0 0;border-top:1px solid var(--border);">
+          <span class="ac-val"><b>R$197</b></span>
+          <span class="badge badge-terra" style="font-size:.55rem;">Incluído</span>
+        </div>
+      </div>
+      <div style="border:1px solid var(--border2);border-radius:16px;padding:16px 14px;background:var(--paper);">
+        <div style="font-size:1.4rem;margin-bottom:8px;">📚</div>
+        <p style="font-family:'Fraunces',serif;font-size:1rem;font-weight:500;color:var(--ink);margin-bottom:4px;">Biblioteca de Prompts</p>
+        <p style="font-size:.75rem;color:var(--sage);line-height:1.5;margin-bottom:10px;">Prompts estratégicos prontos para usar nos casos mais comuns do seu negócio.</p>
+        <div class="ac-foot" style="padding:10px 0 0;border-top:1px solid var(--border);">
+          <span class="ac-val"><b>R$97</b></span>
+          <span class="badge badge-terra" style="font-size:.55rem;">Incluído</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MIDAS BÔNUS -->
+    <div class="bonus-card reveal">
+      <span class="bonus-tag">🎁 Bônus exclusivo — quem entrar agora</span>
+      <div class="bc-head">
+        <div class="bc-icon">💰</div>
+        <div>
+          <p class="bc-name">Midas</p>
+          <p class="bc-role">Acelerador de Receita</p>
+        </div>
+      </div>
+      <p class="bc-tagline">Você descobriu oportunidades. Agora transforme em dinheiro.</p>
+      <div class="bc-body">
+        <div class="bc-list">
+          <p class="bc-li">Te entrevista sobre o projeto</p>
+          <p class="bc-li">Calcula o custo da inação do cliente em reais</p>
+          <p class="bc-li">Monta proposta com estrutura SCR (Situação-Complicação-Resolução)</p>
+          <p class="bc-li">Documento profissional pronto para enviar</p>
+        </div>
+        <p class="bc-punch">Você para de mandar orçamento no WhatsApp.<br>Uma proposta paga o Time inteiro.</p>
+      </div>
+      <div class="bc-foot">
+        <span class="bc-val">Valor: R$297</span>
+        <span class="badge badge-forest">GRÁTIS agora</span>
+      </div>
+    </div>
+
+    <!-- QUICK WIN -->
+    <div class="quick-win reveal">
+      <p class="qw-title">⚡ Resultado nas primeiras 24 horas</p>
+      <p class="qw-body">Assim que você abrir a Vitória e responder as perguntas sobre o seu negócio, ela vai te mostrar exatamente onde você está deixando dinheiro na mesa — com números. Esse diagnóstico sozinho já vale mais que os R$197. A maioria das pessoas se espanta com o que descobre nos primeiros 30 minutos.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     CUSTO DA INAÇÃO (Douglas + BA)
+     BA: torna o problema financeiramente concreto antes do preço
+════════════════════════════════ -->
+<section class="inacao">
+  <div class="w">
+    <span class="lbl lbl-dim reveal">o custo de não agir</span>
+    <h2 class="h2 reveal" style="color:var(--paper);">O dinheiro que sai todo mês<br><em class="terra-l">sem você perceber</em></h2>
+
+    <div class="in-calc reveal">
+      <div class="in-row"><span class="in-item">5 pessoas na equipe × 5 h/semana em tarefas que IA resolve</span><span class="in-val">25h/sem</span></div>
+      <div class="in-row"><span class="in-item">Custo estimado por hora (R$30)</span><span class="in-val">× R$30</span></div>
+      <div class="in-row"><span class="in-item">Custo mensal desperdiçado</span><span class="in-val">R$3.000</span></div>
+      <div class="in-row"><span class="in-item">Em 3 meses</span><span class="in-val">R$9.000</span></div>
+      <div class="in-row in-total"><span class="in-item">Em 1 ano</span><span class="in-val">R$36.000</span></div>
+    </div>
+
+    <p class="in-callout reveal">
+      <strong>R$197</strong> para descobrir onde isso está acontecendo <em>no seu negócio.</em>
+    </p>
+    <p class="in-sub reveal">Menos que um almoço de negócios. Menos que uma hora de consultoria. Menos que o dinheiro que você perde essa semana fazendo tudo no manual.</p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     BLOCO 4 PARTE 1: ANCORAGEM (Douglas)
+════════════════════════════════ -->
+<section class="stack">
+  <div class="w">
+    <span class="lbl reveal">ancoragem de valor</span>
+    <h2 class="h2 reveal">O que você recebe<br><em class="terra">por R$197</em></h2>
+
+    <div class="stack-table reveal">
+      <div class="srow"><span class="sitem">🔍 Vitória — Diagnóstico Estratégico</span><span class="sprice">R$297</span></div>
+      <div class="srow"><span class="sitem">🧠 Lúcio — Arquiteto de Prompts</span><span class="sprice">R$297</span></div>
+      <div class="srow"><span class="sitem">🎬 Videoaula de Ativação</span><span class="sprice">R$197</span></div>
+      <div class="srow"><span class="sitem">📚 Biblioteca de Prompts Estratégicos</span><span class="sprice">R$97</span></div>
+      <div class="srow"><span class="sitem bonusline">🎁 MIDAS — Gerador de Propostas</span><span class="sprice">R$297</span></div>
+      <div class="srow total"><span class="sitem">Valor real</span><span class="sprice">R$1.185</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     BLOCO 4 PARTE 2: 3 CAMINHOS (Douglas)
+     BA: a inação é a pior escolha, não a compra
+════════════════════════════════ -->
+<section class="caminhos sec-alt">
+  <div class="w">
+    <span class="lbl reveal">os 3 caminhos</span>
+    <h2 class="h2 reveal">Você tem<br><em class="terra">3 opções</em> agora</h2>
+
+    <div class="cam-grid">
+      <div class="cam-card best reveal">
+        <span class="cam-num">Caminho 1 — O óbvio</span>
+        <p class="cam-title">Você age agora</p>
+        <p class="cam-steps">
+          <span>→</span> Compra hoje, acessa imediatamente<br>
+          <span>→</span> Nas primeiras horas, descobre onde está perdendo dinheiro<br>
+          <span>→</span> Em 24 horas, já usa IA de verdade no negócio<br>
+          <span>→</span> Uma proposta do Midas paga o investimento inteiro
+        </p>
+      </div>
+
+      <div class="cam-card neutral reveal">
+        <span class="cam-num" style="color:var(--sage);">Caminho 2 — O que parece seguro</span>
+        <p class="cam-title" style="color:var(--ink2);">Você espera</p>
+        <p class="cam-steps">
+          → O bônus Midas pode não estar mais disponível<br>
+          → Você perde mais meses fazendo tudo no manual<br>
+          → Os concorrentes que estruturaram acumulam vantagem<br>
+          → Você volta ao mesmo ponto daqui a 6 meses
+        </p>
+      </div>
+
+      <div class="cam-card bad reveal">
+        <span class="cam-num bad-num">Caminho 3 — O mais caro</span>
+        <p class="cam-title" style="color:var(--ink2);">Você tenta sozinho</p>
+        <p class="cam-steps">
+          → Assiste horas de tutorial<br>
+          → Cria prompts rasos que não entregam resultado<br>
+          → Acha que IA não funciona pra seu negócio<br>
+          → Frustra. Para. Recomeça. Frustra de novo.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     BLOCO 4 PARTE 4: O FILTRO (o que faltava)
+     Douglas: "Empurre gente embora. Aumenta o desejo de quem fica."
+════════════════════════════════ -->
+<section class="filtro">
+  <div class="w">
+    <span class="lbl lbl-dim reveal">isso não é pra todo mundo</span>
+    <h2 class="h2 reveal" style="color:rgba(247,244,238,.9);">Se você se encaixa aqui,<br><em style="color:var(--terra-l);">não continue.</em></h2>
+
+    <div class="filtro-list reveal">
+      <p class="fi-not">Quem quer mais uma ferramenta pra colecionar e nunca usar</p>
+      <p class="fi-not">Quem acha que IA é hype e vai passar</p>
+      <p class="fi-not">Quem não tem disposição pra aplicar o que aprende</p>
+      <p class="fi-not">Quem acha que R$197 é caro pra transformar a forma como trabalha</p>
+    </div>
+
+    <div class="filtro-reveal reveal">
+      <p class="fr-text">Isso é para quem está pronto para parar de perder tempo e dinheiro fazendo no manual o que IA resolve em minutos.</p>
+      <p class="fr-sub">Se você chegou até aqui, provavelmente já sabe em qual grupo você está.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     BLOCO 4 PARTE 3: CTA FINAL (Douglas)
+     Ancoragem → Preço → Urgência → Botão
+════════════════════════════════ -->
+<section class="finalcta" id="cta">
+  <div class="w">
+    <span class="lbl reveal">sua decisão</span>
+    <h2 class="h2 reveal">Ative seu Time <em class="terra">agora</em></h2>
+
+    <div class="cta-block reveal">
+      <div class="cta-top">
+        <p class="ct-from">Valor real: R$1.185</p>
+        <p class="ct-price">R$197</p>
+        <p class="ct-inst">ou 2× R$99 no cartão · sem juros</p>
+      </div>
+      <div class="cta-list">
+        <div class="cl-item"><span class="cl-check">✔</span> Vitória — Diagnóstico Estratégico de IA</div>
+        <div class="cl-item"><span class="cl-check">✔</span> Lúcio — Arquiteto de Prompts e Estratégia</div>
+        <div class="cl-item"><span class="cl-check">✔</span> Videoaula de Ativação (menos de 1h)</div>
+        <div class="cl-item"><span class="cl-check">✔</span> Biblioteca de Prompts Estratégicos</div>
+        <div class="cl-item bonus-item"><span class="cl-check" style="color:var(--terra-h);">🎁</span> MIDAS — Gerador de Propostas Comerciais</div>
+      </div>
+      <div class="cta-bottom">
+        <a href="#" class="btn-cta">Quero meu Time Virada IA agora</a>
+        <p class="cta-lock">🔒 Pagamento seguro · Acesso imediato · @brusantanna.ai</p>
+      </div>
+    </div>
+
+    <div class="urgency-strip reveal">
+      <strong>⚠️ O bônus Midas está disponível apenas para quem entrar agora.</strong> Não garantimos que estará disponível por tempo indeterminado.
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p class="foot-logo">Bruna Santanna · Virada IA</p>
+  <p class="foot-tag">Empresário não aprende IA. Usa IA. · @brusantanna.ai</p>
+  <div class="foot-links">
+    <a href="https://instagram.com/brusantanna.ai" target="_blank">Instagram</a>
+    <a href="#">Política de Privacidade</a>
+    <a href="#">Termos de Uso</a>
+  </div>
+</footer>
+
+<script>
+// sticky nav
+const nav = document.getElementById('snav');
+window.addEventListener('scroll',()=>{ nav.classList.toggle('vis', window.scrollY > window.innerHeight * .55); });
+
+// scroll reveal
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+},{threshold:.07});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
