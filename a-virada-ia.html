@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Time Virada IA — 3 Agentes que trabalham com você</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,700;1,9..144,900&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --ink:#1A1814;
+  --ink2:#2E2A25;
+  --cream:#F7F4EE;
+  --paper:#FDFBF7;
+  --sand:#EDE8DF;
+  --mist:#C4BDB0;
+  --terra:#A85C38;
+  --terra-h:#8A4828;
+  --terra-l:#C4845E;
+  --terra-f:rgba(168,92,56,.08);
+  --terra-f2:rgba(168,92,56,.14);
+  --forest:#0E2B30;
+  --forest2:#163840;
+  --sage:#6B7A6E;
+  --border:rgba(180,170,155,.22);
+  --border2:rgba(180,170,155,.38);
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--cream);color:var(--ink);
+  line-height:1.65;overflow-x:hidden;
+}
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:900;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.025'/%3E%3C/svg%3E");
+}
+
+/* ─── LAYOUT ─── */
+.w{max-width:580px;margin:0 auto;padding:0 22px;text-align:center;}
+
+/* ─── COUNTDOWN BANNER ─── */
+.countdown-bar{
+  background:var(--ink);color:var(--paper);
+  padding:10px 16px;text-align:center;
+  display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;
+  font-size:.72rem;letter-spacing:.04em;
+}
+.countdown-label{color:rgba(247,244,238,.5);text-transform:uppercase;letter-spacing:.1em;font-size:.62rem;font-weight:600;}
+.cd-units{display:flex;gap:8px;align-items:center;}
+.cd-unit{
+  display:flex;flex-direction:column;align-items:center;
+  background:rgba(255,255,255,.07);border-radius:6px;
+  padding:5px 9px;min-width:44px;
+}
+.cd-num{font-family:'Fraunces',serif;font-size:1.35rem;font-weight:700;color:var(--terra-l);line-height:1;}
+.cd-lbl{font-size:.5rem;color:rgba(196,189,176,.4);text-transform:uppercase;letter-spacing:.08em;margin-top:2px;}
+.cd-sep{font-family:'Fraunces',serif;font-size:1.2rem;color:rgba(247,244,238,.2);margin-bottom:4px;}
+
+/* ─── STICKY NAV ─── */
+.snav{
+  position:fixed;top:0;left:0;right:0;z-index:800;
+  background:rgba(247,244,238,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border2);
+  padding:11px 20px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  translate:0 -100%;transition:translate .45s cubic-bezier(.4,0,.2,1);
+}
+.snav.vis{translate:0 0;}
+.snav-brand{font-family:'Fraunces',serif;font-size:.88rem;font-weight:600;color:var(--ink2);white-space:nowrap;}
+.snav-cta{
+  flex-shrink:0;padding:9px 18px;
+  font-size:.7rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--paper);background:var(--terra);border:none;border-radius:8px;cursor:pointer;text-decoration:none;
+  transition:background .25s;
+}
+.snav-cta:hover{background:var(--terra-h);}
+
+/* ─── TYPE ─── */
+.lbl{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--terra);margin-bottom:10px;display:block;font-weight:600;}
+.lbl-dim{color:rgba(196,189,176,.45);}
+.h2{font-family:'Fraunces',serif;font-size:clamp(1.9rem,6vw,2.8rem);font-weight:700;line-height:1.05;letter-spacing:-.02em;margin-bottom:16px;}
+em.terra{font-style:italic;color:var(--terra);}
+em.terra-l{font-style:italic;color:var(--terra-l);}
+
+/* ─── HERO ─── */
+.hero{
+  min-height:100svh;display:flex;flex-direction:column;justify-content:center;
+  padding:88px 22px 60px;position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 80% 55% at 110% -10%,rgba(168,92,56,.09) 0%,transparent 65%),
+    radial-gradient(ellipse 70% 70% at -10% 110%,rgba(14,43,48,.07) 0%,transparent 65%);
+}
+.hero-inner{position:relative;z-index:1;max-width:580px;margin:0 auto;width:100%;}
+.pre-tag{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--terra);margin-bottom:24px;
+  opacity:0;animation:fadeUp .65s ease forwards;
+}
+.pre-dot{width:5px;height:5px;border-radius:50%;background:currentColor;animation:pulse 2.2s ease infinite;}
+.hero-headline{margin-bottom:22px;opacity:0;animation:fadeUp .65s ease forwards .1s;}
+.hero-hl-a{font-family:'Lora',serif;font-size:clamp(1rem,3.5vw,1.3rem);font-style:italic;color:var(--sage);display:block;margin-bottom:8px;line-height:1.5;}
+.hero-hl-b{font-family:'Fraunces',serif;font-size:clamp(3.2rem,11vw,5.5rem);font-weight:900;line-height:.88;letter-spacing:-.035em;color:var(--ink);display:block;}
+.hero-hl-b span{font-style:italic;color:var(--terra);}
+.hero-hl-c{font-family:'Lora',serif;font-size:clamp(.92rem,3vw,1.1rem);font-weight:400;display:block;margin-top:12px;line-height:1.75;color:var(--ink2);}
+
+/* ─── VALUE PROP CARD ─── */
+.vprop{
+  background:var(--paper);border:1px solid var(--border2);
+  border-radius:16px;padding:20px 18px;margin-bottom:22px;
+  opacity:0;animation:fadeUp .65s ease forwards .18s;
+}
+.vprop-title{font-family:'Fraunces',serif;font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:14px;text-align:left;}
+.vprop-items{display:flex;flex-direction:column;gap:10px;}
+.vpi{display:flex;gap:12px;align-items:flex-start;text-align:left;}
+.vpi-icon{font-size:1.2rem;flex-shrink:0;margin-top:1px;}
+.vpi-body{}
+.vpi-name{font-family:'Fraunces',serif;font-size:.92rem;font-weight:700;color:var(--ink);}
+.vpi-name .role{font-size:.6rem;letter-spacing:.09em;text-transform:uppercase;color:var(--terra);font-weight:700;margin-left:6px;vertical-align:middle;}
+.vpi-desc{font-family:'Lora',serif;font-size:.8rem;color:var(--sage);line-height:1.55;margin-top:2px;}
+.vpi-bonus .vpi-name .role{color:var(--forest2);}
+.vpi-sep{border:none;border-top:1px solid var(--border);margin:2px 0;}
+
+/* ─── PRICE & CTA ─── */
+.hero-price{
+  display:flex;align-items:flex-end;gap:12px;margin-bottom:18px;flex-wrap:wrap;
+  opacity:0;animation:fadeUp .65s ease forwards .28s;
+}
+.hp-from{font-family:'Fraunces',serif;font-size:1rem;font-weight:400;color:var(--mist);text-decoration:line-through;line-height:1.2;}
+.hp-arrow{color:var(--mist);font-size:.85rem;}
+.hp-now{}
+.hp-install{font-family:'Fraunces',serif;font-size:clamp(2.4rem,8vw,3.2rem);font-weight:900;color:var(--terra);line-height:.95;}
+.hp-full{font-size:.68rem;color:var(--sage);margin-top:3px;}
+.btn-hero{
+  display:block;width:100%;padding:19px 24px;
+  font-size:.82rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--paper);background:var(--terra);
+  border:none;border-radius:12px;cursor:pointer;text-decoration:none;text-align:center;
+  transition:background .28s,transform .3s,box-shadow .3s;
+  position:relative;overflow:hidden;
+  opacity:0;animation:fadeUp .65s ease forwards .36s;
+}
+.btn-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.13) 0%,transparent 55%);}
+.btn-hero:hover{background:var(--terra-h);transform:translateY(-2px);box-shadow:0 14px 40px rgba(168,92,56,.3);}
+.hero-lock{font-size:.66rem;color:var(--mist);margin-top:8px;opacity:0;animation:fadeUp .65s ease forwards .44s;}
+
+/* ─── SEC PADDING ─── */
+.sec{padding:60px 0;}
+.sec-alt{background:var(--paper);}
+.sec-dark{background:var(--forest);color:var(--paper);}
+.sec-ink{background:var(--ink);color:var(--paper);}
+
+/* ─── VIDEO ─── */
+.video-wrap{
+  position:relative;width:100%;padding-top:56.25%;
+  border-radius:16px;overflow:hidden;
+  background:var(--ink);border:1px solid var(--border2);
+  box-shadow:0 8px 40px rgba(26,24,20,.12);
+}
+.video-wrap iframe,.video-wrap video{position:absolute;inset:0;width:100%;height:100%;border:none;}
+.video-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:var(--forest);}
+.vp-icon{font-size:2.5rem;opacity:.5;}
+.vp-text{font-family:'Fraunces',serif;font-size:1rem;font-weight:600;color:rgba(253,251,247,.35);letter-spacing:.04em;}
+
+/* ─── NEGAÇÃO COMPACTA ─── */
+.negacao-strip{
+  background:var(--ink);padding:40px 0;
+}
+.neg-title{font-family:'Fraunces',serif;font-size:clamp(1.6rem,5.5vw,2.2rem);font-weight:700;color:var(--paper);line-height:1.2;margin-bottom:16px;}
+.neg-title em{font-style:italic;color:var(--terra-l);}
+.neg-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:18px;}
+.neg-chip{
+  font-family:'Lora',serif;font-size:.78rem;font-style:italic;
+  color:rgba(247,244,238,.25);text-decoration:line-through;text-decoration-color:rgba(168,92,56,.35);
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);
+  border-radius:100px;padding:6px 14px;
+}
+.neg-reveal{
+  background:rgba(168,92,56,.1);border:1px solid rgba(168,92,56,.2);
+  border-radius:14px;padding:18px 18px;text-align:left;
+}
+.nr-headline{font-family:'Fraunces',serif;font-size:clamp(1.1rem,3.8vw,1.45rem);font-weight:700;color:var(--paper);line-height:1.4;margin-bottom:5px;}
+.nr-sub{font-family:'Lora',serif;font-size:.82rem;color:rgba(196,189,176,.55);line-height:1.7;}
+
+/* ─── AGENT CARDS ─── */
+.agent-card{
+  border:1px solid var(--border2);border-radius:20px;overflow:hidden;
+  background:var(--paper);margin-bottom:16px;
+  transition:transform .35s cubic-bezier(.4,0,.2,1),box-shadow .35s;
+}
+.agent-card:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(26,24,20,.09);}
+.ac-head{padding:20px 20px 14px;display:flex;gap:14px;align-items:flex-start;text-align:left;}
+.ac-icon-wrap{width:48px;height:48px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.4rem;}
+.ac-icon-terra{background:rgba(168,92,56,.1);}
+.ac-icon-forest{background:rgba(14,43,48,.08);}
+.ac-name{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:700;color:var(--ink);line-height:1;}
+.ac-role{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--terra);margin-top:2px;}
+.ac-tagline{font-family:'Lora',serif;font-style:italic;font-size:.92rem;color:var(--sage);padding:0 20px 10px;text-align:left;}
+.ac-body{padding:0 20px 16px;text-align:left;}
+.ac-desc{font-family:'Lora',serif;font-size:.83rem;color:var(--ink2);line-height:1.72;}
+.ac-foot{border-top:1px solid var(--border);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;}
+.badge{font-size:.6rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:5px 11px;border-radius:100px;}
+.badge-terra{background:rgba(168,92,56,.11);color:var(--terra-h);}
+
+/* BONUS CARD */
+.bonus-card{
+  border-radius:20px;overflow:hidden;margin-bottom:16px;
+  background:linear-gradient(145deg,var(--forest) 0%,#122830 100%);
+  position:relative;
+}
+.bonus-tag{
+  background:var(--terra);color:var(--paper);
+  font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:5px 13px;border-radius:100px;
+  display:inline-block;margin:20px 20px 0;
+}
+.bc-head{padding:12px 20px 12px;display:flex;gap:12px;align-items:flex-start;text-align:left;}
+.bc-icon{width:48px;height:48px;border-radius:12px;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;}
+.bc-name{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:700;color:var(--paper);line-height:1;}
+.bc-role{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:rgba(196,132,94,.9);margin-top:2px;}
+.bc-tagline{font-family:'Lora',serif;font-style:italic;font-size:.9rem;color:rgba(253,251,247,.45);padding:0 20px 10px;text-align:left;}
+.bc-body{padding:0 20px 14px;text-align:left;}
+.bc-desc{font-family:'Lora',serif;font-size:.83rem;color:rgba(253,251,247,.65);line-height:1.72;}
+.bc-foot{border-top:1px solid rgba(255,255,255,.07);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;}
+.bc-val{font-size:.72rem;color:rgba(196,189,176,.3);text-decoration:line-through;}
+.badge-forest{background:rgba(196,132,94,.15);color:var(--terra-l);}
+
+/* ─── MINI GRID INCLUDES ─── */
+.inc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+.inc-card{border:1px solid var(--border2);border-radius:14px;padding:14px;background:var(--paper);text-align:left;}
+.inc-icon{font-size:1.2rem;margin-bottom:6px;}
+.inc-title{font-family:'Fraunces',serif;font-size:.92rem;font-weight:600;color:var(--ink);margin-bottom:3px;}
+.inc-desc{font-size:.72rem;color:var(--sage);line-height:1.5;font-family:'Lora',serif;}
+
+/* ─── PROVA COMPACTA ─── */
+.prova-wrap{display:flex;flex-direction:column;gap:12px;}
+.proof-hero{
+  background:var(--forest);border-radius:16px;padding:22px 20px;
+  position:relative;overflow:hidden;text-align:left;
+}
+.proof-hero::after{content:'';position:absolute;bottom:-30px;right:-30px;width:130px;height:130px;background:radial-gradient(circle,rgba(168,92,56,.15) 0%,transparent 70%);}
+.ph-tag{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--terra-l);font-weight:600;margin-bottom:8px;display:block;}
+.ph-num{font-family:'Fraunces',serif;font-size:clamp(2.4rem,8vw,3.2rem);font-weight:900;color:var(--paper);line-height:.9;margin-bottom:5px;}
+.ph-num span{font-style:italic;color:var(--terra-l);}
+.ph-desc{font-family:'Lora',serif;font-size:.8rem;color:rgba(196,189,176,.6);line-height:1.6;}
+.proof-card{background:var(--paper);border:1px solid var(--border2);border-radius:14px;padding:16px 18px;text-align:left;}
+.pc-label{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--terra);margin-bottom:4px;display:block;}
+.pc-title{font-family:'Fraunces',serif;font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:5px;line-height:1.2;}
+.pc-body{font-family:'Lora',serif;font-size:.8rem;color:var(--sage);line-height:1.65;}
+.pc-metric{display:inline-flex;align-items:center;gap:5px;background:var(--terra-f2);border-radius:100px;padding:4px 10px;margin-top:8px;font-size:.7rem;font-weight:600;color:var(--terra-h);}
+
+/* ─── CUSTO INAÇÃO ─── */
+.in-calc{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:18px 18px;margin:18px 0;}
+.in-row{display:flex;align-items:baseline;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05);gap:10px;text-align:left;}
+.in-row:last-child{border-bottom:none;}
+.in-item{font-family:'Lora',serif;font-size:.8rem;color:rgba(247,244,238,.45);}
+.in-val{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:300;color:rgba(247,244,238,.75);white-space:nowrap;}
+.in-total .in-item{color:var(--paper);font-weight:600;}
+.in-total .in-val{color:var(--terra-l);font-size:1.45rem;}
+.in-callout{font-family:'Fraunces',serif;font-size:clamp(1.2rem,4.2vw,1.7rem);font-weight:700;color:var(--paper);line-height:1.4;margin:16px 0 6px;text-align:left;}
+.in-callout strong{color:var(--terra-l);}
+.in-sub{font-family:'Lora',serif;font-size:.82rem;color:rgba(196,189,176,.4);line-height:1.65;text-align:left;}
+
+/* ─── STACK ─── */
+.stack-table{border:1px solid var(--border2);border-radius:14px;overflow:hidden;margin:18px 0;}
+.srow{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;border-bottom:1px solid var(--border);gap:10px;text-align:left;}
+.srow:last-child{border-bottom:none;}
+.srow.total{background:var(--forest);color:var(--paper);}
+.sitem{font-size:.83rem;color:var(--ink);}
+.sitem.bonusline{font-weight:600;color:var(--terra-h);}
+.sprice{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:300;color:var(--mist);text-decoration:line-through;white-space:nowrap;flex-shrink:0;}
+.srow.total .sitem{color:var(--paper);font-weight:600;}
+.srow.total .sprice{text-decoration:none;color:var(--terra-l);font-size:1.3rem;}
+
+/* ─── HISTÓRIA COMPACTA ─── */
+.hist-card{background:var(--cream);border:1px solid var(--border2);border-radius:16px;padding:24px 20px;position:relative;}
+.hist-quote{position:absolute;top:-10px;left:16px;font-size:3rem;font-family:'Fraunces',serif;color:var(--terra);line-height:1;opacity:.3;}
+.hist-text{font-family:'Lora',serif;font-size:.88rem;font-weight:400;line-height:1.85;color:var(--ink2);text-align:left;}
+.hist-text strong{font-weight:600;color:var(--ink);}
+.hist-byline{display:flex;align-items:center;gap:10px;margin-top:14px;padding-top:12px;border-top:1px solid var(--border);text-align:left;}
+.hb-name{font-size:.78rem;font-weight:600;color:var(--ink);display:block;}
+.hb-role{font-size:.66rem;color:var(--sage);}
+
+/* ─── FILTRO ─── */
+.filtro-wrap{background:var(--forest);padding:50px 0;}
+.fi-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:14px 0 18px;}
+.fi-chip{
+  font-family:'Lora',serif;font-size:.78rem;font-style:italic;
+  color:rgba(247,244,238,.22);text-decoration:line-through;text-decoration-color:rgba(168,92,56,.3);
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);
+  border-radius:100px;padding:7px 14px;
+}
+.filtro-reveal{background:rgba(168,92,56,.09);border:1px solid rgba(168,92,56,.18);border-radius:14px;padding:18px 18px;text-align:left;}
+.fr-text{font-family:'Fraunces',serif;font-size:clamp(1.05rem,3.8vw,1.45rem);font-weight:700;color:var(--paper);line-height:1.4;margin-bottom:5px;}
+.fr-sub{font-family:'Lora',serif;font-style:italic;font-size:.8rem;color:rgba(196,189,176,.45);line-height:1.65;}
+
+/* ─── FINAL CTA ─── */
+.cta-block{border:1px solid var(--border2);border-radius:20px;overflow:hidden;background:var(--paper);}
+.cta-top{background:var(--ink);padding:28px 22px;text-align:center;border-bottom:1px solid rgba(255,255,255,.05);}
+.ct-from{font-size:.7rem;text-decoration:line-through;color:rgba(196,189,176,.3);margin-bottom:2px;}
+.ct-install{font-family:'Fraunces',serif;font-size:clamp(3rem,10vw,4.2rem);font-weight:900;color:var(--terra-l);line-height:.9;}
+.ct-full{font-size:.72rem;color:rgba(196,189,176,.3);margin-top:6px;}
+.cta-list{padding:18px 22px 4px;}
+.cl-item{display:flex;align-items:center;gap:10px;font-size:.84rem;color:var(--ink2);padding:8px 0;border-bottom:1px solid var(--border);line-height:1.35;text-align:left;}
+.cl-item:last-child{border-bottom:none;}
+.cl-check{color:var(--terra);font-size:.85rem;flex-shrink:0;}
+.cl-item.bonus-item{font-weight:600;color:var(--terra-h);}
+.cta-bottom{padding:18px 22px;}
+.btn-cta{display:block;width:100%;padding:19px 24px;font-size:.82rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--paper);background:var(--terra);border:none;border-radius:12px;cursor:pointer;text-decoration:none;text-align:center;transition:background .28s,transform .3s,box-shadow .3s;position:relative;overflow:hidden;margin-bottom:10px;}
+.btn-cta::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.13) 0%,transparent 55%);}
+.btn-cta:hover{background:var(--terra-h);transform:translateY(-2px);box-shadow:0 14px 40px rgba(168,92,56,.3);}
+.cta-lock{font-size:.66rem;color:var(--mist);text-align:center;}
+.urgency-strip{background:rgba(168,92,56,.07);border:1px solid rgba(168,92,56,.14);border-radius:12px;padding:13px 15px;margin-top:14px;font-family:'Lora',serif;font-size:.79rem;color:var(--ink2);line-height:1.65;text-align:left;}
+.urgency-strip strong{color:var(--terra);font-weight:600;}
+
+/* ─── FOOTER ─── */
+.footer{background:var(--ink);padding:38px 22px;text-align:center;}
+.foot-logo{font-family:'Fraunces',serif;font-size:1rem;font-weight:300;color:rgba(247,244,238,.55);margin-bottom:3px;}
+.foot-tag{font-size:.66rem;letter-spacing:.04em;color:rgba(247,244,238,.22);margin-bottom:16px;}
+.foot-links{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;}
+.foot-links a{font-size:.66rem;color:rgba(247,244,238,.22);text-decoration:none;transition:color .3s;}
+.foot-links a:hover{color:var(--terra-l);}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.45;transform:scale(.75);}}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .55s cubic-bezier(.4,0,.2,1),transform .55s cubic-bezier(.4,0,.2,1);}
+.reveal.in{opacity:1;transform:translateY(0);}
+.rd1{transition-delay:.07s;}.rd2{transition-delay:.14s;}.rd3{transition-delay:.21s;}
+
+/* ─── MOBILE ─── */
+@media(max-width:480px){
+  .hero-inner{text-align:left;}
+  .hero-price{justify-content:flex-start;}
+  .pre-tag{text-align:left;}
+  .inc-grid{grid-template-columns:1fr;}
+  .snav-brand{font-size:.76rem;}
+  .in-row{flex-direction:column;gap:2px;align-items:flex-start;}
+  .cd-units{gap:5px;}
+  .cd-unit{min-width:36px;padding:4px 7px;}
+  .cd-num{font-size:1.1rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- ════ COUNTDOWN BANNER ════ -->
+<div class="countdown-bar" id="countdown-bar">
+  <span class="countdown-label">Oferta expira em</span>
+  <div class="cd-units">
+    <div class="cd-unit"><span class="cd-num" id="cd-h">23</span><span class="cd-lbl">horas</span></div>
+    <span class="cd-sep">:</span>
+    <div class="cd-unit"><span class="cd-num" id="cd-m">59</span><span class="cd-lbl">min</span></div>
+    <span class="cd-sep">:</span>
+    <div class="cd-unit"><span class="cd-num" id="cd-s">59</span><span class="cd-lbl">seg</span></div>
+  </div>
+  <span style="font-size:.68rem;color:rgba(196,189,176,.4);">· bônus Midas incluído</span>
+</div>
+
+<!-- ════ STICKY NAV ════ -->
+<nav class="snav" id="snav">
+  <span class="snav-brand">Virada IA · @brusantanna.ai</span>
+  <a href="#cta" class="snav-cta">Quero meu Time</a>
+</nav>
+
+<!-- ════════════════════════════════════
+     HERO
+     Dor + Solução + Proposta de valor no topo
+════════════════════════════════════ -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+
+    <p class="pre-tag">
+      <span class="pre-dot"></span>
+      por @brusantanna.ai · Virada IA
+    </p>
+
+    <div class="hero-headline">
+      <span class="hero-hl-a">Você sabe que deveria usar IA melhor no seu negócio.</span>
+      <span class="hero-hl-b">TIME<br>VIRADA <span>IA</span></span>
+      <span class="hero-hl-c">3 agentes prontos para diagnosticar, estruturar e vender mais — sem estudar tecnologia, sem depender de ninguém.</span>
+    </div>
+
+    <!-- PROPOSTA DE VALOR: 3 agentes com benefícios diretos -->
+    <div class="vprop">
+      <p class="vprop-title">O que o Time faz pelo seu negócio:</p>
+      <div class="vprop-items">
+        <div class="vpi">
+          <div class="vpi-icon">🔍</div>
+          <div class="vpi-body">
+            <div class="vpi-name">Vitória <span class="role">Diagnóstico</span></div>
+            <div class="vpi-desc">Mapeia onde você está perdendo dinheiro e tempo — e entrega prioridades com prompts prontos para agir hoje.</div>
+          </div>
+        </div>
+        <hr class="vpi-sep">
+        <div class="vpi">
+          <div class="vpi-icon">🧠</div>
+          <div class="vpi-body">
+            <div class="vpi-name">Lúcio <span class="role">Estratégia</span></div>
+            <div class="vpi-desc">Transforma qualquer ideia — até áudio bagunçado — em estratégia clara e prompt estruturado para usar em qualquer IA.</div>
+          </div>
+        </div>
+        <hr class="vpi-sep">
+        <div class="vpi vpi-bonus">
+          <div class="vpi-icon">🎁</div>
+          <div class="vpi-body">
+            <div class="vpi-name">Midas <span class="role" style="background:rgba(14,43,48,.08);color:var(--forest);padding:2px 8px;border-radius:100px;">Bônus</span></div>
+            <div class="vpi-desc">Cria propostas comerciais irresistíveis: você responde as perguntas dele, ele monta a proposta completa — com precificação, estrutura de venda e documento pronto para enviar.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRICE -->
+    <div class="hero-price">
+      <div class="hp-from">R$ 1.185</div>
+      <div class="hp-arrow">→</div>
+      <div class="hp-now">
+        <div class="hp-install">10× R$ 21</div>
+        <div class="hp-full">ou R$ 197 à vista · acesso imediato</div>
+      </div>
+    </div>
+
+    <a href="#cta" class="btn-hero">Quero meu Time Virada IA agora</a>
+    <p class="hero-lock">🔒 Compra segura · Acesso imediato após confirmação</p>
+
+  </div>
+</section>
+
+<!-- ════ VÍDEO ════ -->
+<section class="sec" style="padding:0 0 50px;">
+  <div class="w">
+    <div class="video-wrap reveal">
+      <!-- Cole aqui a URL do seu vídeo do YouTube ou Vimeo -->
+      <!-- Exemplo: <iframe src="https://www.youtube.com/embed/SEU_ID" allowfullscreen></iframe> -->
+      <div class="video-placeholder">
+        <span class="vp-icon">▶</span>
+        <span class="vp-text">Seu vídeo aqui</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ NEGAÇÃO COMPACTA ════ -->
+<section class="negacao-strip">
+  <div class="w">
+    <h2 class="neg-title reveal">Isso não é <em>mais um curso.</em></h2>
+    <div class="neg-row reveal">
+      <span class="neg-chip">Curso de 40 horas</span>
+      <span class="neg-chip">Lista de ferramentas</span>
+      <span class="neg-chip">Prompt genérico</span>
+      <span class="neg-chip">Ebook raso</span>
+      <span class="neg-chip">PDF bonito sem implementação</span>
+    </div>
+    <div class="neg-reveal reveal">
+      <p class="nr-headline">É um time de especialistas de IA prontos para trabalhar com você — agora.</p>
+      <p class="nr-sub">Você abre, usa, e o resultado aparece nas primeiras horas.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════ AGENTES ════ -->
+<section class="sec sec-alt">
+  <div class="w">
+    <span class="lbl reveal">conheça seu time</span>
+    <h2 class="h2 reveal">3 Especialistas.<br><em class="terra">1 resultado imediato.</em></h2>
+
+    <!-- VITÓRIA -->
+    <div class="agent-card reveal">
+      <div class="ac-head">
+        <div class="ac-icon-wrap ac-icon-terra">🔍</div>
+        <div>
+          <p class="ac-name">Vitória</p>
+          <p class="ac-role">Diagnóstico Estratégico de IA</p>
+        </div>
+      </div>
+      <p class="ac-tagline">Sua consultora particular. Ela descobre onde o dinheiro está escapando.</p>
+      <div class="ac-body">
+        <p class="ac-desc">Responde perguntas simples sobre o seu negócio. Vitória mapeia onde você perde tempo e dinheiro, calcula o custo da inação em reais, e entrega um diagnóstico com prioridades e prompts prontos para usar imediatamente. Nas primeiras horas, você já tem clareza total sobre onde agir.</p>
+      </div>
+      <div class="ac-foot">
+        <span style="font-size:.75rem;font-family:'Fraunces',serif;font-style:italic;color:var(--sage);">+ Receita · − Desperdício</span>
+        <span class="badge badge-terra">Incluído</span>
+      </div>
+    </div>
+
+    <!-- LÚCIO -->
+    <div class="agent-card reveal">
+      <div class="ac-head">
+        <div class="ac-icon-wrap ac-icon-forest">🧠</div>
+        <div>
+          <p class="ac-name">Lúcio</p>
+          <p class="ac-role">Arquiteto de Prompts e Estratégia</p>
+        </div>
+      </div>
+      <p class="ac-tagline">Seu mentor provocador. Transforma ideia bagunçada em prompt extraordinário.</p>
+      <div class="ac-body">
+        <p class="ac-desc">Manda áudio, ideia incompleta, qualquer coisa. Lúcio não aceita raso — ele faz as perguntas certas, organiza o contexto, indica qual IA usar, e entrega o prompt estruturado com o passo a passo para você executar. Você para de perder horas tentando fazer o ChatGPT entender o que você quer.</p>
+      </div>
+      <div class="ac-foot">
+        <span style="font-size:.75rem;font-family:'Fraunces',serif;font-style:italic;color:var(--sage);">+ Produtividade · − Retrabalho</span>
+        <span class="badge badge-terra">Incluído</span>
+      </div>
+    </div>
+
+    <!-- EXTRAS GRID -->
+    <div class="inc-grid reveal">
+      <div class="inc-card">
+        <div class="inc-icon">🎬</div>
+        <p class="inc-title">Videoaula de Ativação</p>
+        <p class="inc-desc">Em menos de 1 hora você usa tudo — passo a passo, sem enrolação.</p>
+      </div>
+      <div class="inc-card">
+        <div class="inc-icon">📚</div>
+        <p class="inc-title">Biblioteca de Prompts</p>
+        <p class="inc-desc">Prompts estratégicos prontos para os casos mais comuns do seu negócio.</p>
+      </div>
+    </div>
+
+    <!-- MIDAS BÔNUS -->
+    <div class="bonus-card reveal">
+      <span class="bonus-tag">🎁 Bônus — disponível agora</span>
+      <div class="bc-head">
+        <div class="bc-icon">💰</div>
+        <div>
+          <p class="bc-name">Midas</p>
+          <p class="bc-role">Gerador de Propostas Comerciais</p>
+        </div>
+      </div>
+      <p class="bc-tagline">Você para de mandar orçamento no WhatsApp.</p>
+      <div class="bc-body">
+        <p class="bc-desc">Midas te entrevista sobre o projeto, cruza com documentos e transcrições que você enviar, te ajuda a definir o preço certo, e monta uma proposta comercial irresistível — com estrutura de venda, cálculo de ROI para o cliente, e documento profissional pronto para enviar. Uma proposta fechada paga o Time inteiro.</p>
+      </div>
+      <div class="bc-foot">
+        <span class="bc-val">Valor: R$ 297</span>
+        <span class="badge badge-forest">GRÁTIS agora</span>
+      </div>
+    </div>
+
+    <!-- QUICK WIN -->
+    <div class="reveal" style="background:var(--terra-f);border:1px solid rgba(168,92,56,.14);border-radius:14px;padding:16px 18px;text-align:left;">
+      <p style="font-family:'Fraunces',serif;font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:4px;">⚡ Resultado em menos de 24 horas</p>
+      <p style="font-family:'Lora',serif;font-size:.82rem;color:var(--ink2);line-height:1.7;">A maioria das pessoas se espanta com o que a Vitória revela nos primeiros 30 minutos. Só esse diagnóstico já vale mais que os R$ 197.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════ PROVA ════ -->
+<section class="sec">
+  <div class="w">
+    <span class="lbl reveal">a prova</span>
+    <h2 class="h2 reveal">Não é teoria.<br><em class="terra">São resultados reais.</em></h2>
+
+    <div class="prova-wrap">
+      <div class="proof-hero reveal">
+        <span class="ph-tag">Resultado de conteúdo</span>
+        <div class="ph-num">+<span>10.000</span></div>
+        <p class="ph-desc">seguidores e mais de 10 milhões de visualizações na série <em>"Coisas que você ainda não está pedindo pra IA"</em> — mostrando usos de IA que a maioria nunca imaginou.</p>
+      </div>
+      <div class="proof-card reveal">
+        <span class="pc-label">Case de implementação</span>
+        <p class="pc-title">Clínica COLO · 15 enfermeiras · 300 páginas de protocolo</p>
+        <p class="pc-body">Sistema de IA que lê prontuários, analisa exames e cruza com protocolo interno — gerando roteiros personalizados para cada atendimento. Resultado: mais de 30 horas semanais liberadas, com mais padronização e menos retrabalho.</p>
+        <span class="pc-metric">→ +30 horas semanais liberadas</span>
+      </div>
+      <div class="proof-card reveal">
+        <span class="pc-label">Uso pessoal diário</span>
+        <p class="pc-title">Os mesmos agentes que uso no meu negócio todo dia</p>
+        <p class="pc-body">Vitória e Lúcio não foram criados pra vender. São as ferramentas que gerenciam a Virada IA. Você compra o que funciona — não o que parece bonito numa apresentação.</p>
+        <span class="pc-metric">→ Testados e atualizados continuamente</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ CUSTO DA INAÇÃO ════ -->
+<section class="sec sec-ink">
+  <div class="w">
+    <span class="lbl lbl-dim reveal">o custo de não agir</span>
+    <h2 class="h2 reveal" style="color:var(--paper);">O dinheiro que sai todo mês<br><em class="terra-l">sem você perceber</em></h2>
+
+    <div class="in-calc reveal">
+      <div class="in-row"><span class="in-item">5 pessoas × 5 h/semana em tarefas que IA resolve</span><span class="in-val">25 h/sem</span></div>
+      <div class="in-row"><span class="in-item">Custo estimado por hora (R$ 30)</span><span class="in-val">× R$ 30</span></div>
+      <div class="in-row"><span class="in-item">Custo mensal desperdiçado</span><span class="in-val">R$ 3.000</span></div>
+      <div class="in-row"><span class="in-item">Em 1 ano</span><span class="in-val">R$ 36.000</span></div>
+      <div class="in-row in-total"><span class="in-item">Custo do Time Virada IA</span><span class="in-val">R$ 197</span></div>
+    </div>
+
+    <p class="in-callout reveal"><strong>R$ 197</strong> para descobrir onde isso acontece <em style="font-style:italic;">no seu negócio.</em></p>
+    <p class="in-sub reveal">Menos que uma hora de consultoria. Menos que o dinheiro que você perde essa semana fazendo tudo no manual.</p>
+  </div>
+</section>
+
+<!-- ════ ANCORAGEM ════ -->
+<section class="sec sec-alt">
+  <div class="w">
+    <h2 class="h2 reveal">O que você leva<br><em class="terra">por R$ 197</em></h2>
+    <div class="stack-table reveal">
+      <div class="srow"><span class="sitem">🔍 Vitória — Diagnóstico Estratégico</span><span class="sprice">R$ 297</span></div>
+      <div class="srow"><span class="sitem">🧠 Lúcio — Arquiteto de Prompts</span><span class="sprice">R$ 297</span></div>
+      <div class="srow"><span class="sitem">🎬 Videoaula de Ativação</span><span class="sprice">R$ 197</span></div>
+      <div class="srow"><span class="sitem">📚 Biblioteca de Prompts</span><span class="sprice">R$ 97</span></div>
+      <div class="srow"><span class="sitem bonusline">🎁 Midas — Propostas Comerciais</span><span class="sprice">R$ 297</span></div>
+      <div class="srow total"><span class="sitem">Valor total</span><span class="sprice">R$ 1.185</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ HISTÓRIA COMPACTA ════ -->
+<section class="sec">
+  <div class="w">
+    <span class="lbl reveal">quem está por trás</span>
+    <h2 class="h2 reveal">Bruna Santanna<br><em class="terra">@brusantanna.ai</em></h2>
+
+    <!-- ESPAÇO PARA FOTO -->
+    <div class="reveal" style="margin:0 0 20px;">
+      <div style="width:140px;height:140px;border-radius:50%;background:var(--sand);border:2px dashed var(--border2);display:flex;align-items:center;justify-content:center;margin:0 auto;">
+        <span style="font-size:.62rem;color:var(--mist);letter-spacing:.08em;text-transform:uppercase;">Sua foto</span>
+      </div>
+    </div>
+
+    <div class="hist-card reveal">
+      <div class="hist-quote">"</div>
+      <p class="hist-text">
+        Formada em Marketing pela ESPM. Passei por SulAmérica e Whirlpool. Por 8 anos, toquei minha própria joalheria, a Casa Kahla — fazendo tudo sozinha.<br><br>
+        Na minha licença maternidade, mergulhei fundo em IA. Estudei, testei, implementei. Os resultados vieram rápido. E percebi uma coisa: <strong>nenhum empresário vai ter tempo para fazer esse mergulho.</strong><br><br>
+        Então decidi fazer por você. Vitória e Lúcio são os agentes que uso todos os dias para gerir meus negócios. Você está comprando o que funciona — não o que parece bonito numa apresentação.<br><br>
+        <strong>Você não precisa aprender IA como eu aprendi. Precisa ter acesso à estrutura que eu construí.</strong>
+      </p>
+      <div class="hist-byline">
+        <div>
+          <span class="hb-name">Bruna Santanna</span>
+          <span class="hb-role">@brusantanna.ai · Virada IA</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FILTRO ════ -->
+<section class="filtro-wrap">
+  <div class="w">
+    <span class="lbl lbl-dim reveal">isso não é pra todo mundo</span>
+    <h2 class="h2 reveal" style="color:rgba(247,244,238,.9);">Se você se encaixa aqui,<br><em style="color:var(--terra-l);">não continue.</em></h2>
+
+    <div class="fi-chips reveal">
+      <span class="fi-chip">Quer colecionar ferramenta</span>
+      <span class="fi-chip">Acha que IA é hype</span>
+      <span class="fi-chip">Não vai aplicar o que receber</span>
+      <span class="fi-chip">Acha R$ 197 caro pra transformar como trabalha</span>
+    </div>
+
+    <div class="filtro-reveal reveal">
+      <p class="fr-text">Isso é para quem está pronto para parar de perder tempo e dinheiro fazendo no manual o que IA resolve em minutos.</p>
+      <p class="fr-sub">Se você chegou até aqui, já sabe em qual grupo está.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════ CTA FINAL ════ -->
+<section class="sec sec-alt" id="cta">
+  <div class="w">
+    <span class="lbl reveal">sua decisão</span>
+    <h2 class="h2 reveal">Ative seu Time <em class="terra">agora</em></h2>
+
+    <div class="cta-block reveal">
+      <div class="cta-top">
+        <p class="ct-from">Valor real: R$ 1.185</p>
+        <p class="ct-install">10× R$ 21</p>
+        <p class="ct-full">ou R$ 197 à vista · sem juros</p>
+      </div>
+      <div class="cta-list">
+        <div class="cl-item"><span class="cl-check">✔</span> Vitória — Diagnóstico Estratégico de IA</div>
+        <div class="cl-item"><span class="cl-check">✔</span> Lúcio — Arquiteto de Prompts e Estratégia</div>
+        <div class="cl-item"><span class="cl-check">✔</span> Videoaula de Ativação (menos de 1 h)</div>
+        <div class="cl-item"><span class="cl-check">✔</span> Biblioteca de Prompts Estratégicos</div>
+        <div class="cl-item bonus-item"><span class="cl-check" style="color:var(--terra-h);">🎁</span> Midas — Propostas Comerciais Irresistíveis</div>
+      </div>
+      <div class="cta-bottom">
+        <a href="#" class="btn-cta">Quero meu Time Virada IA agora</a>
+        <p class="cta-lock">🔒 Pagamento seguro · Acesso imediato · @brusantanna.ai</p>
+      </div>
+    </div>
+
+    <div class="urgency-strip reveal">
+      <strong>⚠️ O bônus Midas está disponível apenas para quem entrar agora.</strong> Não garantimos disponibilidade por tempo indeterminado.
+    </div>
+
+  </div>
+</section>
+
+<!-- ════ FOOTER ════ -->
+<footer class="footer">
+  <p class="foot-logo">Bruna Santanna · Virada IA</p>
+  <p class="foot-tag">Empresário não aprende IA. Usa IA. · @brusantanna.ai</p>
+  <div class="foot-links">
+    <a href="https://instagram.com/brusantanna.ai" target="_blank">Instagram</a>
+    <a href="#">Política de Privacidade</a>
+    <a href="#">Termos de Uso</a>
+  </div>
+</footer>
+
+<script>
+// ─── COUNTDOWN: 24h reinicia ao acessar ───
+(function(){
+  const KEY = 'tviaExpiry';
+  let expiry = parseInt(localStorage.getItem(KEY) || '0');
+  if(!expiry || expiry < Date.now()){
+    expiry = Date.now() + 24*60*60*1000;
+    localStorage.setItem(KEY, expiry);
+  }
+  const h = document.getElementById('cd-h');
+  const m = document.getElementById('cd-m');
+  const s = document.getElementById('cd-s');
+  function pad(n){return String(n).padStart(2,'0');}
+  function tick(){
+    const diff = Math.max(0, expiry - Date.now());
+    const hrs = Math.floor(diff/3600000);
+    const mins = Math.floor((diff%3600000)/60000);
+    const secs = Math.floor((diff%60000)/1000);
+    h.textContent = pad(hrs);
+    m.textContent = pad(mins);
+    s.textContent = pad(secs);
+  }
+  tick();
+  setInterval(tick,1000);
+})();
+
+// ─── STICKY NAV ───
+const nav = document.getElementById('snav');
+window.addEventListener('scroll',()=>{ nav.classList.toggle('vis', window.scrollY > window.innerHeight * .55); });
+
+// ─── SCROLL REVEAL ───
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+},{threshold:.07});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
