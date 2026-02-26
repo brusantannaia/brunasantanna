@@ -191,6 +191,28 @@ em.terra-l{font-style:italic;color:var(--terra-l);}
 .btn-hero:hover{background:var(--terra-h);transform:translateY(-2px);box-shadow:0 14px 40px rgba(168,92,56,.3);}
 .hero-lock{font-size:.68rem;color:var(--mist);margin-top:9px;opacity:0;animation:fadeUp .65s ease forwards .5s;}
 
+
+/* ─── VIDEO SECTION ─── */
+.video-section{padding:0 0 60px;}
+.video-wrap{
+  position:relative;width:100%;padding-top:56.25%;
+  border-radius:16px;overflow:hidden;
+  background:var(--ink);border:1px solid var(--border2);
+  box-shadow:0 8px 40px rgba(26,24,20,.12);
+}
+.video-wrap iframe,.video-wrap video{
+  position:absolute;inset:0;width:100%;height:100%;border:none;
+}
+.video-placeholder{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:10px;
+  background:var(--forest);
+}
+.vp-icon{font-size:2.5rem;opacity:.5;}
+.vp-text{font-family:'Fraunces',serif;font-size:1rem;font-weight:600;
+  color:rgba(253,251,247,.35);letter-spacing:.04em;}
+.video-caption{font-size:.72rem;color:var(--mist);margin-top:10px;text-align:center;line-height:1.5;}
+
 /* ─── BREAKTHROUGH SECTION: amplifica o estado mental ─── */
 .amplify{padding:60px 0;}
 .amp-line{
@@ -673,6 +695,22 @@ em.terra-l{font-style:italic;color:var(--terra-l);}
   </div>
 </section>
 
+
+<!-- ════ VÍDEO ════ -->
+<section class="video-section">
+  <div class="w">
+    <div class="video-wrap reveal">
+      <!-- Cole aqui a URL do seu vídeo do YouTube ou Vimeo -->
+      <!-- Exemplo YouTube: <iframe src="https://www.youtube.com/embed/SEU_ID" allowfullscreen></iframe> -->
+      <div class="video-placeholder">
+        <span class="vp-icon">▶</span>
+        <span class="vp-text">Seu vídeo aqui</span>
+      </div>
+    </div>
+    <p class="video-caption">Cole a URL do seu vídeo do YouTube ou Vimeo no código HTML acima.</p>
+  </div>
+</section>
+
 <!-- ════════════════════════════════
      BREAKTHROUGH: AMPLIFICA O ESTADO MENTAL
      BA: não explica o produto. Amplifica a frustração que já existe.
@@ -709,7 +747,7 @@ em.terra-l{font-style:italic;color:var(--terra-l);}
     <p class="reveal" style="font-size:.62rem;color:var(--mist);margin-top:8px;line-height:1.6;">Fontes: Pew Research Center, U.S. Census Bureau – Business Trends and Outlook Survey, relatórios Deloitte e McKinsey.</p>
 
     <div class="reveal" style="border-left:2.5px solid var(--terra);padding-left:16px;margin-top:22px;">
-      <p style="font-family:'Fraunces',serif;font-size:1.3rem;font-weight:400;font-style:italic;color:var(--ink);line-height:1.4;">Você não está atrasado. Você está <strong style="font-style:normal;">cedo.</strong></p>
+      <p style="font-family:'Fraunces',serif;font-size:1.3rem;font-weight:400;font-style:italic;color:var(--ink);line-height:1.4;">Você não está atrasado. Você está <strong style="font-style:normal;">na hora certa.</strong></p>
       <p style="font-size:.84rem;color:var(--sage);margin-top:5px;">E quem estrutura agora acumula vantagem enquanto 96% ainda hesitam.</p>
     </div>
   </div>
@@ -722,7 +760,7 @@ em.terra-l{font-style:italic;color:var(--terra-l);}
 <section class="negacao">
   <div class="w">
     <span class="lbl lbl-dim reveal">o que isso não é</span>
-    <h2 class="sec-title reveal">O que isso<br><em style="font-style:italic;color:var(--terra-l);">não é.</em></h2>
+    <h2 class="sec-title reveal">Isso não é<br><em style="font-style:italic;color:var(--terra-l);">um curso.</em></h2>
     <p class="neg-intro reveal">Você já comprou curso. Já salvou lista de ferramentas. Já baixou prompt pack. Nenhum disso funcionou de verdade. Então antes de continuar:</p>
 
     <div class="neg-list reveal">
@@ -741,81 +779,115 @@ em.terra-l{font-style:italic;color:var(--terra-l);}
 </section>
 
 <!-- ════════════════════════════════
-     BLOCO 2 PARTE 2: HISTÓRIA DE ORIGEM (Douglas)
+     BLOCO 3 PARTE 2: ENTREGÁVEIS (Douglas)
+     Cada componente com valor isolado
 ════════════════════════════════ -->
-<section class="historia sec-alt">
+<section class="agents">
   <div class="w">
-    <span class="lbl reveal">a história por trás</span>
-    <h2 class="h2 reveal">Quem está<br><em class="terra">por trás do time</em></h2>
+    <span class="lbl reveal">o que você recebe</span>
+    <h2 class="h2 reveal">Conheça seu<br><em class="terra">Time</em></h2>
 
-    <!-- ESPAÇO PARA FOTO -->
-    <div class="hist-photo reveal">
-      <div class="hist-photo-inner">
-        <span class="hist-photo-label">Sua foto aqui</span>
+    <!-- VITÓRIA -->
+    <div class="agent-card reveal">
+      <div class="ac-head">
+        <div class="ac-icon-wrap ac-icon-terra">🔍</div>
+        <div class="ac-meta">
+          <p class="ac-name">Vitória</p>
+          <p class="ac-role">Diagnóstico Estratégico de IA</p>
+        </div>
+      </div>
+      <p class="ac-tagline">Sua consultora. Ela descobre onde o dinheiro está escorregando.</p>
+      <div class="ac-body">
+        <p class="ac-desc">Você responde perguntas simples sobre seu negócio. Vitória mapeia onde você está perdendo tempo e dinheiro, calcula o custo da inação em reais e entrega um diagnóstico completo com ações imediatas — incluindo prompts prontos.</p>
+        <div class="ac-list">
+          <p class="ac-li">Mapeamento de onde você perde tempo e dinheiro</p>
+          <p class="ac-li">Cálculo do custo da inação em reais</p>
+          <p class="ac-li">Prioridade estratégica clara para implementar IA</p>
+          <p class="ac-li">Prompts prontos para usar imediatamente</p>
+        </div>
+      </div>
+      <div class="ac-foot">
+        <span class="badge badge-terra">Incluído</span>
       </div>
     </div>
 
-    <div class="hist-card reveal">
-      <div class="hist-quote">"</div>
-      <p class="hist-text">
-        Sou formada em Marketing pela ESPM. Passei por grandes empresas como SulAmérica e Whirlpool. Durante 8 anos, tive minha própria joalheria, a Casa Kahla.<br><br>
-        Sempre fui aquela empresária que faz de tudo: marketing, vendas, operação, financeiro. Se algo precisava ser resolvido, passava por mim.<br><br>
-        Quando a IA começou a ganhar força, percebi imediatamente que o impacto seria enorme. Mas como qualquer empresário ocupado, eu não tinha tempo para aprender tudo o que queria.<br><br>
-        Só consegui mergulhar de verdade quando parei tudo — na minha licença maternidade.<br><br>
-        Foi ali que eu estudei profundamente. Testei ferramentas. Implementei automações. Criei agentes. Reestruturei processos. E os resultados vieram rápido. Mais clareza. Mais organização. Mais eficiência. Menos desperdício.<br><br>
-        E aconteceu algo inesperado: <strong>eu me apaixonei.</strong><br><br>
-        Não pela tecnologia em si. Mas pelo poder que ela entrega ao empresário que sabe usar.<br><br>
-        Quanto mais eu mergulhava, mais percebia uma verdade simples: a maioria dos empresários nunca terá tempo para fazer esse mergulho. IA muda toda semana. Novos modelos. Novas ferramentas. Atualizações constantes. Acompanhar tudo exige dedicação intensa.<br><br>
-        Foi exatamente isso que eu fiz. E continuo fazendo até hoje.<br><br>
-        Mas nenhum empresário deveria precisar fazer esse caminho sozinho.<br><br>
-        Foi aí que decidi que minha carreira seria ajudar empresários a usar IA de forma estratégica — sem precisar passar pelo mesmo processo que eu passei.<br><br>
-        <strong>Você não precisa aprender IA como eu aprendi.<br>Precisa ter acesso à estrutura que eu construí.</strong><br><br>
-        Aprender é preparação infinita. Usar é vantagem acumulativa.
-      </p>
-      <div class="hist-byline">
-        <div>
-          <span class="hb-name">Bruna Santanna</span>
-          <span class="hb-role">@brusantanna.ai · Virada IA</span>
+    <!-- LÚCIO -->
+    <div class="agent-card reveal">
+      <div class="ac-head">
+        <div class="ac-icon-wrap ac-icon-forest">🧠</div>
+        <div class="ac-meta">
+          <p class="ac-name">Lúcio</p>
+          <p class="ac-role">Arquiteto de Prompts e Estratégia</p>
+        </div>
+      </div>
+      <p class="ac-tagline">Seu mentor provocador. Transforma ideia bagunçada em prompt extraordinário.</p>
+      <div class="ac-body">
+        <p class="ac-desc">Pode mandar áudio. Pode mandar ideia incompleta. Lúcio não aceita pedido raso — ele te desafia a pensar mais fundo, organiza o contexto, te dá a estratégia e o passo a passo para usar a IA, e ainda gera prompts estruturados com explicação de por que funcionam.</p>
+        <div class="ac-list">
+          <p class="ac-li">Aceita áudios e ideias bagunçadas</p>
+          <p class="ac-li">Faz perguntas estratégicas para extrair o melhor</p>
+          <p class="ac-li">Indica quais IAs usar em cada situação</p>
+          <p class="ac-li">Te ensina a pensar diferente sobre IA — enquanto executa</p>
+          <p class="ac-li">Prompts estruturados com passo a passo aplicável</p>
+        </div>
+      </div>
+      <div class="ac-foot">
+        <span class="badge badge-terra">Incluído</span>
+      </div>
+    </div>
+
+    <!-- VIDEOAULA + BIBLIOTECA -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px;" class="reveal">
+      <div style="border:1px solid var(--border2);border-radius:16px;padding:16px 14px;background:var(--paper);">
+        <div style="font-size:1.4rem;margin-bottom:8px;">🎬</div>
+        <p style="font-family:'Fraunces',serif;font-size:1rem;font-weight:500;color:var(--ink);margin-bottom:4px;">Videoaula de Ativação</p>
+        <p style="font-size:.75rem;color:var(--sage);line-height:1.5;margin-bottom:10px;">Em menos de 1 hora você está usando tudo — passo a passo, sem enrolação.</p>
+        <div class="ac-foot" style="padding:10px 0 0;border-top:1px solid var(--border);">
+          <span class="badge badge-terra" style="font-size:.55rem;">Incluído</span>
+        </div>
+      </div>
+      <div style="border:1px solid var(--border2);border-radius:16px;padding:16px 14px;background:var(--paper);">
+        <div style="font-size:1.4rem;margin-bottom:8px;">📚</div>
+        <p style="font-family:'Fraunces',serif;font-size:1rem;font-weight:500;color:var(--ink);margin-bottom:4px;">Biblioteca de Prompts</p>
+        <p style="font-size:.75rem;color:var(--sage);line-height:1.5;margin-bottom:10px;">Prompts estratégicos prontos para usar nos casos mais comuns do seu negócio.</p>
+        <div class="ac-foot" style="padding:10px 0 0;border-top:1px solid var(--border);">
+          <span class="badge badge-terra" style="font-size:.55rem;">Incluído</span>
         </div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ════════════════════════════════
-     BLOCO 2 PARTE 3: PROVA (o que faltava)
-     Douglas: "Nunca peça nada antes de mostrar recibos."
-     BA: prova específica, com números — não vaga
-════════════════════════════════ -->
-<section class="prova">
-  <div class="w">
-    <span class="lbl reveal">a prova</span>
-    <h2 class="h2 reveal">Não é teoria.<br><em class="terra">São resultados reais.</em></h2>
-
-    <!-- prova maior em destaque -->
-    <div class="proof-hero reveal">
-      <span class="ph-tag">Resultado de conteúdo</span>
-      <div class="ph-num">+<span>10.000</span></div>
-      <p class="ph-desc">seguidores e mais de 10 milhões de visualizações na série <em>"Coisas que você ainda não está pedindo pra IA"</em> — mostrando o que a maioria nunca imaginou ser possível com IA.</p>
-    </div>
-
-    <div class="proof-grid">
-      <!-- case médico -->
-      <div class="proof-card reveal">
-        <span class="pc-label">Case de implementação</span>
-        <p class="pc-title">Clínica COLO · 15 enfermeiras · 300 páginas de protocolo</p>
-        <p class="pc-body">Desenvolvi um sistema de IA que lê prontuários, analisa exames e cruza tudo com um protocolo interno de 300 páginas, gerando automaticamente roteiros personalizados para cada atendimento. O resultado foi a liberação de mais de 30 horas semanais da equipe — com mais padronização e menos retrabalho.</p>
-        <span class="pc-metric">→ +30 horas semanais liberadas</span>
+    <!-- MIDAS BÔNUS -->
+    <div class="bonus-card reveal">
+      <span class="bonus-tag">🎁 Bônus exclusivo — quem entrar agora</span>
+      <div class="bc-head">
+        <div class="bc-icon">💰</div>
+        <div>
+          <p class="bc-name">Midas</p>
+          <p class="bc-role">Acelerador de Receita</p>
+        </div>
       </div>
-
-      <!-- uso pessoal -->
-      <div class="proof-card reveal">
-        <span class="pc-label">Uso pessoal diário</span>
-        <p class="pc-title">Os mesmos agentes que uso no meu negócio todo dia</p>
-        <p class="pc-body">Vitória e Lúcio não são produtos criados pra vender. São as ferramentas que eu uso para gerir a NewScale e o Virada IA. Você está comprando o que funciona — não o que parece bonito numa apresentação.</p>
-        <span class="pc-metric">→ Testados e atualizados continuamente</span>
+      <p class="bc-tagline">Você descobriu oportunidades. Agora transforme em dinheiro.</p>
+      <div class="bc-body">
+        <div class="bc-list">
+          <p class="bc-li">Te entrevista sobre o projeto</p>
+          <p class="bc-li">Calcula o custo da inação do cliente em reais</p>
+          <p class="bc-li">Monta proposta com estrutura SCR (Situação-Complicação-Resolução)</p>
+          <p class="bc-li">Documento profissional pronto para enviar</p>
+        </div>
+        <p class="bc-punch">Você para de mandar orçamento no WhatsApp.<br>Uma proposta paga o Time inteiro.</p>
+      </div>
+      <div class="bc-foot">
+        <span class="bc-val">Valor: R$297</span>
+        <span class="badge badge-forest">GRÁTIS agora</span>
       </div>
     </div>
+
+    <!-- QUICK WIN -->
+    <div class="quick-win reveal">
+      <p class="qw-title">⚡ Resultado nas primeiras 24 horas</p>
+      <p class="qw-body">Assim que você abrir a Vitória e responder as perguntas sobre o seu negócio, ela vai te mostrar exatamente onde você está deixando dinheiro na mesa — com números. Esse diagnóstico sozinho já vale mais que os R$197. A maioria das pessoas se espanta com o que descobre nos primeiros 30 minutos.</p>
+    </div>
+
   </div>
 </section>
 
@@ -864,123 +936,6 @@ em.terra-l{font-style:italic;color:var(--terra-l);}
 </section>
 
 <!-- ════════════════════════════════
-     BLOCO 3 PARTE 2: ENTREGÁVEIS (Douglas)
-     Cada componente com valor isolado
-════════════════════════════════ -->
-<section class="agents">
-  <div class="w">
-    <span class="lbl reveal">o que você recebe</span>
-    <h2 class="h2 reveal">Seu <em class="terra">Time</em> completo</h2>
-
-    <!-- VITÓRIA -->
-    <div class="agent-card reveal">
-      <div class="ac-head">
-        <div class="ac-icon-wrap ac-icon-terra">🔍</div>
-        <div class="ac-meta">
-          <p class="ac-name">Vitória</p>
-          <p class="ac-role">Diagnóstico Estratégico de IA</p>
-        </div>
-      </div>
-      <p class="ac-tagline">Sua consultora. Ela descobre onde o dinheiro está escorregando.</p>
-      <div class="ac-body">
-        <p class="ac-desc">Você responde perguntas simples sobre seu negócio. Vitória mapeia onde você está perdendo tempo e dinheiro, calcula o custo da inação em reais e entrega um diagnóstico completo com ações imediatas — incluindo prompts prontos.</p>
-        <div class="ac-list">
-          <p class="ac-li">Mapeamento de onde você perde tempo e dinheiro</p>
-          <p class="ac-li">Cálculo do custo da inação em reais</p>
-          <p class="ac-li">Prioridade estratégica clara para implementar IA</p>
-          <p class="ac-li">Prompts prontos para usar imediatamente</p>
-        </div>
-      </div>
-      <div class="ac-foot">
-        <span class="ac-val">Valor isolado: <b>R$297</b></span>
-        <span class="badge badge-terra">Incluído</span>
-      </div>
-    </div>
-
-    <!-- LÚCIO -->
-    <div class="agent-card reveal">
-      <div class="ac-head">
-        <div class="ac-icon-wrap ac-icon-forest">🧠</div>
-        <div class="ac-meta">
-          <p class="ac-name">Lúcio</p>
-          <p class="ac-role">Arquiteto de Prompts e Estratégia</p>
-        </div>
-      </div>
-      <p class="ac-tagline">Seu mentor provocador. Transforma ideia bagunçada em prompt extraordinário.</p>
-      <div class="ac-body">
-        <p class="ac-desc">Pode mandar áudio. Pode mandar ideia incompleta. Lúcio não aceita pedido raso — ele te desafia a pensar mais fundo, organiza o contexto, te dá a estratégia e o passo a passo para usar a IA, e ainda gera prompts estruturados com explicação de por que funcionam.</p>
-        <div class="ac-list">
-          <p class="ac-li">Aceita áudios e ideias bagunçadas</p>
-          <p class="ac-li">Faz perguntas estratégicas para extrair o melhor</p>
-          <p class="ac-li">Indica quais IAs usar em cada situação</p>
-          <p class="ac-li">Te ensina a pensar diferente sobre IA — enquanto executa</p>
-          <p class="ac-li">Prompts estruturados com passo a passo aplicável</p>
-        </div>
-      </div>
-      <div class="ac-foot">
-        <span class="ac-val">Valor isolado: <b>R$297</b></span>
-        <span class="badge badge-terra">Incluído</span>
-      </div>
-    </div>
-
-    <!-- VIDEOAULA + BIBLIOTECA -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px;" class="reveal">
-      <div style="border:1px solid var(--border2);border-radius:16px;padding:16px 14px;background:var(--paper);">
-        <div style="font-size:1.4rem;margin-bottom:8px;">🎬</div>
-        <p style="font-family:'Fraunces',serif;font-size:1rem;font-weight:500;color:var(--ink);margin-bottom:4px;">Videoaula de Ativação</p>
-        <p style="font-size:.75rem;color:var(--sage);line-height:1.5;margin-bottom:10px;">Em menos de 1 hora você está usando tudo — passo a passo, sem enrolação.</p>
-        <div class="ac-foot" style="padding:10px 0 0;border-top:1px solid var(--border);">
-          <span class="ac-val"><b>R$197</b></span>
-          <span class="badge badge-terra" style="font-size:.55rem;">Incluído</span>
-        </div>
-      </div>
-      <div style="border:1px solid var(--border2);border-radius:16px;padding:16px 14px;background:var(--paper);">
-        <div style="font-size:1.4rem;margin-bottom:8px;">📚</div>
-        <p style="font-family:'Fraunces',serif;font-size:1rem;font-weight:500;color:var(--ink);margin-bottom:4px;">Biblioteca de Prompts</p>
-        <p style="font-size:.75rem;color:var(--sage);line-height:1.5;margin-bottom:10px;">Prompts estratégicos prontos para usar nos casos mais comuns do seu negócio.</p>
-        <div class="ac-foot" style="padding:10px 0 0;border-top:1px solid var(--border);">
-          <span class="ac-val"><b>R$97</b></span>
-          <span class="badge badge-terra" style="font-size:.55rem;">Incluído</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- MIDAS BÔNUS -->
-    <div class="bonus-card reveal">
-      <span class="bonus-tag">🎁 Bônus exclusivo — quem entrar agora</span>
-      <div class="bc-head">
-        <div class="bc-icon">💰</div>
-        <div>
-          <p class="bc-name">Midas</p>
-          <p class="bc-role">Acelerador de Receita</p>
-        </div>
-      </div>
-      <p class="bc-tagline">Você descobriu oportunidades. Agora transforme em dinheiro.</p>
-      <div class="bc-body">
-        <div class="bc-list">
-          <p class="bc-li">Te entrevista sobre o projeto</p>
-          <p class="bc-li">Calcula o custo da inação do cliente em reais</p>
-          <p class="bc-li">Monta proposta com estrutura SCR (Situação-Complicação-Resolução)</p>
-          <p class="bc-li">Documento profissional pronto para enviar</p>
-        </div>
-        <p class="bc-punch">Você para de mandar orçamento no WhatsApp.<br>Uma proposta paga o Time inteiro.</p>
-      </div>
-      <div class="bc-foot">
-        <span class="bc-val">Valor: R$297</span>
-        <span class="badge badge-forest">GRÁTIS agora</span>
-      </div>
-    </div>
-
-    <!-- QUICK WIN -->
-    <div class="quick-win reveal">
-      <p class="qw-title">⚡ Resultado nas primeiras 24 horas</p>
-      <p class="qw-body">Assim que você abrir a Vitória e responder as perguntas sobre o seu negócio, ela vai te mostrar exatamente onde você está deixando dinheiro na mesa — com números. Esse diagnóstico sozinho já vale mais que os R$197. A maioria das pessoas se espanta com o que descobre nos primeiros 30 minutos.</p>
-    </div>
-
-  </div>
-</section>
-
-<!-- ════════════════════════════════
      CUSTO DA INAÇÃO (Douglas + BA)
      BA: torna o problema financeiramente concreto antes do preço
 ════════════════════════════════ -->
@@ -1009,7 +964,6 @@ em.terra-l{font-style:italic;color:var(--terra-l);}
 ════════════════════════════════ -->
 <section class="stack">
   <div class="w">
-    <span class="lbl reveal">ancoragem de valor</span>
     <h2 class="h2 reveal">O que você recebe<br><em class="terra">por R$197</em></h2>
 
     <div class="stack-table reveal">
@@ -1019,6 +973,85 @@ em.terra-l{font-style:italic;color:var(--terra-l);}
       <div class="srow"><span class="sitem">📚 Biblioteca de Prompts Estratégicos</span><span class="sprice">R$97</span></div>
       <div class="srow"><span class="sitem bonusline">🎁 MIDAS — Gerador de Propostas</span><span class="sprice">R$297</span></div>
       <div class="srow total"><span class="sitem">Valor real</span><span class="sprice">R$1.185</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     BLOCO 2 PARTE 3: PROVA (o que faltava)
+     Douglas: "Nunca peça nada antes de mostrar recibos."
+     BA: prova específica, com números — não vaga
+════════════════════════════════ -->
+<section class="prova">
+  <div class="w">
+    <span class="lbl reveal">a prova</span>
+    <h2 class="h2 reveal">Não é teoria.<br><em class="terra">São resultados reais.</em></h2>
+
+    <!-- prova maior em destaque -->
+    <div class="proof-hero reveal">
+      <span class="ph-tag">Resultado de conteúdo</span>
+      <div class="ph-num">+<span>10.000</span></div>
+      <p class="ph-desc">seguidores e mais de 10 milhões de visualizações na série <em>"Coisas que você ainda não está pedindo pra IA"</em> — mostrando o que a maioria nunca imaginou ser possível com IA.</p>
+    </div>
+
+    <div class="proof-grid">
+      <!-- case médico -->
+      <div class="proof-card reveal">
+        <span class="pc-label">Case de implementação</span>
+        <p class="pc-title">Clínica COLO · 15 enfermeiras · 300 páginas de protocolo</p>
+        <p class="pc-body">Desenvolvi um sistema de IA que lê prontuários, analisa exames e cruza tudo com um protocolo interno de 300 páginas, gerando automaticamente roteiros personalizados para cada atendimento. O resultado foi a liberação de mais de 30 horas semanais da equipe — com mais padronização e menos retrabalho.</p>
+        <span class="pc-metric">→ +30 horas semanais liberadas</span>
+      </div>
+
+      <!-- uso pessoal -->
+      <div class="proof-card reveal">
+        <span class="pc-label">Uso pessoal diário</span>
+        <p class="pc-title">Os mesmos agentes que uso no meu negócio todo dia</p>
+        <p class="pc-body">Vitória e Lúcio não são produtos criados pra vender. São as ferramentas que eu uso para gerir a NewScale e o Virada IA. Você está comprando o que funciona — não o que parece bonito numa apresentação.</p>
+        <span class="pc-metric">→ Testados e atualizados continuamente</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     BLOCO 2 PARTE 2: HISTÓRIA DE ORIGEM (Douglas)
+════════════════════════════════ -->
+<section class="historia sec-alt">
+  <div class="w">
+    <span class="lbl reveal">a história por trás</span>
+    <h2 class="h2 reveal">Quem está<br><em class="terra">por trás do time</em></h2>
+
+    <!-- ESPAÇO PARA FOTO -->
+    <div class="hist-photo reveal">
+      <div class="hist-photo-inner">
+        <span class="hist-photo-label">Sua foto aqui</span>
+      </div>
+    </div>
+
+    <div class="hist-card reveal">
+      <div class="hist-quote">"</div>
+      <p class="hist-text">
+        Sou formada em Marketing pela ESPM. Passei por grandes empresas como SulAmérica e Whirlpool. Durante 8 anos, tive minha própria joalheria, a Casa Kahla.<br><br>
+        Sempre fui aquela empresária que faz de tudo: marketing, vendas, operação, financeiro. Se algo precisava ser resolvido, passava por mim.<br><br>
+        Quando a IA começou a ganhar força, percebi imediatamente que o impacto seria enorme. Mas como qualquer empresário ocupado, eu não tinha tempo para aprender tudo o que queria.<br><br>
+        Só consegui mergulhar de verdade quando parei tudo — na minha licença maternidade.<br><br>
+        Foi ali que eu estudei profundamente. Testei ferramentas. Implementei automações. Criei agentes. Reestruturei processos. E os resultados vieram rápido. Mais clareza. Mais organização. Mais eficiência. Menos desperdício.<br><br>
+        E aconteceu algo inesperado: <strong>eu me apaixonei.</strong><br><br>
+        Não pela tecnologia em si. Mas pelo poder que ela entrega ao empresário que sabe usar.<br><br>
+        Quanto mais eu mergulhava, mais percebia uma verdade simples: a maioria dos empresários nunca terá tempo para fazer esse mergulho. IA muda toda semana. Novos modelos. Novas ferramentas. Atualizações constantes. Acompanhar tudo exige dedicação intensa.<br><br>
+        Foi exatamente isso que eu fiz. E continuo fazendo até hoje.<br><br>
+        Mas nenhum empresário deveria precisar fazer esse caminho sozinho.<br><br>
+        Foi aí que decidi que minha carreira seria ajudar empresários a usar IA de forma estratégica — sem precisar passar pelo mesmo processo que eu passei.<br><br>
+        <strong>Você não precisa aprender IA como eu aprendi.<br>Precisa ter acesso à estrutura que eu construí.</strong><br><br>
+        Aprender é preparação infinita. Usar é vantagem acumulativa.
+      </p>
+      <div class="hist-byline">
+        <div>
+          <span class="hb-name">Bruna Santanna</span>
+          <span class="hb-role">@brusantanna.ai · Virada IA</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
