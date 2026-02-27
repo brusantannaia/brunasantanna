@@ -60,9 +60,18 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:900;ba
 }
 
 /* Texto hero */
+/* COUNTDOWN */
+.countdown-bar{background:var(--ink);color:var(--paper);padding:10px 16px;text-align:center;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;font-size:.72rem;letter-spacing:.04em;}
+.cd-units{display:flex;gap:8px;align-items:center;}
+.cd-unit{display:flex;flex-direction:column;align-items:center;background:rgba(255,255,255,.07);border-radius:6px;padding:5px 9px;min-width:44px;}
+.cd-num{font-family:'Fraunces',serif;font-size:1.35rem;font-weight:700;color:var(--terra-l);line-height:1;}
+.cd-lbl{font-size:.5rem;color:rgba(196,189,176,.4);text-transform:uppercase;letter-spacing:.08em;margin-top:2px;}
+.cd-sep{font-family:'Fraunces',serif;font-size:1.2rem;color:rgba(247,244,238,.2);margin-bottom:4px;}
+
 .hero-text{
-  padding:32px 22px 40px;
+  padding:32px 22px 32px;
   background:var(--cream);
+  text-align:center;
 }
 .hero-badge{
   display:inline-flex;align-items:center;gap:7px;
@@ -412,31 +421,44 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:900;ba
   <a href="https://sun.eduzz.com/7977B1GV9E" target="_blank" class="snav-cta">Quero meu Time</a>
 </nav>
 
+<!-- COUNTDOWN BAR -->
+<div class="countdown-bar" id="countdown-bar">
+  <span style="color:rgba(196,189,176,.55);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;">⏳ Oferta expira em</span>
+  <div class="cd-units">
+    <div class="cd-unit"><span class="cd-num" id="cd-h">23</span><span class="cd-lbl">horas</span></div>
+    <span class="cd-sep">:</span>
+    <div class="cd-unit"><span class="cd-num" id="cd-m">59</span><span class="cd-lbl">min</span></div>
+    <span class="cd-sep">:</span>
+    <div class="cd-unit"><span class="cd-num" id="cd-s">59</span><span class="cd-lbl">seg</span></div>
+  </div>
+</div>
+
 <!-- ════ HERO — Layout Duda ════ -->
 <section class="hero" id="top">
 
   <!-- Texto -->
   <div class="hero-text">
-    <div class="hero-badge">
+    <div class="hero-badge" style="justify-content:center;">
       <span class="hero-badge-dot"></span>
       por @brusantanna.ai · Virada IA
     </div>
 
-    <span class="hero-hl-sub">Você sabe que deveria usar IA melhor no seu negócio.</span>
-    <span class="hero-hl-main">TIME<br><em>VIRADA</em> IA</span>
-    <span class="hero-hl-tag">Eu vou te entregar 3 agentes prontos para diagnosticar, estruturar e vender mais — <strong>para você usar agora, sem estudar tecnologia.</strong></span>
+    <span class="hero-hl-sub" style="text-align:center;">Você sabe que deveria usar IA melhor no seu negócio.</span>
+    <span class="hero-hl-main" style="text-align:center;">TIME VIRADA<br><em>IA</em></span>
+    <span class="hero-hl-tag" style="text-align:center;">3 agentes prontos para diagnosticar, estruturar e vender mais — <strong>sem estudar tecnologia, sem depender de ninguém.</strong></span>
 
     <a href="https://sun.eduzz.com/7977B1GV9E" target="_blank" class="btn-hero">QUERO MEU TIME VIRADA IA →</a>
-    <p class="btn-sub">🔒 Acesso imediato após confirmação · por R$ 197</p>
+    <p class="btn-sub">🔒 Acesso imediato após confirmação</p>
+    <p class="btn-sub" style="margin-top:3px;color:var(--terra);font-weight:600;font-size:.72rem;">12× de R$ 19,90 ou R$ 197 à vista</p>
   </div>
 
   <!-- Vídeo de vendas -->
-  <div class="w" style="padding-top:32px;padding-bottom:8px;">
-    <div style="position:relative;width:100%;padding-bottom:56.25%;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.35);">
+  <div style="padding:0 22px 40px;">
+    <div style="position:relative;width:100%;padding-bottom:56.25%;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.18);">
       <iframe
-        src="https://www.youtube.com/embed/m5fxJt1xFxM?start=1"
+        src="https://www.youtube.com/embed/m5fxJt1xFxM?start=1&rel=0"
         style="position:absolute;inset:0;width:100%;height:100%;border:0;"
-        allow="autoplay; fullscreen"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
         title="Time Virada IA — apresentação">
       </iframe>
@@ -813,6 +835,17 @@ window.addEventListener('scroll',()=>{nav.classList.toggle('vis',window.scrollY>
 
 // Scroll reveal
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');});},{threshold:.07});
+
+// Countdown
+(function(){
+  const KEY='tviaExpiry3';
+  let expiry=parseInt(localStorage.getItem(KEY)||'0');
+  if(!expiry||expiry<Date.now()){expiry=Date.now()+24*60*60*1000;localStorage.setItem(KEY,expiry);}
+  const h=document.getElementById('cd-h'),m=document.getElementById('cd-m'),s=document.getElementById('cd-s');
+  function pad(n){return String(n).padStart(2,'0');}
+  function tick(){const diff=Math.max(0,expiry-Date.now());h.textContent=pad(Math.floor(diff/3600000));m.textContent=pad(Math.floor((diff%3600000)/60000));s.textContent=pad(Math.floor((diff%60000)/1000));}
+  tick();setInterval(tick,1000);
+})();
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
 </body>
