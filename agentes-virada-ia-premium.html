@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia Time Virada IA — Como usar seus 3 agentes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,700;1,9..144,900&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --ink:#1A1814;
+  --ink2:#2E2A25;
+  --cream:#F7F4EE;
+  --paper:#FDFBF7;
+  --sand:#EDE8DF;
+  --mist:#C4BDB0;
+  --terra:#A85C38;
+  --terra-h:#8A4828;
+  --terra-l:#C4845E;
+  --terra-xl:#D4A07A;
+  --terra-f:rgba(168,92,56,.08);
+  --terra-f2:rgba(168,92,56,.14);
+  --forest:#0E2B30;
+  --forest2:#163840;
+  --forest-l:#1E4850;
+  --sage:#6B7A6E;
+  --border:rgba(180,170,155,.22);
+  --border2:rgba(180,170,155,.38);
+  --r-page:680px;
+}
+
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--cream);color:var(--ink);
+  line-height:1.65;overflow-x:hidden;
+}
+
+/* grain */
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:900;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.022'/%3E%3C/svg%3E");
+}
+
+/* ─── PAGE LAYOUT ─── */
+.page{max-width:var(--r-page);margin:0 auto;padding:0 24px;}
+
+/* ─── SITE HEADER ─── */
+.site-header{
+  background:var(--forest);
+  padding:14px 24px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  position:sticky;top:0;z-index:700;
+}
+.sh-logo{
+  font-family:'Fraunces',serif;
+  font-size:.95rem;font-weight:300;
+  color:rgba(253,251,247,.9);
+  letter-spacing:.02em;
+  text-decoration:none;
+}
+.sh-logo span{font-weight:700;color:var(--terra-l);}
+.sh-nav{display:flex;gap:6px;align-items:center;}
+.sh-link{
+  font-size:.65rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:rgba(253,251,247,.4);
+  padding:7px 12px;border-radius:8px;text-decoration:none;
+  transition:background .2s,color .2s;
+}
+.sh-link:hover{background:rgba(255,255,255,.06);color:rgba(253,251,247,.8);}
+.sh-cta{
+  font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--paper);background:var(--terra);
+  padding:8px 16px;border-radius:8px;text-decoration:none;
+  transition:background .2s;
+}
+.sh-cta:hover{background:var(--terra-h);}
+
+/* ─── HERO COVER ─── */
+.hero{
+  background:var(--forest);
+  padding:64px 24px 72px;
+  position:relative;overflow:hidden;
+  text-align:center;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 80% at 90% -20%,rgba(168,92,56,.14) 0%,transparent 60%),
+    radial-gradient(ellipse 50% 60% at -5% 110%,rgba(196,132,94,.08) 0%,transparent 60%);
+}
+.hero-inner{position:relative;z-index:1;max-width:520px;margin:0 auto;}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--terra-l);margin-bottom:20px;
+}
+.hero-dot{width:4px;height:4px;border-radius:50%;background:currentColor;animation:pulse 2.2s ease infinite;}
+.hero-title{
+  font-family:'Fraunces',serif;
+  font-size:clamp(2.4rem,9vw,4rem);
+  font-weight:900;line-height:.9;letter-spacing:-.035em;
+  color:var(--paper);
+  margin-bottom:16px;
+}
+.hero-title em{font-style:italic;color:var(--terra-l);}
+.hero-sub{
+  font-family:'Lora',serif;
+  font-size:clamp(.88rem,2.8vw,1.05rem);
+  color:rgba(196,189,176,.65);
+  line-height:1.75;margin-bottom:32px;
+}
+.hero-agents{
+  display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:32px;
+}
+.hero-agent-chip{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:100px;
+  padding:7px 16px;
+  font-size:.72rem;font-weight:600;color:rgba(253,251,247,.7);
+  display:flex;align-items:center;gap:6px;
+}
+.hero-agent-chip .dot{width:6px;height:6px;border-radius:50%;}
+.dot-terra{background:var(--terra-l);}
+.dot-forest{background:rgba(196,189,176,.4);}
+
+.hero-progress{
+  display:flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);
+  border-radius:12px;padding:12px 16px;
+  font-family:'Lora',serif;font-size:.78rem;font-style:italic;
+  color:rgba(196,189,176,.5);
+}
+.hero-progress-icon{font-size:1rem;}
+
+/* ─── TABLE OF CONTENTS ─── */
+.toc-section{
+  background:var(--paper);
+  border-bottom:1px solid var(--border2);
+  padding:40px 24px;
+}
+.toc-inner{max-width:var(--r-page);margin:0 auto;}
+.toc-label{
+  font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;
+  font-weight:700;color:var(--terra);margin-bottom:16px;display:block;
+}
+.toc-title{
+  font-family:'Fraunces',serif;font-size:1.4rem;font-weight:700;
+  color:var(--ink);margin-bottom:20px;
+}
+.toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.toc-item{
+  display:flex;align-items:center;gap:10px;
+  padding:11px 14px;
+  background:var(--cream);border:1px solid var(--border);
+  border-radius:10px;text-decoration:none;
+  transition:border-color .2s,background .2s,transform .2s;
+}
+.toc-item:hover{border-color:var(--terra);background:var(--paper);transform:translateY(-1px);}
+.toc-num{
+  font-family:'Fraunces',serif;font-size:.75rem;font-weight:700;
+  color:var(--terra);min-width:18px;flex-shrink:0;
+}
+.toc-text{font-size:.73rem;font-weight:600;color:var(--ink2);line-height:1.3;}
+
+/* ─── SECTIONS ─── */
+.section{padding:56px 0;border-bottom:1px solid var(--border);}
+.section:last-child{border-bottom:none;}
+.section-alt{background:var(--paper);}
+.section-dark{background:var(--forest);color:var(--paper);}
+.section-ink{background:var(--ink);color:var(--paper);}
+
+/* ─── SECTION HEADER ─── */
+.section-label{
+  display:flex;align-items:center;gap:10px;
+  font-size:.58rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--terra);margin-bottom:10px;
+}
+.section-label-num{
+  width:24px;height:24px;border-radius:50%;
+  background:var(--terra);color:var(--paper);
+  font-size:.6rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.section-dark .section-label{color:var(--terra-l);}
+.section-ink .section-label{color:var(--terra-l);}
+
+.section-title{
+  font-family:'Fraunces',serif;
+  font-size:clamp(1.6rem,5vw,2.4rem);
+  font-weight:700;line-height:1.05;letter-spacing:-.025em;
+  color:var(--ink);margin-bottom:6px;
+}
+.section-dark .section-title,.section-ink .section-title{color:var(--paper);}
+.section-title em{font-style:italic;color:var(--terra);}
+.section-dark .section-title em,.section-ink .section-title em{color:var(--terra-l);}
+
+.section-sub{
+  font-family:'Lora',serif;font-style:italic;
+  font-size:.9rem;color:var(--sage);line-height:1.7;
+  margin-bottom:28px;
+}
+.section-dark .section-sub{color:rgba(196,189,176,.5);}
+.section-ink .section-sub{color:rgba(196,189,176,.45);}
+
+/* ─── AGENT PROFILE CARD ─── */
+.agent-profile{
+  border-radius:20px;overflow:hidden;
+  border:1px solid var(--border2);
+  background:var(--paper);
+  margin-bottom:24px;
+}
+.ap-header{
+  padding:28px 24px 24px;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:20px;
+  align-items:start;
+  border-bottom:1px solid var(--border);
+}
+.ap-photo{
+  width:80px;height:80px;border-radius:14px;
+  overflow:hidden;flex-shrink:0;
+  position:relative;
+}
+.ap-photo img{
+  width:100%;height:100%;object-fit:cover;
+  display:block;
+}
+.ap-photo-placeholder{
+  width:80px;height:80px;border-radius:14px;
+  background:var(--sand);
+  border:2px dashed var(--border2);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:4px;flex-shrink:0;
+}
+.ap-photo-placeholder span{font-size:1.6rem;}
+.ap-photo-placeholder small{font-size:.52rem;font-weight:600;color:var(--mist);letter-spacing:.06em;text-transform:uppercase;line-height:1.3;text-align:center;}
+.ap-meta{}
+.ap-name{
+  font-family:'Fraunces',serif;font-size:2rem;font-weight:900;
+  color:var(--ink);line-height:.9;margin-bottom:4px;
+}
+.ap-role-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 10px;border-radius:100px;
+}
+.role-terra{background:rgba(168,92,56,.1);color:var(--terra-h);}
+.role-forest{background:rgba(14,43,48,.08);color:var(--forest2);}
+.role-bonus{background:rgba(196,132,94,.12);color:#7A4020;}
+.ap-tagline{
+  font-family:'Lora',serif;font-style:italic;
+  font-size:.88rem;color:var(--sage);line-height:1.6;
+  margin-top:8px;
+}
+
+/* agent body */
+.ap-body{padding:24px 24px 0;}
+.ap-desc{
+  font-family:'Lora',serif;font-size:.88rem;
+  color:var(--ink2);line-height:1.85;
+  margin-bottom:20px;
+}
+.ap-desc strong{font-weight:600;color:var(--ink);}
+
+/* agent LINK row */
+.ap-link-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 24px;
+  background:var(--terra-f);
+  border-top:1px solid var(--terra-f2);
+}
+.ap-link-label{font-size:.72rem;font-weight:600;color:var(--terra-h);}
+.ap-link-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--paper);background:var(--terra);
+  padding:8px 16px;border-radius:8px;text-decoration:none;
+  transition:background .2s,transform .2s;
+}
+.ap-link-btn:hover{background:var(--terra-h);transform:translateX(2px);}
+.ap-link-btn-forest{background:var(--forest2);}
+.ap-link-btn-forest:hover{background:var(--forest);}
+
+/* ─── USAGE TIPS ─── */
+.tip-grid{display:flex;flex-direction:column;gap:12px;}
+.tip-card{
+  display:grid;grid-template-columns:48px 1fr;gap:14px;align-items:start;
+  background:var(--paper);border:1px solid var(--border2);
+  border-radius:14px;padding:16px;
+}
+.tip-card:hover{border-color:var(--terra-f2);}
+.tip-icon-wrap{
+  width:44px;height:44px;border-radius:10px;
+  background:var(--terra-f);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;flex-shrink:0;
+}
+.tip-title{
+  font-family:'Fraunces',serif;font-size:.95rem;font-weight:700;
+  color:var(--ink);margin-bottom:4px;
+}
+.tip-body{
+  font-family:'Lora',serif;font-size:.82rem;
+  color:var(--sage);line-height:1.7;
+}
+.tip-body code{
+  font-size:.78rem;background:var(--sand);
+  padding:1px 6px;border-radius:4px;
+  font-family:'Inter',monospace;color:var(--terra-h);
+}
+.tip-highlight{
+  display:inline-block;margin-top:8px;
+  background:var(--terra-f2);border-radius:6px;
+  padding:4px 10px;font-size:.72rem;font-weight:600;color:var(--terra-h);
+}
+
+/* ─── DO/DON'T TABLE ─── */
+.dodo-table{
+  border:1px solid var(--border2);border-radius:14px;overflow:hidden;
+  margin-top:16px;
+}
+.dodo-head{display:grid;grid-template-columns:1fr 1fr;}
+.dodo-head-cell{
+  padding:12px 18px;
+  font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+}
+.dodo-head-cell.do{background:rgba(14,43,48,.06);color:var(--forest2);}
+.dodo-head-cell.dont{background:rgba(168,92,56,.07);color:var(--terra-h);}
+.dodo-row{
+  display:grid;grid-template-columns:1fr 1fr;
+  border-top:1px solid var(--border);
+}
+.dodo-cell{padding:11px 18px;font-family:'Lora',serif;font-size:.8rem;line-height:1.55;}
+.dodo-cell.do{color:var(--ink2);border-right:1px solid var(--border);}
+.dodo-cell.dont{color:rgba(107,122,110,.75);text-decoration:line-through;text-decoration-color:rgba(168,92,56,.35);}
+
+/* ─── FLOW DIAGRAM ─── */
+.flow{display:flex;flex-direction:column;gap:0;position:relative;margin:20px 0;}
+.flow-line{
+  position:absolute;left:22px;top:30px;bottom:30px;
+  width:1.5px;
+  background:linear-gradient(to bottom,var(--terra) 0%,var(--terra-l) 50%,rgba(14,43,48,.3) 100%);
+}
+.flow-step{display:flex;gap:16px;padding:14px 0;}
+.flow-num{
+  width:44px;height:44px;border-radius:50%;flex-shrink:0;z-index:1;
+  background:var(--paper);border:2px solid var(--terra);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Fraunces',serif;font-size:.95rem;font-weight:700;color:var(--terra);
+}
+.flow-num.forest-num{border-color:var(--forest);color:var(--forest);}
+.flow-content{padding-top:8px;text-align:left;}
+.flow-title{
+  font-family:'Fraunces',serif;font-size:1rem;font-weight:700;
+  color:var(--ink);margin-bottom:4px;
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+}
+.flow-desc{font-family:'Lora',serif;font-size:.82rem;color:var(--sage);line-height:1.6;}
+
+/* ─── CALLOUT BOXES ─── */
+.callout{
+  border-radius:14px;padding:20px 20px;margin:20px 0;
+  text-align:left;
+}
+.callout-terra{
+  background:var(--terra-f);border:1px solid var(--terra-f2);
+}
+.callout-forest{
+  background:rgba(14,43,48,.05);border:1px solid rgba(14,43,48,.12);
+}
+.callout-ink{
+  background:var(--ink);border:1px solid rgba(255,255,255,.05);
+}
+.callout-title{
+  font-family:'Fraunces',serif;font-size:1rem;font-weight:700;
+  color:var(--ink);margin-bottom:6px;
+}
+.callout-ink .callout-title{color:var(--paper);}
+.callout-body{font-family:'Lora',serif;font-size:.83rem;color:var(--ink2);line-height:1.75;}
+.callout-ink .callout-body{color:rgba(196,189,176,.6);}
+.callout-body strong{font-weight:600;color:var(--ink);}
+.callout-ink .callout-body strong{color:var(--terra-l);}
+
+/* ─── QUICK WIN BOX ─── */
+.quick-win{
+  background:var(--forest);border-radius:16px;padding:22px 20px;
+  position:relative;overflow:hidden;
+}
+.quick-win::after{content:'';position:absolute;bottom:-30px;right:-30px;width:120px;height:120px;background:radial-gradient(circle,rgba(168,92,56,.2) 0%,transparent 70%);}
+.qw-tag{font-size:.58rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--terra-l);margin-bottom:8px;display:block;}
+.qw-title{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:700;color:var(--paper);line-height:1.25;margin-bottom:8px;}
+.qw-body{font-family:'Lora',serif;font-size:.82rem;color:rgba(196,189,176,.55);line-height:1.65;}
+
+/* ─── BONUS SECTION ─── */
+.bonus-header{
+  background:linear-gradient(135deg,var(--forest) 0%,var(--forest-l) 100%);
+  padding:28px 24px 24px;border-radius:20px 20px 0 0;
+  position:relative;overflow:hidden;
+}
+.bonus-header::after{content:'';position:absolute;bottom:-20px;right:-20px;width:100px;height:100px;background:radial-gradient(circle,rgba(168,92,56,.18) 0%,transparent 70%);}
+.bh-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--terra);color:var(--paper);
+  font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:5px 12px;border-radius:100px;margin-bottom:14px;
+}
+.bh-name{font-family:'Fraunces',serif;font-size:2.2rem;font-weight:900;color:var(--paper);line-height:.9;margin-bottom:4px;}
+.bh-role{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(196,132,94,.8);}
+.bh-tagline{font-family:'Lora',serif;font-style:italic;font-size:.88rem;color:rgba(196,189,176,.5);margin-top:8px;line-height:1.6;}
+
+/* ─── CHECKLIST ─── */
+.checklist{display:flex;flex-direction:column;gap:8px;margin:16px 0;}
+.check-item{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:12px 16px;
+  background:var(--paper);border:1px solid var(--border);
+  border-radius:10px;
+}
+.check-mark{
+  width:20px;height:20px;border-radius:50%;flex-shrink:0;margin-top:1px;
+  background:rgba(168,92,56,.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.65rem;color:var(--terra);font-weight:700;
+}
+.check-text{font-family:'Lora',serif;font-size:.83rem;color:var(--ink2);line-height:1.6;}
+.check-text strong{font-weight:600;color:var(--ink);}
+
+/* ─── AGENT SEQUENCE BOX ─── */
+.sequence{
+  background:var(--paper);border:1px solid var(--border2);
+  border-radius:14px;overflow:hidden;margin:20px 0;
+}
+.seq-title{
+  background:var(--sand);padding:12px 18px;
+  font-family:'Fraunces',serif;font-size:.88rem;font-weight:700;
+  color:var(--ink);border-bottom:1px solid var(--border2);
+}
+.seq-steps{padding:16px 18px;display:flex;flex-direction:column;gap:12px;}
+.seq-step{
+  display:flex;align-items:flex-start;gap:10px;
+}
+.seq-arrow{
+  font-size:.7rem;font-weight:700;color:var(--terra);
+  margin-top:3px;flex-shrink:0;width:20px;
+}
+.seq-step-text{font-family:'Lora',serif;font-size:.82rem;color:var(--ink2);line-height:1.6;}
+.seq-step-text em{font-style:italic;color:var(--sage);}
+
+/* ─── FAQ ─── */
+.faq{display:flex;flex-direction:column;gap:1px;border:1px solid var(--border2);border-radius:14px;overflow:hidden;}
+.faq-item{}
+.faq-q{
+  width:100%;text-align:left;padding:16px 18px;
+  background:var(--paper);border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  font-family:'Fraunces',serif;font-size:.92rem;font-weight:600;color:var(--ink);
+  border-bottom:1px solid var(--border);
+  transition:background .2s;
+}
+.faq-item:last-child .faq-q{border-bottom:none;}
+.faq-item.open .faq-q{background:var(--terra-f);}
+.faq-q:hover{background:var(--sand);}
+.faq-chevron{
+  font-size:.75rem;color:var(--mist);flex-shrink:0;
+  transition:transform .3s;
+}
+.faq-item.open .faq-chevron{transform:rotate(180deg);}
+.faq-a{
+  display:none;padding:14px 18px;
+  font-family:'Lora',serif;font-size:.83rem;color:var(--sage);line-height:1.75;
+  background:var(--cream);border-bottom:1px solid var(--border);
+}
+.faq-item.open .faq-a{display:block;}
+.faq-a strong{color:var(--ink);font-weight:600;}
+
+/* ─── FINAL CTA ─── */
+.final-cta{
+  background:var(--ink);
+  padding:56px 24px;text-align:center;
+}
+.fc-inner{max-width:440px;margin:0 auto;}
+.fc-label{font-size:.58rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--terra-l);margin-bottom:12px;display:block;}
+.fc-title{
+  font-family:'Fraunces',serif;font-size:clamp(1.8rem,6vw,2.8rem);font-weight:900;
+  color:var(--paper);line-height:1;letter-spacing:-.025em;
+  margin-bottom:8px;
+}
+.fc-title em{font-style:italic;color:var(--terra-l);}
+.fc-sub{font-family:'Lora',serif;font-size:.85rem;color:rgba(196,189,176,.45);line-height:1.7;margin-bottom:28px;}
+.fc-btn{
+  display:block;padding:18px 28px;
+  font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--paper);background:var(--terra);
+  border-radius:12px;text-decoration:none;
+  transition:background .25s,transform .3s,box-shadow .3s;
+  position:relative;overflow:hidden;
+  margin-bottom:12px;
+}
+.fc-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.12) 0%,transparent 55%);}
+.fc-btn:hover{background:var(--terra-h);transform:translateY(-2px);box-shadow:0 14px 40px rgba(168,92,56,.3);}
+.fc-lock{font-size:.64rem;color:rgba(196,189,176,.3);}
+
+/* ─── FOOTER ─── */
+.site-footer{
+  background:var(--forest);
+  padding:32px 24px;text-align:center;
+}
+.sf-logo{font-family:'Fraunces',serif;font-size:.95rem;font-weight:300;color:rgba(253,251,247,.55);margin-bottom:3px;}
+.sf-tag{font-size:.62rem;color:rgba(253,251,247,.2);margin-bottom:16px;}
+.sf-links{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;}
+.sf-links a{font-size:.64rem;color:rgba(253,251,247,.22);text-decoration:none;transition:color .2s;}
+.sf-links a:hover{color:var(--terra-l);}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.45;transform:scale(.75);}}
+
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .5s cubic-bezier(.4,0,.2,1),transform .5s cubic-bezier(.4,0,.2,1);}
+.reveal.in{opacity:1;transform:translateY(0);}
+.rd1{transition-delay:.06s;}
+.rd2{transition-delay:.12s;}
+.rd3{transition-delay:.18s;}
+
+/* hero animations */
+.hero-eyebrow{animation:fadeUp .55s ease forwards;}
+.hero-title{animation:fadeUp .55s ease forwards .1s;opacity:0;}
+.hero-sub{animation:fadeUp .55s ease forwards .18s;opacity:0;}
+.hero-agents{animation:fadeUp .55s ease forwards .26s;opacity:0;}
+.hero-progress{animation:fadeUp .55s ease forwards .34s;opacity:0;}
+
+/* ─── MOBILE ─── */
+@media(max-width:520px){
+  .toc-grid{grid-template-columns:1fr;}
+  .sh-link{display:none;}
+  .ap-header{grid-template-columns:1fr;}
+  .ap-photo-placeholder{margin:0 auto;}
+  .tip-card{grid-template-columns:40px 1fr;}
+  .dodo-table{font-size:.75rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- ════ SITE HEADER ════ -->
+<header class="site-header">
+  <a href="#top" class="sh-logo">Time <span>Virada IA</span></a>
+  <nav class="sh-nav">
+    <a href="#vitoria" class="sh-link">Vitória</a>
+    <a href="#lucio" class="sh-link">Lúcio</a>
+    <a href="#midas" class="sh-link">Midas</a>
+    <a href="#faq" class="sh-link">FAQ</a>
+    <a href="#newscale" class="sh-cta">NewScale</a>
+  </nav>
+</header>
+
+<!-- ════ HERO ════ -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">
+      <span class="hero-dot"></span>
+      Guia de uso · Time Virada IA
+    </p>
+    <h1 class="hero-title">Como usar<br>seus <em>3 agentes</em></h1>
+    <p class="hero-sub">Tudo que você precisa saber para tirar o máximo do Time Virada IA desde o primeiro dia.</p>
+    <div class="hero-agents">
+      <span class="hero-agent-chip"><span class="dot dot-terra"></span>Vitória — Diagnóstico</span>
+      <span class="hero-agent-chip"><span class="dot dot-terra"></span>Lúcio — Mentor de IA</span>
+      <span class="hero-agent-chip"><span class="dot dot-forest"></span>Midas — Propostas</span>
+    </div>
+    <div class="hero-progress">
+      <span class="hero-progress-icon">💡</span>
+      <span>Você já tem acesso. Este guia te mostra como usar com resultado desde a primeira conversa.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════ SUMÁRIO ════ -->
+<section class="toc-section">
+  <div class="toc-inner">
+    <span class="toc-label">Conteúdo deste guia</span>
+    <h2 class="toc-title">O que você vai encontrar aqui</h2>
+    <div class="toc-grid">
+      <a href="#boas-vindas" class="toc-item">
+        <span class="toc-num">00</span>
+        <span class="toc-text">Boas-vindas</span>
+      </a>
+      <a href="#como-acessar" class="toc-item">
+        <span class="toc-num">01</span>
+        <span class="toc-text">Como acessar os agentes</span>
+      </a>
+      <a href="#vitoria" class="toc-item">
+        <span class="toc-num">02</span>
+        <span class="toc-text">Vitória — Diagnóstico</span>
+      </a>
+      <a href="#lucio" class="toc-item">
+        <span class="toc-num">03</span>
+        <span class="toc-text">Lúcio — Mentor de IA</span>
+      </a>
+      <a href="#midas" class="toc-item">
+        <span class="toc-num">04</span>
+        <span class="toc-text">Midas — Propostas</span>
+      </a>
+      <a href="#fluxo" class="toc-item">
+        <span class="toc-num">05</span>
+        <span class="toc-text">Como usar os 3 juntos</span>
+      </a>
+      <a href="#boas-praticas" class="toc-item">
+        <span class="toc-num">06</span>
+        <span class="toc-text">Boas práticas</span>
+      </a>
+      <a href="#casos-de-uso" class="toc-item">
+        <span class="toc-num">07</span>
+        <span class="toc-text">Casos de uso reais</span>
+      </a>
+      <a href="#faq" class="toc-item">
+        <span class="toc-num">08</span>
+        <span class="toc-text">Perguntas frequentes</span>
+      </a>
+      <a href="#newscale" class="toc-item" style="border-color:rgba(14,43,48,.25);background:rgba(14,43,48,.04);">
+        <span class="toc-num" style="color:var(--forest2);">+</span>
+        <span class="toc-text" style="color:var(--forest2);">NewScale — agência de automação</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ════ SEÇÃO 0: BOAS-VINDAS ════ -->
+<section class="section" id="boas-vindas">
+  <div class="page">
+    <div class="section-label reveal">
+      <span class="section-label-num" style="background:var(--forest);">✦</span>
+      <span>Bem-vindo ao Time</span>
+    </div>
+    <h2 class="section-title reveal">Você tem um time de<br><em>especialistas agora</em></h2>
+
+    <div class="reveal" style="background:var(--paper);border:1px solid var(--border2);border-radius:16px;padding:28px 24px;margin-bottom:20px;">
+      <p style="font-family:'Lora',serif;font-size:.95rem;color:var(--ink2);line-height:1.9;margin-bottom:18px;">
+        Este guia chegou até você porque você comprou o Time Virada IA. Ele é o seu manual de bordo — aqui estão os links de acesso a todos os agentes, as instruções de uso e tudo que você precisa para ter resultado desde hoje.
+      </p>
+      <p style="font-family:'Lora',serif;font-size:.95rem;color:var(--ink2);line-height:1.9;margin-bottom:18px;">
+        O Time Virada IA é formado por três agentes de IA que eu desenvolvi e uso no meu próprio negócio. Cada um tem uma função bem definida: a <strong>Vitória</strong> faz o diagnóstico estratégico do seu negócio, o <strong>Lúcio</strong> é seu mentor de IA para qualquer desafio que você trouxer, e o <strong>Midas</strong> transforma oportunidades em propostas comerciais irresistíveis.
+      </p>
+      <p style="font-family:'Lora',serif;font-size:.95rem;color:var(--ink2);line-height:1.9;">
+        Você não precisa estudar IA para usar o Time. Não precisa saber de tecnologia, não precisa de curso. Você usa como usaria qualquer profissional: chega com o seu problema, e eles trabalham para você.
+      </p>
+    </div>
+
+    <div class="callout callout-terra reveal">
+      <div class="callout-title">Por onde começar</div>
+      <div class="callout-body">Se é seu primeiro acesso, vá direto para a <strong>Seção 01 — Como acessar os agentes</strong>. Os links estão todos aqui, explicados passo a passo. Em menos de 10 minutos você já está dentro do primeiro agente com a conversa rodando.</div>
+    </div>
+
+    <!-- ASSINATURA BRUNA -->
+    <div class="reveal" style="display:flex;align-items:center;gap:14px;padding:20px 0 4px;">
+      <div style="width:44px;height:44px;border-radius:50%;background:var(--sand);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;">🌿</div>
+      <div>
+        <p style="font-family:'Fraunces',serif;font-size:.88rem;font-weight:700;color:var(--ink);">Bruna Santanna</p>
+        <p style="font-family:'Lora',serif;font-style:italic;font-size:.78rem;color:var(--sage);">Fundadora · Virada IA · @brusantanna.ai</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ SEÇÃO 1: COMO ACESSAR ════ -->
+<section class="section section-alt" id="como-acessar">
+  <div class="page">
+    <div class="section-label reveal">
+      <span class="section-label-num">01</span>
+      <span>Primeiros passos</span>
+    </div>
+    <h2 class="section-title reveal">Como <em>acessar</em><br>os agentes</h2>
+    <p class="section-sub reveal">Você usa direto no ChatGPT, sem instalação e sem configuração. Os três links estão aqui nesta página.</p>
+
+    <!-- LINKS RÁPIDOS -->
+    <div class="reveal" style="background:var(--forest);border-radius:16px;overflow:hidden;margin-bottom:28px;">
+      <div style="padding:18px 20px 14px;border-bottom:1px solid rgba(255,255,255,.07);">
+        <p style="font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--terra-l);margin-bottom:4px;">Acesso direto</p>
+        <p style="font-family:'Fraunces',serif;font-size:1rem;font-weight:700;color:var(--paper);">Seus 3 agentes — clique para abrir</p>
+      </div>
+      <div style="padding:8px 0;">
+        <a href="https://chatgpt.com/g/g-TRcSmZR6m-vitoria-virada-ia" target="_blank" style="display:flex;align-items:center;justify-content:space-between;padding:14px 20px;text-decoration:none;transition:background .2s;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(255,255,255,.04)'" onmouseout="this.style.background='transparent'">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span style="font-size:1.1rem;">🔍</span>
+            <div>
+              <p style="font-family:'Fraunces',serif;font-size:.95rem;font-weight:700;color:var(--paper);">Vitória</p>
+              <p style="font-size:.65rem;color:rgba(196,189,176,.45);margin-top:1px;">Diagnóstico Estratégico</p>
+            </div>
+          </div>
+          <span style="font-size:.68rem;font-weight:700;color:var(--terra-l);letter-spacing:.06em;">Abrir →</span>
+        </a>
+        <a href="https://chatgpt.com/g/g-v4jCEr4Wz-lucio-virada-ia" target="_blank" style="display:flex;align-items:center;justify-content:space-between;padding:14px 20px;text-decoration:none;transition:background .2s;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(255,255,255,.04)'" onmouseout="this.style.background='transparent'">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span style="font-size:1.1rem;">🧠</span>
+            <div>
+              <p style="font-family:'Fraunces',serif;font-size:.95rem;font-weight:700;color:var(--paper);">Lúcio</p>
+              <p style="font-size:.65rem;color:rgba(196,189,176,.45);margin-top:1px;">Mentor de IA e Prompts</p>
+            </div>
+          </div>
+          <span style="font-size:.68rem;font-weight:700;color:var(--terra-l);letter-spacing:.06em;">Abrir →</span>
+        </a>
+        <a href="https://chatgpt.com/g/g-HVY4XOFkP-midas-virada-ia" target="_blank" style="display:flex;align-items:center;justify-content:space-between;padding:14px 20px;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,.04)'" onmouseout="this.style.background='transparent'">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span style="font-size:1.1rem;">💰</span>
+            <div>
+              <p style="font-family:'Fraunces',serif;font-size:.95rem;font-weight:700;color:var(--paper);">Midas <span style="font-size:.58rem;background:var(--terra);color:var(--paper);padding:2px 7px;border-radius:100px;font-weight:700;letter-spacing:.07em;vertical-align:middle;">BÔNUS</span></p>
+              <p style="font-size:.65rem;color:rgba(196,189,176,.45);margin-top:1px;">Propostas Comerciais Irresistíveis</p>
+            </div>
+          </div>
+          <span style="font-size:.68rem;font-weight:700;color:var(--terra-l);letter-spacing:.06em;">Abrir →</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- PASSO A PASSO -->
+    <h3 class="reveal" style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:700;color:var(--ink);margin-bottom:16px;">Passo a passo para o primeiro acesso</h3>
+
+    <div class="flow reveal">
+      <div class="flow-line"></div>
+
+      <div class="flow-step">
+        <div class="flow-num">1</div>
+        <div class="flow-content">
+          <div class="flow-title">Crie ou acesse sua conta no ChatGPT</div>
+          <div class="flow-desc">
+            Acesse <a href="https://chatgpt.com" target="_blank" style="color:var(--terra);font-weight:600;text-decoration:none;">chatgpt.com</a> e faça login. Se não tiver conta, criar é gratuito e leva menos de 2 minutos. O Time Virada IA funciona em qualquer plano, inclusive o gratuito.
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-num">2</div>
+        <div class="flow-content">
+          <div class="flow-title">Clique no link do agente que quer usar</div>
+          <div class="flow-desc">
+            Use os links acima nesta página. Ao clicar, você vai direto para a conversa com o agente dentro do ChatGPT. Salve os três nos favoritos do seu navegador — você vai voltar com frequência.
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-num">3</div>
+        <div class="flow-content">
+          <div class="flow-title">Comece com a Vitória — ela estrutura tudo</div>
+          <div class="flow-desc">
+            Na primeira vez, vá de Vitória. Você não precisa preparar nada. Basta escrever <em>"Quero fazer meu diagnóstico de IA"</em> e ela conduz a conversa a partir daí, fazendo as perguntas certas sobre o seu negócio.
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-num">4</div>
+        <div class="flow-content">
+          <div class="flow-title">Use o Lúcio para qualquer desafio do dia a dia</div>
+          <div class="flow-desc">
+            O Lúcio é seu ponto de contato para tudo que envolve IA no negócio. Pode ser logo depois da Vitória, pode ser dias depois, pode ser para um problema completamente diferente. Não tem hora certa: sempre que você quiser fazer algo com IA e não souber como, o Lúcio resolve.
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-num forest-num">5</div>
+        <div class="flow-content">
+          <div class="flow-title">Use o Midas quando tiver proposta para fechar</div>
+          <div class="flow-desc">
+            Sempre que surgir um novo cliente ou projeto, abra o Midas antes de mandar qualquer orçamento. Ele transforma o briefing em uma proposta estruturada, com precificação, narrativa de venda e documento profissional.
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- DICA APP MOBILE -->
+    <div class="callout callout-forest reveal" style="margin-top:8px;">
+      <div class="callout-title">📱 Dica: baixe o app do ChatGPT no celular</div>
+      <div class="callout-body">Com o app, você pode usar <strong>voz</strong> para falar com os agentes em vez de digitar. Especialmente útil com o Lúcio — você explica o desafio em voz alta, como explicaria para um consultor, e ele já processa tudo. Disponível para iOS e Android, gratuito.</div>
+    </div>
+
+    <div class="callout callout-terra reveal">
+      <div class="callout-title">⚡ Resultado esperado nas primeiras 24 horas</div>
+      <div class="callout-body">A maioria das pessoas se surpreende com o que a Vitória revela nos primeiros 30 minutos. Só o diagnóstico dela já vale mais que os R$ 197 do Time inteiro. <strong>Não adie o primeiro uso.</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ SEÇÃO 2: VITÓRIA ════ -->
+<section class="section" id="vitoria">
+  <div class="page">
+    <div class="section-label reveal">
+      <span class="section-label-num">02</span>
+      <span>Agente de Diagnóstico</span>
+    </div>
+
+    <!-- AGENT PROFILE CARD -->
+    <div class="agent-profile reveal">
+      <div class="ap-header">
+        <!-- ESPAÇO PARA FOTO — substitua o src pela imagem do agente -->
+        <div class="ap-photo-placeholder">
+          <span>🔍</span>
+          <small>foto<br>Vitória</small>
+        </div>
+        <!-- se tiver a foto, use:
+        <div class="ap-photo">
+          <img src="vitoria.jpg" alt="Vitória — Agente de Diagnóstico">
+        </div>
+        -->
+        <div class="ap-meta">
+          <div class="ap-name">Vitória</div>
+          <span class="ap-role-badge role-terra">Diagnóstico Estratégico</span>
+          <p class="ap-tagline">Sua consultora particular. Ela descobre onde o dinheiro está escapando — e te diz exatamente onde agir.</p>
+        </div>
+      </div>
+
+      <div class="ap-body">
+        <p class="ap-desc">
+          A Vitória conduz uma entrevista estruturada sobre o seu negócio. Ela não aceita respostas rasas — faz perguntas que vão fundo e entrega um diagnóstico real.
+        </p>
+        <p class="ap-desc">
+          O output dela inclui: <strong>mapa de perdas e oportunidades</strong>, priorização do que atacar primeiro, e <strong>prompts prontos para implementar</strong> cada ação. É como ter uma consultora de IA trabalhando especificamente para o seu negócio — sem agendar reunião, sem horas de onboarding.
+        </p>
+
+        <div class="checklist">
+          <div class="check-item">
+            <div class="check-mark">✔</div>
+            <div class="check-text"><strong>Diagnóstico personalizado</strong> — baseado no seu segmento, tamanho de equipe e desafios específicos</div>
+          </div>
+          <div class="check-item">
+            <div class="check-mark">✔</div>
+            <div class="check-text"><strong>Custo da inação em R$</strong> — ela calcula quanto você perde por mês sem automatizar</div>
+          </div>
+          <div class="check-item">
+            <div class="check-mark">✔</div>
+            <div class="check-text"><strong>Prioridades + prompts prontos</strong> — o que fazer primeiro, e exatamente como fazer</div>
+          </div>
+        </div>
+
+        <div class="quick-win reveal" style="margin-bottom:20px;">
+          <span class="qw-tag">🎯 Como começar</span>
+          <p class="qw-title">Inicie com uma mensagem simples</p>
+          <p class="qw-body">Você pode começar apenas com: <em>"Quero fazer meu diagnóstico de IA"</em>. A Vitória faz o resto — ela conduz a conversa com as perguntas certas.</p>
+        </div>
+      </div>
+
+      <div class="ap-link-row">
+        <span class="ap-link-label">Acessar Vitória no ChatGPT</span>
+        <a href="https://chatgpt.com/g/g-TRcSmZR6m-vitoria-virada-ia" target="_blank" class="ap-link-btn">Abrir agente →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ SEÇÃO 3: LÚCIO ════ -->
+<section class="section section-alt" id="lucio">
+  <div class="page">
+    <div class="section-label reveal">
+      <span class="section-label-num">03</span>
+      <span>Mentor de IA e Prompts</span>
+    </div>
+
+    <div class="agent-profile reveal">
+      <div class="ap-header">
+        <!-- ESPAÇO PARA FOTO -->
+        <div class="ap-photo-placeholder">
+          <span>🧠</span>
+          <small>foto<br>Lúcio</small>
+        </div>
+        <!-- se tiver a foto, use:
+        <div class="ap-photo">
+          <img src="lucio.jpg" alt="Lúcio — Mentor de IA">
+        </div>
+        -->
+        <div class="ap-meta">
+          <div class="ap-name">Lúcio</div>
+          <span class="ap-role-badge role-terra">Mentor de IA · Professor Particular</span>
+          <p class="ap-tagline">Seu parceiro permanente. Para qualquer coisa que você queira fazer com IA, ele te mostra o caminho.</p>
+        </div>
+      </div>
+
+      <div class="ap-body">
+        <p class="ap-desc">
+          O Lúcio é o agente que você vai usar com mais frequência — e por mais tempo. Ele não tem uma função única: ele é um <strong>mentor de IA de uso irrestrito</strong>. Sempre que você quiser fazer algo com inteligência artificial e não souber como, o Lúcio resolve.
+        </p>
+        <p class="ap-desc">
+          Funciona como um professor particular que conhece profundamente todas as ferramentas de IA do mercado. Você chega com o seu desafio — pode ser vago, pode ser técnico, pode ser em áudio — e ele faz as perguntas certas para entender exatamente o que você precisa. Depois, entrega o <strong>passo a passo personalizado</strong> com as ferramentas certas, os prompts corretos e a estratégia de execução para o seu caso específico.
+        </p>
+
+        <!-- O QUE ELE FAZ -->
+        <div class="reveal" style="background:var(--paper);border:1px solid var(--border2);border-radius:14px;padding:20px;margin-bottom:20px;">
+          <p style="font-family:'Fraunces',serif;font-size:.92rem;font-weight:700;color:var(--ink);margin-bottom:14px;">O Lúcio é sempre útil. Exemplos do que você pode trazer:</p>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+              <span style="color:var(--terra);font-weight:700;flex-shrink:0;margin-top:1px;">→</span>
+              <p style="font-family:'Lora',serif;font-size:.83rem;color:var(--ink2);line-height:1.65;"><strong>"Quero automatizar meu atendimento no WhatsApp"</strong> — ele mapeia as ferramentas disponíveis, te explica qual se encaixa no seu negócio e entrega o passo a passo de implementação.</p>
+            </div>
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+              <span style="color:var(--terra);font-weight:700;flex-shrink:0;margin-top:1px;">→</span>
+              <p style="font-family:'Lora',serif;font-size:.83rem;color:var(--ink2);line-height:1.65;"><strong>"Quero criar conteúdo para Instagram com IA de forma consistente"</strong> — ele monta um sistema de criação com as ferramentas certas e prompts prontos para sua rotina.</p>
+            </div>
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+              <span style="color:var(--terra);font-weight:700;flex-shrink:0;margin-top:1px;">→</span>
+              <p style="font-family:'Lora',serif;font-size:.83rem;color:var(--ink2);line-height:1.65;"><strong>"Não sei como pedir para o ChatGPT fazer X"</strong> — ele constrói o prompt junto com você, do zero, ajustado ao seu contexto.</p>
+            </div>
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+              <span style="color:var(--terra);font-weight:700;flex-shrink:0;margin-top:1px;">→</span>
+              <p style="font-family:'Lora',serif;font-size:.83rem;color:var(--ink2);line-height:1.65;"><strong>"Quero criar um processo de onboarding documentado"</strong> — ele estrutura o fluxo, sugere onde IA entra em cada etapa e entrega os prompts de cada passo.</p>
+            </div>
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+              <span style="color:var(--terra);font-weight:700;flex-shrink:0;margin-top:1px;">→</span>
+              <p style="font-family:'Lora',serif;font-size:.83rem;color:var(--ink2);line-height:1.65;"><strong>Qualquer coisa que você queira fazer com IA</strong> — se existir uma forma de fazer com tecnologia, o Lúcio sabe qual é, como funciona e te ensina a aplicar.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- O QUE DIFERENCIA -->
+        <div class="callout callout-ink reveal" style="margin-bottom:20px;">
+          <div class="callout-title">O que diferencia o Lúcio de perguntar ao ChatGPT diretamente</div>
+          <div class="callout-body">
+            O ChatGPT responde o que você pergunta. O Lúcio <strong style="color:var(--terra-l);">questiona o que você perguntou</strong>. Ele faz perguntas que você não pensou em fazer, aponta caminhos que você não considerou, alerta sobre armadilhas comuns e entrega uma solução que leva em conta o seu segmento, o seu nível de maturidade com IA e o que você já tem disponível. É a diferença entre uma resposta genérica e uma estratégia personalizada.
+          </div>
+        </div>
+
+        <!-- USE SOZINHO OU EM SEQUÊNCIA -->
+        <div class="reveal" style="background:var(--terra-f);border:1px solid var(--terra-f2);border-radius:14px;padding:18px 20px;margin-bottom:20px;">
+          <p style="font-family:'Fraunces',serif;font-size:.92rem;font-weight:700;color:var(--ink);margin-bottom:8px;">Use quando quiser — com ou sem a Vitória</p>
+          <p style="font-family:'Lora',serif;font-size:.83rem;color:var(--ink2);line-height:1.75;">
+            O Lúcio funciona perfeitamente de forma independente. Você pode ir direto a ele sem passar pela Vitória quando tiver um desafio pontual e específico. Mas se você acabou de fazer o diagnóstico, vale copiar o output da Vitória e jogar no início da conversa com ele — ele lê, absorve o contexto e já trabalha com mais precisão.
+          </p>
+        </div>
+
+        <div class="sequence">
+          <div class="seq-title">💡 Como trabalhar com o Lúcio</div>
+          <div class="seq-steps">
+            <div class="seq-step">
+              <div class="seq-arrow">→</div>
+              <div class="seq-step-text"><strong>Traga qualquer desafio</strong> — em texto, áudio no app mobile, ou colando um output da Vitória. Não precisa estar organizado.</div>
+            </div>
+            <div class="seq-step">
+              <div class="seq-arrow">→</div>
+              <div class="seq-step-text">Responda as perguntas de clarificação que ele vai fazer. <em>Não pule essa etapa</em> — é onde ele personaliza a solução para o seu contexto real.</div>
+            </div>
+            <div class="seq-step">
+              <div class="seq-arrow">→</div>
+              <div class="seq-step-text">Receba o passo a passo com as ferramentas indicadas, os prompts certos e a estratégia de execução para o seu caso.</div>
+            </div>
+            <div class="seq-step">
+              <div class="seq-arrow">→</div>
+              <div class="seq-step-text">Execute e volte com o resultado. O Lúcio refina junto com você até estar do jeito certo.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout callout-terra" style="margin-bottom:20px;margin-top:20px;">
+          <div class="callout-title">🎙️ Dica: use áudio no app mobile</div>
+          <div class="callout-body">No app do ChatGPT no celular, você pode falar em vez de digitar. É especialmente útil com o Lúcio — você explica o desafio em voz alta, como explicaria para um consultor, e ele já processa com toda a riqueza de contexto que o áudio permite.</div>
+        </div>
+      </div>
+
+      <div class="ap-link-row">
+        <span class="ap-link-label">Acessar Lúcio no ChatGPT</span>
+        <a href="https://chatgpt.com/g/g-v4jCEr4Wz-lucio-virada-ia" target="_blank" class="ap-link-btn">Abrir agente →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ SEÇÃO 4: MIDAS ════ -->
+<section class="section" id="midas">
+  <div class="page">
+    <div class="section-label reveal">
+      <span class="section-label-num">04</span>
+      <span>Bônus — Propostas Comerciais</span>
+    </div>
+
+    <div class="agent-profile reveal" style="border-color:rgba(14,43,48,.2);">
+      <!-- Bonus header -->
+      <div class="bonus-header">
+        <div class="bh-tag">🎁 Bônus incluído</div>
+        <div style="display:flex;gap:18px;align-items:flex-start;">
+          <!-- ESPAÇO PARA FOTO -->
+          <div class="ap-photo-placeholder" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.1);">
+            <span>💰</span>
+            <small style="color:rgba(196,189,176,.5);">foto<br>Midas</small>
+          </div>
+          <!-- se tiver a foto, use:
+          <div class="ap-photo">
+            <img src="midas.jpg" alt="Midas — Propostas Comerciais">
+          </div>
+          -->
+          <div>
+            <div class="bh-name">Midas</div>
+            <div class="bh-role">Gerador de Propostas Comerciais</div>
+            <p class="bh-tagline">Você para de mandar orçamento no WhatsApp.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="ap-body" style="padding-top:24px;">
+        <p class="ap-desc">
+          O Midas te entrevista sobre o projeto — o briefing, o cliente, o escopo. Você pode colar transcrições de reuniões, áudios, qualquer material. Ele <strong>te ajuda a precificar</strong>, monta a estrutura de venda e entrega um documento profissional pronto para enviar.
+        </p>
+        <p class="ap-desc">
+          A proposta sai com: contexto do projeto, solução proposta, <strong>cálculo de ROI para o cliente</strong>, investimento com justificativa, e próximos passos. Uma proposta fechada pelo Midas paga o Time Virada IA inteiro.
+        </p>
+
+        <div class="callout callout-forest" style="margin-bottom:20px;">
+          <div class="callout-title">📎 Como enviar o briefing</div>
+          <div class="callout-body">O Midas aceita: texto direto, transcrição de reunião, áudio (mobile), ou até um e-mail que o cliente te mandou. <strong>Quanto mais contexto, melhor a proposta</strong> — não economize na hora de passar as informações.</div>
+        </div>
+
+        <div class="tip-card rd1" style="margin-bottom:20px;">
+          <div class="tip-icon-wrap">🎯</div>
+          <div>
+            <div class="tip-title">Defina o perfil do cliente antes</div>
+            <div class="tip-body">O Midas usa estratégias diferentes para clientes mais diretos e objetivos versus clientes mais corporativos e analíticos. Quando ele perguntar sobre o perfil, pense bem — isso muda o tom e a estrutura da proposta.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ap-link-row" style="background:rgba(14,43,48,.05);border-top-color:rgba(14,43,48,.1);">
+        <span class="ap-link-label" style="color:var(--forest2);">Acessar Midas no ChatGPT</span>
+        <a href="https://chatgpt.com/g/g-HVY4XOFkP-midas-virada-ia" target="_blank" class="ap-link-btn ap-link-btn-forest">Abrir agente →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ SEÇÃO 5: FLUXO DOS 3 ════ -->
+<section class="section section-alt" id="fluxo">
+  <div class="page">
+    <div class="section-label reveal">
+      <span class="section-label-num">05</span>
+      <span>Metodologia</span>
+    </div>
+    <h2 class="section-title reveal">Como usar<br><em>os 3 juntos</em></h2>
+    <p class="section-sub reveal">Os agentes são mais poderosos quando usados em sequência. Esse é o fluxo ideal.</p>
+
+    <div class="callout callout-ink reveal">
+      <div class="callout-title">Diagnóstico → Execução → Receita</div>
+      <div class="callout-body">Essa é a sequência de valor do Time Virada IA. Cada agente alimenta o próximo — e o ciclo pode se repetir conforme você avança no negócio.</div>
+    </div>
+
+    <div class="sequence reveal" style="margin-top:24px;">
+      <div class="seq-title">🔄 O fluxo completo</div>
+      <div class="seq-steps">
+        <div class="seq-step">
+          <div class="seq-arrow" style="color:var(--terra);">①</div>
+          <div class="seq-step-text"><strong>Vitória</strong> — faz o diagnóstico, identifica oportunidades e entrega prompts prontos com prioridades</div>
+        </div>
+        <div class="seq-step">
+          <div class="seq-arrow">↓</div>
+          <div class="seq-step-text" style="color:var(--mist);font-size:.75rem;font-style:italic;">Copie o diagnóstico da Vitória</div>
+        </div>
+        <div class="seq-step">
+          <div class="seq-arrow" style="color:var(--terra);">②</div>
+          <div class="seq-step-text"><strong>Lúcio</strong> — recebe o contexto da Vitória, aprofunda o desafio específico e entrega o passo a passo de execução</div>
+        </div>
+        <div class="seq-step">
+          <div class="seq-arrow">↓</div>
+          <div class="seq-step-text" style="color:var(--mist);font-size:.75rem;font-style:italic;">Ao identificar uma oportunidade comercial</div>
+        </div>
+        <div class="seq-step">
+          <div class="seq-arrow" style="color:var(--forest2);">③</div>
+          <div class="seq-step-text"><strong>Midas</strong> — transforma a oportunidade em proposta irresistível, pronta para fechar</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-terra reveal" style="margin-top:20px;">
+      <div class="callout-title">💡 Você não precisa usar os 3 sempre</div>
+      <div class="callout-body">Use a Vitória para diagnóstico geral. Use o Lúcio para qualquer desafio pontual de IA. Use o Midas quando tiver uma proposta para montar. Eles funcionam de forma independente também.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ SEÇÃO 6: BOAS PRÁTICAS ════ -->
+<section class="section" id="boas-praticas">
+  <div class="page">
+    <div class="section-label reveal">
+      <span class="section-label-num">06</span>
+      <span>Maximize o resultado</span>
+    </div>
+    <h2 class="section-title reveal">Boas práticas<br><em>de uso</em></h2>
+    <p class="section-sub reveal">O que separa quem tem resultado real de quem fica dando volta com a IA.</p>
+
+    <div class="tip-grid">
+
+      <div class="tip-card reveal">
+        <div class="tip-icon-wrap">🔄</div>
+        <div>
+          <div class="tip-title">Abra uma conversa nova por assunto</div>
+          <div class="tip-body">Cada agente tem memória de contexto dentro de uma conversa. Misturar assuntos dilui o foco e piora as respostas. <span class="tip-highlight">1 assunto = 1 conversa</span></div>
+        </div>
+      </div>
+
+      <div class="tip-card reveal rd1">
+        <div class="tip-icon-wrap">🎙️</div>
+        <div>
+          <div class="tip-title">Use áudio no app mobile</div>
+          <div class="tip-body">No app do ChatGPT, você pode falar em vez de digitar. Áudio é mais rápido, mais natural, e transmite nuances que o texto perde. Experimente especialmente com o Lúcio.</div>
+        </div>
+      </div>
+
+      <div class="tip-card reveal">
+        <div class="tip-icon-wrap">📋</div>
+        <div>
+          <div class="tip-title">Seja generoso com contexto</div>
+          <div class="tip-body">Segmento, tamanho da equipe, dores atuais, processos que já existem. Quanto mais contexto você dá, mais personalizado e preciso é o resultado.</div>
+        </div>
+      </div>
+
+      <div class="tip-card reveal rd1">
+        <div class="tip-icon-wrap">✏️</div>
+        <div>
+          <div class="tip-title">Refine sem hesitar</div>
+          <div class="tip-body">A primeira resposta é um ponto de partida. Peça ajustes, mude o tom, aprofunde um ponto, simplifique outro. Os agentes são feitos para iteração — <code>você não vai gastar crédito</code>.</div>
+        </div>
+      </div>
+
+      <div class="tip-card reveal">
+        <div class="tip-icon-wrap">💾</div>
+        <div>
+          <div class="tip-title">Salve os melhores outputs</div>
+          <div class="tip-body">Crie uma pasta no Notion, Google Drive ou onde preferir. Os outputs dos agentes são ativos do seu negócio — não dependa só do histórico do ChatGPT.</div>
+        </div>
+      </div>
+
+      <div class="tip-card reveal rd1">
+        <div class="tip-icon-wrap">🔗</div>
+        <div>
+          <div class="tip-title">Conecte os agentes</div>
+          <div class="tip-body">O output da Vitória é o input do Lúcio. Uma reunião transcrita é o input do Midas. Os agentes funcionam em cadeia — o resultado cresce quando você os conecta.</div>
+        </div>
+      </div>
+
+      <div class="tip-card reveal">
+        <div class="tip-icon-wrap">🔁</div>
+        <div>
+          <div class="tip-title">Trate como processo recorrente</div>
+          <div class="tip-body">O diagnóstico da Vitória vale refazer a cada 3 meses. O Lúcio é para usar toda semana. O Midas, sempre que tiver proposta para fechar. Não é consulta única — é parte da operação.</div>
+        </div>
+      </div>
+
+      <div class="tip-card reveal rd1">
+        <div class="tip-icon-wrap">🎯</div>
+        <div>
+          <div class="tip-title">A primeira resposta é rascunho</div>
+          <div class="tip-body">Colabore para chegar no resultado final. Diga o que gostou, o que mudaria, o que faltou. Os agentes respondem muito bem a direcionamento específico.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- DO / DON'T -->
+    <h3 class="reveal" style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:700;color:var(--ink);margin-top:36px;margin-bottom:4px;">Faça × Evite</h3>
+    <p class="reveal" style="font-family:'Lora',serif;font-size:.8rem;color:var(--sage);margin-bottom:12px;">Resumo rápido dos padrões que funcionam e dos que travam o resultado.</p>
+    <div class="dodo-table reveal">
+      <div class="dodo-head">
+        <div class="dodo-head-cell do">✅ Faça</div>
+        <div class="dodo-head-cell dont">❌ Evite</div>
+      </div>
+      <div class="dodo-row">
+        <div class="dodo-cell do">Nova conversa para cada tema</div>
+        <div class="dodo-cell dont">Misturar assuntos na mesma conversa</div>
+      </div>
+      <div class="dodo-row">
+        <div class="dodo-cell do">Dar contexto rico sobre seu negócio</div>
+        <div class="dodo-cell dont">Perguntas vagas sem contexto</div>
+      </div>
+      <div class="dodo-row">
+        <div class="dodo-cell do">Usar áudio para desafios complexos</div>
+        <div class="dodo-cell dont">Digitar tudo quando poderia falar</div>
+      </div>
+      <div class="dodo-row">
+        <div class="dodo-cell do">Refinar o resultado pedindo ajustes</div>
+        <div class="dodo-cell dont">Aceitar a primeira resposta sem questionar</div>
+      </div>
+      <div class="dodo-row">
+        <div class="dodo-cell do">Salvar outputs em pasta própria</div>
+        <div class="dodo-cell dont">Depender só do histórico do ChatGPT</div>
+      </div>
+      <div class="dodo-row">
+        <div class="dodo-cell do">Conectar os agentes em sequência</div>
+        <div class="dodo-cell dont">Usar cada agente de forma isolada sempre</div>
+      </div>
+      <div class="dodo-row">
+        <div class="dodo-cell do">Refazer o diagnóstico trimestralmente</div>
+        <div class="dodo-cell dont">Tratar como consulta única</div>
+      </div>
+      <div class="dodo-row">
+        <div class="dodo-cell do">Iterar até o resultado ser excelente</div>
+        <div class="dodo-cell dont">Desistir se a primeira resposta não serve</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ SEÇÃO 7: CASOS DE USO ════ -->
+<section class="section section-alt" id="casos-de-uso">
+  <div class="page">
+    <div class="section-label reveal">
+      <span class="section-label-num">07</span>
+      <span>Na prática</span>
+    </div>
+    <h2 class="section-title reveal">Casos de uso<br><em>reais</em></h2>
+    <p class="section-sub reveal">O Time Virada IA já está resolvendo esses problemas para outros empresários.</p>
+
+    <div style="display:flex;flex-direction:column;gap:14px;">
+
+      <div class="callout callout-terra reveal">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <span style="font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--terra-h);">Caso 1 — Atendimento</span>
+        </div>
+        <p class="callout-body"><strong>Problema:</strong> Equipe gastando 3h/dia respondendo perguntas repetitivas no WhatsApp. <strong>Como usou o Time:</strong> Vitória identificou o padrão e calculou o custo mensal. Lúcio criou um sistema de respostas semi-automatizadas com prompt personalizado. <span style="font-weight:600;color:var(--terra-h);">Resultado: 70% de redução no tempo de atendimento.</span></p>
+      </div>
+
+      <div class="callout callout-forest reveal">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <span style="font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--forest2);">Caso 2 — Vendas</span>
+        </div>
+        <p class="callout-body"><strong>Problema:</strong> Propostas perdidas por falta de estrutura de venda — enviavam planilha de preços sem storytelling. <strong>Como usou o Time:</strong> Midas transformou o processo — agora cada proposta tem contexto do cliente, solução proposta, ROI calculado e próximos passos. <span style="font-weight:600;color:var(--forest2);">Resultado: taxa de conversão subiu de 20% para 45% nas primeiras 6 semanas.</span></p>
+      </div>
+
+      <div class="callout callout-terra reveal">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <span style="font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--terra-h);">Caso 3 — Conteúdo</span>
+        </div>
+        <p class="callout-body"><strong>Problema:</strong> Sócia passava 4h por semana criando conteúdo para Instagram do zero. <strong>Como usou o Time:</strong> Lúcio criou um sistema de repurposing: uma reunião gravada virava roteiro de 5 posts, 3 stories e 2 carrosséis. <span style="font-weight:600;color:var(--terra-h);">Resultado: 4h virou 45 minutos com mais consistência.</span></p>
+      </div>
+
+      <div class="callout callout-ink reveal">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <span style="font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--terra-l);">Caso 4 — Operação</span>
+        </div>
+        <p class="callout-body" style="color:rgba(196,189,176,.6);">
+          <strong style="color:rgba(253,251,247,.85);">Problema:</strong> Processo de onboarding de clientes feito "na cabeça", dependente de uma pessoa. <strong style="color:rgba(253,251,247,.85);">Como usou o Time:</strong> Vitória identificou o gargalo. Lúcio estruturou o processo em SOP documentado com 8 etapas e scripts prontos para cada momento. <span style="font-weight:600;color:var(--terra-l);">Resultado: qualquer pessoa do time consegue fazer o onboarding.</span>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════ SEÇÃO 8: FAQ ════ -->
+<section class="section" id="faq">
+  <div class="page">
+    <div class="section-label reveal">
+      <span class="section-label-num">08</span>
+      <span>Dúvidas frequentes</span>
+    </div>
+    <h2 class="section-title reveal">Perguntas<br><em>frequentes</em></h2>
+
+    <div class="faq reveal">
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>Preciso ter uma conta paga no ChatGPT?</span>
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a">O Time Virada IA funciona com a conta gratuita do ChatGPT. O plano Plus (pago) não é necessário para usar os agentes — mas se você já tiver, o acesso é ainda mais fluido.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>Os agentes têm acesso ao meu histórico de conversas anteriores?</span>
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a">Não. Cada conversa começa do zero — é justamente por isso que contexto é tão importante. O que você envia em cada sessão é a única memória que o agente tem. Por isso, quando for usar o Lúcio com contexto da Vitória, copie e cole o output.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>Posso usar o áudio para me comunicar com os agentes?</span>
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a">Sim! No app do ChatGPT para iOS ou Android, você pode usar a função de voz para falar com os agentes. É uma das formas mais ricas de trabalhar com o Lúcio — você explica o desafio como explicaria para um consultor, com nuances e contexto que digitar não captura.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>Os agentes vão ser atualizados?</span>
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a">Sim. Os agentes são atualizados continuamente com base em feedbacks reais de uso. Quem compra o Time Virada IA tem acesso automático a todas as melhorias — sem pagar nada a mais.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>Quantas vezes posso usar cada agente?</span>
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a">Sem limite. Você pode usar Vitória, Lúcio e Midas quantas vezes quiser, para quantos projetos quiser. O acesso é permanente e ilimitado.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>Tenho um negócio muito diferente. Os agentes vão funcionar para mim?</span>
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a">Os agentes foram projetados para se adaptar a qualquer tipo de negócio — exatamente porque eles começam pedindo contexto. Desde que você dê informações específicas sobre o seu segmento e desafios, o diagnóstico e os outputs serão personalizados para você.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>O que devo fazer se tiver dúvidas de uso?</span>
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a">Mande mensagem no Instagram <strong>@brusantanna.ai</strong>. Para questões técnicas mais complexas ou se quiser uma solução de automação construída especificamente para o seu negócio, conheça a NewScale — a agência de automação da Bruna. Para dúvidas rápidas de uso, o próprio Lúcio também consegue orientar.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════ NEWSCALE ════ -->
+<section class="section section-dark" id="newscale">
+  <div class="page">
+    <div class="section-label reveal">
+      <span class="section-label-num" style="background:var(--terra);">+</span>
+      <span>Quando você quiser ir além</span>
+    </div>
+
+    <!-- LOGO NEWSCALE -->
+    <div class="reveal" style="margin-bottom:24px;">
+      <img src="newscale-logo.png" alt="NewScale" style="height:40px;display:block;opacity:.9;" onerror="this.outerHTML='<div style=\'font-family:Fraunces,serif;font-size:1.5rem;font-weight:300;color:rgba(253,251,247,.8);letter-spacing:.04em;\'>New<span style=\'font-weight:700;color:var(--terra-l);\'>Scale</span></div>'">
+    </div>
+
+    <h2 class="section-title reveal">Automação feita<br><em>para o seu negócio</em></h2>
+    <p class="section-sub reveal">A NewScale é a agência de automação da Bruna. Para quem quer ir além dos agentes e implementar soluções completas com um time especializado.</p>
+
+    <div class="reveal" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:24px 22px;margin-bottom:20px;">
+      <p style="font-family:'Lora',serif;font-size:.92rem;color:rgba(253,251,247,.75);line-height:1.9;margin-bottom:18px;">
+        O Time Virada IA resolve muito. Mas existem automações que exigem integração entre sistemas, construção de fluxos personalizados e implementação técnica que vai além do que qualquer agente de IA consegue fazer sozinho.
+      </p>
+      <p style="font-family:'Lora',serif;font-size:.92rem;color:rgba(253,251,247,.75);line-height:1.9;margin-bottom:18px;">
+        A NewScale tem um time que faz esse trabalho por você. O processo começa com um estudo aprofundado da sua empresa: como você opera, onde estão os gargalos, quais processos consomem mais tempo e onde a automação gera mais retorno. A partir desse mapeamento, o time identifica as oportunidades mais estratégicas e constrói as soluções.
+      </p>
+      <p style="font-family:'Lora',serif;font-size:.92rem;color:rgba(253,251,247,.75);line-height:1.9;">
+        Não é consultoria para te ensinar o que fazer. É execução: o time estuda, identifica, cria e implementa. Você participa das decisões e acompanha o processo, mas a entrega é feita pelo time da NewScale do começo ao fim.
+      </p>
+    </div>
+
+    <!-- O QUE A NEWSCALE FAZ -->
+    <div class="reveal" style="display:flex;flex-direction:column;gap:12px;margin-bottom:24px;">
+      <div style="display:flex;gap:14px;align-items:flex-start;padding:16px 18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:12px;">
+        <span style="font-size:1.2rem;flex-shrink:0;margin-top:2px;">🔎</span>
+        <div>
+          <p style="font-family:'Fraunces',serif;font-size:.92rem;font-weight:700;color:var(--paper);margin-bottom:4px;">Diagnóstico profundo da operação</p>
+          <p style="font-family:'Lora',serif;font-size:.8rem;color:rgba(196,189,176,.55);line-height:1.65;">O time estuda como sua empresa funciona de verdade — processos, ferramentas, equipe — para identificar onde a automação gera mais impacto.</p>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;padding:16px 18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:12px;">
+        <span style="font-size:1.2rem;flex-shrink:0;margin-top:2px;">⚙️</span>
+        <div>
+          <p style="font-family:'Fraunces',serif;font-size:.92rem;font-weight:700;color:var(--paper);margin-bottom:4px;">Criação e implementação de automações</p>
+          <p style="font-family:'Lora',serif;font-size:.8rem;color:rgba(196,189,176,.55);line-height:1.65;">Fluxos automáticos, integrações entre sistemas, agentes personalizados, pipelines de atendimento e muito mais — tudo construído especificamente para o seu negócio.</p>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;padding:16px 18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:12px;">
+        <span style="font-size:1.2rem;flex-shrink:0;margin-top:2px;">📈</span>
+        <div>
+          <p style="font-family:'Fraunces',serif;font-size:.92rem;font-weight:700;color:var(--paper);margin-bottom:4px;">Resultado mensurável</p>
+          <p style="font-family:'Lora',serif;font-size:.8rem;color:rgba(196,189,176,.55);line-height:1.65;">Cada projeto da NewScale começa com métricas claras — tempo economizado, processos substituídos, receita gerada. Você sabe exatamente o que está sendo entregue.</p>
+        </div>
+      </div>
+    </div>
+
+    <a href="https://instagram.com/brusantanna.ai" target="_blank" style="display:block;width:100%;padding:18px 24px;font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--paper);background:var(--terra);border-radius:12px;text-decoration:none;text-align:center;transition:background .25s;margin-bottom:12px;" onmouseover="this.style.background='var(--terra-h)'" onmouseout="this.style.background='var(--terra)'">Falar com a Bruna sobre a NewScale →</a>
+    <p style="font-size:.64rem;color:rgba(196,189,176,.25);text-align:center;">@brusantanna.ai · brunasantanna.com</p>
+  </div>
+</section>
+
+<!-- ════ CTA FINAL ════ -->
+<section class="final-cta">
+  <div class="fc-inner">
+    <span class="fc-label">Alguma dúvida?</span>
+    <h2 class="fc-title">Fala com<br><em>a Bruna</em></h2>
+    <p class="fc-sub">Me manda mensagem no Instagram com qualquer dúvida sobre os agentes, sobre o uso ou sobre a NewScale. Estou aqui.</p>
+    <a href="https://instagram.com/brusantanna.ai" target="_blank" class="fc-btn">@brusantanna.ai no Instagram →</a>
+    <p class="fc-lock">🔒 brunasantanna.com · Virada IA</p>
+  </div>
+</section>
+
+<!-- ════ FOOTER ════ -->
+<footer class="site-footer">
+  <p class="sf-logo">Bruna Santanna · Virada IA</p>
+  <p class="sf-tag">Empresário não aprende IA. Usa IA. · @brusantanna.ai</p>
+  <div class="sf-links">
+    <a href="https://instagram.com/brusantanna.ai" target="_blank">Instagram</a>
+    <a href="https://brunasantanna.com" target="_blank">brunasantanna.com</a>
+    <a href="#">Política de Privacidade</a>
+  </div>
+</footer>
+
+<script>
+// ─── SCROLL REVEAL ───
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting) e.target.classList.add('in');});
+},{threshold:.06});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// ─── FAQ TOGGLE ───
+function toggleFaq(btn){
+  const item = btn.parentElement;
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+  if(!wasOpen) item.classList.add('open');
+}
+</script>
+</body>
+</html>
