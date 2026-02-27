@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Time Virada IA — 3 Agentes que trabalham com você</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700;1,9..144,900&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --ink:#1A1814;
+  --ink2:#2E2A25;
+  --cream:#F7F4EE;
+  --paper:#FDFBF7;
+  --sand:#EDE8DF;
+  --mist:#C4BDB0;
+  --terra:#A85C38;
+  --terra-h:#8A4828;
+  --terra-l:#C4845E;
+  --terra-f:rgba(168,92,56,.08);
+  --terra-f2:rgba(168,92,56,.14);
+  --forest:#0E2B30;
+  --forest2:#163840;
+  --sage:#6B7A6E;
+  --border:rgba(180,170,155,.22);
+  --border2:rgba(180,170,155,.38);
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);line-height:1.65;overflow-x:hidden;}
+
+/* NOISE TEXTURE */
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:900;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.025'/%3E%3C/svg%3E");}
+
+/* LAYOUT */
+.w{max-width:620px;margin:0 auto;padding:0 22px;}
+
+
+
+
+/* STICKY NAV */
+.snav{position:fixed;top:0;left:0;right:0;z-index:800;background:rgba(247,244,238,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border2);padding:11px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;translate:0 -100%;transition:translate .45s cubic-bezier(.4,0,.2,1);}
+.snav.vis{translate:0 0;}
+.snav-brand{font-family:'Fraunces',serif;font-size:.88rem;font-weight:600;color:var(--ink2);}
+.snav-cta{flex-shrink:0;padding:9px 18px;font-size:.7rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--paper);background:var(--terra);border:none;border-radius:8px;cursor:pointer;text-decoration:none;transition:background .25s;}
+.snav-cta:hover{background:var(--terra-h);}
+
+/* ═══════════════════════════
+   HERO — Layout Duda style
+   foto dominante + texto à esq
+═══════════════════════════ */
+.hero{
+  min-height:100svh;
+  display:grid;
+  grid-template-columns:1fr;
+  position:relative;
+  overflow:hidden;
+  background:var(--cream);
+}
+
+/* Texto hero */
+.hero-text{
+  padding:32px 22px 40px;
+  background:var(--cream);
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:.62rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--terra);margin-bottom:18px;
+}
+.hero-badge-dot{width:5px;height:5px;border-radius:50%;background:currentColor;animation:pulse 2.2s ease infinite;}
+
+.hero-hl-sub{font-family:'Lora',serif;font-size:.95rem;font-style:italic;color:var(--sage);display:block;margin-bottom:6px;line-height:1.5;}
+.hero-hl-main{
+  font-family:'Fraunces',serif;
+  font-size:clamp(2.6rem,9vw,4rem);
+  font-weight:900;
+  line-height:.9;
+  letter-spacing:-.035em;
+  color:var(--ink);
+  display:block;
+  margin-bottom:4px;
+}
+.hero-hl-main em{font-style:italic;color:var(--terra);}
+.hero-hl-tag{
+  display:inline-block;
+  font-family:'Lora',serif;
+  font-size:.92rem;
+  font-style:italic;
+  color:var(--ink2);
+  line-height:1.65;
+  margin-top:10px;
+  display:block;
+}
+
+/* BOTÃO HERO — estilo Duda: dourado, grande, destaque */
+.btn-hero{
+  display:block;width:100%;
+  margin-top:22px;
+  padding:20px 24px;
+  font-size:.85rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--paper);
+  background:var(--terra);
+  border:none;border-radius:12px;cursor:pointer;text-decoration:none;text-align:center;
+  transition:background .28s,transform .3s,box-shadow .3s;
+  position:relative;overflow:hidden;
+}
+.btn-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.15) 0%,transparent 55%);}
+.btn-hero:hover{background:var(--terra-h);transform:translateY(-2px);box-shadow:0 14px 40px rgba(168,92,56,.35);}
+.btn-sub{
+  text-align:center;font-size:.66rem;color:var(--mist);margin-top:8px;
+}
+
+/* ═══════════════════════════
+   SEÇÃO "VOCÊ VAI CONSEGUIR"
+   Layout Duda: lista com ícones, arejada
+═══════════════════════════ */
+.sec{padding:52px 0;}
+.sec-alt{background:var(--paper);}
+.sec-dark{background:var(--forest);color:var(--paper);}
+.sec-ink{background:var(--ink);color:var(--paper);}
+
+.sec-label{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--terra);font-weight:600;display:block;margin-bottom:10px;}
+.sec-label-dim{color:rgba(196,189,176,.35);}
+.sec-h2{font-family:'Fraunces',serif;font-size:clamp(2rem,7vw,2.8rem);font-weight:700;line-height:1.05;letter-spacing:-.02em;margin-bottom:28px;}
+.sec-h2 em{font-style:italic;color:var(--terra);}
+.sec-h2-light{color:var(--paper);}
+.sec-h2-light em{color:var(--terra-l);}
+
+/* Lista de capacidades — estilo Duda mas com a identidade Virada */
+.cap-list{display:flex;flex-direction:column;gap:14px;margin-bottom:28px;}
+.cap-item{
+  display:flex;gap:14px;align-items:flex-start;
+  background:var(--paper);
+  border:1px solid var(--border2);
+  border-radius:14px;
+  padding:16px 18px;
+  transition:border-color .25s,transform .25s;
+}
+.cap-item:hover{border-color:var(--terra-l);transform:translateX(4px);}
+.cap-icon{
+  width:40px;height:40px;
+  border-radius:10px;
+  background:rgba(168,92,56,.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;flex-shrink:0;
+}
+.cap-text{font-family:'Lora',serif;font-size:.85rem;color:var(--ink2);line-height:1.6;padding-top:6px;}
+.cap-text strong{color:var(--ink);font-weight:600;}
+
+/* ═══════════════════════════
+   PREVIEW DO PRODUTO
+   Carrossel de screenshots (estilo Duda)
+═══════════════════════════ */
+.preview-wrap{
+  overflow:hidden;
+  position:relative;
+  margin-bottom:24px;
+}
+.preview-scroll{
+  display:flex;
+  gap:14px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  padding-bottom:12px;
+  scrollbar-width:none;
+}
+.preview-scroll::-webkit-scrollbar{display:none;}
+.preview-card{
+  flex-shrink:0;
+  width:240px;
+  scroll-snap-align:start;
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid var(--border2);
+  background:var(--paper);
+  box-shadow:0 4px 20px rgba(26,24,20,.08);
+}
+.preview-card-head{
+  background:var(--forest);
+  padding:12px 14px 10px;
+  display:flex;align-items:center;gap:8px;
+}
+.preview-card-dots{display:flex;gap:4px;}
+.preview-card-dots span{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.15);}
+.preview-agent-name{font-family:'Fraunces',serif;font-size:.82rem;font-weight:700;color:var(--paper);margin-left:4px;}
+.preview-agent-icon{font-size:.9rem;}
+.preview-card-body{padding:12px 14px;display:flex;flex-direction:column;gap:8px;}
+/* Balões de conversa */
+.bubble{border-radius:10px;padding:8px 11px;font-size:.73rem;line-height:1.5;}
+.bubble-agent{
+  background:rgba(168,92,56,.09);
+  border:1px solid rgba(168,92,56,.15);
+  color:var(--ink2);
+  font-family:'Lora',serif;
+  align-self:flex-start;
+  max-width:90%;
+}
+.bubble-user{
+  background:var(--forest);
+  color:rgba(247,244,238,.8);
+  align-self:flex-end;
+  max-width:85%;
+  font-family:'Inter',sans-serif;
+  font-size:.7rem;
+}
+.preview-scroll-hint{
+  text-align:center;font-size:.62rem;color:var(--mist);letter-spacing:.05em;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+}
+
+/* ═══════════════════════════
+   FILTRO — X vermelho estilo Duda
+═══════════════════════════ */
+.filter-sec{background:var(--forest);padding:52px 0;}
+.not-for-list{display:flex;flex-direction:column;gap:12px;margin:20px 0;}
+.not-for-item{
+  display:flex;gap:14px;align-items:flex-start;
+  padding:14px 16px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:12px;
+}
+.not-for-x{
+  width:36px;height:36px;flex-shrink:0;
+  border-radius:8px;
+  background:#81161C;
+  display:flex;align-items:center;justify-content:center;
+}
+.not-for-x svg{width:16px;height:16px;}
+.not-for-text{
+  font-family:'Lora',serif;font-size:.83rem;color:rgba(247,244,238,.6);
+  line-height:1.6;padding-top:4px;
+}
+.for-reveal{
+  background:rgba(168,92,56,.1);
+  border:1px solid rgba(168,92,56,.22);
+  border-radius:16px;
+  padding:20px 20px;
+  margin-top:20px;
+}
+.for-reveal-title{
+  font-family:'Fraunces',serif;font-size:clamp(1.1rem,3.8vw,1.45rem);
+  font-weight:700;color:var(--paper);line-height:1.4;margin-bottom:5px;
+}
+.for-reveal-sub{font-family:'Lora',serif;font-style:italic;font-size:.8rem;color:rgba(196,189,176,.5);line-height:1.7;}
+
+/* ═══════════════════════════
+   AGENTES — Cards mais visuais
+═══════════════════════════ */
+.agent-card{
+  border:1px solid var(--border2);
+  border-radius:20px;overflow:hidden;
+  background:var(--paper);
+  margin-bottom:14px;
+  transition:transform .3s,box-shadow .3s;
+}
+.agent-card:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(26,24,20,.09);}
+.ac-head{
+  padding:20px 20px 14px;
+  display:flex;gap:14px;align-items:flex-start;
+}
+.ac-icon{
+  width:52px;height:52px;border-radius:14px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:1.5rem;
+}
+.ac-icon-terra{background:rgba(168,92,56,.1);}
+.ac-icon-forest{background:rgba(14,43,48,.08);}
+.ac-icon-gold{background:rgba(168,92,56,.06);border:1px solid rgba(168,92,56,.15);}
+.ac-name{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:700;color:var(--ink);line-height:1;}
+.ac-role{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--terra);margin-top:2px;}
+.ac-tagline{
+  font-family:'Lora',serif;font-style:italic;font-size:.9rem;color:var(--sage);
+  padding:0 20px 10px;
+}
+.ac-desc{
+  font-family:'Lora',serif;font-size:.83rem;color:var(--ink2);line-height:1.72;
+  padding:0 20px 18px;
+}
+.ac-foot{
+  border-top:1px solid var(--border);padding:11px 20px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.badge{font-size:.6rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:5px 12px;border-radius:100px;}
+.badge-terra{background:rgba(168,92,56,.11);color:var(--terra-h);}
+.badge-bonus{background:rgba(14,43,48,.08);color:var(--forest2);}
+
+/* BONUS */
+.bonus-card{
+  border-radius:20px;overflow:hidden;margin-bottom:14px;
+  background:linear-gradient(145deg,var(--forest) 0%,#122830 100%);
+  position:relative;
+}
+.bonus-tag{
+  background:var(--terra);color:var(--paper);
+  font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:5px 13px;border-radius:100px;
+  display:inline-block;margin:20px 20px 0;
+}
+.bc-head{padding:12px 20px 12px;display:flex;gap:12px;align-items:flex-start;}
+.bc-icon{width:52px;height:52px;border-radius:14px;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;}
+.bc-name{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:700;color:var(--paper);line-height:1;}
+.bc-role{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:rgba(196,132,94,.9);margin-top:2px;}
+.bc-tagline{font-family:'Lora',serif;font-style:italic;font-size:.9rem;color:rgba(253,251,247,.4);padding:0 20px 10px;}
+.bc-desc{font-family:'Lora',serif;font-size:.83rem;color:rgba(253,251,247,.65);line-height:1.72;padding:0 20px 14px;}
+.bc-foot{border-top:1px solid rgba(255,255,255,.07);padding:11px 20px;display:flex;align-items:center;justify-content:space-between;}
+.bc-val{font-size:.72rem;color:rgba(196,189,176,.25);text-decoration:line-through;}
+
+/* ═══════════════════════════
+   CUSTO INAÇÃO
+═══════════════════════════ */
+.calc-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:18px 18px;margin:18px 0;}
+.calc-row{display:flex;align-items:baseline;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05);gap:10px;}
+.calc-row:last-child{border-bottom:none;}
+.calc-item{font-family:'Lora',serif;font-size:.8rem;color:rgba(247,244,238,.45);}
+.calc-val{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:300;color:rgba(247,244,238,.75);white-space:nowrap;}
+.calc-total .calc-item{color:var(--paper);font-weight:600;}
+.calc-total .calc-val{color:var(--terra-l);font-size:1.45rem;}
+
+/* ═══════════════════════════
+   ANCORAGEM
+═══════════════════════════ */
+.stack-table{border:1px solid var(--border2);border-radius:14px;overflow:hidden;margin:18px 0;}
+.srow{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;border-bottom:1px solid var(--border);gap:10px;}
+.srow:last-child{border-bottom:none;}
+.srow.total{background:var(--forest);color:var(--paper);}
+.sitem{font-size:.83rem;color:var(--ink);line-height:1.3;}
+.sitem.bonus-line{font-weight:600;color:var(--terra-h);}
+.sprice{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:300;color:var(--mist);text-decoration:line-through;flex-shrink:0;}
+.srow.total .sitem{color:var(--paper);font-weight:600;}
+.srow.total .sprice{text-decoration:none;color:var(--terra-l);font-size:1.35rem;}
+
+/* ═══════════════════════════
+   HISTÓRIA — mais clean
+═══════════════════════════ */
+.hist-card{
+  background:var(--cream);border:1px solid var(--border2);
+  border-radius:16px;padding:24px 22px;
+  position:relative;
+}
+.hist-quote{
+  position:absolute;top:-12px;left:18px;
+  font-size:3.5rem;font-family:'Fraunces',serif;
+  color:var(--terra);line-height:1;opacity:.25;
+}
+.hist-text{font-family:'Lora',serif;font-size:.88rem;line-height:1.85;color:var(--ink2);}
+.hist-text strong{color:var(--ink);font-weight:600;}
+.hist-byline{display:flex;align-items:center;gap:10px;margin-top:14px;padding-top:12px;border-top:1px solid var(--border);}
+.hb-name{font-size:.78rem;font-weight:600;color:var(--ink);display:block;}
+.hb-role{font-size:.66rem;color:var(--sage);}
+
+/* ═══════════════════════════
+   CTA FINAL
+═══════════════════════════ */
+.cta-block{border:1px solid var(--border2);border-radius:20px;overflow:hidden;background:var(--paper);}
+.cta-top{background:var(--ink);padding:28px 22px;text-align:center;}
+.ct-from{font-size:.7rem;text-decoration:line-through;color:rgba(196,189,176,.3);margin-bottom:2px;}
+.ct-install{font-family:'Fraunces',serif;font-size:clamp(3rem,10vw,4.2rem);font-weight:900;color:var(--terra-l);line-height:.9;}
+.ct-full{font-size:.72rem;color:rgba(196,189,176,.3);margin-top:6px;}
+.cta-list{padding:18px 22px 4px;}
+.cl-item{display:flex;align-items:flex-start;gap:10px;font-size:.84rem;color:var(--ink2);padding:9px 0;border-bottom:1px solid var(--border);line-height:1.4;}
+.cl-item:last-child{border-bottom:none;}
+.cl-check{color:var(--terra);font-size:.85rem;flex-shrink:0;margin-top:2px;}
+.cl-item.bonus-item{font-weight:600;color:var(--terra-h);}
+.cta-bottom{padding:18px 22px;}
+.btn-cta{display:block;width:100%;padding:20px 24px;font-size:.84rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--paper);background:var(--terra);border:none;border-radius:12px;cursor:pointer;text-decoration:none;text-align:center;transition:background .28s,transform .3s,box-shadow .3s;position:relative;overflow:hidden;margin-bottom:10px;}
+.btn-cta::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.15) 0%,transparent 55%);}
+.btn-cta:hover{background:var(--terra-h);transform:translateY(-2px);box-shadow:0 14px 40px rgba(168,92,56,.3);}
+.cta-lock{font-size:.66rem;color:var(--mist);text-align:center;}
+.urgency-strip{background:rgba(168,92,56,.07);border:1px solid rgba(168,92,56,.14);border-radius:12px;padding:13px 15px;margin-top:14px;font-family:'Lora',serif;font-size:.79rem;color:var(--ink2);line-height:1.65;}
+.urgency-strip strong{color:var(--terra);font-weight:600;}
+
+/* CTA SECTION btn */
+.btn-sec{display:inline-block;padding:14px 28px;font-size:.76rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--terra);background:transparent;border:1.5px solid var(--terra);border-radius:10px;cursor:pointer;text-decoration:none;transition:background .25s,color .25s,transform .25s;}
+.btn-sec:hover{background:var(--terra);color:var(--paper);transform:translateY(-2px);}
+.sec-dark .btn-sec,.filter-sec .btn-sec,.sec-ink .btn-sec{color:var(--terra-l);border-color:var(--terra-l);}
+.sec-dark .btn-sec:hover,.filter-sec .btn-sec:hover,.sec-ink .btn-sec:hover{background:var(--terra-l);color:var(--paper);}
+
+/* FOOTER */
+.footer{background:var(--ink);padding:38px 22px;text-align:center;}
+.foot-logo{font-family:'Fraunces',serif;font-size:1rem;font-weight:300;color:rgba(247,244,238,.5);margin-bottom:3px;}
+.foot-tag{font-size:.66rem;color:rgba(247,244,238,.2);margin-bottom:16px;}
+.foot-links{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;}
+.foot-links a{font-size:.66rem;color:rgba(247,244,238,.2);text-decoration:none;transition:color .3s;}
+.foot-links a:hover{color:var(--terra-l);}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.45;transform:scale(.75);}}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .55s cubic-bezier(.4,0,.2,1),transform .55s cubic-bezier(.4,0,.2,1);}
+.reveal.in{opacity:1;transform:translateY(0);}
+.rd1{transition-delay:.07s;}.rd2{transition-delay:.14s;}.rd3{transition-delay:.21s;}
+
+@media(max-width:480px){
+  .cd-unit{min-width:36px;padding:4px 7px;}
+  .cd-num{font-size:1.1rem;}
+  .hero-visual{aspect-ratio:3/2;}
+  .hero-symbol-ring{width:140px;height:140px;}
+  .hero-symbol-inner{width:100px;height:100px;font-size:2.8rem;}
+}
+</style>
+</head>
+<body>
+
+
+
+<!-- STICKY NAV -->
+<nav class="snav" id="snav">
+  <span class="snav-brand">Virada IA · @brusantanna.ai</span>
+  <a href="https://sun.eduzz.com/7977B1GV9E" target="_blank" class="snav-cta">Quero meu Time</a>
+</nav>
+
+<!-- ════ HERO — Layout Duda ════ -->
+<section class="hero" id="top">
+
+  <!-- Texto -->
+  <div class="hero-text">
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      por @brusantanna.ai · Virada IA
+    </div>
+
+    <span class="hero-hl-sub">Você sabe que deveria usar IA melhor no seu negócio.</span>
+    <span class="hero-hl-main">TIME<br><em>VIRADA</em> IA</span>
+    <span class="hero-hl-tag">Eu vou te entregar 3 agentes prontos para diagnosticar, estruturar e vender mais — <strong>para você usar agora, sem estudar tecnologia.</strong></span>
+
+    <a href="https://sun.eduzz.com/7977B1GV9E" target="_blank" class="btn-hero">QUERO MEU TIME VIRADA IA →</a>
+    <p class="btn-sub">🔒 Acesso imediato após confirmação · por R$ 197</p>
+  </div>
+
+  <!-- Vídeo de vendas -->
+  <div class="w" style="padding-top:32px;padding-bottom:8px;">
+    <div style="position:relative;width:100%;padding-bottom:56.25%;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.35);">
+      <iframe
+        src="https://www.youtube.com/embed/m5fxJt1xFxM?start=1"
+        style="position:absolute;inset:0;width:100%;height:100%;border:0;"
+        allow="autoplay; fullscreen"
+        allowfullscreen
+        title="Time Virada IA — apresentação">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ════ VOCÊ VAI CONSEGUIR — seção separada, respirada ════ -->
+<section class="sec sec-alt">
+  <div class="w">
+    <span class="sec-label reveal">com o time virada ia, você vai conseguir</span>
+    <h2 class="sec-h2 reveal">Com o Time Virada IA,<br>você vai <em>ser capaz de:</em></h2>
+
+    <div class="cap-list">
+      <div class="cap-item reveal">
+        <div class="cap-icon">🗺️</div>
+        <p class="cap-text">Ter um mapa claro das suas maiores oportunidades de IA — <strong>por ordem de impacto, não de complexidade</strong></p>
+      </div>
+      <div class="cap-item reveal rd1">
+        <div class="cap-icon">⚡</div>
+        <p class="cap-text">Usar IA de verdade no seu negócio hoje — <strong>não depois de um curso, não depois de estudar</strong></p>
+      </div>
+      <div class="cap-item reveal rd2">
+        <div class="cap-icon">🔧</div>
+        <p class="cap-text">Parar de usar IA no modo básico e <strong>começar a usar como ferramenta de trabalho</strong></p>
+      </div>
+      <div class="cap-item reveal rd3">
+        <div class="cap-icon">🧠</div>
+        <p class="cap-text">Criar prompts que funcionam de verdade — <strong>não os genéricos que qualquer um copia do Google</strong></p>
+      </div>
+      <div class="cap-item reveal">
+        <div class="cap-icon">🎯</div>
+        <p class="cap-text">Ter uma ação estratégica de IA pra qualquer desafio — <strong>só descrevendo a situação</strong></p>
+      </div>
+      <div class="cap-item reveal rd1">
+        <div class="cap-icon">⏱️</div>
+        <p class="cap-text">Recuperar horas por semana que hoje vão embora <strong>em tarefas repetitivas</strong></p>
+      </div>
+    </div>
+
+    <!-- Bônus -->
+    <div style="margin-bottom:28px;">
+      <p style="font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--terra);margin-bottom:12px;" class="reveal">🎁 Bônus</p>
+      <div class="cap-list" style="gap:10px;">
+        <div class="cap-item reveal" style="background:linear-gradient(135deg,var(--forest) 0%,#122830 100%);border-color:rgba(168,92,56,.2);">
+          <div class="cap-icon" style="background:rgba(196,132,94,.12);">📄</div>
+          <p class="cap-text" style="color:rgba(247,244,238,.75);">Mandar propostas que parecem de consultoria — <strong style="color:var(--paper);">sem travar, sem improvisar no WhatsApp</strong></p>
+        </div>
+        <div class="cap-item reveal rd1" style="background:linear-gradient(135deg,var(--forest) 0%,#122830 100%);border-color:rgba(168,92,56,.2);">
+          <div class="cap-icon" style="background:rgba(196,132,94,.12);">💰</div>
+          <p class="cap-text" style="color:rgba(247,244,238,.75);">Parar de perder venda por proposta fraca <strong style="color:var(--paper);">depois de uma reunião boa</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;">
+      <a href="https://sun.eduzz.com/7977B1GV9E" target="_blank" class="btn-sec reveal">Quero meu Time Virada IA →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════ OS 3 AGENTES ════ -->
+<section class="sec sec-alt">
+  <div class="w">
+    <span class="sec-label reveal">conheça seu time</span>
+    <h2 class="sec-h2 reveal">3 Especialistas.<br><em>1 resultado imediato.</em></h2>
+
+    <div class="agent-card reveal">
+      <div class="ac-head">
+        <div class="ac-icon ac-icon-terra">🔍</div>
+        <div>
+          <p class="ac-name">Vitória</p>
+          <p class="ac-role">Diagnóstico Estratégico de IA</p>
+        </div>
+      </div>
+      <p class="ac-tagline">Sua consultora particular. Ela descobre onde o dinheiro está escapando.</p>
+      <p class="ac-desc">Responde perguntas simples sobre o seu negócio. Vitória mapeia onde você perde tempo e dinheiro, calcula o custo da inação em reais, e entrega um diagnóstico com prioridades e prompts prontos para usar imediatamente.</p>
+      <div class="ac-foot">
+        <span style="font-size:.75rem;font-family:'Fraunces',serif;font-style:italic;color:var(--sage);">+ Receita · − Desperdício</span>
+        <span class="badge badge-terra">Incluído</span>
+      </div>
+    </div>
+
+    <div class="agent-card reveal">
+      <div class="ac-head">
+        <div class="ac-icon ac-icon-forest">🧠</div>
+        <div>
+          <p class="ac-name">Lúcio</p>
+          <p class="ac-role">Arquiteto de Prompts e Estratégia</p>
+        </div>
+      </div>
+      <p class="ac-tagline">Seu mentor provocador. Transforma ideia bagunçada em prompt extraordinário.</p>
+      <p class="ac-desc">Manda áudio, ideia incompleta, qualquer coisa. Lúcio não aceita raso — ele faz as perguntas certas, organiza o contexto, indica qual IA usar, e entrega o prompt estruturado com o passo a passo para você executar.</p>
+      <div class="ac-foot">
+        <span style="font-size:.75rem;font-family:'Fraunces',serif;font-style:italic;color:var(--sage);">+ Produtividade · − Retrabalho</span>
+        <span class="badge badge-terra">Incluído</span>
+      </div>
+    </div>
+
+    <!-- Bonus Midas -->
+    <div class="bonus-card reveal">
+      <span class="bonus-tag">🎁 Bônus — disponível agora</span>
+      <div class="bc-head">
+        <div class="bc-icon">💰</div>
+        <div>
+          <p class="bc-name">Midas</p>
+          <p class="bc-role">Gerador de Propostas Comerciais</p>
+        </div>
+      </div>
+      <p class="bc-tagline">Você para de mandar orçamento no WhatsApp.</p>
+      <p class="bc-desc">Midas te entrevista sobre o projeto, te ajuda a definir o preço certo, e monta uma proposta comercial irresistível — com estrutura de venda, cálculo de ROI para o cliente, e documento profissional pronto para enviar. Uma proposta fechada paga o Time inteiro.</p>
+      <div class="bc-foot">
+        <span class="bc-val">Valor: R$ 297</span>
+        <span class="badge" style="background:rgba(196,132,94,.15);color:var(--terra-l);">GRÁTIS agora</span>
+      </div>
+    </div>
+
+    <!-- Grid extras -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px;" class="reveal">
+      <div style="border:1px solid var(--border2);border-radius:14px;padding:16px;background:var(--paper);">
+        <div style="font-size:1.2rem;margin-bottom:6px;">🎬</div>
+        <p style="font-family:'Fraunces',serif;font-size:.9rem;font-weight:600;color:var(--ink);margin-bottom:3px;">Videoaula de Ativação</p>
+        <p style="font-size:.72rem;color:var(--sage);line-height:1.5;font-family:'Lora',serif;">Em menos de 1 hora você usa tudo — sem enrolação.</p>
+      </div>
+      <div style="border:1px solid var(--border2);border-radius:14px;padding:16px;background:var(--paper);">
+        <div style="font-size:1.2rem;margin-bottom:6px;">📚</div>
+        <p style="font-family:'Fraunces',serif;font-size:.9rem;font-weight:600;color:var(--ink);margin-bottom:3px;">Biblioteca de Prompts</p>
+        <p style="font-size:.72rem;color:var(--sage);line-height:1.5;font-family:'Lora',serif;">Prompts estratégicos prontos para os casos mais comuns.</p>
+      </div>
+    </div>
+
+    <div style="text-align:center;">
+      <a href="https://sun.eduzz.com/7977B1GV9E" target="_blank" class="btn-sec reveal">Quero meu Time Virada IA →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════ NÃO É MAIS UM CURSO ════ -->
+<section class="sec sec-alt">
+  <div class="w">
+    <span class="sec-label reveal">antes de continuar</span>
+    <h2 class="sec-h2 reveal">Isso <em>não é</em><br>mais um curso de IA</h2>
+
+    <div style="display:grid;gap:12px;margin:24px 0;" class="reveal">
+
+      <div style="display:flex;gap:14px;align-items:flex-start;padding:18px;background:var(--paper);border:1px solid var(--border2);border-radius:14px;">
+        <div style="font-size:1.5rem;flex-shrink:0;line-height:1;">❌</div>
+        <div>
+          <p style="font-family:'Fraunces',serif;font-size:.95rem;font-weight:700;color:var(--ink);margin-bottom:4px;">Não é um curso</p>
+          <p style="font-family:'Lora',serif;font-size:.8rem;color:var(--sage);line-height:1.65;">Você não vai assistir 40 horas de aula para "entender IA". Não tem módulo, não tem prova, não tem certificado.</p>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:14px;align-items:flex-start;padding:18px;background:var(--paper);border:1px solid var(--border2);border-radius:14px;">
+        <div style="font-size:1.5rem;flex-shrink:0;line-height:1;">❌</div>
+        <div>
+          <p style="font-family:'Fraunces',serif;font-size:.95rem;font-weight:700;color:var(--ink);margin-bottom:4px;">Não é uma consultoria</p>
+          <p style="font-family:'Lora',serif;font-size:.8rem;color:var(--sage);line-height:1.65;">Você não precisa de mim para usar. Os agentes trabalham sozinhos — você conversa com eles como conversaria com um especialista.</p>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:14px;align-items:flex-start;padding:18px;background:linear-gradient(135deg,var(--forest) 0%,#122830 100%);border:1px solid rgba(168,92,56,.2);border-radius:14px;">
+        <div style="font-size:1.5rem;flex-shrink:0;line-height:1;">✅</div>
+        <div>
+          <p style="font-family:'Fraunces',serif;font-size:.95rem;font-weight:700;color:var(--paper);margin-bottom:4px;">É uma estrutura pronta para usar</p>
+          <p style="font-family:'Lora',serif;font-size:.8rem;color:rgba(196,189,176,.65);line-height:1.65;">3 agentes de IA especializados que eu construí, testei e uso no meu próprio negócio. Você acessa hoje e aplica hoje.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════ CUSTO DE INAÇÃO ════ -->
+<section class="sec sec-ink">
+  <div class="w">
+    <span class="sec-label sec-label-dim reveal">o custo de não agir</span>
+    <h2 class="sec-h2 sec-h2-light reveal">O dinheiro que sai todo mês<br><em>sem você perceber</em></h2>
+
+    <div class="calc-box reveal">
+      <div class="calc-row"><span class="calc-item">5 pessoas × 5 h/semana em tarefas que IA resolve</span><span class="calc-val">25 h/sem</span></div>
+      <div class="calc-row"><span class="calc-item">Custo estimado por hora (R$ 30)</span><span class="calc-val">× R$ 30</span></div>
+      <div class="calc-row"><span class="calc-item">Custo mensal desperdiçado</span><span class="calc-val">R$ 3.000</span></div>
+      <div class="calc-row"><span class="calc-item">Em 1 ano</span><span class="calc-val">R$ 36.000</span></div>
+      <div class="calc-row calc-total"><span class="calc-item">Custo do Time Virada IA</span><span class="calc-val">R$ 197</span></div>
+    </div>
+
+    <p style="font-family:'Fraunces',serif;font-size:clamp(1.2rem,4.2vw,1.7rem);font-weight:700;color:var(--paper);line-height:1.4;margin:16px 0 6px;" class="reveal"><strong style="color:var(--terra-l);">R$ 197</strong> para descobrir onde isso acontece <em style="font-style:italic;">no seu negócio.</em></p>
+    <p style="font-family:'Lora',serif;font-size:.82rem;color:rgba(196,189,176,.4);line-height:1.65;margin-bottom:24px;" class="reveal">Menos que uma hora de consultoria. Menos que o dinheiro que você perde essa semana fazendo tudo no manual.</p>
+
+    <div style="text-align:center;">
+      <a href="https://sun.eduzz.com/7977B1GV9E" target="_blank" class="btn-sec reveal">Quero meu Time Virada IA →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════ ANCORAGEM ════ -->
+<section class="sec sec-alt">
+  <div class="w">
+    <h2 class="sec-h2 reveal">O que você leva<br><em>por R$ 197</em></h2>
+    <div class="stack-table reveal">
+      <div class="srow"><span class="sitem">🔍 Vitória — Diagnóstico Estratégico</span><span class="sprice">R$ 297</span></div>
+      <div class="srow"><span class="sitem">🧠 Lúcio — Arquiteto de Prompts</span><span class="sprice">R$ 297</span></div>
+      <div class="srow"><span class="sitem">🎬 Videoaula de Ativação</span><span class="sprice">R$ 197</span></div>
+      <div class="srow"><span class="sitem">📚 Biblioteca de Prompts</span><span class="sprice">R$ 97</span></div>
+      <div class="srow"><span class="sitem bonus-line">🎁 Midas — Propostas Comerciais</span><span class="sprice">R$ 297</span></div>
+      <div class="srow total"><span class="sitem">Valor total</span><span class="sprice">R$ 1.185</span></div>
+    </div>
+
+    <div style="text-align:center;padding-top:20px;">
+      <a href="https://sun.eduzz.com/7977B1GV9E" target="_blank" class="btn-sec reveal">Quero meu Time Virada IA →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FILTRO — X Vermelho estilo Duda ════ -->
+<section class="filter-sec">
+  <div class="w">
+    <span class="sec-label sec-label-dim reveal">isso não é pra todo mundo</span>
+    <h2 class="sec-h2 sec-h2-light reveal">Se você se encaixa aqui,<br><em>não continue.</em></h2>
+
+    <div class="not-for-list">
+      <div class="not-for-item reveal">
+        <div class="not-for-x">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M12 4L4 12M4 4l8 8" stroke="#E9DDCC" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <p class="not-for-text">Quer colecionar ferramenta sem aplicar nada</p>
+      </div>
+      <div class="not-for-item reveal rd1">
+        <div class="not-for-x">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M12 4L4 12M4 4l8 8" stroke="#E9DDCC" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <p class="not-for-text">Acha que IA é hype e não vai mudar seu negócio</p>
+      </div>
+      <div class="not-for-item reveal rd2">
+        <div class="not-for-x">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M12 4L4 12M4 4l8 8" stroke="#E9DDCC" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <p class="not-for-text">Não vai aplicar o que receber nos próximos 7 dias</p>
+      </div>
+      <div class="not-for-item reveal rd3">
+        <div class="not-for-x">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M12 4L4 12M4 4l8 8" stroke="#E9DDCC" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <p class="not-for-text">Acha R$ 197 caro para transformar como trabalha</p>
+      </div>
+    </div>
+
+    <div class="for-reveal reveal">
+      <p class="for-reveal-title">Isso é para quem está pronto para parar de perder tempo e dinheiro fazendo no manual o que IA resolve em minutos.</p>
+      <p class="for-reveal-sub">Se você chegou até aqui, já sabe em qual grupo está.</p>
+    </div>
+
+    <div style="text-align:center;padding-top:24px;">
+      <a href="https://sun.eduzz.com/7977B1GV9E" target="_blank" class="btn-sec reveal">Quero meu Time Virada IA →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════ HISTÓRIA ════ -->
+<section class="sec">
+  <div class="w">
+    <span class="sec-label reveal">quem está por trás</span>
+    <h2 class="sec-h2 reveal">Bruna Santanna<br><em>@brusantanna.ai</em></h2>
+
+    <!-- Foto -->
+    <div class="reveal" style="margin-bottom:20px;">
+      <img
+        src="SUA_FOTO_AQUI"
+        alt="Bruna Santanna — Virada IA"
+        style="width:100%;max-width:420px;display:block;margin:0 auto;border-radius:20px;object-fit:cover;aspect-ratio:4/5;box-shadow:0 16px 48px rgba(0,0,0,.12);"
+      />
+    </div>
+
+    <div class="hist-card reveal">
+      <div class="hist-quote">"</div>
+      <p class="hist-text">
+        Formada em Marketing pela ESPM. Passei por SulAmérica e Whirlpool. Por 8 anos, toquei minha própria joalheria, a Casa Kahla — fazendo tudo sozinha.<br><br>
+        Na minha licença maternidade, mergulhei fundo em IA. Estudei, testei, implementei. Os resultados vieram rápido. E percebi uma coisa: <strong>nenhum empresário vai ter tempo para fazer esse mergulho.</strong><br><br>
+        Então decidi fazer por você. Vitória e Lúcio são os agentes que uso todos os dias para gerir meus negócios. Você está comprando o que funciona — não o que parece bonito numa apresentação.<br><br>
+        <strong>Você não precisa aprender IA como eu aprendi. Precisa ter acesso à estrutura que eu construí.</strong>
+      </p>
+      <div class="hist-byline">
+        <div>
+          <span class="hb-name">Bruna Santanna</span>
+          <span class="hb-role">@brusantanna.ai · Virada IA</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;padding-top:24px;">
+      <a href="https://sun.eduzz.com/7977B1GV9E" target="_blank" class="btn-sec reveal">Quero meu Time Virada IA →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════ 3 OPÇÕES ════ -->
+<section class="sec sec-ink">
+  <div class="w">
+    <span class="sec-label sec-label-dim reveal">sua decisão agora</span>
+    <h2 class="sec-h2 sec-h2-light reveal">Você tem<br><em>3 opções</em></h2>
+
+    <div style="display:grid;gap:14px;margin:24px 0;">
+
+      <div style="padding:20px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:14px;" class="reveal">
+        <p style="font-family:'Fraunces',serif;font-size:1rem;font-weight:700;color:rgba(247,244,238,.4);margin-bottom:6px;">Opção 1 — Não fazer nada</p>
+        <p style="font-family:'Lora',serif;font-size:.82rem;color:rgba(196,189,176,.4);line-height:1.72;">Continuar como está. Fazendo tudo no manual. Perdendo tempo com tarefas que IA resolve em minutos. Assistindo seus concorrentes usarem IA enquanto você estuda se deve tentar.</p>
+      </div>
+
+      <div style="padding:20px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:14px;" class="reveal rd1">
+        <p style="font-family:'Fraunces',serif;font-size:1rem;font-weight:700;color:rgba(247,244,238,.4);margin-bottom:6px;">Opção 2 — Fazer sozinha</p>
+        <p style="font-family:'Lora',serif;font-size:.82rem;color:rgba(196,189,176,.4);line-height:1.72;">Passar os próximos meses testando prompts no ChatGPT, assistindo vídeos no YouTube, montando sua própria estrutura. Funciona — mas custa tempo que você não tem.</p>
+      </div>
+
+      <div style="padding:20px;background:rgba(168,92,56,.1);border:1.5px solid rgba(168,92,56,.35);border-radius:14px;" class="reveal rd2">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <p style="font-family:'Fraunces',serif;font-size:1rem;font-weight:700;color:var(--terra-l);">Opção 3 — Ativar o Time hoje</p>
+          <span style="font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;background:var(--terra);color:var(--paper);padding:3px 8px;border-radius:20px;">recomendado</span>
+        </div>
+        <p style="font-family:'Lora',serif;font-size:.82rem;color:rgba(247,244,238,.7);line-height:1.72;">Pagar R$ 197 uma vez. Receber acesso imediato a 3 agentes prontos — Vitória, Lúcio e Midas. Começar a usar hoje. Recuperar esse valor na primeira proposta fechada ou na primeira hora de trabalho que você não vai mais precisar fazer.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════ CTA FINAL ════ -->
+<section class="sec sec-alt" id="cta">
+  <div class="w">
+    <span class="sec-label reveal">sua decisão</span>
+    <h2 class="sec-h2 reveal">Ative seu Time <em>agora</em></h2>
+
+    <div class="cta-block reveal">
+      <div class="cta-top">
+        <p class="ct-from">Valor real: R$ 1.185</p>
+        <p class="ct-install">10× R$ 21</p>
+        <p class="ct-full">ou R$ 197 à vista · acesso imediato</p>
+      </div>
+      <div class="cta-list">
+        <div class="cl-item"><span class="cl-check">✔</span> Vitória — Diagnóstico Estratégico de IA</div>
+        <div class="cl-item"><span class="cl-check">✔</span> Lúcio — Arquiteto de Prompts e Estratégia</div>
+        <div class="cl-item"><span class="cl-check">✔</span> Videoaula de Ativação (menos de 1 h)</div>
+        <div class="cl-item"><span class="cl-check">✔</span> Biblioteca de Prompts Estratégicos</div>
+        <div class="cl-item bonus-item"><span class="cl-check" style="color:var(--terra-h);">🎁</span> Midas — Propostas Comerciais Irresistíveis</div>
+      </div>
+      <div class="cta-bottom">
+        <a href="https://sun.eduzz.com/7977B1GV9E" target="_blank" class="btn-cta">QUERO MEU TIME VIRADA IA</a>
+        <p class="cta-lock">🔒 Pagamento seguro · Acesso imediato · @brusantanna.ai</p>
+      </div>
+    </div>
+
+    <div class="urgency-strip reveal">
+      <strong>⚠️ O bônus Midas está disponível apenas para quem entrar agora.</strong> Não garantimos disponibilidade por tempo indeterminado.
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p class="foot-logo">Bruna Santanna · Virada IA</p>
+  <p class="foot-tag">Empresário não aprende IA. Usa IA. · @brusantanna.ai</p>
+  <div class="foot-links">
+    <a href="https://instagram.com/brusantanna.ai" target="_blank">Instagram</a>
+    <a href="https://sun.eduzz.com/7977B1GV9E" target="_blank">Política de Privacidade</a>
+    <a href="https://sun.eduzz.com/7977B1GV9E" target="_blank">Termos de Uso</a>
+  </div>
+</footer>
+
+<script>
+
+// Sticky nav
+const nav=document.getElementById('snav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('vis',window.scrollY>window.innerHeight*.5);});
+
+// Scroll reveal
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');});},{threshold:.07});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
