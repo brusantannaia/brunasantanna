@@ -38,6 +38,26 @@ body::after{
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.025'/%3E%3C/svg%3E");
 }
 
+/* ─── HERO SEAL ─── */
+.hero-seal{
+  display:inline-flex;align-items:center;gap:8px;
+  background:linear-gradient(135deg,var(--terra) 0%,var(--terra-h) 100%);
+  color:var(--paper);
+  padding:8px 18px;border-radius:100px;
+  margin-bottom:18px;
+  box-shadow:0 4px 20px rgba(168,92,56,.35);
+  position:relative;
+}
+.hero-seal::before{
+  content:'';position:absolute;inset:0;border-radius:100px;
+  background:linear-gradient(135deg,rgba(255,255,255,.15) 0%,transparent 60%);
+}
+.seal-text{
+  font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  white-space:nowrap;
+}
+.seal-star{font-size:.55rem;opacity:.7;}
+
 /* ─── LAYOUT ─── */
 .w{max-width:580px;margin:0 auto;padding:0 22px;text-align:center;}
 
@@ -419,6 +439,13 @@ em.terra-l{font-style:italic;color:var(--terra-l);}
 <section class="hero" id="top">
   <div class="hero-bg"></div>
   <div class="hero-inner">
+
+    <!-- SELO -->
+    <div class="hero-seal" style="opacity:0;animation:fadeUp .55s ease forwards;">
+      <span class="seal-star">✦</span>
+      <span class="seal-text">Transforme a forma como você usa IA</span>
+      <span class="seal-star">✦</span>
+    </div>
 
     <p class="pre-tag">
       <span class="pre-dot"></span>
