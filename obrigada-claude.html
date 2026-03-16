@@ -4,30 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Obrigado | Bruna Santanna</title>
-
-    <meta name="description" content="Seu guia está a caminho. Verifique seu email.">
     <meta name="robots" content="noindex">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --cream:        #F5F3EE;
-            --warm-white:   #FDFCFA;
-            --charcoal:     #2A2A2A;
-            --sage:         #7D8B7A;
-            --terracotta:   #C17A5A;
-            --terracotta-d: #A66548;
-            --soft-brown:   #8B7355;
-            --light-sage:   #E8EBE6;
-            --border:       rgba(125,139,122,0.2);
+            --cream:      #F5F3EE;
+            --warm-white: #FDFCFA;
+            --charcoal:   #2A2A2A;
+            --sage:       #7D8B7A;
+            --terracotta: #C17A5A;
+            --soft-brown: #8B7355;
+            --light-sage: #E8EBE6;
+            --border:     rgba(125,139,122,0.2);
+            --dark:       #14373C;
         }
-
-        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Outfit', sans-serif;
@@ -52,13 +46,14 @@
             z-index: 1;
             max-width: 580px;
             margin: 0 auto;
-            padding: 0 28px;
+            padding: 0 28px 64px;
         }
 
+        /* ── HEADER ── */
         header {
             padding: 40px 0 0;
             opacity: 0;
-            animation: up 0.7s ease forwards;
+            animation: up 0.6s ease forwards;
         }
 
         .brand-tag {
@@ -70,132 +65,55 @@
 
         /* ── HERO ── */
         .hero {
-            padding: 64px 0 0;
+            padding: 56px 0 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-align: center;
+            gap: 24px;
+            opacity: 0;
+            animation: up 0.6s ease forwards 0.1s;
         }
 
-        .check {
-            width: 56px;
-            height: 56px;
-            background: var(--light-sage);
-            border-radius: 50%;
-            display: flex;
+        .hero-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 16px;
+            object-fit: cover;
+            object-position: center top;
+            border: 2px solid var(--light-sage);
+        }
+
+        .check-tag {
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            margin: 0 auto 28px;
-            font-size: 1.4rem;
-            opacity: 0;
-            animation: up 0.7s ease forwards 0.1s;
+            gap: 6px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--sage);
+            margin-bottom: 8px;
         }
 
         h1 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2.4rem, 8vw, 3.6rem);
+            font-size: clamp(2.2rem, 8vw, 3.2rem);
             font-weight: 400;
-            line-height: 1.1;
+            line-height: 1.08;
             letter-spacing: -0.02em;
-            margin-bottom: 16px;
-            opacity: 0;
-            animation: up 0.7s ease forwards 0.15s;
         }
 
-        h1 em {
-            font-style: italic;
-            color: var(--terracotta);
-        }
+        h1 em { font-style: italic; color: var(--terracotta); }
 
-        .hero-body {
-            font-size: 1rem;
+        .hero-sub {
+            font-size: 0.9rem;
             font-weight: 300;
-            line-height: 1.8;
-            color: rgba(42,42,42,0.75);
-            max-width: 420px;
-            margin: 0 auto 48px;
-            opacity: 0;
-            animation: up 0.7s ease forwards 0.2s;
+            color: rgba(42,42,42,0.55);
+            line-height: 1.7;
         }
 
-        /* ── FOTO ── */
-        .photo-block {
-            margin-bottom: 40px;
-            opacity: 0;
-            animation: up 0.7s ease forwards 0.25s;
-        }
-
-        .photo-block img {
-            width: 100%;
-            max-width: 420px;
-            height: 320px;
-            object-fit: cover;
-            object-position: center top;
-            border-radius: 16px;
-            display: block;
-            margin: 0 auto;
-        }
-
-        /* ── MENSAGEM PESSOAL ── */
-        .message {
-            background: var(--warm-white);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 32px;
-            margin-bottom: 32px;
-            text-align: left;
-            opacity: 0;
-            animation: up 0.7s ease forwards 0.3s;
-        }
-
-        .message-label {
-            font-size: 0.72rem;
-            font-weight: 600;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            color: var(--sage);
-            margin-bottom: 14px;
-        }
-
-        .message p {
-            font-size: 0.97rem;
-            font-weight: 300;
-            line-height: 1.8;
-            color: var(--charcoal);
-            margin-bottom: 12px;
-        }
-
-        .message p:last-child { margin-bottom: 0; }
-
-        .message strong {
-            font-weight: 500;
-            color: var(--charcoal);
-        }
-
-        .assinatura {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
-            font-style: italic;
-            color: var(--soft-brown);
-            margin-top: 20px !important;
-        }
-
-        /* ── CTAs ── */
-        .ctas {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 56px;
-            opacity: 0;
-            animation: up 0.7s ease forwards 0.35s;
-        }
-
-        .cta-label {
-            font-size: 0.72rem;
-            font-weight: 600;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            color: var(--sage);
-            margin-bottom: 4px;
-        }
-
+        /* ── BOTÃO TOPO ── */
         .btn-primary {
             display: block;
             width: 100%;
@@ -203,7 +121,7 @@
             background: #B06E4A;
             color: #FDFCFA;
             font-family: 'Outfit', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: 500;
             letter-spacing: 0.07em;
             text-transform: uppercase;
@@ -211,6 +129,8 @@
             text-decoration: none;
             border-radius: 10px;
             transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+            opacity: 0;
+            animation: up 0.6s ease forwards 0.2s;
         }
 
         .btn-primary:hover {
@@ -219,55 +139,188 @@
             box-shadow: 0 8px 24px rgba(176,110,74,0.25);
         }
 
-        .btn-secondary {
+        /* ── DIVISOR ── */
+        .divider {
+            width: 100%;
+            height: 1px;
+            background: var(--border);
+            margin: 36px 0;
+            opacity: 0;
+            animation: up 0.6s ease forwards 0.25s;
+        }
+
+        /* ── VIRADA BLOCK ── */
+        .virada-block {
+            background: var(--dark);
+            border-radius: 20px;
+            padding: 32px 28px;
+            opacity: 0;
+            animation: up 0.6s ease forwards 0.3s;
+        }
+
+        .virada-eyebrow {
+            display: inline-block;
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(176,110,74,0.85);
+            margin-bottom: 10px;
+        }
+
+        .virada-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            color: #F5F0E8;
+            line-height: 1.05;
+            margin-bottom: 6px;
+        }
+
+        .virada-sub {
+            font-size: 0.83rem;
+            font-weight: 300;
+            color: rgba(245,240,232,0.4);
+            margin-bottom: 24px;
+        }
+
+        /* lista */
+        .results-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .result-row {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            background: rgba(245,240,232,0.04);
+            border: 1px solid rgba(245,240,232,0.07);
+            border-radius: 10px;
+            padding: 13px 14px;
+        }
+
+        .result-row.bonus {
+            background: rgba(176,110,74,0.09);
+            border-color: rgba(176,110,74,0.18);
+        }
+
+        .result-icon {
+            font-size: 1rem;
+            flex-shrink: 0;
+            line-height: 1.6;
+        }
+
+        .result-text {
+            font-size: 0.83rem;
+            font-weight: 300;
+            color: rgba(245,240,232,0.65);
+            line-height: 1.6;
+        }
+
+        .bonus-tag {
+            display: inline-block;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #C4845E;
+            background: rgba(176,110,74,0.18);
+            border-radius: 100px;
+            padding: 2px 8px;
+            margin-bottom: 5px;
+        }
+
+        /* preço */
+        .virada-price {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+            padding: 14px 16px;
+            background: rgba(245,240,232,0.04);
+            border: 1px solid rgba(245,240,232,0.07);
+            border-radius: 12px;
+        }
+
+        .price-from {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            color: rgba(245,240,232,0.18);
+            text-decoration: line-through;
+            flex-shrink: 0;
+        }
+
+        .price-main {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.9rem;
+            font-weight: 500;
+            color: #C4845E;
+            line-height: 1;
+        }
+
+        .price-main span {
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: rgba(245,240,232,0.3);
+        }
+
+        .price-install {
+            font-size: 0.74rem;
+            font-weight: 300;
+            color: rgba(245,240,232,0.22);
+            margin-top: 3px;
+        }
+
+        .btn-virada {
             display: block;
             width: 100%;
-            padding: 17px 32px;
-            background: transparent;
-            color: var(--charcoal);
+            padding: 18px 32px;
+            background: #B06E4A;
+            color: #FDFCFA;
             font-family: 'Outfit', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 400;
+            font-size: 0.88rem;
+            font-weight: 500;
             letter-spacing: 0.07em;
             text-transform: uppercase;
             text-align: center;
             text-decoration: none;
             border-radius: 10px;
-            border: 1.5px solid var(--border);
-            transition: border-color 0.25s, background 0.25s;
+            transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+            margin-bottom: 12px;
         }
 
-        .btn-secondary:hover {
-            border-color: var(--sage);
-            background: var(--warm-white);
+        .btn-virada:hover {
+            background: #A66548;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(176,110,74,0.3);
         }
 
-        /* ── DIVIDER ── */
-        .divider {
-            width: 100%;
-            height: 1px;
-            background: var(--border);
-            margin: 0 0 48px;
-            opacity: 0;
-            animation: up 0.7s ease forwards 0.4s;
+        .virada-lock {
+            font-size: 0.7rem;
+            font-weight: 300;
+            color: rgba(245,240,232,0.18);
+            text-align: center;
         }
 
         /* ── FOOTER ── */
         footer {
-            padding: 0 0 48px;
+            padding: 40px 0 0;
             opacity: 0;
-            animation: up 0.7s ease forwards 0.45s;
+            animation: up 0.6s ease forwards 0.4s;
         }
 
         .footer-links {
             display: flex;
             gap: 24px;
             flex-wrap: wrap;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .footer-links a {
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             color: var(--soft-brown);
             text-decoration: none;
             transition: color 0.2s;
@@ -276,22 +329,20 @@
         .footer-links a:hover { color: var(--terracotta); }
 
         .footer-copy {
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             color: var(--sage);
-            opacity: 0.6;
+            opacity: 0.5;
         }
 
         @keyframes up {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(18px); }
             to   { opacity: 1; transform: translateY(0); }
         }
 
-        @media (max-width: 520px) {
-            .wrap { padding: 0 20px; }
-            .hero { padding: 48px 0 0; }
-            h1 { font-size: 2.4rem; }
-            .message { padding: 24px 20px; }
-            .photo-block img { height: 260px; }
+        @media (max-width: 480px) {
+            .wrap { padding: 0 20px 48px; }
+            .virada-block { padding: 24px 18px; }
+            .hero-photo { width: 96px; height: 96px; }
         }
     </style>
 </head>
@@ -304,46 +355,80 @@
     </header>
 
     <main>
+
+        <!-- 1. FOTO + TÍTULO + CONFIRMAÇÃO -->
         <section class="hero">
-
-            <div class="check">✓</div>
-
-            <h1>Seu guia está<br>a <em>caminho.</em></h1>
-
-            <p class="hero-body">
-                Verifique seu email — o guia completo chegará em alguns minutos.<br>
-                Não esqueça de checar a caixa de spam.
-            </p>
-
+            <img src="Bruna-5.jpg" alt="Bruna Santanna" class="hero-photo">
+            <div>
+                <p class="check-tag">✓ Enviado</p>
+                <h1>Seu guia está<br>a <em>caminho.</em></h1>
+            </div>
+            <p class="hero-sub">Verifique seu email em alguns minutos.<br>Não esqueça de checar o spam.</p>
         </section>
 
-        <div class="photo-block">
-            <img src="Bruna-5.jpg" alt="Bruna Santanna">
-        </div>
-
-        <div class="message">
-            <p class="message-label">Enquanto você espera</p>
-            <p>
-                Obrigada por baixar o guia. Ele foi escrito pra quem quer ir além do uso básico — 
-                sem precisar virar especialista técnico pra isso.
-            </p>
-            <p>
-                Se quiser continuar nessa direção, o <strong>Time Virada IA</strong> são três agentes de IA 
-                que trabalham pra você: diagnóstico do negócio, estratégia e propostas comerciais.
-                É o próximo passo natural depois do guia.
-            </p>
-            <p class="assinatura">— Bruna</p>
-        </div>
-
-        <div class="ctas">
-            <p class="cta-label">Continue por aqui</p>
-            <a href="https://sun.eduzz.com/7977B1GV9E" class="btn-primary" target="_blank">
-                Conhecer o Time Virada IA
-            </a>
-
-        </div>
+        <!-- 2. BOTÃO TOPO -->
+        <a href="https://sun.eduzz.com/7977B1GV9E" class="btn-primary" target="_blank">
+            Quero meu Time Virada IA
+        </a>
 
         <div class="divider"></div>
+
+        <!-- 3. BLOCO VIRADA IA -->
+        <div class="virada-block">
+
+            <span class="virada-eyebrow">Próximo passo</span>
+            <h2 class="virada-title">Time Virada IA</h2>
+            <p class="virada-sub">Com o Time Virada IA, você vai ser capaz de:</p>
+
+            <div class="results-list">
+                <div class="result-row">
+                    <span class="result-icon">🗺️</span>
+                    <span class="result-text">Ter um mapa claro das suas maiores oportunidades de IA — por ordem de impacto, não de complexidade</span>
+                </div>
+                <div class="result-row">
+                    <span class="result-icon">⚡</span>
+                    <span class="result-text">Usar IA de verdade no seu negócio hoje — não depois de um curso, não depois de estudar</span>
+                </div>
+                <div class="result-row">
+                    <span class="result-icon">🔧</span>
+                    <span class="result-text">Parar de usar IA no modo básico e começar a usar como ferramenta de trabalho</span>
+                </div>
+                <div class="result-row">
+                    <span class="result-icon">🧠</span>
+                    <span class="result-text">Criar prompts que funcionam de verdade — não os genéricos que qualquer um copia do Google</span>
+                </div>
+                <div class="result-row">
+                    <span class="result-icon">🎯</span>
+                    <span class="result-text">Ter uma ação estratégica de IA pra qualquer desafio — só descrevendo a situação</span>
+                </div>
+                <div class="result-row">
+                    <span class="result-icon">⏱️</span>
+                    <span class="result-text">Recuperar horas por semana que hoje vão embora em tarefas repetitivas</span>
+                </div>
+                <div class="result-row bonus">
+                    <span class="result-icon">🎁</span>
+                    <div>
+                        <span class="bonus-tag">Bônus Midas — incluído agora</span>
+                        <p class="result-text">Mandar propostas que parecem de consultoria — sem travar, sem improvisar no WhatsApp</p>
+                        <p class="result-text" style="margin-top:5px;">Parar de perder venda por proposta fraca depois de uma reunião boa</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="virada-price">
+                <span class="price-from">R$ 1.185</span>
+                <div>
+                    <p class="price-main">R$ 147 <span>à vista</span></p>
+                    <p class="price-install">ou 12× R$ 15,20</p>
+                </div>
+            </div>
+
+            <a href="https://sun.eduzz.com/7977B1GV9E" class="btn-virada" target="_blank">
+                Quero meu Time Virada IA
+            </a>
+            <p class="virada-lock">🔒 Acesso imediato · Pagamento seguro</p>
+
+        </div>
 
     </main>
 
