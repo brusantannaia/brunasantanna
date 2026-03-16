@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obrigado | Bruna Santanna</title>
+
+    <meta name="description" content="Seu guia está a caminho. Verifique seu email.">
+    <meta name="robots" content="noindex">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --cream:        #F5F3EE;
+            --warm-white:   #FDFCFA;
+            --charcoal:     #2A2A2A;
+            --sage:         #7D8B7A;
+            --terracotta:   #C17A5A;
+            --terracotta-d: #A66548;
+            --soft-brown:   #8B7355;
+            --light-sage:   #E8EBE6;
+            --border:       rgba(125,139,122,0.2);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            opacity: 0.025;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 580px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        header {
+            padding: 40px 0 0;
+            opacity: 0;
+            animation: up 0.7s ease forwards;
+        }
+
+        .brand-tag {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--sage);
+        }
+
+        /* ── HERO ── */
+        .hero {
+            padding: 64px 0 0;
+            text-align: center;
+        }
+
+        .check {
+            width: 56px;
+            height: 56px;
+            background: var(--light-sage);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 28px;
+            font-size: 1.4rem;
+            opacity: 0;
+            animation: up 0.7s ease forwards 0.1s;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.4rem, 8vw, 3.6rem);
+            font-weight: 400;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+            opacity: 0;
+            animation: up 0.7s ease forwards 0.15s;
+        }
+
+        h1 em {
+            font-style: italic;
+            color: var(--terracotta);
+        }
+
+        .hero-body {
+            font-size: 1rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: rgba(42,42,42,0.75);
+            max-width: 420px;
+            margin: 0 auto 48px;
+            opacity: 0;
+            animation: up 0.7s ease forwards 0.2s;
+        }
+
+        /* ── FOTO ── */
+        .photo-block {
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: up 0.7s ease forwards 0.25s;
+        }
+
+        .photo-block img {
+            width: 100%;
+            max-width: 420px;
+            height: 320px;
+            object-fit: cover;
+            object-position: center top;
+            border-radius: 16px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* ── MENSAGEM PESSOAL ── */
+        .message {
+            background: var(--warm-white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            text-align: left;
+            opacity: 0;
+            animation: up 0.7s ease forwards 0.3s;
+        }
+
+        .message-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--sage);
+            margin-bottom: 14px;
+        }
+
+        .message p {
+            font-size: 0.97rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: var(--charcoal);
+            margin-bottom: 12px;
+        }
+
+        .message p:last-child { margin-bottom: 0; }
+
+        .message strong {
+            font-weight: 500;
+            color: var(--charcoal);
+        }
+
+        .assinatura {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--soft-brown);
+            margin-top: 20px !important;
+        }
+
+        /* ── CTAs ── */
+        .ctas {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 56px;
+            opacity: 0;
+            animation: up 0.7s ease forwards 0.35s;
+        }
+
+        .cta-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--sage);
+            margin-bottom: 4px;
+        }
+
+        .btn-primary {
+            display: block;
+            width: 100%;
+            padding: 18px 32px;
+            background: #B06E4A;
+            color: #FDFCFA;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+        }
+
+        .btn-primary:hover {
+            background: #A66548;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(176,110,74,0.25);
+        }
+
+        .btn-secondary {
+            display: block;
+            width: 100%;
+            padding: 17px 32px;
+            background: transparent;
+            color: var(--charcoal);
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 10px;
+            border: 1.5px solid var(--border);
+            transition: border-color 0.25s, background 0.25s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--sage);
+            background: var(--warm-white);
+        }
+
+        /* ── DIVIDER ── */
+        .divider {
+            width: 100%;
+            height: 1px;
+            background: var(--border);
+            margin: 0 0 48px;
+            opacity: 0;
+            animation: up 0.7s ease forwards 0.4s;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            padding: 0 0 48px;
+            opacity: 0;
+            animation: up 0.7s ease forwards 0.45s;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            font-size: 0.82rem;
+            color: var(--soft-brown);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--terracotta); }
+
+        .footer-copy {
+            font-size: 0.75rem;
+            color: var(--sage);
+            opacity: 0.6;
+        }
+
+        @keyframes up {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 520px) {
+            .wrap { padding: 0 20px; }
+            .hero { padding: 48px 0 0; }
+            h1 { font-size: 2.4rem; }
+            .message { padding: 24px 20px; }
+            .photo-block img { height: 260px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrap">
+
+    <header>
+        <span class="brand-tag">Bruna Santanna · brunasantanna.com</span>
+    </header>
+
+    <main>
+        <section class="hero">
+
+            <div class="check">✓</div>
+
+            <h1>Seu guia está<br>a <em>caminho.</em></h1>
+
+            <p class="hero-body">
+                Verifique seu email — o guia completo chegará em alguns minutos.<br>
+                Não esqueça de checar a caixa de spam.
+            </p>
+
+        </section>
+
+        <div class="photo-block">
+            <img src="Bruna-5.jpg" alt="Bruna Santanna">
+        </div>
+
+        <div class="message">
+            <p class="message-label">Enquanto você espera</p>
+            <p>
+                Obrigada por baixar o guia. Ele foi escrito pra quem quer ir além do uso básico — 
+                sem precisar virar especialista técnico pra isso.
+            </p>
+            <p>
+                Se quiser continuar nessa direção, o <strong>Time Virada IA</strong> são três agentes de IA 
+                que trabalham pra você: diagnóstico do negócio, estratégia e propostas comerciais.
+                É o próximo passo natural depois do guia.
+            </p>
+            <p class="assinatura">— Bruna</p>
+        </div>
+
+        <div class="ctas">
+            <p class="cta-label">Continue por aqui</p>
+            <a href="https://sun.eduzz.com/7977B1GV9E" class="btn-primary" target="_blank">
+                Conhecer o Time Virada IA
+            </a>
+
+        </div>
+
+        <div class="divider"></div>
+
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://instagram.com/brusantanna.ai" target="_blank">Instagram</a>
+            <a href="https://newscale.tech" target="_blank">Newscale</a>
+            <a href="https://www.linkedin.com/in/bruna-araujo-santanna/" target="_blank">LinkedIn</a>
+            <a href="mailto:eu@brunasantanna.com">Contato</a>
+        </div>
+        <p class="footer-copy">© 2026 Bruna Santanna</p>
+    </footer>
+
+</div>
+
+</body>
+</html>
