@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virada IA: Claude com profundidade | Bruna Santanna</title>
+    <meta name="description" content="Finalmente: tudo que você precisava saber sobre o Claude e a virada que vai mudar como você usa IA pra sempre.">
+    <meta name="author" content="Bruna Santanna">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --cream: #F5F3EE;
+            --warm-white: #FDFCFA;
+            --charcoal: #2A2A2A;
+            --sage: #7D8B7A;
+            --terracotta: #C17A5A;
+            --terracotta-dark: #A66548;
+            --soft-brown: #8B7355;
+            --light-sage: #E8EBE6;
+            --border: rgba(125, 139, 122, 0.2);
+            --claude-orange: #CC785C;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.025;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 24px 100px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        .hero-pattern {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            opacity: 0.055;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 16 16'%3E%3Cpath fill='%23C17A5A' d='m3.127 10.604 3.135-1.76.053-.153-.053-.085H6.11l-.525-.032-1.791-.048-1.554-.065-1.505-.08-.38-.081L0 7.832l.036-.234.32-.214.455.04 1.009.069 1.513.105 1.097.064 1.626.17h.259l.036-.105-.089-.065-.068-.064-1.566-1.062-1.695-1.121-.887-.646-.48-.327-.243-.306-.104-.67.435-.48.585.04.15.04.593.456 1.267.981 1.654 1.218.242.202.097-.068.012-.049-.109-.181-.9-1.626-.96-1.655-.428-.686-.113-.411a2 2 0 0 1-.068-.484l.496-.674L4.446 0l.662.089.279.242.411.94.666 1.48 1.033 2.014.302.597.162.553.06.17h.105v-.097l.085-1.134.157-1.392.154-1.792.052-.504.25-.605.497-.327.387.186.319.456-.045.294-.19 1.23-.37 1.93-.243 1.29h.142l.161-.16.654-.868 1.097-1.372.484-.545.565-.601.363-.287h.686l.505.751-.226.775-.707.895-.585.759-.839 1.13-.524.904.048.072.125-.012 1.897-.403 1.024-.186 1.223-.21.553.258.06.263-.218.536-1.307.323-1.533.307-2.284.54-.028.02.032.04 1.029.098.44.024h1.077l2.005.15.525.346.315.424-.053.323-.807.411-3.631-.863-.872-.218h-.12v.073l.726.71 1.331 1.202 1.667 1.55.084.383-.214.302-.226-.032-1.464-1.101-.565-.497-1.28-1.077h-.084v.113l.295.432 1.557 2.34.08.718-.112.234-.404.141-.444-.08-.911-1.28-.94-1.44-.759-1.291-.093.053-.448 4.821-.21.246-.484.186-.403-.307-.214-.496.214-.98.258-1.28.21-1.016.19-1.263.112-.42-.008-.028-.092.012-.953 1.307-1.448 1.957-1.146 1.227-.274.109-.477-.247.045-.44.266-.39 1.586-2.018.956-1.25.617-.723-.004-.105h-.036l-4.212 2.736-.75.096-.324-.302.04-.496.154-.162 1.267-.871z'/%3E%3C/svg%3E");
+            background-size: 72px 72px;
+            background-repeat: repeat;
+        }
+        /* Fade edges of pattern */
+        .hero-pattern::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, transparent 30%, var(--cream) 80%);
+        }
+        .hero > * { position: relative; z-index: 1; }
+        .brand-tag {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--sage);
+            margin-bottom: 36px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards;
+        }
+        .hero-eyebrow {
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--terracotta);
+            font-weight: 500;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.1s;
+        }
+        .hero-headline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 9vw, 5.5rem);
+            font-weight: 400;
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+            max-width: 820px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.15s;
+        }
+        .hero-headline em { font-style: italic; color: var(--terracotta); }
+        .hero-subheadline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.2rem, 2.8vw, 1.7rem);
+            font-style: italic;
+            color: var(--soft-brown);
+            margin-bottom: 44px;
+            max-width: 680px;
+            line-height: 1.5;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.25s;
+        }
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 28px;
+            margin-bottom: 52px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.35s;
+        }
+        .hero-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.88rem;
+            color: var(--soft-brown);
+        }
+        .dot {
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: var(--terracotta);
+            display: inline-block;
+            flex-shrink: 0;
+        }
+        .cta-primary {
+            display: inline-block;
+            padding: 20px 52px;
+            background: var(--terracotta);
+            color: var(--warm-white);
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.45s;
+            border: none;
+            cursor: pointer;
+        }
+        .cta-primary:hover {
+            background: var(--terracotta-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(193, 122, 90, 0.3);
+        }
+        .cta-note {
+            margin-top: 14px;
+            font-size: 0.82rem;
+            color: var(--sage);
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.55s;
+        }
+
+        /* DIVIDERS & SECTIONS */
+        .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+        section { position: relative; z-index: 1; }
+        .section-inner { max-width: 860px; margin: 0 auto; padding: 96px 24px; }
+        .section-inner.wide { max-width: 1080px; }
+        .section-label {
+            font-size: 0.72rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--sage);
+            margin-bottom: 20px;
+            display: block;
+        }
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+        .section-title em { font-style: italic; color: var(--terracotta); }
+
+        /* DOR */
+        .bg-warm { background: var(--warm-white); }
+        .dor-text { font-size: 1.1rem; line-height: 1.9; color: var(--soft-brown); }
+        .dor-text p + p { margin-top: 18px; }
+        .dor-highlight {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.45rem;
+            font-style: italic;
+            color: var(--charcoal);
+            border-left: 3px solid var(--terracotta);
+            padding-left: 24px;
+            margin: 40px 0;
+            line-height: 1.55;
+        }
+
+        /* PARA QUEM É */
+        .audience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 18px;
+            margin-top: 48px;
+        }
+        .audience-card {
+            background: var(--warm-white);
+            border-radius: 14px;
+            padding: 28px 30px;
+            border: 1px solid var(--border);
+            transition: all 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .audience-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 3px;
+            background: var(--terracotta);
+            transform: scaleX(0);
+            transition: transform 0.35s ease;
+            transform-origin: left;
+        }
+        .audience-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(42,42,42,0.07); }
+        .audience-card:hover::before { transform: scaleX(1); }
+        .audience-card-role {
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--terracotta);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .audience-card-text { font-size: 0.97rem; line-height: 1.7; color: var(--charcoal); }
+
+        /* NÃO É PRA QUEM */
+        .not-for {
+            background: var(--light-sage);
+            border-radius: 14px;
+            padding: 36px 40px;
+            margin-top: 40px;
+            border: 1px solid var(--border);
+        }
+        .not-for-label {
+            font-size: 0.72rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--sage);
+            margin-bottom: 12px;
+            display: block;
+        }
+        .not-for-text { font-size: 0.97rem; line-height: 1.8; color: var(--soft-brown); }
+
+        /* O QUE VAI APRENDER */
+        .aprende-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0;
+            margin-top: 48px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+        .aprende-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 22px 26px;
+            border-bottom: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+            transition: background 0.3s ease;
+        }
+        .aprende-item:nth-child(even) { border-right: none; }
+        .aprende-item:nth-last-child(-n+2) { border-bottom: none; }
+        .aprende-item:hover { background: var(--cream); }
+        .aprende-icon { color: var(--terracotta); font-size: 0.9rem; flex-shrink: 0; margin-top: 3px; }
+        .aprende-text { font-size: 0.94rem; line-height: 1.6; color: var(--charcoal); }
+
+        /* DEPOIMENTOS */
+        .depoimentos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 48px;
+        }
+        .depo-card {
+            background: var(--warm-white);
+            border-radius: 14px;
+            padding: 28px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        .depo-card:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(42,42,42,0.07); }
+        .depo-quote {
+            font-size: 2.5rem;
+            color: var(--terracotta);
+            font-family: 'Cormorant Garamond', serif;
+            line-height: 1;
+            margin-bottom: 10px;
+            opacity: 0.45;
+        }
+        .depo-text {
+            font-size: 0.95rem;
+            line-height: 1.75;
+            color: var(--charcoal);
+            margin-bottom: 18px;
+            font-style: italic;
+        }
+        .depo-author {
+            font-size: 0.75rem;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            color: var(--sage);
+            font-weight: 500;
+        }
+
+        /* INCLUSOS */
+        .inclusos-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-top: 48px;
+        }
+        .incluso-card {
+            background: var(--warm-white);
+            border-radius: 14px;
+            padding: 28px 22px;
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .incluso-card:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(42,42,42,0.07); }
+        .incluso-icon { font-size: 1.8rem; margin-bottom: 14px; }
+        .incluso-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--charcoal);
+        }
+        .incluso-desc { font-size: 0.84rem; line-height: 1.6; color: var(--sage); }
+
+        /* BIO */
+        .bio-inner {
+            display: flex;
+            gap: 56px;
+            align-items: center;
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 96px 24px;
+        }
+        .bio-img-wrap { flex-shrink: 0; }
+        .bio-img-wrap img {
+            width: 200px; height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--light-sage);
+        }
+        .bio-img-placeholder {
+            width: 200px; height: 200px;
+            border-radius: 50%;
+            background: var(--light-sage);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            color: var(--sage);
+        }
+        .bio-label { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage); margin-bottom: 10px; display: block; }
+        .bio-name { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 500; margin-bottom: 6px; }
+        .bio-role { font-size: 0.82rem; color: var(--terracotta); font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 20px; }
+        .bio-text { font-size: 1rem; line-height: 1.8; color: var(--soft-brown); margin-bottom: 28px; }
+        .bio-social { display: flex; gap: 10px; flex-wrap: wrap; }
+        .bio-social a {
+            padding: 10px 20px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--charcoal);
+            background: var(--light-sage);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .bio-social a:hover { background: var(--terracotta); color: var(--warm-white); }
+
+        /* CTA FINAL */
+        .cta-box {
+            background: var(--light-sage);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 72px 48px;
+            text-align: center;
+            max-width: 660px;
+            margin: 0 auto;
+        }
+        .cta-box .section-title { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 14px; }
+        .cta-sub { font-size: 1rem; color: var(--soft-brown); margin-bottom: 40px; line-height: 1.75; }
+        .cta-box .cta-primary { opacity: 1; animation: none; }
+        .cta-final-note { margin-top: 16px; font-size: 0.82rem; color: var(--sage); }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 56px 24px;
+            border-top: 1px solid var(--border);
+            position: relative;
+            z-index: 1;
+        }
+        .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 500; margin-bottom: 8px; }
+        .footer-tagline { font-size: 0.85rem; color: var(--sage); margin-bottom: 24px; }
+        .footer-links { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
+        .footer-links a { font-size: 0.85rem; color: var(--soft-brown); text-decoration: none; transition: color 0.3s ease; }
+        .footer-links a:hover { color: var(--terracotta); }
+
+        /* MOBILE HERO LOGO */
+        .hero-claude-logo-mobile {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards;
+        }
+        .hero-claude-logo-mobile svg {
+            width: 56px;
+            height: 56px;
+            filter: drop-shadow(0 4px 16px rgba(218, 119, 86, 0.35));
+        }
+        .hero-claude-logo-mobile span {
+            font-size: 0.72rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--terracotta);
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .hero-claude-logo-mobile { display: flex; }
+            .brand-tag { display: none; }
+        }
+
+        /* DATE BADGE */
+        .date-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--terracotta);
+            color: var(--warm-white);
+            padding: 12px 28px;
+            border-radius: 100px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            margin-bottom: 32px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.05s;
+        }
+        .date-badge .date-icon { font-size: 1rem; }
+
+        /* CLAUDE LOGO HEADER */
+        .claude-header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 18px 24px;
+            background: rgba(245, 243, 238, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+        .claude-logo-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .claude-logo-svg {
+            width: 28px;
+            height: 28px;
+        }
+        .claude-logo-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--charcoal);
+            letter-spacing: 0.02em;
+        }
+        .claude-logo-text span {
+            color: var(--terracotta);
+            font-style: italic;
+        }
+        .header-cta {
+            position: absolute;
+            right: 24px;
+            padding: 10px 24px;
+            background: var(--terracotta);
+            color: var(--warm-white);
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .header-cta:hover {
+            background: var(--terracotta-dark);
+        }
+
+        /* SECTION CTA BUTTON */
+        .section-cta-wrap {
+            text-align: center;
+            margin-top: 56px;
+        }
+        .section-cta {
+            display: inline-block;
+            padding: 16px 44px;
+            background: transparent;
+            color: var(--terracotta);
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 10px;
+            border: 1.5px solid var(--terracotta);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .section-cta:hover {
+            background: var(--terracotta);
+            color: var(--warm-white);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(193, 122, 90, 0.2);
+        }
+
+        /* DEPOIMENTOS ENHANCED */
+        .depoimentos-section-wrap {
+            background: var(--charcoal);
+            position: relative;
+            z-index: 1;
+            padding: 96px 24px;
+        }
+        .depoimentos-section-wrap .section-label {
+            color: rgba(255,255,255,0.45);
+        }
+        .depoimentos-section-wrap .section-title {
+            color: var(--warm-white);
+        }
+        .depoimentos-section-wrap .section-title em {
+            color: var(--terracotta);
+        }
+
+        /* PHOTO MOSAIC */
+        .photo-mosaic {
+            display: flex;
+            gap: 12px;
+            margin: 48px 0 56px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            scrollbar-width: none;
+        }
+        .photo-mosaic::-webkit-scrollbar { display: none; }
+        .photo-slot {
+            flex-shrink: 0;
+            width: 100px;
+            height: 100px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.08);
+            border: 1.5px dashed rgba(255,255,255,0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            position: relative;
+        }
+        .photo-slot:hover {
+            border-color: var(--terracotta);
+            background: rgba(193, 122, 90, 0.08);
+        }
+        .photo-slot-icon { font-size: 1.4rem; opacity: 0.4; }
+        .photo-slot-label {
+            font-size: 0.62rem;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.3);
+        }
+        .photo-slot img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        /* First photo slot is bigger */
+        .photo-slot.large {
+            width: 160px;
+            height: 160px;
+            border-radius: 16px;
+        }
+        .photo-slot.medium {
+            width: 120px;
+            height: 120px;
+        }
+
+        /* DEPOIMENTOS CARDS DARK */
+        .depoimentos-grid-dark {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 0;
+        }
+        .depo-card-dark {
+            background: rgba(255,255,255,0.05);
+            border-radius: 14px;
+            padding: 28px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.35s ease;
+            position: relative;
+        }
+        .depo-card-dark:hover {
+            background: rgba(255,255,255,0.09);
+            transform: translateY(-4px);
+        }
+        .depo-card-dark .depo-quote {
+            color: var(--terracotta);
+            opacity: 0.6;
+        }
+        .depo-card-dark .depo-text {
+            color: rgba(255,255,255,0.85);
+        }
+        .depo-card-dark .depo-author {
+            color: rgba(255,255,255,0.35);
+        }
+        .depo-stars {
+            display: flex;
+            gap: 3px;
+            margin-bottom: 14px;
+        }
+        .depo-stars span {
+            color: var(--terracotta);
+            font-size: 0.85rem;
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .depoimentos-grid { grid-template-columns: repeat(2, 1fr); }
+            .inclusos-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 680px) {
+            .audience-grid { grid-template-columns: 1fr; }
+            .aprende-list { grid-template-columns: 1fr; }
+            .aprende-item { border-right: none !important; }
+            .aprende-item:last-child { border-bottom: none; }
+            .aprende-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--border); }
+            .aprende-item:last-child { border-bottom: none !important; }
+            .depoimentos-grid { grid-template-columns: 1fr; }
+            .inclusos-grid { grid-template-columns: 1fr; }
+            .bio-inner { flex-direction: column; text-align: center; padding: 72px 20px; }
+            .bio-social { justify-content: center; }
+            .cta-box { padding: 48px 24px; }
+            .not-for { padding: 28px 24px; }
+            .hero-meta { flex-direction: column; gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER COM LOGO DO CLAUDE -->
+    <header class="claude-header">
+        <div class="claude-logo-wrap">
+            <svg class="claude-logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="#da7756">
+                <path d="m3.127 10.604 3.135-1.76.053-.153-.053-.085H6.11l-.525-.032-1.791-.048-1.554-.065-1.505-.08-.38-.081L0 7.832l.036-.234.32-.214.455.04 1.009.069 1.513.105 1.097.064 1.626.17h.259l.036-.105-.089-.065-.068-.064-1.566-1.062-1.695-1.121-.887-.646-.48-.327-.243-.306-.104-.67.435-.48.585.04.15.04.593.456 1.267.981 1.654 1.218.242.202.097-.068.012-.049-.109-.181-.9-1.626-.96-1.655-.428-.686-.113-.411a2 2 0 0 1-.068-.484l.496-.674L4.446 0l.662.089.279.242.411.94.666 1.48 1.033 2.014.302.597.162.553.06.17h.105v-.097l.085-1.134.157-1.392.154-1.792.052-.504.25-.605.497-.327.387.186.319.456-.045.294-.19 1.23-.37 1.93-.243 1.29h.142l.161-.16.654-.868 1.097-1.372.484-.545.565-.601.363-.287h.686l.505.751-.226.775-.707.895-.585.759-.839 1.13-.524.904.048.072.125-.012 1.897-.403 1.024-.186 1.223-.21.553.258.06.263-.218.536-1.307.323-1.533.307-2.284.54-.028.02.032.04 1.029.098.44.024h1.077l2.005.15.525.346.315.424-.053.323-.807.411-3.631-.863-.872-.218h-.12v.073l.726.71 1.331 1.202 1.667 1.55.084.383-.214.302-.226-.032-1.464-1.101-.565-.497-1.28-1.077h-.084v.113l.295.432 1.557 2.34.08.718-.112.234-.404.141-.444-.08-.911-1.28-.94-1.44-.759-1.291-.093.053-.448 4.821-.21.246-.484.186-.403-.307-.214-.496.214-.98.258-1.28.21-1.016.19-1.263.112-.42-.008-.028-.092.012-.953 1.307-1.448 1.957-1.146 1.227-.274.109-.477-.247.045-.44.266-.39 1.586-2.018.956-1.25.617-.723-.004-.105h-.036l-4.212 2.736-.75.096-.324-.302.04-.496.154-.162 1.267-.871z"/>
+            </svg>
+            <span class="claude-logo-text">Virada IA: <span>Claude com profundidade</span></span>
+        </div>
+        <a href="#cta" class="header-cta">Quero entrar</a>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" style="padding-top: 140px;">
+        <div class="hero-pattern"></div>
+        <p class="brand-tag">Bruna Santanna · NewScale</p>
+
+        <!-- LOGO GRANDE NO MOBILE -->
+        <div class="hero-claude-logo-mobile">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="#da7756">
+                <path d="m3.127 10.604 3.135-1.76.053-.153-.053-.085H6.11l-.525-.032-1.791-.048-1.554-.065-1.505-.08-.38-.081L0 7.832l.036-.234.32-.214.455.04 1.009.069 1.513.105 1.097.064 1.626.17h.259l.036-.105-.089-.065-.068-.064-1.566-1.062-1.695-1.121-.887-.646-.48-.327-.243-.306-.104-.67.435-.48.585.04.15.04.593.456 1.267.981 1.654 1.218.242.202.097-.068.012-.049-.109-.181-.9-1.626-.96-1.655-.428-.686-.113-.411a2 2 0 0 1-.068-.484l.496-.674L4.446 0l.662.089.279.242.411.94.666 1.48 1.033 2.014.302.597.162.553.06.17h.105v-.097l.085-1.134.157-1.392.154-1.792.052-.504.25-.605.497-.327.387.186.319.456-.045.294-.19 1.23-.37 1.93-.243 1.29h.142l.161-.16.654-.868 1.097-1.372.484-.545.565-.601.363-.287h.686l.505.751-.226.775-.707.895-.585.759-.839 1.13-.524.904.048.072.125-.012 1.897-.403 1.024-.186 1.223-.21.553.258.06.263-.218.536-1.307.323-1.533.307-2.284.54-.028.02.032.04 1.029.098.44.024h1.077l2.005.15.525.346.315.424-.053.323-.807.411-3.631-.863-.872-.218h-.12v.073l.726.71 1.331 1.202 1.667 1.55.084.383-.214.302-.226-.032-1.464-1.101-.565-.497-1.28-1.077h-.084v.113l.295.432 1.557 2.34.08.718-.112.234-.404.141-.444-.08-.911-1.28-.94-1.44-.759-1.291-.093.053-.448 4.821-.21.246-.484.186-.403-.307-.214-.496.214-.98.258-1.28.21-1.016.19-1.263.112-.42-.008-.028-.092.012-.953 1.307-1.448 1.957-1.146 1.227-.274.109-.477-.247.045-.44.266-.39 1.586-2.018.956-1.25.617-.723-.004-.105h-.036l-4.212 2.736-.75.096-.324-.302.04-.496.154-.162 1.267-.871z"/>
+            </svg>
+            <span>Claude · Anthropic</span>
+        </div>
+        <div class="date-badge"><span class="date-icon">📅</span> Início: 07 de abril às 20h</div>
+        <h1 class="hero-headline">Virada IA: <em>Claude com profundidade</em></h1>
+        <p class="hero-subheadline">Finalmente: tudo que você precisava saber sobre o Claude e a virada que vai mudar como você usa IA pra sempre</p>
+        <div class="hero-meta">
+            <span class="hero-meta-item"><span class="dot"></span> 4 aulas ao vivo (1h30 cada)</span>
+            <span class="hero-meta-item"><span class="dot"></span> Zero tech</span>
+            <span class="hero-meta-item"><span class="dot"></span> 100% prático</span>
+            <span class="hero-meta-item"><span class="dot"></span> Gravações inclusas</span>
+        </div>
+        <a href="#cta" class="cta-primary">Quero entrar na Turma 1</a>
+        <p class="cta-note">Condição especial de fundador por tempo limitado</p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- DOR -->
+    <section class="bg-warm">
+        <div class="section-inner">
+            <div class="reveal">
+                <span class="section-label">A virada começa aqui</span>
+                <h2 class="section-title"><em>O Claude não te decepcionou.</em><br>Você nunca viu o que ele realmente faz.</h2>
+                <div class="dor-text" style="margin-top: 32px;">
+                    <p>Você já viu o Claude funcionar. Já sentiu que tem algo diferente ali.</p>
+                    <p>Mas o que você usou até agora é a superfície. Existe uma camada abaixo disso que muda completamente como você trabalha, produz e pensa.</p>
+                </div>
+                <blockquote class="dor-highlight">
+                    É isso que o Curso Claude com Profundidade abre.
+                </blockquote>
+            </div>
+            <div class="section-cta-wrap reveal">
+                <a href="#cta" class="section-cta">Quero entrar na Turma 1</a>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- PARA QUEM É -->
+    <section>
+        <div class="section-inner wide">
+            <div class="reveal">
+                <span class="section-label">Para quem é</span>
+                <h2 class="section-title">Esse curso foi feito <em>pra você</em></h2>
+            </div>
+            <div class="audience-grid">
+                <div class="audience-card reveal">
+                    <p class="audience-card-role">Empreendedor</p>
+                    <p class="audience-card-text">Você ainda faz na mão tarefas que poderiam estar rodando sozinhas enquanto você foca no que importa de verdade no negócio.</p>
+                </div>
+                <div class="audience-card reveal">
+                    <p class="audience-card-role">Criador de conteúdo</p>
+                    <p class="audience-card-text">Você gasta horas em coisas que o Claude poderia resolver em minutos, se você soubesse configurar do jeito certo.</p>
+                </div>
+                <div class="audience-card reveal">
+                    <p class="audience-card-role">Usuário de ChatGPT</p>
+                    <p class="audience-card-text">Você usa o ChatGPT no básico e quer entender por que todo mundo fala que o Claude é diferente e o que você está perdendo.</p>
+                </div>
+                <div class="audience-card reveal">
+                    <p class="audience-card-role">Profissional CLT</p>
+                    <p class="audience-card-text">Você sente que poderia entregar muito mais se soubesse usar as ferramentas certas, sem depender de ninguém de TI pra isso.</p>
+                </div>
+            </div>
+            <div class="not-for reveal">
+                <span class="not-for-label">Não é pra você se...</span>
+                <p class="not-for-text">Você já é dev, trabalha com programação ou quer se aprofundar no lado técnico da IA. Aqui a gente não escreve código, não usa terminal e não fala em Python. O Virada IA é pra quem quer resultado prático sem precisar virar técnico.</p>
+            </div>
+            <div class="section-cta-wrap reveal">
+                <a href="#cta" class="section-cta">Quero entrar na Turma 1</a>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- O QUE VAI APRENDER -->
+    <section class="bg-warm">
+        <div class="section-inner wide">
+            <div class="reveal">
+                <span class="section-label">Conteúdo</span>
+                <h2 class="section-title">O que você vai <em>aprender</em></h2>
+            </div>
+            <ul class="aprende-list reveal">
+                <li class="aprende-item">
+                    <span class="aprende-icon">✦</span>
+                    <span class="aprende-text">Como dar contexto direito e criar prompts que realmente funcionam</span>
+                </li>
+                <li class="aprende-item">
+                    <span class="aprende-icon">✦</span>
+                    <span class="aprende-text">Como aprender a pensar com a IA — e não só pedir coisas pra ela</span>
+                </li>
+                <li class="aprende-item">
+                    <span class="aprende-icon">✦</span>
+                    <span class="aprende-text">Como extrair o uso mais profundo da IA no seu dia a dia</span>
+                </li>
+                <li class="aprende-item">
+                    <span class="aprende-icon">✦</span>
+                    <span class="aprende-text">Como usar a própria IA pra aprender a usar a IA</span>
+                </li>
+                <li class="aprende-item">
+                    <span class="aprende-icon">✦</span>
+                    <span class="aprende-text">Como montar Projetos no Claude que te conhecem e não esquecem nada</span>
+                </li>
+                <li class="aprende-item">
+                    <span class="aprende-icon">✦</span>
+                    <span class="aprende-text">Skills e sub-skills: ensina uma vez, o Claude nunca esquece</span>
+                </li>
+                <li class="aprende-item">
+                    <span class="aprende-icon">✦</span>
+                    <span class="aprende-text">Claude Code: criar landing pages, desenvolver apps e automatizar tarefas — sem escrever uma linha de código</span>
+                </li>
+                <li class="aprende-item">
+                    <span class="aprende-icon">✦</span>
+                    <span class="aprende-text">Claude Cowork: IA rodando no seu desktop enquanto você trabalha</span>
+                </li>
+                <li class="aprende-item">
+                    <span class="aprende-icon">✦</span>
+                    <span class="aprende-text">Como criar agentes que trabalham por você</span>
+                </li>
+                <li class="aprende-item">
+                    <span class="aprende-icon">✦</span>
+                    <span class="aprende-text">NotebookLM, ChatGPT, Gemini e outras ferramentas que valem a pena ter na sua stack</span>
+                </li>
+                <li class="aprende-item">
+                    <span class="aprende-icon">✦</span>
+                    <span class="aprende-text">Como acompanhar as novidades de IA sem enlouquecer</span>
+                </li>
+                <li class="aprende-item">
+                    <span class="aprende-icon">✦</span>
+                    <span class="aprende-text">Como otimizar seus tokens — e parar de ver o Claude acabar no meio de uma resposta importante</span>
+                </li>
+                <li class="aprende-item">
+                    <span class="aprende-icon">✦</span>
+                    <span class="aprende-text">Como conectar o Claude ao Excel e ao PowerPoint e criar apresentações incríveis sem sair do seu fluxo de trabalho</span>
+                </li>
+                <li class="aprende-item">
+                    <span class="aprende-icon">✦</span>
+                    <span class="aprende-text">Como conectar o Claude ao Excel e ao PowerPoint e criar apresentações lindas em minutos</span>
+                </li>
+            </ul>
+            <div class="section-cta-wrap reveal">
+                <a href="#cta" class="section-cta">Quero entrar na Turma 1</a>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- DEPOIMENTOS ENHANCED -->
+    <section class="depoimentos-section-wrap">
+        <div style="max-width: 1080px; margin: 0 auto;">
+            <div class="reveal">
+                <span class="section-label">O que dizem as alunas</span>
+                <h2 class="section-title">Mais de <em>1.000 alunas</em> já passaram por aqui</h2>
+            </div>
+
+            <!-- MOSAICO DE FOTOS -->
+            <div class="photo-mosaic reveal">
+                <div class="photo-slot large">
+                    <span class="photo-slot-icon">📷</span>
+                    <span class="photo-slot-label">foto aluna</span>
+                </div>
+                <div class="photo-slot medium">
+                    <span class="photo-slot-icon">📷</span>
+                    <span class="photo-slot-label">foto</span>
+                </div>
+                <div class="photo-slot medium">
+                    <span class="photo-slot-icon">📷</span>
+                    <span class="photo-slot-label">foto</span>
+                </div>
+                <div class="photo-slot large">
+                    <span class="photo-slot-icon">📷</span>
+                    <span class="photo-slot-label">foto aluna</span>
+                </div>
+                <div class="photo-slot medium">
+                    <span class="photo-slot-icon">📷</span>
+                    <span class="photo-slot-label">foto</span>
+                </div>
+                <div class="photo-slot medium">
+                    <span class="photo-slot-icon">📷</span>
+                    <span class="photo-slot-label">foto</span>
+                </div>
+                <div class="photo-slot large">
+                    <span class="photo-slot-icon">📷</span>
+                    <span class="photo-slot-label">foto aluna</span>
+                </div>
+                <div class="photo-slot medium">
+                    <span class="photo-slot-icon">📷</span>
+                    <span class="photo-slot-label">foto</span>
+                </div>
+                <div class="photo-slot medium">
+                    <span class="photo-slot-icon">📷</span>
+                    <span class="photo-slot-label">foto</span>
+                </div>
+                <div class="photo-slot large">
+                    <span class="photo-slot-icon">📷</span>
+                    <span class="photo-slot-label">foto aluna</span>
+                </div>
+                <div class="photo-slot medium">
+                    <span class="photo-slot-icon">📷</span>
+                    <span class="photo-slot-label">foto</span>
+                </div>
+                <div class="photo-slot medium">
+                    <span class="photo-slot-icon">📷</span>
+                    <span class="photo-slot-label">foto</span>
+                </div>
+            </div>
+
+            <!-- CARDS DE DEPOIMENTOS -->
+            <div class="depoimentos-grid-dark">
+                <div class="depo-card-dark reveal">
+                    <div class="depo-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                    <div class="depo-quote">"</div>
+                    <p class="depo-text">A Bruna faz tudo parecer muito simples e fácil. Eu fazia somente o arroz com feijão bem limitado e a partir das aulas já consigo melhorar muito os meus prompts.</p>
+                    <span class="depo-author">Débora Nogueira Cobra</span>
+                </div>
+                <div class="depo-card-dark reveal">
+                    <div class="depo-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                    <div class="depo-quote">"</div>
+                    <p class="depo-text">Ta sendo tão legal fazer o curso, tenho compartilhado as coisas com meu time no dia a dia e ta sendo muito legal.</p>
+                    <span class="depo-author">Fernanda Patricio Vieira</span>
+                </div>
+                <div class="depo-card-dark reveal">
+                    <div class="depo-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                    <div class="depo-quote">"</div>
+                    <p class="depo-text">A Bruna possui conhecimento profundo na área e conduz as conversas com muita naturalidade.</p>
+                    <span class="depo-author">Sandy Ramos de Lima Silva</span>
+                </div>
+                <div class="depo-card-dark reveal">
+                    <div class="depo-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                    <div class="depo-quote">"</div>
+                    <p class="depo-text">A didática como a Bruna passa o conteúdo é sensacional. O material e as ferramentas apresentadas são incríveis.</p>
+                    <span class="depo-author">Aluna Turma MIS-04</span>
+                </div>
+                <div class="depo-card-dark reveal">
+                    <div class="depo-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                    <div class="depo-quote">"</div>
+                    <p class="depo-text">É muito lindo de ver o quanto você demonstra acreditar em tudo o que traz pra nós. E com isso, deixa o tema leve.</p>
+                    <span class="depo-author">Viviane Moreno Montenegro Pizarro</span>
+                </div>
+                <div class="depo-card-dark reveal">
+                    <div class="depo-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                    <div class="depo-quote">"</div>
+                    <p class="depo-text">Estou apaixonada pelo curso. A professora é maravilhosa, fazendo um papel muito real de facilitadora.</p>
+                    <span class="depo-author">Thaline Soares Arruda da Silva</span>
+                </div>
+            </div>
+
+            <div class="section-cta-wrap reveal" style="margin-top: 56px;">
+                <a href="#cta" style="display:inline-block; padding:16px 44px; background: var(--terracotta); color: var(--warm-white); font-family:'Outfit',sans-serif; font-size:0.88rem; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none; border-radius:10px; transition:all 0.3s ease;">Quero entrar na Turma 1</a>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- INCLUSOS -->
+    <section class="bg-warm">
+        <div class="section-inner wide">
+            <div class="reveal">
+                <span class="section-label">O que está incluso</span>
+                <h2 class="section-title">Tudo que você precisa <em>pra começar</em></h2>
+            </div>
+            <div class="inclusos-grid">
+                <div class="incluso-card reveal">
+                    <div class="incluso-icon">🎥</div>
+                    <h3 class="incluso-title">4 Aulas ao Vivo</h3>
+                    <p class="incluso-desc">1h30 cada, com Bruna Santanna. Hands-on, na tela, em tempo real.</p>
+                </div>
+                <div class="incluso-card reveal">
+                    <div class="incluso-icon">📹</div>
+                    <h3 class="incluso-title">Aulas Gravadas</h3>
+                    <p class="incluso-desc">Todas as aulas ficam gravadas pra você assistir quando e quantas vezes quiser.</p>
+                </div>
+                <div class="incluso-card reveal">
+                    <div class="incluso-icon">💬</div>
+                    <h3 class="incluso-title">Comunidade Exclusiva</h3>
+                    <p class="incluso-desc">Grupo de alunos pra tirar dúvidas, trocar cases e crescer junto.</p>
+                </div>
+                <div class="incluso-card reveal">
+                    <div class="incluso-icon">⭐</div>
+                    <h3 class="incluso-title">Condições Especiais de Compra Antecipada</h3>
+                    <p class="incluso-desc">Preço de lançamento + acesso antecipado a tudo que vier depois.</p>
+                </div>
+            </div>
+            <div class="section-cta-wrap reveal">
+                <a href="#cta" class="section-cta">Quero entrar na Turma 1</a>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- BIO -->
+    <section>
+        <div class="bio-inner">
+            <div class="bio-img-wrap reveal">
+                <img src="https://brunasantanna.com/bruna-santanna.jpg" alt="Bruna Santanna"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="bio-img-placeholder" style="display:none;">B</div>
+            </div>
+            <div class="reveal">
+                <span class="bio-label">Sua professora</span>
+                <h2 class="bio-name">Bruna Santanna</h2>
+                <p class="bio-role">Empreendedora · Educadora · Especialista em IA</p>
+                <p class="bio-text">
+                    Empresária há mais de 10 anos, Bruna construiu negócios do zero antes de descobrir que a inteligência artificial podia mudar tudo. Passou por empresas como SulAmérica, Whirlpool e Blackbox AI, fundou e operou a Casa Kahla por 8 anos e chegou ao mundo da IA sem nenhuma formação técnica.
+                    <br><br>
+                    Hoje é mentora de IA no programa Potenc.IA, parceria com OLX, Bradesco, Livelo, Magalu, B3 e CI&T, entre outras, e professora de IA e automação para equipes corporativas. Já ensinou mais de 1.000 alunas a usar IA de verdade, no trabalho e nos negócios.
+                    <br><br>
+                    A maior prova de que não precisa ser técnica pra ser referência.
+                </p>
+                <div class="bio-social">
+                    <a href="https://instagram.com/brusantanna.ai" target="_blank">Instagram</a>
+                    <a href="https://newscale.tech" target="_blank">NewScale</a>
+                    <a href="https://www.linkedin.com/in/bruna-araujo-santanna/" target="_blank">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- CTA FINAL -->
+    <section class="bg-warm" id="cta">
+        <div class="section-inner">
+            <div class="cta-box reveal">
+                <span class="section-label" style="display:block; margin-bottom:16px;">Turma 1</span>
+                <h2 class="section-title">Pronta pra sua <em>virada</em>?</h2>
+                <p class="cta-sub">Começa dia 07 de abril às 20h. Condições especiais de compra antecipada disponíveis por tempo limitado: depois esse preço não volta.</p>
+                <a href="SEU_LINK_AQUI" class="cta-primary">Quero entrar na Turma 1</a>
+                <p class="cta-final-note">4 aulas ao vivo · Gravações inclusas · Comunidade exclusiva</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p class="footer-logo">Bruna Santanna</p>
+        <p class="footer-tagline">Transformando a relação das pessoas com IA</p>
+        <div class="footer-links">
+            <a href="https://instagram.com/brusantanna.ai" target="_blank">Instagram</a>
+            <a href="https://newscale.tech" target="_blank">NewScale</a>
+            <a href="mailto:contato@newscale.tech">Contato</a>
+        </div>
+    </footer>
+
+    <script>
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+        reveals.forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
