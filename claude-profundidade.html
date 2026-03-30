@@ -695,6 +695,7 @@
             .hero-meta-item { font-size: 0.82rem; }
 
             .audience-grid { grid-template-columns: 1fr; }
+            .muda-grid { grid-template-columns: 1fr; }
             .aprende-list { grid-template-columns: 1fr; }
             .aprende-item { border-right: none !important; }
             .aprende-item:last-child { border-bottom: none !important; }
@@ -705,6 +706,40 @@
             .bio-social { justify-content: center; }
             .cta-box { padding: 48px 24px; }
             .not-for { padding: 28px 24px; }
+        }
+
+        /* O QUE MUDA GRID */
+        .muda-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 40px;
+        }
+        .muda-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            background: var(--warm-white);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px 26px;
+            transition: all 0.3s ease;
+        }
+        .muda-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(42,42,42,0.07);
+            border-color: var(--terracotta);
+        }
+        .muda-icon {
+            color: var(--terracotta);
+            font-size: 1rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .muda-item p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--charcoal);
         }
 
         /* TIMER */
@@ -765,6 +800,56 @@
             font-size: 0.88rem;
             color: var(--sage);
             font-style: italic;
+        }
+
+        /* DIFERENCIAL */
+        .diferencial-section { background: var(--charcoal); }
+        .diferencial-inner {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 96px 24px;
+        }
+        .diferencial-inner .section-label { color: rgba(255,255,255,0.4); }
+        .diferencial-inner .section-title { color: var(--warm-white); }
+        .diferencial-inner .section-title em { color: var(--terracotta); }
+        .diferencial-text {
+            font-size: 1.12rem;
+            line-height: 1.9;
+            color: rgba(255,255,255,0.7);
+            margin-top: 32px;
+        }
+        .diferencial-text p + p { margin-top: 16px; }
+        .diferencial-highlight {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--warm-white);
+            border-left: 3px solid var(--terracotta);
+            padding-left: 24px;
+            margin: 40px 0;
+            line-height: 1.55;
+        }
+        .diferencial-inner .section-cta {
+            border-color: rgba(255,255,255,0.3);
+            color: var(--warm-white);
+        }
+        .diferencial-inner .section-cta:hover {
+            background: var(--terracotta);
+            border-color: var(--terracotta);
+            color: var(--warm-white);
+        }
+
+        /* BIGGER PHOTOS */
+        .photo-slot.large {
+            width: 180px;
+            height: 180px;
+            border-radius: 16px;
+        }
+        .photo-slot.large img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 14px;
         }
     </style>
 </head>
@@ -827,16 +912,56 @@
 
     <hr class="divider">
 
-    <!-- DOR -->
-    <section class="bg-warm">
+    <!-- O QUE MUDA -->
+    <section>
         <div class="section-inner">
+            <div class="reveal">
+                <span class="section-label">Resultado</span>
+                <h2 class="section-title">O que muda, <em>na prática</em></h2>
+                <div class="dor-text" style="margin-top: 28px;">
+                    <p>Você não vai sair daqui sabendo "mais uma ferramenta".</p>
+                    <p>Você vai sair com uma nova forma de usar IA.</p>
+                </div>
+            </div>
+            <div class="muda-grid reveal">
+                <div class="muda-item">
+                    <span class="muda-icon">✦</span>
+                    <p>Clareza sobre quando, como e por que usar</p>
+                </div>
+                <div class="muda-item">
+                    <span class="muda-icon">✦</span>
+                    <p>Estrutura para parar de depender de tentativa e erro</p>
+                </div>
+                <div class="muda-item">
+                    <span class="muda-icon">✦</span>
+                    <p>Capacidade de extrair muito mais da mesma ferramenta</p>
+                </div>
+                <div class="muda-item">
+                    <span class="muda-icon">✦</span>
+                    <p>Aplicação real no seu dia a dia — negócio, trabalho ou estudo</p>
+                </div>
+            </div>
+            <div class="section-cta-wrap reveal">
+                <a href="https://chk.eduzz.com/VWGN1DPP07" class="section-cta">Quero entrar na Turma 1</a>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- VIRADA + DIFERENCIAL FUNDIDOS -->
+    <section class="diferencial-section">
+        <div class="diferencial-inner">
             <div class="reveal">
                 <span class="section-label">A virada começa aqui</span>
                 <h2 class="section-title"><em>Você já viu o Claude funcionar.</em><br>Já sentiu que tem algo diferente ali.</h2>
-                <div class="dor-text" style="margin-top: 32px;">
-                    <p>Mas o que você usou até agora é a superfície. Existe uma camada abaixo disso que muda completamente como você trabalha, produz e pensa.</p>
+                <div class="diferencial-text" style="margin-top: 32px;">
+                    <p>Mas o que você usou até agora é a superfície.</p>
+                    <p>A maioria das pessoas está focada em ferramenta: prompt, plugin, automação. Isso não resolve o problema principal.</p>
+                    <p>O que separa quem usa bem IA de quem não usa não é a ferramenta. É a forma de pensar.</p>
+                    <p>Existe uma camada abaixo do que você conhece que muda completamente como você trabalha, produz e pensa.</p>
                 </div>
-                <blockquote class="dor-highlight">
+                <blockquote class="diferencial-highlight">
                     É isso que o Curso Claude com Profundidade abre.
                 </blockquote>
             </div>
