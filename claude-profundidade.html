@@ -672,23 +672,99 @@
 
         /* RESPONSIVE */
         @media (max-width: 900px) {
-            .depoimentos-grid { grid-template-columns: repeat(2, 1fr); }
+            .depoimentos-grid-dark { grid-template-columns: repeat(2, 1fr); }
             .inclusos-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 680px) {
+            /* Header mobile */
+            .claude-header { padding: 12px 16px; }
+            .claude-logo-text { font-size: 0.78rem; }
+            .claude-logo-svg { width: 20px; height: 20px; }
+            .header-cta { padding: 7px 12px; font-size: 0.7rem; right: 16px; letter-spacing: 0.04em; }
+
+            /* Hero bullets: 2 colunas x 2 linhas */
+            .hero-meta {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px 16px;
+                text-align: left;
+                max-width: 340px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .hero-meta-item { font-size: 0.82rem; }
+
             .audience-grid { grid-template-columns: 1fr; }
             .aprende-list { grid-template-columns: 1fr; }
             .aprende-item { border-right: none !important; }
-            .aprende-item:last-child { border-bottom: none; }
-            .aprende-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--border); }
             .aprende-item:last-child { border-bottom: none !important; }
-            .depoimentos-grid { grid-template-columns: 1fr; }
+            .aprende-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--border); }
+            .depoimentos-grid-dark { grid-template-columns: 1fr; }
             .inclusos-grid { grid-template-columns: 1fr; }
             .bio-inner { flex-direction: column; text-align: center; padding: 72px 20px; }
             .bio-social { justify-content: center; }
             .cta-box { padding: 48px 24px; }
             .not-for { padding: 28px 24px; }
-            .hero-meta { flex-direction: column; gap: 12px; }
+        }
+
+        /* TIMER */
+        .timer-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.5s;
+        }
+        .timer-label {
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--sage);
+        }
+        .timer-blocks {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .timer-block {
+            background: var(--warm-white);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px 18px;
+            text-align: center;
+            min-width: 64px;
+            box-shadow: 0 2px 12px rgba(42,42,42,0.06);
+        }
+        .timer-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--terracotta);
+            line-height: 1;
+            display: block;
+        }
+        .timer-unit {
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--sage);
+            margin-top: 4px;
+            display: block;
+        }
+        .timer-sep {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--terracotta);
+            opacity: 0.5;
+            line-height: 1;
+            margin-bottom: 14px;
+        }
+        .timer-expired {
+            font-size: 0.88rem;
+            color: var(--sage);
+            font-style: italic;
         }
     </style>
 </head>
@@ -727,7 +803,26 @@
             <span class="hero-meta-item"><span class="dot"></span> Gravações inclusas</span>
         </div>
         <a href="https://chk.eduzz.com/VWGN1DPP07" class="cta-primary">Quero entrar na Turma 1</a>
-        <p class="cta-note">Condição especial de fundador por tempo limitado</p>
+        <div class="timer-wrap">
+            <span class="timer-label">⏳ Condições especiais encerram em</span>
+            <div class="timer-blocks">
+                <div class="timer-block">
+                    <span class="timer-num" id="t-horas">00</span>
+                    <span class="timer-unit">horas</span>
+                </div>
+                <span class="timer-sep">:</span>
+                <div class="timer-block">
+                    <span class="timer-num" id="t-min">00</span>
+                    <span class="timer-unit">min</span>
+                </div>
+                <span class="timer-sep">:</span>
+                <div class="timer-block">
+                    <span class="timer-num" id="t-seg">00</span>
+                    <span class="timer-unit">seg</span>
+                </div>
+            </div>
+        </div>
+
     </section>
 
     <hr class="divider">
@@ -875,19 +970,23 @@
             <div class="photo-mosaic reveal">
                 <div class="photo-slot large">
                     <span class="photo-slot-icon">📷</span>
-                    <span class="photo-slot-label">foto-aluna-1.jpg</span>
+                    <span class="photo-slot-label">foto-aluna-1.jpeg</span>
                 </div>
                 <div class="photo-slot large">
                     <span class="photo-slot-icon">📷</span>
-                    <span class="photo-slot-label">foto-aluna-2.jpg</span>
+                    <span class="photo-slot-label">foto-aluna-2.jpeg</span>
                 </div>
                 <div class="photo-slot large">
                     <span class="photo-slot-icon">📷</span>
-                    <span class="photo-slot-label">foto-aluna-3.jpg</span>
+                    <span class="photo-slot-label">foto-aluna-3.jpeg</span>
                 </div>
                 <div class="photo-slot large">
                     <span class="photo-slot-icon">📷</span>
-                    <span class="photo-slot-label">foto-aluna-4.jpg</span>
+                    <span class="photo-slot-label">foto-aluna-4.jpeg</span>
+                </div>
+                <div class="photo-slot large">
+                    <span class="photo-slot-icon">📷</span>
+                    <span class="photo-slot-label">foto-aluna-5.jpeg</span>
                 </div>
             </div>
 
@@ -1012,6 +1111,25 @@
                 <h2 class="section-title">Pronto pra sua <em>virada</em>?</h2>
                 <p class="cta-sub">Começa dia 07 de abril às 20h. Condições especiais de compra antecipada disponíveis por tempo limitado: depois esse preço não volta.</p>
                 <a href="https://chk.eduzz.com/VWGN1DPP07" class="cta-primary">Quero entrar na Turma 1</a>
+        <div class="timer-wrap">
+            <span class="timer-label">⏳ Condições especiais encerram em</span>
+            <div class="timer-blocks">
+                <div class="timer-block">
+                    <span class="timer-num" id="t-horas">00</span>
+                    <span class="timer-unit">horas</span>
+                </div>
+                <span class="timer-sep">:</span>
+                <div class="timer-block">
+                    <span class="timer-num" id="t-min">00</span>
+                    <span class="timer-unit">min</span>
+                </div>
+                <span class="timer-sep">:</span>
+                <div class="timer-block">
+                    <span class="timer-num" id="t-seg">00</span>
+                    <span class="timer-unit">seg</span>
+                </div>
+            </div>
+        </div>
                 <p class="cta-final-note">4 aulas ao vivo · Gravações inclusas · Comunidade exclusiva</p>
             </div>
         </div>
@@ -1041,5 +1159,46 @@
         reveals.forEach(el => observer.observe(el));
     </script>
 
+
+    <script>
+        // Timer até meia noite de hoje (horário de Brasília)
+        function getTargetTime() {
+            // Pega hoje no horário de Brasília (UTC-3)
+            const now = new Date();
+            const brtOffset = -3 * 60; // UTC-3 em minutos
+            const localOffset = now.getTimezoneOffset();
+            const diff = (localOffset + brtOffset) * 60 * 1000;
+            const brtNow = new Date(now.getTime() + diff);
+            
+            // Meia noite de hoje em BRT
+            const midnight = new Date(brtNow);
+            midnight.setHours(24, 0, 0, 0);
+            
+            // Converte de volta pra UTC
+            return new Date(midnight.getTime() - diff);
+        }
+
+        function updateTimer() {
+            const target = getTargetTime();
+            const now = new Date();
+            const diff = target - now;
+
+            if (diff <= 0) {
+                document.querySelector('.timer-blocks').innerHTML = '<span class="timer-expired">Condições especiais encerradas</span>';
+                return;
+            }
+
+            const h = Math.floor(diff / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('t-horas').textContent = String(h).padStart(2, '0');
+            document.getElementById('t-min').textContent = String(m).padStart(2, '0');
+            document.getElementById('t-seg').textContent = String(s).padStart(2, '0');
+        }
+
+        updateTimer();
+        setInterval(updateTimer, 1000);
+    </script>
 </body>
 </html>
