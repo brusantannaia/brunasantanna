@@ -195,61 +195,59 @@
             text-align: center;
         }
 
-        /* Kit overrides */
-        .formkit-form[data-uid="4083a3a8df"] { max-width: 100% !important; }
-        .formkit-form[data-uid="4083a3a8df"] [data-style="clean"] { padding: 0 !important; background: transparent !important; }
-        .formkit-form[data-uid="4083a3a8df"] .formkit-fields {
-            display: flex !important;
-            flex-direction: column !important;
-            gap: 12px !important;
-            flex-wrap: nowrap !important;
+        .own-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
-        .formkit-form[data-uid="4083a3a8df"] .formkit-field {
-            flex: none !important;
-            width: 100% !important;
-            margin: 0 !important;
+
+        .own-form input[type="email"] {
+            width: 100%;
+            padding: 18px 22px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            background: var(--cream);
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            color: var(--charcoal);
+            outline: none;
+            transition: border-color 0.25s, background 0.25s;
         }
-        .formkit-form[data-uid="4083a3a8df"] .formkit-input {
-            width: 100% !important;
-            padding: 18px 22px !important;
-            font-family: 'Outfit', sans-serif !important;
-            font-size: 1rem !important;
-            background: var(--cream) !important;
-            border: 1.5px solid var(--border) !important;
-            border-radius: 10px !important;
-            color: var(--charcoal) !important;
-            transition: border-color 0.25s, background 0.25s !important;
-            outline: none !important;
+
+        .own-form input[type="email"]::placeholder { color: #9CA3A0; }
+
+        .own-form input[type="email"]:focus {
+            border-color: var(--terracotta);
+            background: var(--warm-white);
         }
-        .formkit-form[data-uid="4083a3a8df"] .formkit-input::placeholder { color: #9CA3A0 !important; }
-        .formkit-form[data-uid="4083a3a8df"] .formkit-input:focus {
-            border-color: var(--terracotta) !important;
-            background: var(--warm-white) !important;
+
+        .own-form button {
+            width: 100%;
+            padding: 18px 32px;
+            background-color: #B06E4A;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            color: #FDFCFA;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
         }
-        .formkit-form[data-uid="4083a3a8df"] .formkit-submit {
-            flex: none !important;
-            width: 100% !important;
-            margin: 0 !important;
-            padding: 18px 32px !important;
-            background-color: #B06E4A !important;
-            font-family: 'Outfit', sans-serif !important;
-            font-size: 0.9rem !important;
-            font-weight: 500 !important;
-            letter-spacing: 0.07em !important;
-            text-transform: uppercase !important;
-            color: #FDFCFA !important;
-            border: none !important;
-            border-radius: 10px !important;
-            cursor: pointer !important;
-            transition: background 0.25s, transform 0.2s, box-shadow 0.25s !important;
+
+        .own-form button:hover {
+            background-color: #A66548;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(176,110,74,0.25);
         }
-        .formkit-form[data-uid="4083a3a8df"] .formkit-submit:hover {
-            background-color: #A66548 !important;
-            transform: translateY(-2px) !important;
-            box-shadow: 0 8px 24px rgba(176,110,74,0.25) !important;
+
+        .own-form button:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+            transform: none;
         }
-        .formkit-form[data-uid="4083a3a8df"] .formkit-submit > span { padding: 0 !important; }
-        .formkit-form[data-uid="4083a3a8df"] .formkit-powered-by-convertkit-container { display: none !important; }
 
         .privacy {
             margin-top: 14px;
@@ -393,20 +391,9 @@
                 <h2 class="form-heading">Receba agora, grátis.</h2>
                 <p class="form-sub">Seu email. Nada mais. O guia chega na hora.</p>
 
-                <script src="https://f.convertkit.com/ckjs/ck.5.js"></script>
-                <form action="https://app.kit.com/forms/9211214/subscriptions" class="seva-form formkit-form" method="post" data-sv-form="9211214" data-uid="4083a3a8df" data-format="inline" data-version="5" data-options="{&quot;settings&quot;:{&quot;after_subscribe&quot;:{&quot;action&quot;:&quot;redirect&quot;,&quot;success_message&quot;:&quot;Success! Now check your email to confirm your subscription.&quot;,&quot;redirect_url&quot;:&quot;&quot;},&quot;analytics&quot;:{&quot;google&quot;:null,&quot;fathom&quot;:null,&quot;facebook&quot;:null,&quot;segment&quot;:null,&quot;pinterest&quot;:null,&quot;sparkloop&quot;:null,&quot;googletagmanager&quot;:null},&quot;modal&quot;:{&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15},&quot;powered_by&quot;:{&quot;show&quot;:true,&quot;url&quot;:&quot;https://kit.com/features/forms?utm_campaign=poweredby&amp;utm_content=form&amp;utm_medium=referral&amp;utm_source=dynamic&quot;},&quot;recaptcha&quot;:{&quot;enabled&quot;:false},&quot;return_visitor&quot;:{&quot;action&quot;:&quot;show&quot;,&quot;custom_content&quot;:&quot;&quot;},&quot;slide_in&quot;:{&quot;display_in&quot;:&quot;bottom_right&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15},&quot;sticky_bar&quot;:{&quot;display_in&quot;:&quot;top&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15}},&quot;version&quot;:&quot;5&quot;}" min-width="400 500 600 700 800">
-                    <div data-style="clean">
-                        <ul class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert"></ul>
-                        <div data-element="fields" data-stacked="false" class="seva-fields formkit-fields">
-                            <div class="formkit-field">
-                                <input class="formkit-input" name="email_address" aria-label="Seu melhor email" placeholder="Seu melhor email" required type="email">
-                            </div>
-                            <button data-element="submit" class="formkit-submit formkit-submit">
-                                <div class="formkit-spinner"><div></div><div></div><div></div></div>
-                                <span>Quero o guia</span>
-                            </button>
-                        </div>
-                    </div>
+                <form class="own-form" id="leadForm" novalidate>
+                    <input type="email" id="emailInput" placeholder="Seu melhor email" required autocomplete="email">
+                    <button type="submit" id="submitBtn">Quero o guia</button>
                 </form>
 
                 <p class="privacy">Zero spam. Só conteúdo que vale seu tempo.</p>
@@ -440,6 +427,33 @@
     </footer>
 
 </div>
+
+<script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx90IdrA_L6n3jVdoYBinBPxPfWq0h6Iua1MrI8gQ7-RgBXhU1rOqF9dM2n7mLdAeMW/exec";
+    const REDIRECT   = "https://brunasantanna.com/guia-claude-bruna.pdf";
+
+    document.getElementById("leadForm").addEventListener("submit", async function(e) {
+        e.preventDefault();
+        const email = document.getElementById("emailInput").value.trim();
+        const btn   = document.getElementById("submitBtn");
+
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
+
+        btn.disabled    = true;
+        btn.textContent = "Enviando...";
+
+        try {
+            await fetch(SCRIPT_URL, {
+                method:  "POST",
+                mode:    "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body:    JSON.stringify({ email, timestamp: new Date().toISOString(), source: location.href })
+            });
+        } catch(_) {}
+
+        window.location.href = REDIRECT;
+    });
+</script>
 
 </body>
 </html>
