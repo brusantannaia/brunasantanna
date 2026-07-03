@@ -269,7 +269,9 @@
             <a href="/">Home</a>
             <a href="/biblioteca">Biblioteca</a>
             <a href="/claude">Guia do Claude</a>
-            <a href="https://newscale.tech" target="_blank" rel="noopener">IA na sua Empresa</a>
+            <a href="/quem-sou">Quem Sou</a>
+            <a href="/treinamentos">Treinamentos Corporativos</a>
+            <a href="/mentoria">Mentoria</a>
             <a href="/curso" class="nav-cta">Quero o curso</a>
         </nav>
         <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">☰</button>
@@ -435,6 +437,16 @@ Em cada item, me diga: quem enviou, o assunto em uma frase e o que a pessoa espe
     </div>
 </section>
 
+<!-- ========== LEIA TAMBÉM ========== -->
+<div class="wrap" style="max-width:760px;margin:0 auto 8px;">
+    <div style="border:1.5px solid rgba(20,55,60,0.16);border-radius:16px;background:#FBF9F3;padding:24px 26px;">
+        <span style="display:block;font-size:0.72rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#B06E4A;margin-bottom:14px;">Continue aprendendo</span>
+        <a href="/guia-whatsapp-leads" style="display:block;font-size:1rem;font-weight:600;color:#14373C;padding:10px 0;border-top:1px solid rgba(20,55,60,0.10);">Recupere no WhatsApp os leads que morreram no vácuo →</a>
+        <a href="/guia-extensao-chrome" style="display:block;font-size:1rem;font-weight:600;color:#14373C;padding:10px 0;border-top:1px solid rgba(20,55,60,0.10);">A extensão do Claude no Chrome: seu copiloto dentro de qualquer site →</a>
+        <a href="/claude" style="display:block;font-size:1rem;font-weight:600;color:#14373C;padding:10px 0;border-top:1px solid rgba(20,55,60,0.10);">O Guia Definitivo do Claude em Português →</a>
+    </div>
+</div>
+
 <!-- ========== BANNER DO CURSO ========== -->
 <section class="curso-banner">
     <div class="wrap">
@@ -460,6 +472,8 @@ Em cada item, me diga: quem enviou, o assunto em uma frase e o que a pessoa espe
                 <a href="/biblioteca">Biblioteca</a>
                 <a href="/claude">Guia do Claude</a>
                 <a href="/curso">Curso de Claude</a>
+                <a href="/mentoria">Mentoria</a>
+                <a href="/comece">Comece por aqui</a>
                 <a href="https://instagram.com/brusantanna.ai" target="_blank" rel="noopener">Instagram</a>
                 <a href="https://newscale.tech" target="_blank" rel="noopener">NewScale</a>
                 <a href="mailto:eu@brunasantanna.com">Contato</a>
@@ -523,7 +537,93 @@ Em cada item, me diga: quem enviou, o assunto em uma frase e o que a pessoa espe
     // ===== reveal on scroll =====
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold:.12, rootMargin:'0px 0px -40px 0px' });
     document.querySelectorAll('.rv').forEach((el,i) => { el.style.transitionDelay = (i%3*70)+'ms'; io.observe(el); });
+
+    // ===== Popup exit-intent do curso (list: 'curso') =====
+    (function(){
+        var ov = document.getElementById('cursoPopOv');
+        if (!ov || localStorage.getItem('curso_popup') === '1') return;
+        var card = ov.querySelector('.curso-pop');
+        var shown = false;
+        function openPop(){
+            if (shown || localStorage.getItem('curso_popup') === '1') return;
+            shown = true;
+            localStorage.setItem('curso_popup', '1');
+            ov.classList.add('open');
+        }
+        function closePop(){ ov.classList.remove('open'); }
+        // desktop: mouseleave pelo topo
+        document.addEventListener('mouseleave', function(e){ if (e.clientY <= 0) openPop(); });
+        // mobile: 45s OU 60% de scroll
+        var isTouch = window.matchMedia('(max-width:820px)').matches || ('ontouchstart' in window);
+        if (isTouch) {
+            setTimeout(openPop, 45000);
+            window.addEventListener('scroll', function onScroll(){
+                var h = document.documentElement;
+                var pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight || 1);
+                if (pct >= 0.6) { openPop(); window.removeEventListener('scroll', onScroll); }
+            }, { passive:true });
+        }
+        document.getElementById('cursoPopClose').addEventListener('click', closePop);
+        ov.addEventListener('click', function(e){ if (e.target === ov) closePop(); });
+        document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && ov.classList.contains('open')) closePop(); });
+        // submit -> list: 'curso'
+        document.getElementById('cursoPopForm').addEventListener('submit', async function(e){
+            e.preventDefault();
+            var input = this.querySelector('input[type="email"]');
+            var btn = this.querySelector('button[type="submit"]');
+            var email = input.value.trim();
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { input.focus(); return; }
+            btn.disabled = true; btn.textContent = 'Enviando...';
+            try {
+                await fetch(SCRIPT_URL, { method:'POST', mode:'no-cors',
+                    headers:{ 'Content-Type':'application/json' },
+                    body: JSON.stringify({ email: email, list:'curso', timestamp:new Date().toISOString(), source: location.href }) });
+            } catch(_) {}
+            if (typeof gtag === 'function') gtag('event', 'lead_signup', { list:'curso' });
+            card.classList.add('done');
+        });
+    })();
+
 </script>
+
+
+<!-- ===== POPUP EXIT-INTENT CURSO ===== -->
+<style id="cursoPopupCss">
+  .curso-pop-ov { position:fixed; inset:0; z-index:9000; display:none; align-items:center; justify-content:center; padding:24px; background:rgba(20,55,60,.55); backdrop-filter:blur(4px); }
+  .curso-pop-ov.open { display:flex; }
+  .curso-pop { position:relative; width:100%; max-width:440px; background:var(--ink); color:#fff; border-radius:20px; padding:38px 32px 34px; box-shadow:10px 10px 0 var(--terra); animation:cursoPopIn .28s cubic-bezier(.2,.7,.2,1); }
+  @keyframes cursoPopIn { from { opacity:0; transform:translateY(18px) scale(.98); } to { opacity:1; transform:none; } }
+  .curso-pop .cp-close { position:absolute; top:14px; right:16px; background:none; border:none; color:rgba(244,243,239,.55); font-size:1.5rem; line-height:1; cursor:pointer; transition:color .18s; }
+  .curso-pop .cp-close:hover { color:#fff; }
+  .curso-pop .cp-kick { font-size:0.7rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--terra-l); margin-bottom:12px; }
+  .curso-pop h3 { font-family:'Anton',sans-serif; font-weight:400; font-size:1.9rem; line-height:1; text-transform:uppercase; color:#fff; margin-bottom:12px; }
+  .curso-pop p { font-size:0.94rem; color:rgba(244,243,239,.78); font-weight:300; line-height:1.55; margin-bottom:20px; }
+  .curso-pop .cp-form { display:flex; flex-direction:column; gap:10px; }
+  .curso-pop .cp-form input { width:100%; padding:14px 16px; border-radius:100px; border:1.5px solid rgba(244,243,239,.25); background:rgba(244,243,239,.06); color:#fff; font-family:inherit; font-size:0.92rem; }
+  .curso-pop .cp-form input::placeholder { color:rgba(244,243,239,.45); }
+  .curso-pop .cp-form input:focus { outline:none; border-color:var(--terra-l); }
+  .curso-pop .cp-form button { padding:14px 20px; border-radius:100px; border:none; background:var(--terra); color:#fff; font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:0.82rem; letter-spacing:.04em; text-transform:uppercase; cursor:pointer; transition:background .2s, transform .15s; }
+  .curso-pop .cp-form button:hover { background:var(--terra-d); transform:translateY(-1px); }
+  .curso-pop .cp-form button:disabled { opacity:.6; cursor:default; transform:none; }
+  .curso-pop .cp-link { display:inline-block; margin-top:14px; font-size:0.82rem; font-weight:700; color:var(--terra-l); border-bottom:2px solid var(--terra); padding-bottom:2px; }
+  .curso-pop .cp-done { display:none; font-size:0.98rem; color:#fff; font-weight:600; }
+  .curso-pop.done .cp-form, .curso-pop.done p { display:none; }
+  .curso-pop.done .cp-done { display:block; }
+</style>
+<div class="curso-pop-ov" id="cursoPopOv" role="dialog" aria-modal="true" aria-label="Coorte 1 do curso">
+  <div class="curso-pop">
+    <button class="cp-close" id="cursoPopClose" aria-label="Fechar">×</button>
+    <div class="cp-kick">Coorte 1 · Começa 17/08</div>
+    <h3>A Coorte 1 do curso abre em agosto</h3>
+    <p>Claude com Profundidade: a nova forma de pensar e usar IA, sem programar. Deixa seu email que eu te aviso quando a lista da Coorte 1 abrir.</p>
+    <form class="cp-form" id="cursoPopForm">
+      <input type="email" placeholder="seu@email.com" aria-label="Seu email" required>
+      <button type="submit">Quero ser avisada</button>
+    </form>
+    <div class="cp-done">Prontinho. Você tá na lista da Coorte 1. Te aviso por email. 💌</div>
+    <a href="/curso" class="cp-link">Ver o curso →</a>
+  </div>
+</div>
 
 </body>
 </html>

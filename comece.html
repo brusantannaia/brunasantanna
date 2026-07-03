@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comece por aqui | Bruna Santanna</title>
+    <meta name="description" content="Os guias, a biblioteca e o curso de Claude da Bruna Santanna, num lugar só. Comece por aqui.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Comece por aqui · Bruna Santanna · A Virada IA">
+    <meta property="og:description" content="Os guias mais pedidos, a biblioteca completa e o curso de Claude, num lugar só.">
+
+    <link rel="canonical" href="https://brunasantanna.com/comece">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DCW0QVCWB"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-7DCW0QVCWB');
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg:#F3EEE3; --bg-2:#ECE5D6; --card:#FBF9F3;
+            --ink:#14373C; --ink-2:#2C4F54; --green:#435D51;
+            --terra:#B06E4A; --terra-l:#C4835E; --terra-d:#985A3B;
+            --text:#233133; --muted:#6E7A75; --line:rgba(20,55,60,0.16);
+            --cream:#F4F3EF;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family:'Hanken Grotesk',sans-serif; background:var(--bg); color:var(--text); line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+        img { max-width:100%; display:block; }
+        a { color:inherit; text-decoration:none; }
+        ::selection { background:var(--terra); color:#fff; }
+
+        /* ---------- CONTAINER MOBILE-FIRST ---------- */
+        .shell { max-width:520px; margin:0 auto; padding:0 20px 60px; }
+
+        /* mini-header */
+        .topbar { display:flex; align-items:center; justify-content:center; padding:18px 0 4px; }
+        .topbar a { font-family:'Anton',sans-serif; font-size:1.05rem; letter-spacing:.02em; text-transform:uppercase; color:var(--ink); display:inline-flex; align-items:center; }
+        .topbar .brand-tag { font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:.56rem; letter-spacing:.12em; color:var(--terra); border:1.5px solid var(--terra); padding:3px 8px; border-radius:100px; margin-left:9px; }
+
+        /* perfil */
+        .profile { text-align:center; padding:22px 0 26px; }
+        .avatar { width:92px; height:92px; border-radius:50%; margin:0 auto 16px; overflow:hidden; border:2.5px solid var(--ink); box-shadow:5px 5px 0 var(--terra); background:linear-gradient(135deg,#1d4a4f,#14373C 55%,#0e2a2e); position:relative; }
+        .avatar img { width:100%; height:100%; object-fit:cover; }
+        .avatar .fallback { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:'Anton',sans-serif; font-size:1.9rem; color:rgba(245,243,239,.9); }
+        .profile h1 { font-family:'Anton',sans-serif; font-weight:400; font-size:1.5rem; text-transform:uppercase; color:var(--ink); line-height:1; letter-spacing:.005em; }
+        .profile .bio { font-size:.94rem; color:var(--ink-2); font-weight:400; margin-top:10px; max-width:34ch; margin-left:auto; margin-right:auto; }
+        .profile .bio b { color:var(--ink); font-weight:700; }
+
+        /* rótulo de seção */
+        .grp-label { font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:.82rem; letter-spacing:.02em; color:var(--ink); text-align:center; margin:22px 0 14px; }
+
+        /* card base (área de toque generosa) */
+        .card {
+            display:flex; align-items:center; gap:15px;
+            width:100%; min-height:60px; padding:16px 18px; margin-bottom:13px;
+            background:var(--card); border:2px solid var(--ink); border-radius:16px;
+            box-shadow:5px 5px 0 var(--ink);
+            transition:transform .14s ease, box-shadow .14s ease;
+            -webkit-tap-highlight-color:transparent;
+        }
+        .card:active { transform:translate(2px,2px); box-shadow:3px 3px 0 var(--ink); }
+        @media (hover:hover) { .card:hover { transform:translate(-1px,-1px); box-shadow:7px 7px 0 var(--ink); } }
+        .card .ic { flex:0 0 auto; font-size:1.5rem; line-height:1; width:26px; text-align:center; }
+        .card .txt { flex:1; min-width:0; }
+        .card .t { font-weight:700; font-size:1.02rem; color:var(--ink); line-height:1.2; }
+        .card .s { font-size:.82rem; color:var(--muted); margin-top:2px; line-height:1.35; }
+        .card .arw { flex:0 0 auto; font-family:'Anton',sans-serif; color:var(--terra); font-size:1.1rem; }
+
+        /* variantes */
+        .card.dark { background:var(--ink); border-color:var(--ink); box-shadow:5px 5px 0 var(--terra); }
+        .card.dark .t { color:#fff; } .card.dark .s { color:rgba(244,243,239,.6); } .card.dark .arw { color:var(--terra-l); }
+        .card.dark:active { box-shadow:3px 3px 0 var(--terra); }
+        @media (hover:hover) { .card.dark:hover { box-shadow:7px 7px 0 var(--terra); } }
+
+        .card.terra { background:var(--terra); border-color:var(--terra-d); box-shadow:5px 5px 0 var(--ink); }
+        .card.terra .t { color:#fff; } .card.terra .s { color:rgba(255,255,255,.82); } .card.terra .arw { color:#fff; }
+        .card.terra:active { box-shadow:3px 3px 0 var(--ink); }
+        @media (hover:hover) { .card.terra:hover { box-shadow:7px 7px 0 var(--ink); } }
+
+        /* divisor */
+        .divider { height:2px; background:var(--line); border:none; margin:26px 4px; }
+
+        /* form de email */
+        .cap { background:var(--bg-2); border:2px solid var(--ink); border-radius:18px; padding:24px 20px; margin-top:26px; box-shadow:5px 5px 0 var(--ink); }
+        .cap h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:1.35rem; text-transform:uppercase; color:var(--ink); line-height:1; text-align:center; }
+        .cap p { font-size:.88rem; color:var(--ink-2); text-align:center; margin:9px 0 16px; }
+        .cap form { display:flex; flex-direction:column; gap:10px; }
+        .cap input { width:100%; padding:15px 16px; border:2px solid var(--ink); border-radius:12px; background:var(--card); font-family:inherit; font-size:1rem; color:var(--ink); }
+        .cap input:focus { outline:none; border-color:var(--terra); }
+        .cap button { width:100%; min-height:54px; padding:15px; border:none; border-radius:12px; background:var(--terra); color:#fff; font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:.9rem; letter-spacing:.04em; text-transform:uppercase; cursor:pointer; transition:background .2s; -webkit-tap-highlight-color:transparent; }
+        .cap button:hover { background:var(--terra-d); }
+        .cap button:disabled { opacity:.6; }
+        .cap .done { text-align:center; color:var(--green); font-weight:700; font-size:.95rem; padding:8px 0; }
+        .cap .fine { font-size:.72rem; color:var(--muted); text-align:center; margin-top:10px; }
+
+        /* rodapé mini */
+        .foot { text-align:center; padding:34px 0 0; }
+        .foot .fl { display:flex; flex-wrap:wrap; justify-content:center; gap:8px 16px; margin-bottom:16px; }
+        .foot .fl a { font-size:.82rem; font-weight:600; color:var(--ink-2); }
+        .foot .fl a:active, .foot .fl a:hover { color:var(--terra); }
+        .foot .cp { font-size:.72rem; color:var(--muted); }
+    </style>
+</head>
+<body>
+
+<div class="shell">
+
+    <!-- MINI-HEADER (só logo → home) -->
+    <div class="topbar">
+        <a href="/">Bruna Santanna<span class="brand-tag">A Virada IA</span></a>
+    </div>
+
+    <!-- PERFIL -->
+    <div class="profile">
+        <div class="avatar">
+            <img src="fotos/bruna-hero.jpg" alt="Bruna Santanna" onerror="this.remove()">
+            <div class="fallback">BS</div>
+        </div>
+        <h1>Bruna Santanna</h1>
+        <p class="bio"><b>Estrategista de IA · A Virada IA.</b> Te ensino a usar o Claude de verdade. Escolhe por onde começar 👇</p>
+    </div>
+
+    <!-- GUIAS MAIS PEDIDOS -->
+    <div class="grp-label">🔥 Guias mais pedidos</div>
+
+    <a href="/guia-extensao-chrome" class="card" data-label="guia-extensao-chrome">
+        <span class="ic">🧩</span>
+        <span class="txt"><span class="t">Extensão do Claude no Chrome</span><span class="s">O Claude direto no seu navegador</span></span>
+        <span class="arw">→</span>
+    </a>
+
+    <a href="/guia-configurar-claude" class="card" data-label="guia-configurar-claude">
+        <span class="ic">⚙️</span>
+        <span class="txt"><span class="t">Configurar o Claude do zero</span><span class="s">Deixa ele com a sua cara em minutos</span></span>
+        <span class="arw">→</span>
+    </a>
+
+    <a href="/guia-analisar-conteudo" class="card" data-label="guia-analisar-conteudo">
+        <span class="ic">📊</span>
+        <span class="txt"><span class="t">Analisar seu conteúdo com IA</span><span class="s">Descobre o que funciona no seu perfil</span></span>
+        <span class="arw">→</span>
+    </a>
+
+    <a href="/guia-tres-comandos" class="card" data-label="guia-tres-comandos">
+        <span class="ic">✨</span>
+        <span class="txt"><span class="t">3 comandos que mudam tudo</span><span class="s">O básico que faz o Claude trabalhar por você</span></span>
+        <span class="arw">→</span>
+    </a>
+
+    <a href="/claude" class="card" data-label="guia-do-claude">
+        <span class="ic">📖</span>
+        <span class="txt"><span class="t">O Guia completo do Claude</span><span class="s">Do primeiro prompt ao uso avançado</span></span>
+        <span class="arw">→</span>
+    </a>
+
+    <!-- BIBLIOTECA (destaque escuro) -->
+    <hr class="divider">
+
+    <a href="/biblioteca" class="card dark" data-label="biblioteca">
+        <span class="ic">📚</span>
+        <span class="txt"><span class="t">A Biblioteca completa</span><span class="s">Todo prompt e recurso que eu compartilho · grátis</span></span>
+        <span class="arw">→</span>
+    </a>
+
+    <!-- CURSO (terra) -->
+    <a href="/curso" class="card terra" data-label="curso">
+        <span class="ic">🎓</span>
+        <span class="txt"><span class="t">Curso Claude com Profundidade</span><span class="s">Entra na lista da Coorte 1 · começa 17/08</span></span>
+        <span class="arw">→</span>
+    </a>
+
+    <!-- NEWSCALE -->
+    <a href="https://newscale.tech" target="_blank" rel="noopener" class="card" data-label="newscale">
+        <span class="ic">💼</span>
+        <span class="txt"><span class="t">IA na sua empresa (NewScale)</span><span class="s">A gente instala a IA que faz o trabalho por você</span></span>
+        <span class="arw">↗</span>
+    </a>
+
+    <!-- MENTORIA -->
+    <a href="/mentoria" class="card" data-label="mentoria">
+        <span class="ic">🤝</span>
+        <span class="txt"><span class="t">Mentoria com a Bruna</span><span class="s">Acompanhamento de perto · vagas limitadas</span></span>
+        <span class="arw">→</span>
+    </a>
+
+    <!-- CAPTURA DE EMAIL -->
+    <div class="cap">
+        <h2>Quer os guias novos?</h2>
+        <p>Deixa seu email que eu te aviso quando sair um guia novo. Sem spam.</p>
+        <form id="capForm">
+            <input type="email" id="capEmail" placeholder="seu@email.com" autocomplete="email" required>
+            <button type="submit" id="capBtn">Quero ser avisada</button>
+        </form>
+        <div class="fine">Um email de vez em quando. Você sai quando quiser.</div>
+    </div>
+
+    <!-- RODAPÉ MINI -->
+    <div class="foot">
+        <nav class="fl">
+            <a href="/biblioteca">Biblioteca</a>
+            <a href="/claude">Guia do Claude</a>
+            <a href="/curso">Curso</a>
+            <a href="/mentoria">Mentoria</a>
+            <a href="https://instagram.com/brusantanna.ai" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://newscale.tech" target="_blank" rel="noopener">NewScale</a>
+            <a href="https://www.linkedin.com/in/bruna-araujo-santanna/" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="mailto:eu@brunasantanna.com">Contato</a>
+        </nav>
+        <p class="cp">© 2026 Bruna Santanna · A Virada IA</p>
+    </div>
+
+</div>
+
+<script>
+    // ===== GA: clique em cada card (label por destino) =====
+    document.querySelectorAll('.card[data-label]').forEach(card => {
+        card.addEventListener('click', () => {
+            gtag('event', 'biolink_click', { label: card.getAttribute('data-label'), source: location.href });
+        });
+    });
+
+    // ===== CAPTURA DE EMAIL (list: 'comece') =====
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx90IdrA_L6n3jVdoYBinBPxPfWq0h6Iua1MrI8gQ7-RgBXhU1rOqF9dM2n7mLdAeMW/exec";
+    const CAP_KEY = 'comece_email';
+    const form = document.getElementById('capForm');
+    const cap = document.querySelector('.cap');
+
+    function showDone() {
+        cap.innerHTML = '<h2>Prontinho!</h2><div class="done">✓ Você tá na lista. Já já te aviso dos guias novos.</div>';
+    }
+    if (localStorage.getItem(CAP_KEY)) showDone();
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const input = document.getElementById('capEmail');
+        const btn = document.getElementById('capBtn');
+        const email = input.value.trim();
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { input.focus(); return; }
+        btn.disabled = true; btn.textContent = 'Enviando...';
+        try {
+            await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, list: 'comece', timestamp: new Date().toISOString(), source: location.href }) });
+        } catch(_) {}
+        gtag('event', 'lead_capture', { list: 'comece' });
+        localStorage.setItem(CAP_KEY, email);
+        showDone();
+    });
+</script>
+
+</body>
+</html>

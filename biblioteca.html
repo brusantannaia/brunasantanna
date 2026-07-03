@@ -290,6 +290,16 @@
         .filters-head h2 { font-family: 'Anton', sans-serif; font-weight: 400; font-size: 2.2rem; text-transform: uppercase; color: var(--ink); line-height: 1; }
         .feed-count { font-size: 0.82rem; font-weight: 600; color: var(--muted); }
 
+        .filter-toggle {
+            font-family: 'Hanken Grotesk', sans-serif; font-size: 0.84rem; font-weight: 700;
+            letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer;
+            background: var(--card); color: var(--ink); border: 1.5px solid var(--ink);
+            padding: 9px 18px; border-radius: 100px; transition: all .18s;
+            display: inline-flex; align-items: center; gap: 7px;
+        }
+        .filter-toggle:hover, .filter-toggle[aria-expanded="true"] { background: var(--ink); color: #fff; }
+        .filter-toggle[aria-expanded="true"] #filterArrow { display:inline-block; transform: rotate(180deg); }
+        .filters { background: var(--card); border: 1.5px solid var(--line); border-radius: 14px; padding: 16px 18px 8px; margin-bottom: 6px; }
         .filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; align-items: center; }
         .filter-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); width: 56px; }
         .chip {
@@ -371,7 +381,9 @@
             <a href="/">Home</a>
             <a href="/biblioteca" class="active">Biblioteca</a>
             <a href="/claude">Guia do Claude</a>
-            <a href="https://newscale.tech" target="_blank" rel="noopener">IA na sua Empresa</a>
+            <a href="/quem-sou">Quem Sou</a>
+            <a href="/treinamentos">Treinamentos Corporativos</a>
+            <a href="/mentoria">Mentoria</a>
             <a href="/curso" class="nav-cta">Quero o curso</a>
         </nav>
         <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">☰</button>
@@ -442,10 +454,13 @@
 
         <div class="filters-head">
             <h2>O feed</h2>
-            <span class="feed-count" id="feedCount"></span>
+            <div style="display:flex; align-items:center; gap:14px;">
+                <span class="feed-count" id="feedCount"></span>
+                <button class="filter-toggle" id="filterToggle" aria-expanded="false" aria-controls="filtersPanel">Filtrar <span id="filterArrow">▾</span></button>
+            </div>
         </div>
 
-        <div class="filters">
+        <div class="filters" id="filtersPanel" hidden>
             <div class="filter-row">
                 <span class="filter-label">Formato</span>
                 <button class="chip active" data-filter="formato" data-value="all">Todos</button>
@@ -486,6 +501,8 @@
                 <a href="/biblioteca">Biblioteca</a>
                 <a href="/claude">Guia do Claude</a>
                 <a href="/curso">Curso de Claude</a>
+                <a href="/mentoria">Mentoria</a>
+                <a href="/comece">Comece por aqui</a>
                 <a href="https://instagram.com/brusantanna.ai" target="_blank" rel="noopener">Instagram</a>
                 <a href="https://newscale.tech" target="_blank" rel="noopener">NewScale</a>
                 <a href="mailto:eu@brunasantanna.com">Contato</a>
@@ -1476,6 +1493,15 @@ Quando eu escolher, cria roteiro dia a dia com logística completa.` },
             });
         }
     }
+
+    // toggle dos filtros (colapsados por padrão)
+    const filterToggle = document.getElementById('filterToggle');
+    const filtersPanel = document.getElementById('filtersPanel');
+    filterToggle.addEventListener('click', () => {
+        const aberto = filtersPanel.hidden;
+        filtersPanel.hidden = !aberto;
+        filterToggle.setAttribute('aria-expanded', aberto ? 'true' : 'false');
+    });
 
     // menu mobile
     const navToggle = document.getElementById('navToggle');

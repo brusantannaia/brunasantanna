@@ -124,6 +124,16 @@
         .frente p { font-size:0.92rem; color:var(--text); line-height:1.55; margin-bottom:20px; flex:1; }
         .frente .go { font-size:0.82rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--ink); border-bottom:2px solid var(--terra); padding-bottom:3px; align-self:flex-start; transition:color .18s; }
         .frente:hover .go { color:var(--terra); }
+        .frentes-extra { display:flex; flex-wrap:wrap; gap:14px 32px; margin-top:26px; padding-top:22px; border-top:1px solid var(--line); }
+        .frentes-extra a { font-size:0.9rem; font-weight:600; color:var(--ink-2); display:inline-flex; align-items:center; gap:7px; transition:color .18s; }
+        .frentes-extra a span { color:var(--terra); font-weight:700; transition:transform .18s; }
+        .frentes-extra a:hover { color:var(--terra); }
+        .frentes-extra a:hover span { transform:translateX(3px); }
+
+        /* manifesto */
+        .manifesto-home { background:var(--bg-2); border-top:2px solid var(--ink); border-bottom:2px solid var(--ink); padding:72px 0; }
+        .manifesto-home p { font-family:'Anton',sans-serif; font-weight:400; text-transform:uppercase; font-size:clamp(1.8rem,4.8vw,3.2rem); line-height:1.05; letter-spacing:0.005em; color:var(--ink); max-width:900px; }
+        .manifesto-home span { color:var(--terra); }
 
         /* novidades */
         .nov { background:var(--bg-2); }
@@ -186,8 +196,9 @@
         <nav class="main-nav" id="mainNav">
             <a href="/biblioteca">Biblioteca</a>
             <a href="/claude">Guia do Claude</a>
-            <a href="https://newscale.tech" target="_blank" rel="noopener">IA na sua Empresa</a>
-            <a href="#quem-sou">Quem Sou</a>
+            <a href="/quem-sou">Quem Sou</a>
+            <a href="/treinamentos">Treinamentos Corporativos</a>
+            <a href="/mentoria">Mentoria</a>
             <a href="/curso" class="nav-cta">Curso de Claude</a>
         </nav>
         <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">☰</button>
@@ -234,8 +245,8 @@
     <div class="wrap">
         <div class="sec-head rv">
             <span class="kick">Por onde começar</span>
-            <h2>Três jeitos de<br>virar a chave.</h2>
-            <p>Do gratuito ao sob medida. Escolha pela sua necessidade.</p>
+            <h2>Cinco caminhos pra<br>virar a chave.</h2>
+            <p>Do gratuito ao sob medida — pra você, pro seu time ou pra sua operação inteira.</p>
         </div>
         <div class="frentes">
             <article class="frente rv">
@@ -257,6 +268,24 @@
                 </div>
             </article>
             <article class="frente rv">
+                <div class="ph"><img src="fotos/nov-ismart.jpg" alt="Treinamentos Corporativos de IA" onerror="this.remove()"><div class="ph-tag"><b>Treinamentos</b><span>fotos/nov-ismart.jpg</span></div></div>
+                <div class="frente-body">
+                    <span class="tag">Pro seu time</span>
+                    <h3>Treinamentos Corporativos</h3>
+                    <p>Palestras, imersões, hackathons e cursos in-company. Seu time sai usando IA no trabalho — com Claude ou com a IA que a sua empresa já tem.</p>
+                    <a href="/treinamentos" class="go">Levar pra minha empresa →</a>
+                </div>
+            </article>
+            <article class="frente rv">
+                <div class="ph"><img src="fotos/bruna-retrato.jpg" alt="Mentoria Individual com Bruna Santanna" onerror="this.remove()"><div class="ph-tag"><b>Mentoria</b><span>fotos/bruna-retrato.jpg</span></div></div>
+                <div class="frente-body">
+                    <span class="tag">Por aplicação</span>
+                    <h3>Mentoria Individual</h3>
+                    <p>Acompanhamento direto comigo pra implantar IA no seu negócio. Poucas vagas por trimestre — a entrada é por aplicação.</p>
+                    <a href="/mentoria" class="go">Quero aplicar →</a>
+                </div>
+            </article>
+            <article class="frente rv">
                 <div class="ph"><img src="fotos/frente-empresa.jpg" alt="IA na sua Empresa" onerror="this.remove()"><div class="ph-tag"><b>IA na sua Empresa</b><span>fotos/frente-empresa.jpg</span></div></div>
                 <div class="frente-body">
                     <span class="tag">Feito pra você</span>
@@ -266,6 +295,16 @@
                 </div>
             </article>
         </div>
+        <div class="frentes-extra rv">
+            <a href="/comece">Já me segue no Instagram? Comece por aqui <span>→</span></a>
+        </div>
+    </div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto-home">
+    <div class="wrap rv">
+        <p>Quem aprende isso <span>agora</span> vai olhar pra trás e ver este momento como <span>o ponto de virada</span>.</p>
     </div>
 </section>
 
@@ -334,6 +373,8 @@
                 <a href="/biblioteca">Biblioteca</a>
                 <a href="/claude">Guia do Claude</a>
                 <a href="/curso">Curso de Claude</a>
+                <a href="/mentoria">Mentoria</a>
+                <a href="/comece">Comece por aqui</a>
                 <a href="https://instagram.com/brusantanna.ai" target="_blank" rel="noopener">Instagram</a>
                 <a href="https://newscale.tech" target="_blank" rel="noopener">NewScale</a>
                 <a href="mailto:eu@brunasantanna.com">Contato</a>
