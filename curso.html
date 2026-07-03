@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso de Claude em Português — Claude com Profundidade | Bruna Santanna</title>
+
+    <meta name="description" content="Virada IA: Claude com Profundidade — Coorte 1 começa 17 de agosto. 4 aulas ao vivo, zero tech, 100% prático. Entre na lista de espera e receba as vagas primeiro.">
+    <meta name="author" content="Bruna Santanna">
+    <link rel="canonical" href="https://brunasantanna.com/curso">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://brunasantanna.com/curso">
+    <meta property="og:title" content="Curso de Claude em Português — Claude com Profundidade | Bruna Santanna">
+    <meta property="og:description" content="Coorte 1 começa 17 de agosto. Uma nova forma de pensar e usar IA — zero tech, 100% prático. Entre na lista de espera.">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DCW0QVCWB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-7DCW0QVCWB');
+    </script>
+
+    <!-- JSON-LD: Course -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Course",
+        "name": "Virada IA: Claude com Profundidade — Coorte 1",
+        "description": "Curso de Claude em português para quem não é técnico. 4 aulas ao vivo de 1h30, gravações, comunidade e atualizações por 12 meses. Uma nova forma de pensar e usar IA.",
+        "url": "https://brunasantanna.com/curso",
+        "inLanguage": "pt-BR",
+        "provider": {
+            "@type": "Person",
+            "name": "Bruna Santanna",
+            "url": "https://brunasantanna.com"
+        },
+        "hasCourseInstance": {
+            "@type": "CourseInstance",
+            "courseMode": "online",
+            "startDate": "2026-08-17",
+            "courseWorkload": "PT6H",
+            "instructor": { "@type": "Person", "name": "Bruna Santanna" }
+        },
+        "offers": {
+            "@type": "Offer",
+            "availability": "https://schema.org/PreOrder",
+            "url": "https://brunasantanna.com/curso"
+        }
+    }
+    </script>
+
+    <!-- JSON-LD: FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Preciso saber programar?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Não. Zero código, zero terminal, zero Python. O curso foi feito pra quem trabalha, empreende ou cria conteúdo — não pra dev. Se você sabe usar WhatsApp, você consegue acompanhar." }
+            },
+            {
+                "@type": "Question",
+                "name": "E se eu perder a aula ao vivo?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Todas as aulas ficam gravadas e você assiste quando e quantas vezes quiser. Mas eu recomendo ir ao vivo: é onde você tira dúvida na hora e vê tudo acontecendo em tempo real." }
+            },
+            {
+                "@type": "Question",
+                "name": "Funciona no plano Free do Claude?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Dá pra acompanhar boa parte no Free, sim. Alguns recursos mais avançados (como Projetos e limites maiores de uso) fazem mais sentido no plano pago, e eu explico exatamente quando vale a pena — e quando não vale." }
+            },
+            {
+                "@type": "Question",
+                "name": "Já uso ChatGPT. Esse curso é pra mim?",
+                "acceptedAnswer": { "@type": "Answer", "text": "É — talvez principalmente pra você. O que você aprende de forma de pensar serve pra qualquer IA. E você vai entender na prática por que tanta gente fala que o Claude é diferente, e o que você tá perdendo." }
+            },
+            {
+                "@type": "Question",
+                "name": "Quanto tempo por semana eu preciso?",
+                "acceptedAnswer": { "@type": "Answer", "text": "São 4 aulas ao vivo de 1h30 cada. Fora isso, o que você praticar no seu próprio trabalho já conta — a ideia é aplicar no seu dia a dia, não criar mais uma tarefa na sua lista." }
+            },
+            {
+                "@type": "Question",
+                "name": "Quando abrem as vagas e quanto custa?",
+                "acceptedAnswer": { "@type": "Answer", "text": "A Coorte 1 começa em 17 de agosto e as vagas abrem antes disso, primeiro pra quem tá na lista de espera. Preço e condições de lançamento chegam por email pra quem se inscreveu na lista." }
+            }
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg:#F3EEE3; --bg-2:#ECE5D6; --card:#FBF9F3;
+            --ink:#14373C; --ink-2:#2C4F54; --green:#435D51;
+            --terra:#B06E4A; --terra-l:#C4835E; --terra-d:#985A3B;
+            --text:#233133; --muted:#6E7A75; --line:rgba(20,55,60,0.16);
+            --cream:#F4F3EF;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family:'Hanken Grotesk',sans-serif; background:var(--bg); color:var(--text); line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+        img { max-width:100%; display:block; }
+        a { color:inherit; text-decoration:none; }
+        ::selection { background:var(--terra); color:#fff; }
+        .wrap { max-width:1100px; margin:0 auto; padding:0 30px; }
+        .kick { font-size:0.72rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--terra); }
+
+        /* ---------- HEADER ---------- */
+        .site-header { position:sticky; top:0; z-index:50; background:rgba(243,238,227,0.92); backdrop-filter:blur(8px); border-bottom:2px solid var(--ink); }
+        .header-inner { display:flex; align-items:center; justify-content:space-between; padding:16px 0; }
+        .logo { display:inline-flex; align-items:center; white-space:nowrap; font-family:'Anton',sans-serif; font-size:1.2rem; letter-spacing:0.02em; text-transform:uppercase; color:var(--ink); }
+        .logo .brand-tag { font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:0.62rem; letter-spacing:0.12em; color:var(--terra); border:1.5px solid var(--terra); padding:3px 8px; border-radius:100px; margin-left:10px; }
+        .main-nav { display:flex; align-items:center; gap:24px; }
+        .main-nav a { font-size:0.86rem; font-weight:600; color:var(--ink-2); transition:color .18s; }
+        .main-nav a:hover, .main-nav a.active { color:var(--terra); }
+        .nav-cta { background:var(--terra); color:#fff !important; padding:10px 18px; border-radius:100px; font-size:0.8rem !important; transition:background .2s, transform .15s; }
+        .nav-cta:hover { background:var(--terra-d); transform:translateY(-1px); }
+        .nav-toggle { display:none; background:none; border:none; font-size:1.5rem; color:var(--ink); cursor:pointer; line-height:1; }
+        @media (max-width:820px) {
+            .nav-toggle { display:block; }
+            .main-nav { display:none; position:absolute; top:100%; left:0; right:0; flex-direction:column; align-items:flex-start; gap:0; background:var(--bg); border-bottom:2px solid var(--ink); padding:8px 30px 20px; }
+            .main-nav.open { display:flex; }
+            .main-nav a { padding:12px 0; width:100%; border-top:1px solid var(--line); font-size:1rem; }
+            .nav-cta { margin-top:12px; text-align:center; border-top:none; }
+        }
+
+        /* botão genérico */
+        .btn { display:inline-flex; align-items:center; gap:9px; justify-content:center; font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:0.85rem; letter-spacing:0.04em; text-transform:uppercase; padding:15px 28px; border-radius:100px; border:none; cursor:pointer; transition:transform .15s, box-shadow .15s, background .2s; }
+        .btn-terra { background:var(--terra); color:#fff; }
+        .btn-terra:hover { background:var(--terra-d); transform:translateY(-2px); box-shadow:0 10px 26px rgba(176,110,74,.35); }
+
+        /* placeholder de foto */
+        .ph { position:relative; overflow:hidden; border-radius:16px; background:linear-gradient(135deg,#1d4a4f,#14373C 55%,#0e2a2e); }
+        .ph>img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:2; }
+        .ph-tag { position:absolute; inset:0; z-index:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; text-align:center; padding:18px; }
+        .ph-tag svg { opacity:.5; }
+        .ph-tag b { font-family:'Anton',sans-serif; font-size:1.05rem; letter-spacing:.01em; text-transform:uppercase; color:rgba(245,243,239,.92); }
+        .ph-tag span { font-size:.6rem; letter-spacing:.06em; color:rgba(208,208,202,.4); }
+
+        /* ---------- HERO ---------- */
+        .hero { position:relative; overflow:hidden; }
+        .hero-glow { position:absolute; width:620px; height:620px; border-radius:50%; top:-220px; right:-180px; background:radial-gradient(circle,rgba(176,110,74,.13),transparent 62%); pointer-events:none; }
+        .hero .wrap { position:relative; z-index:2; padding:76px 30px 80px; }
+        .hero-grid { display:grid; grid-template-columns:1.1fr .9fr; gap:54px; align-items:center; }
+        .hero-eyebrow { display:inline-flex; align-items:center; gap:9px; margin-bottom:22px; }
+        .hero-eyebrow .dot { width:7px; height:7px; border-radius:50%; background:var(--terra); box-shadow:0 0 0 4px rgba(176,110,74,.18); }
+        h1 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(3rem,8.5vw,5.6rem); line-height:0.9; letter-spacing:-0.01em; text-transform:uppercase; color:var(--ink); }
+        h1 .terra { color:var(--terra); }
+        .hero-sub { font-size:1.15rem; color:var(--ink-2); font-weight:300; max-width:46ch; margin:24px 0 26px; }
+        .hero-sub b { color:var(--ink); font-weight:600; }
+        .hero-chips { display:flex; flex-wrap:wrap; gap:8px; }
+        .hero-chip { font-size:0.76rem; font-weight:600; padding:8px 14px; border-radius:100px; border:1.5px solid var(--line); color:var(--ink-2); background:var(--card); white-space:nowrap; }
+        @media (max-width:880px) {
+            .hero-grid { grid-template-columns:1fr; gap:40px; }
+            .hero .wrap { padding:54px 30px 64px; }
+        }
+
+        /* card de waitlist (escuro, sombra hard) */
+        .wl-card { background:var(--ink); color:#fff; border-radius:18px; padding:34px 32px; box-shadow:8px 8px 0 var(--green); }
+        .wl-card h3 { font-family:'Anton',sans-serif; font-weight:400; font-size:1.7rem; text-transform:uppercase; line-height:1; margin-bottom:6px; }
+        .wl-card .wl-sub { font-size:0.9rem; color:rgba(255,255,255,0.7); margin-bottom:22px; }
+        .field { width:100%; padding:17px 20px; font-family:inherit; font-size:1rem; background:rgba(255,255,255,0.07); border:1.5px solid rgba(255,255,255,0.22); border-radius:10px; color:#fff; outline:none; transition:border-color .2s, background .2s; }
+        .field::placeholder { color:rgba(255,255,255,0.5); }
+        .field:focus { border-color:var(--terra); background:rgba(255,255,255,0.12); }
+        .btn-form { width:100%; margin-top:12px; padding:17px 26px; font-family:'Hanken Grotesk',sans-serif; font-size:0.86rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer; background:var(--terra); color:#fff; border:none; border-radius:10px; transition:transform .15s, box-shadow .15s, background .2s; }
+        .btn-form:hover { background:var(--terra-d); transform:translateY(-2px); box-shadow:0 8px 22px rgba(176,110,74,0.35); }
+        .btn-form:disabled { opacity:.6; cursor:not-allowed; transform:none; }
+        .wl-card .fine { margin-top:14px; font-size:0.76rem; color:rgba(255,255,255,0.55); text-align:center; }
+        .wl-ok { display:none; background:rgba(67,93,81,0.35); border:1.5px solid var(--terra-l); border-radius:10px; padding:18px 20px; font-size:0.95rem; line-height:1.5; color:#fff; }
+        .wl-ok b { color:var(--terra-l); }
+        .wl-done .wl-ok { display:block; }
+        .wl-done form, .wl-done .fine { display:none; }
+
+        /* ---------- SEÇÕES ---------- */
+        .sec { padding:80px 0; }
+        .sec-head { max-width:680px; margin-bottom:42px; }
+        .sec-head .kick { display:block; margin-bottom:14px; }
+        .sec-head h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(2.2rem,6vw,3.4rem); text-transform:uppercase; color:var(--ink); line-height:1; letter-spacing:-0.01em; }
+        .sec-head p { margin-top:14px; color:var(--ink-2); font-size:1.02rem; font-weight:300; max-width:52ch; }
+
+        /* faixa escura: a virada */
+        .virada { background:var(--ink); color:var(--cream); }
+        .virada .wrap { padding:84px 30px; }
+        .virada h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(2rem,6vw,3.2rem); text-transform:uppercase; color:#fff; line-height:1; margin:14px 0 26px; max-width:20ch; }
+        .virada h2 .terra { color:var(--terra-l); }
+        .virada p { color:rgba(244,243,239,.72); font-weight:300; font-size:1.08rem; line-height:1.75; max-width:56ch; margin-bottom:14px; }
+        .virada p b { color:#fff; font-weight:600; }
+        .virada-punch { font-family:'Anton',sans-serif; font-weight:400; text-transform:uppercase; font-size:clamp(1.3rem,3.6vw,1.9rem); line-height:1.15; color:#fff; border-left:4px solid var(--terra); padding-left:20px; margin-top:32px; max-width:30ch; }
+        .virada-punch span { color:var(--terra-l); }
+
+        /* o que muda: 4 cards */
+        .muda-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+        @media (max-width:1000px) { .muda-grid { grid-template-columns:repeat(2,1fr); } }
+        @media (max-width:600px) { .muda-grid { grid-template-columns:1fr; } }
+        .muda-card { background:var(--card); border:1.5px solid var(--line); border-radius:16px; padding:26px 24px; transition:transform .18s, box-shadow .18s, border-color .18s; }
+        .muda-card:hover { transform:translateY(-4px); border-color:var(--ink); box-shadow:6px 6px 0 var(--line); }
+        .muda-num { font-family:'Anton',sans-serif; font-size:2rem; color:var(--terra); line-height:1; margin-bottom:14px; }
+        .muda-card h3 { font-size:1.08rem; font-weight:700; color:var(--ink); line-height:1.2; margin-bottom:8px; }
+        .muda-card p { font-size:0.9rem; color:var(--text); line-height:1.55; }
+
+        /* pra quem é */
+        .quem-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+        @media (max-width:760px) { .quem-grid { grid-template-columns:1fr; } }
+        .quem-card { background:var(--card); border:1.5px solid var(--line); border-radius:16px; padding:26px 28px; transition:transform .18s, box-shadow .18s, border-color .18s; }
+        .quem-card:hover { transform:translateY(-4px); border-color:var(--ink); box-shadow:6px 6px 0 var(--line); }
+        .quem-role { font-family:'Anton',sans-serif; font-weight:400; font-size:1.3rem; text-transform:uppercase; color:var(--ink); line-height:1; margin-bottom:10px; }
+        .quem-role::before { content:'→ '; color:var(--terra); }
+        .quem-card p { font-size:0.94rem; color:var(--text); line-height:1.6; }
+        .not-for { margin-top:24px; background:var(--bg-2); border:1.5px solid var(--line); border-left:5px solid var(--terra); border-radius:16px; padding:28px 32px; }
+        .not-for .nf-label { display:block; font-size:0.72rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--terra); margin-bottom:10px; }
+        .not-for p { font-size:0.96rem; color:var(--ink-2); line-height:1.7; max-width:72ch; }
+        .not-for p b { color:var(--ink); }
+
+        /* aprender: grade 13 itens */
+        .aprende-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:0; border:1.5px solid var(--line); border-radius:18px; overflow:hidden; background:var(--card); }
+        .aprende-item { display:flex; align-items:flex-start; gap:13px; padding:22px 26px; border-bottom:1.5px solid var(--line); transition:background .2s; }
+        .aprende-item:nth-child(odd) { border-right:1.5px solid var(--line); }
+        .aprende-item:nth-last-child(-n+1) { border-bottom:none; }
+        .aprende-item:nth-last-child(2):nth-child(odd) { border-bottom:none; }
+        .aprende-item:hover { background:var(--bg-2); }
+        .aprende-item .seta { color:var(--terra); font-weight:800; flex-shrink:0; margin-top:1px; }
+        .aprende-item p { font-size:0.94rem; line-height:1.55; color:var(--text); }
+        .aprende-item p b { color:var(--ink); }
+        @media (max-width:760px) {
+            .aprende-grid { grid-template-columns:1fr; }
+            .aprende-item:nth-child(odd) { border-right:none; }
+            .aprende-item:nth-last-child(2):nth-child(odd) { border-bottom:1.5px solid var(--line); }
+            .aprende-item:last-child { border-bottom:none; }
+        }
+
+        /* depoimentos (escuro) */
+        .depo { background:var(--ink); color:var(--cream); }
+        .depo .wrap { padding:84px 30px; }
+        .depo .sec-head .kick { color:var(--terra-l); }
+        .depo .sec-head h2 { color:#fff; }
+        .depo .sec-head p { color:rgba(244,243,239,.65); }
+        .depo-fotos { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:38px; }
+        .depo-fotos img { width:130px; height:130px; object-fit:cover; border-radius:14px; border:1.5px solid rgba(244,243,239,.18); }
+        @media (max-width:600px) { .depo-fotos img { width:96px; height:96px; } }
+        .depo-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+        @media (max-width:940px) { .depo-grid { grid-template-columns:repeat(2,1fr); } }
+        @media (max-width:620px) { .depo-grid { grid-template-columns:1fr; } }
+        .depo-card { background:rgba(255,255,255,.05); border:1.5px solid rgba(255,255,255,.12); border-radius:16px; padding:26px; display:flex; flex-direction:column; transition:background .25s, transform .2s; }
+        .depo-card:hover { background:rgba(255,255,255,.09); transform:translateY(-4px); }
+        .depo-stars { color:var(--terra-l); font-size:0.85rem; letter-spacing:2px; margin-bottom:12px; }
+        .depo-card p { font-size:0.94rem; line-height:1.7; color:rgba(255,255,255,.85); flex:1; margin-bottom:16px; }
+        .depo-author { font-size:0.72rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:rgba(255,255,255,.45); }
+
+        /* como funciona */
+        .como-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+        @media (max-width:1000px) { .como-grid { grid-template-columns:repeat(2,1fr); } }
+        @media (max-width:600px) { .como-grid { grid-template-columns:1fr; } }
+        .como-card { background:var(--card); border:1.5px solid var(--line); border-radius:16px; padding:28px 24px; text-align:left; transition:transform .18s, box-shadow .18s, border-color .18s; }
+        .como-card:hover { transform:translateY(-4px); border-color:var(--ink); box-shadow:6px 6px 0 var(--line); }
+        .como-icon { font-size:1.6rem; margin-bottom:14px; }
+        .como-card h3 { font-family:'Anton',sans-serif; font-weight:400; font-size:1.25rem; text-transform:uppercase; color:var(--ink); line-height:1.05; margin-bottom:8px; }
+        .como-card p { font-size:0.88rem; color:var(--text); line-height:1.55; }
+        .como-note { margin-top:26px; font-size:0.92rem; color:var(--ink-2); }
+        .como-note b { color:var(--terra); }
+
+        /* bio */
+        .bio { background:var(--bg-2); }
+        .bio-grid { display:grid; grid-template-columns:.8fr 1.2fr; gap:50px; align-items:start; }
+        @media (max-width:860px) { .bio-grid { grid-template-columns:1fr; gap:34px; } }
+        .bio-grid .ph { aspect-ratio:4/5; }
+        .bio h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(2rem,6vw,3rem); text-transform:uppercase; color:var(--ink); line-height:1; margin:12px 0 8px; }
+        .bio .role { font-size:0.76rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--terra); margin-bottom:18px; }
+        .bio p { color:var(--ink-2); font-weight:300; font-size:1.02rem; line-height:1.7; margin-bottom:14px; max-width:54ch; }
+        .bio p b { color:var(--ink); font-weight:600; }
+        .bio-chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; }
+        .bio-chip { font-size:0.68rem; font-weight:600; letter-spacing:.04em; color:var(--terra-d); border:1.5px solid rgba(176,110,74,.4); padding:6px 13px; border-radius:100px; }
+
+        /* faq */
+        .faq-list { max-width:760px; }
+        .faq-item { border:1.5px solid var(--line); border-radius:14px; background:var(--card); margin-bottom:12px; overflow:hidden; }
+        .faq-q { width:100%; display:flex; justify-content:space-between; align-items:center; gap:16px; text-align:left; background:none; border:none; cursor:pointer; padding:20px 24px; font-family:'Hanken Grotesk',sans-serif; font-size:1.02rem; font-weight:700; color:var(--ink); }
+        .faq-q .mark { font-family:'Anton',sans-serif; font-size:1.3rem; color:var(--terra); transition:transform .25s; flex-shrink:0; line-height:1; }
+        .faq-item.open .faq-q .mark { transform:rotate(45deg); }
+        .faq-a { display:none; padding:0 24px 22px; font-size:0.95rem; color:var(--ink-2); line-height:1.7; }
+        .faq-item.open .faq-a { display:block; }
+        .faq-a b { color:var(--ink); }
+
+        /* cta final */
+        .cta-final { text-align:center; }
+        .cta-final .wrap { padding:90px 30px; }
+        .cta-final h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(2.2rem,7vw,3.8rem); text-transform:uppercase; color:var(--ink); line-height:0.98; max-width:20ch; margin:14px auto 16px; }
+        .cta-final h2 .terra { color:var(--terra); }
+        .cta-final .cta-sub { color:var(--ink-2); font-weight:300; max-width:48ch; margin:0 auto 34px; font-size:1.05rem; }
+        .cta-final .wl-card { max-width:480px; margin:0 auto; text-align:left; }
+
+        /* footer */
+        footer { background:var(--ink); color:rgba(244,243,239,.6); padding:40px 0 48px; }
+        .footer-row { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+        .footer-brand { font-family:'Anton',sans-serif; font-size:1.1rem; text-transform:uppercase; color:#fff; }
+        .footer-links { display:flex; gap:20px; flex-wrap:wrap; }
+        .footer-links a { font-size:0.84rem; font-weight:600; color:rgba(244,243,239,.7); }
+        .footer-links a:hover { color:var(--terra-l); }
+        .footer-copy { font-size:0.76rem; color:rgba(244,243,239,.4); margin-top:14px; }
+
+        /* reveal */
+        .rv { opacity:0; transform:translateY(22px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+        .rv.in { opacity:1; transform:none; }
+        @media (prefers-reduced-motion:reduce) { .rv { opacity:1; transform:none; } }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="wrap header-inner">
+        <a href="/" class="logo">Bruna Santanna<span class="brand-tag">A Virada IA</span></a>
+        <nav class="main-nav" id="mainNav">
+            <a href="/">Home</a>
+            <a href="/biblioteca">Biblioteca</a>
+            <a href="/claude">Guia do Claude</a>
+            <a href="/curso" class="active">Curso de Claude</a>
+            <a href="https://newscale.tech" target="_blank" rel="noopener">IA na sua Empresa</a>
+            <a href="#waitlist" class="nav-cta">Quero o curso</a>
+        </nav>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">☰</button>
+    </div>
+</header>
+
+<!-- ========== 1. HERO ========== -->
+<section class="hero" id="waitlist">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="wrap">
+        <div class="hero-grid">
+            <div class="rv">
+                <div class="hero-eyebrow"><span class="dot"></span><span class="kick">Coorte 1 · começa 17 de agosto</span></div>
+                <h1>Claude com<br><span class="terra">Profundidade</span></h1>
+                <p class="hero-sub"><b>Não é mais um curso de ferramenta. É uma nova forma de pensar e usar IA.</b> Zero tech, zero código — você sai sabendo colocar o Claude pra trabalhar de verdade no seu dia a dia.</p>
+                <div class="hero-chips">
+                    <span class="hero-chip">🎥 4 aulas ao vivo · 1h30</span>
+                    <span class="hero-chip">🚫 Zero tech</span>
+                    <span class="hero-chip">⚡ 100% prático</span>
+                    <span class="hero-chip">📹 Gravações inclusas</span>
+                </div>
+            </div>
+            <div class="wl-card rv" id="wlHero">
+                <h3>Entre na lista</h3>
+                <p class="wl-sub">As vagas abrem primeiro pra quem tá aqui. Sem compromisso.</p>
+                <form class="wl-form" novalidate>
+                    <input class="field" type="email" placeholder="Seu melhor email" required autocomplete="email">
+                    <button type="submit" class="btn-form">Quero entrar na lista</button>
+                </form>
+                <div class="wl-ok"><b>Você tá dentro da lista.</b> Vagas e condições de lançamento chegam primeiro pra quem tá aqui.</div>
+                <p class="fine">Zero spam. Só o que importa sobre a Coorte 1.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== 2. FAIXA ESCURA: A VIRADA ========== -->
+<section class="virada">
+    <div class="wrap rv">
+        <span class="kick" style="color:var(--terra-l)">A virada começa aqui</span>
+        <h2>Você já viu o Claude funcionar. Já sentiu que tem algo <span class="terra">diferente</span> ali.</h2>
+        <p>Mas o que você usou até agora é a superfície.</p>
+        <p>A maioria das pessoas tá focada em ferramenta: prompt, plugin, automação. Isso não resolve o problema principal.</p>
+        <p><b>O que separa quem usa bem IA de quem não usa não é a ferramenta. É a forma de pensar.</b></p>
+        <p>Existe uma camada abaixo do que você conhece que muda completamente como você trabalha, produz e pensa.</p>
+        <div class="virada-punch">É isso que o Claude com Profundidade <span>abre.</span></div>
+    </div>
+</section>
+
+<!-- ========== 3. O QUE MUDA NA PRÁTICA ========== -->
+<section class="sec">
+    <div class="wrap">
+        <div class="sec-head rv">
+            <span class="kick">Resultado</span>
+            <h2>O que muda<br>na prática.</h2>
+            <p>Você não sai daqui sabendo "mais uma ferramenta". Você sai com uma nova forma de usar IA.</p>
+        </div>
+        <div class="muda-grid">
+            <div class="muda-card rv">
+                <div class="muda-num">01</div>
+                <h3>Clareza</h3>
+                <p>Você passa a saber quando, como e por que usar a IA — em vez de abrir o chat e torcer.</p>
+            </div>
+            <div class="muda-card rv">
+                <div class="muda-num">02</div>
+                <h3>Estrutura</h3>
+                <p>Chega de tentativa e erro. Você ganha um método pra tirar resultado consistente, toda vez.</p>
+            </div>
+            <div class="muda-card rv">
+                <div class="muda-num">03</div>
+                <h3>Profundidade</h3>
+                <p>Você extrai muito mais da mesma ferramenta que todo mundo usa no raso.</p>
+            </div>
+            <div class="muda-card rv">
+                <div class="muda-num">04</div>
+                <h3>Aplicação real</h3>
+                <p>Tudo aterrissa no seu dia a dia: negócio, trabalho ou estudo. Nada de exemplo genérico.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== 4. PRA QUEM É ========== -->
+<section class="sec" style="padding-top:0">
+    <div class="wrap">
+        <div class="sec-head rv">
+            <span class="kick">Pra quem é</span>
+            <h2>Esse curso foi<br>feito pra você.</h2>
+        </div>
+        <div class="quem-grid">
+            <div class="quem-card rv">
+                <h3 class="quem-role">Empreendedora</h3>
+                <p>Você ainda faz na mão tarefas que poderiam estar rodando sozinhas enquanto você foca no que importa de verdade no negócio.</p>
+            </div>
+            <div class="quem-card rv">
+                <h3 class="quem-role">Criadora de conteúdo</h3>
+                <p>Você gasta horas em coisas que o Claude resolveria em minutos — se você soubesse configurar do jeito certo.</p>
+            </div>
+            <div class="quem-card rv">
+                <h3 class="quem-role">Usuária de ChatGPT</h3>
+                <p>Você usa o ChatGPT no básico e quer entender por que todo mundo fala que o Claude é diferente — e o que você tá perdendo.</p>
+            </div>
+            <div class="quem-card rv">
+                <h3 class="quem-role">Profissional CLT</h3>
+                <p>Você sente que poderia entregar muito mais se soubesse usar as ferramentas certas, sem depender de ninguém de TI pra isso.</p>
+            </div>
+        </div>
+        <div class="not-for rv">
+            <span class="nf-label">⚠ Atenção · não é pra você se...</span>
+            <p>Você já é dev, trabalha com programação ou quer se aprofundar no lado técnico da IA. Aqui a gente não escreve código, não usa terminal e não fala em Python. <b>O Claude com Profundidade é pra quem quer resultado prático sem precisar virar técnico.</b></p>
+        </div>
+    </div>
+</section>
+
+<!-- ========== 5. O QUE VOCÊ VAI APRENDER ========== -->
+<section class="sec" style="background:var(--bg-2)">
+    <div class="wrap">
+        <div class="sec-head rv">
+            <span class="kick">Conteúdo</span>
+            <h2>O que você<br>vai aprender.</h2>
+            <p>Não é mágica. É saber usar a ferramenta certa, do jeito certo.</p>
+        </div>
+        <div class="aprende-grid rv">
+            <div class="aprende-item"><span class="seta">→</span><p><b>Contexto que funciona:</b> como dar contexto direito e criar prompts que realmente entregam</p></div>
+            <div class="aprende-item"><span class="seta">→</span><p><b>Pensar com a IA</b> — e não só pedir coisas pra ela</p></div>
+            <div class="aprende-item"><span class="seta">→</span><p>Como extrair o <b>uso mais profundo</b> da IA no seu dia a dia</p></div>
+            <div class="aprende-item"><span class="seta">→</span><p>Como usar a <b>própria IA pra aprender</b> a usar a IA</p></div>
+            <div class="aprende-item"><span class="seta">→</span><p><b>Projetos no Claude</b> que te conhecem e não esquecem nada</p></div>
+            <div class="aprende-item"><span class="seta">→</span><p><b>Skills e sub-skills:</b> ensina uma vez, o Claude nunca esquece</p></div>
+            <div class="aprende-item"><span class="seta">→</span><p><b>Claude Code:</b> criar landing pages, apps e automações — sem escrever uma linha de código</p></div>
+            <div class="aprende-item"><span class="seta">→</span><p><b>Claude Cowork:</b> IA rodando no seu desktop enquanto você trabalha</p></div>
+            <div class="aprende-item"><span class="seta">→</span><p>Como criar <b>agentes que trabalham por você</b></p></div>
+            <div class="aprende-item"><span class="seta">→</span><p><b>NotebookLM, ChatGPT, Gemini</b> e outras ferramentas que valem estar na sua stack</p></div>
+            <div class="aprende-item"><span class="seta">→</span><p>Como <b>acompanhar as novidades de IA</b> sem enlouquecer</p></div>
+            <div class="aprende-item"><span class="seta">→</span><p>Como <b>otimizar seus tokens</b> — e parar de ver o Claude acabar no meio de uma resposta importante</p></div>
+            <div class="aprende-item"><span class="seta">→</span><p><b>Claude no Excel e no PowerPoint:</b> apresentações e planilhas incríveis sem sair do seu fluxo de trabalho</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== 6. DEPOIMENTOS ========== -->
+<section class="depo">
+    <div class="wrap">
+        <div class="sec-head rv">
+            <span class="kick">Quem já passou por aqui</span>
+            <h2>Mais de 1.000 pessoas<br>já viraram a chave.</h2>
+            <p>Entre turmas abertas, mentorias e treinamentos corporativos. Olha o que elas dizem:</p>
+        </div>
+        <div class="depo-fotos rv">
+            <img src="fotos/foto-aluna-1.jpeg" alt="Aluna do curso" onerror="this.remove()">
+            <img src="fotos/foto-aluna-2.jpeg" alt="Aluna do curso" onerror="this.remove()">
+            <img src="fotos/foto-aluna-3.jpeg" alt="Aluna do curso" onerror="this.remove()">
+            <img src="fotos/foto-aluna-4.jpeg" alt="Aluna do curso" onerror="this.remove()">
+            <img src="fotos/foto-aluna-5.jpeg" alt="Aluna do curso" onerror="this.remove()">
+        </div>
+        <div class="depo-grid">
+            <div class="depo-card rv">
+                <div class="depo-stars">★★★★★</div>
+                <p>"A Bruna faz tudo parecer muito simples e fácil. Eu fazia somente o arroz com feijão bem limitado e a partir das aulas já consigo melhorar muito os meus prompts."</p>
+                <span class="depo-author">Débora Nogueira Cobra</span>
+            </div>
+            <div class="depo-card rv">
+                <div class="depo-stars">★★★★★</div>
+                <p>"Ta sendo tão legal fazer o curso, tenho compartilhado as coisas com meu time no dia a dia e ta sendo muito legal."</p>
+                <span class="depo-author">Fernanda Patricio Vieira</span>
+            </div>
+            <div class="depo-card rv">
+                <div class="depo-stars">★★★★★</div>
+                <p>"A Bruna possui conhecimento profundo na área e conduz as conversas com muita naturalidade."</p>
+                <span class="depo-author">Sandy Ramos de Lima Silva</span>
+            </div>
+            <div class="depo-card rv">
+                <div class="depo-stars">★★★★★</div>
+                <p>"É muito lindo de ver o quanto você demonstra acreditar em tudo o que traz pra nós. E com isso, deixa o tema leve."</p>
+                <span class="depo-author">Viviane Moreno Montenegro Pizarro</span>
+            </div>
+            <div class="depo-card rv">
+                <div class="depo-stars">★★★★★</div>
+                <p>"Estou apaixonada pelo curso. A professora é maravilhosa, fazendo um papel muito real de facilitadora."</p>
+                <span class="depo-author">Thaline Soares Arruda da Silva</span>
+            </div>
+            <div class="depo-card rv">
+                <div class="depo-stars">★★★★★</div>
+                <p>"A didática como a Bruna passa o conteúdo é sensacional. O material e as ferramentas apresentadas são incríveis."</p>
+                <span class="depo-author">Aluna Turma MIS-04</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== 7. COMO FUNCIONA A COORTE 1 ========== -->
+<section class="sec">
+    <div class="wrap">
+        <div class="sec-head rv">
+            <span class="kick">Como funciona</span>
+            <h2>A Coorte 1,<br>por dentro.</h2>
+            <p>Formato pensado pra quem trabalha: pouco tempo de aula, muito resultado aplicado.</p>
+        </div>
+        <div class="como-grid">
+            <div class="como-card rv">
+                <div class="como-icon">🎥</div>
+                <h3>4 aulas ao vivo</h3>
+                <p>1h30 cada, comigo na tela, hands-on e em tempo real. Você vê tudo acontecendo e tira dúvida na hora.</p>
+            </div>
+            <div class="como-card rv">
+                <div class="como-icon">📹</div>
+                <h3>Gravações</h3>
+                <p>Perdeu o horário? Todas as aulas ficam gravadas pra você assistir quando e quantas vezes quiser.</p>
+            </div>
+            <div class="como-card rv">
+                <div class="como-icon">💬</div>
+                <h3>Comunidade</h3>
+                <p>Grupo exclusivo de alunos pra tirar dúvidas, trocar cases reais e crescer junto.</p>
+            </div>
+            <div class="como-card rv">
+                <div class="como-icon">🔄</div>
+                <h3>Atualizações · 12 meses</h3>
+                <p>IA muda toda semana. Por 12 meses, o que mudar de importante vira atualização dentro do curso.</p>
+            </div>
+        </div>
+        <p class="como-note rv">→ DICA: a Coorte 1 é a primeira turma desse formato — <b>quem tá na lista de espera recebe as vagas e as condições de lançamento antes de todo mundo.</b></p>
+    </div>
+</section>
+
+<!-- ========== 8. BIO ========== -->
+<section class="sec bio">
+    <div class="wrap">
+        <div class="bio-grid">
+            <figure class="rv">
+                <div class="ph">
+                    <img src="fotos/bruna-retrato.jpg" alt="Bruna Santanna" onerror="this.remove()">
+                    <div class="ph-tag">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--terra-l)" stroke-width="1.3"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                        <b>Retrato</b><span>fotos/bruna-retrato.jpg</span>
+                    </div>
+                </div>
+            </figure>
+            <div class="rv">
+                <span class="kick">Quem ensina</span>
+                <h2>Oi, eu sou a Bruna</h2>
+                <div class="role">Mãe · Empresária · Estrategista de IA</div>
+                <p><b>Eu não sou desenvolvedora. Sou empresária.</b> E foi exatamente por isso que eu aprendi a usar IA do jeito que funciona pra quem trabalha de verdade.</p>
+                <p>Empresária há mais de 10 anos, construí negócios do zero e passei por empresas como SulAmérica, Whirlpool e Blackbox AI — direto do Vale do Silício — antes de fundar a NewScale. Cheguei ao mundo da IA com uma visão diferente: aplicar com profundidade, não com superficialidade.</p>
+                <p>Hoje sou mentora de IA no programa Potenc.IA, parceria com OLX, Bradesco, Livelo, Magalu, B3 e CI&amp;T, entre outras, e professora de IA e automação pra equipes corporativas. <b>Já ensinei mais de 1.000 pessoas a usar IA de verdade</b>, no trabalho e nos negócios.</p>
+                <div class="bio-chips">
+                    <span class="bio-chip">ESPM + MBA USP</span>
+                    <span class="bio-chip">Ex-SulAmérica</span>
+                    <span class="bio-chip">Ex-Whirlpool</span>
+                    <span class="bio-chip">Ex-Blackbox AI</span>
+                    <span class="bio-chip">Mentora Potenc.IA</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== 9. FAQ ========== -->
+<section class="sec">
+    <div class="wrap">
+        <div class="sec-head rv">
+            <span class="kick">Dúvidas</span>
+            <h2>Perguntas que<br>sempre me fazem.</h2>
+        </div>
+        <div class="faq-list rv">
+            <div class="faq-item">
+                <button class="faq-q">Preciso saber programar?<span class="mark">+</span></button>
+                <div class="faq-a">Não. Zero código, zero terminal, zero Python. O curso foi feito pra quem trabalha, empreende ou cria conteúdo — não pra dev. Se você sabe usar WhatsApp, você consegue acompanhar.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">E se eu perder a aula ao vivo?<span class="mark">+</span></button>
+                <div class="faq-a">Todas as aulas ficam gravadas e você assiste quando e quantas vezes quiser. Mas eu recomendo ir ao vivo: é onde você tira dúvida na hora e vê tudo acontecendo em tempo real.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Funciona no plano Free do Claude?<span class="mark">+</span></button>
+                <div class="faq-a">Dá pra acompanhar boa parte no Free, sim. Alguns recursos mais avançados (como Projetos e limites maiores de uso) fazem mais sentido no plano pago — e eu explico exatamente <b>quando vale a pena e quando não vale</b>. Nada de gastar à toa.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Já uso ChatGPT. Esse curso é pra mim?<span class="mark">+</span></button>
+                <div class="faq-a">É — talvez principalmente pra você. O que você aprende de forma de pensar serve pra qualquer IA. E você vai entender na prática por que tanta gente fala que o Claude é diferente, e o que você tá perdendo.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Quanto tempo por semana eu preciso?<span class="mark">+</span></button>
+                <div class="faq-a">São 4 aulas ao vivo de 1h30 cada. Fora isso, o que você praticar no seu próprio trabalho já conta — a ideia é aplicar no seu dia a dia, não criar mais uma tarefa na sua lista.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Quando abrem as vagas e quanto custa?<span class="mark">+</span></button>
+                <div class="faq-a">A Coorte 1 começa em <b>17 de agosto</b> e as vagas abrem antes disso — primeiro pra quem tá na lista de espera. Preço e condições de lançamento chegam por email pra quem se inscreveu na lista aqui da página.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== 10. CTA FINAL ========== -->
+<section class="cta-final" style="background:var(--bg-2)">
+    <div class="wrap rv">
+        <span class="kick">Coorte 1 · 17 de agosto</span>
+        <h2>Pronta pra sua <span class="terra">virada?</span></h2>
+        <p class="cta-sub">As vagas são limitadas e abrem primeiro pra quem tá na lista. Deixa seu email e eu te aviso antes de todo mundo.</p>
+        <div class="wl-card" id="wlFinal">
+            <h3>Entre na lista</h3>
+            <p class="wl-sub">Vagas e condições de lançamento, direto no seu email.</p>
+            <form class="wl-form" novalidate>
+                <input class="field" type="email" placeholder="Seu melhor email" required autocomplete="email">
+                <button type="submit" class="btn-form">Quero entrar na lista</button>
+            </form>
+            <div class="wl-ok"><b>Você tá dentro da lista.</b> Vagas e condições de lançamento chegam primeiro pra quem tá aqui.</div>
+            <p class="fine">Zero spam. Só o que importa sobre a Coorte 1.</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="wrap">
+        <div class="footer-row">
+            <span class="footer-brand">A Virada IA</span>
+            <nav class="footer-links">
+                <a href="/">Home</a>
+                <a href="/biblioteca">Biblioteca</a>
+                <a href="/claude">Guia do Claude</a>
+                <a href="/curso">Curso de Claude</a>
+                <a href="https://newscale.tech" target="_blank" rel="noopener">IA na sua Empresa</a>
+                <a href="https://instagram.com/brusantanna.ai" target="_blank" rel="noopener">Instagram</a>
+                <a href="https://www.linkedin.com/in/bruna-araujo-santanna/" target="_blank" rel="noopener">LinkedIn</a>
+                <a href="mailto:eu@brunasantanna.com">Contato</a>
+            </nav>
+        </div>
+        <p class="footer-copy">© 2026 Bruna Santanna · A Virada IA</p>
+    </div>
+</footer>
+
+<script>
+    // ===== Waitlist (Apps Script, list: 'curso') =====
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx90IdrA_L6n3jVdoYBinBPxPfWq0h6Iua1MrI8gQ7-RgBXhU1rOqF9dM2n7mLdAeMW/exec";
+
+    document.querySelectorAll('.wl-form').forEach(form => {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const input = form.querySelector('input[type="email"]');
+            const btn = form.querySelector('button[type="submit"]');
+            const email = input.value.trim();
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { input.focus(); return; }
+            btn.disabled = true; btn.textContent = 'Enviando...';
+            try {
+                await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, list: 'curso', timestamp: new Date().toISOString(), source: location.href }) });
+            } catch(_) {}
+            if (typeof gtag === 'function') gtag('event', 'waitlist_signup', { list: 'curso' });
+            // marca os dois cards como concluídos
+            document.querySelectorAll('.wl-card').forEach(c => c.classList.add('wl-done'));
+            localStorage.setItem('curso_waitlist', '1');
+        });
+    });
+    if (localStorage.getItem('curso_waitlist') === '1') {
+        document.querySelectorAll('.wl-card').forEach(c => c.classList.add('wl-done'));
+    }
+
+    // ===== FAQ accordion =====
+    document.querySelectorAll('.faq-q').forEach(q => {
+        q.addEventListener('click', () => q.closest('.faq-item').classList.toggle('open'));
+    });
+
+    // ===== menu mobile =====
+    const navToggle = document.getElementById('navToggle'), mainNav = document.getElementById('mainNav');
+    navToggle.addEventListener('click', () => mainNav.classList.toggle('open'));
+    mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mainNav.classList.remove('open')));
+
+    // ===== reveal on scroll =====
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold:.12, rootMargin:'0px 0px -40px 0px' });
+    document.querySelectorAll('.rv').forEach((el,i) => { el.style.transitionDelay = (i%3*70)+'ms'; io.observe(el); });
+</script>
+
+</body>
+</html>

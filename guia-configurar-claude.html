@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configure o Claude uma vez pra ele soar como você pra sempre | A Virada IA · Bruna Santanna</title>
+    <meta name="description" content="O passo a passo pra configurar o Claude Cowork com uma pasta e três arquivos .md — e nunca mais reexplicar quem você é. Modelos prontos pra copiar.">
+    <meta name="author" content="Bruna Santanna">
+    <link rel="canonical" href="https://brunasantanna.com/guia-configurar-claude">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://brunasantanna.com/guia-configurar-claude">
+    <meta property="og:title" content="Configure o Claude uma vez pra ele soar como você pra sempre | A Virada IA">
+    <meta property="og:description" content="O passo a passo pra configurar o Claude Cowork com uma pasta e três arquivos .md — e nunca mais reexplicar quem você é. Modelos prontos pra copiar.">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DCW0QVCWB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-7DCW0QVCWB');
+    </script>
+
+    <!-- JSON-LD: Article -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Configure o Claude uma vez pra ele soar como você pra sempre",
+        "description": "O passo a passo pra configurar o Claude Cowork com uma pasta e três arquivos .md — e nunca mais reexplicar quem você é. Modelos prontos pra copiar.",
+        "inLanguage": "pt-BR",
+        "url": "https://brunasantanna.com/guia-configurar-claude",
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://brunasantanna.com/guia-configurar-claude" },
+        "datePublished": "2026-07-03",
+        "dateModified": "2026-07-03",
+        "author": { "@type": "Person", "name": "Bruna Santanna", "url": "https://brunasantanna.com" },
+        "publisher": {
+            "@type": "Organization",
+            "name": "A Virada IA · Bruna Santanna",
+            "url": "https://brunasantanna.com"
+        },
+        "about": "Setup"
+    }
+    </script>
+
+    <!-- JSON-LD: FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Preciso saber programar pra configurar o Claude assim?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Não. Os arquivos .md são só arquivos de texto — você escreve em português normal, sem nenhum comando ou sintaxe. Se você sabe criar uma pasta no computador e digitar num bloco de notas, você consegue fazer todo o setup. As Instruções Globais também são coladas num campo de configuração, sem código."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Isso funciona no Claude do navegador ou só no aplicativo?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "A parte de apontar pra uma pasta local e ler seus arquivos é do Claude Cowork, que fica no aplicativo de desktop do Claude (Mac e Windows), na aba Cowork. As Instruções Globais também ficam nas configurações do Cowork. No navegador você consegue colar seu contexto manualmente, mas quem lê a sua pasta e os seus arquivos automaticamente é o app de desktop."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Cada vez que abro uma conversa preciso mandar meus arquivos de novo?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Não, e esse é o ponto. Depois que você concede acesso à pasta e coloca a instrução de ler seus arquivos antes de qualquer tarefa, o Claude consulta o sobre-mim, a voz e as regras sozinho. Dentro de um Projeto do Cowork, esse contexto e a memória ficam salvos entre as sessões — você não reexplica nada."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg:#F3EEE3; --bg-2:#ECE5D6; --card:#FBF9F3;
+            --ink:#14373C; --ink-2:#2C4F54; --green:#435D51;
+            --terra:#B06E4A; --terra-l:#C4835E; --terra-d:#985A3B;
+            --text:#233133; --muted:#6E7A75; --line:rgba(20,55,60,0.16);
+            --cream:#F4F3EF;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family:'Hanken Grotesk',sans-serif; background:var(--bg); color:var(--text); line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+        img { max-width:100%; display:block; }
+        a { color:inherit; text-decoration:none; }
+        ::selection { background:var(--terra); color:#fff; }
+        .wrap { max-width:1100px; margin:0 auto; padding:0 30px; }
+        .kick { font-size:0.72rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--terra); }
+
+        /* ---------- HEADER ---------- */
+        .site-header { position:sticky; top:0; z-index:50; background:rgba(243,238,227,0.92); backdrop-filter:blur(8px); border-bottom:2px solid var(--ink); }
+        .header-inner { display:flex; align-items:center; justify-content:space-between; padding:16px 0; }
+        .logo { display:inline-flex; align-items:center; white-space:nowrap; font-family:'Anton',sans-serif; font-size:1.2rem; letter-spacing:0.02em; text-transform:uppercase; color:var(--ink); }
+        .logo .brand-tag { font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:0.62rem; letter-spacing:0.12em; color:var(--terra); border:1.5px solid var(--terra); padding:3px 8px; border-radius:100px; margin-left:10px; }
+        .main-nav { display:flex; align-items:center; gap:24px; }
+        .main-nav a { font-size:0.86rem; font-weight:600; color:var(--ink-2); transition:color .18s; }
+        .main-nav a:hover, .main-nav a.active { color:var(--terra); }
+        .nav-cta { background:var(--terra); color:#fff !important; padding:10px 18px; border-radius:100px; font-size:0.8rem !important; transition:background .2s, transform .15s; }
+        .nav-cta:hover { background:var(--terra-d); transform:translateY(-1px); }
+        .nav-toggle { display:none; background:none; border:none; font-size:1.5rem; color:var(--ink); cursor:pointer; line-height:1; }
+        @media (max-width:820px) {
+            .nav-toggle { display:block; }
+            .main-nav { display:none; position:absolute; top:100%; left:0; right:0; flex-direction:column; align-items:flex-start; gap:0; background:var(--bg); border-bottom:2px solid var(--ink); padding:8px 30px 20px; }
+            .main-nav.open { display:flex; }
+            .main-nav a { padding:12px 0; width:100%; border-top:1px solid var(--line); font-size:1rem; }
+            .nav-cta { margin-top:12px; text-align:center; border-top:none; }
+        }
+
+        /* botão genérico */
+        .btn { display:inline-flex; align-items:center; gap:9px; justify-content:center; font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:0.85rem; letter-spacing:0.04em; text-transform:uppercase; padding:15px 28px; border-radius:100px; border:none; cursor:pointer; transition:transform .15s, box-shadow .15s, background .2s; }
+        .btn-terra { background:var(--terra); color:#fff; }
+        .btn-terra:hover { background:var(--terra-d); transform:translateY(-2px); box-shadow:0 10px 26px rgba(176,110,74,.35); }
+        .btn-ink { background:var(--ink); color:#fff; }
+        .btn-ink:hover { background:var(--ink-2); transform:translateY(-2px); }
+
+        /* ---------- HERO COMPACTO ---------- */
+        .hero { position:relative; overflow:hidden; border-bottom:1.5px solid var(--line); }
+        .hero-glow { position:absolute; width:560px; height:560px; border-radius:50%; top:-240px; right:-160px; background:radial-gradient(circle,rgba(176,110,74,.13),transparent 62%); pointer-events:none; }
+        .hero .wrap { position:relative; z-index:2; padding:54px 30px 48px; max-width:820px; }
+        .hero-eyebrow { display:inline-flex; align-items:center; gap:9px; margin-bottom:20px; flex-wrap:wrap; }
+        .hero-eyebrow .dot { width:7px; height:7px; border-radius:50%; background:var(--terra); box-shadow:0 0 0 4px rgba(176,110,74,.18); }
+        .hero-eyebrow .sep { color:var(--line); }
+        .hero-eyebrow .data { font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); }
+        .hero h1 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(2.4rem,7vw,4.2rem); line-height:0.94; letter-spacing:-0.01em; text-transform:uppercase; color:var(--ink); }
+        .hero h1 .terra { color:var(--terra); }
+        .hero-sub { font-size:1.12rem; color:var(--ink-2); font-weight:300; max-width:54ch; margin-top:20px; }
+        .hero-sub b { color:var(--ink); font-weight:600; }
+
+        /* ---------- LAYOUT ARTIGO ---------- */
+        .artigo { padding:56px 0 40px; }
+        .artigo .wrap { max-width:760px; }
+
+        /* bloco do reel embedado */
+        .reel-embed { margin:0 auto 44px; max-width:540px; }
+        .reel-embed .instagram-media { margin:0 auto !important; }
+        .reel-placeholder { border:1.5px dashed var(--line); border-radius:16px; background:var(--card); padding:34px 26px; text-align:center; }
+        .reel-placeholder .rp-icon { font-size:1.7rem; margin-bottom:10px; }
+        .reel-placeholder b { display:block; font-family:'Anton',sans-serif; font-weight:400; font-size:1.15rem; text-transform:uppercase; color:var(--ink); letter-spacing:.01em; margin-bottom:6px; }
+        .reel-placeholder p { font-size:0.88rem; color:var(--muted); }
+
+        /* corpo do post */
+        .corpo { font-size:1.06rem; color:var(--text); line-height:1.75; }
+        .corpo > p { margin-bottom:20px; }
+        .corpo > p:first-of-type { font-size:1.16rem; color:var(--ink-2); }
+        .corpo h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.6rem,4.5vw,2.2rem); text-transform:uppercase; color:var(--ink); line-height:1.05; letter-spacing:-0.01em; margin:44px 0 16px; }
+        .corpo h3 { font-size:1.2rem; font-weight:700; color:var(--ink); margin:30px 0 10px; }
+        .corpo a { color:var(--terra-d); font-weight:600; border-bottom:1.5px solid var(--terra); }
+        .corpo a:hover { color:var(--terra); }
+        .corpo strong, .corpo b { color:var(--ink); font-weight:700; }
+        .corpo ul { list-style:none; margin:6px 0 22px; padding:0; }
+        .corpo ul li { position:relative; padding-left:26px; margin-bottom:12px; }
+        .corpo ul li::before { content:'→'; position:absolute; left:0; top:0; color:var(--terra); font-weight:800; }
+        .corpo ol { margin:6px 0 22px 22px; }
+        .corpo ol li { margin-bottom:12px; padding-left:6px; }
+        .corpo ol li::marker { color:var(--terra); font-weight:800; }
+
+        /* blocos didáticos */
+        .bloco { border-radius:14px; padding:22px 24px 22px 26px; margin:26px 0; border:1.5px solid var(--line); }
+        .bloco .bloco-tag { display:block; font-size:0.72rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:8px; }
+        .bloco p { font-size:0.98rem; line-height:1.65; margin:0; }
+        .bloco p + p { margin-top:10px; }
+        .bloco-dica { background:rgba(67,93,81,0.08); border-left:5px solid var(--green); }
+        .bloco-dica .bloco-tag { color:var(--green); }
+        .bloco-atencao { background:rgba(176,110,74,0.09); border-left:5px solid var(--terra); }
+        .bloco-atencao .bloco-tag { color:var(--terra-d); }
+        .bloco-case { background:var(--ink); border-left:5px solid var(--terra-l); border-color:var(--ink); }
+        .bloco-case .bloco-tag { color:var(--terra-l); }
+        .bloco-case p { color:rgba(244,243,239,.88); }
+        .bloco-case b { color:#fff; }
+
+        /* antes/depois */
+        .antes-depois { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:26px 0; }
+        @media (max-width:600px) { .antes-depois { grid-template-columns:1fr; } }
+        .ad-ruim, .ad-bom { border-radius:12px; padding:18px 20px; font-size:0.95rem; line-height:1.6; border:1.5px solid var(--line); }
+        .ad-ruim { background:rgba(150,90,59,0.06); }
+        .ad-bom { background:rgba(67,93,81,0.08); }
+        .ad-ruim .ad-label, .ad-bom .ad-label { display:block; font-size:0.74rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:8px; }
+        .ad-ruim .ad-label { color:var(--terra-d); }
+        .ad-bom .ad-label { color:var(--green); }
+
+        /* prompt box com botão copiar */
+        .prompt-box { background:var(--ink); border-radius:16px; padding:22px 24px; margin:28px 0; position:relative; box-shadow:8px 8px 0 var(--green); }
+        .prompt-box .pb-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; }
+        .prompt-box .pb-label { font-size:0.72rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--terra-l); }
+        .prompt-box pre { font-family:'Hanken Grotesk',ui-monospace,monospace; font-size:0.95rem; line-height:1.6; color:rgba(244,243,239,.92); white-space:pre-wrap; word-wrap:break-word; margin:0; }
+        .copy-btn { flex-shrink:0; display:inline-flex; align-items:center; gap:6px; background:var(--terra); color:#fff; border:none; border-radius:100px; padding:8px 16px; font-family:'Hanken Grotesk',sans-serif; font-size:0.74rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer; transition:background .2s, transform .15s; }
+        .copy-btn:hover { background:var(--terra-d); transform:translateY(-1px); }
+        .copy-btn.copied { background:var(--green); }
+
+        /* ---------- CONTENT UPGRADE (gated) ---------- */
+        .upgrade { margin:52px 0; }
+        .upgrade .wl-card { background:var(--ink); color:#fff; border-radius:18px; padding:34px 32px; box-shadow:8px 8px 0 var(--terra); }
+        .upgrade .wl-card .kick { color:var(--terra-l); display:block; margin-bottom:12px; }
+        .upgrade .wl-card h3 { font-family:'Anton',sans-serif; font-weight:400; font-size:1.7rem; text-transform:uppercase; line-height:1; margin-bottom:8px; }
+        .upgrade .wl-card .wl-sub { font-size:0.95rem; color:rgba(255,255,255,0.72); margin-bottom:22px; max-width:46ch; }
+        .upgrade .wl-form { display:flex; gap:10px; flex-wrap:wrap; }
+        .field { flex:1; min-width:220px; padding:16px 20px; font-family:inherit; font-size:1rem; background:rgba(255,255,255,0.07); border:1.5px solid rgba(255,255,255,0.22); border-radius:10px; color:#fff; outline:none; transition:border-color .2s, background .2s; }
+        .field::placeholder { color:rgba(255,255,255,0.5); }
+        .field:focus { border-color:var(--terra); background:rgba(255,255,255,0.12); }
+        .btn-form { padding:16px 26px; font-family:'Hanken Grotesk',sans-serif; font-size:0.82rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer; background:var(--terra); color:#fff; border:none; border-radius:10px; transition:transform .15s, box-shadow .15s, background .2s; white-space:nowrap; }
+        .btn-form:hover { background:var(--terra-d); transform:translateY(-2px); box-shadow:0 8px 22px rgba(176,110,74,0.35); }
+        .btn-form:disabled { opacity:.6; cursor:not-allowed; transform:none; }
+        .upgrade .fine { margin-top:14px; font-size:0.76rem; color:rgba(255,255,255,0.55); }
+        .wl-ok { display:none; background:rgba(67,93,81,0.35); border:1.5px solid var(--terra-l); border-radius:10px; padding:18px 20px; font-size:0.98rem; line-height:1.5; color:#fff; }
+        .wl-ok b { color:var(--terra-l); }
+        .wl-ok a { color:#fff; font-weight:700; border-bottom:2px solid var(--terra-l); }
+        .wl-done .wl-ok { display:block; }
+        .wl-done .wl-form, .wl-done .fine { display:none; }
+
+        /* ---------- FAQ ---------- */
+        .faq-sec { padding:8px 0 20px; }
+        .faq-sec .wrap { max-width:760px; }
+        .faq-sec h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.6rem,4.5vw,2.2rem); text-transform:uppercase; color:var(--ink); line-height:1; margin-bottom:22px; }
+        .faq-list { max-width:760px; }
+        .faq-item { border:1.5px solid var(--line); border-radius:14px; background:var(--card); margin-bottom:12px; overflow:hidden; }
+        .faq-q { width:100%; display:flex; justify-content:space-between; align-items:center; gap:16px; text-align:left; background:none; border:none; cursor:pointer; padding:20px 24px; font-family:'Hanken Grotesk',sans-serif; font-size:1.02rem; font-weight:700; color:var(--ink); }
+        .faq-q .mark { font-family:'Anton',sans-serif; font-size:1.3rem; color:var(--terra); transition:transform .25s; flex-shrink:0; line-height:1; }
+        .faq-item.open .faq-q .mark { transform:rotate(45deg); }
+        .faq-a { display:none; padding:0 24px 22px; font-size:0.96rem; color:var(--ink-2); line-height:1.7; }
+        .faq-item.open .faq-a { display:block; }
+        .faq-a b { color:var(--ink); }
+
+        /* ---------- BANNER DO CURSO ---------- */
+        .curso-banner { background:var(--ink); color:var(--cream); margin:40px 0 0; }
+        .curso-banner .wrap { max-width:900px; padding:56px 30px; display:flex; align-items:center; justify-content:space-between; gap:30px; flex-wrap:wrap; }
+        .curso-banner .cb-text { flex:1; min-width:260px; }
+        .curso-banner .kick { color:var(--terra-l); display:block; margin-bottom:12px; }
+        .curso-banner h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.7rem,5vw,2.6rem); text-transform:uppercase; color:#fff; line-height:1; margin-bottom:12px; max-width:20ch; }
+        .curso-banner h2 .terra { color:var(--terra-l); }
+        .curso-banner p { color:rgba(244,243,239,.72); font-weight:300; font-size:1rem; max-width:46ch; }
+
+        /* volta pro hub */
+        .voltar-hub { text-align:center; padding:40px 0 8px; }
+        .voltar-hub a { font-size:0.9rem; font-weight:700; letter-spacing:0.02em; color:var(--ink); border-bottom:2px solid var(--terra); padding-bottom:3px; transition:color .18s; }
+        .voltar-hub a:hover { color:var(--terra); }
+
+        /* footer */
+        footer { background:var(--ink); color:rgba(244,243,239,.6); padding:40px 0 48px; margin-top:30px; }
+        .footer-row { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+        .footer-brand { font-family:'Anton',sans-serif; font-size:1.1rem; text-transform:uppercase; color:#fff; }
+        .footer-links { display:flex; gap:20px; flex-wrap:wrap; }
+        .footer-links a { font-size:0.84rem; font-weight:600; color:rgba(244,243,239,.7); }
+        .footer-links a:hover { color:var(--terra-l); }
+        .footer-copy { font-size:0.76rem; color:rgba(244,243,239,.4); margin-top:14px; }
+
+        /* reveal */
+        .rv { opacity:0; transform:translateY(22px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+        .rv.in { opacity:1; transform:none; }
+        @media (prefers-reduced-motion:reduce) { .rv { opacity:1; transform:none; } }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="wrap header-inner">
+        <a href="/" class="logo">Bruna Santanna<span class="brand-tag">A Virada IA</span></a>
+        <nav class="main-nav" id="mainNav">
+            <a href="/">Home</a>
+            <a href="/biblioteca">Biblioteca</a>
+            <a href="/claude">Guia do Claude</a>
+            <a href="https://newscale.tech" target="_blank" rel="noopener">IA na sua Empresa</a>
+            <a href="/curso" class="nav-cta">Quero o curso</a>
+        </nav>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">☰</button>
+    </div>
+</header>
+
+<!-- ========== HERO COMPACTO ========== -->
+<section class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="wrap">
+        <div class="hero-eyebrow rv">
+            <span class="dot"></span>
+            <span class="kick">Setup</span>
+            <span class="sep">·</span>
+            <span class="data">Julho de 2026</span>
+        </div>
+        <h1 class="rv">Configure o Claude uma vez pra ele soar como <span class="terra">você</span> pra sempre</h1>
+        <p class="hero-sub rv">O passo a passo pra montar uma pasta e três arquivos que ensinam quem você é — e nunca mais reexplicar seu tom, seu jeito e suas regras. <b>Modelos prontos pra copiar.</b></p>
+    </div>
+</section>
+
+<!-- ========== ARTIGO ========== -->
+<article class="artigo">
+    <div class="wrap">
+
+        <!-- ─── BLOCO DO REEL EMBEDADO ─── -->
+        <div class="reel-embed rv">
+            <blockquote class="instagram-media"
+                data-instgrm-permalink="https://www.instagram.com/reel/DXsQY05gGBG/"
+                data-instgrm-version="14"
+                style="max-width:540px; width:100%; margin:0 auto;">
+            </blockquote>
+            <script async src="https://www.instagram.com/embed.js"></script>
+        </div>
+
+        <!-- ─── CORPO DO POST ─── -->
+        <div class="corpo rv">
+
+            <p>Configurar o Claude uma vez significa criar uma pasta com três arquivos de texto — quem você é, como você escreve e o que ele nunca pode fazer — e apontar o Claude Cowork pra ela. A partir daí ele lê esse contexto sozinho antes de qualquer tarefa. Você para de reexplicar seu tom e ele já começa soando como você.</p>
+
+            <p>Se você viu o Reel, ficou com aquela sensação de "por que ninguém me contou isso antes?". A verdade é que quase todo mundo usa o Claude no modo mais cansativo possível: abrindo uma conversa em branco toda vez e digitando de novo quem é, o que faz e como quer as coisas. Dá pra fazer isso <b>uma vez só</b>.</p>
+
+            <p>Esse guia é o passo a passo completo do Reel, com os modelos de cada arquivo prontos pra você copiar. Vou usar o <b>Claude Cowork</b> — que agora está disponível pra todo mundo nos planos pagos, no aplicativo de desktop (Mac e Windows), na aba <b>Cowork</b>. É ele que consegue enxergar uma pasta no seu computador e ler seus arquivos.</p>
+
+            <h2>Por que uma pasta, e não um prompt gigante</h2>
+
+            <p>Prompt vive na conversa. Quando a conversa acaba, o contexto vai junto. Pasta vive no seu computador — e o Claude volta nela toda vez. É a diferença entre contar sua história pra alguém que esquece de manhã e escrever num caderno que a pessoa consulta sempre.</p>
+
+            <p>A ideia é simples: você cria uma pasta central e enche ela de "quem você é". Depois é só mandar o Claude ler isso antes de trabalhar. Bora montar.</p>
+
+            <h2>Passo 1 · Crie a pasta Claude-Work</h2>
+
+            <p>No seu computador, cria uma pasta chamada <b>Claude-Work</b>. Pode ser na área de trabalho ou nos Documentos, onde você achar. Dentro dela, cria quatro subpastas:</p>
+
+            <ul>
+                <li><b>SOBRE MIM</b> — onde moram os arquivos que dizem quem você é</li>
+                <li><b>PROJETOS</b> — cada cliente, cliente ou área de trabalho num lugar</li>
+                <li><b>TEMPLATES</b> — seus modelos prontos (proposta, email, relatório)</li>
+                <li><b>OUTPUTS</b> — onde o Claude salva o que produz pra você</li>
+            </ul>
+
+            <p>Essa estrutura não é enfeite. Ela dá ao Claude um mapa: ele sabe onde procurar quem você é, onde estão seus projetos, quais modelos usar e onde deixar o resultado. Organização vira contexto.</p>
+
+            <div class="bloco bloco-dica">
+                <span class="bloco-tag">→ Dica</span>
+                <p>Não precisa encher tudo de uma vez. Comece só pela subpasta <b>SOBRE MIM</b> com os três arquivos abaixo. PROJETOS, TEMPLATES e OUTPUTS você vai enchendo conforme usa. O que importa é o Claude ter <b>onde</b> te conhecer.</p>
+            </div>
+
+            <h2>Passo 2 · Os três arquivos que ensinam quem você é</h2>
+
+            <p>Dentro de <b>SOBRE MIM</b>, você vai criar três arquivos de texto simples. A terminação <b>.md</b> é só um tipo de arquivo de texto — abre em qualquer bloco de notas. Você escreve em português normal, sem comando nenhum. Copia os modelos, troca pelas suas informações e salva.</p>
+
+            <h3>sobre-mim.md — o seu contexto</h3>
+            <p>Aqui você conta o básico: quem você é, o que faz, pra quem trabalha e o que o Claude precisa saber pra te ajudar bem.</p>
+
+            <div class="prompt-box">
+                <div class="pb-head">
+                    <span class="pb-label">&gt; Modelo · sobre-mim.md</span>
+                    <button class="copy-btn">Copiar</button>
+                </div>
+                <pre># Sobre mim
+
+Nome: [seu nome]
+O que eu faço: [ex.: sou nutricionista e atendo online]
+Pra quem eu trabalho: [ex.: mulheres 30-50 querendo reeducação alimentar]
+
+## Meus objetivos
+- [ex.: crescer meu Instagram sem parecer robótica]
+- [ex.: fechar 5 consultas novas por mês]
+
+## O que o Claude precisa saber
+- Meu público não entende jargão técnico, fala comigo em linguagem simples.
+- Eu prezo por [ex.: honestidade, nada de promessa milagrosa].
+- Ferramentas que eu uso: [ex.: Instagram, WhatsApp, Google Agenda].</pre>
+            </div>
+
+            <h3>minha-voz.md — como você escreve</h3>
+            <p>Esse é o arquivo que faz o Claude soar como você. Descreve seu tom, dá exemplos de coisa que você diria e de coisa que você <b>nunca</b> diria.</p>
+
+            <div class="prompt-box">
+                <div class="pb-head">
+                    <span class="pb-label">&gt; Modelo · minha-voz.md</span>
+                    <button class="copy-btn">Copiar</button>
+                </div>
+                <pre># Minha voz
+
+## Como eu falo
+- Falo em 2ª pessoa, como quem conversa com uma amiga.
+- Frases curtas. Coloquial. Uso "tá", "pra", "a gente".
+- Direta ao ponto, sem enrolação nem palavra difícil.
+
+## Palavras e expressões que eu uso
+[ex.: "olha só", "sério", "a real é que"]
+
+## O que eu NUNCA faço
+- Não uso jargão corporativo ("sinergia", "otimizar processos").
+- Não prometo resultado milagroso.
+- Não uso emoji em excesso.
+
+## Exemplo do meu tom
+"[Cole aqui um parágrafo que você escreveu e que é a sua cara.]"</pre>
+            </div>
+
+            <h3>minhas-regras.md — o que ele nunca pode fazer</h3>
+            <p>As regras de segurança da casa. É aqui que você põe os limites pra dormir tranquila.</p>
+
+            <div class="prompt-box">
+                <div class="pb-head">
+                    <span class="pb-label">&gt; Modelo · minhas-regras.md</span>
+                    <button class="copy-btn">Copiar</button>
+                </div>
+                <pre># Minhas regras
+
+- Antes de qualquer tarefa, leia os arquivos da pasta SOBRE MIM.
+- Nunca invente dados, número ou fonte. Se não souber, diga que não sabe.
+- Pergunte antes de executar qualquer coisa que altere ou apague arquivos.
+- Sempre me mostre um plano antes de fazer algo grande.
+- Salve o que você produzir na subpasta OUTPUTS.
+- Escreva sempre no tom descrito em minha-voz.md.</pre>
+            </div>
+
+            <div class="bloco bloco-atencao">
+                <span class="bloco-tag">⚠ Atenção</span>
+                <p>Preencha os modelos de verdade — não deixe os colchetes <b>[assim]</b> no arquivo. O Claude é tão bom quanto o que você conta pra ele. Um "sobre-mim" genérico gera resposta genérica. Cinco minutos preenchendo com sinceridade valem por meses de prompt repetido.</p>
+            </div>
+
+            <h2>Passo 3 · Conecte a pasta e cole as Instruções Globais</h2>
+
+            <p>Agora é ligar tudo. Abre o aplicativo do Claude no desktop e vai na aba <b>Cowork</b>. Você vai fazer duas coisas:</p>
+
+            <ol>
+                <li><b>Dar acesso à pasta.</b> Aponta o Cowork pra sua pasta <b>Claude-Work</b> e concede a permissão de leitura (e escrita, se quiser que ele salve nos OUTPUTS). Ele passa a enxergar seus arquivos ali, sem você ter que anexar nada.</li>
+                <li><b>Colar as Instruções Globais.</b> Vai em <b>Configurações &gt; Cowork</b>, acha o campo <b>Instruções Globais</b>, clica em <b>Editar</b> e cola o texto abaixo. Isso vira a regra que vale pra toda conversa.</li>
+            </ol>
+
+            <div class="prompt-box">
+                <div class="pb-head">
+                    <span class="pb-label">&gt; Prompt · Instruções Globais</span>
+                    <button class="copy-btn">Copiar</button>
+                </div>
+                <pre>Antes de qualquer tarefa, leia os arquivos da minha pasta SOBRE MIM (sobre-mim.md, minha-voz.md e minhas-regras.md) e use esse contexto em tudo que você fizer.
+
+Regras que valem sempre:
+- Pergunte antes de executar qualquer coisa. Não saia fazendo.
+- Sempre me mostre um plano do que você pretende fazer antes de começar.
+- Nunca delete nem sobrescreva um arquivo sem a minha aprovação explícita.
+- Escreva sempre no meu tom, descrito em minha-voz.md.
+- Se faltar informação, me pergunte em vez de inventar.</pre>
+            </div>
+
+            <p>Pronto. Da próxima vez que você abrir uma conversa e pedir "me ajuda a escrever o post de hoje", ele já vai ter lido quem você é, vai escrever no seu tom e vai te mostrar um plano antes de sair fazendo. Se você quer entender melhor cada recurso do Claude por dentro, o <a href="/claude">Guia do Claude</a> destrincha tudo com calma.</p>
+
+            <div class="bloco bloco-dica">
+                <span class="bloco-tag">→ Dica</span>
+                <p>Dentro do Cowork dá pra criar um <b>Projeto</b> pra cada área da sua vida (um pro seu negócio, um pra área pessoal). O bom é que o Projeto guarda o contexto e a memória <b>entre as sessões</b> — então o que você configurou não se perde quando você fecha o app.</p>
+            </div>
+
+            <div class="bloco bloco-case">
+                <span class="bloco-tag">✦ Case real</span>
+                <p><b>Eu tenho uma pasta dessas pra Virada IA e outra pra NewScale.</b> Antes, cada texto começava com dez minutos de "então, meu público é assim, meu tom é assado, não pode isso, tem que ter aquilo". Toda santa vez.</p>
+                <p>Depois que eu montei a pasta com meu sobre-mim, minha voz e minhas regras, isso acabou. Hoje eu abro o Claude e falo "escreve a legenda do Reel de hoje" — e sai na minha cara, no meu tom, sem eu reexplicar nada. O tempo que eu economizo só nisso já pagou a assinatura muitas vezes.</p>
+            </div>
+
+            <h2>O erro que faz você perder tempo pra sempre</h2>
+
+            <p>Aqui está o ponto que separa quem usa IA no raso de quem usa com profundidade. A maioria das pessoas resolve o problema do "o Claude não me conhece" da pior forma possível: escrevendo um <b>prompt gigante toda vez</b>.</p>
+
+            <p>Elas colam um parágrafo enorme de contexto no começo de cada conversa. Funciona? Mais ou menos. Mas é a definição de trabalho manual: você refaz o mesmo esforço todo dia, e ainda esquece um pedaço na pressa. É a diferença entre configurar uma vez e reexplicar pra sempre:</p>
+
+            <div class="antes-depois">
+                <div class="ad-ruim">
+                    <span class="ad-label">❌ Cansativo</span>
+                    Todo dia, colar de novo: "Oi, eu sou a fulana, sou nutricionista, meu público é X, meu tom é Y, não pode Z, sempre faça W..." antes de cada pedido.
+                </div>
+                <div class="ad-bom">
+                    <span class="ad-label">✅ Configurado</span>
+                    Uma vez: montar a pasta e colar as Instruções Globais. Depois, só: "escreve o post de hoje". Ele já sabe o resto.
+                </div>
+            </div>
+
+            <p>Configurar leva quinze minutos. Reexplicar leva quinze minutos <b>por dia, pra sempre</b>. É a conta mais fácil de fazer. Faz a pasta hoje e amanhã você já colhe.</p>
+
+        </div>
+
+        <!-- ─── CONTENT UPGRADE (gated → list: 'biblioteca') ───────────── -->
+        <div class="upgrade rv">
+            <div class="wl-card" id="upgradeCard">
+                <span class="kick">Material extra · grátis</span>
+                <h3>Os três arquivos .md prontos pra baixar</h3>
+                <p class="wl-sub">Montei um PDF com os modelos de sobre-mim, minha-voz e minhas-regras já formatados, mais as Instruções Globais e um checklist do setup. Deixa seu email que eu mando direto pra você — e você ainda entra na Biblioteca.</p>
+                <form class="wl-form" novalidate>
+                    <input class="field" type="email" placeholder="Seu melhor email" required autocomplete="email">
+                    <button type="submit" class="btn-form">Quero o material</button>
+                </form>
+                <div class="wl-ok"><b>Prontinho, tá dentro.</b> Baixa aqui o teu material: <a href="/guia-claude-bruna.pdf" target="_blank" rel="noopener">os três arquivos .md + Instruções Globais (PDF)</a>. As próximas novidades da Biblioteca chegam no seu email.</div>
+                <p class="fine">Zero spam. Só o que vale a pena sobre IA na prática.</p>
+            </div>
+        </div>
+
+    </div>
+</article>
+
+<!-- ========== FAQ ========== -->
+<section class="faq-sec">
+    <div class="wrap">
+        <h2 class="rv">Dúvidas rápidas</h2>
+        <div class="faq-list rv">
+            <div class="faq-item">
+                <button class="faq-q">Preciso saber programar pra configurar o Claude assim?<span class="mark">+</span></button>
+                <div class="faq-a">Não. Os arquivos <b>.md</b> são só arquivos de texto — você escreve em português normal, sem nenhum comando ou sintaxe. Se você sabe criar uma pasta no computador e digitar num bloco de notas, você consegue fazer todo o setup. As Instruções Globais também são coladas num campo de configuração, sem código.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Isso funciona no Claude do navegador ou só no aplicativo?<span class="mark">+</span></button>
+                <div class="faq-a">A parte de apontar pra uma pasta local e ler seus arquivos é do <b>Claude Cowork</b>, que fica no aplicativo de desktop do Claude (Mac e Windows), na aba Cowork. As Instruções Globais também ficam nas configurações do Cowork. No navegador você consegue colar seu contexto manualmente, mas quem lê a sua pasta e os seus arquivos <b>automaticamente</b> é o app de desktop.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Cada vez que abro uma conversa preciso mandar meus arquivos de novo?<span class="mark">+</span></button>
+                <div class="faq-a">Não, e esse é o ponto. Depois que você concede acesso à pasta e coloca a instrução de <b>ler seus arquivos antes de qualquer tarefa</b>, o Claude consulta o sobre-mim, a voz e as regras sozinho. Dentro de um Projeto do Cowork, esse contexto e a memória ficam salvos entre as sessões — você não reexplica nada.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== BANNER DO CURSO ========== -->
+<section class="curso-banner">
+    <div class="wrap">
+        <div class="cb-text">
+            <span class="kick">Curso de Claude · Coorte 1</span>
+            <h2>Quer ir <span class="terra">além</span> desse guia?</h2>
+            <p>No Claude com Profundidade você aprende a pensar e usar IA de verdade, do zero, sem programar. Zero tech, 100% prático.</p>
+        </div>
+        <a href="/curso" class="btn btn-terra">Quero o curso</a>
+    </div>
+</section>
+
+<!-- volta pro hub -->
+<div class="voltar-hub">
+    <a href="/biblioteca">← Voltar pra Biblioteca</a>
+</div>
+
+<footer>
+    <div class="wrap">
+        <div class="footer-row">
+            <span class="footer-brand">A Virada IA</span>
+            <nav class="footer-links">
+                <a href="/biblioteca">Biblioteca</a>
+                <a href="/claude">Guia do Claude</a>
+                <a href="/curso">Curso de Claude</a>
+                <a href="https://instagram.com/brusantanna.ai" target="_blank" rel="noopener">Instagram</a>
+                <a href="https://newscale.tech" target="_blank" rel="noopener">NewScale</a>
+                <a href="mailto:eu@brunasantanna.com">Contato</a>
+            </nav>
+        </div>
+        <p class="footer-copy">© 2026 Bruna Santanna · A Virada IA</p>
+    </div>
+</footer>
+
+<script>
+    // ===== Copiar prompt =====
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const box = btn.closest('.prompt-box');
+            const pre = box.querySelector('pre');
+            const text = pre ? pre.innerText : '';
+            navigator.clipboard.writeText(text).then(() => {
+                const original = btn.textContent;
+                btn.textContent = '✓ Copiado';
+                btn.classList.add('copied');
+                setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, 1800);
+            });
+        });
+    });
+
+    // ===== Content upgrade (Apps Script, list: 'biblioteca') =====
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx90IdrA_L6n3jVdoYBinBPxPfWq0h6Iua1MrI8gQ7-RgBXhU1rOqF9dM2n7mLdAeMW/exec";
+
+    document.querySelectorAll('.wl-form').forEach(form => {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const input = form.querySelector('input[type="email"]');
+            const btn = form.querySelector('button[type="submit"]');
+            const email = input.value.trim();
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { input.focus(); return; }
+            btn.disabled = true; btn.textContent = 'Enviando...';
+            try {
+                await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, list: 'biblioteca', timestamp: new Date().toISOString(), source: location.href }) });
+            } catch(_) {}
+            if (typeof gtag === 'function') gtag('event', 'lead_signup', { list: 'biblioteca' });
+            document.querySelectorAll('.upgrade .wl-card').forEach(c => c.classList.add('wl-done'));
+            localStorage.setItem('biblioteca_lead', '1');
+        });
+    });
+    if (localStorage.getItem('biblioteca_lead') === '1') {
+        document.querySelectorAll('.upgrade .wl-card').forEach(c => c.classList.add('wl-done'));
+    }
+
+    // ===== FAQ accordion =====
+    document.querySelectorAll('.faq-q').forEach(q => {
+        q.addEventListener('click', () => q.closest('.faq-item').classList.toggle('open'));
+    });
+
+    // ===== menu mobile =====
+    const navToggle = document.getElementById('navToggle'), mainNav = document.getElementById('mainNav');
+    navToggle.addEventListener('click', () => mainNav.classList.toggle('open'));
+    mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mainNav.classList.remove('open')));
+
+    // ===== reveal on scroll =====
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold:.12, rootMargin:'0px 0px -40px 0px' });
+    document.querySelectorAll('.rv').forEach((el,i) => { el.style.transitionDelay = (i%3*70)+'ms'; io.observe(el); });
+</script>
+
+</body>
+</html>

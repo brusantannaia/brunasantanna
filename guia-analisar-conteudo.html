@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Como usar o Claude pra descobrir por que seu conteúdo (não) viraliza | A Virada IA · Bruna Santanna</title>
+    <meta name="description" content="O passo a passo real pra jogar os dados dos seus posts no Claude, achar o padrão do que viraliza e virar isso num checklist de roteiro. Com prompt pronto.">
+    <meta name="author" content="Bruna Santanna">
+    <link rel="canonical" href="https://brunasantanna.com/guia-analisar-conteudo">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://brunasantanna.com/guia-analisar-conteudo">
+    <meta property="og:title" content="Como usar o Claude pra descobrir por que seu conteúdo (não) viraliza | A Virada IA">
+    <meta property="og:description" content="O passo a passo real pra jogar os dados dos seus posts no Claude, achar o padrão do que viraliza e virar isso num checklist de roteiro. Com prompt pronto.">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DCW0QVCWB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-7DCW0QVCWB');
+    </script>
+
+    <!-- JSON-LD: Article -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Como usar o Claude pra descobrir por que seu conteúdo (não) viraliza",
+        "description": "O passo a passo real pra jogar os dados dos seus posts no Claude, achar o padrão do que viraliza e virar isso num checklist de roteiro. Com prompt pronto.",
+        "inLanguage": "pt-BR",
+        "url": "https://brunasantanna.com/guia-analisar-conteudo",
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://brunasantanna.com/guia-analisar-conteudo" },
+        "datePublished": "2026-07-03",
+        "dateModified": "2026-07-03",
+        "author": { "@type": "Person", "name": "Bruna Santanna", "url": "https://brunasantanna.com" },
+        "publisher": {
+            "@type": "Organization",
+            "name": "A Virada IA · Bruna Santanna",
+            "url": "https://brunasantanna.com"
+        },
+        "about": "Criadores"
+    }
+    </script>
+
+    <!-- JSON-LD: FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Preciso pagar alguma coisa pra fazer essa análise?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Não. Os dados vêm do Painel Profissional do próprio Instagram, que é de graça, e o Claude analisa arquivos no plano gratuito. Eu fiz a auditoria inteira sem gastar um real. Se você tiver muitos posts pra jogar de uma vez, um plano pago do Claude ajuda pelo contexto maior, mas não é obrigatório pra começar."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "De onde eu tiro os dados dos meus posts?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Do Painel Profissional do Instagram: perfil, Painel Profissional, Conteúdo, filtra por Reels e ordena por visualizações. Ali você vê views, alcance, salvamentos e a curva de retenção segundo a segundo de cada Reel. Anote isso numa planilha simples ou tire prints e mande pro Claude. Lembra que o Instagram guarda só 90 dias de histórico, então exporte de tempos em tempos."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Quantos posts eu preciso ter pra valer a pena?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Uns 15 a 20 já dão padrão suficiente pra separar o que funciona do que não funciona. Com menos que isso o Claude ainda te ajuda a levantar hipóteses, mas o padrão fica mais fraco. O segredo é ter na amostra tanto os posts que bombaram quanto os que morreram, porque a resposta tá justamente na diferença entre os dois grupos."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg:#F3EEE3; --bg-2:#ECE5D6; --card:#FBF9F3;
+            --ink:#14373C; --ink-2:#2C4F54; --green:#435D51;
+            --terra:#B06E4A; --terra-l:#C4835E; --terra-d:#985A3B;
+            --text:#233133; --muted:#6E7A75; --line:rgba(20,55,60,0.16);
+            --cream:#F4F3EF;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family:'Hanken Grotesk',sans-serif; background:var(--bg); color:var(--text); line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+        img { max-width:100%; display:block; }
+        a { color:inherit; text-decoration:none; }
+        ::selection { background:var(--terra); color:#fff; }
+        .wrap { max-width:1100px; margin:0 auto; padding:0 30px; }
+        .kick { font-size:0.72rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--terra); }
+
+        /* ---------- HEADER ---------- */
+        .site-header { position:sticky; top:0; z-index:50; background:rgba(243,238,227,0.92); backdrop-filter:blur(8px); border-bottom:2px solid var(--ink); }
+        .header-inner { display:flex; align-items:center; justify-content:space-between; padding:16px 0; }
+        .logo { display:inline-flex; align-items:center; white-space:nowrap; font-family:'Anton',sans-serif; font-size:1.2rem; letter-spacing:0.02em; text-transform:uppercase; color:var(--ink); }
+        .logo .brand-tag { font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:0.62rem; letter-spacing:0.12em; color:var(--terra); border:1.5px solid var(--terra); padding:3px 8px; border-radius:100px; margin-left:10px; }
+        .main-nav { display:flex; align-items:center; gap:24px; }
+        .main-nav a { font-size:0.86rem; font-weight:600; color:var(--ink-2); transition:color .18s; }
+        .main-nav a:hover, .main-nav a.active { color:var(--terra); }
+        .nav-cta { background:var(--terra); color:#fff !important; padding:10px 18px; border-radius:100px; font-size:0.8rem !important; transition:background .2s, transform .15s; }
+        .nav-cta:hover { background:var(--terra-d); transform:translateY(-1px); }
+        .nav-toggle { display:none; background:none; border:none; font-size:1.5rem; color:var(--ink); cursor:pointer; line-height:1; }
+        @media (max-width:820px) {
+            .nav-toggle { display:block; }
+            .main-nav { display:none; position:absolute; top:100%; left:0; right:0; flex-direction:column; align-items:flex-start; gap:0; background:var(--bg); border-bottom:2px solid var(--ink); padding:8px 30px 20px; }
+            .main-nav.open { display:flex; }
+            .main-nav a { padding:12px 0; width:100%; border-top:1px solid var(--line); font-size:1rem; }
+            .nav-cta { margin-top:12px; text-align:center; border-top:none; }
+        }
+
+        /* botão genérico */
+        .btn { display:inline-flex; align-items:center; gap:9px; justify-content:center; font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:0.85rem; letter-spacing:0.04em; text-transform:uppercase; padding:15px 28px; border-radius:100px; border:none; cursor:pointer; transition:transform .15s, box-shadow .15s, background .2s; }
+        .btn-terra { background:var(--terra); color:#fff; }
+        .btn-terra:hover { background:var(--terra-d); transform:translateY(-2px); box-shadow:0 10px 26px rgba(176,110,74,.35); }
+        .btn-ink { background:var(--ink); color:#fff; }
+        .btn-ink:hover { background:var(--ink-2); transform:translateY(-2px); }
+
+        /* ---------- HERO COMPACTO ---------- */
+        .hero { position:relative; overflow:hidden; border-bottom:1.5px solid var(--line); }
+        .hero-glow { position:absolute; width:560px; height:560px; border-radius:50%; top:-240px; right:-160px; background:radial-gradient(circle,rgba(176,110,74,.13),transparent 62%); pointer-events:none; }
+        .hero .wrap { position:relative; z-index:2; padding:54px 30px 48px; max-width:820px; }
+        .hero-eyebrow { display:inline-flex; align-items:center; gap:9px; margin-bottom:20px; flex-wrap:wrap; }
+        .hero-eyebrow .dot { width:7px; height:7px; border-radius:50%; background:var(--terra); box-shadow:0 0 0 4px rgba(176,110,74,.18); }
+        .hero-eyebrow .sep { color:var(--line); }
+        .hero-eyebrow .data { font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); }
+        .hero h1 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(2.4rem,7vw,4.2rem); line-height:0.94; letter-spacing:-0.01em; text-transform:uppercase; color:var(--ink); }
+        .hero h1 .terra { color:var(--terra); }
+        .hero-sub { font-size:1.12rem; color:var(--ink-2); font-weight:300; max-width:54ch; margin-top:20px; }
+        .hero-sub b { color:var(--ink); font-weight:600; }
+
+        /* ---------- LAYOUT ARTIGO ---------- */
+        .artigo { padding:56px 0 40px; }
+        .artigo .wrap { max-width:760px; }
+
+        /* bloco do reel embedado */
+        .reel-embed { margin:0 auto 44px; max-width:540px; }
+        .reel-embed .instagram-media { margin:0 auto !important; }
+        .reel-placeholder { border:1.5px dashed var(--line); border-radius:16px; background:var(--card); padding:34px 26px; text-align:center; }
+        .reel-placeholder .rp-icon { font-size:1.7rem; margin-bottom:10px; }
+        .reel-placeholder b { display:block; font-family:'Anton',sans-serif; font-weight:400; font-size:1.15rem; text-transform:uppercase; color:var(--ink); letter-spacing:.01em; margin-bottom:6px; }
+        .reel-placeholder p { font-size:0.88rem; color:var(--muted); }
+
+        /* corpo do post */
+        .corpo { font-size:1.06rem; color:var(--text); line-height:1.75; }
+        .corpo > p { margin-bottom:20px; }
+        .corpo > p:first-of-type { font-size:1.16rem; color:var(--ink-2); }
+        .corpo h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.6rem,4.5vw,2.2rem); text-transform:uppercase; color:var(--ink); line-height:1.05; letter-spacing:-0.01em; margin:44px 0 16px; }
+        .corpo h3 { font-size:1.2rem; font-weight:700; color:var(--ink); margin:30px 0 10px; }
+        .corpo a { color:var(--terra-d); font-weight:600; border-bottom:1.5px solid var(--terra); }
+        .corpo a:hover { color:var(--terra); }
+        .corpo strong, .corpo b { color:var(--ink); font-weight:700; }
+        .corpo ul { list-style:none; margin:6px 0 22px; padding:0; }
+        .corpo ul li { position:relative; padding-left:26px; margin-bottom:12px; }
+        .corpo ul li::before { content:'→'; position:absolute; left:0; top:0; color:var(--terra); font-weight:800; }
+        .corpo ol { margin:6px 0 22px 22px; }
+        .corpo ol li { margin-bottom:12px; padding-left:6px; }
+        .corpo ol li::marker { color:var(--terra); font-weight:800; }
+
+        /* blocos didáticos */
+        .bloco { border-radius:14px; padding:22px 24px 22px 26px; margin:26px 0; border:1.5px solid var(--line); }
+        .bloco .bloco-tag { display:block; font-size:0.72rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:8px; }
+        .bloco p { font-size:0.98rem; line-height:1.65; margin:0; }
+        .bloco p + p { margin-top:10px; }
+        .bloco-dica { background:rgba(67,93,81,0.08); border-left:5px solid var(--green); }
+        .bloco-dica .bloco-tag { color:var(--green); }
+        .bloco-atencao { background:rgba(176,110,74,0.09); border-left:5px solid var(--terra); }
+        .bloco-atencao .bloco-tag { color:var(--terra-d); }
+        .bloco-case { background:var(--ink); border-left:5px solid var(--terra-l); border-color:var(--ink); }
+        .bloco-case .bloco-tag { color:var(--terra-l); }
+        .bloco-case p { color:rgba(244,243,239,.88); }
+        .bloco-case b { color:#fff; }
+
+        /* antes/depois */
+        .antes-depois { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:26px 0; }
+        @media (max-width:600px) { .antes-depois { grid-template-columns:1fr; } }
+        .ad-ruim, .ad-bom { border-radius:12px; padding:18px 20px; font-size:0.95rem; line-height:1.6; border:1.5px solid var(--line); }
+        .ad-ruim { background:rgba(150,90,59,0.06); }
+        .ad-bom { background:rgba(67,93,81,0.08); }
+        .ad-ruim .ad-label, .ad-bom .ad-label { display:block; font-size:0.74rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:8px; }
+        .ad-ruim .ad-label { color:var(--terra-d); }
+        .ad-bom .ad-label { color:var(--green); }
+
+        /* prompt box com botão copiar */
+        .prompt-box { background:var(--ink); border-radius:16px; padding:22px 24px; margin:28px 0; position:relative; box-shadow:8px 8px 0 var(--green); }
+        .prompt-box .pb-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; }
+        .prompt-box .pb-label { font-size:0.72rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--terra-l); }
+        .prompt-box pre { font-family:'Hanken Grotesk',ui-monospace,monospace; font-size:0.95rem; line-height:1.6; color:rgba(244,243,239,.92); white-space:pre-wrap; word-wrap:break-word; margin:0; }
+        .copy-btn { flex-shrink:0; display:inline-flex; align-items:center; gap:6px; background:var(--terra); color:#fff; border:none; border-radius:100px; padding:8px 16px; font-family:'Hanken Grotesk',sans-serif; font-size:0.74rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer; transition:background .2s, transform .15s; }
+        .copy-btn:hover { background:var(--terra-d); transform:translateY(-1px); }
+        .copy-btn.copied { background:var(--green); }
+
+        /* ---------- CONTENT UPGRADE (gated) ---------- */
+        .upgrade { margin:52px 0; }
+        .upgrade .wl-card { background:var(--ink); color:#fff; border-radius:18px; padding:34px 32px; box-shadow:8px 8px 0 var(--terra); }
+        .upgrade .wl-card .kick { color:var(--terra-l); display:block; margin-bottom:12px; }
+        .upgrade .wl-card h3 { font-family:'Anton',sans-serif; font-weight:400; font-size:1.7rem; text-transform:uppercase; line-height:1; margin-bottom:8px; }
+        .upgrade .wl-card .wl-sub { font-size:0.95rem; color:rgba(255,255,255,0.72); margin-bottom:22px; max-width:46ch; }
+        .upgrade .wl-form { display:flex; gap:10px; flex-wrap:wrap; }
+        .field { flex:1; min-width:220px; padding:16px 20px; font-family:inherit; font-size:1rem; background:rgba(255,255,255,0.07); border:1.5px solid rgba(255,255,255,0.22); border-radius:10px; color:#fff; outline:none; transition:border-color .2s, background .2s; }
+        .field::placeholder { color:rgba(255,255,255,0.5); }
+        .field:focus { border-color:var(--terra); background:rgba(255,255,255,0.12); }
+        .btn-form { padding:16px 26px; font-family:'Hanken Grotesk',sans-serif; font-size:0.82rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer; background:var(--terra); color:#fff; border:none; border-radius:10px; transition:transform .15s, box-shadow .15s, background .2s; white-space:nowrap; }
+        .btn-form:hover { background:var(--terra-d); transform:translateY(-2px); box-shadow:0 8px 22px rgba(176,110,74,0.35); }
+        .btn-form:disabled { opacity:.6; cursor:not-allowed; transform:none; }
+        .upgrade .fine { margin-top:14px; font-size:0.76rem; color:rgba(255,255,255,0.55); }
+        .wl-ok { display:none; background:rgba(67,93,81,0.35); border:1.5px solid var(--terra-l); border-radius:10px; padding:18px 20px; font-size:0.98rem; line-height:1.5; color:#fff; }
+        .wl-ok b { color:var(--terra-l); }
+        .wl-ok a { color:#fff; font-weight:700; border-bottom:1.5px solid var(--terra-l); }
+        .wl-done .wl-ok { display:block; }
+        .wl-done .wl-form, .wl-done .fine { display:none; }
+
+        /* ---------- FAQ ---------- */
+        .faq-sec { padding:8px 0 20px; }
+        .faq-sec .wrap { max-width:760px; }
+        .faq-sec h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.6rem,4.5vw,2.2rem); text-transform:uppercase; color:var(--ink); line-height:1; margin-bottom:22px; }
+        .faq-list { max-width:760px; }
+        .faq-item { border:1.5px solid var(--line); border-radius:14px; background:var(--card); margin-bottom:12px; overflow:hidden; }
+        .faq-q { width:100%; display:flex; justify-content:space-between; align-items:center; gap:16px; text-align:left; background:none; border:none; cursor:pointer; padding:20px 24px; font-family:'Hanken Grotesk',sans-serif; font-size:1.02rem; font-weight:700; color:var(--ink); }
+        .faq-q .mark { font-family:'Anton',sans-serif; font-size:1.3rem; color:var(--terra); transition:transform .25s; flex-shrink:0; line-height:1; }
+        .faq-item.open .faq-q .mark { transform:rotate(45deg); }
+        .faq-a { display:none; padding:0 24px 22px; font-size:0.96rem; color:var(--ink-2); line-height:1.7; }
+        .faq-item.open .faq-a { display:block; }
+        .faq-a b { color:var(--ink); }
+
+        /* ---------- BANNER DO CURSO ---------- */
+        .curso-banner { background:var(--ink); color:var(--cream); margin:40px 0 0; }
+        .curso-banner .wrap { max-width:900px; padding:56px 30px; display:flex; align-items:center; justify-content:space-between; gap:30px; flex-wrap:wrap; }
+        .curso-banner .cb-text { flex:1; min-width:260px; }
+        .curso-banner .kick { color:var(--terra-l); display:block; margin-bottom:12px; }
+        .curso-banner h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.7rem,5vw,2.6rem); text-transform:uppercase; color:#fff; line-height:1; margin-bottom:12px; max-width:20ch; }
+        .curso-banner h2 .terra { color:var(--terra-l); }
+        .curso-banner p { color:rgba(244,243,239,.72); font-weight:300; font-size:1rem; max-width:46ch; }
+
+        /* volta pro hub */
+        .voltar-hub { text-align:center; padding:40px 0 8px; }
+        .voltar-hub a { font-size:0.9rem; font-weight:700; letter-spacing:0.02em; color:var(--ink); border-bottom:2px solid var(--terra); padding-bottom:3px; transition:color .18s; }
+        .voltar-hub a:hover { color:var(--terra); }
+
+        /* footer */
+        footer { background:var(--ink); color:rgba(244,243,239,.6); padding:40px 0 48px; margin-top:30px; }
+        .footer-row { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+        .footer-brand { font-family:'Anton',sans-serif; font-size:1.1rem; text-transform:uppercase; color:#fff; }
+        .footer-links { display:flex; gap:20px; flex-wrap:wrap; }
+        .footer-links a { font-size:0.84rem; font-weight:600; color:rgba(244,243,239,.7); }
+        .footer-links a:hover { color:var(--terra-l); }
+        .footer-copy { font-size:0.76rem; color:rgba(244,243,239,.4); margin-top:14px; }
+
+        /* reveal */
+        .rv { opacity:0; transform:translateY(22px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+        .rv.in { opacity:1; transform:none; }
+        @media (prefers-reduced-motion:reduce) { .rv { opacity:1; transform:none; } }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="wrap header-inner">
+        <a href="/" class="logo">Bruna Santanna<span class="brand-tag">A Virada IA</span></a>
+        <nav class="main-nav" id="mainNav">
+            <a href="/">Home</a>
+            <a href="/biblioteca">Biblioteca</a>
+            <a href="/claude">Guia do Claude</a>
+            <a href="https://newscale.tech" target="_blank" rel="noopener">IA na sua Empresa</a>
+            <a href="/curso" class="nav-cta">Quero o curso</a>
+        </nav>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">☰</button>
+    </div>
+</header>
+
+<!-- ========== HERO COMPACTO ========== -->
+<section class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="wrap">
+        <div class="hero-eyebrow rv">
+            <span class="dot"></span>
+            <span class="kick">Criadores</span>
+            <span class="sep">·</span>
+            <span class="data">Julho de 2026</span>
+        </div>
+        <h1 class="rv">Como usar o Claude pra descobrir por que seu conteúdo <span class="terra">(não) viraliza</span></h1>
+        <p class="hero-sub rv">Peguei os números dos meus próprios posts, joguei no Claude e descobri <b>exatamente</b> o que os vídeos que bombaram tinham em comum. Agora são uns 300 seguidores novos por dia. Te mostro o passo a passo.</p>
+    </div>
+</section>
+
+<!-- ========== ARTIGO ========== -->
+<article class="artigo">
+    <div class="wrap">
+
+        <!-- ─── BLOCO DO REEL EMBEDADO ─── -->
+        <div class="reel-embed rv">
+            <blockquote class="instagram-media"
+                data-instgrm-permalink="https://www.instagram.com/reel/DXaQENGgBa0/"
+                data-instgrm-version="14"
+                style="max-width:540px; width:100%; margin:0 auto;">
+            </blockquote>
+            <script async src="//www.instagram.com/embed.js"></script>
+        </div>
+
+        <!-- ─── CORPO DO POST ─── -->
+        <div class="corpo rv">
+            <p>Resposta rápida: você exporta os números dos seus posts (views, retenção, salvamentos) do Painel Profissional do Instagram, joga tudo no Claude e pede pra ele comparar os que viralizaram com os que não viralizaram. Ele acha o padrão que você não enxergava sozinha e transforma isso num checklist de roteiro. Grátis, em uns 20 minutos.</p>
+
+            <p>Eu sempre achei que sabia por que um vídeo meu ia bem. "Ah, esse tema é bom", "esse gancho tá forte". Achismo. Até o dia em que parei de adivinhar e deixei a IA olhar os dados frios. O que ela achou me deixou de queixo caído, porque não era nada do que eu imaginava. E foi a partir dali que a conta virou a chave.</p>
+
+            <h2>Por que jogar isso no Claude e não olhar no olho</h2>
+
+            <p>Você até consegue abrir o Instagram e sentir que "esse foi bem". Mas seu olho compara dois ou três vídeos por vez. O Claude compara os seus <b>vinte</b> de uma vez, cruza retenção com salvamento com tema com formato de gancho, e te fala o que se repete nos campeões que não aparece nos fracos. É isso que a gente chama de padrão. E padrão é o que você consegue repetir de propósito.</p>
+
+            <p>Ele aceita planilha (CSV), texto colado e até prints do painel. Roda uma análise de verdade por baixo dos panos e te devolve em português, sem gráfico incompreensível. Se quiser entender melhor como o Claude lê arquivos e por que isso funciona tão bem, dá uma olhada no <a href="/claude">Guia do Claude</a> depois.</p>
+
+            <div class="bloco bloco-dica">
+                <span class="bloco-tag">→ Dica</span>
+                <p>Não precisa de plano pago pra começar. O Painel Profissional do Instagram é de graça e o Claude analisa arquivos no plano gratuito. Eu fiz a primeira auditoria inteira sem gastar nada.</p>
+            </div>
+
+            <h2>Passo 1 — junte os números dos seus posts</h2>
+
+            <p>No Instagram: seu perfil → <b>Painel Profissional</b> → <b>Conteúdo</b> → filtra por <b>Reels</b> e ordena por visualizações. Ali você vê tudo o que importa por post. Pega uns 15 a 20 Reels — e importante: <b>misture os que bombaram com os que morreram</b>. A resposta tá na diferença entre os dois grupos, não só nos campeões.</p>
+
+            <p>Monte uma planilha simples (ou vá anotando num bloco de notas) com uma linha por post e estas colunas:</p>
+
+            <ul>
+                <li>Tema / assunto do vídeo</li>
+                <li>Gancho (a primeira frase que aparece)</li>
+                <li>Views e alcance</li>
+                <li>Salvamentos e compartilhamentos</li>
+                <li>Retenção — quanto por cento chegou até o fim, e onde a curva despenca</li>
+                <li>Duração do vídeo</li>
+            </ul>
+
+            <div class="bloco bloco-atencao">
+                <span class="bloco-tag">⚠ Atenção</span>
+                <p>O Instagram guarda só <b>90 dias</b> de histórico dos insights (mudou em 2026). Se você não exportar de tempos em tempos, perde os dados dos posts antigos pra sempre. Faça isso uma vez por mês e guarde a planilha.</p>
+            </div>
+
+            <h2>Passo 2 — o prompt de auditoria</h2>
+
+            <p>Sobe a planilha (ou cola a tabela / manda os prints) no Claude e usa esse prompt. Ele é o coração de tudo — não é enfeite, é o que separa "a IA resumiu meus dados" de "a IA me deu um plano".</p>
+
+            <div class="prompt-box">
+                <div class="pb-head">
+                    <span class="pb-label">&gt; Prompt · auditoria de conteúdo</span>
+                    <button class="copy-btn">Copiar</button>
+                </div>
+<pre>Você é analista de conteúdo de criadores no Instagram. Anexei os dados dos meus últimos posts (views, alcance, salvamentos, compartilhamentos, retenção, tema, gancho e duração).
+
+Faça o seguinte, em português e sem jargão:
+
+1. Separe os posts em dois grupos: os que performaram ACIMA da minha média e os ABAIXO. Use views e salvamentos como critério principal.
+
+2. Liste o que os posts de cima têm em comum e que os de baixo NÃO têm. Olhe tema, tipo de gancho, duração e onde a retenção cai. Quero padrões concretos, não achismo — cada padrão sustentado pelos números.
+
+3. Me diga a hipótese mais provável de POR QUE os de cima viralizaram. Se os dados não sustentarem, fale que não dá pra concluir.
+
+4. Transforme os padrões vencedores num CHECKLIST de roteiro com 5 a 7 itens práticos que eu marco antes de gravar o próximo Reel.
+
+5. Aponte 1 coisa que eu devo PARAR de fazer, baseada nos posts que morreram.
+
+Seja direto e honesto. Se algum dado estiver faltando pra concluir, me diga qual eu preciso coletar.</pre>
+            </div>
+
+            <p>Repara que o prompt pede o padrão <b>e</b> o checklist <b>e</b> o que parar de fazer. É essa terceira parte que quase ninguém pede e que mais dói — porque é onde a IA te mostra o hábito que tá te segurando.</p>
+
+            <div class="antes-depois">
+                <div class="ad-ruim">
+                    <span class="ad-label">❌ Vago</span>
+                    "Analisa meus posts e me diz como melhorar." → devolve conselho genérico de coach de internet.
+                </div>
+                <div class="ad-bom">
+                    <span class="ad-label">✅ Funciona</span>
+                    O prompt de cima → devolve o padrão real dos SEUS números e um checklist que você marca antes de gravar.
+                </div>
+            </div>
+
+            <h2>Passo 3 — vire a análise num checklist e teste</h2>
+
+            <p>O que o Claude te devolve não é pra ler e esquecer. Cola o checklist num lugar que você vê antes de gravar. No meu caso ele virou cinco perguntas do tipo "o gancho promete algo nos primeiros 2 segundos?" e "tem um motivo pra salvar?". Aí é só gravar os próximos seguindo o checklist e, depois de uns dez posts, rodar a auditoria de novo pra ver se o padrão se confirmou. É um ciclo: mede, ajusta, mede de novo.</p>
+
+            <div class="bloco bloco-case">
+                <span class="bloco-tag">✦ Case real</span>
+                <p>Foi exatamente isso que fez a minha conta virar. Quando cruzei os números, descobri que os meus campeões não eram os "mais bonitos" — eram os que entregavam <b>uma coisa útil de graça nos primeiros segundos</b> e davam motivo pra salvar. Virou checklist. Hoje entram uns <b>300 seguidores novos por dia</b>, e o processo todo custou zero.</p>
+            </div>
+
+            <p>Não é mágica e não é sorte. É parar de adivinhar e deixar os seus próprios dados falarem. A parte boa: você já tem tudo o que precisa — os números tão lá no seu painel, esperando alguém fazer a pergunta certa.</p>
+        </div>
+
+        <!-- ─── CONTENT UPGRADE (gated → list: 'biblioteca') ─── -->
+        <div class="upgrade rv">
+            <div class="wl-card" id="upgradeCard">
+                <span class="kick">Material extra · grátis</span>
+                <h3>O guia de bolso do Claude</h3>
+                <p class="wl-sub">Um PDF com meus prompts favoritos e o passo a passo pra usar o Claude sem enrolação — incluindo a auditoria de conteúdo deste guia. Deixa seu email que eu mando direto pra você — e você ainda entra na Biblioteca.</p>
+                <form class="wl-form" novalidate>
+                    <input class="field" type="email" placeholder="Seu melhor email" required autocomplete="email">
+                    <button type="submit" class="btn-form">Quero o material</button>
+                </form>
+                <div class="wl-ok"><b>Prontinho, tá dentro.</b> Baixa aqui o teu material: <a href="/guia-claude-bruna.pdf" target="_blank" rel="noopener">guia-claude-bruna.pdf</a>. As próximas novidades da Biblioteca chegam no seu email.</div>
+                <p class="fine">Zero spam. Só o que vale a pena sobre IA na prática.</p>
+            </div>
+        </div>
+
+    </div>
+</article>
+
+<!-- ========== FAQ ========== -->
+<section class="faq-sec">
+    <div class="wrap">
+        <h2 class="rv">Dúvidas rápidas</h2>
+        <div class="faq-list rv">
+            <div class="faq-item">
+                <button class="faq-q">Preciso pagar alguma coisa pra fazer essa análise?<span class="mark">+</span></button>
+                <div class="faq-a">Não. Os dados vêm do Painel Profissional do próprio Instagram, que é de graça, e o Claude analisa arquivos no plano gratuito. Eu fiz a auditoria inteira sem gastar um real. Se você tiver <b>muitos</b> posts pra jogar de uma vez, um plano pago do Claude ajuda pelo contexto maior, mas não é obrigatório pra começar.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">De onde eu tiro os dados dos meus posts?<span class="mark">+</span></button>
+                <div class="faq-a">Do Painel Profissional do Instagram: perfil, <b>Painel Profissional</b>, <b>Conteúdo</b>, filtra por Reels e ordena por visualizações. Ali você vê views, alcance, salvamentos e a curva de retenção segundo a segundo de cada Reel. Anote isso numa planilha simples ou tire prints e mande pro Claude. Lembra que o Instagram guarda só 90 dias de histórico, então exporte de tempos em tempos.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Quantos posts eu preciso ter pra valer a pena?<span class="mark">+</span></button>
+                <div class="faq-a">Uns <b>15 a 20</b> já dão padrão suficiente pra separar o que funciona do que não funciona. Com menos que isso o Claude ainda te ajuda a levantar hipóteses, mas o padrão fica mais fraco. O segredo é ter na amostra tanto os posts que bombaram quanto os que morreram, porque a resposta tá justamente na diferença entre os dois grupos.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== BANNER DO CURSO ========== -->
+<section class="curso-banner">
+    <div class="wrap">
+        <div class="cb-text">
+            <span class="kick">Curso de Claude · Coorte 1</span>
+            <h2>Quer ir <span class="terra">além</span> desse guia?</h2>
+            <p>No Claude com Profundidade você aprende a pensar e usar IA de verdade, do zero, sem programar. Zero tech, 100% prático.</p>
+        </div>
+        <a href="/curso" class="btn btn-terra">Quero o curso</a>
+    </div>
+</section>
+
+<!-- volta pro hub -->
+<div class="voltar-hub">
+    <a href="/biblioteca">← Voltar pra Biblioteca</a>
+</div>
+
+<footer>
+    <div class="wrap">
+        <div class="footer-row">
+            <span class="footer-brand">A Virada IA</span>
+            <nav class="footer-links">
+                <a href="/biblioteca">Biblioteca</a>
+                <a href="/claude">Guia do Claude</a>
+                <a href="/curso">Curso de Claude</a>
+                <a href="https://instagram.com/brusantanna.ai" target="_blank" rel="noopener">Instagram</a>
+                <a href="https://newscale.tech" target="_blank" rel="noopener">NewScale</a>
+                <a href="mailto:eu@brunasantanna.com">Contato</a>
+            </nav>
+        </div>
+        <p class="footer-copy">© 2026 Bruna Santanna · A Virada IA</p>
+    </div>
+</footer>
+
+<script>
+    // ===== Copiar prompt =====
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const box = btn.closest('.prompt-box');
+            const pre = box.querySelector('pre');
+            const text = pre ? pre.innerText : '';
+            navigator.clipboard.writeText(text).then(() => {
+                const original = btn.textContent;
+                btn.textContent = '✓ Copiado';
+                btn.classList.add('copied');
+                setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, 1800);
+            });
+        });
+    });
+
+    // ===== Content upgrade (Apps Script, list: 'biblioteca') =====
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx90IdrA_L6n3jVdoYBinBPxPfWq0h6Iua1MrI8gQ7-RgBXhU1rOqF9dM2n7mLdAeMW/exec";
+
+    document.querySelectorAll('.wl-form').forEach(form => {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const input = form.querySelector('input[type="email"]');
+            const btn = form.querySelector('button[type="submit"]');
+            const email = input.value.trim();
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { input.focus(); return; }
+            btn.disabled = true; btn.textContent = 'Enviando...';
+            try {
+                await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, list: 'biblioteca', timestamp: new Date().toISOString(), source: location.href }) });
+            } catch(_) {}
+            if (typeof gtag === 'function') gtag('event', 'lead_signup', { list: 'biblioteca' });
+            document.querySelectorAll('.upgrade .wl-card').forEach(c => c.classList.add('wl-done'));
+            localStorage.setItem('biblioteca_lead', '1');
+        });
+    });
+    if (localStorage.getItem('biblioteca_lead') === '1') {
+        document.querySelectorAll('.upgrade .wl-card').forEach(c => c.classList.add('wl-done'));
+    }
+
+    // ===== FAQ accordion =====
+    document.querySelectorAll('.faq-q').forEach(q => {
+        q.addEventListener('click', () => q.closest('.faq-item').classList.toggle('open'));
+    });
+
+    // ===== menu mobile =====
+    const navToggle = document.getElementById('navToggle'), mainNav = document.getElementById('mainNav');
+    navToggle.addEventListener('click', () => mainNav.classList.toggle('open'));
+    mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mainNav.classList.remove('open')));
+
+    // ===== reveal on scroll =====
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold:.12, rootMargin:'0px 0px -40px 0px' });
+    document.querySelectorAll('.rv').forEach((el,i) => { el.style.transitionDelay = (i%3*70)+'ms'; io.observe(el); });
+</script>
+
+</body>
+</html>
