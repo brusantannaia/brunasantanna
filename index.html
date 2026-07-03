@@ -262,9 +262,9 @@
                 <div class="ph"><img src="fotos/frente-cursos.jpg" alt="Cursos e Palestras" onerror="this.remove()"><div class="ph-tag"><b>Cursos e Palestras</b><span>fotos/frente-cursos.jpg</span></div></div>
                 <div class="frente-body">
                     <span class="tag">Você aprende</span>
-                    <h3>Curso de Claude</h3>
-                    <p>Claude com Profundidade: a nova forma de pensar e usar IA, sem precisar programar. Coorte 1 em agosto.</p>
-                    <a href="/curso" class="go">Entrar na lista da Coorte 1 →</a>
+                    <h3>Claude com Profundidade</h3>
+                    <p>O curso: a nova forma de pensar e usar IA, sem precisar programar. Lançamento em 20 de julho.</p>
+                    <a href="/curso" class="go">Entrar na lista de espera →</a>
                 </div>
             </article>
             <article class="frente rv">
@@ -350,7 +350,7 @@
     <div class="wrap">
         <div class="stats rv">
             <div class="stat"><div class="v">+10mil</div><div class="l">pessoas na biblioteca</div></div>
-            <div class="stat"><div class="v">+1000</div><div class="l">profissionais treinados (com Potenc.IA)</div></div>
+            <div class="stat"><div class="v">+1000</div><div class="l">profissionais treinados</div></div>
             <div class="stat"><div class="v">10 anos</div><div class="l">de experiência em negócios</div></div>
         </div>
     </div>
@@ -361,7 +361,7 @@
     <div class="wrap rv">
         <h2>Bora colocar a IA pra <span class="terra">trabalhar?</span></h2>
         <p>Seja pra você, pro seu time ou pra sua operação inteira. Me conta onde você quer chegar.</p>
-        <a href="mailto:eu@brunasantanna.com" class="btn btn-terra">Falar comigo</a>
+        <a href="https://wa.me/5511971901020?text=Oi%20Bruna!%20Vim%20pelo%20site%20e%20quero%20conversar" target="_blank" rel="noopener" class="btn btn-terra">Falar comigo no WhatsApp</a>
     </div>
 </section>
 
@@ -387,6 +387,7 @@
 <script>
     // ===== Novidades (data-driven: cada evento = 1 objeto) =====
     const NOVIDADES = [
+        { data: '2026', titulo: 'Hackathon de IA · Ismart', desc: 'Times competindo pra construir soluções reais com IA em um dia — e saíram com projetos rodando.', img: 'fotos/hackathon-1.jpg', link: '/hackathon-de-ia' },
         { data: '2026', titulo: 'Stoller · Identidade & IA', desc: 'Como a IA muda a forma de trabalhar, sem perder a sua identidade.', img: 'fotos/nov-stoller-identidade.jpg' },
         { data: '2026', titulo: 'Convenção Stoller', desc: 'Palestra pro time: a IA que multiplica o que você já sabe fazer.', img: 'fotos/nov-stoller-convencao.jpg' },
         { data: '2026', titulo: 'Convenção Sorridents', desc: 'A Virada IA pra uma das maiores redes de odontologia do país.', img: 'fotos/nov-sorridents.jpg' },
@@ -396,16 +397,19 @@
         { data: '2026', titulo: 'Ella Club · Dra Carla Sarni', desc: 'Palestra sobre IA pras mentoradas do Ella Club, da Dra Carla Sarni.', img: 'fotos/nov-dracarla.jpg' },
         { data: '2026', titulo: 'Shark Tank School', desc: 'Parceria: gravei meu curso de IA pros alunos da Shark Tank School.', img: 'fotos/nov-sharktank.jpg' }
     ];
-    document.getElementById('novGrid').innerHTML = NOVIDADES.map(n => `
-        <article class="nov-card">
+    document.getElementById('novGrid').innerHTML = NOVIDADES.map(n => {
+        const inner = `
             <div class="ph"><img src="${n.img}" alt="${n.titulo}" onerror="this.remove()">
                 <div class="ph-tag"><b>Foto do evento</b><span>${n.img}</span></div></div>
             <div class="nov-body">
                 <div class="nov-date">${n.data}</div>
                 <h3>${n.titulo}</h3>
-                <p>${n.desc}</p>
-            </div>
-        </article>`).join('');
+                <p>${n.desc}${n.link ? ' <span style="color:var(--terra);font-weight:700;white-space:nowrap;">Ler a história →</span>' : ''}</p>
+            </div>`;
+        return n.link
+            ? `<a class="nov-card" href="${n.link}" style="display:block;">${inner}</a>`
+            : `<article class="nov-card">${inner}</article>`;
+    }).join('');
 
     // menu mobile
     const navToggle = document.getElementById('navToggle'), mainNav = document.getElementById('mainNav');

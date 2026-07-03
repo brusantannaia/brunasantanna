@@ -170,17 +170,34 @@
         .story-body p { font-size:1.08rem; color:var(--text); line-height:1.72; margin-bottom:20px; font-weight:300; }
         .story-body p b { color:var(--ink); font-weight:600; }
         .story-body .big { font-family:'Anton',sans-serif; font-weight:400; text-transform:uppercase; font-size:clamp(1.3rem,3.5vw,1.8rem); line-height:1.12; color:var(--ink); letter-spacing:-0.005em; margin:34px 0; }
+        .story-photo { max-width:62ch; margin:38px 0; }
+        .story-photo .ph { aspect-ratio:4/5; max-width:420px; border-radius:18px; box-shadow:8px 8px 0 var(--line); }
+        .story-photo figcaption { font-size:0.88rem; color:var(--terra-d); font-style:italic; margin-top:14px; max-width:420px; line-height:1.5; }
 
-        /* ---------- TIMELINE ---------- */
+        /* ---------- TIMELINE (linha do tempo vertical) ---------- */
         .tl { background:var(--bg-2); }
-        .tl-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
-        @media (max-width:860px) { .tl-grid { grid-template-columns:1fr; } }
-        .tl-card { background:var(--card); border:1.5px solid var(--line); border-radius:18px; padding:28px 26px 30px; position:relative; transition:transform .18s, box-shadow .18s, border-color .18s; }
-        .tl-card:hover { transform:translateY(-4px); border-color:var(--ink); box-shadow:6px 6px 0 var(--line); }
-        .tl-year { font-family:'Anton',sans-serif; font-size:0.92rem; letter-spacing:.06em; color:var(--terra); text-transform:uppercase; margin-bottom:6px; }
-        .tl-card h3 { font-family:'Anton',sans-serif; font-weight:400; font-size:1.4rem; text-transform:uppercase; color:var(--ink); line-height:1.02; margin-bottom:10px; }
-        .tl-card p { font-size:0.94rem; color:var(--text); line-height:1.58; }
-        .tl-num { position:absolute; top:22px; right:24px; font-family:'Anton',sans-serif; font-size:1.6rem; color:var(--line); line-height:1; }
+        .tl-line { position:relative; max-width:900px; margin:0 auto; padding:10px 0; }
+        /* a linha vertical central */
+        .tl-line::before { content:""; position:absolute; top:0; bottom:0; left:50%; transform:translateX(-50%); width:2px; background:var(--line); }
+        .tl-item { position:relative; width:50%; padding:0 44px 46px; box-sizing:border-box; }
+        .tl-item:last-child { padding-bottom:0; }
+        .tl-item.left { left:0; text-align:right; }
+        .tl-item.right { left:50%; text-align:left; }
+        /* dot terracota na linha */
+        .tl-item::after { content:""; position:absolute; top:6px; width:16px; height:16px; border-radius:50%; background:var(--terra); border:3px solid var(--bg-2); box-shadow:0 0 0 2px var(--line); z-index:2; }
+        .tl-item.left::after { right:-8px; }
+        .tl-item.right::after { left:-8px; }
+        .tl-year { font-family:'Anton',sans-serif; font-size:1.5rem; letter-spacing:.02em; color:var(--terra); text-transform:uppercase; line-height:1; margin-bottom:12px; }
+        .tl-card { display:inline-block; text-align:left; background:var(--card); border:1.5px solid var(--line); border-radius:16px; padding:22px 24px 24px; transition:transform .18s, box-shadow .18s, border-color .18s; }
+        .tl-card:hover { transform:translateY(-3px); border-color:var(--ink); box-shadow:6px 6px 0 var(--line); }
+        .tl-card h3 { font-family:'Anton',sans-serif; font-weight:400; font-size:1.35rem; text-transform:uppercase; color:var(--ink); line-height:1.04; margin-bottom:9px; }
+        .tl-card p { font-size:0.92rem; color:var(--text); line-height:1.56; }
+        @media (max-width:860px) {
+            .tl-line::before { left:9px; }
+            .tl-item { width:100%; left:0 !important; text-align:left !important; padding:0 0 40px 40px; }
+            .tl-item::after { left:1px !important; right:auto !important; }
+            .tl-year { font-size:1.35rem; }
+        }
 
         /* ---------- MANIFESTO (escuro) ---------- */
         .mani { background:var(--ink); color:var(--cream); }
@@ -317,11 +334,24 @@
             <p>Por 8 anos toquei a <b>Casa Kahla</b>, meu negócio, do jeito que todo dono de empresa conhece bem: fazendo de tudo, ao mesmo tempo, com o dia nunca dando conta do que precisava ser feito. Como toda empresária, eu vivia sobrecarregada. Não faltava vontade nem trabalho. Faltava tempo.</p>
             <p class="big">Foi aí que a IA entrou. Primeiro por curiosidade. Depois por paixão.</p>
             <p>Quando descobri o tanto que ela podia fazer por mim, virou outra coisa. Não era um assunto de tecnologia, era uma forma de recuperar o meu tempo e fazer mais com menos gente, menos horas, menos peso nas costas.</p>
-            <p>E teve um momento que me deu a coragem que faltava pra virar a chave de vez: <b>quando eu virei mãe.</b> Ser mãe muda a sua relação com o tempo de um jeito que nada mais muda. Eu decidi que ia mudar de carreira mais uma vez e mergulhei de cabeça nesse universo.</p>
-            <p>Passei pela <b>Blackbox AI</b>, direto do Vale do Silício. E foi lá que a ficha caiu de vez:</p>
+            <p>E teve um momento que me deu a coragem que faltava pra virar a chave de vez: <b>quando eu virei mãe.</b> Ser mãe muda a sua relação com o tempo de um jeito que nada mais muda. De repente, cada hora do dia passou a valer mais. Foi aí que eu decidi que ia mudar de carreira mais uma vez e mergulhei de cabeça nesse universo.</p>
+            <figure class="story-photo rv">
+                <div class="ph">
+                    <img src="fotos/arthur.jpg" alt="Bruna Santanna com o filho Arthur no colo" onerror="this.remove()">
+                    <div class="ph-tag">
+                        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--terra-l)" stroke-width="1.3"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                        <b>O Arthur</b><span>fotos/arthur.jpg</span>
+                    </div>
+                </div>
+                <figcaption>O Arthur, que me deu coragem de recomeçar.</figcaption>
+            </figure>
+            <p>Passei pela <b>Blackbox AI</b>, como gerente de Growth, direto do Vale do Silício. E foi lá, no epicentro de tudo, que a ficha caiu de vez:</p>
             <p class="big">O que falta pras pessoas não é tecnologia. É saber usar.</p>
-            <p>No meio de tanta informação nova todo dia, o difícil não é ter acesso à ferramenta. É decidir o que, de fato, é <b>útil</b> pra sua rotina. Aplicar com profundidade, não com superficialidade. É isso que eu vivo na prática, todo dia. IAs como o Claude me ajudam a criar coisas que eu nunca imaginei serem possíveis e a automatizar boa parte do meu trabalho.</p>
-            <p>Hoje eu trabalho dos <b>dois lados dessa virada.</b> Com A Virada IA, ensino pessoas e times a entender como a IA pensa, em palestras e cursos. Com a NewScale, eu e meu time construímos as soluções e automações que fazem o trabalho acontecer dentro das empresas. Um lado ensina. O outro executa.</p>
+            <p>No meio de tanta informação nova todo dia, o difícil não é ter acesso à ferramenta. É decidir o que, de fato, é <b>útil</b> pra sua rotina. E aí eu tomei a decisão que mudou tudo: <b>sair pra trazer esse conhecimento pra cá.</b> Pro Brasil, pras empresas daqui, pra gente que trabalha de verdade e não tem tempo de ficar caçando cada novidade.</p>
+            <p>Foi assim que nasceu a <b>NewScale.</b> Eu criei a NewScale pra levar IA de verdade pra dentro das empresas brasileiras — automações que fazem o trabalho, não slides bonitos. Um exemplo real: um fluxo que levava <b>1,5 dia</b> pra ser feito passou a rodar em <b>10 minutos.</b> Eu enxergava empresários como eu, sobrecarregados, que usariam muito se alguém instalasse e ensinasse do jeito certo.</p>
+            <p>E o <b>A Virada IA</b> não nasceu separado. Nasceu junto, no mesmo movimento. É o braço de educação do mesmo trabalho: o Instagram, a biblioteca, o curso, os treinamentos corporativos. <b>Eu ensino as pessoas a usar, e quando a empresa precisa que alguém construa, a NewScale constrói.</b></p>
+            <p class="big">Educação e automação são o mesmo propósito. Só que em dois formatos.</p>
+            <p>Um lado ensina você a pensar com a IA. O outro coloca a IA pra trabalhar dentro da sua operação. IAs como o Claude me ajudam a criar coisas que eu nunca imaginei serem possíveis e a automatizar boa parte do meu trabalho — e é exatamente isso que eu quero colocar na sua mão.</p>
             <p>Porque depois que você entende os conceitos, a tecnologia só fica mais fácil. E é isso que eu acredito de verdade: <b>quem aprende IA agora vai olhar pra trás e ver que esse foi o momento da virada.</b></p>
         </div>
     </div>
@@ -335,43 +365,49 @@
             <h2>Como eu cheguei<br>até aqui.</h2>
             <p>Do corporativo ao próprio negócio, do próprio negócio à IA. Cada fase preparou a próxima.</p>
         </div>
-        <div class="tl-grid">
-            <article class="tl-card rv">
-                <span class="tl-num">01</span>
+        <div class="tl-line">
+            <div class="tl-item left rv">
                 <div class="tl-year">O começo</div>
-                <h3>Dentro das grandes</h3>
-                <p>Carreira começa dentro de empresas como Whirlpool e SulAmérica. Aprender como uma operação de verdade funciona por dentro.</p>
-            </article>
-            <article class="tl-card rv">
-                <span class="tl-num">02</span>
+                <div class="tl-card">
+                    <h3>Dentro das grandes</h3>
+                    <p>A carreira começa no corporativo, em empresas como Whirlpool e SulAmérica. Aprender como uma operação de verdade funciona por dentro.</p>
+                </div>
+            </div>
+            <div class="tl-item right rv">
                 <div class="tl-year">8 anos</div>
-                <h3>Casa Kahla</h3>
-                <p>Tocar o próprio negócio por 8 anos. Onde me encontrei como empresária e onde conheci de perto a sobrecarga de quem faz tudo.</p>
-            </article>
-            <article class="tl-card rv">
-                <span class="tl-num">03</span>
+                <div class="tl-card">
+                    <h3>Casa Kahla</h3>
+                    <p>Oito anos tocando o próprio negócio. Onde me encontrei como empresária e conheci de perto a sobrecarga de quem faz tudo ao mesmo tempo.</p>
+                </div>
+            </div>
+            <div class="tl-item left rv">
                 <div class="tl-year">A virada</div>
-                <h3>A IA entra</h3>
-                <p>Primeiro por curiosidade, depois por paixão. A maternidade dá a coragem pra mudar de carreira mais uma vez.</p>
-            </article>
-            <article class="tl-card rv">
-                <span class="tl-num">04</span>
+                <div class="tl-card">
+                    <h3>A IA entra</h3>
+                    <p>Primeiro por curiosidade. Depois por paixão. Descobrir o tanto que a IA podia fazer por mim virou uma forma de recuperar o meu tempo.</p>
+                </div>
+            </div>
+            <div class="tl-item right rv">
+                <div class="tl-year">Ser mãe</div>
+                <div class="tl-card">
+                    <h3>A coragem de virar a chave</h3>
+                    <p>Quando o Arthur nasceu, a minha relação com o tempo mudou. Foi a coragem que faltava pra mudar de carreira mais uma vez.</p>
+                </div>
+            </div>
+            <div class="tl-item left rv">
                 <div class="tl-year">Vale do Silício</div>
-                <h3>Blackbox AI</h3>
-                <p>A ficha cai: o que falta não é tecnologia, é saber usar. Aplicar com profundidade, não com superficialidade.</p>
-            </article>
-            <article class="tl-card rv">
-                <span class="tl-num">05</span>
-                <div class="tl-year">Hoje · ensina</div>
-                <h3>A Virada IA</h3>
-                <p>Palestras, cursos e a biblioteca. Ensinar pessoas e times a entender como a IA pensa, sem jargão e sem precisar programar.</p>
-            </article>
-            <article class="tl-card rv">
-                <span class="tl-num">06</span>
-                <div class="tl-year">Hoje · executa</div>
-                <h3>NewScale</h3>
-                <p>Do outro lado da virada: construir as automações e soluções de IA que fazem o trabalho acontecer dentro das empresas.</p>
-            </article>
+                <div class="tl-card">
+                    <h3>Blackbox AI</h3>
+                    <p>Gerente de Growth, direto do Vale do Silício. A ficha cai de vez: o que falta pras pessoas não é tecnologia, é saber usar.</p>
+                </div>
+            </div>
+            <div class="tl-item right rv">
+                <div class="tl-year">Hoje</div>
+                <div class="tl-card">
+                    <h3>NewScale + A Virada IA</h3>
+                    <p>Decidi voltar pra trazer esse conhecimento pra cá. A NewScale constrói as automações; A Virada IA ensina. Mesmo propósito, dois formatos.</p>
+                </div>
+            </div>
         </div>
     </div>
 </section>
