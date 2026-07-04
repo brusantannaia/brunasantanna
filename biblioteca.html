@@ -1371,12 +1371,11 @@ Quando eu escolher, cria roteiro dia a dia com logística completa.` },
         countEl.textContent = `${list.length} ${list.length === 1 ? 'item' : 'itens'}`;
     }
 
-    // contadores dinâmicos no hero
-    const nGuias = POSTS.length;
-    // "prompts prontos" = todos os ativos da biblioteca (prompts, dica e recurso)
-    const nPrompts = ASSETS.length;
-    document.getElementById('statGuias').textContent = nGuias;
-    document.getElementById('statCount').textContent = nPrompts;
+    // contadores dinâmicos no hero (elementos opcionais — hero atual mostra só o +10mil)
+    const elGuias = document.getElementById('statGuias');
+    if (elGuias) elGuias.textContent = POSTS.length;
+    const elCount = document.getElementById('statCount');
+    if (elCount) elCount.textContent = ASSETS.length;
 
     // popula os chips de TEMA dinamicamente
     const temaRow = document.getElementById('temaRow');
