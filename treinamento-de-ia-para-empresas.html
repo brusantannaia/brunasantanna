@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Treinamento de IA para empresas: o que funciona de verdade (case com 280 pessoas) | A Virada IA · Bruna Santanna</title>
-    <meta name="description" content="Treinamento de IA para empresas que funciona não é palestra genérica: é sobre o trabalho real do time. Estudei a operação antes da convenção da Stoller e treinei +280 pessoas. O que muda quando o treino é sob medida.">
+    <title>Treinamento de IA para empresas com Claude: o que funciona de verdade | A Virada IA · Bruna Santanna</title>
+    <meta name="description" content="Treinamento de inteligência artificial (IA) para empresas que funciona não é palestra genérica: é sobre o trabalho real do time, com Claude ou a IA que a empresa já usa. Estudei a operação antes da convenção da Stoller e treinei +280 pessoas. O que muda quando o treino é sob medida.">
     <meta name="author" content="Bruna Santanna">
     <link rel="canonical" href="https://brunasantanna.com/treinamento-de-ia-para-empresas">
     <meta property="og:type" content="article">
@@ -249,6 +249,7 @@
             <a href="/quem-sou">Quem Sou</a>
             <a href="/treinamentos">Treinamentos Corporativos</a>
             <a href="/mentoria">Mentoria</a>
+            <a href="https://newscale.tech" target="_blank" rel="noopener">IA na sua Empresa</a>
             <a href="/curso" class="nav-cta">Quero o curso</a>
         </nav>
         <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">☰</button>
@@ -266,7 +267,7 @@
             <span class="data">Julho de 2026</span>
         </div>
         <h1 class="rv">Treinamento de IA para empresas: o que <span class="terra">funciona de verdade</span></h1>
-        <p class="hero-sub rv">Um treinamento de IA que muda a rotina não é palestra genérica de internet — é sobre o <b>trabalho real do seu time</b>. Na convenção da Stoller, com mais de 280 pessoas, o diferencial não foi o palco. Foi o que eu fiz <b>antes</b> de subir nele.</p>
+        <p class="hero-sub rv">Um treinamento de inteligência artificial (IA) que muda a rotina não é palestra genérica de internet — é sobre o <b>trabalho real do seu time</b>, com Claude ou a IA que a empresa já usa. Na convenção da Stoller, com mais de 280 pessoas, o diferencial não foi o palco. Foi o que eu fiz <b>antes</b> de subir nele.</p>
     </div>
 </section>
 
@@ -431,8 +432,10 @@
     mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mainNav.classList.remove('open')));
 
     // ===== reveal on scroll =====
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold:.12, rootMargin:'0px 0px -40px 0px' });
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0, rootMargin:'0px 0px -40px 0px' });
     document.querySelectorAll('.rv').forEach((el,i) => { el.style.transitionDelay = (i%3*70)+'ms'; io.observe(el); });
+    /* rv-safety: garante que o conteudo nunca fica invisivel */
+    setTimeout(function(){ document.querySelectorAll('.rv:not(.in)').forEach(function(el){ el.classList.add('in'); }); }, 2500);
 </script>
 
 </body>

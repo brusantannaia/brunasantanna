@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Virada IA · Bruna Santanna · IA aplicada de verdade</title>
-    <meta name="description" content="Bruna Santanna · A Virada IA. Biblioteca de prompts, cursos e palestras de IA, e automação para empresas. Da teoria ao uso prático.">
+    <title>Claude e IA aplicada de verdade | A Virada IA · Bruna Santanna</title>
+    <meta name="description" content="Bruna Santanna · A Virada IA. Biblioteca de prompts do Claude, cursos e palestras de inteligência artificial (IA) e automação para empresas. Da teoria ao uso prático.">
     <meta property="og:type" content="website">
     <meta property="og:title" content="A Virada IA · Bruna Santanna">
     <meta property="og:description" content="Biblioteca de prompts, cursos e palestras de IA, e automação para empresas.">
@@ -199,6 +199,7 @@
             <a href="/quem-sou">Quem Sou</a>
             <a href="/treinamentos">Treinamentos Corporativos</a>
             <a href="/mentoria">Mentoria</a>
+            <a href="https://newscale.tech" target="_blank" rel="noopener">IA na sua Empresa</a>
             <a href="/curso" class="nav-cta">Curso de Claude</a>
         </nav>
         <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">☰</button>
@@ -213,7 +214,7 @@
             <div class="rv">
                 <div class="hero-eyebrow"><span class="dot"></span><span class="kick">Bruna Santanna · Estrategista de IA</span></div>
                 <h1>A Virada<br><span class="terra">IA</span> começa<br>aqui.</h1>
-                <p class="hero-sub"><b>Do primeiro prompt à automação que roda sozinha.</b> Você não precisa correr atrás de cada novidade. Quando entende como a IA funciona, ela passa a trabalhar por você.</p>
+                <p class="hero-sub"><b>Do primeiro prompt à automação que roda sozinha.</b> Você não precisa correr atrás de cada novidade. Quando entende como a inteligência artificial (IA) funciona — o Claude e as outras — ela passa a trabalhar por você.</p>
                 <div class="hero-actions">
                     <a href="/biblioteca" class="btn btn-terra">Explorar a biblioteca</a>
                     <a href="/curso" class="btn btn-ink">Conhecer o curso de Claude</a>
@@ -389,11 +390,11 @@
     const NOVIDADES = [
         { data: '2026', titulo: 'Hackathon de IA · Ismart', desc: 'Times competindo pra construir soluções reais com IA em um dia — e saíram com projetos rodando.', img: 'fotos/hackathon-1.jpg', link: '/hackathon-de-ia' },
         { data: '2026', titulo: 'Stoller · Identidade & IA', desc: 'Como a IA muda a forma de trabalhar, sem perder a sua identidade.', img: 'fotos/nov-stoller-identidade.jpg' },
-        { data: '2026', titulo: 'Convenção Stoller', desc: 'Palestra pro time: a IA que multiplica o que você já sabe fazer.', img: 'fotos/nov-stoller-convencao.jpg' },
+        { data: '2026', titulo: 'Convenção Stoller', desc: 'Mais de 280 pessoas: a IA que multiplica o que o time já sabe fazer.', img: 'fotos/nov-stoller-convencao.jpg', link: '/treinamento-de-ia-para-empresas' },
         { data: '2026', titulo: 'Convenção Sorridents', desc: 'A Virada IA pra uma das maiores redes de odontologia do país.', img: 'fotos/nov-sorridents.jpg' },
         { data: '2026', titulo: 'Imersão Claude · Ismart', desc: 'Imersão de IA com Claude pros 70 colaboradores do Ismart.', img: 'fotos/nov-ismart.jpg' },
-        { data: '2026', titulo: 'Grupo Stringhetta', desc: 'IA aplicada dentro da operação, junto com o time da empresa.', img: 'fotos/nov-stringhetta.jpg' },
-        { data: '2026', titulo: 'OneGlobal', desc: 'Não é saber escrever prompts — é saber planejar. Treinamento do time.', img: 'fotos/nov-oneglobal.jpg' },
+        { data: '2026', titulo: 'Grupo Stringhetta', desc: 'O fluxo de caixa que levava 2 dias passou a sair em minutos.', img: 'fotos/nov-stringhetta.jpg', link: '/fluxo-de-caixa-com-ia' },
+        { data: '2026', titulo: 'Oneglobal Broking', desc: 'Formação Claude com Profundidade pra 40 líderes, em 3 encontros.', img: 'fotos/nov-oneglobal.jpg', link: '/formacao-claude-empresas' },
         { data: '2026', titulo: 'Ella Club · Dra Carla Sarni', desc: 'Palestra sobre IA pras mentoradas do Ella Club, da Dra Carla Sarni.', img: 'fotos/nov-dracarla.jpg' },
         { data: '2026', titulo: 'Shark Tank School', desc: 'Parceria: gravei meu curso de IA pros alunos da Shark Tank School.', img: 'fotos/nov-sharktank.jpg' }
     ];
@@ -416,8 +417,10 @@
     navToggle.addEventListener('click', () => mainNav.classList.toggle('open'));
 
     // reveal on scroll
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold:.12, rootMargin:'0px 0px -40px 0px' });
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0, rootMargin:'0px 0px -40px 0px' });
     document.querySelectorAll('.rv').forEach((el,i) => { el.style.transitionDelay = (i%3*70)+'ms'; io.observe(el); });
+    /* rv-safety: garante que o conteudo nunca fica invisivel */
+    setTimeout(function(){ document.querySelectorAll('.rv:not(.in)').forEach(function(el){ el.classList.add('in'); }); }, 2500);
 </script>
 
 </body>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Como criar uma Skill no Claude (passo a passo, sem programar) | A Virada IA · Bruna Santanna</title>
-    <meta name="description" content="Skill é uma habilidade que você ensina uma vez e o Claude nunca mais esquece. Aprenda a criar a sua no app, sem código — e deixe o próprio Claude montar pra você.">
+    <meta name="description" content="Skill é uma habilidade que você ensina uma vez e o Claude, a inteligência artificial (IA) da Anthropic, nunca mais esquece. Aprenda a criar a sua no app, sem código — e deixe o próprio Claude montar pra você.">
     <meta name="author" content="Bruna Santanna">
     <link rel="canonical" href="https://brunasantanna.com/guia-skills-claude">
     <meta property="og:type" content="article">
@@ -263,6 +263,7 @@
             <a href="/quem-sou">Quem Sou</a>
             <a href="/treinamentos">Treinamentos Corporativos</a>
             <a href="/mentoria">Mentoria</a>
+            <a href="https://newscale.tech" target="_blank" rel="noopener">IA na sua Empresa</a>
             <a href="/curso" class="nav-cta">Quero o curso</a>
         </nav>
         <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">☰</button>
@@ -280,7 +281,7 @@
             <span class="data">Julho de 2026</span>
         </div>
         <h1 class="rv">Como criar uma <span class="terra">Skill</span> no Claude</h1>
-        <p class="hero-sub rv">Skill é uma habilidade que você ensina <b>uma vez</b> e o Claude nunca mais esquece. Passo a passo pra criar a sua no app, sem programar — e o truque de deixar o próprio Claude montar pra você.</p>
+        <p class="hero-sub rv">Skill é uma habilidade que você ensina <b>uma vez</b> e o Claude, a inteligência artificial (IA) da Anthropic, nunca mais esquece. Passo a passo pra criar a sua no app, sem programar — e o truque de deixar o próprio Claude montar pra você.</p>
     </div>
 </section>
 
@@ -553,8 +554,10 @@ Depois que eu responder, escreva a Skill completa e organizada, pronta pra eu sa
     mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mainNav.classList.remove('open')));
 
     // ===== reveal on scroll =====
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold:.12, rootMargin:'0px 0px -40px 0px' });
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0, rootMargin:'0px 0px -40px 0px' });
     document.querySelectorAll('.rv').forEach((el,i) => { el.style.transitionDelay = (i%3*70)+'ms'; io.observe(el); });
+    /* rv-safety: garante que o conteudo nunca fica invisivel */
+    setTimeout(function(){ document.querySelectorAll('.rv:not(.in)').forEach(function(el){ el.classList.add('in'); }); }, 2500);
 
     // ===== Popup exit-intent do curso (list: 'curso') =====
     (function(){

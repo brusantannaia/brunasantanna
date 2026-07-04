@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fluxo de caixa com IA: como um processo de 2 dias caiu pra minutos | A Virada IA · Bruna Santanna</title>
-    <meta name="description" content="Fluxo de caixa com IA: no Grupo Stringhetta, o fechamento levava 2 dias por semana. Depois do treinamento feito na própria operação, virou minutos. Como funciona o princípio replicável — e a prova em vídeo de um produtor rural.">
+    <title>Fluxo de caixa com IA e Claude: de 2 dias pra minutos | A Virada IA · Bruna Santanna</title>
+    <meta name="description" content="Fluxo de caixa com inteligência artificial (IA): no Grupo Stringhetta, o fechamento levava 2 dias por semana. Depois do treinamento com Claude feito na própria operação, virou minutos. O princípio replicável — e a prova em vídeo de um produtor rural.">
     <meta name="author" content="Bruna Santanna">
     <link rel="canonical" href="https://brunasantanna.com/fluxo-de-caixa-com-ia">
     <meta property="og:type" content="article">
@@ -256,6 +256,7 @@
             <a href="/quem-sou">Quem Sou</a>
             <a href="/treinamentos">Treinamentos Corporativos</a>
             <a href="/mentoria">Mentoria</a>
+            <a href="https://newscale.tech" target="_blank" rel="noopener">IA na sua Empresa</a>
             <a href="/curso" class="nav-cta">Quero o curso</a>
         </nav>
         <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">☰</button>
@@ -273,7 +274,7 @@
             <span class="data">Julho de 2026</span>
         </div>
         <h1 class="rv">Fluxo de caixa com IA: de <span class="terra">2 dias</span> pra minutos</h1>
-        <p class="hero-sub rv">No Grupo Stringhetta, no agro, o fechamento do fluxo de caixa consumia <b>2 dias por semana</b> numa planilha manual. Depois de um treinamento de IA feito na própria operação, a mesma rotina virou minutos. E tem um produtor rural provando isso em vídeo, logo abaixo.</p>
+        <p class="hero-sub rv">No Grupo Stringhetta, no agro, o fechamento do fluxo de caixa consumia <b>2 dias por semana</b> numa planilha manual. Depois de um treinamento de inteligência artificial (IA) — com o Claude, na própria operação — a mesma rotina virou minutos. E tem um produtor rural provando isso em vídeo, logo abaixo.</p>
     </div>
 </section>
 
@@ -316,7 +317,7 @@
 
             <figure class="video rv">
                 <div class="video-frame">
-                    <video controls preload="metadata" playsinline>
+                    <video poster="fotos/video-rafael-poster.jpg" controls preload="metadata" playsinline>
                         <source src="fotos/video-rafael-magaldi.mp4" type="video/mp4">
                         Seu navegador não suporta vídeo. <a href="fotos/video-rafael-magaldi.mp4">Baixe o vídeo aqui.</a>
                     </video>
@@ -447,8 +448,10 @@
     mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mainNav.classList.remove('open')));
 
     // ===== reveal on scroll =====
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold:.12, rootMargin:'0px 0px -40px 0px' });
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0, rootMargin:'0px 0px -40px 0px' });
     document.querySelectorAll('.rv').forEach((el,i) => { el.style.transitionDelay = (i%3*70)+'ms'; io.observe(el); });
+    /* rv-safety: garante que o conteudo nunca fica invisivel */
+    setTimeout(function(){ document.querySelectorAll('.rv:not(.in)').forEach(function(el){ el.classList.add('in'); }); }, 2500);
 </script>
 
 </body>

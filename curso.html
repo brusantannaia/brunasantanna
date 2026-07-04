@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curso de Claude em Português · Claude com Profundidade · Bruna Santanna</title>
-    <meta name="description" content="Claude com Profundidade: o curso de Claude em português pra quem já usa IA e quer usar de verdade. 8 módulos, ~6h de aulas curtas. Lançamento 20 de julho. Lista de espera aberta.">
+    <title>Curso de Claude em Português · Claude com Profundidade</title>
+    <meta name="description" content="Claude com Profundidade: o curso de Claude e inteligência artificial (IA) em português pra quem já usa IA e quer usar de verdade. 8 módulos, ~6h de aulas curtas. Lançamento 20 de julho. Lista de espera aberta.">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Claude com Profundidade · Curso de Claude em português">
     <meta property="og:description" content="Você, multiplicada. O curso de Claude pra quem já usa IA e quer parar de usar 10%. Lançamento 20 de julho — lista de espera aberta.">
@@ -334,6 +334,7 @@
             <a href="/quem-sou">Quem Sou</a>
             <a href="/treinamentos">Treinamentos Corporativos</a>
             <a href="/mentoria">Mentoria</a>
+            <a href="https://newscale.tech" target="_blank" rel="noopener">IA na sua Empresa</a>
             <a href="/curso" class="nav-cta active">Quero o curso</a>
         </nav>
         <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">☰</button>
@@ -348,7 +349,7 @@
             <div class="rv">
                 <div class="hero-eyebrow"><span class="dot"></span><span class="kick">Lançamento 20 de julho · Lista de espera aberta</span></div>
                 <h1>Claude com<br><span class="terra">Profundidade</span></h1>
-                <p class="hero-sub"><b>O curso de Claude em português pra quem já usa IA e quer usar de verdade.</b> Sem código, sem terminal, sem virar técnica. Só a forma de pensar que separa quem economiza tempo de quem decide melhor.</p>
+                <p class="hero-sub"><b>O curso de Claude e inteligência artificial (IA) em português pra quem já usa IA e quer usar de verdade.</b> Sem código, sem terminal, sem virar técnica. Só a forma de pensar que separa quem economiza tempo de quem decide melhor.</p>
                 <div class="hero-anchor">Você, multiplicada.</div>
 
                 <div class="waitlist" id="wl1">
@@ -727,8 +728,10 @@
     });
 
     // reveal on scroll
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold:.12, rootMargin:'0px 0px -40px 0px' });
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0, rootMargin:'0px 0px -40px 0px' });
     document.querySelectorAll('.rv').forEach((el,i) => { el.style.transitionDelay = (i%3*70)+'ms'; io.observe(el); });
+    /* rv-safety: garante que o conteudo nunca fica invisivel */
+    setTimeout(function(){ document.querySelectorAll('.rv:not(.in)').forEach(function(el){ el.classList.add('in'); }); }, 2500);
 </script>
 
 </body>

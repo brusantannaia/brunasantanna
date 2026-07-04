@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quem é Bruna Santanna | A Virada IA</title>
-    <meta name="description" content="A história da Bruna Santanna: de empresária sobrecarregada a estrategista de IA. Whirlpool, SulAmérica, Casa Kahla, Blackbox AI no Vale do Silício, NewScale e A Virada IA. +1.000 pessoas treinadas.">
+    <title>Quem é Bruna Santanna, estrategista de IA e Claude | A Virada IA</title>
+    <meta name="description" content="A história da Bruna Santanna: de empresária sobrecarregada a estrategista de inteligência artificial (IA) e Claude. Whirlpool, SulAmérica, Blackbox AI no Vale do Silício, NewScale e A Virada IA. +1.000 pessoas treinadas.">
     <meta name="author" content="Bruna Santanna">
     <meta property="og:type" content="profile">
     <meta property="og:title" content="Quem é Bruna Santanna | A Virada IA">
@@ -282,6 +282,7 @@
             <a href="/quem-sou" class="active">Quem Sou</a>
             <a href="/treinamentos">Treinamentos Corporativos</a>
             <a href="/mentoria">Mentoria</a>
+            <a href="https://newscale.tech" target="_blank" rel="noopener">IA na sua Empresa</a>
             <a href="/curso" class="nav-cta">Quero o curso</a>
         </nav>
         <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">☰</button>
@@ -296,7 +297,7 @@
             <div class="rv">
                 <div class="hero-eyebrow"><span class="dot"></span><span class="kick">Quem sou</span></div>
                 <h1>Oi, eu<br>sou a <span class="terra">Bruna.</span></h1>
-                <p class="hero-sub"><b>Eu não sou desenvolvedora. Sou empresária.</b> E foi exatamente por isso que aprendi a usar IA do jeito que funciona pra quem trabalha de verdade.</p>
+                <p class="hero-sub"><b>Eu não sou desenvolvedora. Sou empresária.</b> E foi exatamente por isso que aprendi a usar inteligência artificial (IA) — o Claude no meu dia a dia — do jeito que funciona pra quem trabalha de verdade.</p>
                 <div class="hero-role">
                     <span class="chip">Mãe</span>
                     <span class="chip">Empresária há 10+ anos</span>
@@ -564,8 +565,10 @@
     navToggle.addEventListener('click', () => mainNav.classList.toggle('open'));
 
     // reveal on scroll
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold:.12, rootMargin:'0px 0px -40px 0px' });
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0, rootMargin:'0px 0px -40px 0px' });
     document.querySelectorAll('.rv').forEach((el,i) => { el.style.transitionDelay = (i%3*70)+'ms'; io.observe(el); });
+    /* rv-safety: garante que o conteudo nunca fica invisivel */
+    setTimeout(function(){ document.querySelectorAll('.rv:not(.in)').forEach(function(el){ el.classList.add('in'); }); }, 2500);
 </script>
 
 </body>

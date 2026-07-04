@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Como Usar o Claude: Guia Completo em Português [2026]</title>
-    <meta name="description" content="O guia definitivo do Claude em português: o que é, planos e preços, modelos, prompts, Projetos, Artefatos, Skills, Cowork e Claude Code. Atualizado em julho de 2026.">
+    <title>Como Usar o Claude, a IA da Anthropic: Guia em Português</title>
+    <meta name="description" content="O guia definitivo do Claude, a inteligência artificial (IA) da Anthropic, em português: o que é, planos e preços, modelos, prompts, Projetos, Artefatos, Skills e Claude Code. Atualizado em julho de 2026.">
     <meta name="author" content="Bruna Santanna">
     <link rel="canonical" href="https://brunasantanna.com/claude">
 
@@ -328,6 +328,7 @@
             <a href="/quem-sou">Quem Sou</a>
             <a href="/treinamentos">Treinamentos Corporativos</a>
             <a href="/mentoria">Mentoria</a>
+            <a href="https://newscale.tech" target="_blank" rel="noopener">IA na sua Empresa</a>
             <a href="/curso" class="nav-cta">Quero o curso</a>
         </nav>
         <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">☰</button>
@@ -996,8 +997,10 @@
     mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mainNav.classList.remove('open')));
 
     // ===== reveal on scroll =====
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold:.12, rootMargin:'0px 0px -40px 0px' });
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0, rootMargin:'0px 0px -40px 0px' });
     document.querySelectorAll('.rv').forEach((el,i) => { el.style.transitionDelay = (i%3*70)+'ms'; io.observe(el); });
+    /* rv-safety: garante que o conteudo nunca fica invisivel */
+    setTimeout(function(){ document.querySelectorAll('.rv:not(.in)').forEach(function(el){ el.classList.add('in'); }); }, 2500);
 </script>
 
 </body>

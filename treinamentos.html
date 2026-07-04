@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Treinamentos Corporativos de IA | Palestras, Imersões e Hackathons | Bruna Santanna</title>
+    <title>Treinamentos Corporativos de IA e Claude | Bruna Santanna</title>
 
-    <meta name="description" content="Treinamentos corporativos de IA com Bruna Santanna: palestras, imersões, hackathons e cursos in-company. +1.000 profissionais treinados, com Claude ou a IA que a empresa já usa. IA que entra na rotina, sem hype.">
+    <meta name="description" content="Treinamentos corporativos de inteligência artificial (IA) com Bruna Santanna: palestras, imersões, hackathons e cursos in-company. +1.000 profissionais treinados, com Claude ou a IA que a empresa já usa. IA que entra na rotina, sem hype.">
     <meta name="author" content="Bruna Santanna">
     <link rel="canonical" href="https://brunasantanna.com/treinamentos">
     <meta property="og:type" content="website">
@@ -389,6 +389,7 @@
             <a href="/claude">Guia do Claude</a>
             <a href="/treinamentos" class="active">Treinamentos Corporativos</a>
             <a href="/mentoria">Mentoria</a>
+            <a href="https://newscale.tech" target="_blank" rel="noopener">IA na sua Empresa</a>
             <a href="/quem-sou">Quem Sou</a>
             <a href="/curso" class="nav-cta">Quero o curso</a>
         </nav>
@@ -404,7 +405,7 @@
             <div class="rv">
                 <div class="hero-eyebrow"><span class="dot"></span><span class="kick">Treinamentos Corporativos · IA na prática</span></div>
                 <h1>Seu time usando<br>IA <span class="terra">de verdade.</span></h1>
-                <p class="lead-answer">Treinamentos corporativos de IA são palestras, imersões, hackathons e cursos in-company em que o time coloca a mão na IA e sai com prompts, skills e fluxos prontos aplicados no próprio trabalho. Nada de futurologia: é IA que entra na rotina, com Claude ou com a IA que a empresa já usa.</p>
+                <p class="lead-answer">Treinamentos corporativos de IA são palestras, imersões, hackathons e cursos in-company em que o time coloca a mão na IA e sai com prompts, skills e fluxos prontos aplicados no próprio trabalho. Nada de teoria solta: é inteligência artificial que entra na rotina, com Claude ou com a IA que a empresa já usa.</p>
                 <p class="hero-sub">A Bruna já treinou <b>+1.000 profissionais</b> — palestras, imersões e hackathons que saem do hype e entram na rotina de trabalho.</p>
                 <div class="hero-actions">
                     <a href="#contato" class="btn btn-terra">Quero levar pra minha empresa</a>
@@ -500,8 +501,8 @@
 <!-- ========== 4. FAIXA ESCURA: ANTI-HYPE ========== -->
 <section class="antihype">
     <div class="wrap rv">
-        <span class="kick" style="color:var(--terra-l)">Sem futurologia</span>
-        <h2>Não é palestra de <span class="terra">futurologia.</span></h2>
+        <span class="kick" style="color:var(--terra-l)">Mão na massa</span>
+        <h2>Seu time sai <span class="terra">fazendo.</span><br>Não anotando.</h2>
         <p>Você não vai me ver passando slide sobre como o mundo vai ser em 2030. Isso não faz o seu time produzir mais amanhã.</p>
         <p><b>Aqui o time abre o notebook e faz.</b> A gente pega uma tarefa real da rotina de vocês e resolve com IA, ali, na sua frente. É onde a ficha cai de verdade.</p>
         <p>E depende da IA que a empresa tem: eu ensino no Claude, no ChatGPT, no Gemini ou no Copilot. <b>O conceito é o mesmo, a prática muda.</b> Você não precisa trocar de ferramenta — precisa aprender a usar bem a que já paga.</p>
@@ -589,7 +590,7 @@
         <!-- CASE EM DESTAQUE: vídeo Rafael Magaldi -->
         <div class="case-feature rv">
             <div class="case-feature-media">
-                <video controls preload="metadata" playsinline poster="fotos/stringhetta-2.jpg">
+                <video controls preload="metadata" playsinline poster="fotos/video-rafael-poster.jpg">
                     <source src="fotos/video-rafael-magaldi.mp4" type="video/mp4">
                     Seu navegador não abre o vídeo. <a href="fotos/video-rafael-magaldi.mp4">Baixar o depoimento.</a>
                 </video>
@@ -852,8 +853,10 @@
     mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mainNav.classList.remove('open')));
 
     // ===== reveal on scroll =====
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold:.12, rootMargin:'0px 0px -40px 0px' });
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0, rootMargin:'0px 0px -40px 0px' });
     document.querySelectorAll('.rv').forEach((el,i) => { el.style.transitionDelay = (i%3*70)+'ms'; io.observe(el); });
+    /* rv-safety: garante que o conteudo nunca fica invisivel */
+    setTimeout(function(){ document.querySelectorAll('.rv:not(.in)').forEach(function(el){ el.classList.add('in'); }); }, 2500);
 </script>
 
 </body>

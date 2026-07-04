@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loop: defina a meta uma vez e o Claude trabalha sozinho até bater | A Virada IA · Bruna Santanna</title>
-    <meta name="description" content="Em vez de mandar 'continua' o tempo todo, você define a meta uma vez e o Claude trabalha sozinho até bater. Aprenda a escrever uma meta mensurável e pegue o prompt de loop pronto.">
+    <meta name="description" content="Em vez de mandar 'continua' o tempo todo, você define a meta uma vez e o Claude, a inteligência artificial (IA) da Anthropic, trabalha sozinho até bater. Aprenda a escrever uma meta mensurável e pegue o prompt de loop pronto.">
     <meta name="author" content="Bruna Santanna">
     <link rel="canonical" href="https://brunasantanna.com/guia-loop-meta">
     <meta property="og:type" content="article">
@@ -273,6 +273,7 @@
             <a href="/quem-sou">Quem Sou</a>
             <a href="/treinamentos">Treinamentos Corporativos</a>
             <a href="/mentoria">Mentoria</a>
+            <a href="https://newscale.tech" target="_blank" rel="noopener">IA na sua Empresa</a>
             <a href="/curso" class="nav-cta">Quero o curso</a>
         </nav>
         <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">☰</button>
@@ -290,7 +291,7 @@
             <span class="data">Julho de 2026</span>
         </div>
         <h1 class="rv">Loop: defina a meta uma vez e o Claude trabalha <span class="terra">sozinho</span> até bater</h1>
-        <p class="hero-sub rv">Em vez de ficar mandando <b>"continua"</b> o tempo todo, você escreve a meta uma vez. O Claude trabalha, um segundo modelo checa, e o loop só para quando o resultado bater de verdade.</p>
+        <p class="hero-sub rv">Em vez de ficar mandando <b>"continua"</b> o tempo todo, você escreve a meta uma vez. O Claude, a inteligência artificial (IA) da Anthropic, trabalha, um segundo modelo checa, e o loop só para quando o resultado bater de verdade.</p>
     </div>
 </section>
 
@@ -551,8 +552,10 @@ Não me pergunte "continua?" no meio. A meta acima é o seu critério de parada.
     mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mainNav.classList.remove('open')));
 
     // ===== reveal on scroll =====
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold:.12, rootMargin:'0px 0px -40px 0px' });
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0, rootMargin:'0px 0px -40px 0px' });
     document.querySelectorAll('.rv').forEach((el,i) => { el.style.transitionDelay = (i%3*70)+'ms'; io.observe(el); });
+    /* rv-safety: garante que o conteudo nunca fica invisivel */
+    setTimeout(function(){ document.querySelectorAll('.rv:not(.in)').forEach(function(el){ el.classList.add('in'); }); }, 2500);
 
     // ===== Popup exit-intent do curso (list: 'curso') =====
     (function(){

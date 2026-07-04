@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recupere no WhatsApp os leads que morreram no vácuo | A Virada IA · Bruna Santanna</title>
-    <meta name="description" content="O Claude lê seus últimos 30 dias de WhatsApp, acha quem ficou sem resposta e escreve a retomada no seu tom. Você só aprova. Prompt pronto aqui dentro.">
+    <meta name="description" content="O Claude, a inteligência artificial (IA) da Anthropic, lê seus últimos 30 dias de WhatsApp, acha quem ficou sem resposta e escreve a retomada no seu tom. Você só aprova. Prompt pronto aqui dentro.">
     <meta name="author" content="Bruna Santanna">
     <link rel="canonical" href="https://brunasantanna.com/guia-whatsapp-leads">
     <meta property="og:type" content="article">
@@ -273,6 +273,7 @@
             <a href="/quem-sou">Quem Sou</a>
             <a href="/treinamentos">Treinamentos Corporativos</a>
             <a href="/mentoria">Mentoria</a>
+            <a href="https://newscale.tech" target="_blank" rel="noopener">IA na sua Empresa</a>
             <a href="/curso" class="nav-cta">Quero o curso</a>
         </nav>
         <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">☰</button>
@@ -290,7 +291,7 @@
             <span class="data">Julho de 2026</span>
         </div>
         <h1 class="rv">Recupere no WhatsApp os leads que morreram no <span class="terra">vácuo</span></h1>
-        <p class="hero-sub rv">O Claude lê seus últimos 30 dias de conversa, acha <b>quem ficou sem resposta</b> e escreve a retomada no seu tom. Você só aprova e envia.</p>
+        <p class="hero-sub rv">O Claude, a inteligência artificial (IA) da Anthropic, lê seus últimos 30 dias de conversa, acha <b>quem ficou sem resposta</b> e escreve a retomada no seu tom. Você só aprova e envia.</p>
     </div>
 </section>
 
@@ -543,8 +544,10 @@ Não envie nada sozinho.</pre>
     mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mainNav.classList.remove('open')));
 
     // ===== reveal on scroll =====
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold:.12, rootMargin:'0px 0px -40px 0px' });
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0, rootMargin:'0px 0px -40px 0px' });
     document.querySelectorAll('.rv').forEach((el,i) => { el.style.transitionDelay = (i%3*70)+'ms'; io.observe(el); });
+    /* rv-safety: garante que o conteudo nunca fica invisivel */
+    setTimeout(function(){ document.querySelectorAll('.rv:not(.in)').forEach(function(el){ el.classList.add('in'); }); }, 2500);
 
     // ===== Popup exit-intent do curso (list: 'curso') =====
     (function(){

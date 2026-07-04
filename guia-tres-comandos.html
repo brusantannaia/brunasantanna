@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3 frases que mudam tudo no Claude | A Virada IA · Bruna Santanna</title>
-    <meta name="description" content="Três frases curtas que trocam o papel do Claude: de quem chuta pra quem te entrevista, de quem concorda pra quem te confronta, de quem responde pra quem te entrega uma skill.">
+    <meta name="description" content="Três frases curtas que trocam o papel do Claude, a inteligência artificial (IA) da Anthropic: de quem chuta pra quem te entrevista, de quem concorda pra quem te confronta, de quem responde pra quem te entrega uma skill.">
     <meta name="author" content="Bruna Santanna">
     <link rel="canonical" href="https://brunasantanna.com/guia-tres-comandos">
     <meta property="og:type" content="article">
@@ -273,6 +273,7 @@
             <a href="/quem-sou">Quem Sou</a>
             <a href="/treinamentos">Treinamentos Corporativos</a>
             <a href="/mentoria">Mentoria</a>
+            <a href="https://newscale.tech" target="_blank" rel="noopener">IA na sua Empresa</a>
             <a href="/curso" class="nav-cta">Quero o curso</a>
         </nav>
         <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">☰</button>
@@ -290,7 +291,7 @@
             <span class="data">Julho de 2026</span>
         </div>
         <h1 class="rv">3 frases que mudam <span class="terra">tudo</span> no Claude</h1>
-        <p class="hero-sub rv">Não é prompt gigante, não é técnica secreta. São <b>três frases curtas</b> que trocam o papel do Claude: de quem chuta pra quem te entrevista, de quem concorda pra quem te confronta, de quem responde pra quem te entrega uma skill pronta.</p>
+        <p class="hero-sub rv">Não é prompt gigante, não é técnica secreta. São <b>três frases curtas</b> que trocam o papel do Claude, a inteligência artificial (IA) da Anthropic: de quem chuta pra quem te entrevista, de quem concorda pra quem te confronta, de quem responde pra quem te entrega uma skill pronta.</p>
     </div>
 </section>
 
@@ -536,8 +537,10 @@
     mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mainNav.classList.remove('open')));
 
     // ===== reveal on scroll =====
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold:.12, rootMargin:'0px 0px -40px 0px' });
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0, rootMargin:'0px 0px -40px 0px' });
     document.querySelectorAll('.rv').forEach((el,i) => { el.style.transitionDelay = (i%3*70)+'ms'; io.observe(el); });
+    /* rv-safety: garante que o conteudo nunca fica invisivel */
+    setTimeout(function(){ document.querySelectorAll('.rv:not(.in)').forEach(function(el){ el.classList.add('in'); }); }, 2500);
 
     // ===== Popup exit-intent do curso (list: 'curso') =====
     (function(){

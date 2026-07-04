@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Biblioteca do Claude — o blog com guias e prompts em português | Bruna Santanna</title>
+    <title>A Biblioteca do Claude — guias e prompts de IA | Bruna Santanna</title>
 
-    <meta name="description" content="IA pra quem não é dev: guias passo a passo e prompts prontos de Claude, em português, pra transformar seu dia a dia de trabalho. Aberto, sem cadastro.">
+    <meta name="description" content="Inteligência artificial (IA) pra quem não é dev: guias passo a passo e prompts prontos de Claude, em português, pra transformar seu dia a dia de trabalho. Aberto, sem cadastro.">
     <meta name="author" content="Bruna Santanna">
     <link rel="canonical" href="https://brunasantanna.com/biblioteca">
     <meta property="og:type" content="website">
@@ -384,6 +384,7 @@
             <a href="/quem-sou">Quem Sou</a>
             <a href="/treinamentos">Treinamentos Corporativos</a>
             <a href="/mentoria">Mentoria</a>
+            <a href="https://newscale.tech" target="_blank" rel="noopener">IA na sua Empresa</a>
             <a href="/curso" class="nav-cta">Quero o curso</a>
         </nav>
         <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">☰</button>
@@ -397,7 +398,7 @@
         <span class="gate-eyebrow">O blog do Claude · atualizado toda semana</span>
         <h1>A Biblioteca<br><span class="terra">do Claude</span></h1>
 
-        <p class="gate-lead"><strong>IA pra quem não é dev.</strong> Aprenda a colocar o Claude pra trabalhar por você — no seu emprego, no seu negócio, na sua rotina. Guias passo a passo e prompts prontos, em português, do jeito que eu uso todo dia.</p>
+        <p class="gate-lead"><strong>Inteligência artificial (IA) pra quem não é dev.</strong> Aprenda a colocar o Claude pra trabalhar por você — no seu emprego, no seu negócio, na sua rotina. Guias passo a passo e prompts prontos, em português, do jeito que eu uso todo dia.</p>
         <div class="stats">
             <div><div class="stat-num"><span>+</span>10mil</div><div class="stat-label">pessoas aprendendo aqui</div></div>
         </div>
@@ -554,12 +555,9 @@
     //  Cada objeto é um card-link pra companion page /{slug}.
     // ============================================================
     const POSTS = [
-        { slug: 'hackathon-de-ia', titulo: 'Hackathon de IA na empresa: como funciona e o que o time constrói em 1 dia', tema: 'Corporativo', data: '2026-07',
-          descricao: 'Um dia, o time inteiro construindo soluções de IA pros problemas reais da operação — case Ismart, ~70 pessoas.' },
-        { slug: 'treinamento-de-ia-para-empresas', titulo: 'Treinamento de IA para empresas: o que funciona de verdade (case com 280 pessoas)', tema: 'Corporativo', data: '2026-07',
-          descricao: 'Treino que muda a rotina não é palestra genérica: é sobre o trabalho real do time — case Stoller, +280 pessoas.' },
-        { slug: 'fluxo-de-caixa-com-ia', titulo: 'Fluxo de caixa com IA: como um processo de 2 dias caiu pra minutos', tema: 'Corporativo', data: '2026-07',
-          descricao: 'No Stringhetta, o fluxo de caixa levava 2 dias por semana; depois do treino na operação, virou minutos.' },
+        // cases corporativos ficam FORA do feed do blog (decisão da Bruna 04/07) —
+        // eles vivem em /hackathon-de-ia, /treinamento-de-ia-para-empresas,
+        // /fluxo-de-caixa-com-ia e /formacao-claude-empresas, linkados pela home e por /treinamentos.
         { slug: 'guia-analisar-conteudo', titulo: 'Como usar o Claude pra descobrir por que seu conteúdo (não) viraliza', tema: 'Criadores', data: '2026-07',
           descricao: 'Cola seus posts no Claude e descobre o padrão real do que engaja — sem achismo.' },
         { slug: 'guia-extensao-chrome', titulo: 'A extensão do Claude no Chrome: seu copiloto dentro de qualquer site', tema: 'Ferramentas', data: '2026-07',

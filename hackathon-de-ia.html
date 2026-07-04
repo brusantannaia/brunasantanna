@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hackathon de IA na empresa: como funciona e o que o time constrói em 1 dia | A Virada IA · Bruna Santanna</title>
-    <meta name="description" content="Um hackathon de IA na empresa junta o time por um dia pra resolver problemas reais da própria operação com IA. Como funciona, o que sai pronto no fim do dia e por que funciona melhor que treinamento genérico. Case real: Ismart, ~70 pessoas.">
+    <title>Hackathon de IA na empresa com Claude: o que o time constrói em 1 dia | A Virada IA · Bruna Santanna</title>
+    <meta name="description" content="Um hackathon de inteligência artificial (IA) na empresa junta o time por um dia pra resolver problemas reais da própria operação com IA — Claude, principalmente. Como funciona, o que sai pronto no fim do dia e por que bate treinamento genérico. Case: Ismart, ~70 pessoas.">
     <meta name="author" content="Bruna Santanna">
     <link rel="canonical" href="https://brunasantanna.com/hackathon-de-ia">
     <meta property="og:type" content="article">
@@ -244,6 +244,7 @@
             <a href="/quem-sou">Quem Sou</a>
             <a href="/treinamentos">Treinamentos Corporativos</a>
             <a href="/mentoria">Mentoria</a>
+            <a href="https://newscale.tech" target="_blank" rel="noopener">IA na sua Empresa</a>
             <a href="/curso" class="nav-cta">Quero o curso</a>
         </nav>
         <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">☰</button>
@@ -261,7 +262,7 @@
             <span class="data">Julho de 2026</span>
         </div>
         <h1 class="rv">Hackathon de IA na empresa: o que o time <span class="terra">constrói em 1 dia</span></h1>
-        <p class="hero-sub rv">Um dia. O time inteiro dividido em grupos, resolvendo <b>problemas reais da própria operação</b> com IA. No fim do dia, projetos rodando de verdade. Foi assim no Ismart, com cerca de 70 pessoas — e aqui eu conto como funciona por dentro.</p>
+        <p class="hero-sub rv">Um dia. O time inteiro dividido em grupos, resolvendo <b>problemas reais da própria operação</b> com inteligência artificial (IA) — o Claude, principalmente. No fim do dia, projetos rodando de verdade. Foi assim no Ismart, com cerca de 70 pessoas — e aqui eu conto como funciona por dentro.</p>
     </div>
 </section>
 
@@ -433,8 +434,10 @@
     mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mainNav.classList.remove('open')));
 
     // ===== reveal on scroll =====
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold:.12, rootMargin:'0px 0px -40px 0px' });
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0, rootMargin:'0px 0px -40px 0px' });
     document.querySelectorAll('.rv').forEach((el,i) => { el.style.transitionDelay = (i%3*70)+'ms'; io.observe(el); });
+    /* rv-safety: garante que o conteudo nunca fica invisivel */
+    setTimeout(function(){ document.querySelectorAll('.rv:not(.in)').forEach(function(el){ el.classList.add('in'); }); }, 2500);
 </script>
 
 </body>
