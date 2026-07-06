@@ -1,0 +1,18 @@
+<svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <rect width="128" height="128" fill="#0a0a0a"/>
+  <!-- corpo -->
+  <rect x="20" y="30" width="88" height="46" fill="#C17A5A"/>
+  <!-- braço esquerdo -->
+  <rect x="4"  y="46" width="16" height="16" fill="#C17A5A"/>
+  <!-- braço direito -->
+  <rect x="108" y="46" width="16" height="16" fill="#C17A5A"/>
+  <!-- olho esquerdo -->
+  <rect x="36" y="46" width="10" height="18" fill="#0a0a0a"/>
+  <!-- olho direito -->
+  <rect x="82" y="46" width="10" height="18" fill="#0a0a0a"/>
+  <!-- 4 pernas -->
+  <rect x="28"  y="76" width="12" height="22" fill="#C17A5A"/>
+  <rect x="48"  y="76" width="12" height="22" fill="#C17A5A"/>
+  <rect x="68"  y="76" width="12" height="22" fill="#C17A5A"/>
+  <rect x="88"  y="76" width="12" height="22" fill="#C17A5A"/>
+</svg>
