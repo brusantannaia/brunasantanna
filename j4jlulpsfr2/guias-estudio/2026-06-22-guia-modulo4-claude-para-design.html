@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Módulo 07 · Claude para Design, Claude com Profundidade</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#F3EEE3; --bg-2:#ECE5D6; --card:#FBF9F3;
+  --ink:#14373C; --ink-2:#2C4F54; --green:#435D51;
+  --terra:#B06E4A; --terra-l:#C4835E; --terra-d:#985A3B;
+  --text:#233133; --muted:#6E7A75;
+  --line:rgba(20,55,60,.16);
+  --anton:'Anton', sans-serif; --hank:'Hanken Grotesk', sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--hank);background:var(--bg);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+::selection{background:var(--terra);color:#fff;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 30px;}
+h1, h2, h3{font-family:var(--anton);font-weight:400;text-transform:uppercase;letter-spacing:-.01em;line-height:.92;}
+.terra{color:var(--terra);}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--terra);}
+.eyebrow::before{content:'';width:26px;height:2px;background:var(--terra);}
+#bar{position:fixed;top:0;left:0;height:4px;width:0;background:var(--terra);z-index:99;transition:width .1s linear;}
+
+.hd{position:sticky;top:0;z-index:50;background:rgba(243,238,227,.92);backdrop-filter:blur(8px);border-bottom:2px solid var(--ink);}
+.hd-in{display:flex;align-items:center;justify-content:space-between;padding:14px 30px;max-width:1180px;margin:0 auto;}
+.hd .logo{font-family:var(--anton);font-size:1.15rem;text-transform:uppercase;color:var(--ink);letter-spacing:.02em;display:inline-flex;align-items:center;}
+.hd .logo .tag{font-family:var(--hank);font-weight:700;font-size:.6rem;letter-spacing:.12em;color:var(--terra);border:1.5px solid var(--terra);padding:3px 8px;border-radius:100px;margin-left:10px;text-transform:uppercase;}
+.hd nav{display:flex;gap:22px;}
+.hd nav a{font-size:.84rem;font-weight:600;color:var(--ink-2);text-decoration:none;transition:.18s;}
+.hd nav a:hover{color:var(--terra);}
+@media(max-width:760px){.hd nav{display:none;}}
+
+section{padding:80px 0;position:relative;}
+.snum{font-family:var(--anton);font-size:clamp(3rem,8vw,5.5rem);color:var(--terra);line-height:.8;display:block;}
+.sec-h{font-size:clamp(2.1rem,6vw,3.6rem);color:var(--ink);margin:6px 0 14px;}
+.lead{font-size:1.15rem;color:var(--ink-2);max-width:54ch;}
+.lead b{color:var(--ink);font-weight:700;}
+
+.hero{padding:70px 0 56px;}
+.hero h1{font-size:clamp(3.2rem,12vw,7.4rem);color:var(--ink);margin:20px 0 0;}
+.hero .sub{font-size:1.3rem;color:var(--ink-2);max-width:36ch;margin-top:24px;}
+.hero .sub b{color:var(--ink);font-weight:700;}
+.statrow{display:flex;gap:34px;flex-wrap:wrap;margin-top:40px;}
+.statrow .n{font-family:var(--anton);font-size:2.4rem;color:var(--ink);line-height:1;}
+.statrow .n span{color:var(--terra);}
+.statrow .l{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:5px;}
+
+.mani{background:var(--ink);padding:64px 0;}
+.mani p{font-family:var(--anton);text-transform:uppercase;font-size:clamp(1.8rem,5.2vw,3.4rem);line-height:1.02;color:#fff;max-width:24ch;}
+.mani p span{color:var(--terra-l);}
+.marq{background:var(--bg-2);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);padding:16px 0;overflow:hidden;}
+.marq-t{display:flex;gap:40px;width:max-content;animation:slide 26s linear infinite;align-items:center;}
+@keyframes slide{to{transform:translateX(-50%);}}
+.marq span{font-family:var(--anton);font-size:1.5rem;text-transform:uppercase;color:var(--ink);white-space:nowrap;}
+.marq span.d{color:var(--terra);}
+
+/* split */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px;}
+@media(max-width:680px){.split{grid-template-columns:1fr;}}
+.col{border-radius:16px;padding:24px 26px;}
+.col.no{background:var(--bg-2);border:1.5px dashed var(--line);}
+.col.yes{background:var(--ink);color:#fff;box-shadow:7px 7px 0 var(--terra);}
+.col .lab{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;}
+.col.no .lab{color:var(--muted);} .col.yes .lab{color:var(--terra-l);}
+.col h4{font-family:var(--hank);font-weight:800;font-size:1.4rem;text-transform:uppercase;letter-spacing:.005em;line-height:1.08;margin-bottom:8px;}
+.col.no h4{color:var(--ink);} .col.yes h4{color:#fff;}
+.col p{font-size:.95rem;} .col.no p{color:var(--ink-2);} .col.yes p{color:rgba(255,255,255,.85);}
+
+/* lista de comparação dentro das colunas */
+.cmplist{list-style:none;margin-top:14px;display:grid;gap:10px;}
+.cmplist li{display:flex;gap:10px;align-items:flex-start;font-size:.92rem;line-height:1.4;}
+.cmplist .ic{flex-shrink:0;font-family:var(--anton);font-size:1rem;line-height:1.3;}
+.col.no .cmplist li{color:var(--ink-2);} .col.no .cmplist .ic{color:var(--muted);}
+.col.yes .cmplist li{color:rgba(255,255,255,.88);} .col.yes .cmplist .ic{color:var(--terra-l);}
+.col .cmplist b{font-weight:800;} .col.no .cmplist b{color:var(--ink);} .col.yes .cmplist b{color:#fff;}
+
+.callout{margin-top:18px;background:rgba(176,110,74,.1);border-left:4px solid var(--terra);border-radius:0 12px 12px 0;padding:14px 18px;font-size:1rem;color:var(--ink-2);}
+.callout b{color:var(--terra);}
+
+/* flow */
+.flow{display:flex;align-items:stretch;gap:0;margin-top:26px;flex-wrap:wrap;}
+.fstep{flex:1;min-width:140px;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:18px;}
+.fstep.dark{background:var(--ink);box-shadow:7px 7px 0 var(--terra);}
+.fstep .fn{font-family:var(--anton);font-size:1.3rem;color:var(--terra);}
+.fstep.dark .fn{color:var(--terra-l);}
+.fstep .ft{font-family:var(--anton);text-transform:uppercase;font-size:1.02rem;color:var(--ink);margin-top:4px;line-height:1.02;}
+.fstep.dark .ft{color:#fff;}
+.fstep p{font-size:.83rem;color:var(--ink-2);margin-top:6px;}.fstep.dark p{color:rgba(255,255,255,.8);}
+.farrow{display:flex;align-items:center;justify-content:center;font-family:var(--anton);color:var(--terra);font-size:1.7rem;padding:0 12px;}
+@media(max-width:680px){.flow{flex-direction:column;}.farrow{transform:rotate(90deg);padding:8px 0;}}
+
+/* estúdio mock (chat + canvas) */
+.studio{display:grid;grid-template-columns:.85fr 1.15fr;border:2px solid var(--ink);border-radius:16px;overflow:hidden;margin-top:26px;box-shadow:9px 9px 0 var(--terra);}
+@media(max-width:680px){.studio{grid-template-columns:1fr;}}
+.studio .chat{background:var(--ink);padding:20px;}
+.studio .chat .tt{font-size:.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra-l);margin-bottom:14px;}
+.studio .chat .msg{border-radius:11px;padding:10px 13px;font-size:.86rem;margin-bottom:9px;color:#fff;}
+.studio .chat .msg.me{background:var(--terra);}
+.studio .chat .msg.ai{background:rgba(255,255,255,.08);}
+.studio .canvas{background:var(--card);padding:18px;}
+.studio .canvas .tt{font-size:.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+.mock{border:1.5px solid var(--line);border-radius:10px;overflow:hidden;}
+.mock .mhero{background:var(--ink);padding:18px 16px;}
+.mock .mh1{height:13px;width:70%;background:var(--terra-l);border-radius:4px;}
+.mock .mh2{height:8px;width:50%;background:rgba(255,255,255,.4);border-radius:4px;margin-top:8px;}
+.mock .mbtn{height:18px;width:90px;background:var(--terra);border-radius:6px;margin-top:12px;}
+.mock .mrow{display:flex;gap:10px;padding:14px 16px;}
+.mock .mcard{flex:1;height:54px;background:var(--bg-2);border-radius:8px;}
+
+/* chips */
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;}
+.chip{font-family:var(--hank);font-weight:700;font-size:.82rem;background:var(--bg-2);border:1.5px solid var(--line);border-radius:100px;padding:8px 16px;color:var(--ink);}
+.chip.hot{background:var(--terra);color:#fff;border-color:var(--terra);}
+
+/* use cases */
+.ucg{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px;}
+@media(max-width:680px){.ucg{grid-template-columns:1fr;}}
+.uc{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:20px;}
+.uc .un{font-family:var(--anton);color:var(--terra);font-size:1.1rem;}
+.uc .ut{font-family:var(--anton);text-transform:uppercase;font-size:1.15rem;color:var(--ink);margin-top:2px;}
+.uc p{font-size:.87rem;color:var(--ink-2);margin-top:5px;}
+
+/* prompt */
+.prompt{margin-top:18px;background:var(--card);border:1.5px solid var(--line);border-left:7px solid var(--terra);border-radius:0 14px 14px 0;overflow:hidden;}
+.prompt .pl{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;background:rgba(176,110,74,.1);}
+.prompt .pl span{font-family:var(--hank);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);}
+.copy{font-family:var(--hank);font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--terra);border:none;border-radius:100px;padding:7px 16px;cursor:pointer;transition:.18s;white-space:nowrap;}
+.copy:hover{background:var(--terra-d);}.copy.done{background:var(--green);}
+.live{background:var(--terra);color:#fff;padding:2px 7px;border-radius:5px;margin-right:8px;}
+.prompt pre{font-family:var(--hank);font-size:.95rem;line-height:1.55;color:var(--text);padding:18px 20px;white-space:pre-wrap;word-break:break-word;}
+
+/* mission/teaser/close */
+.misscard{background:var(--ink);color:#fff;border-radius:20px;padding:40px;box-shadow:9px 9px 0 var(--green);}
+.misscard h2{color:#fff;font-size:clamp(1.8rem,5vw,2.8rem);}.misscard h2 span{color:var(--terra-l);}
+.check{margin-top:24px;display:grid;gap:11px;}
+.ck{display:flex;gap:14px;align-items:flex-start;}
+.ck .bx{flex-shrink:0;width:24px;height:24px;border-radius:6px;border:2px solid var(--terra-l);margin-top:1px;}
+.ck p{color:rgba(255,255,255,.9);font-size:1.02rem;}.ck p b{color:#fff;}
+.teaser{background:var(--bg-2);}
+.teaser .pill{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra);border:1.5px solid var(--terra);border-radius:100px;padding:5px 14px;margin-bottom:16px;}
+.teaser h2{font-size:clamp(2rem,5.5vw,3.4rem);color:var(--ink);max-width:20ch;}.teaser h2 span{color:var(--terra);}
+.teaser h2 a{color:inherit;text-decoration:none;}
+.teaser h2 a:hover span{color:var(--terra-d);}
+.teaser p{margin-top:14px;color:var(--ink-2);max-width:52ch;font-size:1.05rem;}
+.close{background:var(--ink);text-align:center;}
+.close h2{font-size:clamp(2.6rem,9vw,5.5rem);color:#fff;}.close h2 span{color:var(--terra-l);}
+.close .sig{margin-top:18px;font-size:.92rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra-l);}
+.sign{display:flex;align-items:center;justify-content:space-between;gap:12px;color:#fff;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;padding:18px 30px;background:#0E282C;}
+.sign .ns{font-family:var(--anton);letter-spacing:.28em;color:var(--terra-l);font-size:1.05rem;}
+
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);}
+.rv.in{opacity:1;transform:none;}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+
+<header class="hd">
+  <div class="hd-in">
+    <span class="logo">Bruna Santanna<span class="tag">A Virada IA</span></span>
+    <nav><a href="#mito">O mito</a><a href="#porque">Por quê</a><a href="#estudio">Claude Design</a><a href="#casos">Casos</a><a href="#desafio">Desafio</a></nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap rv">
+    <span class="eyebrow">Claude com Profundidade · 07 de 08</span>
+    <h1>O CLAUDE TAMBÉM<br><span class="terra">DESENHA.</span></h1>
+    <p class="sub"><b>Slides, one-pagers e páginas, on-brand, em minutos.</b></p>
+    <div class="statrow">
+      <div><div class="n">0</div><div class="l">linha de código</div></div>
+      <div><div class="n">0</div><div class="l">designer contratado</div></div>
+      <div><div class="n">PPTX<span>+</span></div><div class="l">exporta pro Canva</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<div class="mani"><div class="wrap rv"><p>O Claude não gera foto. <span>Ele constrói, e por isso sai editável.</span></p></div></div>
+
+<!-- MARQUEE -->
+<div class="marq"><div class="marq-t">
+  <span>Decks</span><span class="d">·</span><span>One-pagers</span><span class="d">·</span><span>Landing pages</span><span class="d">·</span><span>Protótipos</span><span class="d">·</span><span>Export PPTX</span><span class="d">·</span><span>Canva</span><span class="d">·</span>
+  <span>Decks</span><span class="d">·</span><span>One-pagers</span><span class="d">·</span><span>Landing pages</span><span class="d">·</span><span>Protótipos</span><span class="d">·</span><span>Export PPTX</span><span class="d">·</span><span>Canva</span><span class="d">·</span>
+</div></div>
+
+<!-- 01 O MITO -->
+<section id="mito">
+  <div class="wrap">
+    <div class="rv"><span class="snum">01</span><h2 class="sec-h">O que ele faz (e não faz)</h2>
+    <p class="lead">A maior confusão de design com IA mora aqui. <b>Resolve isso de cara</b> e a expectativa fica certa.</p></div>
+
+    <div class="split rv">
+      <div class="col no"><div class="lab">Não faz</div><h4>Gerar foto</h4><p>Não é Midjourney. Ele não cria fotos nem ilustrações do zero.</p></div>
+      <div class="col yes"><div class="lab">Faz, e muito bem</div><h4>Construir com código</h4><p>Slides, one-pagers, dashboards, páginas. Sai <b>editável</b> e no seu padrão.</p></div>
+    </div>
+    <div class="callout rv"><b>Na prática:</b> se você precisa de uma foto, ainda usa outra ferramenta. Mas o layout, o texto, o gráfico e a página, quem monta é o Claude.</div>
+  </div>
+</section>
+
+<!-- 02 POR QUE DESIGN E NÃO O CHAT -->
+<section id="porque" style="background:var(--bg-2);">
+  <div class="wrap">
+    <div class="rv"><span class="snum">02</span><h2 class="sec-h">Por que Design e não o chat?</h2>
+    <p class="lead">A dúvida nº1 dos alunos. <b>Se o Claude já desenha no chat normal, pra que um modo separado?</b> O diagrama abaixo mostra a diferença que muda tudo.</p></div>
+
+    <!-- diagrama de comparação lado a lado -->
+    <div class="split rv">
+      <div class="col no">
+        <div class="lab">Chat normal</div>
+        <h4>Você descreve no escuro</h4>
+        <ul class="cmplist">
+          <li><span class="ic">→</span><span>Você instrui tudo por <b>texto</b>.</span></li>
+          <li><span class="ic">→</span><span>Vê o resultado e <b>refina por palavra</b>,"menor", "mais à esquerda", "outra cor".</span></li>
+          <li><span class="ic">→</span><span>Precisa <b>imaginar o visual</b> antes de pedir o ajuste.</span></li>
+          <li><span class="ic">→</span><span>Sem marca embutida: você repete cores e fontes toda vez.</span></li>
+        </ul>
+      </div>
+      <div class="col yes">
+        <div class="lab">Claude Design</div>
+        <h4>Você reage ao que vê</h4>
+        <ul class="cmplist">
+          <li><span class="ic">✓</span><span>Chat à esquerda + <b>canvas à direita</b>: você VÊ o resultado.</span></li>
+          <li><span class="ic">✓</span><span>Você <b>mexe direto</b>: comenta no elemento, arrasta, usa <b>sliders</b> de cor e espaçamento.</span></li>
+          <li><span class="ic">✓</span><span>A <b>sua marca fica embutida</b>, ele usa suas cores e fontes sozinho.</span></li>
+          <li><span class="ic">✓</span><span><b>Exporta</b> pra PPTX, Canva e código.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout rv"><b>O ponto:</b> não é um modelo mais inteligente, é a <b>mesma inteligência (Opus)</b> num ambiente feito pra design. O ganho é o <b>loop visual</b>: você reage ao resultado em vez de só descrever.</div>
+    <div class="callout rv"><b>Beta:</b> o Claude Design ainda é research preview (Anthropic Labs), pode mudar e ter limitações. Mas o loop visual já compensa muito.</div>
+  </div>
+</section>
+
+<!-- 03 CLAUDE DESIGN -->
+<section id="estudio">
+  <div class="wrap">
+    <div class="rv"><span class="snum">03</span><h2 class="sec-h">Claude Design</h2>
+    <p class="lead">Um estúdio visual: <b>chat à esquerda, canvas à direita.</b> Você descreve, ele desenha, você refina.</p></div>
+
+    <!-- mock estúdio -->
+    <div class="studio rv">
+      <div class="chat">
+        <div class="tt">Você conversa</div>
+        <div class="msg me">Crie uma landing do meu serviço de consultoria</div>
+        <div class="msg ai">Pronto. Quer ajustar a cor ou o título?</div>
+        <div class="msg me">Usa a cor da minha marca e aperta o espaçamento</div>
+      </div>
+      <div class="canvas">
+        <div class="tt">Ele desenha no canvas</div>
+        <div class="mock">
+          <div class="mhero"><div class="mh1"></div><div class="mh2"></div><div class="mbtn"></div></div>
+          <div class="mrow"><div class="mcard"></div><div class="mcard"></div><div class="mcard"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- como refinar -->
+    <div class="rv" style="margin-top:26px;"><span class="eyebrow">4 jeitos de refinar</span></div>
+    <div class="chips rv">
+      <span class="chip hot">Conversando</span>
+      <span class="chip">Comentário no elemento</span>
+      <span class="chip">Arrastando no canvas</span>
+      <span class="chip">Sliders (cor, espaço)</span>
+    </div>
+
+    <!-- exporta -->
+    <div class="rv" style="margin-top:26px;"><span class="eyebrow">E exporta pra onde você usa</span></div>
+    <div class="chips rv">
+      <span class="chip hot">PPTX</span><span class="chip hot">Canva</span><span class="chip">PDF</span><span class="chip">HTML</span>
+    </div>
+
+    <!-- fluxo -->
+    <div class="flow rv">
+      <div class="fstep"><div class="fn">1</div><div class="ft">Descreve</div></div>
+      <div class="farrow">→</div>
+      <div class="fstep"><div class="fn">2</div><div class="ft">Vê no canvas</div></div>
+      <div class="farrow">→</div>
+      <div class="fstep"><div class="fn">3</div><div class="ft">Refina</div></div>
+      <div class="farrow">→</div>
+      <div class="fstep dark"><div class="fn">4</div><div class="ft">Exporta</div></div>
+    </div>
+    <div class="callout rv"><b>Beta:</b> o Claude Design ainda é research preview (Anthropic Labs), pode mudar e ter limitações. Mas já entrega muito.</div>
+  </div>
+</section>
+
+<!-- 04 CASOS -->
+<section id="casos" style="background:var(--bg-2);">
+  <div class="wrap">
+    <div class="rv"><span class="snum">04</span><h2 class="sec-h">O que dá pra fazer</h2>
+    <p class="lead">Tudo com a <b>sua marca embutida</b>, ele aprende suas cores e fontes e aplica sozinho.</p></div>
+
+    <div class="ucg rv">
+      <div class="uc"><div class="un">01</div><div class="ut">Pitch deck</div><p>De um esboço a um deck on-brand. Exporta PPTX.</p></div>
+      <div class="uc"><div class="un">02</div><div class="ut">One-pager</div><p>Proposta ou apresentação de serviço numa página.</p></div>
+      <div class="uc"><div class="un">03</div><div class="ut">Landing page</div><p>Hero, depoimentos, tabela de preços, CTA.</p></div>
+      <div class="uc"><div class="un">04</div><div class="ut">Social media</div><p>Peças de campanha e posts no seu visual.</p></div>
+      <div class="uc"><div class="un">05</div><div class="ut">Protótipo</div><p>Telas de app/produto pra validar uma ideia.</p></div>
+      <div class="uc"><div class="un">06</div><div class="ut">Alternativas</div><p>"Me dá 2-3 layouts" e você compara.</p></div>
+    </div>
+
+    <div class="prompt rv">
+      <div class="pl"><span><b class="live">⚡ AGORA NO CLAUDE</b> Landing do Studio Aurora</span><button class="copy">Copiar</button></div>
+      <pre>Crie uma landing page do Studio Aurora pro serviço "Diagnóstico de Marca": hero com promessa, 3 benefícios, como funciona em 3 passos, um depoimento e uma chamada pra ação. Use cores sofisticadas e quentes, design limpo, em português.</pre>
+    </div>
+    <div class="prompt rv">
+      <div class="pl"><span>Prompt · one-pager de proposta</span><button class="copy">Copiar</button></div>
+      <pre>Monte um one-pager de proposta comercial pra uma cliente do setor de [X], no meu padrão de marca: o problema dela, minha solução em 3 passos, o que está incluído e o investimento. Exporta em PPTX.</pre>
+    </div>
+    <div class="prompt rv">
+      <div class="pl"><span>Prompt · refino no elemento</span><button class="copy">Copiar</button></div>
+      <pre>Aumenta o espaçamento deste botão, usa a cor primária da marca aqui e troca este bloco de texto por um depoimento curto.</pre>
+    </div>
+  </div>
+</section>
+
+<!-- DESAFIO -->
+<section id="desafio">
+  <div class="wrap rv">
+    <div class="misscard">
+      <span class="eyebrow" style="color:var(--terra-l);">Mini-desafio do Módulo 7</span>
+      <h2>Descreva.<br><span>Deixa ele desenhar.</span></h2>
+      <div class="check">
+        <div class="ck"><div class="bx"></div><p><b>Peça um one-pager</b> de proposta no seu padrão.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Refine</b> mudando 1 cor e 1 texto, conversando.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Exporte</b> pra PPTX ou mande pro Canva.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Peça 2 alternativas</b> de layout e escolha.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEASER -->
+<section class="teaser">
+  <div class="wrap rv">
+    <span class="pill">Módulo 08</span>
+    <a href="2026-06-22-guia-modulo8-juntando-tudo.html"><h2>Juntando <span>tudo.</span></h2></a>
+    <p>Você montou um sistema. No finale, todas as peças (chat, projetos, Cowork, design) viram um fluxo só, do seu jeito.</p>
+  </div>
+</section>
+
+<!-- CLOSE -->
+<section class="close">
+  <div class="wrap rv">
+    <h2>VOCÊ,<br><span>MULTIPLICADO.</span></h2>
+    <div class="sig">NewScale · @brusantanna.ai</div>
+  </div>
+</section>
+
+<div class="sign"><span>Claude com Profundidade · Módulo 07 · @brusantanna.ai</span><img src="logo-newscale.png" alt="NewScale" style="height:20px;filter:brightness(0) invert(1);opacity:.9;"></div>
+
+<script>
+const bar=document.getElementById('bar');
+addEventListener('scroll',()=>{const h=document.documentElement;bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';},{passive:true});
+document.querySelectorAll('.prompt').forEach(box=>{
+  const btn=box.querySelector('.copy'),pre=box.querySelector('pre');
+  btn.addEventListener('click',async()=>{
+    try{await navigator.clipboard.writeText(pre.innerText.trim());}
+    catch(e){const r=document.createRange();r.selectNode(pre);getSelection().removeAllRanges();getSelection().addRange(r);document.execCommand('copy');getSelection().removeAllRanges();}
+    const o=btn.textContent;btn.textContent='Copiado ✓';btn.classList.add('done');
+    setTimeout(()=>{btn.textContent=o;btn.classList.remove('done');},1600);
+  });
+});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
