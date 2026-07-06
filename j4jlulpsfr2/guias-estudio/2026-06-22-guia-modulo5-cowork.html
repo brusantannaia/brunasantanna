@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Módulo 04 · Cowork, Claude com Profundidade</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#F3EEE3; --bg-2:#ECE5D6; --card:#FBF9F3;
+  --ink:#14373C; --ink-2:#2C4F54; --green:#435D51;
+  --terra:#B06E4A; --terra-l:#C4835E; --terra-d:#985A3B;
+  --text:#233133; --muted:#6E7A75;
+  --line:rgba(20,55,60,.16);
+  --anton:'Anton', sans-serif; --hank:'Hanken Grotesk', sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--hank);background:var(--bg);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+::selection{background:var(--terra);color:#fff;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 30px;}
+h1, h2, h3{font-family:var(--anton);font-weight:400;text-transform:uppercase;letter-spacing:-.01em;line-height:.92;}
+.terra{color:var(--terra);}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--terra);}
+.eyebrow::before{content:'';width:26px;height:2px;background:var(--terra);}
+#bar{position:fixed;top:0;left:0;height:4px;width:0;background:var(--terra);z-index:99;transition:width .1s linear;}
+
+.hd{position:sticky;top:0;z-index:50;background:rgba(243,238,227,.92);backdrop-filter:blur(8px);border-bottom:2px solid var(--ink);}
+.hd-in{display:flex;align-items:center;justify-content:space-between;padding:14px 30px;max-width:1180px;margin:0 auto;}
+.hd .logo{font-family:var(--anton);font-size:1.15rem;text-transform:uppercase;color:var(--ink);letter-spacing:.02em;display:inline-flex;align-items:center;}
+.hd .logo .tag{font-family:var(--hank);font-weight:700;font-size:.6rem;letter-spacing:.12em;color:var(--terra);border:1.5px solid var(--terra);padding:3px 8px;border-radius:100px;margin-left:10px;text-transform:uppercase;}
+.hd nav{display:flex;gap:22px;}
+.hd nav a{font-size:.84rem;font-weight:600;color:var(--ink-2);text-decoration:none;transition:.18s;}
+.hd nav a:hover{color:var(--terra);}
+@media(max-width:760px){.hd nav{display:none;}}
+
+section{padding:80px 0;position:relative;}
+.snum{font-family:var(--anton);font-size:clamp(3rem,8vw,5.5rem);color:var(--terra);line-height:.8;display:block;}
+.sec-h{font-size:clamp(2.1rem,6vw,3.6rem);color:var(--ink);margin:6px 0 14px;}
+.lead{font-size:1.15rem;color:var(--ink-2);max-width:54ch;}
+.lead b{color:var(--ink);font-weight:700;}
+
+.hero{padding:70px 0 56px;}
+.hero h1{font-size:clamp(3.2rem,12vw,7.4rem);color:var(--ink);margin:20px 0 0;}
+.hero .sub{font-size:1.3rem;color:var(--ink-2);max-width:36ch;margin-top:24px;}
+.hero .sub b{color:var(--ink);font-weight:700;}
+.statrow{display:flex;gap:34px;flex-wrap:wrap;margin-top:40px;}
+.statrow .n{font-family:var(--anton);font-size:2.4rem;color:var(--ink);line-height:1;}
+.statrow .n span{color:var(--terra);}
+.statrow .l{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:5px;}
+
+.mani{background:var(--ink);padding:64px 0;}
+.mani p{font-family:var(--anton);text-transform:uppercase;font-size:clamp(1.8rem,5.2vw,3.4rem);line-height:1.02;color:#fff;max-width:24ch;}
+.mani p span{color:var(--terra-l);}
+.marq{background:var(--bg-2);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);padding:16px 0;overflow:hidden;}
+.marq-t{display:flex;gap:40px;width:max-content;animation:slide 26s linear infinite;align-items:center;}
+@keyframes slide{to{transform:translateX(-50%);}}
+.marq span{font-family:var(--anton);font-size:1.5rem;text-transform:uppercase;color:var(--ink);white-space:nowrap;}
+.marq span.d{color:var(--terra);}
+
+/* split */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px;}
+@media(max-width:680px){.split{grid-template-columns:1fr;}}
+.col{border-radius:16px;padding:24px 26px;}
+.col.no{background:var(--bg-2);border:1.5px dashed var(--line);}
+.col.yes{background:var(--ink);color:#fff;box-shadow:7px 7px 0 var(--terra);}
+.col .lab{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;}
+.col.no .lab{color:var(--muted);} .col.yes .lab{color:var(--terra-l);}
+.col h4{font-family:var(--hank);font-weight:800;font-size:1.4rem;text-transform:uppercase;letter-spacing:.005em;line-height:1.08;margin-bottom:8px;}
+.col.no h4{color:var(--ink);} .col.yes h4{color:#fff;}
+.col p{font-size:.95rem;} .col.no p{color:var(--ink-2);} .col.yes p{color:rgba(255,255,255,.85);}
+
+.callout{margin-top:18px;background:rgba(176,110,74,.1);border-left:4px solid var(--terra);border-radius:0 12px 12px 0;padding:14px 18px;font-size:1rem;color:var(--ink-2);}
+.callout b{color:var(--terra);}
+
+/* destaque "ele vê seus arquivos" */
+.spot{margin-top:26px;background:var(--ink);border-radius:18px;padding:32px 34px;box-shadow:7px 7px 0 var(--green);}
+.spot .lab{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra-l);margin-bottom:12px;}
+.spot h3{font-family:var(--anton);text-transform:uppercase;font-size:clamp(1.5rem,4vw,2.2rem);color:#fff;line-height:1;}
+.spot h3 span{color:var(--terra-l);}
+.spot p{color:rgba(255,255,255,.86);font-size:1.04rem;margin-top:14px;max-width:50ch;}
+.spot p b{color:#fff;}
+.spot .verbs{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;}
+.spot .verbs i{font-style:normal;font-family:var(--anton);text-transform:uppercase;letter-spacing:.04em;font-size:1rem;color:#fff;background:rgba(196,131,94,.22);border:1.5px solid var(--terra-l);border-radius:100px;padding:7px 18px;}
+
+/* flow */
+.flow{display:flex;align-items:stretch;gap:0;margin-top:26px;flex-wrap:wrap;}
+.fstep{flex:1;min-width:140px;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:18px;}
+.fstep.dark{background:var(--ink);box-shadow:7px 7px 0 var(--terra);}
+.fstep .fn{font-family:var(--anton);font-size:1.3rem;color:var(--terra);}
+.fstep.dark .fn{color:var(--terra-l);}
+.fstep .ft{font-family:var(--anton);text-transform:uppercase;font-size:1.02rem;color:var(--ink);margin-top:4px;line-height:1.02;}
+.fstep.dark .ft{color:#fff;}
+.fstep p{font-size:.83rem;color:var(--ink-2);margin-top:6px;}.fstep.dark p{color:rgba(255,255,255,.8);}
+.farrow{display:flex;align-items:center;justify-content:center;font-family:var(--anton);color:var(--terra);font-size:1.7rem;padding:0 12px;}
+@media(max-width:680px){.flow{flex-direction:column;}.farrow{transform:rotate(90deg);padding:8px 0;}}
+
+/* chips */
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;}
+.chip{font-family:var(--hank);font-weight:700;font-size:.82rem;background:var(--bg-2);border:1.5px solid var(--line);border-radius:100px;padding:8px 16px;color:var(--ink);}
+.chip.hot{background:var(--terra);color:#fff;border-color:var(--terra);}
+
+/* prompt */
+.prompt{margin-top:18px;background:var(--card);border:1.5px solid var(--line);border-left:7px solid var(--terra);border-radius:0 14px 14px 0;overflow:hidden;}
+.prompt .pl{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;background:rgba(176,110,74,.1);}
+.prompt .pl span{font-family:var(--hank);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);display:inline-flex;align-items:center;gap:9px;}
+.live{background:var(--terra);color:#fff;padding:3px 8px;border-radius:6px;letter-spacing:.06em;}
+.copy{font-family:var(--hank);font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--terra);border:none;border-radius:100px;padding:7px 16px;cursor:pointer;transition:.18s;white-space:nowrap;}
+.copy:hover{background:var(--terra-d);}.copy.done{background:var(--green);}
+.prompt pre{font-family:var(--hank);font-size:.95rem;line-height:1.55;color:var(--text);padding:18px 20px;white-space:pre-wrap;word-break:break-word;}
+
+/* mission/teaser/close */
+.misscard{background:var(--ink);color:#fff;border-radius:20px;padding:40px;box-shadow:9px 9px 0 var(--green);}
+.misscard h2{color:#fff;font-size:clamp(1.8rem,5vw,2.8rem);}.misscard h2 span{color:var(--terra-l);}
+.check{margin-top:24px;display:grid;gap:11px;}
+.ck{display:flex;gap:14px;align-items:flex-start;}
+.ck .bx{flex-shrink:0;width:24px;height:24px;border-radius:6px;border:2px solid var(--terra-l);margin-top:1px;}
+.ck p{color:rgba(255,255,255,.9);font-size:1.02rem;}.ck p b{color:#fff;}
+.teaser{background:var(--bg-2);}
+.teaser .pill{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra);border:1.5px solid var(--terra);border-radius:100px;padding:5px 14px;margin-bottom:16px;}
+.teaser h2{font-size:clamp(2rem,5.5vw,3.4rem);color:var(--ink);max-width:20ch;}.teaser h2 span{color:var(--terra);}
+.teaser h2 a{color:inherit;text-decoration:none;}
+.teaser h2 a:hover span{color:var(--terra-d);}
+.teaser p{margin-top:14px;color:var(--ink-2);max-width:52ch;font-size:1.05rem;}
+.close{background:var(--ink);text-align:center;}
+.close h2{font-size:clamp(2.6rem,9vw,5.5rem);color:#fff;}.close h2 span{color:var(--terra-l);}
+.close .sig{margin-top:18px;font-size:.92rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra-l);}
+.sign{display:flex;align-items:center;justify-content:space-between;gap:12px;color:#fff;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;padding:18px 30px;background:#0E282C;}
+.sign .ns{font-family:var(--anton);letter-spacing:.28em;color:var(--terra-l);font-size:1.05rem;}
+
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);}
+.rv.in{opacity:1;transform:none;}
+
+/* ====== DIAGRAMAS NOVOS, MÓDULO 4 ====== */
+
+/* jornada, degraus ascendentes */
+.journey{display:flex;align-items:flex-end;gap:0;margin-top:30px;flex-wrap:nowrap;}
+@media(max-width:760px){.journey{flex-wrap:wrap;align-items:stretch;}}
+.jstep{flex:1;min-width:0;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:16px 14px;display:flex;flex-direction:column;}
+.jstep.s1{align-self:flex-end;}
+.jstep.s2{align-self:flex-end;margin-bottom:26px;}
+.jstep.s3{align-self:flex-end;margin-bottom:52px;}
+.jstep.s4{align-self:flex-end;margin-bottom:78px;background:var(--ink);box-shadow:7px 7px 0 var(--terra);}
+@media(max-width:760px){.jstep,.jstep.s1,.jstep.s2,.jstep.s3,.jstep.s4{margin-bottom:0;align-self:auto;flex-basis:100%;}}
+.jstep .jn{font-family:var(--anton);font-size:1.2rem;color:var(--terra);}
+.jstep.s4 .jn{color:var(--terra-l);}
+.jstep .jt{font-family:var(--anton);text-transform:uppercase;font-size:1rem;color:var(--ink);margin:2px 0 12px;line-height:1.02;}
+.jstep.s4 .jt{color:#fff;}
+.jarrow{display:flex;align-items:center;justify-content:center;font-family:var(--anton);color:var(--terra);font-size:1.5rem;padding:0 6px 30px;align-self:flex-end;}
+@media(max-width:760px){.jarrow{transform:rotate(90deg);padding:6px 0;align-self:center;flex-basis:100%;}}
+/* mini-mocks dentro dos degraus */
+.jbody{margin-top:auto;}
+.mline{height:6px;border-radius:4px;background:var(--bg-2);margin-bottom:5px;}
+.mline.a{width:90%;}.mline.b{width:62%;margin-left:8%;}.mline.c{width:78%;}.mline.d{width:48%;margin-left:20%;}
+.mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;}
+.mgrid i{height:10px;background:var(--bg-2);border:1px solid var(--line);border-radius:2px;}
+.mbars{display:flex;align-items:flex-end;gap:6px;height:46px;}
+.mbars i{flex:1;background:var(--terra);border-radius:3px 3px 0 0;height:0;transition:height .9s cubic-bezier(.2,.8,.2,1);}
+.in .mbars i.b1{height:40%;}.in .mbars i.b2{height:72%;}.in .mbars i.b3{height:55%;}.in .mbars i.b4{height:92%;}
+.mskill{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--terra);color:#fff;border-radius:8px;padding:12px;font-family:var(--anton);text-transform:uppercase;letter-spacing:.04em;font-size:1rem;}
+
+/* árvore de pastas */
+.tree{margin-top:26px;background:var(--ink);border-radius:16px;padding:26px 28px;box-shadow:7px 7px 0 var(--terra);font-family:var(--hank);}
+.tree .row{display:flex;align-items:center;gap:9px;color:rgba(255,255,255,.9);font-size:.96rem;padding:5px 0;font-weight:600;}
+.tree .row.root{color:#fff;font-family:var(--anton);text-transform:uppercase;letter-spacing:.03em;font-size:1.05rem;}
+.tree .ic{width:20px;text-align:center;flex-shrink:0;}
+.tree .row.file{color:var(--terra-l);}
+.tree .ind1{padding-left:26px;}
+.tree .note{color:var(--muted);font-weight:400;font-size:.84rem;margin-left:6px;}
+
+/* trio de cards segurança/contexto/cache */
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px;}
+@media(max-width:760px){.trio{grid-template-columns:1fr;}}
+.tcard{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:24px 22px;}
+.tcard .ti{width:46px;height:46px;border-radius:12px;background:rgba(176,110,74,.12);display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+.tcard h4{font-family:var(--anton);text-transform:uppercase;font-size:1.18rem;color:var(--ink);line-height:1;}
+.tcard p{font-size:.92rem;color:var(--ink-2);margin-top:9px;}
+.tcard p b{color:var(--ink);font-weight:700;}
+
+/* escada de prioridade */
+.ladder{margin-top:26px;display:flex;flex-direction:column-reverse;gap:10px;}
+.lstep{display:flex;align-items:center;gap:16px;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:16px 20px;}
+.lstep.top{background:var(--ink);box-shadow:7px 7px 0 var(--terra);}
+.lstep .lr{font-family:var(--anton);font-size:1.6rem;color:var(--terra);flex-shrink:0;width:34px;}
+.lstep.top .lr{color:var(--terra-l);}
+.lstep .lc h4{font-family:var(--anton);text-transform:uppercase;font-size:1.15rem;color:var(--ink);line-height:1;}
+.lstep.top .lc h4{color:#fff;}
+.lstep .lc p{font-size:.86rem;color:var(--ink-2);margin-top:3px;}.lstep.top .lc p{color:rgba(255,255,255,.82);}
+.lstep .lspeed{margin-left:auto;font-size:.66rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.lstep.top .lspeed{color:var(--terra-l);}
+
+/* navegador / claude no chrome */
+.browser{margin-top:26px;background:var(--ink);border-radius:16px;box-shadow:7px 7px 0 var(--terra);overflow:hidden;}
+.browser .bbar{display:flex;align-items:center;gap:8px;padding:14px 18px;background:#0E282C;}
+.browser .bbar .dots{display:flex;gap:6px;}
+.browser .bbar .dots i{width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,.28);}
+.browser .bbar .url{flex:1;background:rgba(255,255,255,.1);border-radius:100px;padding:6px 16px;color:rgba(255,255,255,.7);font-size:.82rem;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.browser .bbody{display:flex;gap:18px;padding:24px;align-items:flex-start;flex-wrap:wrap;}
+.browser .bpage{flex:1;min-width:200px;display:grid;gap:9px;}
+.browser .brow{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:11px 14px;}
+.browser .brow .av{width:30px;height:30px;border-radius:50%;background:var(--terra);flex-shrink:0;}
+.browser .brow .bl{display:grid;gap:5px;flex:1;}
+.browser .brow .bl i{height:6px;border-radius:4px;background:rgba(255,255,255,.22);display:block;}
+.browser .brow .bl i.s{width:54%;}
+.browser .bscan{width:110px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:10px;align-self:center;}
+.browser .bscan .eye{width:64px;height:64px;border-radius:50%;border:3px solid var(--terra-l);display:flex;align-items:center;justify-content:center;}
+.browser .bscan .eye::after{content:'';width:22px;height:22px;border-radius:50%;background:var(--terra-l);}
+.browser .bscan span{font-family:var(--anton);text-transform:uppercase;font-size:.78rem;letter-spacing:.05em;color:#fff;text-align:center;line-height:1.1;}
+@media(max-width:680px){.browser .bbody{flex-direction:column;}.browser .bscan{align-self:center;}}
+
+/* dispatch celular -> desktop */
+.dispatch{margin-top:22px;display:flex;align-items:center;justify-content:center;gap:24px;background:var(--bg-2);border:1.5px solid var(--line);border-radius:16px;padding:30px 24px;flex-wrap:wrap;}
+.dev{display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--ink);}
+.dev svg{display:block;}
+.dev span{font-family:var(--anton);text-transform:uppercase;font-size:.92rem;letter-spacing:.03em;}
+.dev small{font-size:.74rem;color:var(--muted);font-weight:600;letter-spacing:.04em;}
+.disarrow{display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--terra);font-family:var(--anton);font-size:1.8rem;}
+.disarrow small{font-family:var(--hank);font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+
+/* relógio agendado */
+.sched{margin-top:26px;display:flex;align-items:center;gap:28px;background:var(--ink);border-radius:16px;padding:30px;box-shadow:7px 7px 0 var(--green);flex-wrap:wrap;}
+.clock{position:relative;width:96px;height:96px;flex-shrink:0;}
+.clock .face{width:96px;height:96px;border-radius:50%;border:3px solid var(--terra-l);}
+.clock .loop{position:absolute;inset:-9px;border:3px dashed var(--terra);border-radius:50%;border-right-color:transparent;animation:spin 9s linear infinite;}
+.clock .hh,.clock .mh{position:absolute;left:50%;bottom:50%;transform-origin:bottom center;background:#fff;border-radius:3px;}
+.clock .hh{width:3px;height:26px;transform:translateX(-50%) rotate(20deg);}
+.clock .mh{width:3px;height:36px;transform:translateX(-50%) rotate(-90deg);background:var(--terra-l);}
+.clock .dot{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:8px;height:8px;border-radius:50%;background:#fff;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.sched .sc h4{font-family:var(--anton);text-transform:uppercase;color:#fff;font-size:1.4rem;line-height:1.02;}
+.sched .sc p{color:rgba(255,255,255,.85);font-size:.96rem;margin-top:6px;max-width:42ch;}
+.sched .sc .badge{display:inline-block;margin-top:12px;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--terra-l);border:1.5px solid var(--terra-l);border-radius:100px;padding:5px 13px;}
+
+@media(prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;}
+  .marq-t{animation:none;}
+  .clock .loop{animation:none;}
+  .mbars i{transition:none;}
+}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+
+<header class="hd">
+  <div class="hd-in">
+    <span class="logo">Bruna Santanna<span class="tag">A Virada IA</span></span>
+    <nav>
+      <a href="#virada">A virada</a>
+      <a href="#jornada">A jornada</a>
+      <a href="#pastas">Pastas</a>
+      <a href="#computer">Computer Use</a>
+      <a href="#chrome">Chrome</a>
+      <a href="#dispatch">Dispatch</a>
+      <a href="#agendadas">Agendadas</a>
+      <a href="index.html">Índice</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap rv">
+    <span class="eyebrow">Claude com Profundidade · 04 de 08</span>
+    <h1>ELE TRABALHA<br><span class="terra">SOZINHO.</span></h1>
+    <p class="sub"><b>O Cowork, o agente no seu computador.</b></p>
+    <div class="statrow">
+      <div><div class="n">docs<span>·</span>planilhas<span>·</span>e-mail</div><div class="l">o que ele mexe</div></div>
+      <div><div class="n">1<span>.</span></div><div class="l">pasta dedicada</div></div>
+      <div><div class="n">24/<span>7</span></div><div class="l">trabalha por você</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<div class="mani"><div class="wrap rv"><p>Chat é pedir conselho a um colega. <span>Cowork é delegar e ir tomar um café.</span></p></div></div>
+
+<!-- MARQUEE -->
+<div class="marq"><div class="marq-t">
+  <span>Pastas</span><span class="d">·</span><span>Workflows</span><span class="d">·</span><span>Computer Use</span><span class="d">·</span><span>Chrome</span><span class="d">·</span><span>Dispatch</span><span class="d">·</span><span>Agendadas</span><span class="d">·</span>
+  <span>Pastas</span><span class="d">·</span><span>Workflows</span><span class="d">·</span><span>Computer Use</span><span class="d">·</span><span>Chrome</span><span class="d">·</span><span>Dispatch</span><span class="d">·</span><span>Agendadas</span><span class="d">·</span>
+</div></div>
+
+<!-- 01 A VIRADA + ELE VÊ SEUS ARQUIVOS -->
+<section id="virada">
+  <div class="wrap">
+    <div class="rv"><span class="snum">01</span><h2 class="sec-h">A virada</h2>
+    <p class="lead">No chat, <b>você fica no meio</b>: pergunta, copia, cola, salva na mão. No Cowork, <b>você delega</b>, ele mexe nos arquivos e te entrega pronto.</p></div>
+
+    <div class="split rv">
+      <div class="col no"><div class="lab">Chat · você no meio</div><h4>O braçal é seu</h4><p>Pergunta, copia a resposta, abre a pasta, cria o arquivo, salva. Cada passo é na mão.</p></div>
+      <div class="col yes"><div class="lab">Cowork · você delega</div><h4>Um colaborador sênior</h4><p>Lê seus arquivos, organiza, cria os documentos e <b>salva na pasta certa.</b> Você revisa o resultado.</p></div>
+    </div>
+
+    <div class="spot rv">
+      <div class="lab">A diferença que muda tudo</div>
+      <h3>Ele <span>vê</span> seus arquivos.</h3>
+      <p>No chat, o Claude <b>não toca nos seus arquivos</b>, você é a ponte: copia daqui, cola ali, salva na mão. No Cowork ele <b>vê, lê e mexe nos seus arquivos direto</b>, dentro da pasta que você deu. Por isso a tarefa anda sozinha: nada de copiar e colar entre você e ele.</p>
+      <div class="verbs"><i>👁 Vê</i><i>📖 Lê</i><i>✍ Mexe</i></div>
+    </div>
+
+    <div class="callout rv"><b>Antes de delegar, segurança:</b> o Cowork pede plano pago. <b>Anonimize dados sensíveis</b> de cliente e trabalhe sempre numa <b>pasta dedicada</b> (não na raiz do seu computador).</div>
+
+    <div class="prompt rv">
+      <div class="pl"><span><span class="live">⚡ AGORA NO CLAUDE</span> Instruções globais do Cowork · Studio Aurora</span><button class="copy">Copiar</button></div>
+      <pre>Sou Marina, fundadora do Studio Aurora, consultoria de branding pra pequenos negócios. Trabalho nesta pasta. Sempre nomeie arquivos no formato AAAA-MM-DD-tipo-descricao. Tom profissional e caloroso, sem jargão. Nunca apague originais, mova pra /arquivo. Tudo em português.</pre>
+    </div>
+  </div>
+</section>
+
+<!-- 02 A JORNADA -->
+<section id="jornada" style="background:var(--bg-2);">
+  <div class="wrap">
+    <div class="rv"><span class="snum">02</span><h2 class="sec-h">A jornada de uma tarefa</h2>
+    <p class="lead">A mágica do Cowork: ele <b>sobe o nível</b> dos seus dados. Um dado solto vira planilha, vira dashboard, vira uma Skill que você repete pra sempre.</p></div>
+
+    <div class="journey rv">
+      <div class="jstep s1">
+        <div class="jn">1</div><div class="jt">Dado solto</div>
+        <div class="jbody">
+          <div class="mline a"></div><div class="mline b"></div><div class="mline c"></div><div class="mline d"></div>
+        </div>
+      </div>
+      <div class="jarrow">→</div>
+      <div class="jstep s2">
+        <div class="jn">2</div><div class="jt">Planilha</div>
+        <div class="jbody">
+          <div class="mgrid"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+      </div>
+      <div class="jarrow">→</div>
+      <div class="jstep s3">
+        <div class="jn">3</div><div class="jt">Dashboard</div>
+        <div class="jbody">
+          <div class="mbars"><i class="b1"></i><i class="b2"></i><i class="b3"></i><i class="b4"></i></div>
+        </div>
+      </div>
+      <div class="jarrow">→</div>
+      <div class="jstep s4">
+        <div class="jn">4</div><div class="jt">Skill</div>
+        <div class="jbody">
+          <div class="mskill">Skill ✓</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout rv"><b>Só dá no Cowork:</b> essa escada só sobe porque o Cowork <b>enxerga e edita os seus arquivos</b>, ele lê o dado solto, cria a planilha e o dashboard e salva a Skill na sua pasta. No chat comum, nada disso encosta nos seus arquivos.</div>
+
+    <div class="callout rv"><b>Dica de ouro:</b> peça o resultado <b>em HTML</b>, ele entende muito bem e cria algo bonito, pronto pra abrir no navegador.</div>
+
+    <div class="prompt rv">
+      <div class="pl"><span><span class="live">⚡ AGORA NO CLAUDE</span> A jornada · leads do Studio Aurora</span><button class="copy">Copiar</button></div>
+      <pre>Pega essas linhas de leads soltas que colei (vieram de e-mails) e organiza numa planilha limpa: nome, empresa, serviço de interesse, valor estimado, status. Depois transforma num dashboard em HTML com totais por serviço e por mês, e me diz onde estão minhas melhores oportunidades. No fim, vira isso numa Skill 'Relatório Aurora' pra eu repetir todo mês.</pre>
+    </div>
+  </div>
+</section>
+
+<!-- 03 ORGANIZAÇÃO, SEGURANÇA E CONTEXTO -->
+<section id="pastas">
+  <div class="wrap">
+    <div class="rv"><span class="snum">03</span><h2 class="sec-h">Organização, segurança e contexto</h2>
+    <p class="lead">Dê ao Cowork uma <b>casa organizada</b>. Uma pasta dedicada, subpastas por etapa e um <b>contexto.md</b> que ele lê no início de cada sessão. A pasta é tudo: é o sandbox dele e a memória do seu trabalho.</p></div>
+
+    <div class="tree rv">
+      <div class="row root"><span class="ic">📁</span> /studio-aurora</div>
+      <div class="row file ind1"><span class="ic">📄</span> contexto.md <span class="note">· quem é a Marina, tom de voz, regras</span></div>
+      <div class="row ind1"><span class="ic">📁</span> /inbox <span class="note">· leads e e-mails que chegam</span></div>
+      <div class="row ind1"><span class="ic">📁</span> /clientes <span class="note">· pasta por cliente ativo</span></div>
+      <div class="row ind1"><span class="ic">📁</span> /propostas <span class="note">· orçamentos e propostas</span></div>
+      <div class="row ind1"><span class="ic">📁</span> /entregas <span class="note">· diagnósticos e materiais prontos</span></div>
+      <div class="row ind1"><span class="ic">📁</span> /diario <span class="note">· resumos e tarefas agendadas</span></div>
+      <div class="row ind1"><span class="ic">📁</span> /arquivo <span class="note">· originais nunca são apagados, só movidos</span></div>
+    </div>
+
+    <div class="trio rv">
+      <div class="tcard">
+        <div class="ti"><svg width="22" height="24" viewBox="0 0 22 24" fill="none"><path d="M11 1L20 4v7c0 6-4 10-9 12C6 21 2 17 2 11V4l9-3z" stroke="#B06E4A" stroke-width="2" stroke-linejoin="round"/></svg></div>
+        <h4>Segurança = sandbox</h4>
+        <p>Você dá <b>uma única pasta</b> pro Claude. Ele não acessa o computador inteiro, só enxerga e mexe ali dentro. O resto da sua máquina fica fora do alcance.</p>
+      </div>
+      <div class="tcard">
+        <div class="ti"><svg width="22" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 4a2 2 0 012-2h8l8 8v8a2 2 0 01-2 2H5a2 2 0 01-2-2V4z" stroke="#B06E4A" stroke-width="2" stroke-linejoin="round"/><path d="M13 2v8h8" stroke="#B06E4A" stroke-width="2" stroke-linejoin="round"/></svg></div>
+        <h4>Contexto que persiste</h4>
+        <p>Ele <b>salva tudo na pasta</b> e depois <b>relê sempre</b>. O contexto.md mais os arquivos são o histórico do seu trabalho, cada sessão começa já sabendo onde você parou.</p>
+      </div>
+      <div class="tcard">
+        <div class="ti"><svg width="22" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2v20M2 12h20" stroke="#B06E4A" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="9" stroke="#B06E4A" stroke-width="2"/></svg></div>
+        <h4>Cache = economia</h4>
+        <p>Ele <b>não relê tudo a toda hora</b>. Guarda em cache o que já leu e só volta nos arquivos quando precisa, fica mais rápido e gasta menos.</p>
+      </div>
+    </div>
+
+    <div class="prompt rv">
+      <div class="pl"><span>Organizador de pasta</span><button class="copy">Copiar</button></div>
+      <pre>Leia todos os arquivos desta pasta. Identifique o tipo, renomeie com data e descrição (AAAA-MM-DD-tipo-descricao) e mova pra subpastas por tipo. Crie um contexto.md resumindo o que tem aqui. Mostre o plano antes de executar.</pre>
+    </div>
+
+    <div class="rv" style="margin-top:44px;"><span class="eyebrow">A dúvida que todo mundo trava</span><h3 style="font-size:clamp(1.5rem,4vw,2.2rem);color:var(--ink);margin-top:10px;">Onde mora o contexto?</h3>
+    <p class="lead" style="margin-top:10px;">De dentro de um projeto, o Claude não vê uma pasta de contexto "irmã". Por isso o contexto sobre <b>você</b> não vai numa pasta, vai nas <b>Instruções Globais</b>, que carregam em toda tarefa, em qualquer pasta.</p></div>
+    <div class="split rv">
+      <div class="col yes"><div class="lab">Sobre VOCÊ · sempre</div><h4>Instruções Globais</h4><p>Quem você é, tom e regras. Em Config › Cowork. Carregam em TODA tarefa, não importa a pasta.</p></div>
+      <div class="col yes" style="box-shadow:7px 7px 0 var(--green);"><div class="lab">Sobre o CLIENTE · na pasta</div><h4>cliente.md</h4><p>Um arquivo dentro da pasta de cada cliente. Carrega junto quando você abre aquela pasta.</p></div>
+    </div>
+    <div class="prompt rv">
+      <div class="pl"><span><span class="live">⚡ AGORA NO CLAUDE</span> Cola nas Instruções Globais</span><button class="copy">Copiar</button></div>
+      <pre>Sou Marina, fundadora do Studio Aurora, consultoria de branding pra pequenos negócios.
+Tom: caloroso, direto, sem jargão. Evite clichês de IA ("Claro!", "Com certeza!").
+Antes de executar, mostre o plano. Nunca apague originais, mova pra /arquivo.
+Nomeie arquivos como AAAA-MM-DD-tipo-descricao. Tudo em português.
+Quando eu abrir a pasta de um cliente, leia o cliente.md antes de começar.</pre>
+    </div>
+    <div class="callout rv"><b>E a Memória do Claude?</b> A Memória é automática ("talvez" lembra). As Instruções são escritas (ele lê sempre igual). Pra regra crítica e contexto de cliente, use o escrito, não confie no "talvez".</div>
+  </div>
+</section>
+
+<!-- 04 COMPUTER USE -->
+<section id="computer" style="background:var(--bg-2);">
+  <div class="wrap">
+    <div class="rv"><span class="snum">04</span><h2 class="sec-h">Computer Use</h2>
+    <p class="lead">Agora o Claude <b>controla o seu computador</b>: abre apps, navega e preenche coisas na <b>sua tela</b>. Mas ele segue uma <b>ordem de prioridade</b>: usa o caminho mais rápido e seguro primeiro, e só desce pra mexer no mouse e no teclado quando não tem outro jeito.</p></div>
+    <div class="ladder rv">
+      <div class="lstep top">
+        <div class="lr">1º</div>
+        <div class="lc"><h4>Conectores</h4><p>Ligações diretas (Gmail, Drive, Notion). O caminho oficial, sem mexer na tela.</p></div>
+        <div class="lspeed">Mais rápido</div>
+      </div>
+      <div class="lstep">
+        <div class="lr">2º</div>
+        <div class="lc"><h4>Browser · Claude no Chrome</h4><p>Ele navega sites por você quando não há conector.</p></div>
+        <div class="lspeed">Médio</div>
+      </div>
+      <div class="lstep">
+        <div class="lr">3º</div>
+        <div class="lc"><h4>Tela · mouse e teclado</h4><p>Controla apps de desktop direto, clicando e digitando. O último recurso.</p></div>
+        <div class="lspeed">Mais lento</div>
+      </div>
+    </div>
+    <div class="callout rv"><b>Honestidade:</b> Computer Use é um <b>preview de pesquisa</b>: pode errar e é mais lento. Não use com banco, senhas ou dados muito sensíveis. Prefira sempre conectores.</div>
+  </div>
+</section>
+
+<!-- 05 CLAUDE NO CHROME -->
+<section id="chrome">
+  <div class="wrap">
+    <div class="rv"><span class="snum">05</span><h2 class="sec-h">Claude no Chrome</h2>
+    <p class="lead">O Claude trabalha <b>dentro do navegador</b>: abre uma página, <b>lê o que está nela</b> e te traz o que importa. Ótimo pra pesquisa, por exemplo, <b>varrer o LinkedIn</b> e listar perfis ou conteúdos de um tema.</p></div>
+    <div class="browser rv">
+      <div class="bbar">
+        <div class="dots"><i></i><i></i><i></i></div>
+        <div class="url">linkedin.com/search · branding para pequenos negócios</div>
+      </div>
+      <div class="bbody">
+        <div class="bpage">
+          <div class="brow"><div class="av"></div><div class="bl"><i></i><i class="s"></i></div></div>
+          <div class="brow"><div class="av"></div><div class="bl"><i></i><i class="s"></i></div></div>
+          <div class="brow"><div class="av"></div><div class="bl"><i></i><i class="s"></i></div></div>
+        </div>
+        <div class="bscan">
+          <div class="eye"></div>
+          <span>Claude<br>lendo a página</span>
+        </div>
+      </div>
+    </div>
+    <div class="callout rv"><b>Seguro por padrão:</b> aqui ele só <b>lê e lista</b>, não dispara mensagem nem clica em "conectar". A ação de falar com alguém continua sendo sua.</div>
+    <div class="prompt rv">
+      <div class="pl"><span><span class="live">⚡ AGORA NO CLAUDE</span> Busca no LinkedIn · Studio Aurora</span><button class="copy">Copiar</button></div>
+      <pre>Abre o LinkedIn e me traz 10 perfis de donas de pequenos negócios (moda, decoração, gastronomia) que falam sobre identidade visual ou rebranding. Só pesquisa e lista: nome, cargo/negócio, cidade e o link do perfil, com uma frase do que postam. NÃO mande mensagem nem peça conexão, só me entrega a lista numa tabela.</pre>
+    </div>
+  </div>
+</section>
+
+<!-- 06 DISPATCH -->
+<section id="dispatch" style="background:var(--bg-2);">
+  <div class="wrap">
+    <div class="rv"><span class="snum">06</span><h2 class="sec-h">Dispatch</h2>
+    <p class="lead">Você está na rua, lembra de uma tarefa e <b>manda do celular</b>. O Claude <b>executa no seu desktop</b>, onde estão suas pastas e seus apps, e te avisa quando termina.</p></div>
+    <div class="dispatch rv">
+      <div class="dev">
+        <svg width="44" height="64" viewBox="0 0 44 64" fill="none"><rect x="3" y="3" width="38" height="58" rx="7" stroke="#14373C" stroke-width="3"/><rect x="9" y="11" width="26" height="38" rx="2" fill="#C4835E"/><circle cx="22" cy="56" r="2.5" fill="#14373C"/></svg>
+        <span>Celular</span><small>você manda a ordem</small>
+      </div>
+      <div class="disarrow"><span>→</span><small>executa remoto</small></div>
+      <div class="dev">
+        <svg width="74" height="64" viewBox="0 0 74 64" fill="none"><rect x="3" y="3" width="68" height="44" rx="5" stroke="#14373C" stroke-width="3"/><rect x="10" y="10" width="54" height="30" rx="2" fill="#14373C"/><rect x="28" y="50" width="18" height="6" fill="#14373C"/><rect x="22" y="56" width="30" height="4" rx="2" fill="#14373C"/></svg>
+        <span>Desktop</span><small>o trabalho acontece</small>
+      </div>
+    </div>
+    <div class="callout rv"><b>Na prática:</b> "Claude, prepara a proposta da reunião de amanhã e salva em /propostas." Você fecha o celular, quando chegar em casa, o arquivo já está na pasta certa.</div>
+  </div>
+</section>
+
+<!-- 07 AGENDADAS -->
+<section id="agendadas">
+  <div class="wrap">
+    <div class="rv"><span class="snum">07</span><h2 class="sec-h">Tarefas agendadas</h2>
+    <p class="lead">O nível mais alto de delegar: o Cowork <b>trabalha sozinho no horário marcado</b>, toda semana, e te entrega o resultado quando você acorda.</p></div>
+    <div class="sched rv">
+      <div class="clock">
+        <div class="face"></div>
+        <div class="loop"></div>
+        <div class="mh"></div>
+        <div class="hh"></div>
+        <div class="dot"></div>
+      </div>
+      <div class="sc">
+        <h4>Toda segunda · 8h</h4>
+        <p>Ele lê os leads novos, resume quem está quente e prepara a abordagem, antes do seu café.</p>
+        <span class="badge">↻ Recorrente</span>
+      </div>
+    </div>
+    <div class="prompt rv">
+      <div class="pl"><span><span class="live">⚡ AGORA NO CLAUDE</span> Tarefa agendada · Studio Aurora</span><button class="copy">Copiar</button></div>
+      <pre>Toda segunda às 8h: leia os leads novos em /inbox, resuma quem está quente e prepare a abordagem de cada um no meu tom. Salve em /diario e me mande o resumo.</pre>
+    </div>
+  </div>
+</section>
+
+<!-- DESAFIO -->
+<section id="desafio" style="background:var(--bg-2);">
+  <div class="wrap rv">
+    <div class="misscard">
+      <span class="eyebrow" style="color:var(--terra-l);">Mini-desafio do Módulo 04</span>
+      <h2>Delegue.<br><span>Vá tomar um café.</span></h2>
+      <div class="check">
+        <div class="ck"><div class="bx"></div><p><b>Crie a pasta /studio-aurora</b> organizada, com subpastas e contexto.md.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Rode a jornada:</b> gere o dashboard de leads em HTML.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Use o Chrome:</b> peça uma lista de 10 perfis no LinkedIn (só leitura).</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Agende 1 tarefa</b> recorrente (a do resumo de segunda).</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEASER -->
+<section class="teaser">
+  <div class="wrap rv">
+    <span class="pill">Módulo 05</span>
+    <h2><a href="2026-06-22-guia-modulo6-loops-e-agentes.html">Agora ele <span>se auto-corrige.</span></a></h2>
+    <p>Loops e Agentes: o Claude revisa o próprio trabalho, repete até acertar e coordena várias tarefas sem você no meio.</p>
+  </div>
+</section>
+
+<!-- CLOSE -->
+<section class="close">
+  <div class="wrap rv">
+    <h2>VOCÊ,<br><span>MULTIPLICADO.</span></h2>
+    <div class="sig">NewScale · @brusantanna.ai</div>
+  </div>
+</section>
+
+<div class="sign"><span>Claude com Profundidade · Módulo 04 · @brusantanna.ai</span><img src="logo-newscale.png" alt="NewScale" style="height:20px;filter:brightness(0) invert(1);opacity:.9;"></div>
+
+<script>
+const bar=document.getElementById('bar');
+addEventListener('scroll',()=>{const h=document.documentElement;bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';},{passive:true});
+document.querySelectorAll('.prompt').forEach(box=>{
+  const btn=box.querySelector('.copy'),pre=box.querySelector('pre');
+  if(!btn||!pre)return;
+  btn.addEventListener('click',async()=>{
+    try{await navigator.clipboard.writeText(pre.innerText.trim());}
+    catch(e){const r=document.createRange();r.selectNode(pre);getSelection().removeAllRanges();getSelection().addRange(r);document.execCommand('copy');getSelection().removeAllRanges();}
+    const o=btn.textContent;btn.textContent='Copiado ✓';btn.classList.add('done');
+    setTimeout(()=>{btn.textContent=o;btn.classList.remove('done');},1600);
+  });
+});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
