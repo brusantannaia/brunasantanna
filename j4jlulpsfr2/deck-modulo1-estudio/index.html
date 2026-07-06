@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<title>VIRADA IA: CLAUDE COM PROFUNDIDADE · Módulo 1 — A Fundação · Bruna Santanna · NEWSCALE</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="styles.css">
+<script src="deck-stage.js"></script>
+<style>
+  /* ── Sem itálicos — display em Anton ── */
+  em, i { font-style: normal; }
+  /* Anton (display) só fica legível em CAIXA ALTA — força maiúsculas nos
+     elementos que ainda usam a fonte de display inline. Frases já viraram Hanken. */
+  [style*="var(--serif)"] { text-transform: uppercase; letter-spacing: 0.005em; }
+  /* ── Extras Módulo 1 — A Fundação ───────────────────────────────────── */
+  @keyframes blink { 0%,49%{opacity:1;} 50%,100%{opacity:0;} }
+  @keyframes skillSweep { 0%{background-position:0% 0;} 100%{background-position:220% 0;} }
+  @keyframes floaty { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-12px);} }
+
+  /* texto base mais legível — nada abaixo de 20px em corpo */
+  .body-lg   { font-size:24px; line-height:1.6; }
+  .body      { font-size:21px; line-height:1.6; }
+  .cap       { font-size:17px; line-height:1.55; }
+  .label-sm  { font-family:var(--sans); font-size:14px; font-weight:600; letter-spacing:0.26em; text-transform:uppercase; }
+
+  /* faixas que permeiam */
+  @keyframes sweep { 0%{background-position:0% 0;} 100%{background-position:220% 0;} }
+  .perm-band {
+    border-radius:999px;
+    background-size:220% 100%;
+    animation:sweep 6s linear infinite;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .band-skill   { background:linear-gradient(90deg,var(--terracota) 0%,var(--terracota-soft) 24%,#FBEFE6 40%,var(--terracota-soft) 58%,var(--terracota) 82%,var(--terracota-soft) 100%); box-shadow:0 14px 40px rgba(193,122,90,0.42); }
+  .band-projeto { background:linear-gradient(90deg,#1f4f57 0%,#2c6670 26%,#5b8a8f 46%,#2c6670 66%,#1f4f57 92%); box-shadow:0 12px 34px rgba(20,55,60,0.5); }
+  .connector { width:2px; opacity:0.65; }
+
+  .chip { font-family:var(--sans); font-size:14px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; padding:8px 18px; border-radius:999px; }
+
+  /* fluxo */
+  .flow-chip {
+    font-family:var(--sans); font-weight:700; letter-spacing:0.18em; text-transform:uppercase;
+    padding:22px 0; border-radius:14px; text-align:center; font-size:26px;
+  }
+</style>
+</head>
+<body>
+<deck-stage width="1920" height="1080">
+
+<!-- ════════ ATO 1 — POR QUE ISSO IMPORTA ════════ -->
+
+<!-- 01 — CAPA -->
+<section class="bg-petroleo" data-screen-label="01 Capa">
+  <div class="slide-inner" style="justify-content:center; align-items:center; text-align:center;">
+    <div class="kicker seq" data-step="1" style="font-size:18px; margin-bottom:38px;">CLAUDE COM PROFUNDIDADE &nbsp;·&nbsp; MÓDULO 1 DE 8 &nbsp;·&nbsp; A FUNDAÇÃO</div>
+    <h1 class="seq" data-step="1" style="font-family:var(--serif); font-weight:700; font-size:132px; color:var(--white); letter-spacing:0.04em; line-height:0.98;">VIRADA IA<br><span style="color:var(--terracota-soft);">Claude com profundidade</span></h1>
+    <div class="divider-line seq-line" data-step="2" style="width:200px; margin:48px auto; background:var(--terracota);"></div>
+    <div class="seq" data-step="2" style="font-family:var(--sans); font-size:38px; color:rgba(255,255,255,0.85);">Módulo 1 — Como o Claude pensa e como falar com ele</div>
+    <div class="seq" data-step="3" style="margin-top:58px; display:flex; align-items:center; justify-content:center; gap:46px;">
+      <img src="logo-newscale.png" alt="NewScale" style="height:62px; filter:brightness(0) invert(1); opacity:0.95;">
+      <span style="width:1px; height:48px; background:rgba(255,255,255,0.22);"></span>
+      <img src="logo-claude.svg" alt="Claude" style="height:46px; filter:brightness(0) invert(1); opacity:0.95;">
+    </div>
+    <div class="seq" data-step="3" style="position:absolute; left:0; right:0; bottom:40px; font-family:var(--sans); font-size:24px; letter-spacing:0.32em; text-transform:uppercase; color:rgba(255,255,255,0.75);">Bruna Santanna &nbsp;·&nbsp; NEWSCALE</div>
+  </div>
+  <div class="slide-num">01 / 21</div>
+</section>
+
+<!-- 02 — QUEM SOU EU -->
+<section class="bg-offwhite" data-screen-label="02 Quem conduz">
+  <div class="slide-inner">
+    <div style="display:grid; grid-template-columns: 1fr 600px; gap:72px; flex:1; align-items:stretch;">
+
+      <!-- COLUNA TEXTO -->
+      <div style="display:flex; flex-direction:column; justify-content:center;">
+        <div class="kicker seq" data-step="1" style="font-size:16px;">QUEM CONDUZ ESSA FORMAÇÃO</div>
+        <h2 class="slide-title seq" data-step="1" style="margin-top:16px; font-size:82px; line-height:0.96;">BRUNA<br>SANTANNA</h2>
+        <div class="slide-subtitle seq" data-step="1" style="margin-top:18px; font-size:28px; color:var(--taupe);">Estrategista e mentora de Inteligência Artificial</div>
+        <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:26px;"></div>
+
+        <div class="body-lg seq" data-step="2" style="color:var(--ink); margin-top:40px; max-width:740px;">Empresária há mais de 10 anos e co-fundadora da NEWSCALE Consulting AI. Em 2024 mergulhou em IA e nunca mais parou.</div>
+
+        <!-- FAIXA DE PROVAS -->
+        <div class="seq" data-step="3" style="display:flex; gap:20px; margin-top:36px; max-width:740px;">
+          <div style="background:var(--white); border:1px solid rgba(139,115,85,0.16); border-radius:14px; padding:24px 30px; flex:1;">
+            <div style="font-family:var(--serif); font-weight:800; font-size:56px; color:var(--terracota); line-height:0.88;">10<span style="font-size:30px;">+</span></div>
+            <div style="font-family:var(--sans); font-size:16px; letter-spacing:0.03em; color:var(--taupe); margin-top:10px;">anos como empresária</div>
+          </div>
+          <div style="background:var(--petroleo); border-radius:14px; padding:24px 30px; flex:1.35; box-shadow:0 18px 44px rgba(20,55,60,0.16);">
+            <div style="font-family:var(--serif); font-weight:800; font-size:56px; color:var(--terracota-soft); line-height:0.88;">1.000<span style="font-size:30px;">+</span></div>
+            <div style="font-family:var(--sans); font-size:16px; letter-spacing:0.03em; color:rgba(255,255,255,0.72); margin-top:10px;">profissionais formados</div>
+          </div>
+        </div>
+        <div class="seq" data-step="3" style="margin-top:18px; font-family:var(--sans); font-size:18px; color:var(--taupe); letter-spacing:0.02em;">Já formou times em <strong style="color:var(--petroleo);">Magalu</strong>, <strong style="color:var(--petroleo);">OLX</strong> e <strong style="color:var(--petroleo);">B3</strong>.</div>
+
+        <!-- CITAÇÃO -->
+        <div class="seq" data-step="4" style="margin-top:42px; max-width:740px; font-family:var(--sans); font-weight:600; font-size:30px; color:var(--terracota); line-height:1.4; padding-left:30px; border-left:3px solid var(--terracota);">"Vocês são o cérebro. Eu mostro como destravar o trabalho braçal pra esse cérebro pensar mais."</div>
+      </div>
+
+      <!-- COLUNA FOTO — altura cheia -->
+      <div class="seq-zoom" data-step="2" style="position:relative; border-radius:16px; overflow:hidden; box-shadow:0 34px 78px rgba(20,55,60,0.2);">
+        <img src="bruna.jpg" alt="Bruna Santanna" style="width:100%; height:100%; object-fit:cover; object-position:center top;">
+        <div style="position:absolute; left:0; right:0; bottom:0; padding:30px 34px; background:linear-gradient(to top, rgba(14,40,44,0.92), rgba(14,40,44,0)); display:flex; align-items:flex-end; justify-content:space-between;">
+          <div style="font-family:var(--sans); font-weight:700; font-size:27px; color:#fff;">Bruna Santanna</div>
+          <div style="font-family:var(--sans); font-size:14px; letter-spacing:0.22em; text-transform:uppercase; color:var(--terracota-soft);">NEWSCALE</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="logo-micro">NS</div>
+  <div class="slide-num">02 / 21</div>
+</section>
+
+<!-- 03 — O QUE VOCÊ GANHA HOJE + MAPA DAS 3 AULAS -->
+<section class="bg-offwhite" data-screen-label="03 O que você ganha hoje">
+  <div class="slide-inner">
+    <div class="kicker seq" data-step="1" style="font-size:16px;">A PROMESSA DO CURSO</div>
+    <h2 class="slide-title seq" data-step="1" style="margin-top:16px;">O QUE VOCÊ LEVA DESTE CURSO</h2>
+    <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:28px;"></div>
+
+    <div style="display:grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(2, 1fr); gap:24px; margin-top:40px; flex:1;">
+      <div class="seq" data-step="2" style="background:var(--white); border:1px solid rgba(139,115,85,0.15); border-radius:14px; padding:48px 52px; display:flex; flex-direction:column; justify-content:space-between;">
+        <div class="num-big" style="font-size:72px;">01</div>
+        <div style="font-family:var(--sans); font-weight:700; font-size:44px; color:var(--petroleo); line-height:1.15;">Como a IA realmente pensa</div>
+      </div>
+      <div class="seq" data-step="3" style="background:var(--white); border:1px solid rgba(139,115,85,0.15); border-radius:14px; padding:48px 52px; display:flex; flex-direction:column; justify-content:space-between;">
+        <div class="num-big" style="font-size:72px;">02</div>
+        <div style="font-family:var(--sans); font-weight:700; font-size:44px; color:var(--petroleo); line-height:1.15;">As 5 formas de usar o Claude</div>
+      </div>
+      <div class="seq" data-step="4" style="background:var(--white); border:1px solid rgba(139,115,85,0.15); border-radius:14px; padding:48px 52px; display:flex; flex-direction:column; justify-content:space-between;">
+        <div class="num-big" style="font-size:72px;">03</div>
+        <div style="font-family:var(--sans); font-weight:700; font-size:44px; color:var(--petroleo); line-height:1.15;">Como falar com o Claude</div>
+      </div>
+      <div class="seq" data-step="5" style="background:var(--terracota); color:var(--white); border-radius:14px; padding:48px 52px; box-shadow:0 22px 56px rgba(193,122,90,0.28); display:flex; flex-direction:column; justify-content:space-between;">
+        <div style="font-family:var(--serif); font-weight:700; font-size:72px; line-height:0.9;">04</div>
+        <div style="font-family:var(--sans); font-weight:700; font-size:44px; line-height:1.15;">O Claude que te conhece</div>
+      </div>
+    </div>
+
+    <div class="seq" data-step="6" style="margin-top:28px; display:flex; align-items:stretch; border:1px solid rgba(139,115,85,0.2); border-radius:14px; overflow:hidden;">
+      <div style="flex:1; padding:30px 36px; background:var(--petroleo); color:var(--white);">
+        <div class="label-sm" style="color:var(--terracota-soft); margin-bottom:10px; font-size:13px;">Módulo 1 · você está aqui</div>
+        <div style="font-family:var(--sans); font-size:25px; font-weight:600;">A Fundação — como o Claude pensa e como falar com ele</div>
+      </div>
+      <div style="flex:1; padding:30px 36px; background:var(--white);">
+        <div class="label-sm" style="color:var(--taupe); margin-bottom:10px; font-size:13px;">Módulos 2–4</div>
+        <div style="font-family:var(--sans); font-size:25px; font-weight:600; color:var(--petroleo);">Projetos, Skills, Conectores e Design</div>
+      </div>
+      <div style="flex:1; padding:30px 36px; background:var(--white); border-left:1px solid rgba(139,115,85,0.15);">
+        <div class="label-sm" style="color:var(--taupe); margin-bottom:10px; font-size:13px;">Módulos 5–8</div>
+        <div style="font-family:var(--sans); font-size:25px; font-weight:600; color:var(--petroleo);">Cowork, Loops, Agentes e Claude Code</div>
+      </div>
+    </div>
+  </div>
+  <div class="logo-micro">NS</div>
+  <div class="slide-num">03 / 21</div>
+</section>
+
+<!-- 04 — PRA QUEM É ESTE CURSO -->
+<section class="bg-creme" data-screen-label="04 Pra quem e este curso">
+  <div class="slide-inner">
+    <div class="kicker seq" data-step="1" style="font-size:16px;">O PONTO DE PARTIDA</div>
+    <h2 class="slide-title seq" data-step="1" style="margin-top:12px; font-size:60px;">PRA QUEM É ESTE CURSO</h2>
+    <div class="slide-subtitle seq" data-step="1" style="margin-top:12px; font-size:26px;">Você já usa IA. O salto aqui é <em>profundidade</em>.</div>
+    <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:18px;"></div>
+
+    <!-- KPIs -->
+    <div class="seq" data-step="2" style="display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-top:30px;">
+      <div style="background:var(--white); border:1px solid rgba(139,115,85,0.15); border-radius:14px; padding:26px 28px;">
+        <div class="num-big" style="font-size:60px;">8</div>
+        <div style="font-family:var(--sans); font-weight:700; font-size:24px; color:var(--petroleo); margin-top:6px;">módulos</div>
+      </div>
+      <div style="background:var(--white); border:1px solid rgba(139,115,85,0.15); border-radius:14px; padding:26px 28px;">
+        <div class="num-big" style="font-size:60px;">25</div>
+        <div style="font-family:var(--sans); font-weight:700; font-size:24px; color:var(--petroleo); margin-top:6px;">aulas curtas</div>
+      </div>
+      <div style="background:var(--white); border:1px solid rgba(139,115,85,0.15); border-radius:14px; padding:26px 28px;">
+        <div class="num-big" style="font-size:60px;">+30</div>
+        <div style="font-family:var(--sans); font-weight:700; font-size:24px; color:var(--petroleo); margin-top:6px;">prompts prontos</div>
+      </div>
+      <div style="background:var(--terracota); color:var(--white); border-radius:14px; padding:26px 28px; box-shadow:0 18px 44px rgba(193,122,90,0.28);">
+        <div style="font-family:var(--serif); font-weight:700; font-size:60px; line-height:1;">100%</div>
+        <div style="font-family:var(--sans); font-weight:700; font-size:24px; margin-top:6px;">mão na massa</div>
+      </div>
+    </div>
+
+    <!-- 3 indices de letramento -->
+    <div class="seq" data-step="3" style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:22px;">
+      <div style="background:var(--white); border:1px solid rgba(139,115,85,0.15); border-radius:14px; padding:24px 28px;">
+        <div class="label-sm" style="color:var(--taupe);">Você vai sair sabendo</div>
+        <div style="font-family:var(--serif); font-weight:700; font-size:50px; color:var(--sage);">01</div>
+        <div style="font-family:var(--sans); font-size:19px; color:var(--taupe);">usar o Claude com profundidade</div>
+      </div>
+      <div style="background:var(--white); border:2px solid var(--terracota); border-radius:14px; padding:24px 28px; box-shadow:0 16px 40px rgba(193,122,90,0.18); position:relative;">
+        <div style="position:absolute; top:-14px; left:24px; background:var(--terracota); color:#fff; font-size:12px; letter-spacing:0.2em; text-transform:uppercase; padding:6px 16px; border-radius:12px;">destaque</div>
+        <div class="label-sm" style="color:var(--terracota);">O pulo do gato</div>
+        <div style="font-family:var(--serif); font-weight:700; font-size:50px; color:var(--terracota);">02</div>
+        <div style="font-family:var(--sans); font-size:19px; color:var(--taupe);">fazer o Claude trabalhar por você</div>
+      </div>
+      <div style="background:var(--white); border:1px solid rgba(139,115,85,0.15); border-radius:14px; padding:24px 28px;">
+        <div class="label-sm" style="color:var(--taupe);">E também</div>
+        <div style="font-family:var(--serif); font-weight:700; font-size:50px; color:var(--petroleo);">03</div>
+        <div style="font-family:var(--sans); font-size:19px; color:var(--taupe);">criar com critério e segurança</div>
+      </div>
+    </div>
+
+    <!-- faixa: voces pediram -->
+    <div class="seq" data-step="4" style="margin-top:22px; background:var(--petroleo); border-radius:14px; padding:22px 34px; display:flex; align-items:center; gap:22px;">
+      <span class="label-sm" style="color:var(--terracota-soft); flex-shrink:0;">Você vai aplicar em</span>
+      <span style="font-family:var(--sans); font-weight:600; font-size:23px; color:#fff; line-height:1.4;">conteúdo &nbsp;·&nbsp; propostas e vendas &nbsp;·&nbsp; atendimento ao cliente &nbsp;·&nbsp; finanças do negócio &nbsp;·&nbsp; operacional</span>
+    </div>
+  </div>
+  <div class="logo-micro">NS</div>
+  <div class="slide-num">04 / 21</div>
+</section>
+
+<!-- 05 — A PERGUNTA QUE MUDA TUDO -->
+<section class="bg-petroleo" data-screen-label="05 A pergunta">
+  <div class="slide-inner" style="justify-content:center; align-items:center; text-align:center;">
+    <div class="kicker seq" data-step="1" style="font-size:16px; margin-bottom:56px;">A VIRADA</div>
+
+    <div class="seq" data-step="1" style="margin-bottom:26px;">
+      <div style="font-family:var(--sans); font-size:56px; color:rgba(255,255,255,0.34); position:relative; display:inline-block;">
+        "A IA vai me substituir?"
+        <div class="seq-line" data-step="2" style="position:absolute; top:52%; left:0; right:0; height:3px; background:var(--terracota);"></div>
+      </div>
+      <div class="label-sm" style="color:rgba(255,255,255,0.35); margin-top:18px; font-size:15px;">Pergunta errada</div>
+    </div>
+
+    <div class="divider-line seq-line" data-step="3" style="width:140px; margin:54px auto; background:var(--terracota);"></div>
+
+    <div class="seq" data-step="3">
+      <div style="font-family:var(--serif); font-weight:700; font-size:128px; color:var(--white); line-height:1.04; letter-spacing:0.02em;">Como a <span style="color:var(--terracota-soft); ">IA</span> me multiplica?</div>
+      <div class="label-sm" style="color:var(--terracota-soft); margin-top:32px; font-size:15px;">A pergunta certa</div>
+    </div>
+
+    <div class="seq" data-step="4" style="margin-top:64px; font-family:var(--sans); font-size:28px; color:rgba(255,255,255,0.7);">Multiplica no que <em style="color:var(--terracota-soft);">só você faz</em>.</div>
+  </div>
+  <div class="logo-micro" style="color:rgba(255,255,255,0.4);">NS</div>
+  <div class="slide-num" style="color:rgba(255,255,255,0.4);">05 / 21</div>
+</section>
+
+<!-- 06 — OS 3 PILARES -->
+<section class="bg-offwhite" data-screen-label="06 Os 3 pilares">
+  <div class="slide-inner">
+    <div class="kicker seq" data-step="1" style="font-size:16px;">FRAMEWORK BASE</div>
+    <h2 class="slide-title seq" data-step="1" style="margin-top:14px;">OS 3 PILARES</h2>
+    <div class="slide-subtitle seq" data-step="1" style="margin-top:14px; font-size:28px;">Tudo que o Claude faz pelo seu trabalho cabe em três caixas.</div>
+    <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:24px;"></div>
+
+    <div style="display:grid; grid-template-columns: 1fr 1.12fr 1fr; gap:30px; align-items:end; margin-top:auto; padding-bottom:24px;">
+      <div class="seq" data-step="2" style="background:var(--white); border:1px solid rgba(139,115,85,0.15); border-radius:14px; padding:42px 36px; min-height:540px; display:flex; flex-direction:column;">
+        <div class="label-sm" style="color:var(--terracota);">Pilar 01</div>
+        <div style="font-family:var(--serif); font-weight:700; font-size:86px; color:var(--petroleo); line-height:0.96; margin:24px 0;">MAIS<br>RÁPIDO</div>
+        <div style="display:flex; align-items:baseline; gap:14px;"><span style="font-family:var(--serif); font-weight:700; font-size:80px; color:var(--terracota);">10×</span><span class="cap" style="color:var(--taupe); text-transform:uppercase; letter-spacing:0.12em; font-size:18px;">em 10%<br>do tempo</span></div>
+        <div style="margin-top:auto; padding-top:24px; border-top:1px solid rgba(139,115,85,0.15); font-family:var(--sans); font-size:26px; color:var(--taupe); line-height:1.5;">Legenda de Instagram, e-mail pra cliente, resumo de reunião, primeira versão da proposta.</div>
+      </div>
+
+      <div class="seq" data-step="3" style="background:var(--terracota); color:var(--white); border-radius:14px; padding:50px 40px; min-height:620px; display:flex; flex-direction:column; box-shadow:0 32px 80px rgba(193,122,90,0.34); position:relative;">
+        <div style="position:absolute; top:-15px; left:50%; transform:translateX(-50%); background:var(--petroleo); color:var(--white); font-size:12px; letter-spacing:0.26em; text-transform:uppercase; padding:9px 24px; border-radius:14px; white-space:nowrap;">★ o mais subestimado</div>
+        <div class="label-sm" style="color:rgba(255,255,255,0.85);">Pilar 02</div>
+        <div style="font-family:var(--serif); font-weight:700; font-size:116px; color:var(--white); line-height:0.96; margin:26px 0;">MELHOR</div>
+        <div style="display:flex; align-items:baseline; gap:14px; margin-top:4px;"><span style="font-family:var(--sans); font-weight:700; font-size:62px; color:rgba(255,255,255,0.95);">consultor sênior</span><span class="cap" style="color:rgba(255,255,255,0.8); text-transform:uppercase; letter-spacing:0.12em; font-size:18px;">· 24h</span></div>
+        <div style="margin-top:auto; padding-top:26px; border-top:1px solid rgba(255,255,255,0.25); font-family:var(--sans); font-size:26px; color:rgba(255,255,255,0.95); line-height:1.5;">Analisar seus números de vendas, revisar um contrato, achar o furo na sua precificação.</div>
+      </div>
+
+      <div class="seq" data-step="4" style="background:var(--white); border:1px solid rgba(139,115,85,0.15); border-radius:14px; padding:42px 36px; min-height:540px; display:flex; flex-direction:column;">
+        <div class="label-sm" style="color:var(--terracota);">Pilar 03</div>
+        <div style="font-family:var(--serif); font-weight:700; font-size:86px; color:var(--petroleo); line-height:0.96; margin:24px 0;">NOVO</div>
+        <div style="display:flex; align-items:baseline; gap:12px;"><span style="font-family:var(--serif); font-weight:700; font-size:80px; color:var(--terracota);">0→1</span><span class="cap" style="color:var(--taupe); text-transform:uppercase; letter-spacing:0.12em; font-size:18px;">do impossível<br>ao feito</span></div>
+        <div style="margin-top:auto; padding-top:24px; border-top:1px solid rgba(139,115,85,0.15); font-family:var(--sans); font-size:26px; color:var(--taupe); line-height:1.5;">Um dashboard do seu negócio, uma landing page, uma calculadora de orçamento — sem programar.</div>
+      </div>
+    </div>
+
+    <div class="anchor seq" data-step="5" style="margin-top:14px; text-align:center; font-size:24px;">Tudo cai em um destes três. <em>O pilar 2 é o que quase ninguém usa.</em></div>
+  </div>
+  <div class="logo-micro">NS</div>
+  <div class="slide-num">06 / 21</div>
+</section>
+
+<!-- ════════ ATO 2 — COMO A IA PENSA ════════ -->
+
+<!-- 07 — COMO A IA PENSA + POR QUE O CLAUDE -->
+<section class="bg-offwhite" data-screen-label="07 Como a IA pensa">
+  <div class="slide-inner">
+    <div class="kicker seq" data-step="1" style="font-size:16px;">DESMISTIFICANDO</div>
+    <h2 class="slide-title seq" data-step="1" style="margin-top:14px;">COMO A IA PENSA</h2>
+    <div class="slide-subtitle seq" data-step="1" style="margin-top:14px; font-size:28px;">Não é mágica. É previsão da próxima palavra — com muita potência.</div>
+    <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:24px;"></div>
+
+    <div style="display:grid; grid-template-columns: 1.15fr 1fr; gap:60px; margin-top:48px; flex:1; align-items:center;">
+      <div>
+        <div class="seq" data-step="2" style="background:var(--white); border:1px solid rgba(139,115,85,0.15); border-radius:12px; padding:30px 34px; margin-bottom:26px;">
+          <div style="font-family:var(--mono); font-size:21px; color:var(--ink); line-height:1.6;">"A melhor estratégia de conteúdo para o meu negócio é<span style="display:inline-block; width:13px; height:24px; background:var(--terracota); margin-left:5px; vertical-align:middle; animation:blink 1.2s infinite;"></span>"</div>
+        </div>
+        <div class="seq" data-step="3" style="display:flex; flex-direction:column; gap:12px;">
+          <div style="display:grid; grid-template-columns:74px 1fr 100px; gap:18px; align-items:center; padding:14px 22px; background:rgba(193,122,90,0.1); border-radius:8px; border-left:4px solid var(--terracota);">
+            <span style="font-family:var(--mono); font-size:18px; color:var(--terracota);">38%</span>
+            <span style="font-family:var(--sans); font-size:23px; color:var(--ink);">uma dica genérica que serve pra qualquer um</span>
+            <span style="height:8px; background:var(--terracota); border-radius:4px;"></span>
+          </div>
+          <div style="display:grid; grid-template-columns:74px 1fr 100px; gap:18px; align-items:center; padding:14px 22px;">
+            <span style="font-family:var(--mono); font-size:18px; color:var(--taupe);">24%</span>
+            <span style="font-family:var(--sans); font-size:21px; color:var(--taupe);">o que mais aparece em blog de marketing</span>
+            <span style="height:6px; background:var(--taupe-soft); border-radius:4px; width:62%;"></span>
+          </div>
+          <div style="display:grid; grid-template-columns:74px 1fr 100px; gap:18px; align-items:center; padding:14px 22px;">
+            <span style="font-family:var(--mono); font-size:18px; color:var(--taupe);">17%</span>
+            <span style="font-family:var(--sans); font-size:21px; color:var(--taupe);">uma tática que já saiu de moda</span>
+            <span style="height:6px; background:var(--taupe-soft); border-radius:4px; width:40%; opacity:0.7;"></span>
+          </div>
+        </div>
+        <div class="seq" data-step="4" style="margin-top:26px; font-family:var(--sans); font-size:24px; color:var(--taupe); line-height:1.5; padding-left:24px; border-left:3px solid rgba(139,115,85,0.3);">Ela não <em>sabe</em> a resposta. Ela prevê a palavra mais provável. Por isso: alucina, tem viés, e é proporcional ao que você dá.</div>
+      </div>
+
+      <div class="seq" data-step="5" style="background:var(--petroleo); border-radius:16px; padding:48px 44px; box-shadow:0 26px 64px rgba(20,55,60,0.22);">
+        <img src="logo-claude.svg" alt="Claude" style="height:52px; filter:brightness(0) invert(1);">
+        <div style="font-family:var(--sans); font-weight:700; font-size:40px; color:var(--white); margin:26px 0 8px;">Por que o Claude?</div>
+        <div style="width:46px; height:2px; background:var(--terracota); margin-bottom:30px;"></div>
+        <div style="display:flex; flex-direction:column; gap:24px;">
+          <div style="font-family:var(--sans); font-weight:700; font-size:25px; color:var(--terracota-soft);">Projetos com memória</div>
+          <div style="font-family:var(--sans); font-weight:700; font-size:25px; color:var(--terracota-soft);">Skills, Cowork e Code</div>
+          <div style="font-family:var(--sans); font-weight:700; font-size:25px; color:var(--terracota-soft);">Melhor em escrita — mais natural</div>
+          <div style="font-family:var(--sans); font-weight:700; font-size:25px; color:var(--terracota-soft);">Código e dados — sem precisar programar</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="logo-micro">NS</div>
+  <div class="slide-num">07 / 21</div>
+</section>
+
+<!-- 08 — OS LIMITES DA IA -->
+<section class="bg-terracota" data-screen-label="08 Os limites da IA">
+  <div class="slide-inner">
+    <div class="kicker seq" data-step="1" style="color:rgba(255,255,255,0.9); font-size:16px;">OS LIMITES DA IA</div>
+    <h2 class="slide-title seq" data-step="1" style="margin-top:14px; color:var(--white);">ALUCINAÇÃO, VIESES E SEGURANÇA</h2>
+    <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:28px; background:var(--white);"></div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:24px; margin-top:50px; flex:1;">
+      <div class="seq" data-step="2" style="background:rgba(255,255,255,0.96); border-radius:14px; padding:38px 42px; display:flex; flex-direction:column;">
+        <div style="display:flex; align-items:center; gap:16px; margin-bottom:16px;"><span style="width:44px; height:44px; border-radius:50%; background:var(--terracota); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:22px;">!</span><span style="font-family:var(--sans); font-weight:700; font-size:34px; color:var(--terracota);">Alucinação</span></div>
+        <div class="body" style="color:var(--ink);">Quando não tem dado, a IA inventa — com confiança total. <strong>Sempre valide número, nome, prazo e fonte.</strong></div>
+      </div>
+      <div class="seq" data-step="3" style="background:rgba(255,255,255,0.96); border-radius:14px; padding:38px 42px; display:flex; flex-direction:column;">
+        <div style="display:flex; align-items:center; gap:16px; margin-bottom:16px;"><span style="width:44px; height:44px; border-radius:50%; background:var(--taupe); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:22px;">?</span><span style="font-family:var(--sans); font-weight:700; font-size:34px; color:var(--taupe);">Vieses</span></div>
+        <div class="body" style="color:var(--ink);">A IA reflete os dados que recebeu — não é neutra. Use como ponto de partida, <strong>nunca como palavra final.</strong></div>
+      </div>
+      <div class="seq" data-step="4" style="background:rgba(255,255,255,0.96); border-radius:14px; padding:38px 42px; border-left:6px solid var(--sage); display:flex; flex-direction:column;">
+        <div style="display:flex; align-items:center; gap:16px; margin-bottom:16px;"><span style="width:44px; height:44px; border-radius:50%; background:var(--sage); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:22px;">S</span><span style="font-family:var(--sans); font-weight:700; font-size:34px; color:var(--sage);">Segurança</span></div>
+        <div class="body" style="color:var(--ink);"><strong>Você lida com dados de clientes</strong> — CPF, valores, contratos. Cuidado com o que sobe; use só plano pago e anonimize quando der.</div>
+      </div>
+      <div class="seq" data-step="5" style="background:var(--petroleo); border-radius:14px; padding:38px 42px; display:flex; flex-direction:column; justify-content:center;">
+        <div class="label-sm" style="color:var(--terracota-soft); margin-bottom:18px;">Como usar bem</div>
+        <div class="body" style="color:rgba(255,255,255,0.7); margin-bottom:14px;"><span style="color:var(--terracota-soft);">✕</span> &nbsp;Pedir que a IA pense por você e assinar embaixo.</div>
+        <div class="body" style="color:var(--white);"><span style="color:var(--sage);">✓</span> &nbsp;Usar pra organizar e revisar — <strong>você decide e assina.</strong></div>
+      </div>
+    </div>
+
+    <div class="anchor seq" data-step="6" style="margin-top:26px; text-align:center; color:var(--white); font-size:26px;">A IA amplifica quem pensa criticamente. <em>Use para acelerar — você decide e assina.</em></div>
+  </div>
+  <div class="logo-micro" style="color:rgba(255,255,255,0.55);">NS</div>
+  <div class="slide-num" style="color:rgba(255,255,255,0.55);">08 / 21</div>
+</section>
+
+<!-- 09 — POR QUE O CLAUDE -->
+<section class="bg-petroleo" data-screen-label="09 Por que o Claude">
+  <div class="slide-inner">
+    <div class="kicker seq" data-step="1" style="font-size:16px;">NÃO É SÓ MAIS UMA IA</div>
+    <h2 class="slide-title seq" data-step="1" style="margin-top:14px; color:var(--white);">POR QUE O CLAUDE</h2>
+    <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:24px; background:var(--terracota);"></div>
+    <div class="seq" data-step="1" style="margin-top:26px; font-family:var(--sans); font-weight:600; font-size:36px; color:var(--terracota-soft); line-height:1.25;">A maioria das IAs responde. O Claude também <span style="color:#fff;">executa.</span></div>
+
+    <div style="display:grid; grid-template-columns:1fr 1.05fr; gap:54px; margin-top:46px; flex:1; align-items:center;">
+
+      <!-- ESQUERDA — PENSA → FAZ -->
+      <div>
+        <div class="seq" data-step="2" style="display:flex; align-items:center; gap:24px; margin-bottom:34px;">
+          <span style="font-family:var(--serif); font-weight:700; font-size:30px; letter-spacing:0.14em; padding:18px 42px; border-radius:999px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.14); color:rgba(255,255,255,0.4);">PENSA</span>
+          <span style="font-size:44px; color:var(--terracota); filter:drop-shadow(0 0 16px rgba(193,122,90,0.75)); line-height:1;">&#8594;</span>
+          <span style="font-family:var(--serif); font-weight:700; font-size:30px; letter-spacing:0.14em; padding:18px 46px; border-radius:999px; background:var(--terracota); color:#fff; box-shadow:0 14px 40px rgba(193,122,90,0.5);">FAZ</span>
+        </div>
+        <div class="seq" data-step="2" style="font-family:var(--sans); font-size:23px; line-height:1.65; color:rgba(255,255,255,0.82);">Uma IA comum para na resposta — te diz <strong style="color:#fff;">como</strong> fazer. Um agente <strong style="color:var(--terracota-soft);">executa</strong>: abre seus arquivos, monta o entregável e te devolve pronto. Você revisa e assina.</div>
+      </div>
+
+      <!-- DIREITA — CARD HERÓI -->
+      <div class="seq" data-step="3" style="background:rgba(255,255,255,0.04); border:2px solid var(--terracota); border-radius:18px; padding:40px 44px; box-shadow:0 26px 66px rgba(193,122,90,0.24);">
+        <div style="font-family:var(--serif); font-weight:800; font-size:31px; color:#fff; letter-spacing:0.03em; line-height:1.1; margin-bottom:28px;">UM AGENTE QUE TRABALHA POR VOCÊ</div>
+        <div style="display:flex; flex-direction:column; gap:22px;">
+          <div style="display:flex; gap:18px; align-items:flex-start;">
+            <span style="flex-shrink:0; width:32px; height:32px; border-radius:9px; background:var(--terracota); display:flex; align-items:center; justify-content:center; color:#fff; font-size:17px; font-weight:700;">&#9776;</span>
+            <div style="font-family:var(--sans); font-size:20px; line-height:1.5; color:rgba(255,255,255,0.84);"><strong style="color:#fff;">Trabalha nos seus arquivos (Cowork)</strong> — a planilha de vendas vira o relatório do mês pronto.</div>
+          </div>
+          <div style="display:flex; gap:18px; align-items:flex-start;">
+            <span style="flex-shrink:0; width:32px; height:32px; border-radius:9px; background:var(--terracota); display:flex; align-items:center; justify-content:center; color:#fff; font-size:16px; font-weight:700;">&lt;/&gt;</span>
+            <div style="font-family:var(--sans); font-size:20px; line-height:1.5; color:rgba(255,255,255,0.84);"><strong style="color:#fff;">Constrói ferramentas (Code)</strong> — um dashboard do seu negócio, sem você programar.</div>
+          </div>
+          <div style="display:flex; gap:18px; align-items:flex-start;">
+            <span style="flex-shrink:0; width:32px; height:32px; border-radius:9px; background:var(--terracota); display:flex; align-items:center; justify-content:center; color:#fff; font-size:17px; font-weight:700;">&#10003;</span>
+            <div style="font-family:var(--sans); font-size:20px; line-height:1.5; color:rgba(255,255,255,0.84);"><strong style="color:#fff;">Executa e confere o próprio trabalho</strong> — faz, revisa e entrega; você decide e assina.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAIXA DE APOIO — SAGE -->
+    <div class="seq" data-step="4" style="margin-top:28px; display:grid; grid-template-columns:repeat(3,1fr); gap:18px;">
+      <div style="background:rgba(125,139,122,0.2); border:1px solid rgba(125,139,122,0.42); border-radius:12px; padding:22px 26px;">
+        <div style="font-family:var(--sans); font-weight:700; font-size:21px; color:#fff; margin-bottom:6px;">Projetos com memória</div>
+        <div style="font-family:var(--sans); font-size:16px; color:rgba(255,255,255,0.6); line-height:1.45;">o Claude que já conhece o seu negócio</div>
+      </div>
+      <div style="background:rgba(125,139,122,0.2); border:1px solid rgba(125,139,122,0.42); border-radius:12px; padding:22px 26px;">
+        <div style="font-family:var(--sans); font-weight:700; font-size:21px; color:#fff; margin-bottom:6px;">Skills</div>
+        <div style="font-family:var(--sans); font-size:16px; color:rgba(255,255,255,0.6); line-height:1.45;">ensina uma vez, repete no seu padrão</div>
+      </div>
+      <div style="background:rgba(125,139,122,0.2); border:1px solid rgba(125,139,122,0.42); border-radius:12px; padding:22px 26px;">
+        <div style="font-family:var(--sans); font-weight:700; font-size:21px; color:#fff; margin-bottom:6px;">Lê documentos longos</div>
+        <div style="font-family:var(--sans); font-size:16px; color:rgba(255,255,255,0.6); line-height:1.45;">um contrato de 80 páginas de uma vez</div>
+      </div>
+    </div>
+  </div>
+  <div class="logo-micro" style="color:rgba(255,255,255,0.45);">NS</div>
+  <div class="slide-num" style="color:rgba(255,255,255,0.4);">09 / 21</div>
+</section>
+
+<!-- 09 — QUAL MODO USAR (3 colunas + espectro IDEIA / ENTREGAVEL / SISTEMA) -->
+<section class="bg-offwhite" data-screen-label="10 Qual modo usar">
+  <div class="slide-inner">
+    <div class="kicker seq" data-step="1" style="font-size:16px;">QUANDO USAR CADA MODO</div>
+    <h2 class="slide-title seq" data-step="1" style="margin-top:12px; font-size:60px;">QUAL MODO USAR AGORA?</h2>
+    <div class="slide-subtitle seq" data-step="1" style="margin-top:12px; font-size:25px;">Mesma inteligência, superfícies diferentes — escolha pelo lugar onde o trabalho acontece.</div>
+    <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:20px;"></div>
+
+    <!-- 3 COLUNAS -->
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:30px;">
+
+      <!-- CHAT -->
+      <div class="seq" data-step="2" style="display:flex; flex-direction:column; background:var(--white); border:1px solid rgba(139,115,85,0.18); border-radius:16px; overflow:hidden;">
+        <div style="background:var(--terracota); padding:18px 28px 20px;">
+          <img src="logo-claude-icon.svg" alt="Chat" style="height:34px; filter:brightness(0) invert(1); opacity:0.95; width:fit-content; margin-bottom:10px;">
+          <div style="font-family:var(--serif); font-weight:700; font-size:38px; color:var(--white); letter-spacing:0.12em;">CHAT</div>
+          <div style="font-family:var(--sans); font-size:15px; font-weight:500; color:rgba(255,255,255,0.92); letter-spacing:0.02em; margin-top:2px;">Assistente de conversa</div>
+        </div>
+        <div style="padding:24px 28px 22px; display:flex; flex-direction:column; gap:14px; flex:1;">
+          <div style="font-family:var(--sans); font-size:21px; color:var(--petroleo); line-height:1.3;">Melhor para: pensar, escrever, perguntar e resumir.</div>
+          <div style="display:flex; flex-direction:column; gap:9px;">
+            <div style="display:flex; gap:10px; align-items:flex-start;"><span style="color:var(--terracota); font-weight:700;">·</span><span style="font-family:var(--sans); font-size:17px; color:var(--ink); line-height:1.4;">Conversa rápida e fluida</span></div>
+            <div style="display:flex; gap:10px; align-items:flex-start;"><span style="color:var(--terracota); font-weight:700;">·</span><span style="font-family:var(--sans); font-size:17px; color:var(--ink); line-height:1.4;">Brainstorm e explicações</span></div>
+            <div style="display:flex; gap:10px; align-items:flex-start;"><span style="color:var(--terracota); font-weight:700;">·</span><span style="font-family:var(--sans); font-size:17px; color:var(--ink); line-height:1.4;">Rascunho de conteúdo</span></div>
+            <div style="display:flex; gap:10px; align-items:flex-start;"><span style="color:var(--terracota); font-weight:700;">·</span><span style="font-family:var(--sans); font-size:17px; color:var(--ink); line-height:1.4;">Não mexe nos seus arquivos</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COWORK -->
+      <div class="seq" data-step="3" style="display:flex; flex-direction:column; background:var(--white); border:1px solid rgba(139,115,85,0.18); border-radius:16px; overflow:hidden;">
+        <div style="background:var(--petroleo); padding:18px 28px 20px;">
+          <img src="logo-cowork.svg" alt="Cowork" style="height:30px; opacity:0.95; width:fit-content; margin-bottom:10px;">
+          <div style="font-family:var(--serif); font-weight:700; font-size:38px; color:var(--white); letter-spacing:0.1em;">COWORK</div>
+          <div style="font-family:var(--sans); font-size:15px; font-weight:500; color:rgba(255,255,255,0.92); letter-spacing:0.02em; margin-top:2px;">Agente no seu computador</div>
+        </div>
+        <div style="padding:24px 28px 22px; display:flex; flex-direction:column; gap:14px; flex:1;">
+          <div style="font-family:var(--sans); font-size:21px; color:var(--petroleo); line-height:1.3;">Melhor para: trabalho de escritório — docs, slides, e-mail, pesquisa.</div>
+          <div style="display:flex; flex-direction:column; gap:9px;">
+            <div style="display:flex; gap:10px; align-items:flex-start;"><span style="color:var(--petroleo); font-weight:700;">·</span><span style="font-family:var(--sans); font-size:17px; color:var(--ink); line-height:1.4;">Trabalha nos apps do dia a dia</span></div>
+            <div style="display:flex; gap:10px; align-items:flex-start;"><span style="color:var(--petroleo); font-weight:700;">·</span><span style="font-family:var(--sans); font-size:17px; color:var(--ink); line-height:1.4;">Cria e edita os entregáveis</span></div>
+            <div style="display:flex; gap:10px; align-items:flex-start;"><span style="color:var(--petroleo); font-weight:700;">·</span><span style="font-family:var(--sans); font-size:17px; color:var(--ink); line-height:1.4;">Mantém você no controle, revisando</span></div>
+            <div style="display:flex; gap:10px; align-items:flex-start;"><span style="color:var(--petroleo); font-weight:700;">·</span><span style="font-family:var(--sans); font-size:17px; color:var(--ink); line-height:1.4;">Feito pra times não-técnicos</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CODE -->
+      <div class="seq" data-step="4" style="display:flex; flex-direction:column; background:var(--white); border:1px solid rgba(139,115,85,0.18); border-radius:16px; overflow:hidden;">
+        <div style="background:var(--taupe); padding:18px 28px 20px;">
+          <img src="logo-code.svg" alt="Code" style="height:30px; opacity:0.95; width:fit-content; margin-bottom:10px;">
+          <div style="font-family:var(--serif); font-weight:700; font-size:38px; color:var(--white); letter-spacing:0.12em;">CODE</div>
+          <div style="font-family:var(--sans); font-size:15px; font-weight:500; color:rgba(255,255,255,0.92); letter-spacing:0.02em; margin-top:2px;">Agente de construção</div>
+        </div>
+        <div style="padding:24px 28px 22px; display:flex; flex-direction:column; gap:14px; flex:1;">
+          <div style="font-family:var(--sans); font-size:21px; color:var(--petroleo); line-height:1.3;">Melhor para: construir ferramentas, sistemas e automações.</div>
+          <div style="display:flex; flex-direction:column; gap:9px;">
+            <div style="display:flex; gap:10px; align-items:flex-start;"><span style="color:var(--taupe); font-weight:700;">·</span><span style="font-family:var(--sans); font-size:17px; color:var(--ink); line-height:1.4;">Lê e edita arquivos de projeto</span></div>
+            <div style="display:flex; gap:10px; align-items:flex-start;"><span style="color:var(--taupe); font-weight:700;">·</span><span style="font-family:var(--sans); font-size:17px; color:var(--ink); line-height:1.4;">Roda comandos no terminal</span></div>
+            <div style="display:flex; gap:10px; align-items:flex-start;"><span style="color:var(--taupe); font-weight:700;">·</span><span style="font-family:var(--sans); font-size:17px; color:var(--ink); line-height:1.4;">Testa e verifica o próprio trabalho</span></div>
+            <div style="display:flex; gap:10px; align-items:flex-start;"><span style="color:var(--taupe); font-weight:700;">·</span><span style="font-family:var(--sans); font-size:17px; color:var(--ink); line-height:1.4;">Feito pra entrega técnica</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESPECTRO: IDEIA → ENTREGÁVEL → SISTEMA -->
+    <div class="seq" data-step="5" style="margin-top:24px; display:flex; align-items:center; justify-content:space-between; gap:18px;">
+      <div style="flex:1; text-align:center; padding:14px 0; background:rgba(193,122,90,0.12); border:1px solid rgba(193,122,90,0.4); border-radius:12px;">
+        <span style="font-family:var(--sans); font-size:18px; font-weight:700; letter-spacing:0.18em; color:var(--terracota);">IDEIA</span>
+      </div>
+      <div style="font-size:30px; color:var(--taupe); flex-shrink:0;">&#8594;</div>
+      <div style="flex:1; text-align:center; padding:14px 0; background:rgba(20,55,60,0.1); border:1px solid rgba(20,55,60,0.35); border-radius:12px;">
+        <span style="font-family:var(--sans); font-size:18px; font-weight:700; letter-spacing:0.18em; color:var(--petroleo);">ENTREGÁVEL</span>
+      </div>
+      <div style="font-size:30px; color:var(--taupe); flex-shrink:0;">&#8594;</div>
+      <div style="flex:1; text-align:center; padding:14px 0; background:rgba(139,115,85,0.14); border:1px solid rgba(139,115,85,0.45); border-radius:12px;">
+        <span style="font-family:var(--sans); font-size:18px; font-weight:700; letter-spacing:0.18em; color:var(--taupe);">SISTEMA NO AR</span>
+      </div>
+    </div>
+
+    <!-- camada PROJETO + SKILL -->
+    <div class="seq" data-step="6" style="margin-top:18px;">
+      <div class="perm-band band-projeto" style="padding:18px 44px;">
+        <span style="font-family:var(--serif); font-weight:700; font-size:25px; color:var(--white); letter-spacing:0.1em;">PROJETO + SKILL</span>
+        <span style="font-family:var(--sans); font-size:17px; font-weight:600; color:rgba(255,255,255,0.92);">Não são modos — são camadas que turbinam qualquer um dos três.</span>
+      </div>
+    </div>
+  </div>
+  <div class="logo-micro">NS</div>
+  <div class="slide-num">10 / 21</div>
+</section>
+
+<!-- ════════ ATO 4 — COMO FALAR COM O CLAUDE ════════ -->
+
+<!-- 11 — SABE ONDE QUER CHEGAR -->
+<section class="bg-petroleo" data-screen-label="11 Sabe onde quer chegar">
+  <div class="slide-inner" style="justify-content:center;">
+    <div class="kicker seq" data-step="1" style="color:var(--terracota-soft); font-size:16px;">ANTES DE QUALQUER PROMPT</div>
+    <div class="seq" data-step="2" style="margin-top:40px; font-family:var(--serif); font-weight:700; font-size:138px; color:var(--white); letter-spacing:0.02em; line-height:0.95; text-transform:uppercase;">Sabe onde<br>quer chegar?</div>
+    <div class="divider-line seq-line" data-step="3" style="width:110px; margin-top:46px; background:var(--terracota);"></div>
+    <div class="seq" data-step="3" style="margin-top:40px; font-family:var(--sans); font-size:34px; color:rgba(255,255,255,0.85); line-height:1.45; max-width:1250px;">Se você não decidiu o resultado que quer, <strong style="color:var(--terracota-soft); font-style:normal;">o Claude também não sabe.</strong></div>
+
+    <div class="seq" data-step="4" style="margin-top:54px; display:grid; grid-template-columns:1fr 1fr; gap:28px; max-width:1150px;">
+      <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); border-radius:14px; padding:36px 42px;">
+        <div class="label-sm" style="color:rgba(255,255,255,0.45); margin-bottom:16px; font-size:14px;">Pergunta 1</div>
+        <div style="font-family:var(--sans); font-size:30px; color:var(--white); line-height:1.35;">Como é o resultado pronto?</div>
+      </div>
+      <div style="background:rgba(193,122,90,0.22); border:1px solid rgba(193,122,90,0.5); border-radius:14px; padding:36px 42px;">
+        <div class="label-sm" style="color:var(--terracota-soft); margin-bottom:16px; font-size:14px;">Pergunta 2</div>
+        <div style="font-family:var(--sans); font-size:30px; color:var(--white); line-height:1.35;">O que vou fazer com ele?</div>
+      </div>
+    </div>
+  </div>
+  <div class="logo-micro" style="color:rgba(255,255,255,0.4);">NS</div>
+  <div class="slide-num" style="color:rgba(255,255,255,0.4);">11 / 21</div>
+</section>
+
+<!-- 12 — NÃO É ESCREVER PROMPT, É PLANEJAR -->
+<section class="bg-petroleo" data-screen-label="12 Não é prompt, é planejar">
+  <div class="slide-inner">
+    <div class="kicker seq" data-step="1" style="color:var(--terracota-soft); text-align:center; font-size:16px;">O SEGREDO DO USO DA IA</div>
+    <h2 class="seq" data-step="1" style="margin-top:18px; text-align:center; font-family:var(--serif); font-weight:700; font-size:76px; color:var(--white); line-height:1.1;">Não é saber escrever prompts.<br><span style="color:var(--terracota-soft); ">É saber planejar.</span></h2>
+
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:24px; margin-top:64px;">
+      <div class="seq" data-step="2" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.13); border-radius:16px; padding:40px 32px;">
+        <div style="width:62px; height:62px; border-radius:50%; background:var(--terracota); color:#fff; display:flex; align-items:center; justify-content:center; font-family:var(--serif); font-weight:700; font-size:30px; margin-bottom:26px;">1</div>
+        <div style="font-family:var(--sans); font-weight:700; font-size:28px; color:var(--white); margin-bottom:14px;">Grave um áudio</div>
+        <div class="body" style="color:rgba(255,255,255,0.72);">Fale tudo: contexto, objetivo, restrições.</div>
+      </div>
+      <div class="seq" data-step="3" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.13); border-radius:16px; padding:40px 32px;">
+        <div style="width:62px; height:62px; border-radius:50%; background:var(--sage); color:#fff; display:flex; align-items:center; justify-content:center; font-family:var(--serif); font-weight:700; font-size:30px; margin-bottom:26px;">2</div>
+        <div style="font-family:var(--sans); font-weight:700; font-size:28px; color:var(--white); margin-bottom:14px;">Peça pra organizar</div>
+        <div class="body" style="color:rgba(255,255,255,0.72);">"Organize meu pensamento em tópicos."</div>
+      </div>
+      <div class="seq" data-step="4" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.13); border-radius:16px; padding:40px 32px;">
+        <div style="width:62px; height:62px; border-radius:50%; background:var(--taupe); color:#fff; display:flex; align-items:center; justify-content:center; font-family:var(--serif); font-weight:700; font-size:30px; margin-bottom:26px;">3</div>
+        <div style="font-family:var(--sans); font-weight:700; font-size:28px; color:var(--white); margin-bottom:14px;">Crie o prompt</div>
+        <div class="body" style="color:rgba(255,255,255,0.72);">Papel, Contexto, Tarefa e Formato.</div>
+      </div>
+      <div class="seq" data-step="5" style="background:var(--terracota); border-radius:16px; padding:40px 32px; box-shadow:0 24px 60px rgba(193,122,90,0.32);">
+        <div style="width:62px; height:62px; border-radius:50%; background:var(--white); color:var(--terracota); display:flex; align-items:center; justify-content:center; font-family:var(--serif); font-weight:700; font-size:30px; margin-bottom:26px;">4</div>
+        <div style="font-family:var(--sans); font-weight:700; font-size:28px; color:var(--white); margin-bottom:14px;">Execute</div>
+        <div class="body" style="color:rgba(255,255,255,0.95);">Conversa nova, cole o prompt, rode.</div>
+      </div>
+    </div>
+
+    <div class="anchor seq" data-step="6" style="margin-top:58px; text-align:center; color:rgba(255,255,255,0.78); font-size:28px;">Você não precisa ser boa em escrever prompts. <em style="color:var(--terracota-soft);">Precisa ser boa em falar o que precisa.</em></div>
+  </div>
+  <div class="logo-micro" style="color:rgba(255,255,255,0.4);">NS</div>
+  <div class="slide-num" style="color:rgba(255,255,255,0.4);">12 / 21</div>
+</section>
+
+<!-- 13 — CONTEXTO É TUDO + PROJETOS -->
+<section class="bg-offwhite" data-screen-label="13 Contexto é tudo">
+  <div class="slide-inner">
+    <div class="kicker seq" data-step="1" style="font-size:16px;">O PRINCÍPIO #1 DO CLAUDE</div>
+    <h2 class="slide-title seq" data-step="1" style="margin-top:12px; font-size:82px;">CONTEXTO É TUDO</h2>
+    <div class="slide-subtitle seq" data-step="1" style="margin-top:14px; font-size:28px;">Dar contexto e escrever um bom prompt são a mesma habilidade.</div>
+    <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:24px;"></div>
+
+    <div style="display:grid; grid-template-columns:1.1fr 1fr; gap:56px; margin-top:48px; flex:1; align-items:center;">
+      <div>
+        <div class="seq label-sm" data-step="2" style="color:var(--terracota); margin-bottom:20px;">Os 5 tipos de contexto que mudam tudo</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+          <div class="seq" data-step="2" style="padding:22px 26px; border:1px solid rgba(139,115,85,0.15); border-radius:12px; background:var(--white);"><div style="font-family:var(--sans); font-weight:700; font-size:23px; color:var(--petroleo);">Quem você é</div></div>
+          <div class="seq" data-step="2" style="padding:22px 26px; border:1px solid rgba(139,115,85,0.15); border-radius:12px; background:var(--white);"><div style="font-family:var(--sans); font-weight:700; font-size:23px; color:var(--petroleo);">Para quem é</div></div>
+          <div class="seq" data-step="3" style="padding:22px 26px; border:1px solid rgba(139,115,85,0.15); border-radius:12px; background:var(--white);"><div style="font-family:var(--sans); font-weight:700; font-size:23px; color:var(--petroleo);">O que já existe</div></div>
+          <div class="seq" data-step="3" style="padding:22px 26px; border:1px solid rgba(139,115,85,0.15); border-radius:12px; background:var(--white);"><div style="font-family:var(--sans); font-weight:700; font-size:23px; color:var(--petroleo);">O que você quer</div></div>
+          <div class="seq" data-step="4" style="padding:22px 26px; border-radius:12px; background:var(--terracota); color:#fff;"><div style="font-family:var(--sans); font-weight:700; font-size:23px;">Como você quer</div></div>
+          <div class="seq" data-step="4" style="padding:22px 26px; border:1px solid rgba(139,115,85,0.15); border-radius:12px; background:var(--creme);"><div style="font-family:var(--sans); font-weight:700; font-size:23px; color:var(--petroleo);">O que NÃO quer</div></div>
+        </div>
+        <div class="seq" data-step="5" style="margin-top:26px; padding:26px 34px; background:var(--petroleo); color:#fff; border-radius:14px;">
+          <div style="font-family:var(--sans); font-weight:700; font-size:27px; line-height:1.3;">O <span style="color:var(--terracota-soft);">Projeto</span> guarda esse contexto de forma permanente.</div>
+        </div>
+      </div>
+
+      <div class="seq-zoom" data-step="5" style="background:var(--white); border:1px solid rgba(139,115,85,0.2); border-radius:14px; padding:40px; box-shadow:0 30px 70px rgba(20,55,60,0.1);">
+        <div style="font-family:var(--mono); font-size:15px; letter-spacing:0.12em; text-transform:uppercase; color:var(--taupe); margin-bottom:24px;">📁 PROJETO · CONTEÚDO DA MARCA</div>
+        <div style="display:flex; flex-direction:column; gap:14px; font-family:var(--mono); font-size:18px; color:var(--ink);">
+          <div style="padding:14px 18px; background:var(--offwhite); border-radius:8px;">📄 instrucoes-do-projeto.md</div>
+          <div style="padding:14px 18px; background:var(--offwhite); border-radius:8px;">📄 publico-e-persona.md</div>
+          <div style="padding:14px 18px; background:var(--offwhite); border-radius:8px;">📄 modelos-de-post.md</div>
+          <div style="padding:14px 18px; background:var(--offwhite); border-radius:8px;">📄 tom-de-voz-da-marca.md</div>
+        </div>
+        <div style="margin-top:28px; padding-top:24px; border-top:1px solid rgba(139,115,85,0.15); font-family:var(--sans); font-size:21px; color:var(--terracota); text-align:center;">Cada conversa já começa sabendo quem é você.</div>
+      </div>
+    </div>
+    <div class="anchor seq" data-step="6" style="margin-top:20px; font-size:24px;">Configura uma vez. <em>Colhe pra sempre.</em></div>
+  </div>
+  <div class="logo-micro">NS</div>
+  <div class="slide-num">13 / 21</div>
+</section>
+
+<!-- 13 — 4 TÉCNICAS DE PROMPT -->
+<section class="bg-offwhite" data-screen-label="14 4 técnicas de prompt">
+  <div class="slide-inner">
+    <div class="kicker seq" data-step="1" style="font-size:16px;">TÉCNICAS DE PROMPT</div>
+    <h2 class="slide-title seq" data-step="1" style="margin-top:14px;">4 TÉCNICAS QUE MUDAM O JOGO</h2>
+    <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:26px;"></div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:26px; margin-top:52px; flex:1;">
+      <div class="seq" data-step="2" style="background:var(--white); border:1px solid rgba(139,115,85,0.15); border-left:5px solid var(--terracota); border-radius:0 14px 14px 0; padding:36px 40px; display:flex; flex-direction:column;">
+        <div style="display:flex; align-items:center; gap:18px; margin-bottom:18px;"><span class="num-big" style="font-size:42px;">01</span><span style="font-family:var(--sans); font-weight:700; font-size:30px; color:var(--petroleo);">Dê exemplos do que você quer</span></div>
+        <div style="font-family:var(--mono); font-size:18px; color:var(--ink); background:var(--offwhite); padding:18px 22px; border-radius:10px; line-height:1.5;">"Aqui está um post meu que viralizou. Faça o próximo nesse estilo."</div>
+      </div>
+      <div class="seq" data-step="3" style="background:var(--white); border:1px solid rgba(139,115,85,0.15); border-left:5px solid var(--terracota); border-radius:0 14px 14px 0; padding:36px 40px; display:flex; flex-direction:column;">
+        <div style="display:flex; align-items:center; gap:18px; margin-bottom:18px;"><span class="num-big" style="font-size:42px;">02</span><span style="font-family:var(--sans); font-weight:700; font-size:30px; color:var(--petroleo);">Defina o que NÃO quer</span></div>
+        <div style="font-family:var(--mono); font-size:18px; color:var(--ink); background:var(--offwhite); padding:18px 22px; border-radius:10px; line-height:1.5;">"Sem listas, parágrafos curtos, tom de conversa."</div>
+      </div>
+      <div class="seq" data-step="4" style="background:var(--white); border:1px solid rgba(139,115,85,0.15); border-left:5px solid var(--terracota); border-radius:0 14px 14px 0; padding:36px 40px; display:flex; flex-direction:column;">
+        <div style="display:flex; align-items:center; gap:18px; margin-bottom:18px;"><span class="num-big" style="font-size:42px;">03</span><span style="font-family:var(--sans); font-weight:700; font-size:30px; color:var(--petroleo);">Peça alternativas</span></div>
+        <div style="font-family:var(--mono); font-size:18px; color:var(--ink); background:var(--offwhite); padding:18px 22px; border-radius:10px; line-height:1.5;">"Me dê 3 versões da legenda desse post."</div>
+      </div>
+      <div class="seq" data-step="5" style="background:var(--petroleo); color:#fff; border-radius:14px; padding:36px 40px; display:flex; flex-direction:column;">
+        <div style="display:flex; align-items:center; gap:18px; margin-bottom:18px;"><span style="font-family:var(--serif); font-weight:700; font-size:42px; color:var(--terracota-soft);">04</span><span style="font-family:var(--sans); font-weight:700; font-size:30px; color:var(--white);">Use o Claude pra melhorar o prompt</span></div>
+        <div style="font-family:var(--mono); font-size:18px; color:var(--white); background:rgba(255,255,255,0.08); padding:18px 22px; border-radius:10px; line-height:1.5;">"Reescreva esse prompt pra você me dar um resultado melhor."</div>
+      </div>
+    </div>
+  </div>
+  <div class="logo-micro">NS</div>
+  <div class="slide-num">14 / 21</div>
+</section>
+
+<!-- 14 — OS 4 ELEMENTOS DO PROMPT -->
+<section class="bg-offwhite" data-screen-label="15 Os 4 elementos do prompt">
+  <div class="slide-inner">
+    <div class="kicker seq" data-step="1" style="font-size:16px;">COMO PEDIR BEM</div>
+    <h2 class="slide-title seq" data-step="1" style="margin-top:14px;">OS 4 ELEMENTOS DO PROMPT</h2>
+    <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:24px;"></div>
+
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:24px; margin-top:44px; flex:1;">
+
+      <!-- 01 PAPEL -->
+      <div class="seq" data-step="2" style="background:var(--white); border:1px solid rgba(139,115,85,0.15); border-radius:16px; padding:44px 36px; display:flex; flex-direction:column; gap:0;">
+        <span style="font-family:var(--serif); font-weight:700; font-size:52px; color:var(--terracota); line-height:1;">01</span>
+        <div style="width:36px; height:3px; background:var(--terracota); border-radius:2px; margin:18px 0 22px;"></div>
+        <div style="font-family:var(--serif); font-weight:700; font-size:34px; color:var(--petroleo); letter-spacing:0.06em; margin-bottom:18px;">PAPEL</div>
+        <div style="font-family:var(--sans); font-size:18px; color:var(--taupe); line-height:1.55; margin-bottom:auto;">Quem o Claude é nessa conversa.</div>
+        <div style="margin-top:32px; font-family:var(--mono); font-size:15px; color:var(--ink); background:var(--offwhite); padding:16px 18px; border-radius:10px; line-height:1.6;">"Você é um especialista em marketing pra pequenos negócios."</div>
+      </div>
+
+      <!-- 02 CONTEXTO -->
+      <div class="seq" data-step="3" style="background:var(--white); border:1px solid rgba(139,115,85,0.15); border-radius:16px; padding:44px 36px; display:flex; flex-direction:column; gap:0;">
+        <span style="font-family:var(--serif); font-weight:700; font-size:52px; color:var(--terracota); line-height:1;">02</span>
+        <div style="width:36px; height:3px; background:var(--terracota); border-radius:2px; margin:18px 0 22px;"></div>
+        <div style="font-family:var(--serif); font-weight:700; font-size:34px; color:var(--petroleo); letter-spacing:0.06em; margin-bottom:18px;">CONTEXTO</div>
+        <div style="font-family:var(--sans); font-size:18px; color:var(--taupe); line-height:1.55; margin-bottom:auto;">O que ele precisa saber pra responder bem.</div>
+        <div style="margin-top:32px; font-family:var(--mono); font-size:15px; color:var(--ink); background:var(--offwhite); padding:16px 18px; border-radius:10px; line-height:1.6;">Seu público, seu produto, seu tom de voz, o que você já tentou.</div>
+      </div>
+
+      <!-- 03 TAREFA -->
+      <div class="seq" data-step="4" style="background:var(--white); border:1px solid rgba(139,115,85,0.15); border-radius:16px; padding:44px 36px; display:flex; flex-direction:column; gap:0;">
+        <span style="font-family:var(--serif); font-weight:700; font-size:52px; color:var(--terracota); line-height:1;">03</span>
+        <div style="width:36px; height:3px; background:var(--terracota); border-radius:2px; margin:18px 0 22px;"></div>
+        <div style="font-family:var(--serif); font-weight:700; font-size:34px; color:var(--petroleo); letter-spacing:0.06em; margin-bottom:18px;">TAREFA</div>
+        <div style="font-family:var(--sans); font-size:18px; color:var(--taupe); line-height:1.55; margin-bottom:auto;">Específica. Não "me ajuda aqui".</div>
+        <div style="margin-top:32px; font-family:var(--mono); font-size:15px; color:var(--ink); background:var(--offwhite); padding:16px 18px; border-radius:10px; line-height:1.6;">"Escreva 3 ideias de post pra essa semana."</div>
+      </div>
+
+      <!-- 04 FORMATO — destaque -->
+      <div class="seq" data-step="5" style="background:var(--terracota); border-radius:16px; padding:44px 36px; display:flex; flex-direction:column; gap:0; box-shadow:0 24px 60px rgba(193,122,90,0.35);">
+        <span style="font-family:var(--serif); font-weight:700; font-size:52px; color:rgba(255,255,255,0.9); line-height:1;">04</span>
+        <div style="width:36px; height:3px; background:rgba(255,255,255,0.5); border-radius:2px; margin:18px 0 22px;"></div>
+        <div style="font-family:var(--serif); font-weight:700; font-size:34px; color:var(--white); letter-spacing:0.06em; margin-bottom:18px;">FORMATO</div>
+        <div style="font-family:var(--sans); font-size:18px; color:rgba(255,255,255,0.85); line-height:1.55; margin-bottom:auto;">Como você quer receber a resposta.</div>
+        <div style="margin-top:32px; font-family:var(--mono); font-size:15px; color:var(--white); background:rgba(255,255,255,0.12); padding:16px 18px; border-radius:10px; line-height:1.6;">Tópicos, tabela, e-mail pronto, plano de ação. Economiza copy-paste.</div>
+      </div>
+
+    </div>
+    <div class="anchor seq" data-step="6" style="margin-top:28px; font-size:22px;">Nem todos são obrigatórios — <em style="color:var(--terracota);">mas quanto mais você dá, melhor ele responde.</em></div>
+  </div>
+  <div class="logo-micro">NS</div>
+  <div class="slide-num">15 / 21</div>
+</section>
+
+<!-- ════════ ATO 5 — USE SEM TRAVAR ════════ -->
+
+<!-- 16 — O QUE SÃO TOKENS -->
+<section class="bg-offwhite" data-screen-label="16 O que são tokens">
+  <div class="slide-inner">
+    <div class="kicker seq" data-step="1" style="font-size:16px;">ANTES DE FALAR EM ECONOMIA</div>
+    <h2 class="slide-title seq" data-step="1" style="margin-top:14px;">O QUE SÃO TOKENS?</h2>
+    <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:24px;"></div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:56px; margin-top:52px; flex:1; align-items:center;">
+      <div class="seq" data-step="2" style="background:var(--petroleo); border-radius:16px; padding:48px 48px;">
+        <div class="label-sm" style="color:var(--terracota-soft); margin-bottom:20px;">A definição simples</div>
+        <div style="font-family:var(--sans); font-weight:700; font-size:44px; color:var(--white); margin-bottom:32px;">Token = pedaço de palavra</div>
+        <div style="display:flex; gap:10px; margin-bottom:18px;">
+          <span style="background:var(--terracota); color:#fff; padding:18px 22px; border-radius:10px; font-family:var(--mono); font-size:24px;">in</span>
+          <span style="background:var(--sage); color:#fff; padding:18px 22px; border-radius:10px; font-family:var(--mono); font-size:24px;">te</span>
+          <span style="background:#6B7C95; color:#fff; padding:18px 22px; border-radius:10px; font-family:var(--mono); font-size:24px;">li</span>
+          <span style="background:var(--taupe); color:#fff; padding:18px 22px; border-radius:10px; font-family:var(--mono); font-size:24px;">gên</span>
+          <span style="background:var(--terracota); color:#fff; padding:18px 22px; border-radius:10px; font-family:var(--mono); font-size:24px;">cia</span>
+        </div>
+        <div style="font-family:var(--sans); font-size:20px; color:rgba(255,255,255,0.65);">"inteligência" = 5 tokens</div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:20px;">
+        <div class="seq" data-step="3" style="background:var(--white); border:1px solid rgba(139,115,85,0.15); border-radius:12px; padding:28px 34px;">
+          <div style="font-family:var(--sans); font-weight:700; font-size:26px; color:var(--petroleo); margin-bottom:8px;">Conta tokens, não mensagens</div>
+          <div class="cap" style="color:var(--taupe);">Toda a conversa anterior é relida do zero a cada mensagem.</div>
+        </div>
+        <div class="seq" data-step="4" style="background:var(--white); border:1px solid rgba(139,115,85,0.15); border-radius:12px; padding:28px 34px;">
+          <div style="font-family:var(--sans); font-weight:700; font-size:26px; color:var(--petroleo); margin-bottom:8px;">98,5% vão pra reler o histórico</div>
+          <div class="cap" style="color:var(--taupe);">A mensagem 30 custa 31× a mensagem 1.</div>
+        </div>
+        <div class="seq" data-step="5" style="background:var(--white); border:1px solid rgba(139,115,85,0.15); border-radius:12px; padding:28px 34px; border-left:5px solid var(--terracota);">
+          <div style="font-family:var(--sans); font-weight:700; font-size:26px; color:var(--petroleo); margin-bottom:8px;">Limite por janela de 5 horas</div>
+          <div class="cap" style="color:var(--taupe);">Rolante — não reseta à meia-noite.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="logo-micro">NS</div>
+  <div class="slide-num">16 / 21</div>
+</section>
+
+<!-- 17 — AS 7 REGRAS DE OURO -->
+<section class="bg-creme" data-screen-label="17 7 regras de ouro">
+  <div class="slide-inner">
+    <div class="kicker seq" data-step="1" style="font-size:16px;">USE SEM TRAVAR</div>
+    <h2 class="slide-title seq" data-step="1" style="margin-top:14px;">AS 7 REGRAS DE OURO DOS TOKENS</h2>
+    <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:26px;"></div>
+
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:18px; margin-top:50px;">
+      <div class="seq" data-step="2" style="background:var(--white); border-radius:12px; padding:26px 32px; display:flex; gap:22px; align-items:center;"><span style="font-family:var(--serif); font-weight:700; font-size:40px; color:var(--terracota); flex-shrink:0;">01</span><span class="body" style="color:var(--petroleo);"><strong>Edite o prompt</strong> — não mande follow-up, edite a mensagem original.</span></div>
+      <div class="seq" data-step="2" style="background:var(--white); border-radius:12px; padding:26px 32px; display:flex; gap:22px; align-items:center;"><span style="font-family:var(--serif); font-weight:700; font-size:40px; color:var(--terracota); flex-shrink:0;">02</span><span class="body" style="color:var(--petroleo);"><strong>Conversa nova</strong> a cada 15-20 mensagens — peça um resumo.</span></div>
+      <div class="seq" data-step="3" style="background:var(--white); border-radius:12px; padding:26px 32px; display:flex; gap:22px; align-items:center;"><span style="font-family:var(--serif); font-weight:700; font-size:40px; color:var(--terracota); flex-shrink:0;">03</span><span class="body" style="color:var(--petroleo);"><strong>Junte perguntas</strong> numa mensagem só — e respostas melhores.</span></div>
+      <div class="seq" data-step="3" style="background:var(--white); border-radius:12px; padding:26px 32px; display:flex; gap:22px; align-items:center;"><span style="font-family:var(--serif); font-weight:700; font-size:40px; color:var(--terracota); flex-shrink:0;">04</span><span class="body" style="color:var(--petroleo);"><strong>Arquivos no Projeto</strong> — ficam em cache, não consomem toda vez.</span></div>
+      <div class="seq" data-step="4" style="background:var(--white); border-radius:12px; padding:26px 32px; display:flex; gap:22px; align-items:center;"><span style="font-family:var(--serif); font-weight:700; font-size:40px; color:var(--terracota); flex-shrink:0;">05</span><span class="body" style="color:var(--petroleo);"><strong>Desligue o que não usa</strong> — busca na web, pensamento avançado.</span></div>
+      <div class="seq" data-step="4" style="background:var(--white); border-radius:12px; padding:26px 32px; display:flex; gap:22px; align-items:center;"><span style="font-family:var(--serif); font-weight:700; font-size:40px; color:var(--terracota); flex-shrink:0;">06</span><span class="body" style="color:var(--petroleo);"><strong>Modelo certo</strong> — simples no leve, análise pesada no forte.</span></div>
+      <div class="seq" data-step="5" style="background:var(--white); border-radius:12px; padding:26px 32px; display:flex; gap:22px; align-items:center;"><span style="font-family:var(--serif); font-weight:700; font-size:40px; color:var(--terracota); flex-shrink:0;">07</span><span class="body" style="color:var(--petroleo);"><strong>Distribua no dia</strong> — janela de 5h, divida em 2-3 sessões.</span></div>
+      <div class="seq" data-step="5" style="background:var(--petroleo); color:#fff; border-radius:12px; padding:26px 32px; display:flex; align-items:center;"><span style="font-family:var(--sans); font-size:26px; line-height:1.4;">Não é usar menos. É usar com <span style="color:var(--terracota-soft);">inteligência</span>.</span></div>
+    </div>
+  </div>
+  <div class="logo-micro">NS</div>
+  <div class="slide-num">17 / 21</div>
+</section>
+
+<!-- 16 — MÃO NA MASSA -->
+<section class="bg-petroleo" data-screen-label="18 Mão na massa">
+  <div class="slide-inner" style="justify-content:center; align-items:center; text-align:center;">
+    <div class="kicker seq" data-step="1" style="color:var(--terracota-soft); margin-bottom:28px; font-size:16px;">AGORA É COM VOCÊ</div>
+    <img src="logo-claude.svg" class="seq" data-step="1" alt="Claude" style="height:58px; filter:brightness(0) invert(1); opacity:0.92; margin-bottom:30px; animation:floaty 4s ease-in-out infinite;">
+    <h2 class="seq" data-step="1" style="font-family:var(--serif); font-weight:700; font-size:148px; color:var(--white); line-height:0.98; letter-spacing:0.03em;">MÃO NA MASSA</h2>
+    <div class="divider-line seq-line" data-step="2" style="width:180px; margin:40px auto; background:var(--terracota);"></div>
+    <div class="seq" data-step="2" style="font-family:var(--sans); font-size:36px; color:var(--terracota-soft); margin-bottom:52px;">Os próximos minutos são ao vivo, na tela do Claude.</div>
+
+    <div class="seq" data-step="3" style="display:grid; grid-template-columns:repeat(4,1fr); gap:22px; max-width:1450px;">
+      <div style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.13); border-radius:12px; padding:30px 24px;"><div style="font-family:var(--sans); font-weight:700; font-size:26px; color:var(--white);">1 · Prompt na prática</div></div>
+      <div style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.13); border-radius:12px; padding:30px 24px;"><div style="font-family:var(--sans); font-weight:700; font-size:26px; color:var(--white);">2 · As técnicas</div></div>
+      <div style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.13); border-radius:12px; padding:30px 24px;"><div style="font-family:var(--sans); font-weight:700; font-size:26px; color:var(--white);">3 · Montar um Projeto</div></div>
+      <div style="background:var(--terracota); border-radius:12px; padding:30px 24px;"><div style="font-family:var(--sans); font-weight:700; font-size:26px; color:var(--white);">4 · Memória e Preferências</div></div>
+    </div>
+  </div>
+  <div class="logo-micro" style="color:rgba(255,255,255,0.4);">NS</div>
+  <div class="slide-num" style="color:rgba(255,255,255,0.4);">18 / 21</div>
+</section>
+
+<!-- 18 — TEASER COWORK -->
+<section class="bg-petroleo" data-screen-label="19 Teaser Cowork">
+  <div class="slide-inner">
+    <div class="kicker seq" data-step="1" style="color:var(--terracota-soft); font-size:16px;">MAIS PRA FRENTE NO CURSO</div>
+    <h2 class="slide-title seq" data-step="1" style="margin-top:14px; color:var(--white);">PARE DE PEDIR.<br>COMECE A DELEGAR.</h2>
+    <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:28px; background:var(--terracota);"></div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:44px; margin-top:60px; flex:1;">
+      <div class="seq" data-step="2" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.13); border-radius:16px; padding:48px 48px; display:flex; flex-direction:column;">
+        <div class="chip" style="background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.75); align-self:flex-start;">Chat — hoje</div>
+        <div style="margin-top:32px; display:flex; flex-direction:column; gap:22px;">
+          <div class="body-lg" style="color:rgba(255,255,255,0.85);">Você pergunta, ele responde na tela.</div>
+          <div class="body-lg" style="color:rgba(255,255,255,0.85);">Você copia, cola e move na mão.</div>
+          <div class="body-lg" style="color:rgba(255,255,255,0.85);">Sempre tem você de intermediário.</div>
+        </div>
+      </div>
+      <div class="seq" data-step="3" style="background:var(--terracota); border-radius:16px; padding:48px 48px; display:flex; flex-direction:column; box-shadow:0 30px 70px rgba(193,122,90,0.4);">
+        <div class="chip" style="background:rgba(255,255,255,0.2); color:#fff; align-self:flex-start;">Cowork — Módulo 5</div>
+        <div style="margin-top:32px; display:flex; flex-direction:column; gap:22px;">
+          <div class="body-lg" style="color:#fff;">O Claude trabalha nos seus arquivos.</div>
+          <div class="body-lg" style="color:#fff;">Você delega e sai — ele executa.</div>
+          <div class="body-lg" style="color:#fff;">Direto no seu computador, sem intermediário.</div>
+        </div>
+      </div>
+    </div>
+    <div class="anchor seq" data-step="4" style="margin-top:32px; text-align:center; color:rgba(255,255,255,0.75); font-size:26px;">Chat é pedir conselho a um colega. <em style="color:var(--terracota-soft);">Cowork é delegar e ir tomar um café.</em></div>
+  </div>
+  <div class="logo-micro" style="color:rgba(255,255,255,0.4);">NS</div>
+  <div class="slide-num" style="color:rgba(255,255,255,0.4);">19 / 21</div>
+</section>
+
+<!-- 19 — FECHAMENTO + MISSÃO -->
+<section class="bg-offwhite" data-screen-label="20 Fechamento e missão">
+  <div class="slide-inner">
+    <div class="kicker seq" data-step="1" style="font-size:16px;">FECHAMENTO</div>
+    <h2 class="slide-title seq" data-step="1" style="margin-top:14px;">SEU MINI-DESAFIO DO MÓDULO 1</h2>
+    <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:28px;"></div>
+
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:24px; margin-top:64px;">
+      <div class="seq" data-step="2" style="background:var(--white); border:1px solid rgba(139,115,85,0.15); border-radius:14px; padding:36px 40px; display:flex; gap:26px; align-items:center;">
+        <span style="font-family:var(--serif); font-weight:700; font-size:56px; color:var(--terracota); flex-shrink:0;">1</span>
+        <span style="font-family:var(--sans); font-weight:700; font-size:30px; color:var(--petroleo); line-height:1.25;">Configurar seu primeiro Projeto</span>
+      </div>
+      <div class="seq" data-step="2" style="background:var(--white); border:1px solid rgba(139,115,85,0.15); border-radius:14px; padding:36px 40px; display:flex; gap:26px; align-items:center;">
+        <span style="font-family:var(--serif); font-weight:700; font-size:56px; color:var(--terracota); flex-shrink:0;">2</span>
+        <span style="font-family:var(--sans); font-weight:700; font-size:30px; color:var(--petroleo); line-height:1.25;">Configurar suas Preferências</span>
+      </div>
+      <div class="seq" data-step="3" style="background:var(--white); border:1px solid rgba(139,115,85,0.15); border-radius:14px; padding:36px 40px; display:flex; gap:26px; align-items:center;">
+        <span style="font-family:var(--serif); font-weight:700; font-size:56px; color:var(--terracota); flex-shrink:0;">3</span>
+        <span style="font-family:var(--sans); font-weight:700; font-size:30px; color:var(--petroleo); line-height:1.25;">Instalar o Claude Desktop</span>
+      </div>
+      <div class="seq" data-step="3" style="background:var(--petroleo); color:#fff; border-radius:14px; padding:36px 40px; display:flex; gap:26px; align-items:center;">
+        <span style="font-family:var(--serif); font-weight:700; font-size:56px; color:var(--terracota-soft); flex-shrink:0;">4</span>
+        <span style="font-family:var(--sans); font-weight:700; font-size:30px; color:#fff; line-height:1.25;">Pensar em 1 tarefa repetitiva pra automatizar</span>
+      </div>
+    </div>
+
+    <div class="anchor seq" data-step="4" style="margin-top:auto; text-align:center; font-size:26px;">Próximo módulo: o Claude que te conhece — Projetos, Memória e como usar sem travar.</div>
+  </div>
+  <div class="logo-micro">NS</div>
+  <div class="slide-num">20 / 21</div>
+</section>
+
+<!-- 20 — NEWSCALE / FECHO -->
+<section class="bg-petroleo" data-screen-label="21 NewScale">
+  <div class="slide-inner" style="justify-content:center; align-items:center; text-align:center;">
+    <div class="kicker seq" data-step="1" style="margin-bottom:44px; font-size:16px;">OBRIGADA</div>
+    <div class="seq" data-step="1" style="margin-bottom:52px;">
+      <div style="font-family:var(--serif); font-weight:700; font-size:114px; color:var(--terracota-soft); letter-spacing:0.34em; line-height:1;">NEWSCALE</div>
+      <div style="height:2px; background:var(--terracota); width:130px; margin:32px auto;"></div>
+      <div style="font-family:var(--sans); font-size:38px; color:rgba(255,255,255,0.72);">Você, multiplicado.</div>
+    </div>
+    <div class="seq" data-step="2" style="font-family:var(--sans); font-size:34px; color:var(--white); max-width:1150px; line-height:1.5;">Você já usa o Claude. A partir de hoje, você usa <span style="color:var(--terracota-soft);">com profundidade.</span></div>
+    <div class="divider-line seq-line" data-step="3" style="width:180px; margin:52px auto; background:var(--terracota);"></div>
+    <div class="seq" data-step="3" style="display:flex; flex-direction:column; gap:16px; align-items:center;">
+      <div style="display:flex; align-items:center; justify-content:center; gap:40px; margin-bottom:20px;">
+        <img src="logo-newscale.png" alt="NewScale" style="height:48px; filter:brightness(0) invert(1); opacity:0.9;">
+        <span style="width:1px; height:38px; background:rgba(255,255,255,0.22);"></span>
+        <img src="logo-claude.svg" alt="Claude" style="height:36px; filter:brightness(0) invert(1); opacity:0.9;">
+      </div>
+      <div style="font-family:var(--sans); font-weight:700; font-size:38px; color:var(--white); letter-spacing:0.04em;">Bruna Santanna</div>
+      <div style="font-family:var(--sans); font-size:19px; color:rgba(255,255,255,0.65); letter-spacing:0.18em; text-transform:uppercase;">@brusantanna.ai &nbsp;·&nbsp; newscale.tech</div>
+    </div>
+  </div>
+  <div class="slide-num" style="color:rgba(255,255,255,0.4);">21 / 21</div>
+</section>
+
+</deck-stage>
+<script src="deck.js"></script>
+</body>
+</html>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
