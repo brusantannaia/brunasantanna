@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude com Profundidade · Índice do curso, A Virada IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#F3EEE3; --bg-2:#ECE5D6; --card:#FBF9F3;
+  --ink:#14373C; --ink-2:#2C4F54; --green:#435D51;
+  --terra:#B06E4A; --terra-l:#C4835E; --terra-d:#985A3B;
+  --text:#233133; --muted:#6E7A75; --line:rgba(20,55,60,.16);
+  --anton:'Anton', sans-serif; --hank:'Hanken Grotesk', sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--hank);background:var(--bg);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+::selection{background:var(--terra);color:#fff;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 30px;}
+h1, h2, h3{font-family:var(--anton);font-weight:400;text-transform:uppercase;letter-spacing:-.01em;line-height:.9;}
+.terra{color:var(--terra);}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--terra);}
+.eyebrow::before{content:'';width:26px;height:2px;background:var(--terra);}
+#bar{position:fixed;top:0;left:0;height:4px;width:0;background:var(--terra);z-index:99;transition:width .1s linear;}
+
+.hd{position:sticky;top:0;z-index:50;background:rgba(243,238,227,.92);backdrop-filter:blur(8px);border-bottom:2px solid var(--ink);}
+.hd-in{display:flex;align-items:center;justify-content:space-between;padding:14px 30px;max-width:1180px;margin:0 auto;}
+.hd .logo{font-family:var(--anton);font-size:1.15rem;text-transform:uppercase;color:var(--ink);letter-spacing:.02em;display:inline-flex;align-items:center;}
+.hd .logo .tag{font-family:var(--hank);font-weight:700;font-size:.6rem;letter-spacing:.12em;color:var(--terra);border:1.5px solid var(--terra);padding:3px 8px;border-radius:100px;margin-left:10px;text-transform:uppercase;}
+.hd .small{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+@media(max-width:600px){.hd .small{display:none;}}
+
+.hero{padding:74px 0 50px;}
+.hero h1{font-size:clamp(3rem,11vw,7rem);color:var(--ink);margin:18px 0 0;}
+.hero .sub{font-size:1.3rem;color:var(--ink-2);max-width:42ch;margin-top:22px;}
+.hero .sub b{color:var(--ink);font-weight:700;}
+.statrow{display:flex;gap:34px;flex-wrap:wrap;margin-top:36px;}
+.statrow .n{font-family:var(--anton);font-size:2.3rem;color:var(--ink);line-height:1;}
+.statrow .n span{color:var(--terra);}
+.statrow .l{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:5px;}
+
+.thread{background:var(--ink);padding:44px 0;}
+.thread p{font-family:var(--anton);text-transform:uppercase;font-size:clamp(1.4rem,4vw,2.4rem);line-height:1.05;color:#fff;max-width:30ch;}
+.thread p span{color:var(--terra-l);}
+.thread .sm{font-family:var(--hank);font-weight:700;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--terra-l);margin-bottom:14px;}
+
+.trail{padding:70px 0 30px;}
+.trail .head{margin-bottom:30px;}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:760px){.grid{grid-template-columns:1fr;}}
+.tcard{display:flex;gap:20px;align-items:flex-start;background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:26px 26px;text-decoration:none;color:inherit;transition:transform .16s, box-shadow .16s;position:relative;}
+.tcard:hover{transform:translateY(-3px);box-shadow:8px 8px 0 var(--terra);}
+.tcard .num{font-family:var(--anton);font-size:3.1rem;color:var(--terra);line-height:.8;min-width:64px;}
+.tcard .k{font-size:.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+.tcard h3{font-family:var(--anton);text-transform:uppercase;font-size:1.4rem;color:var(--ink);margin:3px 0 7px;line-height:.98;}
+.tcard p{font-size:.95rem;color:var(--ink-2);}
+.tcard .go{position:absolute;top:24px;right:24px;font-family:var(--anton);color:var(--terra);font-size:1.4rem;transition:transform .16s;}
+.tcard:hover .go{transform:translateX(4px);}
+.tcard.deck{background:var(--ink);}
+.tcard.deck .k{color:var(--terra-l);}.tcard.deck h3{color:#fff;}.tcard.deck p{color:rgba(255,255,255,.78);}.tcard.deck .num{color:var(--terra-l);}
+
+.foot{background:var(--ink);text-align:center;padding:70px 0;margin-top:50px;}
+.foot h2{font-size:clamp(2.2rem,8vw,4.6rem);color:#fff;}.foot h2 span{color:var(--terra-l);}
+.foot .sig{margin-top:16px;font-size:.9rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra-l);}
+.sign{display:flex;align-items:center;justify-content:space-between;gap:12px;color:#fff;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;padding:18px 30px;background:#0E282C;}
+.sign .ns{font-family:var(--anton);letter-spacing:.28em;color:var(--terra-l);font-size:1.05rem;}
+
+.rv{opacity:0;transform:translateY(20px);transition:opacity .6s cubic-bezier(.2,.7,.2,1), transform .6s cubic-bezier(.2,.7,.2,1);}
+.rv.in{opacity:1;transform:none;}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+
+<header class="hd">
+  <div class="hd-in">
+    <span class="logo">Bruna Santanna<span class="tag">A Virada IA</span></span>
+    <span class="small">Índice do curso</span>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap rv">
+    <span class="eyebrow">A Virada IA · NewScale</span>
+    <h1>CLAUDE COM<br><span class="terra">PROFUNDIDADE.</span></h1>
+    <p class="sub"><b>8 módulos. Uma empresa nascendo no Claude</b>, do primeiro prompt ao sistema rodando sozinho.</p>
+    <div class="statrow">
+      <div><div class="n">8</div><div class="l">módulos</div></div>
+      <div><div class="n">25<span>+</span></div><div class="l">aulas curtas</div></div>
+      <div><div class="n">+40</div><div class="l">prompts prontos</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FIO CONDUTOR -->
+<div class="thread"><div class="wrap rv">
+  <div class="sm">O fio condutor</div>
+  <p>A gente constrói <span>uma empresa do zero</span>, módulo a módulo.</p>
+</div></div>
+
+<!-- TRILHA -->
+<section class="trail">
+  <div class="wrap">
+    <div class="head rv"><span class="eyebrow">A trilha</span><h2 style="font-size:clamp(1.8rem,5vw,3rem);color:var(--ink);margin-top:8px;">Os 8 módulos</h2></div>
+    <div class="grid">
+      <a class="tcard deck rv" href="../deck-modulo1-estudio/index.html">
+        <div class="num">01</div><div><div class="k">Módulo 01 · deck</div><h3>A Fundação</h3><p>Como o Claude pensa e como falar com ele. O pedido: do raso ao profundo.</p></div><span class="go">→</span>
+      </a>
+      <a class="tcard rv" href="2026-06-22-guia-modulo2-claude-que-te-conhece.html">
+        <div class="num">02</div><div><div class="k">Módulo 02</div><h3>O Claude que te conhece</h3><p>Criamos o Projeto da empresa: Projetos, Memória e Tokens.</p></div><span class="go">→</span>
+      </a>
+      <a class="tcard rv" href="2026-06-22-guia-modulo3-produzir-de-verdade.html">
+        <div class="num">03</div><div><div class="k">Módulo 03</div><h3>Produzir de verdade</h3><p>A Skill de conteúdo da empresa, Artifacts e Conectores.</p></div><span class="go">→</span>
+      </a>
+      <a class="tcard rv" href="2026-06-22-guia-modulo5-cowork.html">
+        <div class="num">04</div><div><div class="k">Módulo 04</div><h3>Cowork</h3><p>A jornada: dados de leads → planilha → dashboard → Skill.</p></div><span class="go">→</span>
+      </a>
+      <a class="tcard rv" href="2026-06-22-guia-modulo6-loops-e-agentes.html">
+        <div class="num">05</div><div><div class="k">Módulo 05</div><h3>Loops e Agentes</h3><p>O agente de pré-atendimento da empresa e o loop que se auto-corrige.</p></div><span class="go">→</span>
+      </a>
+      <a class="tcard rv" href="2026-06-22-guia-modulo7-claude-code.html">
+        <div class="num">06</div><div><div class="k">Módulo 06</div><h3>Claude Code</h3><p>O Claude constrói a página da empresa do zero, sem você programar.</p></div><span class="go">→</span>
+      </a>
+      <a class="tcard rv" href="2026-06-22-guia-modulo4-claude-para-design.html">
+        <div class="num">07</div><div><div class="k">Módulo 07</div><h3>Claude para Design</h3><p>O Claude desenha a landing e o one-pager da empresa, e exporta.</p></div><span class="go">→</span>
+      </a>
+      <a class="tcard rv" href="2026-06-22-guia-modulo8-juntando-tudo.html">
+        <div class="num">08</div><div><div class="k">Módulo 08 · finale</div><h3>Juntando tudo</h3><p>O sistema da empresa rodando sozinho. Você montou um sistema.</p></div><span class="go">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FECHO -->
+<div class="foot"><div class="wrap rv">
+  <h2>VOCÊ,<br><span>MULTIPLICADO.</span></h2>
+  <div class="sig">A Virada IA · @brusantanna.ai</div>
+</div></div>
+
+<div class="sign"><span>Claude com Profundidade · @brusantanna.ai</span><img src="logo-newscale.png" alt="NewScale" style="height:20px;filter:brightness(0) invert(1);opacity:.9;"></div>
+
+<script>
+const bar=document.getElementById('bar');
+addEventListener('scroll',()=>{const h=document.documentElement;bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';},{passive:true});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.08, rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
