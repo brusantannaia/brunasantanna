@@ -1,0 +1,13 @@
+<svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <rect width="128" height="128" fill="#C17A5A"/>
+  <!-- raio (shape branco) -->
+  <polygon points="108,14 52,14 20,64 58,64 20,114 76,114 108,64 70,64" fill="#F5EFE6"/>
+  <!-- linha S com pontos -->
+  <line x1="88" y1="34" x2="58" y2="54" stroke="#0a0a0a" stroke-width="4" stroke-linecap="round"/>
+  <line x1="58" y1="54" x2="72" y2="74" stroke="#0a0a0a" stroke-width="4" stroke-linecap="round"/>
+  <line x1="72" y1="74" x2="42" y2="94" stroke="#0a0a0a" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="88" cy="34" r="6" fill="#0a0a0a"/>
+  <circle cx="58" cy="54" r="6" fill="#0a0a0a"/>
+  <circle cx="72" cy="74" r="6" fill="#0a0a0a"/>
+  <circle cx="42" cy="94" r="6" fill="#0a0a0a"/>
+</svg>
