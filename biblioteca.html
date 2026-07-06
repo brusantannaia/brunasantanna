@@ -96,7 +96,7 @@
             background: rgba(243,238,227,0.92); backdrop-filter: blur(8px);
             border-bottom: 2px solid var(--ink);
         }
-        .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; max-width: 1280px; padding: 16px 0; }
         .logo {
             display: inline-flex; align-items: center; text-decoration: none; white-space: nowrap;
             font-family: 'Anton', sans-serif; font-size: 1.2rem; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink);
@@ -105,8 +105,8 @@
             font-family: 'Hanken Grotesk', sans-serif; font-weight: 700; font-size: 0.62rem; letter-spacing: 0.12em;
             color: var(--terra); border: 1.5px solid var(--terra); padding: 3px 8px; border-radius: 100px; margin-left: 10px;
         }
-        .main-nav { display: flex; align-items: center; gap: 26px; }
-        .main-nav a { font-size: 0.88rem; font-weight: 600; color: var(--ink-2); text-decoration: none; transition: color .18s; }
+        .main-nav { display: flex; align-items: center; gap: 20px; }
+        .main-nav a { font-size: 0.88rem; font-weight: 600; color: var(--ink-2); text-decoration: none; white-space: nowrap; transition: color .18s; }
         .main-nav a:hover, .main-nav a.active { color: var(--terra); }
         .nav-cta {
             background: var(--terra); color: #fff !important; padding: 10px 18px; border-radius: 100px;
@@ -116,7 +116,7 @@
         .nav-toggle {
             display: none; background: none; border: none; font-size: 1.5rem; color: var(--ink); cursor: pointer; line-height: 1;
         }
-        @media (max-width: 760px) {
+        @media (max-width: 1180px) {
             .nav-toggle { display: block; }
             .main-nav {
                 display: none; position: absolute; top: 100%; left: 0; right: 0;
@@ -558,6 +558,8 @@
         // cases corporativos ficam FORA do feed do blog (decisão da Bruna 04/07) —
         // eles vivem em /hackathon-de-ia, /treinamento-de-ia-para-empresas,
         // /fluxo-de-caixa-com-ia e /formacao-claude-empresas, linkados pela home e por /treinamentos.
+        { slug: 'guia-fable-5-sistemas', titulo: 'Fable 5: pare de usar o modelo mais caro pra tarefa pequena', tema: 'Modelos', data: '2026-07',
+          descricao: 'O erro é gastar o Claude mais poderoso escrevendo email. O certo é fazer ele construir sistemas que rodam sozinhos depois.' },
         { slug: 'guia-testar-fable-5', titulo: 'Fable 5: o que é e como usar pra construir um produto num fim de semana', tema: 'Modelos', data: '2026-07',
           descricao: 'O novo modelo do Claude vira gerente de obra e orquestra agentes pra construir por você — sem programar.' },
         { slug: 'guia-analisar-conteudo', titulo: 'Como usar o Claude pra descobrir por que seu conteúdo (não) viraliza', tema: 'Criadores', data: '2026-07',

@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fable 5: pare de usar o modelo mais caro pra tarefa pequena | A Virada IA · Bruna Santanna</title>
+    <meta name="description" content="O Fable 5 é o modelo mais poderoso do Claude. O erro é usar ele pra escrever email. O certo é fazer ele construir sistemas que rodam sozinhos depois.">
+    <meta name="author" content="Bruna Santanna">
+    <link rel="canonical" href="https://brunasantanna.com/guia-fable-5-sistemas">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://brunasantanna.com/guia-fable-5-sistemas">
+    <meta property="og:title" content="Fable 5: pare de usar o modelo mais caro pra tarefa pequena | A Virada IA">
+    <meta property="og:description" content="O Fable 5 é o modelo mais poderoso do Claude. O erro é usar ele pra escrever email. O certo é fazer ele construir sistemas que rodam sozinhos depois.">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DCW0QVCWB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-7DCW0QVCWB');
+    </script>
+
+    <!-- JSON-LD: Article -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Fable 5: pare de usar o modelo mais caro pra tarefa pequena",
+        "description": "O Fable 5 é o modelo mais poderoso do Claude. O erro é usar ele pra escrever email. O certo é fazer ele construir sistemas que rodam sozinhos depois.",
+        "inLanguage": "pt-BR",
+        "url": "https://brunasantanna.com/guia-fable-5-sistemas",
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://brunasantanna.com/guia-fable-5-sistemas" },
+        "datePublished": "2026-07-06",
+        "dateModified": "2026-07-06",
+        "author": { "@type": "Person", "name": "Bruna Santanna", "url": "https://brunasantanna.com",
+            "sameAs": ["https://instagram.com/brusantanna.ai", "https://www.linkedin.com/in/bruna-araujo-santanna/"] },
+        "publisher": {
+            "@type": "Organization",
+            "name": "A Virada IA · Bruna Santanna",
+            "url": "https://brunasantanna.com"
+        },
+        "about": "Modelos"
+    }
+    </script>
+
+    <!-- JSON-LD: FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "O que é o Fable 5 do Claude?",
+                "acceptedAnswer": { "@type": "Answer", "text": "O Fable 5 é o modelo mais poderoso da família Claude, feito pra raciocínio profundo, estratégia e construção de sistemas e aplicativos. Ele é caro por uso, então rende mais quando você pede pra ele projetar uma solução do que quando pede uma tarefa pequena." }
+            },
+            {
+                "@type": "Question",
+                "name": "Até quando o Fable 5 fica incluído no plano?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Até 8 de julho de 2026 o Fable 5 fica incluído em metade do seu limite semanal se você é assinante do Pro Max ou do Teams. Depois dessa data ele passa a ser cobrado por crédito, então vale usar agora pra construir seus sistemas enquanto está incluído." }
+            },
+            {
+                "@type": "Question",
+                "name": "Qual o erro mais comum ao usar o Fable 5?",
+                "acceptedAnswer": { "@type": "Answer", "text": "O erro é gastar o modelo mais caro em tarefa pequena, tipo escrever um email ou uma legenda. O jeito certo é tratar o Fable 5 como um executivo caríssimo: em vez de pedir a tarefa, você pede pra ele construir o sistema que faz aquela tarefa sozinho, pra sempre, rodando depois em modelos mais baratos." }
+            }
+        ]
+    }
+    </script>
+
+    <!-- JSON-LD: Person (entidade autora) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Bruna Santanna",
+        "url": "https://brunasantanna.com",
+        "jobTitle": "Educadora de IA e fundadora da NewScale",
+        "sameAs": [
+            "https://instagram.com/brusantanna.ai",
+            "https://www.linkedin.com/in/bruna-araujo-santanna/"
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg:#F3EEE3; --bg-2:#ECE5D6; --card:#FBF9F3;
+            --ink:#14373C; --ink-2:#2C4F54; --green:#435D51;
+            --terra:#B06E4A; --terra-l:#C4835E; --terra-d:#985A3B;
+            --text:#233133; --muted:#6E7A75; --line:rgba(20,55,60,0.16);
+            --cream:#F4F3EF;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family:'Hanken Grotesk',sans-serif; background:var(--bg); color:var(--text); line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+        img { max-width:100%; display:block; }
+        a { color:inherit; text-decoration:none; }
+        ::selection { background:var(--terra); color:#fff; }
+        .wrap { max-width:1100px; margin:0 auto; padding:0 30px; }
+        .kick { font-size:0.72rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--terra); }
+
+        /* ---------- HEADER ---------- */
+        .site-header { position:sticky; top:0; z-index:50; background:rgba(243,238,227,0.92); backdrop-filter:blur(8px); border-bottom:2px solid var(--ink); }
+        .header-inner { display:flex; align-items:center; justify-content:space-between; gap:24px; max-width:1280px; padding:16px 30px; }
+        .logo { display:inline-flex; align-items:center; white-space:nowrap; font-family:'Anton',sans-serif; font-size:1.2rem; letter-spacing:0.02em; text-transform:uppercase; color:var(--ink); }
+        .logo .brand-tag { font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:0.62rem; letter-spacing:0.12em; color:var(--terra); border:1.5px solid var(--terra); padding:3px 8px; border-radius:100px; margin-left:10px; }
+        .main-nav { display:flex; align-items:center; gap:20px; }
+        .main-nav a { font-size:0.86rem; font-weight:600; color:var(--ink-2); white-space:nowrap; transition:color .18s; }
+        .main-nav a:hover, .main-nav a.active { color:var(--terra); }
+        .nav-cta { background:var(--terra); color:#fff !important; padding:10px 18px; border-radius:100px; font-size:0.8rem !important; transition:background .2s, transform .15s; }
+        .nav-cta:hover { background:var(--terra-d); transform:translateY(-1px); }
+        .nav-toggle { display:none; background:none; border:none; font-size:1.5rem; color:var(--ink); cursor:pointer; line-height:1; }
+        @media (max-width: 1180px) {
+            .nav-toggle { display:block; }
+            .main-nav { display:none; position:absolute; top:100%; left:0; right:0; flex-direction:column; align-items:flex-start; gap:0; background:var(--bg); border-bottom:2px solid var(--ink); padding:8px 30px 20px; }
+            .main-nav.open { display:flex; box-shadow:0 28px 46px -20px rgba(20,55,60,0.55); max-height:calc(100dvh - 62px); overflow-y:auto; }
+            .site-header:has(.main-nav.open)::after { content:""; position:fixed; left:0; right:0; top:62px; bottom:0; background:rgba(20,55,60,0.38); z-index:40; pointer-events:none; }
+            .main-nav a { padding:12px 0; width:100%; border-top:1px solid var(--line); font-size:1rem; }
+            .nav-cta { margin-top:12px; text-align:center; border-top:none; }
+        }
+
+        /* botão genérico */
+        .btn { display:inline-flex; align-items:center; gap:9px; justify-content:center; font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:0.85rem; letter-spacing:0.04em; text-transform:uppercase; padding:15px 28px; border-radius:100px; border:none; cursor:pointer; transition:transform .15s, box-shadow .15s, background .2s; }
+        .btn-terra { background:var(--terra); color:#fff; }
+        .btn-terra:hover { background:var(--terra-d); transform:translateY(-2px); box-shadow:0 10px 26px rgba(176,110,74,.35); }
+        .btn-ink { background:var(--ink); color:#fff; }
+        .btn-ink:hover { background:var(--ink-2); transform:translateY(-2px); }
+
+        /* ---------- HERO COMPACTO ---------- */
+        .hero { position:relative; overflow:hidden; border-bottom:1.5px solid var(--line); }
+        .hero-glow { position:absolute; width:560px; height:560px; border-radius:50%; top:-240px; right:-160px; background:radial-gradient(circle,rgba(176,110,74,.13),transparent 62%); pointer-events:none; }
+        .hero .wrap { position:relative; z-index:2; padding:54px 30px 48px; max-width:820px; }
+        .hero-eyebrow { display:inline-flex; align-items:center; gap:9px; margin-bottom:20px; flex-wrap:wrap; }
+        .hero-eyebrow .dot { width:7px; height:7px; border-radius:50%; background:var(--terra); box-shadow:0 0 0 4px rgba(176,110,74,.18); }
+        .hero-eyebrow .sep { color:var(--line); }
+        .hero-eyebrow .data { font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); }
+        .hero h1 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(2.4rem,7vw,4.2rem); line-height:0.94; letter-spacing:-0.01em; text-transform:uppercase; color:var(--ink); }
+        .hero h1 .terra { color:var(--terra); }
+        .hero-sub { font-size:1.12rem; color:var(--ink-2); font-weight:300; max-width:54ch; margin-top:20px; }
+        .hero-sub b { color:var(--ink); font-weight:600; }
+
+        /* ---------- LAYOUT ARTIGO ---------- */
+        .artigo { padding:56px 0 40px; }
+        .artigo .wrap { max-width:760px; }
+
+        /* bloco do reel embedado */
+        .reel-embed { margin:0 auto 44px; max-width:540px; }
+        .reel-embed .instagram-media { margin:0 auto !important; }
+        .reel-placeholder { border:1.5px dashed var(--line); border-radius:16px; background:var(--card); padding:34px 26px; text-align:center; }
+        .reel-placeholder .rp-icon { font-size:1.7rem; margin-bottom:10px; }
+        .reel-placeholder b { display:block; font-family:'Anton',sans-serif; font-weight:400; font-size:1.15rem; text-transform:uppercase; color:var(--ink); letter-spacing:.01em; margin-bottom:6px; }
+        .reel-placeholder p { font-size:0.88rem; color:var(--muted); }
+
+        /* corpo do post */
+        .corpo { font-size:1.06rem; color:var(--text); line-height:1.75; }
+        .corpo > p { margin-bottom:20px; }
+        .corpo > p:first-of-type { font-size:1.16rem; color:var(--ink-2); }
+        .corpo h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.6rem,4.5vw,2.2rem); text-transform:uppercase; color:var(--ink); line-height:1.05; letter-spacing:-0.01em; margin:44px 0 16px; }
+        .corpo h3 { font-size:1.2rem; font-weight:700; color:var(--ink); margin:30px 0 10px; }
+        .corpo a { color:var(--terra-d); font-weight:600; border-bottom:1.5px solid var(--terra); }
+        .corpo a:hover { color:var(--terra); }
+        .corpo strong, .corpo b { color:var(--ink); font-weight:700; }
+        .corpo ul { list-style:none; margin:6px 0 22px; padding:0; }
+        .corpo ul li { position:relative; padding-left:26px; margin-bottom:12px; }
+        .corpo ul li::before { content:'→'; position:absolute; left:0; top:0; color:var(--terra); font-weight:800; }
+        .corpo ol { margin:6px 0 22px 22px; }
+        .corpo ol li { margin-bottom:12px; padding-left:6px; }
+        .corpo ol li::marker { color:var(--terra); font-weight:800; }
+
+        /* blocos didáticos */
+        .bloco { border-radius:14px; padding:22px 24px 22px 26px; margin:26px 0; border:1.5px solid var(--line); }
+        .bloco .bloco-tag { display:block; font-size:0.72rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:8px; }
+        .bloco p { font-size:0.98rem; line-height:1.65; margin:0; }
+        .bloco p + p { margin-top:10px; }
+        .bloco-dica { background:rgba(67,93,81,0.08); border-left:5px solid var(--green); }
+        .bloco-dica .bloco-tag { color:var(--green); }
+        .bloco-atencao { background:rgba(176,110,74,0.09); border-left:5px solid var(--terra); }
+        .bloco-atencao .bloco-tag { color:var(--terra-d); }
+        .bloco-case { background:var(--ink); border-left:5px solid var(--terra-l); border-color:var(--ink); }
+        .bloco-case .bloco-tag { color:var(--terra-l); }
+        .bloco-case p { color:rgba(244,243,239,.88); }
+        .bloco-case b { color:#fff; }
+
+        /* antes/depois */
+        .antes-depois { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:26px 0; }
+        @media (max-width:600px) { .antes-depois { grid-template-columns:1fr; } }
+        .ad-ruim, .ad-bom { border-radius:12px; padding:18px 20px; font-size:0.95rem; line-height:1.6; border:1.5px solid var(--line); }
+        .ad-ruim { background:rgba(150,90,59,0.06); }
+        .ad-bom { background:rgba(67,93,81,0.08); }
+        .ad-ruim .ad-label, .ad-bom .ad-label { display:block; font-size:0.74rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:8px; }
+        .ad-ruim .ad-label { color:var(--terra-d); }
+        .ad-bom .ad-label { color:var(--green); }
+
+        /* prompt box com botão copiar */
+        .prompt-box { background:var(--ink); border-radius:16px; padding:22px 24px; margin:28px 0; position:relative; box-shadow:8px 8px 0 var(--green); }
+        .prompt-box .pb-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; }
+        .prompt-box .pb-label { font-size:0.72rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--terra-l); }
+        .prompt-box pre { font-family:'Hanken Grotesk',ui-monospace,monospace; font-size:0.95rem; line-height:1.6; color:rgba(244,243,239,.92); white-space:pre-wrap; word-wrap:break-word; margin:0; }
+        .copy-btn { flex-shrink:0; display:inline-flex; align-items:center; gap:6px; background:var(--terra); color:#fff; border:none; border-radius:100px; padding:8px 16px; font-family:'Hanken Grotesk',sans-serif; font-size:0.74rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer; transition:background .2s, transform .15s; }
+        .copy-btn:hover { background:var(--terra-d); transform:translateY(-1px); }
+        .copy-btn.copied { background:var(--green); }
+
+        /* ---------- CONTENT UPGRADE (gated) ---------- */
+        .upgrade { margin:52px 0; }
+        .upgrade .wl-card { background:var(--ink); color:#fff; border-radius:18px; padding:34px 32px; box-shadow:8px 8px 0 var(--terra); }
+        .upgrade .wl-card .kick { color:var(--terra-l); display:block; margin-bottom:12px; }
+        .upgrade .wl-card h3 { font-family:'Anton',sans-serif; font-weight:400; font-size:1.7rem; text-transform:uppercase; line-height:1; margin-bottom:8px; }
+        .upgrade .wl-card .wl-sub { font-size:0.95rem; color:rgba(255,255,255,0.72); margin-bottom:22px; max-width:46ch; }
+        .upgrade .wl-form { display:flex; gap:10px; flex-wrap:wrap; }
+        .field { flex:1; min-width:220px; padding:16px 20px; font-family:inherit; font-size:1rem; background:rgba(255,255,255,0.07); border:1.5px solid rgba(255,255,255,0.22); border-radius:10px; color:#fff; outline:none; transition:border-color .2s, background .2s; }
+        .field::placeholder { color:rgba(255,255,255,0.5); }
+        .field:focus { border-color:var(--terra); background:rgba(255,255,255,0.12); }
+        .btn-form { padding:16px 26px; font-family:'Hanken Grotesk',sans-serif; font-size:0.82rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer; background:var(--terra); color:#fff; border:none; border-radius:10px; transition:transform .15s, box-shadow .15s, background .2s; white-space:nowrap; }
+        .btn-form:hover { background:var(--terra-d); transform:translateY(-2px); box-shadow:0 8px 22px rgba(176,110,74,0.35); }
+        .btn-form:disabled { opacity:.6; cursor:not-allowed; transform:none; }
+        .upgrade .fine { margin-top:14px; font-size:0.76rem; color:rgba(255,255,255,0.55); }
+        .wl-ok { display:none; background:rgba(67,93,81,0.35); border:1.5px solid var(--terra-l); border-radius:10px; padding:18px 20px; font-size:0.98rem; line-height:1.5; color:#fff; }
+        .wl-ok b { color:var(--terra-l); }
+        .wl-done .wl-ok { display:block; }
+        .wl-done .wl-form, .wl-done .fine { display:none; }
+
+        /* ---------- FAQ ---------- */
+        .faq-sec { padding:8px 0 20px; }
+        .faq-sec .wrap { max-width:760px; }
+        .faq-sec h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.6rem,4.5vw,2.2rem); text-transform:uppercase; color:var(--ink); line-height:1; margin-bottom:22px; }
+        .faq-list { max-width:760px; }
+        .faq-item { border:1.5px solid var(--line); border-radius:14px; background:var(--card); margin-bottom:12px; overflow:hidden; }
+        .faq-q { width:100%; display:flex; justify-content:space-between; align-items:center; gap:16px; text-align:left; background:none; border:none; cursor:pointer; padding:20px 24px; font-family:'Hanken Grotesk',sans-serif; font-size:1.02rem; font-weight:700; color:var(--ink); }
+        .faq-q .mark { font-family:'Anton',sans-serif; font-size:1.3rem; color:var(--terra); transition:transform .25s; flex-shrink:0; line-height:1; }
+        .faq-item.open .faq-q .mark { transform:rotate(45deg); }
+        .faq-a { display:none; padding:0 24px 22px; font-size:0.96rem; color:var(--ink-2); line-height:1.7; }
+        .faq-item.open .faq-a { display:block; }
+        .faq-a b { color:var(--ink); }
+
+        /* ---------- CONTINUE APRENDENDO ---------- */
+        .continue-sec { padding:20px 0 8px; }
+        .continue-sec .wrap { max-width:760px; }
+        .continue-sec h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.4rem,4vw,1.9rem); text-transform:uppercase; color:var(--ink); line-height:1; margin-bottom:18px; }
+        .continue-list { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+        @media (max-width:600px) { .continue-list { grid-template-columns:1fr; } }
+        .continue-list a { display:block; background:var(--card); border:1.5px solid var(--line); border-radius:12px; padding:16px 18px; transition:border-color .2s, transform .15s; }
+        .continue-list a:hover { border-color:var(--terra); transform:translateY(-2px); }
+        .continue-list .cl-kick { font-size:0.68rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--terra); display:block; margin-bottom:5px; }
+        .continue-list .cl-tit { font-size:0.98rem; font-weight:700; color:var(--ink); line-height:1.3; }
+
+        /* ---------- BANNER DO CURSO ---------- */
+        .curso-banner { background:var(--ink); color:var(--cream); margin:40px 0 0; }
+        .curso-banner .wrap { max-width:900px; padding:56px 30px; display:flex; align-items:center; justify-content:space-between; gap:30px; flex-wrap:wrap; }
+        .curso-banner .cb-text { flex:1; min-width:260px; }
+        .curso-banner .kick { color:var(--terra-l); display:block; margin-bottom:12px; }
+        .curso-banner h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.7rem,5vw,2.6rem); text-transform:uppercase; color:#fff; line-height:1; margin-bottom:12px; max-width:20ch; }
+        .curso-banner h2 .terra { color:var(--terra-l); }
+        .curso-banner p { color:rgba(244,243,239,.72); font-weight:300; font-size:1rem; max-width:46ch; }
+
+        /* volta pro hub */
+        .voltar-hub { text-align:center; padding:40px 0 8px; }
+        .voltar-hub a { font-size:0.9rem; font-weight:700; letter-spacing:0.02em; color:var(--ink); border-bottom:2px solid var(--terra); padding-bottom:3px; transition:color .18s; }
+        .voltar-hub a:hover { color:var(--terra); }
+
+        /* footer */
+        footer { background:var(--ink); color:rgba(244,243,239,.6); padding:40px 0 48px; margin-top:30px; }
+        .footer-row { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+        .footer-brand { font-family:'Anton',sans-serif; font-size:1.1rem; text-transform:uppercase; color:#fff; }
+        .footer-links { display:flex; gap:20px; flex-wrap:wrap; }
+        .footer-links a { font-size:0.84rem; font-weight:600; color:rgba(244,243,239,.7); }
+        .footer-links a:hover { color:var(--terra-l); }
+        .footer-copy { font-size:0.76rem; color:rgba(244,243,239,.4); margin-top:14px; }
+
+        /* reveal */
+        .rv { opacity:0; transform:translateY(22px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+        .rv.in { opacity:1; transform:none; }
+        @media (prefers-reduced-motion:reduce) { .rv { opacity:1; transform:none; } }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="wrap header-inner">
+        <a href="/" class="logo">Bruna Santanna<span class="brand-tag">A Virada IA</span></a>
+        <nav class="main-nav" id="mainNav">
+            <a href="/">Home</a>
+            <a href="/biblioteca">Biblioteca</a>
+            <a href="/claude">Guia do Claude</a>
+            <a href="/quem-sou">Quem Sou</a>
+            <a href="/treinamentos">Treinamentos Corporativos</a>
+            <a href="/mentoria">Mentoria</a>
+            <a href="https://newscale.tech" target="_blank" rel="noopener">IA na sua Empresa</a>
+            <a href="/curso" class="nav-cta">Quero o curso</a>
+        </nav>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">☰</button>
+    </div>
+</header>
+
+<!-- ========== HERO COMPACTO ========== -->
+<section class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="wrap">
+        <div class="hero-eyebrow rv">
+            <span class="dot"></span>
+            <span class="kick">Modelos</span>
+            <span class="sep">·</span>
+            <span class="data">Julho de 2026</span>
+        </div>
+        <h1 class="rv">Pare de usar o modelo mais <span class="terra">caro</span> pra tarefa pequena</h1>
+        <p class="hero-sub rv">O Fable 5 é o Claude mais poderoso que já existiu. O erro é gastar ele escrevendo email. O certo é fazer ele <b>construir o sistema</b> que faz a tarefa sozinho, pra sempre.</p>
+    </div>
+</section>
+
+<!-- ========== ARTIGO ========== -->
+<article class="artigo">
+    <div class="wrap">
+
+        <div class="reel-embed rv">
+            <div class="reel-placeholder">
+                <div class="rp-icon">🎬</div>
+                <b>O Reel entra aqui</b>
+                <p>Assim que o vídeo desse guia for publicado no Instagram, ele aparece embedado neste espaço.</p>
+            </div>
+        </div>
+
+        <div class="corpo rv">
+
+            <p>O Fable 5 é o modelo mais poderoso da família Claude, e o maior erro é usar ele pra tarefa pequena tipo escrever um email ou uma legenda. O jeito certo é tratar ele como um executivo caríssimo: em vez de pedir a tarefa, você pede pra ele <b>construir o sistema</b> que resolve aquilo sozinho, pra sempre.</p>
+
+            <p>Se você tá lendo isso antes de <b>8 de julho de 2026</b>, tá com sorte. Até essa data o Fable 5 fica incluído em metade do seu limite semanal se você é assinante do Pro Max ou do Teams. Depois disso ele vira pago por crédito. Ou seja: dá pra usar o modelo mais forte agora, de graça, pra montar as ferramentas que vão rodar o resto do ano.</p>
+
+            <p>E é exatamente aí que quase todo mundo vai escorregar. A maioria nem vai saber que ele existe. E quem souber vai queimar o crédito mais valioso do Claude fazendo coisinha. Bora fazer diferente.</p>
+
+            <h2>Por que não usar o Fable 5 pra tarefa pequena?</h2>
+
+            <p>Pensa assim: você não contrata o diretor mais caro da empresa pra responder email. Você contrata ele pra desenhar o processo que faz os emails serem respondidos sem ele. O Fable 5 é esse diretor.</p>
+
+            <p>Escrever uma legenda, um email, um resumo curto: o Sonnet ou o Haiku fazem isso muito bem, gastando bem menos. O Fable 5 brilha quando o problema é grande e aberto: projetar um fluxo, construir um aplicativo, pensar uma estratégia inteira. Usar ele pra tarefa pequena é como pagar passagem de primeira classe pra atravessar a rua.</p>
+
+            <div class="antes-depois">
+                <div class="ad-ruim">
+                    <span class="ad-label">❌ O jeito que desperdiça</span>
+                    "Fable 5, escreve pra mim a legenda desse post."
+                    <br><br>Resultado: uma legenda. Amanhã você pede de novo. E de novo.
+                </div>
+                <div class="ad-bom">
+                    <span class="ad-label">✅ O jeito que multiplica</span>
+                    "Fable 5, constrói um sistema que gera minhas legendas no meu tom, sozinho."
+                    <br><br>Resultado: uma ferramenta. Amanhã ela já roda sem você.
+                </div>
+            </div>
+
+            <h2>Como fazer o Fable 5 construir um sistema pra você?</h2>
+
+            <p>O pulo do gato é este: se ele te oferecer fazer uma tarefa, você pede pra ele montar a máquina que faz aquela tarefa. E essa máquina depois roda nos modelos mais baratos. Você paga o executivo uma vez pra projetar, e o estagiário barato opera pra sempre. Segue o passo a passo.</p>
+
+            <h3>Passo 1: descubra a tarefa certa com o Opus</h3>
+
+            <p>Antes de ir pro Fable 5, abre uma conversa com o <b>Opus</b> (outro modelo do Claude, ótimo pra pensar junto) e pede pra ele te entrevistar. A tarefa que mais vale virar sistema é aquela que você repete toda semana: editar um vídeo, montar uma proposta, responder um tipo de cliente.</p>
+
+            <div class="prompt-box">
+                <div class="pb-head">
+                    <span class="pb-label">📋 Prompt · cole no Opus</span>
+                    <button class="copy-btn">Copiar</button>
+                </div>
+                <pre>Quero transformar uma tarefa que eu repito toda semana num sistema que rode quase sozinho.
+
+Antes de sugerir qualquer coisa, me entrevista. Faz UMA pergunta de cada vez pra entender:
+- qual é a tarefa que eu mais repito no meu trabalho
+- quanto tempo ela me toma por semana
+- quais são os passos que eu faço na mão hoje
+- o que define um bom resultado (como eu sei que ficou pronto)
+- onde eu costumo travar ou perder tempo
+
+Só depois que eu responder tudo, você me devolve:
+1. a tarefa que mais vale a pena virar sistema (a de maior impacto e mais repetida)
+2. um resumo claro de como esse sistema deveria funcionar, pra eu levar pro Fable 5 construir
+
+Não assume que eu sei de tecnologia. Fala comigo em português simples.</pre>
+            </div>
+
+            <h3>Passo 2: leve a ideia pro Fable 5 e peça a ferramenta completa</h3>
+
+            <p>Com o resumo do Opus na mão, você abre o Fable 5 e pede pra ele construir a coisa inteira. Aqui você não pede uma resposta, você pede um <b>produto</b>: um aplicativo, uma planilha inteligente, um roteiro fixo, uma Skill. Cola o resumo do passo 1 e manda ele construir.</p>
+
+            <div class="prompt-box">
+                <div class="pb-head">
+                    <span class="pb-label">📋 Prompt · cole no Fable 5</span>
+                    <button class="copy-btn">Copiar</button>
+                </div>
+                <pre>Você é o executivo mais capaz do meu time e vai CONSTRUIR uma ferramenta pra mim, não só executar uma tarefa.
+
+Aqui está o sistema que eu preciso (resumo que montei antes):
+[COLE AQUI O RESUMO QUE O OPUS TE DEU]
+
+Sua missão:
+1. Construir a ferramenta completa que resolve isso sozinha (aplicativo, fluxo, template ou Skill).
+2. Deixar ela simples de usar, feita pra alguém que não programa.
+3. Fazer ela rodar depois em modelos mais baratos, guardando o trabalho pesado só pro que realmente precisa.
+
+O que é um bom resultado (não entrega antes de bater isso):
+[EX: cada proposta sai pronta pra enviar / cada vídeo fica com menos de 2 minutos / cada resposta já sai no meu tom]
+
+Depois de construir, TESTE o seu próprio trabalho com um exemplo real e me mostra o resultado. Se não passou no critério de bom resultado, ajusta antes de me entregar.</pre>
+            </div>
+
+            <div class="bloco bloco-dica">
+                <span class="bloco-tag">→ Dica</span>
+                <p>Repare nas duas frases mágicas do prompt: <b>"defina o que é um bom resultado"</b> e <b>"teste o seu próprio trabalho"</b>. É isso que faz o Fable 5 parar de te entregar coisa pela metade. Ele constrói, testa contra o seu critério, corrige, e só então te mostra.</p>
+            </div>
+
+            <h3>Passo 3: deixe o sistema rodando no barato</h3>
+
+            <p>Pronto o sistema, o Fable 5 já cumpriu o papel dele. No dia a dia, a ferramenta roda nos modelos mais baratos e rápidos. Você guarda o Fable 5 pra quando for construir a próxima máquina, não pra operar as que já existem.</p>
+
+            <div class="bloco bloco-atencao">
+                <span class="bloco-tag">⚠ Atenção</span>
+                <p>O prazo de 8 de julho é real. Enquanto o Fable 5 está incluído no seu plano, gasta ele com <b>construção</b>, não com operação. Cada sistema que você montar agora continua trabalhando pra você depois que ele virar pago por crédito.</p>
+            </div>
+
+            <div class="bloco bloco-case">
+                <span class="bloco-tag">✦ Case real</span>
+                <p>Eu mudei toda a estratégia da minha empresa e dos meus conteúdos com essa lógica. Em vez de pedir tarefa, passei a pedir sistema. <b>O site inteiro que eu montei ontem foi construído com o Fable 5.</b> Não foi uma página de cada vez. Foi ele orquestrando a coisa toda enquanto eu decidia o que era um bom resultado.</p>
+            </div>
+
+            <h2>Qual a diferença entre pedir uma tarefa e pedir um sistema?</h2>
+
+            <p>Um sistema é qualquer coisa que continua funcionando depois que você fecha a conversa. Pedir uma tarefa te dá um resultado hoje. Pedir um sistema te dá resultados todos os dias, sem você repetir o pedido. Na prática:</p>
+
+            <ul>
+                <li>Em vez de "responde esse cliente", peça "constrói um fluxo que responde esse tipo de cliente no meu tom".</li>
+                <li>Em vez de "faz essa proposta", peça "monta um gerador de propostas que já sai pronto pra enviar".</li>
+                <li>Em vez de "edita esse vídeo", peça "cria um processo que deixa qualquer vídeo meu com menos de 2 minutos".</li>
+            </ul>
+
+            <p>Se você quer se aprofundar em como o Fable 5 orquestra outros modelos pra construir por você, veja também o <a href="/guia-testar-fable-5">guia de como usar o Fable 5 pra construir um produto num fim de semana</a>. E pra montar sistemas que se repetem, a <a href="/guia-skills-claude">Skill do Claude</a> é o formato mais direto.</p>
+
+        </div>
+
+        <!-- ─── CONTENT UPGRADE (gated → list: 'biblioteca') ───────────── -->
+        <div class="upgrade rv">
+            <div class="wl-card" id="upgradeCard">
+                <span class="kick">Material extra · grátis</span>
+                <h3>O guia pra usar o Claude com profundidade</h3>
+                <p class="wl-sub">Quer aprender a usar o Claude do jeito certo, não pela metade? Deixa seu email que eu mando direto pra você o guia gratuito pra começar hoje mesmo, e você ainda entra na Biblioteca.</p>
+                <form class="wl-form" novalidate>
+                    <input class="field" type="email" placeholder="Seu melhor email" required autocomplete="email">
+                    <button type="submit" class="btn-form">Quero o material</button>
+                </form>
+                <div class="wl-ok"><b>Prontinho, tá dentro.</b> O material e as próximas novidades da Biblioteca chegam no seu email.</div>
+                <p class="fine">Zero spam. Só o que vale a pena sobre IA na prática.</p>
+            </div>
+        </div>
+
+    </div>
+</article>
+
+<!-- ========== FAQ ========== -->
+<section class="faq-sec">
+    <div class="wrap">
+        <h2 class="rv">Dúvidas rápidas</h2>
+        <div class="faq-list rv">
+            <div class="faq-item">
+                <button class="faq-q">O que é o Fable 5 do Claude?<span class="mark">+</span></button>
+                <div class="faq-a">O Fable 5 é o modelo mais poderoso da família Claude, feito pra raciocínio profundo, estratégia e construção de sistemas e aplicativos. Ele é caro por uso, então rende mais quando você pede pra ele projetar uma solução do que quando pede uma tarefa pequena.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Até quando o Fable 5 fica incluído no plano?<span class="mark">+</span></button>
+                <div class="faq-a">Até 8 de julho de 2026 o Fable 5 fica incluído em metade do seu limite semanal se você é assinante do Pro Max ou do Teams. Depois dessa data ele passa a ser cobrado por crédito, então vale usar agora pra construir seus sistemas enquanto está incluído.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Qual o erro mais comum ao usar o Fable 5?<span class="mark">+</span></button>
+                <div class="faq-a">O erro é gastar o modelo mais caro em tarefa pequena, tipo escrever um email ou uma legenda. O jeito certo é tratar o Fable 5 como um executivo caríssimo: em vez de pedir a tarefa, você pede pra ele construir o sistema que faz aquela tarefa sozinho, pra sempre, rodando depois em modelos mais baratos.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== CONTINUE APRENDENDO ========== -->
+<section class="continue-sec">
+    <div class="wrap">
+        <h2 class="rv">Continue aprendendo</h2>
+        <div class="continue-list rv">
+            <a href="/claude">
+                <span class="cl-kick">Comece por aqui</span>
+                <span class="cl-tit">O Guia Definitivo do Claude em Português</span>
+            </a>
+            <a href="/guia-testar-fable-5">
+                <span class="cl-kick">Modelos</span>
+                <span class="cl-tit">Fable 5: construa um produto num fim de semana</span>
+            </a>
+            <a href="/guia-loop-meta">
+                <span class="cl-kick">Claude Code</span>
+                <span class="cl-tit">Loop: defina a meta e o Claude trabalha sozinho</span>
+            </a>
+            <a href="/biblioteca">
+                <span class="cl-kick">Biblioteca</span>
+                <span class="cl-tit">Todos os guias e prompts, num lugar só</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ========== BANNER DO CURSO ========== -->
+<section class="curso-banner">
+    <div class="wrap">
+        <div class="cb-text">
+            <span class="kick">Curso de Claude · Coorte 1</span>
+            <h2>Quer ir <span class="terra">além</span> desse guia?</h2>
+            <p>No Claude com Profundidade você aprende a pensar e usar IA de verdade, do zero, sem programar. Zero tech, 100% prático.</p>
+        </div>
+        <a href="/curso" class="btn btn-terra">Quero o curso</a>
+    </div>
+</section>
+
+<!-- volta pro hub -->
+<div class="voltar-hub">
+    <a href="/biblioteca">← Voltar pra Biblioteca</a>
+</div>
+
+<footer>
+    <div class="wrap">
+        <div class="footer-row">
+            <span class="footer-brand">A Virada IA</span>
+            <nav class="footer-links">
+                <a href="/biblioteca">Biblioteca</a>
+                <a href="/claude">Guia do Claude</a>
+                <a href="/curso">Curso de Claude</a>
+                <a href="/mentoria">Mentoria</a>
+                <a href="/comece">Comece por aqui</a>
+                <a href="https://instagram.com/brusantanna.ai" target="_blank" rel="noopener">Instagram</a>
+                <a href="https://newscale.tech" target="_blank" rel="noopener">NewScale</a>
+                <a href="mailto:eu@brunasantanna.com">Contato</a>
+            </nav>
+        </div>
+        <p class="footer-copy">© 2026 Bruna Santanna · A Virada IA</p>
+    </div>
+</footer>
+
+<script>
+    // ===== Copiar prompt =====
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const box = btn.closest('.prompt-box');
+            const pre = box.querySelector('pre');
+            const text = pre ? pre.innerText : '';
+            navigator.clipboard.writeText(text).then(() => {
+                const original = btn.textContent;
+                btn.textContent = '✓ Copiado';
+                btn.classList.add('copied');
+                setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, 1800);
+            });
+        });
+    });
+
+    // ===== Content upgrade (Apps Script, list: 'biblioteca') =====
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx90IdrA_L6n3jVdoYBinBPxPfWq0h6Iua1MrI8gQ7-RgBXhU1rOqF9dM2n7mLdAeMW/exec";
+
+    document.querySelectorAll('.wl-form').forEach(form => {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const input = form.querySelector('input[type="email"]');
+            const btn = form.querySelector('button[type="submit"]');
+            const email = input.value.trim();
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { input.focus(); return; }
+            btn.disabled = true; btn.textContent = 'Enviando...';
+            try {
+                await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, list: 'biblioteca', timestamp: new Date().toISOString(), source: location.href }) });
+            } catch(_) {}
+            if (typeof gtag === 'function') gtag('event', 'lead_signup', { list: 'biblioteca' });
+            document.querySelectorAll('.upgrade .wl-card').forEach(c => c.classList.add('wl-done'));
+            localStorage.setItem('biblioteca_lead', '1');
+        });
+    });
+    if (localStorage.getItem('biblioteca_lead') === '1') {
+        document.querySelectorAll('.upgrade .wl-card').forEach(c => c.classList.add('wl-done'));
+    }
+
+    // ===== FAQ accordion =====
+    document.querySelectorAll('.faq-q').forEach(q => {
+        q.addEventListener('click', () => q.closest('.faq-item').classList.toggle('open'));
+    });
+
+    // ===== menu mobile =====
+    const navToggle = document.getElementById('navToggle'), mainNav = document.getElementById('mainNav');
+    navToggle.addEventListener('click', () => mainNav.classList.toggle('open'));
+    mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mainNav.classList.remove('open')));
+
+    // ===== reveal on scroll =====
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0, rootMargin:'0px 0px -40px 0px' });
+    document.querySelectorAll('.rv').forEach((el,i) => { el.style.transitionDelay = (i%3*70)+'ms'; io.observe(el); });
+    /* rv-safety: garante que o conteudo nunca fica invisivel */
+    setTimeout(function(){ document.querySelectorAll('.rv:not(.in)').forEach(function(el){ el.classList.add('in'); }); }, 2500);
+</script>
+
+</body>
+</html>
