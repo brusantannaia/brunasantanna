@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Módulo 03 · Produzir de verdade, Claude com Profundidade</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#F3EEE3; --bg-2:#ECE5D6; --card:#FBF9F3;
+  --ink:#14373C; --ink-2:#2C4F54; --green:#435D51;
+  --terra:#B06E4A; --terra-l:#C4835E; --terra-d:#985A3B;
+  --text:#233133; --muted:#6E7A75;
+  --line:rgba(20,55,60,.16); --shadow:rgba(20,55,60,.16);
+  --anton:'Anton', sans-serif; --hank:'Hanken Grotesk', sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--hank);background:var(--bg);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+::selection{background:var(--terra);color:#fff;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 30px;}
+h1, h2, h3{font-family:var(--anton);font-weight:400;text-transform:uppercase;letter-spacing:-.01em;line-height:.92;}
+.terra{color:var(--terra);}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--terra);}
+.eyebrow::before{content:'';width:26px;height:2px;background:var(--terra);}
+
+#bar{position:fixed;top:0;left:0;height:4px;width:0;background:var(--terra);z-index:99;transition:width .1s linear;}
+
+/* header */
+.hd{position:sticky;top:0;z-index:50;background:rgba(243,238,227,.92);backdrop-filter:blur(8px);border-bottom:2px solid var(--ink);}
+.hd-in{display:flex;align-items:center;justify-content:space-between;padding:14px 30px;max-width:1180px;margin:0 auto;}
+.hd .logo{font-family:var(--anton);font-size:1.15rem;text-transform:uppercase;color:var(--ink);letter-spacing:.02em;display:inline-flex;align-items:center;}
+.hd .logo .tag{font-family:var(--hank);font-weight:700;font-size:.6rem;letter-spacing:.12em;color:var(--terra);border:1.5px solid var(--terra);padding:3px 8px;border-radius:100px;margin-left:10px;text-transform:uppercase;}
+.hd nav{display:flex;gap:22px;}
+.hd nav a{font-size:.84rem;font-weight:600;color:var(--ink-2);text-decoration:none;transition:.18s;}
+.hd nav a:hover{color:var(--terra);}
+@media(max-width:760px){.hd nav{display:none;}}
+
+section{padding:80px 0;position:relative;}
+.snum{font-family:var(--anton);font-size:clamp(3rem,8vw,5.5rem);color:var(--terra);line-height:.8;display:block;}
+.sec-h{font-size:clamp(2.1rem,6vw,3.6rem);color:var(--ink);margin:6px 0 14px;}
+.lead{font-size:1.15rem;color:var(--ink-2);max-width:54ch;}
+.lead b{color:var(--ink);font-weight:700;}
+
+/* HERO */
+.hero{padding:70px 0 56px;}
+.hero h1{font-size:clamp(3.2rem,12vw,7.4rem);color:var(--ink);margin:20px 0 0;}
+.hero .sub{font-size:1.3rem;color:var(--ink-2);max-width:34ch;margin-top:24px;}
+.hero .sub b{color:var(--ink);font-weight:700;}
+.statrow{display:flex;gap:34px;flex-wrap:wrap;margin-top:40px;}
+.statrow .n{font-family:var(--anton);font-size:2.4rem;color:var(--ink);line-height:1;}
+.statrow .n span{color:var(--terra);}
+.statrow .l{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:5px;}
+
+/* manifesto + marquee */
+.mani{background:var(--ink);padding:64px 0;}
+.mani p{font-family:var(--anton);text-transform:uppercase;font-size:clamp(1.8rem,5.2vw,3.4rem);line-height:1.02;color:#fff;max-width:22ch;}
+.mani p span{color:var(--terra-l);}
+.marq{background:var(--bg-2);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);padding:16px 0;overflow:hidden;}
+.marq-t{display:flex;gap:40px;width:max-content;animation:slide 24s linear infinite;align-items:center;}
+@keyframes slide{to{transform:translateX(-50%);}}
+.marq span{font-family:var(--anton);font-size:1.5rem;text-transform:uppercase;color:var(--ink);white-space:nowrap;}
+.marq span.d{color:var(--terra);}
+
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:26px 28px;}
+.hard{box-shadow:7px 7px 0 var(--green);}
+
+/* fluxo / steps */
+.flow{display:flex;align-items:stretch;gap:0;margin-top:26px;flex-wrap:wrap;}
+.fstep{flex:1;min-width:150px;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:18px 18px;}
+.fstep.dark{background:var(--ink);box-shadow:7px 7px 0 var(--terra);}
+.fstep .fn{font-family:var(--anton);font-size:1.3rem;color:var(--terra);}
+.fstep.dark .fn{color:var(--terra-l);}
+.fstep .ft{font-family:var(--anton);text-transform:uppercase;font-size:1.02rem;color:var(--ink);margin-top:4px;line-height:1.02;}
+.fstep.dark .ft{color:#fff;}
+.fstep p{font-size:.85rem;color:var(--ink-2);margin-top:6px;}
+.fstep.dark p{color:rgba(255,255,255,.8);}
+.farrow{display:flex;align-items:center;justify-content:center;font-family:var(--anton);color:var(--terra);font-size:1.7rem;padding:0 12px;}
+@media(max-width:680px){.flow{flex-direction:column;}.farrow{transform:rotate(90deg);padding:8px 0;}}
+.loopnote{margin-top:14px;display:inline-flex;align-items:center;gap:10px;font-family:var(--anton);text-transform:uppercase;font-size:1rem;color:var(--ink);background:var(--bg-2);border:1.5px solid var(--line);border-radius:100px;padding:9px 18px;}
+.loopnote b{color:var(--terra);font-size:1.3rem;}
+/* cena ilustrada, o que é uma Skill */
+.skillscene{margin-top:14px;}
+.skill-title{font-family:var(--hank);font-weight:800;font-size:clamp(1.5rem,4.4vw,2.6rem);color:var(--ink);text-align:center;line-height:1.15;letter-spacing:-.01em;}
+.skill-title span{color:var(--terra);}
+.beats{max-width:880px;margin:42px auto 0;display:grid;grid-template-columns:1fr 60px 1fr 60px 1fr;align-items:start;}
+.beat{display:flex;flex-direction:column;align-items:center;}
+.beat .ic{height:160px;display:flex;align-items:center;justify-content:center;}
+.beat .ic svg{width:140px;height:auto;}
+.beat .bt{font-family:var(--hank);font-weight:800;text-transform:uppercase;font-size:1.1rem;letter-spacing:.04em;color:var(--ink);margin-top:14px;}
+.beat .bs{font-size:.92rem;color:var(--muted);margin-top:3px;text-align:center;}
+.barrow{height:160px;display:flex;align-items:center;justify-content:center;}
+.barrow .a{width:42px;height:42px;border-radius:50%;background:var(--terra);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 8px 18px rgba(176,110,74,.35);}
+.cdash{position:relative;width:150px;height:150px;display:flex;align-items:center;justify-content:center;}
+.cdash::before{content:'';position:absolute;inset:4px;border:2px dashed var(--terra-l);border-radius:50%;}
+.cdash .cc{width:118px;height:118px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;box-shadow:0 16px 38px rgba(20,55,60,.3);}
+.cdash .cc svg{width:72px;height:72px;}
+.skill-cap{margin-top:36px;text-align:center;font-size:1.15rem;color:var(--muted);font-style:italic;}
+@media(max-width:680px){.beats{grid-template-columns:1fr;gap:10px;}.barrow{height:auto;}.barrow .a{transform:rotate(90deg);}}
+
+/* split compare */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px;}
+@media(max-width:680px){.split{grid-template-columns:1fr;}}
+.col{border-radius:16px;padding:22px 24px;}
+.col.bad{background:var(--bg-2);border:1.5px dashed var(--line);}
+.col.good{background:var(--ink);color:#fff;box-shadow:7px 7px 0 var(--green);}
+.col.alt{background:var(--card);border:1.5px solid var(--line);box-shadow:7px 7px 0 var(--terra);}
+.col.alt .lab{color:var(--terra);}.col.alt h4{color:var(--ink);}.col.alt p{color:var(--ink-2);}
+.col .lab{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;}
+.col.bad .lab{color:var(--muted);} .col.good .lab{color:var(--terra-l);}
+.col h4{font-family:var(--hank);font-weight:800;font-size:1.3rem;text-transform:uppercase;letter-spacing:.005em;line-height:1.08;margin-bottom:8px;}
+.col.bad h4{color:var(--ink);} .col.good h4{color:#fff;}
+.col p{font-size:.95rem;} .col.bad p{color:var(--ink-2);} .col.good p{color:rgba(255,255,255,.82);}
+
+/* hub conectores */
+.hub{margin-top:26px;}
+.hub svg{width:100%;height:auto;display:block;}
+
+/* prompt */
+.prompt{margin-top:18px;background:var(--card);border:1.5px solid var(--line);border-left:7px solid var(--terra);border-radius:0 14px 14px 0;overflow:hidden;}
+.prompt .pl{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;background:rgba(176,110,74,.1);}
+.prompt .pl span{font-family:var(--hank);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);}
+.copy{font-family:var(--hank);font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--terra);border:none;border-radius:100px;padding:7px 16px;cursor:pointer;transition:.18s;white-space:nowrap;}
+.copy:hover{background:var(--terra-d);}.copy.done{background:var(--green);}
+.live{background:var(--terra);color:#fff;padding:2px 7px;border-radius:5px;margin-right:8px;}
+.prompt pre{font-family:var(--hank);font-size:.95rem;line-height:1.55;color:var(--text);padding:18px 20px;white-space:pre-wrap;word-break:break-word;}
+.callout{margin-top:18px;background:rgba(176,110,74,.1);border-left:4px solid var(--terra);border-radius:0 12px 12px 0;padding:14px 18px;font-size:1rem;color:var(--ink-2);}
+.callout b{color:var(--terra);}
+
+/* mission/teaser/close */
+.mission .wrap{position:relative;z-index:1;}
+.misscard{background:var(--ink);color:#fff;border-radius:20px;padding:40px 40px;box-shadow:9px 9px 0 var(--green);}
+.misscard h2{color:#fff;font-size:clamp(1.8rem,5vw,2.8rem);}.misscard h2 span{color:var(--terra-l);}
+.check{margin-top:24px;display:grid;gap:11px;}
+.ck{display:flex;gap:14px;align-items:flex-start;}
+.ck .bx{flex-shrink:0;width:24px;height:24px;border-radius:6px;border:2px solid var(--terra-l);margin-top:1px;}
+.ck p{color:rgba(255,255,255,.9);font-size:1.02rem;}.ck p b{color:#fff;}
+.teaser{background:var(--bg-2);}
+.teaser .pill{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra);border:1.5px solid var(--terra);border-radius:100px;padding:5px 14px;margin-bottom:16px;}
+.teaser h2{font-size:clamp(2rem,5.5vw,3.4rem);color:var(--ink);max-width:20ch;}.teaser h2 span{color:var(--terra);}
+.teaser p{margin-top:14px;color:var(--ink-2);max-width:52ch;font-size:1.05rem;}
+.close{background:var(--ink);text-align:center;}
+.close h2{font-size:clamp(2.6rem,9vw,5.5rem);color:#fff;}.close h2 span{color:var(--terra-l);}
+.close .sig{margin-top:18px;font-size:.92rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra-l);}
+.sign{display:flex;align-items:center;justify-content:space-between;gap:12px;color:#fff;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;padding:18px 30px;background:#0E282C;}
+.sign .ns{font-family:var(--anton);letter-spacing:.28em;color:var(--terra-l);font-size:1.05rem;}
+
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);}
+.rv.in{opacity:1;transform:none;}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+
+<header class="hd">
+  <div class="hd-in">
+    <span class="logo">Bruna Santanna<span class="tag">A Virada IA</span></span>
+    <nav><a href="#skills">Skills</a><a href="#artifacts">Artifacts</a><a href="#conectores">Conectores</a><a href="#plugins">Plugins</a><a href="#desafio">Desafio</a></nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap rv">
+    <span class="eyebrow">Claude com Profundidade · 03 de 08</span>
+    <h1>ELE TRABALHA<br><span class="terra">DO SEU JEITO.</span></h1>
+    <p class="sub"><b>Skills, Artifacts e Conectores.</b></p>
+    <div class="statrow">
+      <div><div class="n">1<span>×</span></div><div class="l">você ensina</div></div>
+      <div><div class="n">∞</div><div class="l">ele repete no seu padrão</div></div>
+      <div><div class="n">5<span>+</span></div><div class="l">ferramentas plugadas</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<div class="mani"><div class="wrap rv"><p>Skill é o que todo mundo quer entender. <span>E é mais simples do que parece.</span></p></div></div>
+
+<!-- MARQUEE -->
+<div class="marq"><div class="marq-t">
+  <span>Skills</span><span class="d">·</span><span>Skill-Creator</span><span class="d">·</span><span>Artifacts</span><span class="d">·</span><span>Custom Visuals</span><span class="d">·</span><span>Conectores</span><span class="d">·</span>
+  <span>Skills</span><span class="d">·</span><span>Skill-Creator</span><span class="d">·</span><span>Artifacts</span><span class="d">·</span><span>Custom Visuals</span><span class="d">·</span><span>Conectores</span><span class="d">·</span>
+</div></div>
+
+<!-- 01 SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="rv"><span class="snum">01</span><h2 class="sec-h">Skills</h2>
+    <p class="lead">Um <b>arquivo de instruções</b> que o Claude segue sozinho, vale no chat, nos Projetos e no Cowork.</p></div>
+
+    <!-- cena ilustrada: o que é uma Skill -->
+    <div class="skillscene rv">
+      <p class="skill-title">Você ensina <span>uma vez</span>. O Claude repete <span>sempre</span>.</p>
+      <div class="beats">
+        <!-- A SKILL -->
+        <div class="beat">
+          <div class="ic">
+            <svg viewBox="0 0 240 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <g opacity="0.4">
+                <polygon points="156,60 214,60 185,31" fill="none" stroke="#7D8B7A" stroke-width="5" stroke-linejoin="round"/>
+                <rect x="160" y="60" width="50" height="48" rx="2" fill="none" stroke="#7D8B7A" stroke-width="5"/>
+                <rect x="177" y="80" width="16" height="28" fill="#7D8B7A"/>
+              </g>
+              <rect x="40" y="42" width="118" height="140" rx="13" fill="#B06E4A"/>
+              <rect x="58" y="49" width="92" height="126" rx="7" fill="#FBF9F3"/>
+              <rect x="78" y="74" width="64" height="11" rx="5.5" fill="#C4835E"/>
+              <rect x="78" y="95" width="64" height="11" rx="5.5" fill="#C4835E"/>
+              <rect x="78" y="116" width="44" height="11" rx="5.5" fill="#C4835E"/>
+              <path d="M118 42 l0 44 -12 -10 -12 10 0 -44 z" fill="#14373C"/>
+            </svg>
+          </div>
+          <div class="bt">A Skill</div><div class="bs">o manual do seu jeito</div>
+        </div>
+        <div class="barrow"><div class="a">→</div></div>
+        <!-- O CLAUDE -->
+        <div class="beat">
+          <div class="ic"><div class="cdash"><div class="cc">
+            <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <g stroke="#fff" stroke-width="5.5" stroke-linecap="round">
+                <line x1="60" y1="54" x2="60" y2="14"/>
+                <line x1="60" y1="54" x2="60" y2="28" transform="rotate(30 60 60)"/>
+                <line x1="60" y1="54" x2="60" y2="14" transform="rotate(60 60 60)"/>
+                <line x1="60" y1="54" x2="60" y2="28" transform="rotate(90 60 60)"/>
+                <line x1="60" y1="54" x2="60" y2="14" transform="rotate(120 60 60)"/>
+                <line x1="60" y1="54" x2="60" y2="28" transform="rotate(150 60 60)"/>
+                <line x1="60" y1="54" x2="60" y2="14" transform="rotate(180 60 60)"/>
+                <line x1="60" y1="54" x2="60" y2="28" transform="rotate(210 60 60)"/>
+                <line x1="60" y1="54" x2="60" y2="14" transform="rotate(240 60 60)"/>
+                <line x1="60" y1="54" x2="60" y2="28" transform="rotate(270 60 60)"/>
+                <line x1="60" y1="54" x2="60" y2="14" transform="rotate(300 60 60)"/>
+                <line x1="60" y1="54" x2="60" y2="28" transform="rotate(330 60 60)"/>
+              </g>
+            </svg>
+          </div></div></div>
+          <div class="bt">O Claude</div><div class="bs">lê antes de agir</div>
+        </div>
+        <div class="barrow"><div class="a">→</div></div>
+        <!-- O RESULTADO -->
+        <div class="beat">
+          <div class="ic">
+            <svg viewBox="0 0 240 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M58 24 h78 l30 30 v118 a9 9 0 0 1 -9 9 h-99 a9 9 0 0 1 -9 -9 v-139 a9 9 0 0 1 9 -9 z" fill="#FBF9F3" stroke="#14373C" stroke-width="5" stroke-linejoin="round"/>
+              <path d="M136 24 v30 h30" fill="none" stroke="#14373C" stroke-width="5" stroke-linejoin="round"/>
+              <rect x="72" y="74" width="80" height="10" rx="5" fill="#B0A290"/>
+              <rect x="72" y="93" width="80" height="10" rx="5" fill="#B0A290"/>
+              <rect x="72" y="112" width="58" height="10" rx="5" fill="#B0A290"/>
+              <circle cx="150" cy="150" r="35" fill="#B06E4A"/>
+              <path d="M135 150 l10 11 19 -22" fill="none" stroke="#fff" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="bt">O Resultado</div><div class="bs">no seu padrão, sempre</div>
+        </div>
+      </div>
+      <p class="skill-cap">É como dar a um especialista o manual da sua casa.</p>
+    </div>
+
+    <!-- sem vs com skill -->
+    <div class="split rv">
+      <div class="col bad"><div class="lab">Sem Skill</div><h4>Repete instrução</h4><p>Você explica o tom e o formato em toda conversa.</p></div>
+      <div class="col good"><div class="lab">Com Skill</div><h4>Já sai no padrão</h4><p>Ele aplica suas regras sozinho, sem você pedir.</p></div>
+    </div>
+
+    <!-- a ordem certa: primeiro o resultado, depois a Skill -->
+    <div class="rv" style="margin-top:44px;"><span class="eyebrow">A ordem certa</span><h3 style="font-size:clamp(1.5rem,4vw,2.2rem);color:var(--ink);margin-top:10px;">Skill só depois de um bom resultado.</h3>
+    <p class="lead" style="margin-top:12px;">Você não cria Skill no escuro. Primeiro a gente <b>planeja, cria e refina</b> até ficar ótimo. Aí sim: "agora vira isso numa Skill".</p></div>
+    <div class="flow rv">
+      <div class="fstep"><div class="fn">1</div><div class="ft">Planeje</div><p>Sabendo onde quer chegar.</p></div>
+      <div class="farrow">→</div>
+      <div class="fstep"><div class="fn">2</div><div class="ft">Crie<br>um carrossel</div><p>Um post de verdade pra Aurora.</p></div>
+      <div class="farrow">→</div>
+      <div class="fstep"><div class="fn">3</div><div class="ft">Refine<br>até ficar ótimo</div><p>"Ajusta isso, melhora aquilo."</p></div>
+      <div class="farrow">→</div>
+      <div class="fstep dark"><div class="fn">4</div><div class="ft">Agora<br>vira Skill</div><p>Só quando já está bom.</p></div>
+    </div>
+
+    <div class="prompt rv">
+      <div class="pl"><span><b class="live">⚡ AGORA NO CLAUDE</b> Passo 1-2 · criar o carrossel</span><button class="copy">Copiar</button></div>
+      <pre>Vamos criar um carrossel de Instagram pro Studio Aurora sobre [tema, ex.: "3 sinais de que sua marca precisa de posicionamento"]. 6 cards, no meu tom (caloroso, direto, sem jargão): card 1 com gancho forte, cards do meio desenvolvendo, último com chamada pra ação. Me mostra o texto de cada card.</pre>
+    </div>
+    <div class="prompt rv">
+      <div class="pl"><span>Passo 3 · refinar até ficar ótimo</span><button class="copy">Copiar</button></div>
+      <pre>Bom começo. Deixa o card 1 mais forte, encurta os do meio e troca a chamada final por uma pergunta. Me dá 2 versões do card 1 pra eu escolher.</pre>
+    </div>
+    <div class="prompt rv">
+      <div class="pl"><span><b class="live">⚡ AGORA NO CLAUDE</b> Passo 4 · agora vira Skill</span><button class="copy">Copiar</button></div>
+      <pre>Ficou ótimo. Agora pega tudo o que a gente acertou aqui, o tom, a estrutura de 6 cards, o que evitar, e transforma numa Skill reutilizável "Carrossel Aurora", com um checklist de qualidade no final. Depois é só eu pedir "faz um carrossel sobre X" que ele já entrega no padrão.</pre>
+    </div>
+
+    <!-- Skill ou Projeto (a pergunta que todos fazem) -->
+    <div class="rv" style="margin-top:46px;"><span class="eyebrow">A pergunta que todos fazem</span><h3 style="font-size:clamp(1.5rem,4vw,2.2rem);color:var(--ink);margin-top:10px;">Skill ou Projeto?</h3></div>
+    <div class="split rv">
+      <div class="col good"><div class="lab">Projeto · o ONDE</div><h4>Um espaço</h4><p>Contexto e arquivos de uma área, um cliente, seu conteúdo. As instruções valem só ali dentro.</p></div>
+      <div class="col alt"><div class="lab">Skill · o COMO</div><h4>Uma habilidade</h4><p>Ensina a fazer uma tarefa no seu padrão. Portátil: vale no chat, nos Projetos e no Cowork. Liga e desliga.</p></div>
+    </div>
+    <div class="callout rv"><b>Não é um ou outro:</b> a Skill roda <b>dentro</b> do Projeto. Projeto organiza seu mundo; Skill padroniza sua tarefa, e a mesma Skill você reusa em todos os projetos.</div>
+  </div>
+</section>
+
+<!-- 02 ARTIFACTS + CUSTOM VISUALS -->
+<section id="artifacts" style="background:var(--bg-2);">
+  <div class="wrap">
+    <div class="rv"><span class="snum">02</span><h2 class="sec-h">Artifacts + Custom Visuals</h2>
+    <p class="lead">O Claude que <b>produz</b>, não só responde: dashboards, páginas, calculadoras, documentos.</p></div>
+
+    <div class="split rv">
+      <div class="col bad"><div class="lab">Custom Visual</div><h4>O rascunho</h4><p>Gráfico ou diagrama na própria conversa. Rápido e efêmero, quadro branco.</p></div>
+      <div class="col good"><div class="lab">Artifact</div><h4>O entregável</h4><p>Persistente e compartilhável, em janela própria. Você edita e manda pra alguém.</p></div>
+    </div>
+
+    <div class="callout rv"><b>Mito:</b> o Claude não gera foto como o Midjourney. Ele <b>constrói com código</b>, e é por isso que sai editável. (Design é o Módulo 7.)</div>
+
+    <div class="prompt rv">
+      <div class="pl"><span>Prompt · transforme dados em visual</span><button class="copy">Copiar</button></div>
+      <pre>Pega esses números e transforma num Artifact visual interativo: um dashboard com os principais indicadores, filtros simples e um resumo do que os dados mostram. Em HTML, design limpo.</pre>
+    </div>
+  </div>
+</section>
+
+<!-- 03 CONECTORES -->
+<section id="conectores">
+  <div class="wrap">
+    <div class="rv"><span class="snum">03</span><h2 class="sec-h">Conectores</h2>
+    <p class="lead"><b>Seu mundo, plugado.</b> Em vez de baixar e subir arquivo, ele acessa direto.</p></div>
+
+    <!-- hub -->
+    <div class="hub rv">
+      <svg viewBox="0 0 640 330" xmlns="http://www.w3.org/2000/svg" aria-label="Claude conectado às suas ferramentas">
+        <defs><linearGradient id="cv" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00C4CC"/><stop offset="1" stop-color="#7D2AE8"/></linearGradient></defs>
+        <g stroke="#B06E4A" stroke-width="2.4" opacity=".5">
+          <line x1="320" y1="155" x2="120" y2="56"/>
+          <line x1="320" y1="155" x2="520" y2="56"/>
+          <line x1="320" y1="155" x2="95" y2="252"/>
+          <line x1="320" y1="155" x2="545" y2="252"/>
+          <line x1="320" y1="155" x2="320" y2="290"/>
+        </g>
+        <g font-family="Hanken Grotesk, sans-serif" font-weight="700" font-size="15" fill="#14373C">
+          <!-- Drive -->
+          <rect x="42" y="32" width="156" height="48" rx="12" fill="#FBF9F3" stroke="rgba(20,55,60,.18)"/>
+          <g transform="translate(78,56)"><polygon points="-12,8 -3,-9 5,-9 -4,8" fill="#2684FC"/><polygon points="-4,8 5,-9 14,8" fill="#00AC47"/><polygon points="-12,8 14,8 10,15 -8,15" fill="#FFBA00"/></g>
+          <text x="100" y="61">Drive</text>
+          <!-- Gmail -->
+          <rect x="442" y="32" width="156" height="48" rx="12" fill="#FBF9F3" stroke="rgba(20,55,60,.18)"/>
+          <g transform="translate(478,56)"><rect x="-14" y="-10" width="28" height="20" rx="3" fill="#fff" stroke="#EA4335" stroke-width="2.4"/><path d="M-14,-7 L0,4 L14,-7" fill="none" stroke="#EA4335" stroke-width="2.4"/></g>
+          <text x="500" y="61">Gmail</text>
+          <!-- Agenda -->
+          <rect x="17" y="228" width="156" height="48" rx="12" fill="#FBF9F3" stroke="rgba(20,55,60,.18)"/>
+          <g transform="translate(53,252)"><rect x="-12" y="-12" width="24" height="24" rx="4" fill="#fff" stroke="#4285F4" stroke-width="2.4"/><rect x="-12" y="-12" width="24" height="8" rx="2" fill="#4285F4"/><text x="0" y="9" text-anchor="middle" font-size="11" font-weight="800" fill="#4285F4">9</text></g>
+          <text x="75" y="257">Agenda</text>
+          <!-- Notion -->
+          <rect x="467" y="228" width="156" height="48" rx="12" fill="#FBF9F3" stroke="rgba(20,55,60,.18)"/>
+          <g transform="translate(503,252)"><rect x="-12" y="-12" width="24" height="24" rx="4" fill="#fff" stroke="#14373C" stroke-width="2.4"/><text x="0" y="7" text-anchor="middle" font-family="Anton, sans-serif" font-size="17" fill="#14373C">N</text></g>
+          <text x="525" y="257">Notion</text>
+          <!-- Canva -->
+          <rect x="242" y="266" width="156" height="48" rx="12" fill="#FBF9F3" stroke="rgba(20,55,60,.18)"/>
+          <g transform="translate(278,290)"><circle r="13" fill="url(#cv)"/><text x="0" y="5" text-anchor="middle" font-weight="800" font-size="15" fill="#fff">C</text></g>
+          <text x="300" y="295">Canva</text>
+        </g>
+        <circle cx="320" cy="155" r="58" fill="#14373C"/>
+        <text x="320" y="163" text-anchor="middle" font-family="Anton, sans-serif" font-size="20" fill="#C4835E" letter-spacing="1">CLAUDE</text>
+      </svg>
+    </div>
+
+    <div class="prompt rv">
+      <div class="pl"><span>Prompt · Google Drive</span><button class="copy">Copiar</button></div>
+      <pre>Busca no meu Drive o documento "[nome]" e me dá um resumo dos pontos principais em tópicos curtos.</pre>
+    </div>
+    <div class="prompt rv">
+      <div class="pl"><span>Prompt · Gmail</span><button class="copy">Copiar</button></div>
+      <pre>Veja meus e-mails não lidos sobre [assunto] e prepare uma resposta pra cada um no meu tom. Só rascunhe, não envie nada.</pre>
+    </div>
+  </div>
+</section>
+
+<!-- 04 PLUGINS -->
+<section id="plugins" style="background:var(--bg-2);">
+  <div class="wrap">
+    <div class="rv"><span class="snum">04</span><h2 class="sec-h">Plugins</h2>
+    <p class="lead"><b>Tudo isso num pacote só.</b> Um plugin junta Skills + Conectores + agentes prontos, você instala num clique. Tem o marketplace oficial da Anthropic dentro do Claude.</p></div>
+    <div class="flow rv">
+      <div class="fstep"><div class="fn">1</div><div class="ft">Abre o<br>Marketplace</div><p>No Cowork, no claude.ai ou no Code.</p></div>
+      <div class="farrow">→</div>
+      <div class="fstep"><div class="fn">2</div><div class="ft">Instala<br>e autoriza</div><p>Revisa as permissões e confirma.</p></div>
+      <div class="farrow">→</div>
+      <div class="fstep dark"><div class="fn">3</div><div class="ft">Usa<br>na hora</div><p>As Skills e conectores do plugin já entram.</p></div>
+    </div>
+    <div class="callout rv"><b>2 dicas:</b> os plugins oficiais são <b>pontos de partida genéricos</b>, ficam ótimos quando você customiza pro seu jeito. E só instale de <b>fonte confiável</b> (a Anthropic não garante o conteúdo de plugins de terceiros).</div>
+  </div>
+</section>
+
+<!-- DESAFIO -->
+<section class="mission" id="desafio" style="background:var(--bg-2);">
+  <div class="wrap rv">
+    <div class="misscard">
+      <span class="eyebrow" style="color:var(--terra-l);">Mini-desafio do Módulo 3</span>
+      <h2>Ensine uma vez.<br><span>Use pra sempre.</span></h2>
+      <div class="check">
+        <div class="ck"><div class="bx"></div><p><b>Crie um bom resultado primeiro</b> (um carrossel) e só então transforme em Skill.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Peça 1 Artifact</b> visual de algum dado seu.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Ative 1 conector</b> (Drive ou Gmail) e faça uma tarefa real.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Compare com × sem Skill</b> e sinta a diferença.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEASER -->
+<section class="teaser">
+  <div class="wrap rv">
+    <span class="pill">Módulo 04</span>
+    <a href="2026-06-22-guia-modulo5-cowork.html"><h2>Ele trabalha <span>sozinho.</span></h2></a>
+    <p>O Cowork: o Claude mexe nos seus arquivos, organiza pastas e entrega pronto. Você delega e sai.</p>
+  </div>
+</section>
+
+<!-- CLOSE -->
+<section class="close">
+  <div class="wrap rv">
+    <h2>VOCÊ,<br><span>MULTIPLICADO.</span></h2>
+    <div class="sig">NewScale · @brusantanna.ai</div>
+  </div>
+</section>
+
+<div class="sign"><span>Claude com Profundidade · Módulo 03 · @brusantanna.ai</span><img src="logo-newscale.png" alt="NewScale" style="height:20px;filter:brightness(0) invert(1);opacity:.9;"></div>
+
+<script>
+const bar=document.getElementById('bar');
+addEventListener('scroll',()=>{const h=document.documentElement;bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';},{passive:true});
+document.querySelectorAll('.prompt').forEach(box=>{
+  const btn=box.querySelector('.copy'),pre=box.querySelector('pre');
+  btn.addEventListener('click',async()=>{
+    try{await navigator.clipboard.writeText(pre.innerText.trim());}
+    catch(e){const r=document.createRange();r.selectNode(pre);getSelection().removeAllRanges();getSelection().addRange(r);document.execCommand('copy');getSelection().removeAllRanges();}
+    const o=btn.textContent;btn.textContent='Copiado ✓';btn.classList.add('done');
+    setTimeout(()=>{btn.textContent=o;btn.classList.remove('done');},1600);
+  });
+});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
