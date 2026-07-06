@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Módulo 02 · O Claude que te conhece, Claude com Profundidade</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#F3EEE3; --bg-2:#ECE5D6; --card:#FBF9F3;
+  --ink:#14373C; --ink-2:#2C4F54; --green:#435D51;
+  --terra:#B06E4A; --terra-l:#C4835E; --terra-d:#985A3B;
+  --text:#233133; --muted:#6E7A75;
+  --line:rgba(20,55,60,.16); --shadow:rgba(20,55,60,.16);
+  --anton:'Anton', sans-serif; --hank:'Hanken Grotesk', sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--hank);background:var(--bg);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+::selection{background:var(--terra);color:#fff;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 30px;}
+h1, h2, h3{font-family:var(--anton);font-weight:400;text-transform:uppercase;letter-spacing:-.01em;line-height:.92;}
+.terra{color:var(--terra);}
+.out{-webkit-text-stroke:2px var(--ink);color:transparent;}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--terra);}
+.eyebrow::before{content:'';width:26px;height:2px;background:var(--terra);}
+
+#bar{position:fixed;top:0;left:0;height:4px;width:0;background:var(--terra);z-index:99;transition:width .1s linear;}
+
+/* header */
+.hd{position:sticky;top:0;z-index:50;background:rgba(243,238,227,.92);backdrop-filter:blur(8px);border-bottom:2px solid var(--ink);}
+.hd-in{display:flex;align-items:center;justify-content:space-between;padding:14px 30px;max-width:1180px;margin:0 auto;}
+.hd .logo{font-family:var(--anton);font-size:1.15rem;text-transform:uppercase;color:var(--ink);letter-spacing:.02em;}
+.hd .logo b{color:var(--terra);}
+.hd .logo .tag{font-family:var(--hank);font-weight:700;font-size:.6rem;letter-spacing:.12em;color:var(--terra);border:1.5px solid var(--terra);padding:3px 8px;border-radius:100px;margin-left:10px;text-transform:uppercase;vertical-align:middle;}
+.hd nav{display:flex;gap:22px;}
+.hd nav a{font-size:.84rem;font-weight:600;color:var(--ink-2);text-decoration:none;transition:.18s;}
+.hd nav a:hover{color:var(--terra);}
+@media(max-width:760px){.hd nav{display:none;}}
+
+section{padding:80px 0;position:relative;}
+.snum{font-family:var(--anton);font-size:clamp(3rem,8vw,5.5rem);color:var(--terra);line-height:.8;display:block;}
+.sec-h{font-size:clamp(2.1rem,6vw,3.6rem);color:var(--ink);margin:6px 0 14px;}
+.lead{font-size:1.15rem;color:var(--ink-2);max-width:54ch;}
+.lead b{color:var(--ink);font-weight:700;}
+
+/* HERO */
+.hero{padding:70px 0 56px;}
+.hero h1{font-size:clamp(3.2rem,12vw,7.4rem);color:var(--ink);margin:20px 0 0;}
+.hero .sub{font-size:1.3rem;color:var(--ink-2);max-width:34ch;margin-top:24px;}
+.hero .sub b{color:var(--ink);font-weight:700;}
+.statrow{display:flex;gap:34px;flex-wrap:wrap;margin-top:40px;}
+.statrow .n{font-family:var(--anton);font-size:2.4rem;color:var(--ink);line-height:1;}
+.statrow .n span{color:var(--terra);}
+.statrow .l{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:5px;}
+
+/* manifesto band */
+.mani{background:var(--ink);padding:64px 0;}
+.mani p{font-family:var(--anton);text-transform:uppercase;font-size:clamp(1.8rem,5.2vw,3.4rem);line-height:1.02;color:#fff;max-width:20ch;}
+.mani p span{color:var(--terra-l);}
+
+/* marquee */
+.marq{background:var(--bg-2);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);padding:16px 0;overflow:hidden;}
+.marq-t{display:flex;gap:40px;width:max-content;animation:slide 24s linear infinite;align-items:center;}
+@keyframes slide{to{transform:translateX(-50%);}}
+.marq span{font-family:var(--anton);font-size:1.5rem;text-transform:uppercase;color:var(--ink);white-space:nowrap;letter-spacing:.02em;}
+.marq span.d{color:var(--terra);}
+
+/* generic card / hard shadow */
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:26px 28px;}
+.hard{box-shadow:7px 7px 0 var(--green);}
+.hard-t{box-shadow:7px 7px 0 var(--terra);}
+
+/* ===== DIAGRAMA PROJETO ===== */
+.proj{display:grid;grid-template-columns:minmax(240px,1fr) 64px minmax(240px,1.1fr);gap:0;align-items:center;margin-top:30px;}
+@media(max-width:760px){.proj{grid-template-columns:1fr;gap:18px;}.proj .arrows{transform:rotate(90deg);height:50px;}}
+.folder{background:var(--ink);color:#fff;border-radius:16px;padding:24px 24px;box-shadow:7px 7px 0 var(--terra);}
+.folder .ttl{font-family:var(--anton);font-size:1.05rem;text-transform:uppercase;color:var(--terra-l);letter-spacing:.04em;margin-bottom:16px;}
+.file{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:9px;padding:11px 14px;font-size:.92rem;color:rgba(255,255,255,.92);margin-bottom:9px;}
+.file:last-child{margin-bottom:0;}
+.arrows{display:flex;align-items:center;justify-content:center;}
+.arrows svg{width:64px;height:90px;}
+.convos{display:flex;flex-direction:column;gap:12px;}
+.convo{background:var(--card);border:1.5px solid var(--line);border-left:5px solid var(--terra);border-radius:0 12px 12px 0;padding:13px 18px;}
+.convo .t{font-family:var(--anton);font-size:.95rem;text-transform:uppercase;color:var(--ink);}
+.convo .s{font-size:.82rem;color:var(--muted);margin-top:2px;}
+
+/* split compare */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px;}
+@media(max-width:680px){.split{grid-template-columns:1fr;}}
+.col{border-radius:16px;padding:22px 24px;}
+.col.bad{background:var(--bg-2);border:1.5px dashed var(--line);}
+.col.good{background:var(--ink);color:#fff;box-shadow:7px 7px 0 var(--green);}
+.col .lab{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;}
+.col.bad .lab{color:var(--muted);} .col.good .lab{color:var(--terra-l);}
+.col h4{font-family:var(--hank);font-weight:800;font-size:1.3rem;text-transform:uppercase;letter-spacing:.005em;line-height:1.08;margin-bottom:8px;}
+.col.bad h4{color:var(--ink);} .col.good h4{color:#fff;}
+.col p{font-size:.95rem;} .col.bad p{color:var(--ink-2);} .col.good p{color:rgba(255,255,255,.82);}
+
+/* prompt block */
+.prompt{margin-top:18px;background:var(--card);border:1.5px solid var(--line);border-left:7px solid var(--terra);border-radius:0 14px 14px 0;overflow:hidden;}
+.prompt .pl{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;background:rgba(176,110,74,.1);}
+.prompt .pl span{font-family:var(--hank);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);}
+.copy{font-family:var(--hank);font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--terra);border:none;border-radius:100px;padding:7px 16px;cursor:pointer;transition:.18s;white-space:nowrap;}
+.copy:hover{background:var(--terra-d);}.copy.done{background:var(--green);}
+.live{background:var(--terra);color:#fff;padding:2px 7px;border-radius:5px;margin-right:8px;}
+.prompt pre{font-family:var(--hank);font-size:.95rem;line-height:1.55;color:var(--text);padding:18px 20px;white-space:pre-wrap;word-break:break-word;}
+
+/* memory thread */
+.mem{display:flex;align-items:center;gap:0;margin-top:30px;flex-wrap:wrap;}
+.mnode{flex:1;min-width:120px;text-align:center;}
+.mdot{width:52px;height:52px;border-radius:50%;background:var(--ink);color:var(--terra-l);font-family:var(--anton);font-size:1.3rem;display:flex;align-items:center;justify-content:center;margin:0 auto;border:3px solid var(--terra);}
+.mnode .mt{font-size:.78rem;color:var(--muted);margin-top:8px;}
+.mline{flex:0 0 40px;height:3px;background:repeating-linear-gradient(90deg, var(--terra) 0 8px, transparent 8px 14px);}
+@media(max-width:680px){.mline{display:none;}.mem{gap:14px;}.mnode{min-width:45%;}}
+
+/* tokens */
+.tok-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px;}
+.tok-chips .c{font-family:var(--hank);font-weight:700;color:#fff;padding:14px 18px;border-radius:10px;font-size:1.1rem;}
+.tok-note{font-size:.85rem;color:var(--muted);margin-top:10px;}
+.tbar{margin-top:28px;display:flex;height:58px;border-radius:12px;overflow:hidden;border:1.5px solid var(--line);font-family:var(--anton);text-transform:uppercase;}
+.tbar .a{flex:0 0 88.5%;background:var(--bg-2);color:var(--muted);display:flex;align-items:center;padding-left:20px;font-size:1rem;}
+.tbar .b{flex:1;background:var(--terra);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.8rem;}
+.tbar-l{display:flex;justify-content:space-between;font-size:.74rem;color:var(--muted);margin-top:8px;text-transform:uppercase;letter-spacing:.08em;}
+
+/* effort slider */
+.effort{margin-top:18px;}
+.etrack{position:relative;height:14px;border-radius:100px;background:linear-gradient(90deg, var(--green), var(--terra));margin:18px 0 10px;}
+.eknob{position:absolute;top:50%;left:64%;transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;background:#fff;border:4px solid var(--terra);box-shadow:0 4px 12px var(--shadow);}
+.elabs{display:flex;justify-content:space-between;font-family:var(--anton);text-transform:uppercase;font-size:1rem;color:var(--ink);}
+.elabs span:first-child{color:var(--green);}
+
+/* model ladder */
+.ladder{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:end;margin-top:26px;}
+@media(max-width:680px){.ladder{grid-template-columns:1fr;}}
+.rung{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:22px 22px;}
+.rung.mid{background:var(--ink);color:#fff;box-shadow:7px 7px 0 var(--terra);}
+.rung .mn{font-family:var(--anton);font-size:1.7rem;text-transform:uppercase;color:var(--terra);line-height:1;}
+.rung.mid .mn{color:var(--terra-l);}
+.rung .cost{font-family:var(--anton);letter-spacing:.16em;color:var(--green);margin:6px 0;}
+.rung.mid .cost{color:var(--terra-l);}
+.rung p{font-size:.9rem;color:var(--ink-2);} .rung.mid p{color:rgba(255,255,255,.82);}
+.rung.tall{padding-top:34px;} .rung.taller{padding-top:46px;}
+
+/* mission */
+.mission .wrap{position:relative;z-index:1;}
+.misscard{background:var(--ink);color:#fff;border-radius:20px;padding:40px 40px;box-shadow:9px 9px 0 var(--green);}
+.misscard h2{color:#fff;font-size:clamp(1.8rem,5vw,2.8rem);}
+.misscard h2 span{color:var(--terra-l);}
+.check{margin-top:24px;display:grid;gap:11px;}
+.ck{display:flex;gap:14px;align-items:flex-start;}
+.ck .bx{flex-shrink:0;width:24px;height:24px;border-radius:6px;border:2px solid var(--terra-l);margin-top:1px;}
+.ck p{color:rgba(255,255,255,.9);font-size:1.02rem;}.ck p b{color:#fff;}
+
+/* teaser + close */
+.teaser{background:var(--bg-2);}
+.teaser .pill{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra);border:1.5px solid var(--terra);border-radius:100px;padding:5px 14px;margin-bottom:16px;}
+.teaser h2{font-size:clamp(2rem,5.5vw,3.4rem);color:var(--ink);max-width:20ch;}
+.teaser h2 span{color:var(--terra);}
+.teaser p{margin-top:14px;color:var(--ink-2);max-width:52ch;font-size:1.05rem;}
+.close{background:var(--ink);text-align:center;}
+.close h2{font-size:clamp(2.6rem,9vw,5.5rem);color:#fff;}
+.close h2 span{color:var(--terra-l);}
+.close .sig{margin-top:18px;font-size:.92rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra-l);}
+
+.sign{display:flex;align-items:center;justify-content:space-between;gap:12px;color:#fff;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;padding:18px 30px;background:#0E282C;}
+.sign .ns{font-family:var(--anton);letter-spacing:.28em;color:var(--terra-l);font-size:1.05rem;}
+
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);}
+.rv.in{opacity:1;transform:none;}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+
+<header class="hd">
+  <div class="hd-in">
+    <span class="logo">Bruna Santanna<span class="tag">A Virada IA</span></span>
+    <nav><a href="#projetos">Projetos</a><a href="#memoria">Memória</a><a href="#configurar">Config</a><a href="#tokens">Tokens</a><a href="#desafio">Desafio</a></nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap rv">
+    <span class="eyebrow">Claude com Profundidade · 02 de 08</span>
+    <h1>O CLAUDE QUE<br><span class="terra">TE CONHECE.</span></h1>
+    <p class="sub"><b>Configure uma vez. Colha pra sempre.</b></p>
+    <div class="statrow">
+      <div><div class="n">3</div><div class="l">Projetos · Memória · Tokens</div></div>
+      <div><div class="n">+30<span>%</span></div><div class="l">do limite liberado</div></div>
+      <div><div class="n">0</div><div class="l">vezes começando do zero</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<div class="mani"><div class="wrap rv"><p>Cada conversa sem contexto é <span>contratar um funcionário novo todo dia.</span></p></div></div>
+
+<!-- MARQUEE -->
+<div class="marq"><div class="marq-t">
+  <span>Projetos</span><span class="d">·</span><span>Memória</span><span class="d">·</span><span>Preferências</span><span class="d">·</span><span>Tokens</span><span class="d">·</span><span>Modelos</span><span class="d">·</span><span>Effort</span><span class="d">·</span>
+  <span>Projetos</span><span class="d">·</span><span>Memória</span><span class="d">·</span><span>Preferências</span><span class="d">·</span><span>Tokens</span><span class="d">·</span><span>Modelos</span><span class="d">·</span><span>Effort</span><span class="d">·</span>
+</div></div>
+
+<!-- 01 PROJETOS -->
+<section id="projetos">
+  <div class="wrap">
+    <div class="rv"><span class="snum">01</span><h2 class="sec-h">Projetos</h2>
+    <p class="lead">Um espaço onde o Claude <b>já sabe quem é você</b>. Toda conversa nasce no nível certo.</p></div>
+
+    <!-- diagrama -->
+    <div class="proj rv">
+      <div class="folder">
+        <div class="ttl">📁 Projeto · Studio Aurora</div>
+        <div class="file">📄 instruções do projeto</div>
+        <div class="file">📄 tom de voz da marca</div>
+        <div class="file">📄 exemplos que funcionaram</div>
+      </div>
+      <div class="arrows">
+        <svg viewBox="0 0 64 90" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M2 45 H50" stroke="#B06E4A" stroke-width="3"/><path d="M44 38 L52 45 L44 52" stroke="#B06E4A" stroke-width="3" fill="none"/>
+          <path d="M2 45 C30 45 30 16 50 16" stroke="#B06E4A" stroke-width="2.4" opacity=".6" fill="none"/><path d="M44 9 L52 16 L44 23" stroke="#B06E4A" stroke-width="2.4" opacity=".6" fill="none"/>
+          <path d="M2 45 C30 45 30 74 50 74" stroke="#B06E4A" stroke-width="2.4" opacity=".6" fill="none"/><path d="M44 67 L52 74 L44 81" stroke="#B06E4A" stroke-width="2.4" opacity=".6" fill="none"/>
+        </svg>
+      </div>
+      <div class="convos">
+        <div class="convo"><div class="t">Conversa nova</div><div class="s">já sabe quem é você</div></div>
+        <div class="convo"><div class="t">Conversa nova</div><div class="s">já sabe seu tom de voz</div></div>
+        <div class="convo"><div class="t">Conversa nova</div><div class="s">já sabe o que funciona</div></div>
+      </div>
+    </div>
+
+    <!-- chat avulso vs projeto -->
+    <div class="split rv">
+      <div class="col bad"><div class="lab">Chat avulso</div><h4>Pergunta solta</h4><p>Tarefa isolada. Você explica tudo de novo a cada conversa.</p></div>
+      <div class="col good"><div class="lab">Projeto</div><h4>Um cliente, um job, um tema</h4><p>Um espaço por cliente ou projeto (ex.: "Curso do Claude"). Contexto + arquivos salvos ali dentro.</p></div>
+    </div>
+
+    <div class="prompt rv">
+      <div class="pl"><span><b class="live">⚡ AGORA NO CLAUDE</b> Projeto do Studio Aurora</span><button class="copy">Copiar</button></div>
+      <pre>Você é meu parceiro de conteúdo e estratégia do Studio Aurora, minha consultoria de branding pra pequenos negócios.
+Quem sou: Marina, fundadora. Faço vendas, conteúdo e entrega.
+Meu público: donos de pequenos negócios que querem se posicionar melhor.
+Meu tom: caloroso, direto, sofisticado-acessível, sem jargão.
+O que já existe: use como referência os arquivos deste Projeto.
+Como quero: gancho forte na 1ª linha, parágrafos curtos, pronto pra usar.
+Nunca: começar com "Claro!", "Com certeza!" ou clichês de IA.
+(Na hora de fazer o seu, troca o Studio Aurora pela sua empresa.)</pre>
+    </div>
+    <div class="prompt rv">
+      <div class="pl"><span>Contexto fixo · salve uma vez (não cole toda vez)</span><button class="copy">Copiar</button></div>
+      <pre>Eu sou [papel]. Trabalho com [o que faz]. Meu público é [quem usa o resultado].
+Meu tom é [como gosta]. Evite [o que não quer].
+Quando eu pedir conteúdo, comece com um gancho forte.
+Não comece com "Claro!", "Com certeza!" ou "Ótima pergunta!".</pre>
+    </div>
+    <div class="insightbox rv"><b>Não cole isso toda vez.</b> Salve uma vez, nas <b>Preferências</b> (vale em todo chat), nas <b>Instruções do Projeto</b> (por cliente/job) ou nas <b>Instruções globais do Cowork</b>, e ele usa sempre. É o gancho pra próxima seção.</div>
+  </div>
+</section>
+
+<!-- 02 MEMÓRIA -->
+<section id="memoria" style="background:var(--bg-2);">
+  <div class="wrap">
+    <div class="rv"><span class="snum">02</span><h2 class="sec-h">Memória + Preferências</h2>
+    <p class="lead">Ele <b>lembra de você entre conversas</b>. E as Preferências fixam suas regras pra você nunca mais repetir.</p></div>
+
+    <!-- thread de memória -->
+    <div class="mem rv">
+      <div class="mnode"><div class="mdot">1</div><div class="mt">Você conta seu nicho</div></div>
+      <div class="mline"></div>
+      <div class="mnode"><div class="mdot">2</div><div class="mt">Ele aprende seu tom</div></div>
+      <div class="mline"></div>
+      <div class="mnode"><div class="mdot">3</div><div class="mt">Lembra dos projetos</div></div>
+      <div class="mline"></div>
+      <div class="mnode"><div class="mdot" style="background:var(--terra);color:#fff;border-color:var(--ink);">∞</div><div class="mt">Já chega sabendo</div></div>
+    </div>
+
+    <div class="prompt rv">
+      <div class="pl"><span>Preferências de usuário · cole em Configurações</span><button class="copy">Copiar</button></div>
+      <pre>Sempre responda em português brasileiro informal.
+Use parágrafos curtos e diretos; evite jargão.
+Quando eu pedir conteúdo, comece com um gancho forte.
+Quando fizer sentido, me dê 2-3 versões em vez de uma só.
+Não comece com "Claro!", "Com certeza!" ou "Ótima pergunta!".</pre>
+    </div>
+
+    <div class="rv" style="margin-top:40px;"><span class="eyebrow">"Mas o Claude já não tem Memória?"</span><h3 style="font-size:clamp(1.5rem,4vw,2.2rem);color:var(--ink);margin-top:10px;">Automático × Escrito</h3></div>
+    <div class="split rv">
+      <div class="col bad"><div class="lab">Memória</div><h4>Automático</h4><p>Ele aprende sobre você sozinho, com o tempo. Probabilístico, pode lembrar ou não. Ótimo pro leve.</p></div>
+      <div class="col good"><div class="lab">Preferências + contexto</div><h4>Escrito</h4><p>Você escreve, ele lê sempre igual. Determinístico. Pra regra crítica e contexto de cliente, é o que você quer.</p></div>
+    </div>
+    <div class="insightbox rv"><b>A regra:</b> deixa a Memória cuidar do automático e leve. Escreve à mão o que é crítico e o que é específico de cada cliente. Não são concorrentes, se completam.</div>
+  </div>
+</section>
+
+<!-- 03 CONFIGURE SEU CLAUDE -->
+<section id="configurar">
+  <div class="wrap">
+    <div class="rv"><span class="snum">03</span><h2 class="sec-h">Configure seu Claude</h2>
+    <p class="lead">Deixe ele <b>configuradinho uma vez</b>, e pare de repetir contexto em toda conversa. Vale pro Chat e pro Cowork.</p></div>
+    <div class="split rv">
+      <div class="col good"><div class="lab">No Chat</div><h4>Preferências + Projetos</h4><p><b>Preferências</b>: regras fixas que valem em todo chat, idioma, tom, formato. <b>Instruções do Projeto</b>: o contexto daquele cliente/job.</p></div>
+      <div class="col good"><div class="lab">No Cowork</div><h4>Globais + contexto.md</h4><p><b>Instruções globais</b>: ele lê em toda tarefa. <b>Pasta dedicada + contexto.md</b>: o histórico do seu trabalho, sempre à mão.</p></div>
+    </div>
+    <div class="insightbox rv"><b>A regra de ouro:</b> você escreve seu contexto <b>uma vez</b> no lugar certo, e nunca mais repete. Configurar o Claude é o que faz ele acertar de primeira.</div>
+  </div>
+</section>
+
+<!-- 04 TOKENS -->
+<section id="tokens">
+  <div class="wrap">
+    <div class="rv"><span class="snum">04</span><h2 class="sec-h">Use sem travar</h2>
+    <p class="lead">O Claude conta <b>tokens</b> (pedaços de palavra), não mensagens, e relê a conversa toda a cada mensagem.</p></div>
+
+    <!-- chips -->
+    <div class="tok-chips rv">
+      <span class="c" style="background:var(--terra);">in</span>
+      <span class="c" style="background:var(--green);">te</span>
+      <span class="c" style="background:var(--ink-2);">li</span>
+      <span class="c" style="background:var(--terra-d);">gên</span>
+      <span class="c" style="background:var(--ink);">cia</span>
+    </div>
+    <div class="tok-note rv">"inteligência" = 5 tokens</div>
+
+    <!-- barra 88.5/11.5 visual (98,5% relendo) -->
+    <div class="tbar rv"><div class="a">98,5% relendo o histórico</div><div class="b">1,5% resposta</div></div>
+    <div class="tbar-l rv"><span>↑ a mensagem 30 custa 31× a mensagem 1</span><span>janela rolante de 5h</span></div>
+
+    <!-- effort -->
+    <div class="card hard rv" style="margin-top:34px;">
+      <span class="eyebrow">Novidade 2026 · Controle de Esforço</span>
+      <div class="effort">
+        <div class="etrack"><div class="eknob"></div></div>
+        <div class="elabs"><span>Rápido · gasta menos</span><span>Profundo · pensa mais</span></div>
+      </div>
+    </div>
+
+    <!-- model ladder -->
+    <div class="rv" style="margin-top:34px;"><span class="eyebrow">Escolha o modelo certo</span></div>
+    <div class="ladder rv">
+      <div class="rung"><div class="mn">Haiku</div><div class="cost">$</div><p>Simples: revisar, formatar, traduzir, brainstorm.</p></div>
+      <div class="rung mid tall"><div class="mn">Sonnet</div><div class="cost">$$</div><p>O dia a dia: textos, análises, pesquisas.</p></div>
+      <div class="rung taller"><div class="mn">Opus 4.8</div><div class="cost">$$$</div><p>Pesado: estratégia, análise profunda, tarefas longas.</p></div>
+    </div>
+
+    <div class="prompt rv">
+      <div class="pl"><span>Prompt · resumo pra abrir conversa nova</span><button class="copy">Copiar</button></div>
+      <pre>Antes de eu fechar essa conversa: me dê um resumo de tudo que decidimos, no formato de contexto, pra eu colar como primeira mensagem de uma conversa nova. Inclua: o objetivo, as decisões, o que já ficou pronto e o próximo passo.</pre>
+    </div>
+    <div class="insightbox rv"><b>O princípio:</b> não é usar menos. É usar com inteligência. A maioria queima tokens sem saber.</div>
+  </div>
+</section>
+
+<!-- MINI-DESAFIO -->
+<section class="mission" id="desafio">
+  <div class="wrap rv">
+    <div class="misscard">
+      <span class="eyebrow" style="color:var(--terra-l);">Mini-desafio do Módulo 2</span>
+      <h2>Configure uma vez.<br><span>Colhe pra sempre.</span></h2>
+      <div class="check">
+        <div class="ck"><div class="bx"></div><p><b>Crie seu primeiro Projeto</b> com instruções + 1 arquivo.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Configure suas Preferências</b> de usuário.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Ative a Memória</b> e veja o que ele já sabe de você.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Peça um resumo</b> e abra uma conversa nova.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEASER -->
+<section class="teaser">
+  <div class="wrap rv">
+    <span class="pill">Módulo 03</span>
+    <h2>Agora ele trabalha <span>do seu jeito.</span></h2>
+    <p>Skills, Artifacts, Custom Visuals e Conectores: o Claude vira especialista no seu padrão.</p>
+  </div>
+</section>
+
+<!-- CLOSE -->
+<section class="close">
+  <div class="wrap rv">
+    <h2>VOCÊ,<br><span>MULTIPLICADO.</span></h2>
+    <div class="sig">NewScale · @brusantanna.ai</div>
+  </div>
+</section>
+
+<div class="sign"><span>Claude com Profundidade · Módulo 02 · @brusantanna.ai</span><img src="logo-newscale.png" alt="NewScale" style="height:20px;filter:brightness(0) invert(1);opacity:.9;"></div>
+
+<script>
+const bar=document.getElementById('bar');
+addEventListener('scroll',()=>{const h=document.documentElement;bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';},{passive:true});
+document.querySelectorAll('.prompt').forEach(box=>{
+  const btn=box.querySelector('.copy'),pre=box.querySelector('pre');
+  btn.addEventListener('click',async()=>{
+    try{await navigator.clipboard.writeText(pre.innerText.trim());}
+    catch(e){const r=document.createRange();r.selectNode(pre);getSelection().removeAllRanges();getSelection().addRange(r);document.execCommand('copy');getSelection().removeAllRanges();}
+    const o=btn.textContent;btn.textContent='Copiado ✓';btn.classList.add('done');
+    setTimeout(()=>{btn.textContent=o;btn.classList.remove('done');},1600);
+  });
+});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
