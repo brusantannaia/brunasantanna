@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Módulo 05 · Loops e Agentes, Claude com Profundidade</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#F3EEE3; --bg-2:#ECE5D6; --card:#FBF9F3;
+  --ink:#14373C; --ink-2:#2C4F54; --green:#435D51;
+  --terra:#B06E4A; --terra-l:#C4835E; --terra-d:#985A3B;
+  --text:#233133; --muted:#6E7A75;
+  --line:rgba(20,55,60,.16);
+  --anton:'Anton', sans-serif; --hank:'Hanken Grotesk', sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--hank);background:var(--bg);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+::selection{background:var(--terra);color:#fff;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 30px;}
+h1, h2, h3{font-family:var(--anton);font-weight:400;text-transform:uppercase;letter-spacing:-.01em;line-height:.92;}
+.terra{color:var(--terra);}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--terra);}
+.eyebrow::before{content:'';width:26px;height:2px;background:var(--terra);}
+#bar{position:fixed;top:0;left:0;height:4px;width:0;background:var(--terra);z-index:99;transition:width .1s linear;}
+
+.hd{position:sticky;top:0;z-index:50;background:rgba(243,238,227,.92);backdrop-filter:blur(8px);border-bottom:2px solid var(--ink);}
+.hd-in{display:flex;align-items:center;justify-content:space-between;padding:14px 30px;max-width:1180px;margin:0 auto;}
+.hd .logo{font-family:var(--anton);font-size:1.15rem;text-transform:uppercase;color:var(--ink);letter-spacing:.02em;display:inline-flex;align-items:center;}
+.hd .logo .tag{font-family:var(--hank);font-weight:700;font-size:.6rem;letter-spacing:.12em;color:var(--terra);border:1.5px solid var(--terra);padding:3px 8px;border-radius:100px;margin-left:10px;text-transform:uppercase;}
+.hd nav{display:flex;gap:22px;}
+.hd nav a{font-size:.84rem;font-weight:600;color:var(--ink-2);text-decoration:none;transition:.18s;}
+.hd nav a:hover{color:var(--terra);}
+@media(max-width:760px){.hd nav{display:none;}}
+
+section{padding:80px 0;position:relative;}
+.snum{font-family:var(--anton);font-size:clamp(3rem,8vw,5.5rem);color:var(--terra);line-height:.8;display:block;}
+.sec-h{font-size:clamp(2.1rem,6vw,3.6rem);color:var(--ink);margin:6px 0 14px;}
+.lead{font-size:1.15rem;color:var(--ink-2);max-width:54ch;}
+.lead b{color:var(--ink);font-weight:700;}
+
+.hero{padding:70px 0 56px;}
+.hero h1{font-size:clamp(3.2rem,12vw,7.4rem);color:var(--ink);margin:20px 0 0;}
+.hero .sub{font-size:1.3rem;color:var(--ink-2);max-width:36ch;margin-top:24px;}
+.hero .sub b{color:var(--ink);font-weight:700;}
+.statrow{display:flex;gap:34px;flex-wrap:wrap;margin-top:40px;}
+.statrow .n{font-family:var(--anton);font-size:2.4rem;color:var(--ink);line-height:1;}
+.statrow .n span{color:var(--terra);}
+.statrow .l{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:5px;}
+
+.mani{background:var(--ink);padding:64px 0;}
+.mani p{font-family:var(--anton);text-transform:uppercase;font-size:clamp(1.8rem,5.2vw,3.4rem);line-height:1.02;color:#fff;max-width:24ch;}
+.mani p span{color:var(--terra-l);}
+.marq{background:var(--bg-2);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);padding:16px 0;overflow:hidden;}
+.marq-t{display:flex;gap:40px;width:max-content;animation:slide 26s linear infinite;align-items:center;}
+@keyframes slide{to{transform:translateX(-50%);}}
+.marq span{font-family:var(--anton);font-size:1.5rem;text-transform:uppercase;color:var(--ink);white-space:nowrap;}
+.marq span.d{color:var(--terra);}
+
+/* split */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px;}
+@media(max-width:680px){.split{grid-template-columns:1fr;}}
+.col{border-radius:16px;padding:24px 26px;}
+.col.no{background:var(--bg-2);border:1.5px dashed var(--line);}
+.col.yes{background:var(--ink);color:#fff;box-shadow:7px 7px 0 var(--terra);}
+.col .lab{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;}
+.col.no .lab{color:var(--muted);} .col.yes .lab{color:var(--terra-l);}
+.col h4{font-family:var(--hank);font-weight:800;font-size:1.4rem;text-transform:uppercase;letter-spacing:.005em;line-height:1.08;margin-bottom:8px;}
+.col.no h4{color:var(--ink);} .col.yes h4{color:#fff;}
+.col p{font-size:.95rem;} .col.no p{color:var(--ink-2);} .col.yes p{color:rgba(255,255,255,.85);}
+
+.callout{margin-top:18px;background:rgba(176,110,74,.1);border-left:4px solid var(--terra);border-radius:0 12px 12px 0;padding:14px 18px;font-size:1rem;color:var(--ink-2);}
+.callout b{color:var(--terra);}
+
+/* flow */
+.flow{display:flex;align-items:stretch;gap:0;margin-top:26px;flex-wrap:wrap;}
+.fstep{flex:1;min-width:140px;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:18px;}
+.fstep.dark{background:var(--ink);box-shadow:7px 7px 0 var(--terra);}
+.fstep .fn{font-family:var(--anton);font-size:1.3rem;color:var(--terra);}
+.fstep.dark .fn{color:var(--terra-l);}
+.fstep .ft{font-family:var(--anton);text-transform:uppercase;font-size:1.02rem;color:var(--ink);margin-top:4px;line-height:1.02;}
+.fstep.dark .ft{color:#fff;}
+.fstep p{font-size:.83rem;color:var(--ink-2);margin-top:6px;}.fstep.dark p{color:rgba(255,255,255,.8);}
+.farrow{display:flex;align-items:center;justify-content:center;font-family:var(--anton);color:var(--terra);font-size:1.7rem;padding:0 12px;}
+@media(max-width:680px){.flow{flex-direction:column;}.farrow{transform:rotate(90deg);padding:8px 0;}}
+
+/* chips */
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;}
+.chip{font-family:var(--hank);font-weight:700;font-size:.82rem;background:var(--bg-2);border:1.5px solid var(--line);border-radius:100px;padding:8px 16px;color:var(--ink);}
+.chip.hot{background:var(--terra);color:#fff;border-color:var(--terra);}
+
+/* prompt */
+.prompt{margin-top:18px;background:var(--card);border:1.5px solid var(--line);border-left:7px solid var(--terra);border-radius:0 14px 14px 0;overflow:hidden;}
+.prompt .pl{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;background:rgba(176,110,74,.1);}
+.prompt .pl span{font-family:var(--hank);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);}
+.copy{font-family:var(--hank);font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--terra);border:none;border-radius:100px;padding:7px 16px;cursor:pointer;transition:.18s;white-space:nowrap;}
+.copy:hover{background:var(--terra-d);}.copy.done{background:var(--green);}
+.prompt pre{font-family:var(--hank);font-size:.95rem;line-height:1.55;color:var(--text);padding:18px 20px;white-space:pre-wrap;word-break:break-word;}
+
+/* live selo */
+.live{background:var(--terra);color:#fff;padding:3px 8px;border-radius:6px;}
+
+/* mission/teaser/close */
+.misscard{background:var(--ink);color:#fff;border-radius:20px;padding:40px;box-shadow:9px 9px 0 var(--green);}
+.misscard h2{color:#fff;font-size:clamp(1.8rem,5vw,2.8rem);}.misscard h2 span{color:var(--terra-l);}
+.check{margin-top:24px;display:grid;gap:11px;}
+.ck{display:flex;gap:14px;align-items:flex-start;}
+.ck .bx{flex-shrink:0;width:24px;height:24px;border-radius:6px;border:2px solid var(--terra-l);margin-top:1px;}
+.ck p{color:rgba(255,255,255,.9);font-size:1.02rem;}.ck p b{color:#fff;}
+.teaser{background:var(--bg-2);}
+.teaser .pill{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra);border:1.5px solid var(--terra);border-radius:100px;padding:5px 14px;margin-bottom:16px;}
+.teaser h2{font-size:clamp(2rem,5.5vw,3.4rem);color:var(--ink);max-width:20ch;}.teaser h2 span{color:var(--terra);}
+.teaser p{margin-top:14px;color:var(--ink-2);max-width:52ch;font-size:1.05rem;}
+.teaser a{text-decoration:none;}
+.close{background:var(--ink);text-align:center;}
+.close h2{font-size:clamp(2.6rem,9vw,5.5rem);color:#fff;}.close h2 span{color:var(--terra-l);}
+.close .sig{margin-top:18px;font-size:.92rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra-l);}
+.sign{display:flex;align-items:center;justify-content:space-between;gap:12px;color:#fff;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;padding:18px 30px;background:#0E282C;}
+.sign .ns{font-family:var(--anton);letter-spacing:.28em;color:var(--terra-l);font-size:1.05rem;}
+
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);}
+.rv.in{opacity:1;transform:none;}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;}}
+
+/* ===== DIAGRAMAS NOVOS, MÓDULO 6 ===== */
+
+/* equação do agente */
+.eq{display:flex;align-items:stretch;justify-content:center;gap:0;flex-wrap:wrap;margin-top:30px;}
+.eqp{flex:1;min-width:130px;background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:20px 16px;text-align:center;opacity:0;transform:translateY(14px) scale(.96);}
+.eq.in .eqp{animation:assemble .55s cubic-bezier(.2,.8,.2,1) forwards;}
+.eq.in .eqp:nth-of-type(1){animation-delay:.05s;}
+.eq.in .eqp:nth-of-type(2){animation-delay:.45s;}
+.eq.in .eqp:nth-of-type(3){animation-delay:.85s;}
+.eq.in .eqp:nth-of-type(4){animation-delay:1.25s;}
+.eqp.fin{background:var(--terra);box-shadow:7px 7px 0 var(--ink);}
+.eq.in .eqp.fin{animation-delay:1.7s;}
+.eqp .ic{font-family:var(--anton);font-size:1.7rem;color:var(--terra);line-height:1;}
+.eqp.fin .ic{color:#fff;}
+.eqp .nm{font-family:var(--anton);text-transform:uppercase;font-size:1.15rem;color:var(--ink);margin-top:8px;line-height:1;}
+.eqp.fin .nm{color:#fff;font-size:1.5rem;}
+.eqp .ds{font-size:.78rem;color:var(--ink-2);margin-top:7px;}
+.eqp.fin .ds{color:rgba(255,255,255,.9);}
+.eqs{display:flex;align-items:center;justify-content:center;font-family:var(--anton);color:var(--terra);font-size:2rem;padding:0 10px;opacity:0;}
+.eq.in .eqs{animation:fade .4s ease forwards;}
+.eq.in .eqs:nth-of-type(2){animation-delay:.35s;}
+.eq.in .eqs:nth-of-type(4){animation-delay:.75s;}
+.eq.in .eqs:nth-of-type(6){animation-delay:1.15s;}
+.eq.in .eqs.equals{animation-delay:1.55s;}
+@keyframes assemble{to{opacity:1;transform:translateY(0) scale(1);}}
+@keyframes fade{to{opacity:1;}}
+@media(max-width:680px){.eq{flex-direction:column;}.eqs{transform:rotate(90deg);padding:6px 0;}}
+@media(prefers-reduced-motion:reduce){
+  .eqp,.eqs{opacity:1 !important;transform:none !important;animation:none !important;}
+}
+
+/* loop circular svg */
+.loopwrap{display:flex;justify-content:center;margin-top:30px;}
+.loopwrap svg{max-width:420px;width:100%;height:auto;}
+.spin{transform-origin:210px 200px;animation:rot 5s linear infinite;}
+@keyframes rot{to{transform:rotate(360deg);}}
+.pulse{animation:pls 2.4s ease-in-out infinite;transform-origin:center;}
+@keyframes pls{0%,100%{transform:scale(1);}50%{transform:scale(1.06);}}
+@media(prefers-reduced-motion:reduce){.spin,.pulse{animation:none !important;}}
+
+/* loop vs paralelização */
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px;}
+@media(max-width:680px){.vs{grid-template-columns:1fr;}}
+.vsbox{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:24px;}
+.vsbox.b{background:var(--ink);box-shadow:7px 7px 0 var(--terra);}
+.vsbox .vt{font-family:var(--anton);text-transform:uppercase;font-size:1.4rem;color:var(--ink);line-height:1;}
+.vsbox.b .vt{color:#fff;}
+.vsbox .vk{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--terra);margin-bottom:10px;}
+.vsbox.b .vk{color:var(--terra-l);}
+.vsbox .vd{font-size:.88rem;color:var(--ink-2);margin-top:10px;}
+.vsbox.b .vd{color:rgba(255,255,255,.82);}
+.vsbox svg{width:100%;height:auto;margin-top:14px;}
+
+/* managed agents card */
+.mgd{background:var(--ink);color:#fff;border-radius:20px;padding:36px;margin-top:26px;box-shadow:9px 9px 0 var(--terra);}
+.mgd .badge{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);background:var(--terra-l);border-radius:100px;padding:5px 13px;margin-bottom:14px;}
+.mgd h3{font-size:clamp(1.5rem,4vw,2.2rem);color:#fff;}.mgd h3 span{color:var(--terra-l);}
+.mgd p{color:rgba(255,255,255,.85);font-size:1rem;margin-top:12px;max-width:60ch;}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+
+<header class="hd">
+  <div class="hd-in">
+    <span class="logo">Bruna Santanna<span class="tag">A Virada IA</span></span>
+    <nav>
+      <a href="#formula">A fórmula</a>
+      <a href="#loop">O loop</a>
+      <a href="#paralelo">Loop vs Paralelo</a>
+      <a href="#desafio">Desafio</a>
+      <a href="index.html">Índice</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap rv">
+    <span class="eyebrow">Claude com Profundidade · 05 de 08</span>
+    <h1>MONTE UM<br><span class="terra">AGENTE.</span></h1>
+    <p class="sub"><b>Sem código, Projeto + Skill + Conector + Agendada.</b></p>
+    <div class="statrow">
+      <div><div class="n">4</div><div class="l">peças</div></div>
+      <div><div class="n">1<span>×</span></div><div class="l">você escreve o loop</div></div>
+      <div><div class="n">0</div><div class="l">código</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<div class="mani"><div class="wrap rv"><p>Você escreve o loop uma vez. <span>Ele não te entrega até estar perfeito.</span></p></div></div>
+
+<!-- MARQUEE -->
+<div class="marq"><div class="marq-t">
+  <span>A fórmula</span><span class="d">·</span><span>Loop</span><span class="d">·</span><span>Subagentes</span><span class="d">·</span><span>Managed Agents</span><span class="d">·</span>
+  <span>A fórmula</span><span class="d">·</span><span>Loop</span><span class="d">·</span><span>Subagentes</span><span class="d">·</span><span>Managed Agents</span><span class="d">·</span>
+</div></div>
+
+<!-- 01 A FÓRMULA DO AGENTE -->
+<section id="formula">
+  <div class="wrap">
+    <div class="rv"><span class="snum">01</span><h2 class="sec-h">A fórmula do agente</h2>
+    <p class="lead">Um agente não é mágica. É a <b>soma de quatro peças</b> que você já conhece, montadas pra trabalhar juntas.</p></div>
+
+    <!-- equação -->
+    <div class="eq rv">
+      <div class="eqp"><div class="ic">⬡</div><div class="nm">Projeto</div><div class="ds">o corpo e a memória</div></div>
+      <div class="eqs">+</div>
+      <div class="eqp"><div class="ic">✦</div><div class="nm">Skill</div><div class="ds">a especialidade</div></div>
+      <div class="eqs">+</div>
+      <div class="eqp"><div class="ic">⚯</div><div class="nm">Conector</div><div class="ds">os braços (dados)</div></div>
+      <div class="eqs">+</div>
+      <div class="eqp"><div class="ic">◷</div><div class="nm">Agendada</div><div class="ds">o relógio</div></div>
+      <div class="eqs equals">=</div>
+      <div class="eqp fin"><div class="ic">★</div><div class="nm">Agente</div><div class="ds">trabalha sozinho</div></div>
+    </div>
+
+    <div class="prompt rv">
+      <div class="pl"><span><span class="live">⚡ AGORA NO CLAUDE</span>&nbsp; Instruções do Agente · Pré-atendimento Studio Aurora</span><button class="copy">Copiar</button></div>
+      <pre>Você é o Agente de Pré-atendimento do Studio Aurora. Quando chega um lead, você: 1) responde no meu tom (caloroso, direto); 2) entende a necessidade; 3) qualifica (porte do negócio, serviço, urgência); 4) sugere o próximo passo (agendar um Diagnóstico de Marca). Nunca prometa preço sem eu confirmar. Salve cada lead em /leads/AAAA-MM-DD-nome.md.</pre>
+    </div>
+    <div class="prompt rv">
+      <div class="pl"><span>Tarefa agendada do agente</span><button class="copy">Copiar</button></div>
+      <pre>Toda segunda às 8h: leia os leads novos em /leads, resuma quem está quente e prepare a abordagem de cada um no meu tom. Me mande o resumo.</pre>
+    </div>
+  </div>
+</section>
+
+<!-- 02 O LOOP AUTO-MELHORANTE -->
+<section id="loop" style="background:var(--bg-2);">
+  <div class="wrap">
+    <div class="rv"><span class="snum">02</span><h2 class="sec-h">O loop auto-melhorante</h2>
+    <p class="lead">Loop <b>não é um prompt grande.</b> É um ciclo que se repete até passar no checklist, sozinho.</p></div>
+
+    <!-- loop svg -->
+    <div class="loopwrap rv">
+      <svg viewBox="0 0 420 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ciclo: gera, critica, e se falhar volta; quando passa, aprovado">
+        <defs>
+          <marker id="ah" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L7,3 L0,6 Z" fill="#B06E4A"/>
+          </marker>
+        </defs>
+        <!-- círculo guia -->
+        <circle cx="210" cy="200" r="130" fill="none" stroke="rgba(20,55,60,.16)" stroke-width="2" stroke-dasharray="5 7"/>
+        <!-- arco girando -->
+        <g class="spin">
+          <circle cx="210" cy="70" r="9" fill="#B06E4A"/>
+        </g>
+        <!-- nó GERA (topo) -->
+        <g>
+          <circle cx="210" cy="70" r="44" fill="#14373C"/>
+          <text x="210" y="66" text-anchor="middle" font-family="Anton" font-size="17" fill="#fff">GERA</text>
+          <text x="210" y="84" text-anchor="middle" font-family="Hanken Grotesk" font-size="9" fill="#C4835E">faz a 1ª versão</text>
+        </g>
+        <!-- nó CRITICA (direita-baixo) -->
+        <g>
+          <circle cx="320" cy="265" r="44" fill="#14373C"/>
+          <text x="320" y="261" text-anchor="middle" font-family="Anton" font-size="15" fill="#fff">CRITICA</text>
+          <text x="320" y="279" text-anchor="middle" font-family="Hanken Grotesk" font-size="9" fill="#C4835E">vs checklist</text>
+        </g>
+        <!-- nó APROVADO (esquerda-baixo) -->
+        <g class="pulse" style="transform-origin:100px 265px;">
+          <circle cx="100" cy="265" r="46" fill="#B06E4A"/>
+          <text x="100" y="262" text-anchor="middle" font-family="Anton" font-size="15" fill="#fff">APROVADO</text>
+          <text x="100" y="280" text-anchor="middle" font-family="Hanken Grotesk" font-size="9" fill="#fff">passou em tudo</text>
+        </g>
+        <!-- seta GERA -> CRITICA -->
+        <path d="M252,108 A130,130 0 0,1 304,222" fill="none" stroke="#B06E4A" stroke-width="3" marker-end="url(#ah)"/>
+        <!-- seta CRITICA -> volta GERA (falhou) -->
+        <path d="M295,228 A95,95 0 0,0 235,115" fill="none" stroke="#435D51" stroke-width="2.5" stroke-dasharray="4 5" marker-end="url(#ah)"/>
+        <text x="225" y="190" text-anchor="middle" font-family="Hanken Grotesk" font-size="11" font-weight="700" fill="#435D51">↻ falhou? volta</text>
+        <!-- seta CRITICA -> APROVADO (passou) -->
+        <path d="M276,265 L150,265" fill="none" stroke="#B06E4A" stroke-width="3" marker-end="url(#ah)"/>
+        <text x="210" y="255" text-anchor="middle" font-family="Hanken Grotesk" font-size="11" font-weight="700" fill="#B06E4A">passou ✓</text>
+      </svg>
+    </div>
+
+    <div class="callout rv"><b>Exemplo simples:</b> "escreve um resumo" é a <b>tarefa</b>; "toda afirmação precisa ter 3 links que comprovem" é a <b>meta</b>. Sem loop, a IA inventa link que nem existe; com loop, ele confere link por link antes de entregar, com a <b>busca na web ligada</b>, que é o meio de checar. O loop dá a régua; a web é o braço.</div>
+    <div class="callout rv"><b>A regra de ouro:</b> a meta precisa ter <b>número, % ou checklist</b>. "Deixa bom" não funciona, o Claude não tem como se dar nota. É o que quase todo mundo erra.</div>
+
+    <div class="prompt rv">
+      <div class="pl"><span><span class="live">⚡ AGORA NO CLAUDE</span>&nbsp; O Loop · proposta do Studio Aurora</span><button class="copy">Copiar</button></div>
+      <pre>Escreva a proposta de Diagnóstico de Marca pra [cliente]. Agora entre em LOOP de até 5 rodadas: 1) gere a proposta; 2) critique a SUA proposta contra o checklist (problema claro? valor tangível? 3 passos? CTA? tom Aurora?); 3) se algo falhar, reescreva e volte ao passo 2; 4) quando passar em tudo, escreva APROVADO e salve em /propostas. Me mostre o histórico de cada rodada.</pre>
+    </div>
+    <div class="callout rv"><b>Onde roda:</b> o loop auto-melhorante roda no <b>Cowork, sem código</b>, é só descrever o ciclo. A versão dev (comando <b>/loop</b>) é no Claude Code. <b>Honestidade:</b> ainda é território novo (research preview) e funciona melhor com checklist objetivo (sim/não).</div>
+  </div>
+</section>
+
+<!-- 03 LOOP vs PARALELIZAÇÃO -->
+<section id="paralelo">
+  <div class="wrap">
+    <div class="rv"><span class="snum">03</span><h2 class="sec-h">Loop vs paralelização</h2>
+    <p class="lead">A confusão que todo mundo faz. <b>Um é profundidade. O outro é largura.</b></p></div>
+
+    <div class="vs rv">
+      <!-- LOOP -->
+      <div class="vsbox">
+        <div class="vk">Profundidade</div>
+        <div class="vt">Loop</div>
+        <svg viewBox="0 0 260 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Um trabalhador em série, repetindo um ciclo">
+          <defs>
+            <marker id="ah2" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L7,3 L0,6 Z" fill="#B06E4A"/>
+            </marker>
+          </defs>
+          <circle cx="130" cy="75" r="34" fill="#14373C"/>
+          <text x="130" y="80" text-anchor="middle" font-family="Anton" font-size="14" fill="#fff">CLAUDE</text>
+          <path d="M130,28 A52,52 0 1,1 128,28" fill="none" stroke="#B06E4A" stroke-width="3" stroke-dasharray="6 6" marker-end="url(#ah2)"/>
+          <text x="130" y="20" text-anchor="middle" font-family="Hanken Grotesk" font-size="10" font-weight="700" fill="#B06E4A">repete</text>
+        </svg>
+        <div class="vd">1 trabalhador, em série, num ciclo. Ele volta nele mesmo até ficar bom.</div>
+      </div>
+      <!-- PARALELIZAÇÃO -->
+      <div class="vsbox b">
+        <div class="vk">Largura</div>
+        <div class="vt">Paralelização</div>
+        <svg viewBox="0 0 260 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Um maestro no topo, três subagentes em paralelo, depois junta">
+          <defs>
+            <marker id="ah3" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L7,3 L0,6 Z" fill="#C4835E"/>
+            </marker>
+          </defs>
+          <!-- maestro -->
+          <rect x="100" y="10" width="60" height="28" rx="8" fill="#C4835E"/>
+          <text x="130" y="29" text-anchor="middle" font-family="Anton" font-size="12" fill="#14373C">MAESTRO</text>
+          <!-- subagentes -->
+          <rect x="20" y="70" width="56" height="26" rx="7" fill="#fff"/>
+          <rect x="102" y="70" width="56" height="26" rx="7" fill="#fff"/>
+          <rect x="184" y="70" width="56" height="26" rx="7" fill="#fff"/>
+          <text x="48" y="87" text-anchor="middle" font-family="Anton" font-size="11" fill="#14373C">SUB 1</text>
+          <text x="130" y="87" text-anchor="middle" font-family="Anton" font-size="11" fill="#14373C">SUB 2</text>
+          <text x="212" y="87" text-anchor="middle" font-family="Anton" font-size="11" fill="#14373C">SUB 3</text>
+          <!-- linhas maestro->subs -->
+          <path d="M118,38 L48,68" fill="none" stroke="#C4835E" stroke-width="2.5" marker-end="url(#ah3)"/>
+          <path d="M130,38 L130,68" fill="none" stroke="#C4835E" stroke-width="2.5" marker-end="url(#ah3)"/>
+          <path d="M142,38 L212,68" fill="none" stroke="#C4835E" stroke-width="2.5" marker-end="url(#ah3)"/>
+          <!-- junta embaixo -->
+          <rect x="100" y="120" width="60" height="22" rx="7" fill="#435D51"/>
+          <text x="130" y="135" text-anchor="middle" font-family="Anton" font-size="11" fill="#fff">JUNTA</text>
+          <path d="M48,96 L118,118" fill="none" stroke="#C4835E" stroke-width="2.5" marker-end="url(#ah3)"/>
+          <path d="M130,96 L130,118" fill="none" stroke="#C4835E" stroke-width="2.5" marker-end="url(#ah3)"/>
+          <path d="M212,96 L142,118" fill="none" stroke="#C4835E" stroke-width="2.5" marker-end="url(#ah3)"/>
+        </svg>
+        <div class="vd">1 maestro → 3 subagentes ao mesmo tempo → junta. Cobre mais terreno.</div>
+      </div>
+    </div>
+
+    <div class="callout rv"><b>A régua:</b> Loop = um Claude em série. Paralelização = vários Claudes ao mesmo tempo sob um maestro. Use paralelização <b>só</b> quando a tarefa é grande, divisível e vale o custo.</div>
+  </div>
+</section>
+
+<!-- 04 HORIZONTE: MANAGED AGENTS -->
+<section id="horizonte" style="background:var(--bg-2);">
+  <div class="wrap">
+    <div class="rv"><span class="snum">04</span><h2 class="sec-h">Horizonte: Managed Agents</h2>
+    <p class="lead">Onde isso vai dar. Bom saber que existe, e <b>quando vale contratar alguém</b>.</p></div>
+
+    <div class="mgd rv">
+      <span class="badge">Território de TI / dev</span>
+      <h3>O mesmo agente pode <span>subir de nível.</span></h3>
+      <p>Aquele agente que você montou no Projeto pode virar um <b>Managed Agent</b>: rodando 24/7 na infraestrutura da Anthropic, sem depender do seu computador estar ligado. A partir daqui já é terreno de TI/dev, você não precisa fazer sozinha. Mas é bom saber que existe, pra reconhecer a hora de chamar alguém técnico quando o agente virar parte séria da operação.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DESAFIO -->
+<section id="desafio">
+  <div class="wrap rv">
+    <div class="misscard">
+      <span class="eyebrow" style="color:var(--terra-l);">Mini-desafio do Módulo 6</span>
+      <h2>Monte.<br><span>Deixa rodar.</span></h2>
+      <div class="check">
+        <div class="ck"><div class="bx"></div><p><b>Monte 1 agente simples</b> (Projeto + Skill + Agendada).</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Rode 1 loop</b> com checklist numa proposta do Studio Aurora.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Conecte</b> Gmail ou Agenda ao agente.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Diferencie:</b> o que é loop, o que é paralelização.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEASER -->
+<section class="teaser">
+  <div class="wrap rv">
+    <span class="pill">Módulo 06</span>
+    <a href="2026-06-22-guia-modulo7-claude-code.html"><h2>Crie sem <span>depender de ninguém.</span></h2></a>
+    <p>Claude Code, a hora de criar suas próprias ferramentas, do seu jeito, sem fila e sem orçamento de dev.</p>
+  </div>
+</section>
+
+<!-- CLOSE -->
+<section class="close">
+  <div class="wrap rv">
+    <h2>VOCÊ,<br><span>MULTIPLICADO.</span></h2>
+    <div class="sig">NewScale · @brusantanna.ai</div>
+  </div>
+</section>
+
+<div class="sign"><span>Claude com Profundidade · Módulo 05 · @brusantanna.ai</span><img src="logo-newscale.png" alt="NewScale" style="height:20px;filter:brightness(0) invert(1);opacity:.9;"></div>
+
+<script>
+const bar=document.getElementById('bar');
+addEventListener('scroll',()=>{const h=document.documentElement;bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';},{passive:true});
+document.querySelectorAll('.prompt').forEach(box=>{
+  const btn=box.querySelector('.copy'), pre=box.querySelector('pre');
+  if(!btn||!pre)return;
+  btn.addEventListener('click', async()=>{
+    try{await navigator.clipboard.writeText(pre.innerText.trim());}
+    catch(e){const r=document.createRange();r.selectNode(pre);getSelection().removeAllRanges();getSelection().addRange(r);document.execCommand('copy');getSelection().removeAllRanges();}
+    const o=btn.textContent;btn.textContent='Copiado ✓';btn.classList.add('done');
+    setTimeout(()=>{btn.textContent=o;btn.classList.remove('done');},1600);
+  });
+});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
