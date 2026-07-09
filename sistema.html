@@ -153,7 +153,9 @@
         .hero-fact .hf-ico { color:var(--terra); }
 
         /* slot de video + foto */
-        .hero-media { display:flex; flex-direction:column; gap:14px; }
+        .hero-media { display:flex; flex-direction:column; gap:14px; align-items:center; }
+        .hero-video { width:100%; max-width:300px; aspect-ratio:9/16; object-fit:cover; background:var(--ink); border:2px solid var(--ink); border-radius:18px; box-shadow:8px 8px 0 rgba(176,110,74,.22); }
+        @media (min-width:900px){ .hero-video{ max-width:320px; } }
         .video-slot { position:relative; border:2px dashed var(--terra); border-radius:18px; background:var(--card); aspect-ratio:16/10; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:22px; cursor:pointer; transition:transform .18s, box-shadow .18s; box-shadow:8px 8px 0 rgba(176,110,74,.18); }
         .video-slot:hover { transform:translate(-2px,-2px); box-shadow:10px 10px 0 rgba(176,110,74,.22); }
         .video-slot .play { width:60px; height:60px; border-radius:50%; background:var(--terra); color:#fff; display:flex; align-items:center; justify-content:center; font-size:1.4rem; margin-bottom:12px; box-shadow:0 8px 22px rgba(176,110,74,.4); padding-left:5px; animation:playPulse 2.6s ease-in-out infinite; }
@@ -479,14 +481,9 @@
                 </div>
             </div>
             <div class="hero-media rv">
-                <!-- SLOT DE VÍDEO click-to-play. A Bruna grava o vídeo de 60-90s depois; ele
-                     substitui este placeholder (trocar por <video> ou embed com poster). -->
-                <div class="video-slot" id="videoSlot" role="button" tabindex="0" aria-label="Assistir vídeo da Bruna">
-                    <div class="play">▶</div>
-                    <b>Vídeo da Bruna · 60-90s</b>
-                    <span>clique pra assistir</span>
-                </div>
-                <img src="fotos/bruna-hero.jpg" alt="Bruna Santanna" style="width:100%;border-radius:14px;box-shadow:6px 6px 0 rgba(176,110,74,.18);" onerror="this.remove()">
+                <video class="hero-video" controls preload="none" playsinline poster="fotos/bruna-hero.jpg" aria-label="Vídeo da Bruna sobre o workshop">
+                    <source src="videos/video-venda.mp4" type="video/mp4">
+                </video>
             </div>
         </div>
     </div>
