@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workshop Instala Comigo | A Virada IA · Bruna Santanna</title>
+    <meta name="description" content="Workshop ao vivo, terça 21/07 às 20h. Em 2 horas você instala o sistema que pesquisa, escreve, agenda e analisa o seu conteúdo em todas as redes. Sai funcionando ou eu devolvo seus R$99.">
+    <meta name="author" content="Bruna Santanna">
+    <link rel="canonical" href="https://brunasantanna.com/sistema">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://brunasantanna.com/sistema">
+    <meta property="og:title" content="Workshop Instala Comigo: seu conteúdo rodando em loop, você só grava">
+    <meta property="og:description" content="Ao vivo terça 21/07, 20h: em 2 horas você instala um sistema que pesquisa, escreve, agenda e analisa seu conteúdo em todas as redes. Você só grava.">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DCW0QVCWB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-7DCW0QVCWB');
+    </script>
+
+    <!-- JSON-LD: Event -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Event",
+        "name": "Workshop Instala Comigo",
+        "description": "Workshop ao vivo e online: em 2 horas você instala um sistema de conteúdo que pesquisa, escreve, agenda e analisa sozinho. Você só grava.",
+        "startDate": "2026-07-21T20:00:00-03:00",
+        "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "inLanguage": "pt-BR",
+        "url": "https://brunasantanna.com/sistema",
+        "location": {
+            "@type": "VirtualLocation",
+            "url": "https://brunasantanna.com/sistema"
+        },
+        "organizer": { "@type": "Person", "name": "Bruna Santanna", "url": "https://brunasantanna.com" },
+        "offers": {
+            "@type": "Offer",
+            "price": "99",
+            "priceCurrency": "BRL",
+            "url": "https://pay.kiwify.com.br/a9YefRy",
+            "availability": "https://schema.org/InStock",
+            "validThrough": "2026-07-11T23:59:59-03:00"
+        }
+    }
+    </script>
+
+    <!-- JSON-LD: FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {"@type":"Question","name":"Preciso saber de tecnologia?","acceptedAnswer":{"@type":"Answer","text":"Não. A skill instaladora te entrevista com 9 perguntas, uma por vez, e faz por você o que der pra fazer. Você não escreve uma linha de código."}},
+            {"@type":"Question","name":"Preciso pagar algo além do ingresso?","acceptedAnswer":{"@type":"Answer","text":"Só a assinatura do Claude, US$20 por mês, que é onde o sistema roda. Nada além disso."}},
+            {"@type":"Question","name":"É ao vivo? Fica gravado?","acceptedAnswer":{"@type":"Answer","text":"É ao vivo, com instalação assistida: a gente monta junto e eu tiro dúvida na hora. E você tem o replay por 7 dias."}},
+            {"@type":"Question","name":"Serve pro meu nicho?","acceptedAnswer":{"@type":"Answer","text":"Serve. O motor é construído pela entrevista da skill com você, então ele aprende a sua área e o seu jeito de falar. De confeitaria a advocacia."}},
+            {"@type":"Question","name":"Quanto tempo eu gasto depois?","acceptedAnswer":{"@type":"Answer","text":"Você só grava. Em torno de 30 a 40 minutos organizam a sua semana inteira de conteúdo."}},
+            {"@type":"Question","name":"E se eu travar depois?","acceptedAnswer":{"@type":"Answer","text":"Você tem o grupo de dúvidas por 7 dias, a página de resumos pra sempre e os comandos de socorro da skill, que retoma de onde você parou."}},
+            {"@type":"Question","name":"Não gosto de aparecer, funciona?","acceptedAnswer":{"@type":"Answer","text":"Funciona. Carrossel, post de LinkedIn, post de blog e newsletter não precisam de câmera. O vídeo é só uma parte do sistema."}},
+            {"@type":"Question","name":"E depois que os 7 dias de suporte acabarem?","acceptedAnswer":{"@type":"Answer","text":"A skill é sua pra sempre e retoma de onde você parou a qualquer momento. A Biblioteca do Aluno com todos os passos e prompts é acesso vitalício. Os 7 dias são só o plantão de dúvidas ao vivo; o sistema não expira."}},
+            {"@type":"Question","name":"Preciso de computador? Funciona só no celular?","acceptedAnswer":{"@type":"Answer","text":"Precisa de um computador (Windows ou Mac) com o app do Claude, porque é nele que o sistema mora. O celular você continua usando pra gravar e postar."}}
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ═══════════════════════════════════════════════════════════
+           MOBILE FIRST: os estilos base são pro ~390px.
+           Os @media (min-width) expandem pro tablet/desktop.
+        ═══════════════════════════════════════════════════════════ */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg:#F3EEE3; --bg-2:#ECE5D6; --card:#FBF9F3;
+            --ink:#14373C; --ink-2:#2C4F54; --green:#435D51;
+            --terra:#B06E4A; --terra-l:#C4835E; --terra-d:#985A3B;
+            --text:#233133; --muted:#6E7A75; --line:rgba(20,55,60,0.16);
+            --cream:#F4F3EF;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family:'Hanken Grotesk',sans-serif; background:var(--bg); color:var(--text); line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+        img, svg { max-width:100%; display:block; }
+        a { color:inherit; text-decoration:none; }
+        ::selection { background:var(--terra); color:#fff; }
+        .wrap { max-width:1100px; margin:0 auto; padding:0 20px; }
+        @media (min-width:760px){ .wrap { padding:0 30px; } }
+        .kick { font-size:0.68rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--terra); }
+
+        /* ---------- BARRA STICKY TOPO ---------- */
+        .topbar { position:sticky; top:0; z-index:60; background:var(--ink); color:#fff; }
+        .topbar-inner { display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap; max-width:1100px; margin:0 auto; padding:8px 16px; }
+        .topbar-txt { font-size:0.76rem; font-weight:600; letter-spacing:0.01em; text-align:center; }
+        .topbar-txt b { color:var(--terra-l); font-weight:700; }
+        .topbar-mini { display:none; background:var(--terra); color:#fff; border-radius:100px; padding:6px 16px; font-size:0.72rem; font-weight:800; letter-spacing:0.04em; text-transform:uppercase; white-space:nowrap; transition:background .2s, transform .15s; }
+        .topbar-mini:hover { background:var(--terra-l); transform:translateY(-1px); }
+        @media (min-width:760px){ .topbar-txt{ font-size:0.86rem; } .topbar-mini{ display:inline-block; } }
+
+        /* ---------- HEADER (só logo) ---------- */
+        .site-header { position:sticky; top:0; z-index:50; background:rgba(243,238,227,0.92); backdrop-filter:blur(8px); border-bottom:2px solid var(--ink); }
+        .header-inner { display:flex; align-items:center; justify-content:space-between; gap:16px; max-width:1100px; margin:0 auto; padding:12px 20px; }
+        @media (min-width:760px){ .header-inner{ padding:14px 30px; } }
+        .logo { display:inline-flex; align-items:center; white-space:nowrap; font-family:'Anton',sans-serif; font-size:1.1rem; letter-spacing:0.02em; text-transform:uppercase; color:var(--ink); }
+        .logo .brand-tag { font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:0.58rem; letter-spacing:0.1em; color:var(--terra); border:1.5px solid var(--terra); padding:3px 8px; border-radius:100px; margin-left:9px; }
+        .header-date { display:none; font-size:0.8rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-2); }
+        @media (min-width:640px){ .header-date{ display:block; } }
+
+        /* botão genérico + microanimação de sombra dura */
+        .btn { display:inline-flex; align-items:center; gap:9px; justify-content:center; font-family:'Hanken Grotesk',sans-serif; font-weight:800; font-size:0.82rem; letter-spacing:0.03em; text-transform:uppercase; padding:15px 24px; border-radius:100px; border:none; cursor:pointer; text-align:center; transition:transform .14s cubic-bezier(.2,.7,.2,1), box-shadow .14s cubic-bezier(.2,.7,.2,1), background .2s; }
+        .btn-terra { background:var(--terra); color:#fff; box-shadow:4px 4px 0 rgba(20,55,60,.85); }
+        .btn-terra:hover { background:var(--terra-d); transform:translate(-2px,-2px); box-shadow:7px 7px 0 rgba(20,55,60,.85); }
+        .btn-terra:active { transform:translate(2px,2px); box-shadow:2px 2px 0 rgba(20,55,60,.85); }
+        .btn-lg { font-size:0.92rem; padding:17px 30px; width:100%; }
+        @media (min-width:560px){ .btn-lg{ width:auto; font-size:1rem; padding:19px 40px; } }
+        .btn-arrow::after { content:'→'; font-size:1.05em; transition:transform .18s; }
+        .btn-arrow:hover::after { transform:translateX(3px); }
+        /* CTA em fundo escuro: sombra clara */
+        .prova .btn-terra, .fecho .btn-terra { box-shadow:4px 4px 0 rgba(0,0,0,.34); }
+        .prova .btn-terra:hover, .fecho .btn-terra:hover { box-shadow:7px 7px 0 rgba(0,0,0,.34); }
+        .prova .btn-terra:active, .fecho .btn-terra:active { box-shadow:2px 2px 0 rgba(0,0,0,.34); }
+
+        .cta-block { text-align:center; padding:6px 0 2px; }
+        .cta-micro { display:block; margin-top:14px; font-size:0.84rem; color:var(--muted); font-weight:600; line-height:1.5; }
+        .cta-micro b { color:var(--green); }
+
+        /* ---------- HERO ---------- */
+        .hero { position:relative; overflow:hidden; border-bottom:1.5px solid var(--line); }
+        .hero-glow { position:absolute; width:520px; height:520px; border-radius:50%; top:-260px; right:-200px; background:radial-gradient(circle,rgba(176,110,74,.16),transparent 62%); pointer-events:none; }
+        .hero .wrap { position:relative; z-index:2; padding:40px 20px 46px; }
+        @media (min-width:760px){ .hero .wrap{ padding:56px 30px 62px; } }
+        .hero-grid { display:grid; grid-template-columns:1fr; gap:30px; align-items:center; }
+        @media (min-width:900px){ .hero-grid{ grid-template-columns:1.12fr 0.88fr; gap:48px; } }
+        .hero-eyebrow { display:inline-flex; align-items:center; gap:9px; margin-bottom:18px; flex-wrap:wrap; }
+        .hero-eyebrow .dot { width:8px; height:8px; border-radius:50%; background:var(--terra); box-shadow:0 0 0 0 rgba(176,110,74,.5); animation:livePulse 2s ease-out infinite; }
+        @keyframes livePulse { 0%{ box-shadow:0 0 0 0 rgba(176,110,74,.5);} 70%{ box-shadow:0 0 0 9px rgba(176,110,74,0);} 100%{ box-shadow:0 0 0 0 rgba(176,110,74,0);} }
+        .hero-eyebrow .live-kick { font-size:0.7rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--terra); }
+        .hero h1 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(2.55rem,10.5vw,4.6rem); line-height:0.9; letter-spacing:-0.01em; text-transform:uppercase; color:var(--ink); }
+        .hero h1 .terra { color:var(--terra); }
+        .hero-sub { font-size:1.05rem; color:var(--ink-2); font-weight:300; max-width:56ch; margin-top:20px; }
+        @media (min-width:760px){ .hero-sub{ font-size:1.14rem; } }
+        .hero-sub b { color:var(--ink); font-weight:600; }
+        .hero-cta-row { margin-top:26px; }
+        .hero-facts { margin-top:26px; display:flex; gap:9px; flex-wrap:wrap; }
+        .hero-fact { display:flex; align-items:center; gap:7px; background:var(--card); border:1.5px solid var(--line); border-radius:100px; padding:8px 15px; font-size:0.8rem; font-weight:600; color:var(--ink); }
+        .hero-fact .hf-ico { color:var(--terra); }
+
+        /* slot de video + foto */
+        .hero-media { display:flex; flex-direction:column; gap:14px; }
+        .video-slot { position:relative; border:2px dashed var(--terra); border-radius:18px; background:var(--card); aspect-ratio:16/10; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:22px; cursor:pointer; transition:transform .18s, box-shadow .18s; box-shadow:8px 8px 0 rgba(176,110,74,.18); }
+        .video-slot:hover { transform:translate(-2px,-2px); box-shadow:10px 10px 0 rgba(176,110,74,.22); }
+        .video-slot .play { width:60px; height:60px; border-radius:50%; background:var(--terra); color:#fff; display:flex; align-items:center; justify-content:center; font-size:1.4rem; margin-bottom:12px; box-shadow:0 8px 22px rgba(176,110,74,.4); padding-left:5px; animation:playPulse 2.6s ease-in-out infinite; }
+        @keyframes playPulse { 0%,100%{ transform:scale(1);} 50%{ transform:scale(1.06);} }
+        .video-slot b { font-family:'Anton',sans-serif; font-weight:400; font-size:1rem; text-transform:uppercase; color:var(--ink); letter-spacing:0.01em; }
+        .video-slot span { font-size:0.8rem; color:var(--muted); margin-top:5px; max-width:26ch; }
+        .ph-foto { border:2px dashed var(--line); border-radius:14px; background:rgba(20,55,60,0.04); padding:14px; text-align:center; font-size:0.74rem; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; color:var(--muted); }
+
+        /* ---------- SEÇÕES GENÉRICAS ---------- */
+        section.bloco-sec { padding:52px 0; }
+        @media (min-width:760px){ section.bloco-sec{ padding:66px 0; } }
+        .sec-head { max-width:680px; margin-bottom:30px; }
+        .sec-head.center { margin-left:auto; margin-right:auto; text-align:center; }
+        .sec-head .kick { display:block; margin-bottom:12px; }
+        .sec-head h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.85rem,6.6vw,2.9rem); text-transform:uppercase; color:var(--ink); line-height:0.98; letter-spacing:-0.01em; }
+        .sec-head h2 .terra { color:var(--terra); }
+        .sec-head p { margin-top:13px; font-size:1.02rem; color:var(--ink-2); }
+
+        /* ---------- A DOR ---------- */
+        .dor { background:var(--bg-2); border-top:1.5px solid var(--line); border-bottom:1.5px solid var(--line); position:relative; overflow:hidden; }
+        .dor-motif { position:absolute; top:24px; right:-30px; width:190px; opacity:.5; pointer-events:none; color:var(--green); }
+        @media (max-width:760px){ .dor-motif{ width:120px; top:14px; right:-24px; opacity:.35; } }
+        .dor-motif .spin { transform-origin:100px 100px; animation:slowSpin 34s linear infinite; }
+        @keyframes slowSpin { to{ transform:rotate(360deg);} }
+        .dor-list { display:grid; grid-template-columns:1fr; gap:12px; margin-bottom:26px; }
+        @media (min-width:700px){ .dor-list{ grid-template-columns:1fr 1fr; gap:16px; } }
+        .dor-item { display:flex; gap:13px; align-items:flex-start; background:var(--card); border:1.5px solid var(--line); border-radius:14px; padding:18px 20px; }
+        .dor-item .d-ico { flex-shrink:0; width:34px; height:34px; color:var(--terra-d); }
+        .dor-item p { font-size:0.98rem; color:var(--ink-2); line-height:1.5; }
+        .dor-item p b { color:var(--ink); }
+        .dor-punch { position:relative; border-left:5px solid var(--terra); background:rgba(176,110,74,0.08); border-radius:0 14px 14px 0; padding:20px 22px; max-width:60ch; }
+        .dor-punch p { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.15rem,4.6vw,1.6rem); text-transform:uppercase; color:var(--ink); line-height:1.1; letter-spacing:-0.01em; }
+
+        /* ---------- O LOOP ---------- */
+        .loop-sec { padding:54px 0; position:relative; overflow:hidden; }
+        @media (min-width:760px){ .loop-sec{ padding:70px 0; } }
+        /* --- diagrama circular SVG (desktop) --- */
+        .loop-circle { display:none; max-width:600px; margin:0 auto 8px; }
+        @media (min-width:880px){ .loop-circle{ display:block; } }
+        .loop-svg { width:100%; height:auto; overflow:visible; }
+        .loop-ring { fill:none; stroke:var(--line); stroke-width:2; stroke-dasharray:5 8; }
+        .lnode-circle { fill:var(--card); stroke:var(--ink); stroke-width:2.5; transition:none; }
+        .lnode-num { font-family:'Anton',sans-serif; font-size:26px; fill:var(--ink); text-anchor:middle; dominant-baseline:central; }
+        .lnode-label { font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:15px; fill:var(--ink-2); }
+        .loop-node { animation:nodeSeq 7s ease-in-out infinite; animation-delay:calc(var(--i) * 1s); transform-box:fill-box; transform-origin:center; }
+        @keyframes nodeSeq { 0%{ filter:none; } 6%{ filter:drop-shadow(0 0 10px rgba(176,110,74,.65)); } 20%{ filter:none; } 100%{ filter:none; } }
+        .loop-node.human { animation:humanPulse 2.4s ease-in-out infinite; }
+        .loop-node.human .lnode-circle { fill:var(--terra); stroke:var(--terra-d); }
+        .loop-node.human .lnode-num { fill:#fff; }
+        .loop-node.human .lnode-label { fill:var(--terra-d); font-weight:800; }
+        @keyframes humanPulse { 0%,100%{ transform:scale(1);} 50%{ transform:scale(1.09);} }
+        .loop-dot { fill:var(--terra); filter:drop-shadow(0 0 6px rgba(176,110,74,.7)); }
+        .loop-center-k { font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:13px; letter-spacing:2px; fill:var(--terra); text-anchor:middle; }
+        .loop-center-t { font-family:'Anton',sans-serif; font-size:44px; fill:var(--ink); text-anchor:middle; }
+        .loop-center-s { font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:14px; fill:var(--ink-2); text-anchor:middle; }
+        .lnode-sub { font-family:'Hanken Grotesk',sans-serif; font-weight:500; font-size:11.5px; fill:var(--muted); }
+        /* --- fluxo vertical (mobile/tablet) --- */
+        .loop-flow { display:grid; grid-template-columns:1fr; gap:12px; }
+        @media (min-width:520px) and (max-width:879px){ .loop-flow{ grid-template-columns:1fr 1fr; } }
+        @media (min-width:880px){ .loop-flow{ display:none; } }
+        .flow-cards { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:26px; }
+        @media (max-width:879px){ .flow-cards{ display:none; } }
+        .loop-step { position:relative; background:var(--card); border:2px solid var(--ink); border-radius:16px; padding:18px 18px; box-shadow:5px 5px 0 var(--green); }
+        .loop-step .ls-num { display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:50%; background:var(--ink); color:#fff; font-family:'Anton',sans-serif; font-size:1rem; margin-bottom:11px; }
+        .loop-step h3 { font-family:'Anton',sans-serif; font-weight:400; font-size:1.08rem; text-transform:uppercase; color:var(--ink); line-height:1.05; margin-bottom:7px; letter-spacing:-0.01em; }
+        .loop-step p { font-size:0.9rem; color:var(--ink-2); line-height:1.5; }
+        .loop-step p b { color:var(--ink); }
+        .loop-step.human { background:var(--terra); border-color:var(--terra-d); box-shadow:5px 5px 0 var(--ink); animation:cardPulse 2.6s ease-in-out infinite; }
+        @keyframes cardPulse { 0%,100%{ box-shadow:5px 5px 0 var(--ink);} 50%{ box-shadow:7px 7px 0 var(--ink);} }
+        .loop-step.human .ls-num { background:#fff; color:var(--terra-d); }
+        .loop-step.human p b { color:#fff; }
+        .loop-step.human h3 { color:#fff; }
+        .loop-step.human p { color:rgba(255,255,255,0.94); }
+        .loop-step.week { background:var(--ink); border-color:var(--ink); box-shadow:5px 5px 0 var(--terra); }
+        .loop-step.week .ls-num { background:var(--terra); color:#fff; }
+        .loop-step.week h3 { color:#fff; }
+        .loop-step.week p { color:rgba(244,243,239,0.82); }
+        .flow-cards .loop-step.week { grid-column:1 / -1; display:flex; gap:16px; align-items:center; }
+        .flow-cards .loop-step.week .ls-num { margin-bottom:0; flex-shrink:0; }
+        @media (min-width:520px) and (max-width:879px){ .loop-flow .loop-step.week{ grid-column:1 / -1; } }
+        .loop-close { margin:28px auto 6px; max-width:64ch; text-align:center; }
+        .loop-close p { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.25rem,5vw,1.9rem); text-transform:uppercase; color:var(--terra); line-height:1.12; letter-spacing:-0.01em; }
+        .loop-close p .ink { color:var(--ink); }
+
+        /* ---------- A PROVA (escuro) ---------- */
+        .prova { background:var(--ink); color:var(--cream); }
+        .prova .wrap { max-width:960px; padding-top:56px; padding-bottom:56px; }
+        @media (min-width:760px){ .prova .wrap{ padding-top:70px; padding-bottom:70px; } }
+        .prova .kick { color:var(--terra-l); display:block; margin-bottom:16px; }
+        .prova h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.75rem,6vw,2.7rem); text-transform:uppercase; color:#fff; line-height:1.02; letter-spacing:-0.01em; margin-bottom:30px; }
+        .prova-grid { display:grid; grid-template-columns:1fr; gap:16px; margin-bottom:14px; }
+        @media (min-width:800px){ .prova-grid{ grid-template-columns:repeat(3,1fr); gap:20px; } }
+        .prova-card { background:rgba(255,255,255,0.05); border:1.5px solid rgba(255,255,255,0.16); border-radius:16px; padding:22px 20px; }
+        .prova-card .pc-ico { width:44px; height:44px; color:var(--terra-l); margin-bottom:12px; }
+        .prova-card .pc-num { font-family:'Anton',sans-serif; font-size:2.1rem; color:var(--terra-l); line-height:1; }
+        .prova-card h3 { font-family:'Anton',sans-serif; font-weight:400; font-size:1.1rem; text-transform:uppercase; color:#fff; margin:8px 0 8px; line-height:1.08; letter-spacing:-0.01em; }
+        .prova-card p { font-size:0.93rem; color:rgba(244,243,239,0.78); font-weight:300; line-height:1.55; }
+        .prova-card p b { color:#fff; font-weight:600; }
+        .ph-dark { margin-top:14px; border:2px dashed rgba(196,131,94,0.55); border-radius:12px; background:rgba(255,255,255,0.03); padding:12px; text-align:center; font-size:0.7rem; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; color:var(--terra-l); }
+
+        /* ---------- A OFERTA (o que recebe) ---------- */
+        .oferta-grid { display:grid; grid-template-columns:1fr; gap:14px; }
+        @media (min-width:760px){ .oferta-grid{ grid-template-columns:repeat(2,1fr); gap:20px; } }
+        .ocard { background:var(--card); border:2px solid var(--ink); border-radius:16px; padding:22px 22px; box-shadow:8px 8px 0 var(--green); transition:transform .18s, box-shadow .18s; }
+        .ocard:hover { transform:translate(-2px,-2px); box-shadow:10px 10px 0 var(--green); }
+        .ocard .o-tag { font-family:'Anton',sans-serif; font-size:0.95rem; color:var(--terra); letter-spacing:0.02em; }
+        .ocard h3 { font-family:'Anton',sans-serif; font-weight:400; font-size:1.28rem; text-transform:uppercase; color:var(--ink); line-height:1.05; margin:5px 0 9px; letter-spacing:-0.01em; }
+        .ocard p { font-size:0.95rem; color:var(--ink-2); line-height:1.6; }
+        .ocard p b { color:var(--ink); }
+        .ocard.hero-card { background:var(--ink); border-color:var(--ink); box-shadow:8px 8px 0 var(--terra); }
+        @media (min-width:760px){ .ocard.hero-card, .ocard.bonus{ grid-column:1 / -1; } }
+        .ocard.hero-card { display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap; }
+        .ocard.hero-card .skill-robot { flex-shrink:0; width:190px; max-width:100%; height:auto; margin:0 auto; }
+        @media (min-width:760px){ .ocard.hero-card .skill-robot{ margin:0; } }
+        .ocard.wanted { border-color:var(--terra); box-shadow:8px 8px 0 var(--terra); }
+        .ocard.wanted:hover { box-shadow:10px 10px 0 var(--terra); }
+        .ocard.wanted .o-tag { color:var(--terra-d); }
+        .ocard.hero-card .hc-body { flex:1; min-width:240px; }
+        .ocard.hero-card .o-tag { color:var(--terra-l); }
+        .ocard.hero-card h3 { color:#fff; }
+        .ocard.hero-card p { color:rgba(244,243,239,0.82); }
+        .ocard.hero-card p b { color:#fff; }
+        .ocard.bonus { background:rgba(176,110,74,0.08); border-color:var(--terra); box-shadow:8px 8px 0 var(--terra); display:flex; gap:18px; align-items:flex-start; flex-wrap:wrap; }
+        .ocard.bonus .bonus-ico { flex-shrink:0; width:52px; height:52px; color:var(--terra-d); }
+        .ocard.bonus .b-body { flex:1; min-width:220px; }
+        .ocard.bonus .o-tag { color:var(--terra-d); }
+
+        /* ---------- INVESTIMENTO ---------- */
+        .invest { background:var(--bg-2); border-top:1.5px solid var(--line); border-bottom:1.5px solid var(--line); }
+        .anchor-row { display:grid; grid-template-columns:1fr; gap:12px; max-width:820px; margin:0 auto 30px; }
+        @media (min-width:720px){ .anchor-row{ grid-template-columns:repeat(3,1fr); gap:16px; } }
+        .anchor-item { background:var(--card); border:1.5px solid var(--line); border-radius:14px; padding:18px 20px; text-align:center; }
+        .anchor-item .a-val { font-family:'Anton',sans-serif; font-size:1.5rem; color:var(--ink); line-height:1; }
+        .anchor-item .a-lab { font-size:0.88rem; color:var(--ink-2); margin-top:7px; }
+        .anchor-item .a-lab b { color:var(--ink); }
+        .anchor-item.win { border:2px solid var(--terra); background:rgba(176,110,74,0.06); box-shadow:6px 6px 0 var(--terra); }
+        .anchor-item.win .a-val { color:var(--terra); font-size:1.9rem; }
+        .invest-card { background:var(--card); border:2px solid var(--ink); border-radius:20px; padding:30px 22px; box-shadow:10px 10px 0 var(--terra); text-align:center; max-width:560px; margin:0 auto; }
+        @media (min-width:560px){ .invest-card{ padding:40px 36px; } }
+        .lote-tabs { display:flex; gap:9px; justify-content:center; margin-bottom:20px; flex-wrap:wrap; }
+        .lote-pill { border-radius:100px; padding:9px 15px; font-size:0.74rem; font-weight:700; letter-spacing:0.02em; }
+        .lote-pill.active { background:var(--green); color:#fff; }
+        .lote-pill.next { background:rgba(20,55,60,0.06); color:var(--muted); border:1.5px solid var(--line); }
+        .price-line { display:flex; align-items:flex-start; justify-content:center; gap:5px; line-height:1; }
+        .price-cifra { font-family:'Anton',sans-serif; font-size:1.6rem; color:var(--ink); margin-top:12px; }
+        .price-big { font-family:'Anton',sans-serif; font-size:clamp(4.2rem,20vw,6.4rem); color:var(--terra); line-height:0.9; letter-spacing:-0.02em; }
+        .price-sub { font-size:0.98rem; color:var(--muted); font-weight:600; margin-top:12px; }
+        .price-sub b { color:var(--ink); }
+        .invest-benes { text-align:left; margin:24px auto 24px; max-width:440px; list-style:none; }
+        .invest-benes li { position:relative; padding-left:32px; margin-bottom:14px; font-size:0.96rem; color:var(--ink-2); line-height:1.5; }
+        .invest-benes li b { color:var(--ink); }
+        .invest-benes li::before { content:'✓'; position:absolute; left:0; top:1px; width:22px; height:22px; background:var(--green); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.72rem; font-weight:800; }
+        .invest-fine { margin-top:16px; font-size:0.84rem; color:var(--muted); }
+        .guarantee-strip { display:flex; align-items:center; gap:12px; justify-content:flex-start; background:rgba(67,93,81,0.1); border:1.5px solid var(--green); border-radius:12px; padding:15px 18px; margin:0 auto 22px; max-width:440px; text-align:left; }
+        .guarantee-strip .gs-ico { flex-shrink:0; width:34px; height:34px; color:var(--green); }
+        .guarantee-strip p { font-size:0.88rem; color:var(--ink-2); line-height:1.45; }
+        .guarantee-strip p b { color:var(--ink); }
+        /* letra clara: custo/requisito + prova social colada no preço */
+        .invest-req { margin:0 auto 18px; max-width:440px; text-align:left; font-size:0.82rem; color:var(--muted); line-height:1.5; }
+        .invest-req b { color:var(--ink-2); font-weight:700; }
+        .invest-proof { margin:0 auto 16px; max-width:440px; font-size:0.9rem; font-weight:600; color:var(--green); line-height:1.45; }
+        /* selo "chegando" do passo 4 do loop */
+        .soon-tag { display:inline-block; margin:0 0 9px; font-size:0.6rem; font-weight:800; letter-spacing:0.05em; text-transform:uppercase; color:var(--terra-d); background:rgba(176,110,74,0.12); border:1.5px solid var(--terra); border-radius:100px; padding:3px 9px; line-height:1.3; }
+        /* micro-glossário de "skill" no card escuro */
+        .skill-gloss { display:block; margin:2px 0 9px; font-size:0.8rem; font-weight:500; color:rgba(244,243,239,0.62); line-height:1.45; }
+
+        /* ---------- URGÊNCIA / COUNTDOWN ---------- */
+        .urg { padding:50px 0; }
+        .urg .wrap { max-width:720px; text-align:center; }
+        .urg .sec-head { margin-left:auto; margin-right:auto; }
+        .cd-timer { display:flex; gap:9px; justify-content:center; margin:24px 0 20px; flex-wrap:wrap; }
+        .cd-box { min-width:70px; background:var(--ink); border-radius:14px; padding:14px 8px; box-shadow:5px 5px 0 var(--terra); perspective:320px; }
+        @media (min-width:560px){ .cd-box{ min-width:80px; padding:16px 10px; } }
+        .cd-n { font-family:'Anton',sans-serif; font-size:2.1rem; line-height:1; color:#fff; transform-origin:center; }
+        @media (min-width:560px){ .cd-n{ font-size:2.5rem; } }
+        .cd-n.flip { animation:digitFlip .5s cubic-bezier(.2,.7,.2,1); }
+        @keyframes digitFlip { 0%{ transform:rotateX(-88deg); opacity:.25; } 100%{ transform:rotateX(0); opacity:1; } }
+        .cd-box .cd-l { font-size:0.62rem; font-weight:700; letter-spacing:0.09em; text-transform:uppercase; color:var(--terra-l); margin-top:7px; }
+        .urg-note { font-size:0.98rem; color:var(--ink-2); max-width:48ch; margin:0 auto 8px; }
+        .urg-note b { color:var(--ink); }
+        #cdExpired { display:none; }
+        #cdExpired .exp-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(176,110,74,0.1); border:1.5px solid var(--terra); color:var(--terra-d); border-radius:100px; padding:9px 18px; font-size:0.82rem; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; margin-bottom:16px; }
+
+        /* ---------- QUEM ENSINA ---------- */
+        .ensina { background:var(--bg-2); border-top:1.5px solid var(--line); border-bottom:1.5px solid var(--line); }
+        .ensina .wrap { max-width:860px; }
+        .ensina-card { display:flex; gap:24px; align-items:center; flex-wrap:wrap; }
+        .ensina-foto { flex-shrink:0; width:100%; max-width:340px; margin:0 auto; }
+        @media (min-width:620px){ .ensina-foto{ width:44%; max-width:340px; margin:0; } }
+        .ensina-foto .ph-foto { aspect-ratio:3/4; display:flex; align-items:center; justify-content:center; border-radius:16px; font-size:0.82rem; padding:24px; box-shadow:8px 8px 0 rgba(176,110,74,.16); }
+        .ensina-body { flex:1; min-width:260px; }
+        .ensina-body .kick { display:block; margin-bottom:10px; }
+        .ensina-body h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.7rem,5.6vw,2.4rem); text-transform:uppercase; color:var(--ink); line-height:1; margin-bottom:14px; letter-spacing:-0.01em; }
+        .ensina-body p { font-size:1.02rem; color:var(--ink-2); line-height:1.7; }
+        .ensina-body p b { color:var(--ink); }
+
+        /* ---------- FAQ ---------- */
+        .faq-sec { padding:52px 0; }
+        @media (min-width:760px){ .faq-sec{ padding:66px 0; } }
+        .faq-sec .wrap { max-width:820px; }
+        .faq-sec .sec-head { margin-bottom:28px; }
+        .faq-item { border:1.5px solid var(--line); border-radius:14px; background:var(--card); margin-bottom:11px; overflow:hidden; }
+        .faq-q { width:100%; display:flex; justify-content:space-between; align-items:center; gap:14px; text-align:left; background:none; border:none; cursor:pointer; padding:18px 20px; font-family:'Hanken Grotesk',sans-serif; font-size:1rem; font-weight:700; color:var(--ink); }
+        .faq-q .mark { font-family:'Anton',sans-serif; font-size:1.3rem; color:var(--terra); transition:transform .25s; flex-shrink:0; line-height:1; }
+        .faq-item.open .faq-q .mark { transform:rotate(45deg); }
+        .faq-a { display:none; padding:0 20px 20px; font-size:0.96rem; color:var(--ink-2); line-height:1.7; }
+        .faq-item.open .faq-a { display:block; }
+        .faq-a b { color:var(--ink); }
+
+        /* ---------- FECHO (escuro) ---------- */
+        .fecho { background:var(--ink); color:var(--cream); }
+        .fecho .wrap { max-width:760px; padding:60px 20px; text-align:center; }
+        @media (min-width:760px){ .fecho .wrap{ padding:78px 30px; } }
+        .fecho .kick { color:var(--terra-l); display:block; margin-bottom:16px; }
+        .fecho h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(2rem,7.4vw,3.2rem); text-transform:uppercase; color:#fff; line-height:1.0; letter-spacing:-0.01em; margin-bottom:18px; }
+        .fecho h2 .terra { color:var(--terra-l); }
+        .fecho p { font-size:1.05rem; color:rgba(244,243,239,.82); font-weight:300; max-width:54ch; margin:0 auto 13px; }
+        .fecho p b { color:#fff; font-weight:600; }
+        .fecho-punch { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.35rem,5.4vw,2rem); text-transform:uppercase; color:var(--terra-l); line-height:1.14; letter-spacing:-0.01em; margin:24px auto 28px; max-width:24ch; }
+        .fecho-punch .white { color:#fff; }
+        .fecho-fine { font-size:0.86rem; color:rgba(244,243,239,.6); margin-top:18px; }
+
+        /* footer mínimo */
+        footer { background:#0F2A2E; color:rgba(244,243,239,.6); padding:36px 0 40px; }
+        .footer-row { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; }
+        .footer-brand { font-family:'Anton',sans-serif; font-size:1.05rem; text-transform:uppercase; color:#fff; }
+        .footer-links { display:flex; gap:18px; flex-wrap:wrap; }
+        .footer-links a { font-size:0.82rem; font-weight:600; color:rgba(244,243,239,.7); }
+        .footer-links a:hover { color:var(--terra-l); }
+        .footer-copy { font-size:0.74rem; color:rgba(244,243,239,.4); margin-top:12px; }
+
+        /* ---------- STICKY MOBILE INFERIOR ---------- */
+        .mobile-bar { display:none; position:fixed; bottom:0; left:0; right:0; z-index:70; background:var(--ink); border-top:2px solid var(--terra); padding:9px 14px calc(9px + env(safe-area-inset-bottom)); align-items:center; justify-content:space-between; gap:12px; box-shadow:0 -8px 24px rgba(20,55,60,0.3); }
+        .mobile-bar .mb-info { color:#fff; font-size:0.72rem; line-height:1.25; }
+        .mobile-bar .mb-info .mb-cd { color:var(--terra-l); font-weight:700; }
+        .mobile-bar .mb-info b { font-family:'Anton',sans-serif; font-weight:400; font-size:1.35rem; color:#fff; display:block; }
+        .mobile-bar .btn { padding:12px 16px; font-size:0.74rem; flex-shrink:0; }
+        @media (max-width:760px){ .mobile-bar{ display:flex; } body{ padding-bottom:70px; } }
+
+        /* ---------- DISTRIBUIÇÃO EM TODAS AS REDES ---------- */
+        .redes { background:var(--bg-2); border-top:1.5px solid var(--line); border-bottom:1.5px solid var(--line); }
+        .redes-diagram { max-width:560px; margin:6px auto 0; }
+        .redes-svg { width:100%; height:auto; overflow:visible; }
+        .rline { stroke-dasharray:5 13; animation:rdash 1.5s linear infinite; animation-delay:var(--d); }
+        @keyframes rdash { to { stroke-dashoffset:-18; } }
+        .rlogo { transform-box:fill-box; transform-origin:center; animation:rpop 1.5s ease-in-out infinite; animation-delay:var(--d); }
+        @keyframes rpop { 0%,55%,100%{ transform:scale(1); } 30%{ transform:scale(1.16); } }
+        .rlogo-cap { font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:12px; fill:var(--ink-2); }
+        .redes-core-pulse { transform-box:view-box; transform-origin:300px 220px; animation:corePulse 2.4s ease-out infinite; }
+        @keyframes corePulse { 0%{ transform:scale(.72); opacity:.55; } 100%{ transform:scale(1.55); opacity:0; } }
+        .redes-quote { max-width:60ch; margin:34px auto 0; border-left:5px solid var(--terra); background:rgba(176,110,74,0.07); border-radius:0 14px 14px 0; padding:20px 24px; }
+        .redes-quote p { font-size:1.06rem; font-style:italic; color:var(--ink); line-height:1.55; }
+        .redes-quote cite { display:block; margin-top:11px; font-style:normal; font-size:0.84rem; font-weight:700; color:var(--terra-d); letter-spacing:0.03em; text-transform:uppercase; }
+        .redes-close { text-align:center; margin:26px auto 0; max-width:26ch; font-family:'Anton',sans-serif; font-size:clamp(1.2rem,4.8vw,1.75rem); text-transform:uppercase; color:var(--ink); line-height:1.1; letter-spacing:-0.01em; }
+        .redes-close b { color:var(--terra); }
+
+        /* ---------- card AULA (estrela da oferta) ---------- */
+        .ocard.aula-card { grid-column:1 / -1; background:var(--terra); border-color:var(--terra-d); box-shadow:8px 8px 0 var(--ink); }
+        .ocard.aula-card:hover { box-shadow:10px 10px 0 var(--ink); }
+        .ocard.aula-card .o-tag { color:#fff; opacity:.92; }
+        .ocard.aula-card h3 { color:#fff; font-size:1.5rem; }
+        @media (min-width:760px){ .ocard.aula-card h3{ font-size:1.75rem; } }
+        .ocard.aula-card p { color:rgba(255,255,255,0.94); font-size:1rem; }
+        .ocard.aula-card p b { color:#fff; }
+        .aula-badge { display:flex; width:max-content; max-width:100%; align-items:center; gap:7px; background:rgba(255,255,255,0.16); border:1.5px solid rgba(255,255,255,0.5); color:#fff; border-radius:100px; padding:5px 13px; font-size:0.64rem; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:11px; }
+        .aula-badge .adot { width:7px; height:7px; border-radius:50%; background:#fff; animation:livePulse 2s ease-out infinite; }
+
+        /* ---------- frase da virada (fecho) ---------- */
+        .fecho-virada { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.15rem,4.4vw,1.7rem); text-transform:uppercase; color:#fff; line-height:1.16; letter-spacing:-0.01em; max-width:26ch; margin:6px auto 28px; padding:18px 22px; border:1.5px solid rgba(196,131,94,0.5); border-radius:14px; background:rgba(176,110,74,0.14); }
+        .fecho-virada .terra { color:var(--terra-l); }
+
+        /* reveal */
+        .rv { opacity:0; transform:translateY(20px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+        .rv.in { opacity:1; transform:none; }
+
+        /* ---- respeita prefers-reduced-motion ---- */
+        @media (prefers-reduced-motion:reduce) {
+            .rv { opacity:1; transform:none; transition:none; }
+            .loop-node, .loop-node.human, .loop-dot, .loop-step.human, .video-slot .play, .hero-eyebrow .dot, .dor-motif .spin, .cd-n.flip, .rline, .rlogo, .redes-core-pulse, .aula-badge .adot { animation:none !important; }
+            .loop-comet { display:none; }
+            html { scroll-behavior:auto; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ========== 0 · BARRA STICKY TOPO ========== -->
+<div class="topbar">
+    <div class="topbar-inner">
+        <span class="topbar-txt" id="topbarTxt"><b>Lote 1: R$99</b> até sábado 23h59 · depois vai a R$149</span>
+        <a href="https://pay.kiwify.com.br/a9YefRy" class="topbar-mini cta-buy">Quero minha vaga</a>
+    </div>
+</div>
+
+<header class="site-header">
+    <div class="header-inner">
+        <a href="/" class="logo">Bruna Santanna<span class="brand-tag">A Virada IA</span></a>
+        <span class="header-date">Ao vivo · terça 21/07 · 20h</span>
+    </div>
+</header>
+
+<!-- ========== 1 · HERO ========== -->
+<section class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="wrap">
+        <div class="hero-grid">
+            <div>
+                <div class="hero-eyebrow rv">
+                    <span class="dot"></span>
+                    <span class="live-kick">Workshop ao vivo · terça 21/07 · 20h</span>
+                </div>
+                <p class="hero-audience rv" style="font-size:0.9rem;font-weight:600;color:var(--terra-d);margin-bottom:14px;">Pra quem toca o próprio negócio e faz o próprio conteúdo.</p>
+                <h1 class="rv">Seu conteúdo rodando em loop. <span class="terra">Você só grava.</span></h1>
+                <p class="hero-sub rv">Em 2 horas, ao vivo, eu instalo com você o sistema que pesquisa, escreve seus roteiros, agenda em todas as redes e analisa os resultados. Pronto, personalizado pro seu negócio, <b>rodando na sua máquina</b>.</p>
+                <div class="hero-cta-row rv">
+                    <a href="https://pay.kiwify.com.br/a9YefRy" class="btn btn-terra btn-lg btn-arrow cta-buy">Quero minha vaga por R$99</a>
+                    <span class="cta-micro"><b>+10 mil seguidores por mês</b> no meu perfil com essas técnicas</span>
+                </div>
+                <div class="hero-facts rv">
+                    <span class="hero-fact"><span class="hf-ico">◷</span> Ao vivo e online</span>
+                    <span class="hero-fact"><span class="hf-ico">◷</span> Cerca de 2 horas</span>
+                    <span class="hero-fact"><span class="hf-ico">◷</span> Replay por 7 dias</span>
+                    <span class="hero-fact"><span class="hf-ico">◷</span> Vira crédito no curso</span>
+                </div>
+            </div>
+            <div class="hero-media rv">
+                <!-- SLOT DE VÍDEO click-to-play. A Bruna grava o vídeo de 60-90s depois; ele
+                     substitui este placeholder (trocar por <video> ou embed com poster). -->
+                <div class="video-slot" id="videoSlot" role="button" tabindex="0" aria-label="Assistir vídeo da Bruna">
+                    <div class="play">▶</div>
+                    <b>Vídeo da Bruna · 60-90s</b>
+                    <span>clique pra assistir</span>
+                </div>
+                <div class="ph-foto">[ FOTO BRUNA sorrindo / gravando ]</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== 2 · A DOR ========== -->
+<section class="bloco-sec dor">
+    <!-- motivo gráfico: o ciclo que nunca para (traço verde) -->
+    <svg class="dor-motif" viewBox="0 0 200 200" aria-hidden="true">
+        <g class="spin">
+            <path d="M76 34 A70 70 0 1 1 124 34" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+            <path d="M114.6 30.6 L126.4 27.4 L121.6 40.6 Z" fill="currentColor" stroke="none"/>
+        </g>
+    </svg>
+    <div class="wrap">
+        <div class="sec-head rv">
+            <span class="kick">Se você faz seu próprio conteúdo, você conhece isso</span>
+            <h2>Criar conteúdo é bom? Mentira. É um <span class="terra">segundo emprego</span>.</h2>
+        </div>
+        <div class="dor-list">
+            <div class="dor-item rv">
+                <svg class="d-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                <p>Domingo à noite, deitando pra dormir, e a cabeça já <b>pensando no que postar</b> na segunda.</p>
+            </div>
+            <div class="dor-item rv">
+                <svg class="d-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+                <p>Horas pesquisando o que tá bombando pra, no fim, sair <b>um roteiro mais ou menos</b>.</p>
+            </div>
+            <div class="dor-item rv">
+                <svg class="d-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 3 6-7"/><path d="M18 6h3v3"/></svg>
+                <p>A constância que <b>nunca vem</b>, porque a vida acontece e o conteúdo é o primeiro a cair.</p>
+            </div>
+            <div class="dor-item rv">
+                <svg class="d-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M16 7.5c0-1.7-1.8-3-4-3s-4 1.3-4 3 1.8 3 4 3 4 1.3 4 3-1.8 3-4 3-4-1.3-4-3"/></svg>
+                <p>Orçar um social media pra terceirizar, ver o preço e <b>desistir na hora</b>.</p>
+            </div>
+        </div>
+        <div class="dor-punch rv">
+            <p>O pior não é o trabalho. É o ciclo: toda semana, tudo de novo, do zero.</p>
+        </div>
+        <div class="cta-block rv" style="margin-top:28px;">
+            <a href="https://pay.kiwify.com.br/a9YefRy" class="btn btn-terra btn-lg btn-arrow cta-buy">Quero minha vaga por R$99</a>
+        </div>
+    </div>
+</section>
+
+<!-- ========== 3 · O MECANISMO: O LOOP ========== -->
+<section class="loop-sec">
+    <div class="wrap">
+        <div class="sec-head center rv">
+            <span class="kick">O mecanismo</span>
+            <h2>O Loop: uma <span class="terra">linha de produção</span> de conteúdo</h2>
+            <p>Sete passos girando em loop. O seu momento é o 3: gravar.</p>
+        </div>
+
+        <!-- ─── DIAGRAMA CIRCULAR ANIMADO (desktop ≥ 880px) ─────────── -->
+        <div class="loop-circle rv" aria-hidden="true">
+            <svg class="loop-svg" viewBox="-30 0 700 640" role="img" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <!-- anel + caminho do cometa viajante (sentido HORÁRIO: passo 1 → 2 → 3...) -->
+                <defs>
+                    <linearGradient id="cometTrail" x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0" stop-color="#B06E4A" stop-opacity="0"/>
+                        <stop offset="1" stop-color="#B06E4A" stop-opacity="0.75"/>
+                    </linearGradient>
+                </defs>
+                <path id="loopRing" class="loop-ring" d="M120,320 a200,200 0 1,1 400,0 a200,200 0 1,1 -400,0"/>
+                <g class="loop-comet">
+                    <path d="M0,-5 Q-28,-3 -44,0 Q-28,3 0,5 Z" fill="url(#cometTrail)"/>
+                    <circle class="loop-dot" r="7"/>
+                    <animateMotion dur="14s" repeatCount="indefinite" rotate="auto">
+                        <mpath href="#loopRing" xlink:href="#loopRing"/>
+                    </animateMotion>
+                </g>
+
+                <!-- centro (eyebrow acima, título abaixo, sem colisão) -->
+                <text class="loop-center-k" x="320" y="272">O LOOP</text>
+                <text class="loop-center-t" x="320" y="332">VOCÊ SÓ</text>
+                <text class="loop-center-t" x="320" y="374">GRAVA</text>
+
+                <!-- nós (rótulo curto + sub-linha) -->
+                <g class="loop-node" style="--i:0"><circle class="lnode-circle" cx="320" cy="120" r="34"/><text class="lnode-num" x="320" y="120">1</text><text class="lnode-label" x="320" y="60" text-anchor="middle">Pesquisa</text><text class="lnode-sub" x="320" y="76" text-anchor="middle">o que bomba + seus números</text></g>
+                <g class="loop-node" style="--i:1"><circle class="lnode-circle" cx="476" cy="195" r="34"/><text class="lnode-num" x="476" y="195">2</text><text class="lnode-label" x="516" y="189" text-anchor="start">Cria</text><text class="lnode-sub" x="516" y="205" text-anchor="start">os formatos que quiser</text></g>
+                <g class="loop-node human" style="--i:2"><circle class="lnode-circle" cx="515" cy="365" r="38"/><text class="lnode-num" x="515" y="365">3</text><text class="lnode-label" x="562" y="360" text-anchor="start">Você grava</text><text class="lnode-sub" x="562" y="378" text-anchor="start">roteiro na mão</text></g>
+                <g class="loop-node" style="--i:3"><circle class="lnode-circle" cx="407" cy="500" r="34"/><text class="lnode-num" x="407" y="500">4</text><text class="lnode-label" x="407" y="554" text-anchor="middle">Edita o vídeo</text><text class="lnode-sub" x="407" y="570" text-anchor="middle">corte, look e títulos</text></g>
+                <g class="loop-node" style="--i:4"><circle class="lnode-circle" cx="233" cy="500" r="34"/><text class="lnode-num" x="233" y="500">5</text><text class="lnode-label" x="233" y="554" text-anchor="middle">Agenda e publica</text><text class="lnode-sub" x="233" y="570" text-anchor="middle">em todas as redes</text></g>
+                <g class="loop-node" style="--i:5"><circle class="lnode-circle" cx="125" cy="365" r="34"/><text class="lnode-num" x="125" y="365">6</text><text class="lnode-label" x="80" y="360" text-anchor="end">Analisa</text><text class="lnode-sub" x="80" y="378" text-anchor="end">repetir ou parar</text></g>
+                <g class="loop-node" style="--i:6"><circle class="lnode-circle" cx="164" cy="195" r="34"/><text class="lnode-num" x="164" y="195">7</text><text class="lnode-label" x="126" y="189" text-anchor="end">Guarda tudo</text><text class="lnode-sub" x="126" y="205" text-anchor="end">vira newsletter</text></g>
+            </svg>
+        </div>
+
+        <!-- ─── FLUXO VERTICAL ANIMADO (mobile/tablet < 880px) ──────── -->
+        <div class="loop-flow">
+            <div class="loop-step rv"><span class="ls-num">1</span><h3>Ele pesquisa e analisa</h3><p>O que tá bombando mais os seus números, e joga tudo no <b>dashboard</b>.</p></div>
+            <div class="loop-step rv"><span class="ls-num">2</span><h3>Cria os formatos</h3><p>Reel, carrossel, LinkedIn, blog: <b>os formatos que você quiser</b>, pras redes que você quiser, no <b>seu tom de voz</b>.</p></div>
+            <div class="loop-step human rv"><span class="ls-num">3</span><h3>Você grava</h3><p>Você aparece e fala. <b>O roteiro já tá pronto.</b></p></div>
+            <div class="loop-step rv"><span class="ls-num">4</span><h3>Ele edita o vídeo</h3><span class="soon-tag">Chegando · bônus de quem entra agora</span><p>Corta o silêncio, aplica o look e <b>põe os títulos</b> (recém-validado; alunos do workshop recebem primeiro).</p></div>
+            <div class="loop-step rv"><span class="ls-num">5</span><h3>Agenda e publica</h3><p>Em todas as redes, no melhor horário. <b>Nada sobe sem o seu OK.</b></p></div>
+            <div class="loop-step rv"><span class="ls-num">6</span><h3>Analisa e recomeça</h3><p>Lê o resultado, joga no dashboard e <b>começa o loop de novo</b>.</p></div>
+            <div class="loop-step rv"><span class="ls-num">7</span><h3>Fecha a semana</h3><p>Guarda tudo na memória do sistema pra alimentar o próximo ciclo.</p></div>
+            <div class="loop-step week rv"><span class="ls-num">+</span><h3>Toda semana</h3><p>Ele compila a sua newsletter da memória de tudo que você criou. Sozinho.</p></div>
+        </div>
+
+        <!-- ─── LEGENDA/CARDS (desktop, sob o diagrama) ─────────────── -->
+        <div class="flow-cards">
+            <div class="loop-step rv"><span class="ls-num">1</span><h3>Pesquisa e analisa</h3><p>O que tá bombando mais os seus números, no <b>dashboard</b>.</p></div>
+            <div class="loop-step rv"><span class="ls-num">2</span><h3>Cria os formatos</h3><p><b>Os formatos que você quiser</b>, pras redes que você quiser, no <b>seu tom</b>.</p></div>
+            <div class="loop-step human rv"><span class="ls-num">3</span><h3>Você grava</h3><p>Você aparece e fala. <b>O roteiro já tá pronto.</b></p></div>
+            <div class="loop-step rv"><span class="ls-num">4</span><h3>Ele edita o vídeo</h3><span class="soon-tag">Chegando · bônus de quem entra agora</span><p>Corta o silêncio, aplica o look e <b>põe os títulos</b> (recém-validado; alunos do workshop recebem primeiro).</p></div>
+            <div class="loop-step rv"><span class="ls-num">5</span><h3>Agenda e publica</h3><p>Em todas as redes. <b>Nada sobe sem o seu OK.</b></p></div>
+            <div class="loop-step rv"><span class="ls-num">6</span><h3>Analisa e recomeça</h3><p>Lê o resultado, joga no dashboard e <b>recomeça</b>.</p></div>
+            <div class="loop-step rv"><span class="ls-num">7</span><h3>Fecha a semana</h3><p>Guarda tudo na memória pro próximo ciclo.</p></div>
+            <div class="loop-step week rv"><span class="ls-num">+</span><h3>Toda semana</h3><p>Compila sua newsletter da memória de tudo que criou. Sozinho.</p></div>
+        </div>
+
+        <div class="loop-close rv">
+            <p>Não é mais um curso de prompts. <span class="ink">É uma linha de produção. Instalada, girando, sua.</span></p>
+        </div>
+        <div class="ph-foto rv" style="max-width:640px; margin:24px auto 0; aspect-ratio:16/7; display:flex; align-items:center; justify-content:center;">[ PRINT DO DASHBOARD REAL ]</div>
+        <div class="cta-block rv" style="margin-top:28px;">
+            <a href="https://pay.kiwify.com.br/a9YefRy" class="btn btn-terra btn-lg btn-arrow cta-buy">Quero minha vaga por R$99</a>
+        </div>
+    </div>
+</section>
+
+<!-- ========== 3.5 · DISTRIBUIÇÃO EM TODAS AS REDES ========== -->
+<section class="bloco-sec redes">
+    <div class="wrap">
+        <div class="sec-head center rv">
+            <span class="kick">A maior dor: distribuir</span>
+            <h2>Ele posta em <span class="terra">todas as redes</span> pra você</h2>
+            <p>Um conteúdo aprovado por você viaja sozinho pra cada rede, no formato de cada uma. Você não abre seis apps na mão.</p>
+        </div>
+
+        <div class="redes-diagram rv">
+            <svg class="redes-svg" viewBox="0 0 600 440" role="img" aria-label="Um conteúdo central distribuído para Instagram, TikTok, YouTube, Threads, X e LinkedIn">
+                <!-- pulso do núcleo -->
+                <circle class="redes-core-pulse" cx="300" cy="220" r="70" fill="none" stroke="var(--terra)" stroke-width="2"/>
+
+                <!-- linhas conectoras com pulso viajando pro logo -->
+                <g fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" opacity="0.85">
+                    <line class="rline" style="--d:0s"    x1="300" y1="220" x2="510" y2="220"/>
+                    <line class="rline" style="--d:0.22s" x1="300" y1="220" x2="452" y2="95"/>
+                    <line class="rline" style="--d:0.44s" x1="300" y1="220" x2="148" y2="95"/>
+                    <line class="rline" style="--d:0.66s" x1="300" y1="220" x2="90"  y2="220"/>
+                    <line class="rline" style="--d:0.88s" x1="300" y1="220" x2="148" y2="345"/>
+                    <line class="rline" style="--d:1.1s"  x1="300" y1="220" x2="452" y2="345"/>
+                </g>
+
+                <!-- INSTAGRAM -->
+                <g transform="translate(510,220)">
+                    <g class="rlogo" style="--d:0s">
+                        <rect x="-13" y="-13" width="26" height="26" rx="8" fill="none" stroke="var(--green)" stroke-width="2.6"/>
+                        <circle cx="0" cy="0" r="6.4" fill="none" stroke="var(--green)" stroke-width="2.6"/>
+                        <circle cx="8" cy="-8" r="1.8" fill="var(--green)"/>
+                    </g>
+                    <text class="rlogo-cap" y="30" text-anchor="middle">Instagram</text>
+                </g>
+                <!-- TIKTOK -->
+                <g transform="translate(452,95)">
+                    <g class="rlogo" style="--d:0.22s">
+                        <path d="M3 -13 v15.5 a6 6 0 1 1 -6 -6" fill="none" stroke="var(--green)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M3 -13 c1 4.6 4.6 7.6 8.6 7.9" fill="none" stroke="var(--green)" stroke-width="2.6" stroke-linecap="round"/>
+                    </g>
+                    <text class="rlogo-cap" y="30" text-anchor="middle">TikTok</text>
+                </g>
+                <!-- YOUTUBE -->
+                <g transform="translate(148,95)">
+                    <g class="rlogo" style="--d:0.44s">
+                        <rect x="-15" y="-10.5" width="30" height="21" rx="6" fill="none" stroke="var(--green)" stroke-width="2.6"/>
+                        <path d="M-4 -5 L7 0 L-4 5 Z" fill="var(--green)"/>
+                    </g>
+                    <text class="rlogo-cap" y="30" text-anchor="middle">YouTube</text>
+                </g>
+                <!-- THREADS -->
+                <g transform="translate(90,220)">
+                    <g class="rlogo" style="--d:0.66s">
+                        <circle cx="0" cy="0" r="11.5" fill="none" stroke="var(--green)" stroke-width="2.6"/>
+                        <path d="M-4.5 4 c3.2 4 9.5 3 9.5 -3 c0 -5.4 -6 -6.8 -9 -4.4" fill="none" stroke="var(--green)" stroke-width="2.6" stroke-linecap="round"/>
+                    </g>
+                    <text class="rlogo-cap" y="30" text-anchor="middle">Threads</text>
+                </g>
+                <!-- X -->
+                <g transform="translate(148,345)">
+                    <g class="rlogo" style="--d:0.88s">
+                        <path d="M-10 -10 L10 10 M10 -10 L-10 10" fill="none" stroke="var(--green)" stroke-width="3.2" stroke-linecap="round"/>
+                    </g>
+                    <text class="rlogo-cap" y="30" text-anchor="middle">X</text>
+                </g>
+                <!-- LINKEDIN -->
+                <g transform="translate(452,345)">
+                    <g class="rlogo" style="--d:1.1s">
+                        <rect x="-13" y="-13" width="26" height="26" rx="6" fill="var(--green)"/>
+                        <circle cx="-6.5" cy="-6" r="2" fill="#F4F3EF"/>
+                        <rect x="-8.3" y="-2.5" width="3.6" height="11.5" rx="0.4" fill="#F4F3EF"/>
+                        <path d="M-1 9 V-2.5 h3.4 V-0.8 a4.3 4.3 0 0 1 7.6 2.8 V9 h-3.6 V2.4 a1.7 1.7 0 0 0 -3.4 0 V9 Z" fill="#F4F3EF"/>
+                    </g>
+                    <text class="rlogo-cap" y="30" text-anchor="middle">LinkedIn</text>
+                </g>
+
+                <!-- CARD CENTRAL (por cima das linhas) -->
+                <g transform="translate(300,220)">
+                    <rect x="-64" y="-44" width="128" height="88" rx="16" fill="var(--ink)"/>
+                    <circle cx="0" cy="-8" r="17" fill="var(--terra)"/>
+                    <path d="M-5 -15 L9 -8 L-5 -1 Z" fill="#fff"/>
+                    <text y="27" text-anchor="middle" fill="#F4F3EF" font-family="'Anton',sans-serif" font-size="14" letter-spacing="0.5">SEU CONTEÚDO</text>
+                </g>
+            </svg>
+        </div>
+
+        <blockquote class="redes-quote rv">
+            <p>"Eu vivia com o conteúdo PRONTO e não postava nas outras redes, porque dá um trabalhão. Hoje o sistema distribui tudo. Eu não encosto."</p>
+            <cite>Bruna Santanna</cite>
+        </blockquote>
+        <p class="redes-close rv">Você aprova, ele publica. <b>Em todas.</b></p>
+        <div class="cta-block rv" style="margin-top:28px;">
+            <a href="https://pay.kiwify.com.br/a9YefRy" class="btn btn-terra btn-lg btn-arrow cta-buy">Quero minha vaga por R$99</a>
+        </div>
+    </div>
+</section>
+
+<!-- ========== 4 · A PROVA ========== -->
+<section class="prova">
+    <div class="wrap">
+        <span class="kick rv">A prova, não a promessa</span>
+        <h2 class="rv">Eu não tô te vendendo uma teoria. Isso já rodou.</h2>
+        <div class="prova-grid">
+            <div class="prova-card rv">
+                <svg class="pc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/><path d="M8.5 14l2 2 4-4"/></svg>
+                <h3>3 dias fora, no automático</h3>
+                <p>Passei <b>3 dias viajando a trabalho</b> e o sistema publicou sozinho em <b>4 redes</b>, no horário certo, sem eu tocar em nada.</p>
+                <div class="ph-dark">[ FOTO BRUNA NO EVENTO / AGRO ]</div>
+            </div>
+            <div class="prova-card rv">
+                <svg class="pc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><circle cx="17" cy="8.5" r="2.6"/><path d="M15.5 13.6A5 5 0 0 1 21 18.5"/></svg>
+                <h3>+10 mil seguidores por mês</h3>
+                <p>As técnicas por trás desse sistema têm trazido <b>+10 mil seguidores por mês</b> pro meu perfil.</p>
+                <div class="ph-dark">[ PRINT DO CRESCIMENTO DE SEGUIDORES ]</div>
+            </div>
+            <div class="prova-card rv">
+                <svg class="pc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12s3.5-6.5 9.5-6.5S21.5 12 21.5 12s-3.5 6.5-9.5 6.5S2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.7"/></svg>
+                <h3>+20 mil views num Reel</h3>
+                <p>Um Reel <b>escrito pelo motor</b> passou de <b>20 mil views</b>. Roteiro do sistema, não meu.</p>
+                <div class="ph-dark">[ PRINT DO REEL / MÉTRICA ]</div>
+            </div>
+        </div>
+        <div class="cta-block rv" style="margin-top:32px;">
+            <a href="https://pay.kiwify.com.br/a9YefRy" class="btn btn-terra btn-lg btn-arrow cta-buy">Quero minha vaga por R$99</a>
+        </div>
+    </div>
+</section>
+
+<!-- ========== 5 · O QUE VOCÊ RECEBE ========== -->
+<section class="bloco-sec">
+    <div class="wrap">
+        <div class="sec-head center rv">
+            <span class="kick">A oferta</span>
+            <h2>Um sistema pronto que <span class="terra">você personaliza</span></h2>
+            <p>Não é um faça-do-zero. É um motor pronto que a skill molda pro seu negócio, no seu tom.</p>
+        </div>
+        <div class="oferta-grid">
+            <div class="ocard aula-card rv">
+                <span class="aula-badge"><span class="adot"></span> Ao vivo · terça 21/07, 20h</span>
+                <span class="o-tag">A estrela do workshop ★</span>
+                <h3>A aula ao vivo comigo</h3>
+                <p>2 horas em que eu abro o meu sistema na tela e te conto exatamente como eu montei: as decisões, os atalhos, o que eu erraria de novo. E a gente instala o SEU juntos, bloco por bloco, ao vivo. <b>Não é curso gravado:</b> se você travar, eu te destravo na hora, na sua frente.</p>
+            </div>
+            <div class="ocard hero-card rv">
+                <!-- robozinho guia: ilustração editorial da marca -->
+                <svg class="skill-robot" viewBox="0 0 224 214" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                    <!-- balão de fala -->
+                    <rect x="76" y="6" width="142" height="48" rx="13" fill="#F4F3EF"/>
+                    <path d="M104 54 L92 72 L118 54 Z" fill="#F4F3EF"/>
+                    <text x="147" y="27" text-anchor="middle" font-family="'Hanken Grotesk',sans-serif" font-size="13" font-weight="700" fill="#14373C">vamos montar</text>
+                    <text x="147" y="44" text-anchor="middle" font-family="'Hanken Grotesk',sans-serif" font-size="13" font-weight="700" fill="#B06E4A">seu sistema?</text>
+                    <!-- antena -->
+                    <line x1="66" y1="86" x2="66" y2="70" stroke="#C4835E" stroke-width="4" stroke-linecap="round"/>
+                    <circle cx="66" cy="63" r="7" fill="#B06E4A"/>
+                    <!-- cabeça -->
+                    <rect x="26" y="86" width="80" height="62" rx="18" fill="#F4F3EF"/>
+                    <!-- olhos -->
+                    <circle cx="52" cy="113" r="7" fill="#14373C"/>
+                    <circle cx="80" cy="113" r="7" fill="#14373C"/>
+                    <circle cx="54.5" cy="110.5" r="2.2" fill="#FBF9F3"/>
+                    <circle cx="82.5" cy="110.5" r="2.2" fill="#FBF9F3"/>
+                    <!-- sorriso -->
+                    <path d="M56 130 q10 9 20 0" fill="none" stroke="#B06E4A" stroke-width="3.5" stroke-linecap="round"/>
+                    <!-- corpo -->
+                    <rect x="34" y="154" width="64" height="48" rx="14" fill="#F4F3EF"/>
+                    <!-- estrela no peito -->
+                    <path d="M66 166 l3.4 6.9 7.6 1.1 -5.5 5.4 1.3 7.6 -6.8 -3.6 -6.8 3.6 1.3 -7.6 -5.5 -5.4 7.6 -1.1 Z" fill="#B06E4A"/>
+                    <!-- braço acenando -->
+                    <path d="M104 168 q18 -4 24 -22" fill="none" stroke="#F4F3EF" stroke-width="9" stroke-linecap="round"/>
+                    <circle cx="130" cy="142" r="8" fill="#C4835E"/>
+                    <!-- braço apoiado -->
+                    <path d="M34 172 q-12 6 -12 18" fill="none" stroke="#F4F3EF" stroke-width="9" stroke-linecap="round"/>
+                </svg>
+                <div class="hc-body">
+                    <span class="o-tag">O produto ★</span>
+                    <h3>A Skill Instaladora</h3>
+                    <span class="skill-gloss">(skill é um guia que você instala no Claude copiando uma pasta; a gente te dá o passo a passo de 5 passos)</span>
+                    <p>Você não configura nada sozinho. Quem te guia é a skill: um <b>professor particular instalado no seu Claude</b>. Ele pergunta sobre o seu negócio (uma pergunta por vez), monta o sistema COM as suas respostas, faz por você o que der, e se você fechar o computador no meio, ele <b>lembra exatamente onde parou</b>. É literalmente impossível se perder.</p>
+                </div>
+            </div>
+            <div class="ocard rv"><span class="o-tag">01</span><h3>Seu motor de conteúdo</h3><p>Uma ideia vira Reel, carrossel, post de LinkedIn, blog: <b>o formato que você quiser</b>. Você escolhe as saídas. E tudo no <b>seu tom de voz</b>, porque o sistema é treinado com as SUAS respostas: seu jeito de falar, as dores do seu público, a sua história. Não é texto de robô com a sua foto: <b>é você, em escala</b>.</p></div>
+            <div class="ocard rv"><span class="o-tag">02</span><h3>Distribuição agendada</h3><p>Ele agenda e publica em todas as redes com a ferramenta certa (essa eu revelo na aula: é o segredinho que faz tudo girar sem você encostar). E a regra de ouro: <b>nada sobe sem o seu OK</b>.</p></div>
+            <div class="ocard rv"><span class="o-tag">03</span><h3>Seu dashboard</h3><p>O painel que mostra <b>o que funcionou</b> e o que fazer mais. Você enxerga tudo num lugar só.</p></div>
+            <div class="ocard rv"><span class="o-tag">04</span><h3>Newsletter semanal</h3><p>Compilada sozinha da memória do sistema, toda semana. Você só revisa e envia.</p></div>
+            <div class="ocard wanted rv"><span class="o-tag">05 · o mais pedido ★</span><h3>A Página Secreta de Resumos e Prompts</h3><p>Todos os passos da aula ilustrados + os <b>MESMOS prompts que eu uso todo dia no meu perfil</b>, prontos pra copiar e colar. É o material que as pessoas me pedem por DM toda semana. <b>Seu, pra sempre.</b></p></div>
+            <div class="ocard rv"><span class="o-tag">06</span><h3>Replay + grupo, 7 dias</h3><p>Replay da aula por <b>7 dias</b> e grupo de dúvidas por <b>7 dias</b>. Travou, você pergunta.</p></div>
+            <div class="ocard bonus rv">
+                <svg class="bonus-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="14" height="12" rx="2"/><path d="M16.5 10l5-3v10l-5-3"/><path d="M6 9.5l2 2.5-2 2.5"/></svg>
+                <div class="b-body">
+                    <span class="o-tag">Bônus de quem chega primeiro ★</span>
+                    <h3>O robô de edição de vídeo</h3>
+                    <p>O passo 4 do loop (corta silêncio, aplica o look, põe os títulos) <b>acabou de ser validado</b>. Os alunos do workshop serão os PRIMEIROS a receber quando ele abrir.</p>
+                </div>
+            </div>
+        </div>
+        <div class="cta-block rv" style="margin-top:32px;">
+            <a href="https://pay.kiwify.com.br/a9YefRy" class="btn btn-terra btn-lg btn-arrow cta-buy">Quero minha vaga por R$99</a>
+        </div>
+    </div>
+</section>
+
+<!-- ========== 6 · INVESTIMENTO + ANCORAGEM ========== -->
+<section class="bloco-sec invest">
+    <div class="wrap">
+        <div class="sec-head center rv">
+            <span class="kick">O investimento</span>
+            <h2>Compara honestamente. Depois decide.</h2>
+        </div>
+        <div class="anchor-row rv">
+            <div class="anchor-item"><div class="a-val">R$1.500 a R$5.000</div><div class="a-lab">um social media freelancer, <b>por mês</b></div></div>
+            <div class="anchor-item"><div class="a-val">R$100+</div><div class="a-lab">só uma ferramenta de agendamento, <b>por mês</b></div></div>
+            <div class="anchor-item win"><div class="a-val">R$99</div><div class="a-lab">o workshop, <b>uma vez</b> (e ainda vira crédito no curso)</div></div>
+        </div>
+        <div class="invest-card rv">
+            <div class="lote-tabs">
+                <span class="lote-pill active">Lote 1 · R$99 · até sábado</span>
+                <span class="lote-pill next">Lote 2 · R$149 · depois</span>
+            </div>
+            <div class="price-line">
+                <span class="price-cifra">R$</span>
+                <span class="price-big" id="priceBig">99</span>
+            </div>
+            <p class="price-sub" id="priceSub"><b>R$99</b> até sábado (11/07) às 23h59. Depois, R$149.</p>
+            <ul class="invest-benes">
+                <li><b>Vira crédito integral no curso.</b> O valor pago vira crédito integral no Claude com Profundidade (R$497): quem pagou R$99 entra pagando R$398. E é opcional: ninguém é obrigado a comprar nada depois.</li>
+                <li><b>Replay por 7 dias.</b> Não viu tudo ao vivo? Você revê dentro da semana.</li>
+                <li><b>Sistema pronto no fim da aula.</b> Você sai com ele rodando na sua máquina, não com uma lista de tarefas.</li>
+            </ul>
+            <div class="guarantee-strip">
+                <svg class="gs-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l7.5 3v5.5c0 4.6-3.2 7.9-7.5 9-4.3-1.1-7.5-4.4-7.5-9V5.5z"/><path d="M8.5 12l2.3 2.3 4.7-4.7"/></svg>
+                <p><b>Garantia:</b> se você não sair com o seu sistema instalado e funcionando, eu devolvo seus R$99, sem letra miúda.</p>
+            </div>
+            <p class="invest-req">Pra rodar, você usa o Claude (plano de US$20/mês, uns R$110) e um computador Windows ou Mac. Só isso: <b>nenhuma outra ferramenta paga obrigatória</b>.</p>
+            <p class="invest-proof">O mesmo sistema por trás de +10 mil seguidores por mês no meu perfil e de um Reel de +20 mil views.</p>
+            <a href="https://pay.kiwify.com.br/a9YefRy" class="btn btn-terra btn-lg btn-arrow cta-buy">Quero minha vaga por R$99</a>
+            <p class="invest-fine">Terça 21/07, 20h · ao vivo e online · cerca de 2 horas</p>
+        </div>
+    </div>
+</section>
+
+<!-- ========== 7 · URGÊNCIA (countdown) ========== -->
+<section class="urg">
+    <div class="wrap">
+        <div id="cdWrap">
+            <div class="sec-head center rv" style="margin-bottom:0;">
+                <span class="kick">O lote 1 fecha em</span>
+                <h2 style="font-size:clamp(1.65rem,6vw,2.5rem);">Depois de sábado, o preço <span class="terra">sobe</span></h2>
+            </div>
+            <div class="cd-timer" aria-live="polite">
+                <div class="cd-box"><div class="cd-n" id="cdD">00</div><div class="cd-l">dias</div></div>
+                <div class="cd-box"><div class="cd-n" id="cdH">00</div><div class="cd-l">horas</div></div>
+                <div class="cd-box"><div class="cd-n" id="cdM">00</div><div class="cd-l">min</div></div>
+                <div class="cd-box"><div class="cd-n" id="cdS">00</div><div class="cd-l">seg</div></div>
+            </div>
+            <p class="urg-note rv">O preço sobe porque o lote vira. Simples assim, <b>sem pegadinha</b>.</p>
+        </div>
+        <div id="cdExpired">
+            <span class="exp-badge">● Lote 1 encerrado</span>
+            <div class="sec-head center" style="margin-bottom:0;">
+                <span class="kick">Lote 2 · valor atual</span>
+                <h2 style="font-size:clamp(1.65rem,6vw,2.5rem);">Agora é <span class="terra">R$149</span></h2>
+            </div>
+            <p class="urg-note" style="margin-top:18px;">O lote 1 fechou no sábado. A vaga segue aberta pelo valor do lote 2, R$149. As entregas e a garantia são as mesmas.</p>
+        </div>
+        <div class="cta-block rv" style="margin-top:24px;">
+            <a href="https://pay.kiwify.com.br/a9YefRy" class="btn btn-terra btn-lg btn-arrow cta-buy">Quero minha vaga por R$99</a>
+        </div>
+    </div>
+</section>
+
+<!-- ========== 8 · QUEM ENSINA ========== -->
+<section class="bloco-sec ensina">
+    <div class="wrap">
+        <div class="ensina-card rv">
+            <div class="ensina-foto"><div class="ph-foto">FOTO GRANDE DA BRUNA · retrato</div></div>
+            <div class="ensina-body">
+                <span class="kick">Quem te ensina</span>
+                <h2>Bruna Santanna</h2>
+                <p>Eu não sou desenvolvedora. Sou empresária, ex-executiva de multinacional, mãe, e tudo que eu construo nasce do mesmo jeito: uma solução pra facilitar a MINHA vida primeiro. Esse sistema existia pra me servir, e funcionou tão bem que virou este workshop. Se eu montei <b>sem escrever uma linha de código</b>, você monta também: a diferença é que você não vai precisar descobrir o caminho, porque <b>eu vou te entregar o mapa</b>.</p>
+                <p style="margin-top:14px;">Fundadora da <b>NewScale</b>, onde levo IA pra dentro das empresas. Já treinei <b>mais de 1.000 pessoas</b> e sou especialista em ensinar IA pra quem <b>não é de tecnologia</b>, no português de todo dia.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== 9 · FAQ ========== -->
+<section class="faq-sec">
+    <div class="wrap">
+        <div class="sec-head rv">
+            <span class="kick">Perguntas frequentes</span>
+            <h2>As dúvidas que <span class="terra">todo mundo</span> tem</h2>
+        </div>
+        <div class="faq-list rv">
+            <div class="faq-item">
+                <button class="faq-q">Preciso saber de tecnologia?<span class="mark">+</span></button>
+                <div class="faq-a">Não. A <b>skill instaladora te entrevista</b> com 9 perguntas, uma por vez, e faz por você o que der pra fazer. Você não escreve uma linha de código, e na aula a gente monta tudo junto.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Preciso pagar algo além do ingresso?<span class="mark">+</span></button>
+                <div class="faq-a">Só a <b>assinatura do Claude, US$20 por mês</b>, que é onde o sistema roda. Nada além disso: sem outra ferramenta paga obrigatória.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">É ao vivo? Fica gravado?<span class="mark">+</span></button>
+                <div class="faq-a">É <b>ao vivo, com instalação assistida</b>: a gente monta junto e eu tiro dúvida na hora. E você tem o <b>replay por 7 dias</b> pra rever quando quiser.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Serve pro meu nicho?<span class="mark">+</span></button>
+                <div class="faq-a">Serve. O motor é <b>construído pela entrevista</b> da skill com você, então ele aprende a sua área e o seu jeito de falar. De confeitaria a advocacia.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Quanto tempo eu gasto depois?<span class="mark">+</span></button>
+                <div class="faq-a">Você só grava. Em torno de <b>30 a 40 minutos</b> organizam a sua semana inteira de conteúdo. O trabalho pesado o sistema faz.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">E se eu travar depois?<span class="mark">+</span></button>
+                <div class="faq-a">Você tem o <b>grupo de dúvidas por 7 dias</b>, a <b>página de resumos pra sempre</b> e os comandos de socorro da skill, que retoma de onde você parou. Você não fica na mão.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Não gosto de aparecer, funciona?<span class="mark">+</span></button>
+                <div class="faq-a">Funciona. <b>Carrossel, LinkedIn, blog e newsletter não precisam de câmera.</b> O vídeo é só uma parte do sistema, e você decide o quanto quer aparecer.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">E depois que os 7 dias de suporte acabarem?<span class="mark">+</span></button>
+                <div class="faq-a">A <b>skill é sua pra sempre</b> e retoma de onde você parou a qualquer momento. A Biblioteca do Aluno com todos os passos e prompts é <b>acesso vitalício</b>. Os 7 dias são só o plantão de dúvidas ao vivo; o sistema não expira.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Preciso de computador? Funciona só no celular?<span class="mark">+</span></button>
+                <div class="faq-a">Precisa de um <b>computador (Windows ou Mac)</b> com o app do Claude, porque é nele que o sistema mora. O celular você continua usando pra gravar e postar.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== 10 · FECHO ========== -->
+<section class="fecho">
+    <div class="wrap">
+        <span class="kick">Última chamada</span>
+        <h2>Terça, 20h. É <span class="terra">agora</span> ou é na mão.</h2>
+        <p>Duas horas ao vivo. Você entra sem saber nada e sai com o <b>sistema instalado</b>, rodando na sua máquina.</p>
+        <p>O valor vira <b>crédito integral no curso</b>. E se não sair funcionando, eu devolvo.</p>
+        <p class="fecho-punch">Terça você pode continuar fazendo conteúdo na mão. <span class="white">Ou pode ter um sistema fazendo por você.</span></p>
+        <p class="fecho-virada">Quem aprende isso agora vai olhar pra trás e ver este momento como o <span class="terra">ponto de virada</span>.</p>
+        <a href="https://pay.kiwify.com.br/a9YefRy" class="btn btn-terra btn-lg btn-arrow cta-buy">Quero minha vaga por R$99</a>
+        <p class="fecho-fine">Garantia: sai com o sistema funcionando ou eu devolvo seus R$99, sem letra miúda.</p>
+    </div>
+</section>
+
+<footer>
+    <div class="wrap">
+        <div class="footer-row">
+            <span class="footer-brand">A Virada IA</span>
+            <nav class="footer-links">
+                <a href="https://brunasantanna.com">brunasantanna.com</a>
+                <a href="/curso">Curso de Claude</a>
+                <a href="https://instagram.com/brusantanna.ai" target="_blank" rel="noopener">Instagram</a>
+            </nav>
+        </div>
+        <p class="footer-copy">© 2026 Bruna Santanna · A Virada IA · Workshop Instala Comigo</p>
+    </div>
+</footer>
+
+<!-- ========== STICKY MOBILE INFERIOR (CTA + countdown resumido) ========== -->
+<div class="mobile-bar">
+    <div class="mb-info">Lote 1 fecha em <span class="mb-cd" id="mbCd">--</span><b id="mbPrice">R$99</b></div>
+    <a href="https://pay.kiwify.com.br/a9YefRy" class="btn btn-terra btn-arrow cta-buy">Quero minha vaga</a>
+</div>
+
+<script>
+    // ===== FAQ accordion =====
+    document.querySelectorAll('.faq-q').forEach(q => {
+        q.addEventListener('click', () => q.closest('.faq-item').classList.toggle('open'));
+    });
+
+    // ===== slot de vídeo (placeholder click-to-play) =====
+    // Quando a Bruna gravar o vídeo, trocar este bloco pra injetar o player real.
+    const videoSlot = document.getElementById('videoSlot');
+    if (videoSlot) {
+        const openVideo = () => { if (typeof gtag === 'function') gtag('event', 'video_slot_click'); };
+        videoSlot.addEventListener('click', openVideo);
+        videoSlot.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openVideo(); } });
+    }
+
+    // ===== Countdown até sábado 11/07/2026 23:59:59 (Brasília, -03:00) =====
+    const DEADLINE = new Date('2026-07-11T23:59:59-03:00').getTime();
+    const cdWrap = document.getElementById('cdWrap');
+    const cdExpired = document.getElementById('cdExpired');
+    const elD = document.getElementById('cdD'), elH = document.getElementById('cdH'),
+          elM = document.getElementById('cdM'), elS = document.getElementById('cdS');
+    const mbCd = document.getElementById('mbCd');
+    const pad = n => String(n).padStart(2, '0');
+
+    // dígito com animação de flip só quando muda
+    function setDigit(el, val) {
+        if (!el || el.textContent === val) return;
+        el.textContent = val;
+        el.classList.remove('flip'); void el.offsetWidth; el.classList.add('flip');
+    }
+
+    let expired = false;
+    function switchToLote2() {
+        expired = true;
+        if (cdWrap) cdWrap.style.display = 'none';
+        if (cdExpired) cdExpired.style.display = 'block';
+        const pb = document.getElementById('priceBig'); if (pb) pb.textContent = '149';
+        const ps = document.getElementById('priceSub'); if (ps) ps.innerHTML = '<b>R$149</b> · lote 2 (o lote 1 encerrou no sábado).';
+        const mb = document.getElementById('mbPrice'); if (mb) mb.textContent = 'R$149';
+        if (mbCd) mbCd.textContent = 'lote 2';
+        const tb = document.getElementById('topbarTxt'); if (tb) tb.innerHTML = '<b>Lote 2: R$149</b> · vaga aberta · mesmas entregas e garantia';
+        // reescreve o texto de TODOS os botões de checkout que citam R$99
+        document.querySelectorAll('.cta-buy').forEach(function(el){
+            if (el.textContent.indexOf('R$99') !== -1) {
+                el.textContent = el.textContent.replace('R$99', 'R$149');
+            }
+        });
+    }
+
+    function tick() {
+        const diff = DEADLINE - Date.now();
+        if (diff <= 0) { if (!expired) switchToLote2(); return; }
+        const d = Math.floor(diff / 86400000);
+        const h = Math.floor((diff % 86400000) / 3600000);
+        const m = Math.floor((diff % 3600000) / 60000);
+        const s = Math.floor((diff % 60000) / 1000);
+        setDigit(elD, pad(d)); setDigit(elH, pad(h)); setDigit(elM, pad(m)); setDigit(elS, pad(s));
+        if (mbCd) mbCd.textContent = d + 'd ' + pad(h) + 'h ' + pad(m) + 'm';
+        setTimeout(tick, 1000);
+    }
+    tick();
+
+    // ===== reveal on scroll (cascata suave) =====
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0, rootMargin:'0px 0px -40px 0px' });
+    document.querySelectorAll('.rv').forEach((el,i) => { el.style.transitionDelay = (i%3*80)+'ms'; io.observe(el); });
+    /* rv-safety: garante que o conteudo nunca fica invisivel */
+    setTimeout(function(){ document.querySelectorAll('.rv:not(.in)').forEach(function(el){ el.classList.add('in'); }); }, 2500);
+</script>
+
+</body>
+</html>
