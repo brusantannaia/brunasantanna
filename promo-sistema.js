@@ -16,6 +16,9 @@
 
     var css = document.createElement('style');
     css.textContent =
+        /* header alinhado: o CTA novo é mais largo que o antigo — sem quebra de linha nos itens do menu, e nav compacto na faixa em que fica apertado */
+        '.main-nav a{white-space:nowrap;}' +
+        '@media(min-width:821px) and (max-width:1220px){.main-nav{gap:9px;}.main-nav a{font-size:.8rem;}.main-nav a.nav-cta{padding:9px 13px;font-size:.72rem !important;}}' +
         '#psBar{background:' + INK + ';color:#fff;font-family:"Hanken Grotesk","Outfit",sans-serif;padding:9px 14px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;text-align:center;position:relative;z-index:60;font-size:.85rem;line-height:1.35;}' +
         '#psBar b{color:#F0C9B4;font-weight:800;}' +
         '#psBar .ps-count{font-variant-numeric:tabular-nums;font-weight:700;background:rgba(255,255,255,.12);padding:2px 9px;border-radius:100px;font-size:.78rem;white-space:nowrap;}' +
