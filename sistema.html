@@ -45,7 +45,7 @@
             "priceCurrency": "BRL",
             "url": "https://pay.kiwify.com.br/a9YefRy",
             "availability": "https://schema.org/InStock",
-            "validThrough": "2026-07-11T23:59:59-03:00"
+            "validThrough": "2026-07-13T23:59:59-03:00"
         }
     }
     </script>
@@ -445,7 +445,7 @@
 <!-- ========== 0 · BARRA STICKY TOPO ========== -->
 <div class="topbar">
     <div class="topbar-inner">
-        <span class="topbar-txt" id="topbarTxt"><b>R$149</b> até sábado 23h59 · depois o preço sobe</span>
+        <span class="topbar-txt" id="topbarTxt"><b>R$149</b> até segunda 23h59 · depois o preço sobe</span>
         <a href="https://pay.kiwify.com.br/a9YefRy" class="topbar-mini cta-buy">Quero minha vaga</a>
     </div>
 </div>
@@ -806,14 +806,14 @@
         </div>
         <div class="invest-card rv">
             <div class="lote-tabs">
-                <span class="lote-pill active">R$149 · até sábado 23h59</span>
+                <span class="lote-pill active">R$149 · até segunda 23h59</span>
                 <span class="lote-pill next">depois · o preço sobe</span>
             </div>
             <div class="price-line" id="priceLine">
                 <span class="price-cifra">R$</span>
                 <span class="price-big" id="priceBig">149</span>
             </div>
-            <p class="price-sub" id="priceSub"><b>R$149</b> até sábado (11/07) às 23h59. Depois disso, o preço sobe.</p>
+            <p class="price-sub" id="priceSub"><b>R$149</b> até segunda (13/07) às 23h59. Depois disso, o preço sobe.</p>
             <ul class="invest-benes">
                 <li><b>Sistema pronto no fim da aula.</b> Você sai com ele rodando na sua máquina, não com uma lista de tarefas.</li>
                 <li><b>Replay por 7 dias.</b> Não viu tudo ao vivo? Você revê dentro da semana.</li>
@@ -833,7 +833,7 @@
         <div id="cdWrap">
             <div class="sec-head center rv" style="margin-bottom:0;">
                 <span class="kick">O lote 1 fecha em</span>
-                <h2 style="font-size:clamp(1.65rem,6vw,2.5rem);">Depois de sábado, o preço <span class="terra">sobe</span></h2>
+                <h2 style="font-size:clamp(1.65rem,6vw,2.5rem);">Depois de segunda, o preço <span class="terra">sobe</span></h2>
             </div>
             <div class="cd-timer" aria-live="polite">
                 <div class="cd-box"><div class="cd-n" id="cdD">00</div><div class="cd-l">dias</div></div>
@@ -849,7 +849,7 @@
                 <span class="kick">Valor atual</span>
                 <h2 style="font-size:clamp(1.65rem,6vw,2.5rem);">O preço <span class="terra">subiu</span></h2>
             </div>
-            <p class="urg-note" style="margin-top:18px;">O valor de abertura fechou no sábado. A vaga segue aberta pelo novo valor. As entregas são as mesmas.</p>
+            <p class="urg-note" style="margin-top:18px;">O valor de abertura fechou na segunda. A vaga segue aberta pelo novo valor. As entregas são as mesmas.</p>
         </div>
         <div class="cta-block rv" style="margin-top:24px;">
             <a href="https://pay.kiwify.com.br/a9YefRy" class="btn btn-terra btn-lg btn-arrow cta-buy">Quero minha vaga por R$149</a>
@@ -968,8 +968,8 @@
         videoSlot.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openVideo(); } });
     }
 
-    // ===== Countdown até sábado 11/07/2026 23:59:59 (Brasília, -03:00) =====
-    const DEADLINE = new Date('2026-07-11T23:59:59-03:00').getTime();
+    // ===== Countdown até segunda 13/07/2026 23:59:59 (Brasília, -03:00) =====
+    const DEADLINE = new Date('2026-07-13T23:59:59-03:00').getTime();
     const cdWrap = document.getElementById('cdWrap');
     const cdExpired = document.getElementById('cdExpired');
     const elD = document.getElementById('cdD'), elH = document.getElementById('cdH'),
@@ -990,7 +990,7 @@
         if (cdWrap) cdWrap.style.display = 'none';
         if (cdExpired) cdExpired.style.display = 'block';
         const pl = document.getElementById('priceLine'); if (pl) pl.style.display = 'none';
-        const ps = document.getElementById('priceSub'); if (ps) ps.innerHTML = 'O valor de abertura encerrou no sábado. A vaga segue aberta pelo <b>novo valor</b>.';
+        const ps = document.getElementById('priceSub'); if (ps) ps.innerHTML = 'O valor de abertura encerrou na segunda. A vaga segue aberta pelo <b>novo valor</b>.';
         const mb = document.getElementById('mbPrice'); if (mb) mb.textContent = 'vaga aberta';
         if (mbCd) mbCd.textContent = 'novo valor';
         const tb = document.getElementById('topbarTxt'); if (tb) tb.innerHTML = 'O preço de abertura encerrou · vaga aberta pelo novo valor';

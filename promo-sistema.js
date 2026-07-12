@@ -5,7 +5,7 @@
     if (path.indexOf('sistema') !== -1 || path.indexOf('obrigada') !== -1) return;
 
     var EVENTO = new Date('2026-07-21T20:00:00-03:00');
-    var SOBE_PRECO = new Date('2026-07-11T23:59:59-03:00');
+    var SOBE_PRECO = new Date('2026-07-13T23:59:59-03:00');
     var agora = new Date();
     if (agora >= EVENTO) return;
 
@@ -87,7 +87,7 @@
             '<h3>Um sistema de IA que cria e posta o seu conteúdo. Eu mostro como montar o seu.</h3>' +
             '<p>É o sistema por trás dos meus Reels de +100 mil visualizações e dos +10 mil seguidores por mês. Em uma noite você vê o processo inteiro — sem precisar programar.</p>' +
             (precoVale
-                ? '<div class="ps-preco">Ingresso <b>R$149 só até sábado (11/07)</b> — depois o preço sobe</div><div class="ps-timer" id="psPopCount"></div>'
+                ? '<div class="ps-preco">Ingresso <b>R$149 só até segunda (13/07)</b> — depois o preço sobe</div><div class="ps-timer" id="psPopCount"></div>'
                 : '<div class="ps-preco">A aula é <b>terça, dia 21</b> — depois dela, acabou</div><div class="ps-timer" id="psPopCount"></div>') +
             '<a href="/sistema" class="ps-cta" id="psPopCta">Quero montar o meu →</a>' +
             '<button class="ps-nao" id="psNao">Agora não</button>';
