@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3 jeitos de criar uma skill no Claude (e por que só um funciona de verdade) | A Virada IA · Bruna Santanna</title>
+    <meta name="description" content="Existem 3 jeitos de criar uma skill no Claude: copiar uma pronta, pedir pra ele construir, ou fazer a tarefa junto com ele. Só o terceiro funciona de verdade.">
+    <meta name="author" content="Bruna Santanna">
+    <link rel="canonical" href="https://brunasantanna.com/guia-criar-skill-do-seu-jeito">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://brunasantanna.com/guia-criar-skill-do-seu-jeito">
+    <meta property="og:title" content="3 jeitos de criar uma skill no Claude (e por que só um funciona de verdade) | A Virada IA">
+    <meta property="og:description" content="Existem 3 jeitos de criar uma skill no Claude: copiar uma pronta, pedir pra ele construir, ou fazer a tarefa junto com ele. Só o terceiro funciona de verdade.">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DCW0QVCWB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-7DCW0QVCWB');
+    </script>
+
+    <!-- JSON-LD: Article -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "3 jeitos de criar uma skill no Claude (e por que só um funciona de verdade)",
+        "description": "Existem 3 jeitos de criar uma skill no Claude: copiar uma pronta, pedir pra ele construir, ou fazer a tarefa junto com ele. Só o terceiro funciona de verdade.",
+        "inLanguage": "pt-BR",
+        "url": "https://brunasantanna.com/guia-criar-skill-do-seu-jeito",
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://brunasantanna.com/guia-criar-skill-do-seu-jeito" },
+        "datePublished": "2026-07-16",
+        "dateModified": "2026-07-16",
+        "author": { "@type": "Person", "name": "Bruna Santanna", "url": "https://brunasantanna.com" },
+        "publisher": {
+            "@type": "Organization",
+            "name": "A Virada IA · Bruna Santanna",
+            "url": "https://brunasantanna.com"
+        },
+        "about": "Skills"
+    }
+    </script>
+
+    <!-- JSON-LD: FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            { "@type": "Question", "name": "Preciso saber programar pra criar uma skill assim?", "acceptedAnswer": { "@type": "Answer", "text": "Não. Você não escreve uma linha de código: você faz a sua tarefa normal conversando com o Claude, corrige o que sair torto e no fim pede pra ele salvar o processo. Quem escreve a skill é ele. Você só precisa saber reconhecer quando o resultado ficou do seu jeito." } },
+            { "@type": "Question", "name": "Quantas vezes preciso fazer a tarefa junto antes de salvar a skill?", "acceptedAnswer": { "@type": "Answer", "text": "Uma vez bem feita já dá uma skill útil, desde que você tenha corrigido o Claude no caminho. As correções são o material mais valioso: é nelas que está o seu padrão. Se a tarefa é complexa, faça duas ou três rodadas e vá pedindo pra ele atualizar a skill com o que aprendeu em cada uma." } },
+            { "@type": "Question", "name": "Skill copiada do GitHub não presta, então?", "acceptedAnswer": { "@type": "Answer", "text": "Presta, para tarefas genéricas: formatar um documento, resumir uma reunião, converter um arquivo. O problema é usar skill de prateleira para o que é a sua vantagem competitiva. Aí ela entrega o jeito de outra pessoa, e o resultado sai igual ao de todo mundo." } }
+        ]
+    }
+    </script>
+
+    <!-- JSON-LD: Person (entidade autora) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Bruna Santanna",
+        "url": "https://brunasantanna.com",
+        "jobTitle": "Educadora de IA e estrategista",
+        "sameAs": [
+            "https://instagram.com/brusantanna.ai",
+            "https://www.linkedin.com/in/bruna-araujo-santanna/"
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg:#F3EEE3; --bg-2:#ECE5D6; --card:#FBF9F3;
+            --ink:#14373C; --ink-2:#2C4F54; --green:#435D51;
+            --terra:#B06E4A; --terra-l:#C4835E; --terra-d:#985A3B;
+            --text:#233133; --muted:#6E7A75; --line:rgba(20,55,60,0.16);
+            --cream:#F4F3EF;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family:'Hanken Grotesk',sans-serif; background:var(--bg); color:var(--text); line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+        img { max-width:100%; display:block; }
+        a { color:inherit; text-decoration:none; }
+        ::selection { background:var(--terra); color:#fff; }
+        .wrap { max-width:1100px; margin:0 auto; padding:0 30px; }
+        .kick { font-size:0.72rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--terra); }
+
+        /* ---------- HEADER ---------- */
+        .site-header { position:sticky; top:0; z-index:50; background:rgba(243,238,227,0.92); backdrop-filter:blur(8px); border-bottom:2px solid var(--ink); }
+        .header-inner { display:flex; align-items:center; justify-content:space-between; gap:24px; max-width:1100px; padding:16px 30px; }
+        .logo { display:inline-flex; align-items:center; white-space:nowrap; font-family:'Anton',sans-serif; font-size:1.2rem; letter-spacing:0.02em; text-transform:uppercase; color:var(--ink); }
+        .logo .brand-tag { font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:0.62rem; letter-spacing:0.12em; color:var(--terra); border:1.5px solid var(--terra); padding:3px 8px; border-radius:100px; margin-left:10px; }
+        .main-nav { display:flex; align-items:center; gap:14px; }
+        .main-nav a { font-size:0.86rem; font-weight:600; color:var(--ink-2); white-space:nowrap; transition:color .18s; }
+        .main-nav a:hover, .main-nav a.active { color:var(--terra); }
+        .nav-cta { background:var(--terra); color:#fff !important; padding:10px 18px; border-radius:100px; font-size:0.8rem !important; transition:background .2s, transform .15s; }
+        .nav-cta:hover { background:var(--terra-d); transform:translateY(-1px); }
+        .nav-toggle { display:none; background:none; border:none; font-size:1.5rem; color:var(--ink); cursor:pointer; line-height:1; }
+        @media (max-width: 1180px) {
+            .nav-toggle { display:block; }
+            .main-nav { display:none; position:absolute; top:100%; left:0; right:0; flex-direction:column; align-items:flex-start; gap:0; background:var(--bg); border-bottom:2px solid var(--ink); padding:8px 30px 20px; }
+            .main-nav.open { display:flex; box-shadow:0 28px 46px -20px rgba(20,55,60,0.55); max-height:calc(100dvh - 62px); overflow-y:auto; }
+            .site-header:has(.main-nav.open)::after { content:""; position:fixed; left:0; right:0; top:62px; bottom:0; background:rgba(20,55,60,0.38); z-index:40; pointer-events:none; }
+            .main-nav a { padding:12px 0; width:100%; border-top:1px solid var(--line); font-size:1rem; }
+            .nav-cta { margin-top:12px; text-align:center; border-top:none; }
+        }
+
+        /* botão genérico */
+        .btn { display:inline-flex; align-items:center; gap:9px; justify-content:center; font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:0.85rem; letter-spacing:0.04em; text-transform:uppercase; padding:15px 28px; border-radius:100px; border:none; cursor:pointer; transition:transform .15s, box-shadow .15s, background .2s; }
+        .btn-terra { background:var(--terra); color:#fff; }
+        .btn-terra:hover { background:var(--terra-d); transform:translateY(-2px); box-shadow:0 10px 26px rgba(176,110,74,.35); }
+        .btn-ink { background:var(--ink); color:#fff; }
+        .btn-ink:hover { background:var(--ink-2); transform:translateY(-2px); }
+
+        /* ---------- HERO COMPACTO ---------- */
+        .hero { position:relative; overflow:hidden; border-bottom:1.5px solid var(--line); }
+        .hero-glow { position:absolute; width:560px; height:560px; border-radius:50%; top:-240px; right:-160px; background:radial-gradient(circle,rgba(176,110,74,.13),transparent 62%); pointer-events:none; }
+        .hero .wrap { position:relative; z-index:2; padding:54px 30px 48px; max-width:820px; }
+        .hero-eyebrow { display:inline-flex; align-items:center; gap:9px; margin-bottom:20px; flex-wrap:wrap; }
+        .hero-eyebrow .dot { width:7px; height:7px; border-radius:50%; background:var(--terra); box-shadow:0 0 0 4px rgba(176,110,74,.18); }
+        .hero-eyebrow .sep { color:var(--line); }
+        .hero-eyebrow .data { font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); }
+        .hero h1 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(2.4rem,7vw,4.2rem); line-height:0.94; letter-spacing:-0.01em; text-transform:uppercase; color:var(--ink); }
+        .hero h1 .terra { color:var(--terra); }
+        .hero-sub { font-size:1.12rem; color:var(--ink-2); font-weight:300; max-width:54ch; margin-top:20px; }
+        .hero-sub b { color:var(--ink); font-weight:600; }
+
+        /* ---------- LAYOUT ARTIGO ---------- */
+        .artigo { padding:56px 0 40px; }
+        .artigo .wrap { max-width:760px; }
+
+        /* corpo do post */
+        .corpo { font-size:1.06rem; color:var(--text); line-height:1.75; }
+        .corpo > p { margin-bottom:20px; }
+        .corpo > p:first-of-type { font-size:1.16rem; color:var(--ink-2); }
+        .corpo h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.6rem,4.5vw,2.2rem); text-transform:uppercase; color:var(--ink); line-height:1.05; letter-spacing:-0.01em; margin:44px 0 16px; }
+        .corpo h3 { font-size:1.2rem; font-weight:700; color:var(--ink); margin:30px 0 10px; }
+        .corpo a { color:var(--terra-d); font-weight:600; border-bottom:1.5px solid var(--terra); }
+        .corpo a:hover { color:var(--terra); }
+        .corpo strong, .corpo b { color:var(--ink); font-weight:700; }
+        .corpo ul { list-style:none; margin:6px 0 22px; padding:0; }
+        .corpo ul li { position:relative; padding-left:26px; margin-bottom:12px; }
+        .corpo ul li::before { content:'→'; position:absolute; left:0; top:0; color:var(--terra); font-weight:800; }
+        .corpo ol { margin:6px 0 22px 22px; }
+        .corpo ol li { margin-bottom:12px; padding-left:6px; }
+        .corpo ol li::marker { color:var(--terra); font-weight:800; }
+
+        /* blocos didáticos */
+        .bloco { border-radius:14px; padding:22px 24px 22px 26px; margin:26px 0; border:1.5px solid var(--line); }
+        .bloco .bloco-tag { display:block; font-size:0.72rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:8px; }
+        .bloco p { font-size:0.98rem; line-height:1.65; margin:0; }
+        .bloco p + p { margin-top:10px; }
+        .bloco-dica { background:rgba(67,93,81,0.08); border-left:5px solid var(--green); }
+        .bloco-dica .bloco-tag { color:var(--green); }
+        .bloco-atencao { background:rgba(176,110,74,0.09); border-left:5px solid var(--terra); }
+        .bloco-atencao .bloco-tag { color:var(--terra-d); }
+        .bloco-case { background:var(--ink); border-left:5px solid var(--terra-l); border-color:var(--ink); }
+        .bloco-case .bloco-tag { color:var(--terra-l); }
+        .bloco-case p { color:rgba(244,243,239,.88); }
+        .bloco-case b { color:#fff; }
+
+        /* antes/depois */
+        .antes-depois { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:26px 0; }
+        @media (max-width:600px) { .antes-depois { grid-template-columns:1fr; } }
+        .ad-ruim, .ad-bom { border-radius:12px; padding:18px 20px; font-size:0.95rem; line-height:1.6; border:1.5px solid var(--line); }
+        .ad-ruim { background:rgba(150,90,59,0.06); }
+        .ad-bom { background:rgba(67,93,81,0.08); }
+        .ad-ruim .ad-label, .ad-bom .ad-label { display:block; font-size:0.74rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:8px; }
+        .ad-ruim .ad-label { color:var(--terra-d); }
+        .ad-bom .ad-label { color:var(--green); }
+
+        /* prompt box com botão copiar */
+        .prompt-box { background:var(--ink); border-radius:16px; padding:22px 24px; margin:28px 0; position:relative; box-shadow:8px 8px 0 var(--green); }
+        .prompt-box .pb-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; }
+        .prompt-box .pb-label { font-size:0.72rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--terra-l); }
+        .prompt-box pre { font-family:'Hanken Grotesk',ui-monospace,monospace; font-size:0.95rem; line-height:1.6; color:rgba(244,243,239,.92); white-space:pre-wrap; word-wrap:break-word; margin:0; }
+        .copy-btn { flex-shrink:0; display:inline-flex; align-items:center; gap:6px; background:var(--terra); color:#fff; border:none; border-radius:100px; padding:8px 16px; font-family:'Hanken Grotesk',sans-serif; font-size:0.74rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer; transition:background .2s, transform .15s; }
+        .copy-btn:hover { background:var(--terra-d); transform:translateY(-1px); }
+        .copy-btn.copied { background:var(--green); }
+
+        /* ---------- CONTENT UPGRADE (gated) ---------- */
+        .upgrade { margin:52px 0; }
+        .upgrade .wl-card { background:var(--ink); color:#fff; border-radius:18px; padding:34px 32px; box-shadow:8px 8px 0 var(--terra); }
+        .upgrade .wl-card .kick { color:var(--terra-l); display:block; margin-bottom:12px; }
+        .upgrade .wl-card h3 { font-family:'Anton',sans-serif; font-weight:400; font-size:1.7rem; text-transform:uppercase; line-height:1; margin-bottom:8px; }
+        .upgrade .wl-card .wl-sub { font-size:0.95rem; color:rgba(255,255,255,0.72); margin-bottom:22px; max-width:46ch; }
+        .upgrade .wl-form { display:flex; gap:10px; flex-wrap:wrap; }
+        .field { flex:1; min-width:220px; padding:16px 20px; font-family:inherit; font-size:1rem; background:rgba(255,255,255,0.07); border:1.5px solid rgba(255,255,255,0.22); border-radius:10px; color:#fff; outline:none; transition:border-color .2s, background .2s; }
+        .field::placeholder { color:rgba(255,255,255,0.5); }
+        .field:focus { border-color:var(--terra); background:rgba(255,255,255,0.12); }
+        .btn-form { padding:16px 26px; font-family:'Hanken Grotesk',sans-serif; font-size:0.82rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer; background:var(--terra); color:#fff; border:none; border-radius:10px; transition:transform .15s, box-shadow .15s, background .2s; white-space:nowrap; }
+        .btn-form:hover { background:var(--terra-d); transform:translateY(-2px); box-shadow:0 8px 22px rgba(176,110,74,0.35); }
+        .btn-form:disabled { opacity:.6; cursor:not-allowed; transform:none; }
+        .upgrade .fine { margin-top:14px; font-size:0.76rem; color:rgba(255,255,255,0.55); }
+        .wl-ok { display:none; background:rgba(67,93,81,0.35); border:1.5px solid var(--terra-l); border-radius:10px; padding:18px 20px; font-size:0.98rem; line-height:1.5; color:#fff; }
+        .wl-ok b { color:var(--terra-l); }
+        .wl-done .wl-ok { display:block; }
+        .wl-done .wl-form, .wl-done .fine { display:none; }
+
+        /* ---------- CONTINUE APRENDENDO ---------- */
+        .continue { padding:8px 0 20px; }
+        .continue .wrap { max-width:760px; }
+        .continue h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.5rem,4.5vw,2rem); text-transform:uppercase; color:var(--ink); line-height:1; margin-bottom:18px; }
+        .continue-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+        @media (max-width:600px) { .continue-grid { grid-template-columns:1fr; } }
+        .continue-card { border:1.5px solid var(--line); border-radius:14px; background:var(--card); padding:20px 22px; transition:transform .15s, box-shadow .15s, border-color .2s; }
+        .continue-card:hover { transform:translateY(-2px); box-shadow:0 12px 26px -16px rgba(20,55,60,.5); border-color:var(--terra); }
+        .continue-card .cc-kick { font-size:0.68rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--terra); }
+        .continue-card b { display:block; font-size:1.02rem; color:var(--ink); margin:6px 0 4px; line-height:1.3; }
+        .continue-card span { font-size:0.88rem; color:var(--muted); }
+        .continue .todos { display:inline-block; margin-top:18px; font-size:0.9rem; font-weight:700; color:var(--ink); border-bottom:2px solid var(--terra); padding-bottom:3px; }
+
+        /* ---------- FAQ ---------- */
+        .faq-sec { padding:8px 0 20px; }
+        .faq-sec .wrap { max-width:760px; }
+        .faq-sec h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.6rem,4.5vw,2.2rem); text-transform:uppercase; color:var(--ink); line-height:1; margin-bottom:22px; }
+        .faq-list { max-width:760px; }
+        .faq-item { border:1.5px solid var(--line); border-radius:14px; background:var(--card); margin-bottom:12px; overflow:hidden; }
+        .faq-q { width:100%; display:flex; justify-content:space-between; align-items:center; gap:16px; text-align:left; background:none; border:none; cursor:pointer; padding:20px 24px; font-family:'Hanken Grotesk',sans-serif; font-size:1.02rem; font-weight:700; color:var(--ink); }
+        .faq-q .mark { font-family:'Anton',sans-serif; font-size:1.3rem; color:var(--terra); transition:transform .25s; flex-shrink:0; line-height:1; }
+        .faq-item.open .faq-q .mark { transform:rotate(45deg); }
+        .faq-a { display:none; padding:0 24px 22px; font-size:0.96rem; color:var(--ink-2); line-height:1.7; }
+        .faq-item.open .faq-a { display:block; }
+        .faq-a b { color:var(--ink); }
+
+        /* ---------- BANNER DO CURSO ---------- */
+        .curso-banner { background:var(--ink); color:var(--cream); margin:40px 0 0; }
+        .curso-banner .wrap { max-width:900px; padding:56px 30px; display:flex; align-items:center; justify-content:space-between; gap:30px; flex-wrap:wrap; }
+        .curso-banner .cb-text { flex:1; min-width:260px; }
+        .curso-banner .kick { color:var(--terra-l); display:block; margin-bottom:12px; }
+        .curso-banner h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.7rem,5vw,2.6rem); text-transform:uppercase; color:#fff; line-height:1; margin-bottom:12px; max-width:20ch; }
+        .curso-banner h2 .terra { color:var(--terra-l); }
+        .curso-banner p { color:rgba(244,243,239,.72); font-weight:300; font-size:1rem; max-width:46ch; }
+
+        /* volta pro hub */
+        .voltar-hub { text-align:center; padding:40px 0 8px; }
+        .voltar-hub a { font-size:0.9rem; font-weight:700; letter-spacing:0.02em; color:var(--ink); border-bottom:2px solid var(--terra); padding-bottom:3px; transition:color .18s; }
+        .voltar-hub a:hover { color:var(--terra); }
+
+        /* footer */
+        footer { background:var(--ink); color:rgba(244,243,239,.6); padding:40px 0 48px; margin-top:30px; }
+        .footer-row { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+        .footer-brand { font-family:'Anton',sans-serif; font-size:1.1rem; text-transform:uppercase; color:#fff; }
+        .footer-links { display:flex; gap:20px; flex-wrap:wrap; }
+        .footer-links a { font-size:0.84rem; font-weight:600; color:rgba(244,243,239,.7); }
+        .footer-links a:hover { color:var(--terra-l); }
+        .footer-copy { font-size:0.76rem; color:rgba(244,243,239,.4); margin-top:14px; }
+
+        /* reveal */
+        .rv { opacity:0; transform:translateY(22px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+        .rv.in { opacity:1; transform:none; }
+        @media (prefers-reduced-motion:reduce) { .rv { opacity:1; transform:none; } }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="wrap header-inner">
+        <a href="/" class="logo">Bruna Santanna<span class="brand-tag">A Virada IA</span></a>
+        <nav class="main-nav" id="mainNav">
+            <a href="/">Home</a>
+            <a href="/biblioteca">Biblioteca</a>
+            <a href="/claude">Guia do Claude</a>
+            <a href="/quem-sou">Quem Sou</a>
+            <a href="/treinamentos">Treinamentos Corporativos</a>
+            <a href="/mentoria">Mentoria</a>
+            <a href="https://newscale.tech" target="_blank" rel="noopener">IA na sua Empresa</a>
+            <a href="/sistema" class="nav-cta">Aula do Sistema · 21/07</a>
+        </nav>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">☰</button>
+    </div>
+</header>
+
+<!-- ========== HERO COMPACTO ========== -->
+<section class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="wrap">
+        <div class="hero-eyebrow rv">
+            <span class="dot"></span>
+            <span class="kick">Skills</span>
+            <span class="sep">·</span>
+            <span class="data">Julho de 2026</span>
+        </div>
+        <h1 class="rv">3 jeitos de criar uma skill no Claude (e por que só <span class="terra">um funciona</span>)</h1>
+        <p class="hero-sub rv">Copiar uma pronta, pedir pro Claude construir, ou fazer a tarefa junto com ele e mandar salvar o processo. Os três te dão uma skill. Só um te dá uma skill que trabalha <b>do seu jeito</b>.</p>
+    </div>
+</section>
+
+<!-- ========== ARTIGO ========== -->
+<article class="artigo">
+    <div class="wrap">
+
+        <div class="reel-embed rv">
+            <blockquote class="instagram-media"
+                data-instgrm-permalink="https://www.instagram.com/reel/Da1F84Dk1OR/"
+                data-instgrm-version="14"
+                style="max-width:540px; width:100%; margin:0 auto;">
+            </blockquote>
+            <script async src="https://www.instagram.com/embed.js"></script>
+        </div>
+
+        <div class="corpo rv">
+            <p>Existem três jeitos de criar uma skill no Claude: copiar uma pronta do GitHub, descrever o que você quer e pedir pra ele construir, ou fazer a tarefa real junto com ele e depois mandar salvar o processo. Os três te entregam uma skill. Só o terceiro te entrega uma skill que funciona do seu jeito, porque ela nasce do seu trabalho de verdade.</p>
+
+            <p>Eu testei os três no meu negócio. Vou te contar o que cada um resolve, onde cada um trava, e por que eu só confio em um deles.</p>
+
+            <h2>O que é uma skill, em uma frase</h2>
+
+            <p>Skill é uma habilidade que você ensina uma vez e o Claude nunca mais esquece: o passo a passo, o seu tom, as suas regras. Se você nunca criou nenhuma, começa pelo <a href="/guia-skills-claude">guia de como criar uma Skill no Claude</a>, que é o passo a passo dos botões. Este aqui é sobre outra coisa: o <b>método</b>. Porque criar uma skill é fácil. Criar uma skill que funciona igual a você é que é a história.</p>
+
+            <h2>Jeito 1: copiar uma skill pronta</h2>
+
+            <p>Você baixa uma skill do GitHub, ou pega uma do guia de alguém, e cola no seu Claude. Em dois minutos tá rodando. É o mais rápido de todos.</p>
+
+            <p>E funciona bem pra coisa genérica: formatar um documento, resumir uma reunião, converter um arquivo. Se a tarefa é igual pra todo mundo, uma skill de prateleira resolve muito bem. Não tem vergonha nenhuma nisso.</p>
+
+            <p>O problema é quando a tarefa é <i>sua</i>. A sua vida e o seu negócio não são iguais aos de ninguém. A skill que a pessoa publicou no GitHub carrega o jeito <b>dela</b> de trabalhar: os critérios dela, o gosto dela, os atalhos dela. Você instala e recebe um resultado que é a cara de outra pessoa.</p>
+
+            <div class="bloco bloco-atencao">
+                <b>⚠ ATENÇÃO</b>
+                <p>Skill copiada é ponto de partida, não de chegada. Se a tarefa é justamente aquilo que te diferencia (seu conteúdo, seu atendimento, sua análise), skill de prateleira vai te entregar o padrão médio da internet. E o médio não é o que você quer no que é a sua vantagem.</p>
+            </div>
+
+            <h2>Jeito 2: descrever o que você quer e pedir pro Claude construir</h2>
+
+            <p>Você abre o chat e explica: "quero uma skill que faz X, seguindo os passos Y e Z, no tom W". Ele escreve a skill pra você. Já é bem melhor que copiar, porque pelo menos parte do seu contexto.</p>
+
+            <p>Mas tem um limite honesto aqui, e ele é mais fundo do que parece: <b>ele está construindo em cima da sua descrição do trabalho, não do trabalho</b>. E descrição não é a mesma coisa que execução.</p>
+
+            <p>Pensa comigo: você consegue descrever exatamente como decide que um texto ficou bom? Como você escolhe cortar uma frase? Por que uma legenda te agrada e outra não? A maior parte do seu critério é automática. Você não sabe que sabe. Então você não descreve, e ele preenche o buraco com chute.</p>
+
+            <div class="antes-depois">
+                <div class="ad-ruim">
+                    <b>❌ Descrevendo</b>
+                    <p>"Escreve legendas no meu tom: coloquial, próximo, sem enrolação."</p>
+                    <p>Ele escreve o que a internet inteira chama de coloquial. Genérico, com cara de IA.</p>
+                </div>
+                <div class="ad-bom">
+                    <p><b>✅ Fazendo junto</b></p>
+                    <p>Você escreve 3 legendas com ele, corrigindo: "essa palavra eu nunca usaria", "corta essa última frase, tá explicando demais".</p>
+                    <p>Ele vê o seu critério acontecendo. Aí ele acerta.</p>
+                </div>
+            </div>
+
+            <h2>Jeito 3: faça a tarefa junto e mande salvar o processo</h2>
+
+            <p>Esse é o que eu uso, porque é o único que faz ele acertar de verdade. E o pulo do gato é a ordem: <b>a skill é a última coisa, não a primeira</b>.</p>
+
+            <p>O passo a passo:</p>
+
+            <p>→ <b>1. Faça a tarefa real com ele, do começo ao fim.</b> Não uma simulação, não um exemplo. A tarefa que você faria hoje de qualquer jeito.<br>
+            → <b>2. Corrija no meio do caminho.</b> Fala o que ficou bom e, principalmente, o que ficou ruim. "Isso aqui não é meu jeito." "Essa parte ficou perfeita, é exatamente isso."<br>
+            → <b>3. Vá até ficar perfeito.</b> Não aceite o "tá bom". A skill vai congelar o padrão que você aceitar aqui.<br>
+            → <b>4. Só aí mande salvar o processo inteiro numa skill.</b></p>
+
+            <p>O prompt do passo 4 é o que faz toda a diferença. Não peça só "salva isso numa skill": peça pra ele <b>olhar para trás</b> e extrair o que ele aprendeu com as suas correções.</p>
+
+            <div class="prompt-box">
+                <div class="pb-head">
+                    <span class="pb-label">&gt; PROMPT PRA SALVAR A SKILL</span>
+                    <button class="copy-btn">Copiar</button>
+                </div>
+                <pre>Você acabou de fazer essa tarefa exatamente do jeito que eu queria.
+Agora quero transformar isso numa skill reutilizável.
+
+Antes de escrever, revisa toda a nossa conversa e me lista:
+1. Os passos que você seguiu, na ordem real
+2. As correções que eu pedi no caminho, e o que cada uma revela
+   sobre o meu padrão e o meu gosto
+3. Os erros que você cometeu e como evitar da próxima vez
+4. Como eu decido que o resultado ficou bom
+
+Depois escreve a skill, incluindo:
+- Quando usar (os gatilhos, com as palavras que EU uso pra pedir isso)
+- O passo a passo do jeito que a gente acabou de fazer
+- As minhas regras de gosto (o que eu sempre quero e o que eu nunca quero)
+- Uma seção "erros que já quebraram" com o que deu errado hoje
+
+Não inventa nada que não aconteceu nessa conversa.</pre>
+            </div>
+
+            <p>Repara na parte 2 e na última seção. É aí que mora o ouro: as suas correções e os erros que ele cometeu. Uma skill escrita só com os acertos é frágil. Uma skill que sabe onde já quebrou é a que segura o padrão da próxima vez.</p>
+
+            <h2>Por que o jeito 3 acerta e os outros chutam</h2>
+
+            <p>A diferença é o que o Claude tem em mãos na hora de escrever a skill.</p>
+
+            <p>→ No jeito 1, ele tem o processo de <b>outra pessoa</b>.<br>
+            → No jeito 2, ele tem a sua <b>descrição</b> do processo, com todos os buracos do que você não sabe explicar.<br>
+            → No jeito 3, ele tem o <b>processo acontecendo</b>, com as suas correções gravadas em cima.</p>
+
+            <p>Não é mágica. É que a sua correção é a única coisa que carrega o seu critério de um jeito que dá pra escrever depois.</p>
+
+            <div class="bloco bloco-dica">
+                <b>→ DICA</b>
+                <p>Guarde a conversa onde a tarefa deu certo. Ela é a matéria-prima da skill. Se você fez um trabalho lindo com o Claude e fechou a janela sem salvar o processo, você jogou fora a parte mais valiosa e vai ter que ensinar tudo de novo na semana que vem.</p>
+            </div>
+
+            <div class="bloco bloco-case">
+                <b>✦ CASE REAL</b>
+                <p>A skill que edita os meus Reels nasceu exatamente assim. Eu não descrevi como eu edito. Eu <b>editei</b>, junto com o Claude, quatro vídeos.</p>
+                <p>No caminho eu fui corrigindo: "o filtro tá lavando meu rosto", "esse zoom tá fraco demais, quero mais dramático, um vai e um volta", "tira esse fundo atrás da escrita, quer mais elegante", "esse trecho eu errei, corta". Cada correção dessa ensinou uma regra que eu nunca teria escrito num briefing, porque eu nem sabia que era uma regra.</p>
+                <p>Quando o quarto vídeo saiu do jeito que eu queria, eu pedi: salva esse processo inteiro numa skill. Hoje eu mando o vídeo cru e falo "edita esse vídeo". Sai pronto, com o meu corte, o meu zoom e o meu título. E o mais importante: a skill guarda até os erros que a gente cometeu no caminho, pra não repetir.</p>
+                <p>Uma skill baixada do GitHub jamais saberia que eu odeio fundo atrás da legenda.</p>
+            </div>
+
+            <h2>Comece pela tarefa que você mais odeia</h2>
+
+            <p>Não comece pela tarefa mais importante. Comece pela mais chata e repetitiva: aquela que você faz toda semana e que te dá preguiça só de pensar. É a de maior retorno, e você já sabe fazer de olhos fechados, então vai reconhecer na hora quando o resultado sair errado.</p>
+
+            <p>Faz uma vez junto com ele, com calma, corrigindo. Manda salvar. Na semana seguinte você não faz mais essa tarefa: você revisa. E revisar leva dois minutos.</p>
+
+            <p>É isso que muda o jogo. Não é a IA fazendo o que qualquer um faria. É a IA fazendo do <b>seu</b> jeito, porque você ensinou o seu jeito uma vez só. Se você quer entender o Claude de trás pra frente pra tirar proveito disso, vale ler o <a href="/claude">Guia Definitivo do Claude em Português</a>. E pra montar a sua primeira skill no app, o <a href="/guia-skills-claude">guia de Skills</a> é o começo natural.</p>
+
+        </div>
+
+        <!-- ─── CONTENT UPGRADE (gated → list: 'biblioteca') ───────────── -->
+        <div class="upgrade rv">
+            <div class="wl-card" id="upgradeCard">
+                <span class="kick">Guia grátis · PDF</span>
+                <h3>O Guia Completo do Claude em PDF</h3>
+                <p class="wl-sub">Meu guia do Claude do zero ao avançado, em PDF pra você salvar e consultar quando quiser. Deixa seu email que eu libero na hora, e você ainda entra na Biblioteca.</p>
+                <form class="wl-form" novalidate>
+                    <input class="field" type="email" placeholder="Seu melhor email" required autocomplete="email">
+                    <button type="submit" class="btn-form">Quero o guia do Claude</button>
+                </form>
+                <div class="wl-ok"><b>Prontinho, tá dentro.</b> Baixa agora: <a href="/guia-claude-bruna.pdf" target="_blank" rel="noopener">o Guia Completo do Claude em PDF</a>. As próximas novidades da Biblioteca chegam no seu email.</div>
+                <p class="fine">Zero spam. Só o que vale a pena sobre IA na prática.</p>
+            </div>
+        </div>
+
+    </div>
+</article>
+
+<!-- ========== CONTINUE APRENDENDO (hub-and-spoke) ========== -->
+<section class="continue">
+    <div class="wrap">
+        <h2 class="rv">Continue aprendendo</h2>
+        <div class="continue-grid rv">
+            <a href="/guia-skills-claude" class="continue-card">
+                <span class="cc-kick">Skills</span>
+                <b>Como criar uma Skill no Claude (passo a passo, sem programar)</b>
+                <span>O básico: o que é uma skill e como montar a sua primeira no app.</span>
+            </a>
+            <a href="/guia-configurar-claude" class="continue-card">
+                <span class="cc-kick">Setup</span>
+                <b>Configure o Claude uma vez pra ele soar como você pra sempre</b>
+                <span>Ensine seu tom e seu contexto de uma vez, e pare de repetir.</span>
+            </a>
+        </div>
+        <a href="/biblioteca" class="todos">Ver todos os guias na Biblioteca →</a>
+    </div>
+</section>
+
+<!-- ========== FAQ ========== -->
+<section class="faq-sec">
+    <div class="wrap">
+        <h2 class="rv">Dúvidas rápidas</h2>
+        <div class="faq-list rv">
+            
+            <div class="faq-item">
+                <button class="faq-q">Preciso saber programar pra criar uma skill assim?<span class="mark">+</span></button>
+                <div class="faq-a">Não. Você não escreve uma linha de código: você faz a sua tarefa normal conversando com o Claude, corrige o que sair torto e no fim pede pra ele salvar o processo. Quem escreve a skill é ele. Você só precisa saber reconhecer quando o resultado ficou do seu jeito.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Quantas vezes preciso fazer a tarefa junto antes de salvar a skill?<span class="mark">+</span></button>
+                <div class="faq-a">Uma vez bem feita já dá uma skill útil, desde que você tenha corrigido o Claude no caminho. As correções são o material mais valioso: é nelas que está o seu padrão. Se a tarefa é complexa, faça duas ou três rodadas e vá pedindo pra ele atualizar a skill com o que aprendeu em cada uma.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Skill copiada do GitHub não presta, então?<span class="mark">+</span></button>
+                <div class="faq-a">Presta, para tarefas genéricas: formatar um documento, resumir uma reunião, converter um arquivo. O problema é usar skill de prateleira para o que é a sua vantagem competitiva. Aí ela entrega o jeito de outra pessoa, e o resultado sai igual ao de todo mundo.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== BANNER DO CURSO ========== -->
+<section class="curso-banner">
+    <div class="wrap">
+        <div class="cb-text">
+            <span class="kick">Curso de Claude · Turma 1</span>
+            <h2>Quer ir <span class="terra">além</span> desse guia?</h2>
+            <p>No Claude com Profundidade você aprende a pensar e usar IA de verdade, do zero, sem programar. Zero tech, 100% prático.</p>
+        </div>
+        <a href="/curso" class="btn btn-terra">Quero o curso</a>
+    </div>
+</section>
+
+<!-- volta pro hub -->
+<div class="voltar-hub">
+    <a href="/biblioteca">← Voltar pra Biblioteca</a>
+</div>
+
+<footer>
+    <div class="wrap">
+        <div class="footer-row">
+            <span class="footer-brand">A Virada IA</span>
+            <nav class="footer-links">
+                <a href="/biblioteca">Biblioteca</a>
+                <a href="/claude">Guia do Claude</a>
+                <a href="/curso">Curso de Claude</a>
+                <a href="/mentoria">Mentoria</a>
+                <a href="/comece">Comece por aqui</a>
+                <a href="https://instagram.com/brusantanna.ai" target="_blank" rel="noopener">Instagram</a>
+                <a href="https://newscale.tech" target="_blank" rel="noopener">NewScale</a>
+                <a href="mailto:eu@brunasantanna.com">Contato</a>
+            </nav>
+        </div>
+        <p class="footer-copy">© 2026 Bruna Santanna · A Virada IA</p>
+    </div>
+</footer>
+
+<script>
+    // ===== Copiar prompt =====
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const box = btn.closest('.prompt-box');
+            const pre = box.querySelector('pre');
+            const text = pre ? pre.innerText : '';
+            navigator.clipboard.writeText(text).then(() => {
+                const original = btn.textContent;
+                btn.textContent = '✓ Copiado';
+                btn.classList.add('copied');
+                setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, 1800);
+            });
+        });
+    });
+
+    // ===== Content upgrade (Apps Script, list: 'biblioteca') =====
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx90IdrA_L6n3jVdoYBinBPxPfWq0h6Iua1MrI8gQ7-RgBXhU1rOqF9dM2n7mLdAeMW/exec";
+
+    document.querySelectorAll('.wl-form').forEach(form => {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const input = form.querySelector('input[type="email"]');
+            const btn = form.querySelector('button[type="submit"]');
+            const email = input.value.trim();
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { input.focus(); return; }
+            btn.disabled = true; btn.textContent = 'Enviando...';
+            try {
+                await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, list: 'biblioteca', timestamp: new Date().toISOString(), source: location.href }) });
+            } catch(_) {}
+            if (typeof gtag === 'function') gtag('event', 'lead_signup', { list: 'biblioteca' });
+            document.querySelectorAll('.upgrade .wl-card').forEach(c => c.classList.add('wl-done'));
+            localStorage.setItem('biblioteca_lead', '1');
+        });
+    });
+    if (localStorage.getItem('biblioteca_lead') === '1') {
+        document.querySelectorAll('.upgrade .wl-card').forEach(c => c.classList.add('wl-done'));
+    }
+
+    // ===== FAQ accordion =====
+    document.querySelectorAll('.faq-q').forEach(q => {
+        q.addEventListener('click', () => q.closest('.faq-item').classList.toggle('open'));
+    });
+
+    // ===== menu mobile =====
+    const navToggle = document.getElementById('navToggle'), mainNav = document.getElementById('mainNav');
+    navToggle.addEventListener('click', () => mainNav.classList.toggle('open'));
+    mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mainNav.classList.remove('open')));
+
+    // ===== reveal on scroll =====
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0, rootMargin:'0px 0px -40px 0px' });
+    document.querySelectorAll('.rv').forEach((el,i) => { el.style.transitionDelay = (i%3*70)+'ms'; io.observe(el); });
+    /* rv-safety: garante que o conteudo nunca fica invisivel */
+    setTimeout(function(){ document.querySelectorAll('.rv:not(.in)').forEach(function(el){ el.classList.add('in'); }); }, 2500);
+</script>
+
+<script src="/promo-sistema.js" defer></script>
+</body>
+</html>
