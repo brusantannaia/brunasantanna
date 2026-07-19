@@ -60,11 +60,11 @@
         bar.innerHTML =
             '<span><b>AULA AO VIVO · TER 21/07 · 20h</b><span class="ps-hide-m"> — o sistema de IA que cria e posta conteúdo por você</span></span>' +
             '<span class="ps-count" id="psBarCount"></span>' +
-            '<a href="/sistema" id="psBarCta">' + (precoVale ? 'Garantir por R$149' : 'Garantir vaga') + ' →</a>' +
+            '<a href="/sistema" id="psBarCta">' + 'Garantir por R$169' + ' →</a>' +
             '<button class="ps-x" id="psBarX" aria-label="Fechar aviso">✕</button>';
         document.body.insertBefore(bar, document.body.firstChild);
         var barCount = document.getElementById('psBarCount');
-        function tickBar() { barCount.textContent = (precoVale ? 'R$149 acaba em ' : 'faltam ') + restante(alvo); }
+        function tickBar() { barCount.textContent = 'faltam ' + restante(alvo); }
         tickBar(); setInterval(tickBar, 1000);
         document.getElementById('psBarX').onclick = function () { sessionStorage.setItem('psBarOff', '1'); bar.remove(); };
         document.getElementById('psBarCta').onclick = function () { ga('promo_banner_click'); };
@@ -87,7 +87,7 @@
             '<h3>Um sistema de IA que cria e posta o seu conteúdo. Eu mostro como montar o seu.</h3>' +
             '<p>É o sistema por trás dos meus Reels de +100 mil visualizações e dos +10 mil seguidores por mês. Em uma noite você vê o processo inteiro — sem precisar programar.</p>' +
             (precoVale
-                ? '<div class="ps-preco">Ingresso <b>R$149 só até segunda (13/07)</b> — depois o preço sobe</div><div class="ps-timer" id="psPopCount"></div>'
+                ? '<div class="ps-preco">Ingresso <b>R$169</b> — depois o preço sobe</div><div class="ps-timer" id="psPopCount"></div>'
                 : '<div class="ps-preco">A aula é <b>terça, dia 21</b> — depois dela, acabou</div><div class="ps-timer" id="psPopCount"></div>') +
             '<a href="/sistema" class="ps-cta" id="psPopCta">Quero montar o meu →</a>' +
             '<button class="ps-nao" id="psNao">Agora não</button>';
