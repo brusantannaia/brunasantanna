@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workshop Instala Comigo | A Virada IA · Bruna Santanna</title>
+    <title>Aula Monte seu Sistema | A Virada IA · Bruna Santanna</title>
     <meta name="description" content="Workshop ao vivo, terça 21/07 às 20h. Em 2 horas você instala o sistema que pesquisa, escreve, edita, agenda e analisa o seu conteúdo em todas as redes. Você só grava.">
     <meta name="author" content="Bruna Santanna">
     <link rel="canonical" href="https://brunasantanna.com/sistema">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://brunasantanna.com/sistema">
-    <meta property="og:title" content="Workshop Instala Comigo: seu conteúdo rodando em loop, você só grava">
+    <meta property="og:title" content="Monte seu Sistema: seu conteúdo rodando em loop, você só grava">
     <meta property="og:description" content="Ao vivo terça 21/07, 20h: em 2 horas você instala um sistema que pesquisa, escreve, edita, agenda e analisa seu conteúdo em todas as redes. Você só grava.">
     <meta property="og:locale" content="pt_BR">
 
@@ -27,7 +27,7 @@
     {
         "@context": "https://schema.org",
         "@type": "Event",
-        "name": "Workshop Instala Comigo",
+        "name": "Aula Monte seu Sistema",
         "description": "Workshop ao vivo e online: em 2 horas você instala um sistema de conteúdo que pesquisa, escreve, agenda e analisa sozinho. Você só grava.",
         "startDate": "2026-07-21T20:00:00-03:00",
         "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
@@ -282,6 +282,14 @@
         .ocard.bonus .bonus-ico { flex-shrink:0; width:52px; height:52px; color:var(--terra-d); }
         .ocard.bonus .b-body { flex:1; min-width:220px; }
         .ocard.bonus .o-tag { color:var(--terra-d); }
+
+        /* ---------- ANTES/DEPOIS DA EDICAO ---------- */
+        .ba-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; max-width:560px; margin:0 auto; }
+        .ba-item { margin:0; }
+        .ba-item video { width:100%; aspect-ratio:9/16; object-fit:cover; border-radius:16px; border:2px solid var(--ink); box-shadow:6px 6px 0 var(--green); display:block; background:#000; }
+        .ba-item.depois video { box-shadow:6px 6px 0 var(--terra); border-color:var(--terra); }
+        .ba-tag { font-family:'Anton',sans-serif; font-size:0.92rem; letter-spacing:0.05em; text-transform:uppercase; color:var(--ink-2); margin-bottom:8px; text-align:center; }
+        .ba-tag.terra { color:var(--terra-d); }
 
         /* ---------- INVESTIMENTO ---------- */
         .invest { background:var(--bg-2); border-top:1.5px solid var(--line); border-bottom:1.5px solid var(--line); }
@@ -601,6 +609,28 @@
         <div class="cta-block rv" style="margin-top:28px;">
             <a href="https://pay.kiwify.com.br/a9YefRy" class="btn btn-terra btn-lg btn-arrow cta-buy">Quero minha vaga por R$169</a>
         </div>
+    </div>
+</section>
+
+<!-- ========== 3.4 · ANTES/DEPOIS DA EDIÇÃO ========== -->
+<section class="bloco-sec">
+    <div class="wrap">
+        <div class="sec-head center rv">
+            <span class="kick">O passo 4, de verdade</span>
+            <h2>O vídeo cru <span class="terra">vira isso</span></h2>
+            <p>Sem editor, sem programa complicado. Eu só falei: "corta as partes paradas, põe as legendas e o título".</p>
+        </div>
+        <div class="ba-grid rv">
+            <figure class="ba-item">
+                <figcaption class="ba-tag">Antes · como saiu da câmera</figcaption>
+                <video src="videos/edicao-antes.mp4" muted loop autoplay playsinline aria-label="Trecho do vídeo cru, sem edição"></video>
+            </figure>
+            <figure class="ba-item depois">
+                <figcaption class="ba-tag terra">Depois · editado pela skill</figcaption>
+                <video src="videos/edicao-depois.mp4" muted loop autoplay playsinline aria-label="O mesmo vídeo editado: cortes, título e legendas"></video>
+            </figure>
+        </div>
+        <p class="redes-close rv" style="margin-top:20px;">Esse Reel foi pro meu perfil exatamente assim. <b>A skill que fez isso vai instalada com você.</b></p>
     </div>
 </section>
 
@@ -956,7 +986,7 @@
                 <a href="https://instagram.com/brusantanna.ai" target="_blank" rel="noopener">Instagram</a>
             </nav>
         </div>
-        <p class="footer-copy">© 2026 Bruna Santanna · A Virada IA · Workshop Instala Comigo</p>
+        <p class="footer-copy">© 2026 Bruna Santanna · A Virada IA · Aula Monte seu Sistema</p>
     </div>
 </footer>
 
