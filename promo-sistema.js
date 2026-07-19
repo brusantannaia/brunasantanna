@@ -1,4 +1,4 @@
-/* Promo site-wide: Aula ao vivo do Sistema (21/07/2026) → /sistema
+/* Promo site-wide: Aula do Sistema (21/07/2026) → /sistema
    Banner de topo + popup. Desliga sozinho quando a aula começa. */
 (function () {
     var path = location.pathname.replace(/\/+$/, '').toLowerCase();
@@ -58,7 +58,7 @@
         var bar = document.createElement('div');
         bar.id = 'psBar';
         bar.innerHTML =
-            '<span><b>AULA AO VIVO · TER 21/07 · 20h</b><span class="ps-hide-m"> — o sistema de IA que cria e posta conteúdo por você</span></span>' +
+            '<span><b>AULA DO SISTEMA · TER 21/07 · 20h</b><span class="ps-hide-m"> — o sistema de IA que cria e posta conteúdo por você</span></span>' +
             '<span class="ps-count" id="psBarCount"></span>' +
             '<a href="/sistema" id="psBarCta">' + 'Garantir por R$169' + ' →</a>' +
             '<button class="ps-x" id="psBarX" aria-label="Fechar aviso">✕</button>';
@@ -83,7 +83,7 @@
         pop.setAttribute('role', 'dialog'); pop.setAttribute('aria-modal', 'true');
         pop.innerHTML =
             '<button class="ps-close" id="psClose" aria-label="Fechar">✕</button>' +
-            '<span class="ps-kick"><span class="dot"></span>Aula ao vivo · Ter 21/07 · 20h</span>' +
+            '<span class="ps-kick"><span class="dot"></span>Aula do Sistema · Ter 21/07 · 20h</span>' +
             '<h3>Um sistema de IA que cria e posta o seu conteúdo. Eu mostro como montar o seu.</h3>' +
             '<p>É o sistema por trás dos meus Reels de +100 mil visualizações e dos +10 mil seguidores por mês. Em uma noite você vê o processo inteiro — sem precisar programar.</p>' +
             (precoVale
