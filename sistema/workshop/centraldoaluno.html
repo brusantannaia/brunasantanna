@@ -105,8 +105,8 @@
   @media(max-width:640px){.magic{grid-template-columns:1fr;}}
   .magic .mcard{background:var(--ink);border-radius:16px;padding:20px 22px;box-shadow:6px 6px 0 var(--terra);}
   .magic .mcard .ml{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--terra-l);margin-bottom:9px;display:block;}
-  .magic .mcard .mp{display:flex;align-items:center;justify-content:space-between;gap:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:11px 14px;}
-  .magic .mcard .mp b{color:#fff;font-size:1rem;}
+  .magic .mcard .mp{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:13px 15px;}
+  .magic .mcard .mp span{color:#fff;font-size:.92rem;line-height:1.5;}
   .magic .mcard>p{color:rgba(244,243,239,.7);font-size:.85rem;margin-top:11px;}
   .copy-mini{flex-shrink:0;background:var(--terra);color:#fff;border:none;border-radius:100px;padding:6px 13px;font-family:var(--hank);font-weight:800;font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:background .2s;}
   .copy-mini:hover{background:var(--terra-d);}
@@ -206,7 +206,6 @@
       <a href="#aula">A aula</a>
       <a href="#skill">Baixar a skill</a>
       <a href="#passo">Passo a passo</a>
-      <a href="#comandos">Comandos</a>
       <a href="#prompts">Prompts</a>
       <a href="#dicas">Dicas</a>
     </nav>
@@ -326,12 +325,12 @@
     <div class="magic">
       <div class="mcard rv">
         <span class="ml">Pra começar (ou recomeçar do zero)</span>
-        <div class="mp"><b>vamos montar meu sistema</b><button class="copy-mini" data-txt="vamos montar meu sistema">Copiar</button></div>
-        <p>A frase que liga tudo. A partir daí ela te entrevista, uma pergunta por vez.</p>
+        <div class="mp"><span>Vamos montar o meu sistema de conteúdo do zero. Começa pelo preparo e me guia uma pergunta de cada vez, fazendo por mim tudo que der.</span><button class="copy-mini" data-txt="Vamos montar o meu sistema de conteúdo do zero. Começa pelo preparo e me guia uma pergunta de cada vez, fazendo por mim tudo que der.">Copiar</button></div>
+        <p>É a frase que liga tudo. A partir daí ela te entrevista, uma pergunta por vez.</p>
       </div>
       <div class="mcard rv">
         <span class="ml">Se você parou no meio</span>
-        <div class="mp"><b>continuar o workshop</b><button class="copy-mini" data-txt="continuar o workshop">Copiar</button></div>
+        <div class="mp"><span>Continuar o workshop de onde eu parei: lê o meu progresso, me diz o que já ficou pronto e qual é o próximo passo, e segue dali.</span><button class="copy-mini" data-txt="Continuar o workshop de onde eu parei: lê o meu progresso, me diz o que já ficou pronto e qual é o próximo passo, e segue dali.">Copiar</button></div>
         <p>Ela retoma exatamente de onde você parou. O progresso fica salvo sozinho num arquivo <code style="color:#eadfd0;background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);">progresso.md</code>, você nunca perde o que já andou.</p>
       </div>
     </div>
@@ -344,38 +343,20 @@
   </div>
 </section>
 
-<!-- 3. COMANDOS -->
-<section class="bloco" id="comandos" style="padding-top:6px;">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <span class="kick">O dia a dia</span>
-      <h2><span class="sec-num">3.</span>Os <span class="terra">comandos</span> do seu sistema</h2>
-      <p>Com o sistema montado, é isso que você fala com o Claude no dia a dia. Simples assim: fala a frase,
-      ele faz. Clique em COPIAR e cole numa conversa nova.</p>
-    </div>
-    <div class="cmd-grid rv">
-      <div class="cmd"><div class="c-txt"><b>vamos montar meu sistema</b><span>começa (ou recomeça) a montagem do zero</span></div><button class="copy" data-txt="vamos montar meu sistema">Copiar</button></div>
-      <div class="cmd"><div class="c-txt"><b>continuar o workshop</b><span>retoma exatamente de onde você parou</span></div><button class="copy" data-txt="continuar o workshop">Copiar</button></div>
-      <div class="cmd"><div class="c-txt"><b>roda o motor com o tema: [X]</b><span>uma ideia vira conteúdo pra todas as suas redes</span></div><button class="copy" data-txt="roda o motor com o tema: ">Copiar</button></div>
-      <div class="cmd"><div class="c-txt"><b>me dá pautas</b><span>5 pautas quentes do seu nicho, sem repetir o que já fez</span></div><button class="copy" data-txt="me dá pautas">Copiar</button></div>
-      <div class="cmd"><div class="c-txt"><b>edita esse vídeo</b><span>corte, legenda, título: seu vídeo pronto conversando</span></div><button class="copy" data-txt="edita esse vídeo">Copiar</button></div>
-      <div class="cmd"><div class="c-txt"><b>distribui esse vídeo: [link]</b><span>legenda por rede + agendamento (com o seu OK)</span></div><button class="copy" data-txt="distribui esse vídeo: ">Copiar</button></div>
-      <div class="cmd"><div class="c-txt"><b>analisa minha semana</b><span>seus números vs. sua meta + 1 recomendação prática</span></div><button class="copy" data-txt="analisa minha semana">Copiar</button></div>
-      <div class="cmd"><div class="c-txt"><b>atualiza meu dashboard</b><span>o painel sempre vivo, com resultados e meta</span></div><button class="copy" data-txt="atualiza meu dashboard">Copiar</button></div>
-      <div class="cmd"><div class="c-txt"><b>compila minha newsletter</b><span>o rascunho da semana, nascido do que você criou</span></div><button class="copy" data-txt="compila minha newsletter">Copiar</button></div>
-      <div class="cmd"><div class="c-txt"><b>guarda isso nos meus materiais</b><span>arquiva análises e textos novos na gaveta do sistema</span></div><button class="copy" data-txt="guarda isso nos meus materiais">Copiar</button></div>
-    </div>
-  </div>
-</section>
-
-<!-- 4. BIBLIOTECA DE PROMPTS -->
+<!-- 3. BIBLIOTECA DE PROMPTS -->
 <section class="bloco" id="prompts" style="padding-top:6px;">
   <div class="wrap">
     <div class="sec-head rv">
       <span class="kick">A biblioteca prometida</span>
-      <h2><span class="sec-num">4.</span>Biblioteca de <span class="terra">prompts</span></h2>
+      <h2><span class="sec-num">3.</span>Biblioteca de <span class="terra">prompts</span></h2>
       <p>Os textos completos pra copiar e colar. São os mesmos que eu uso. Troque o que estiver entre
       colchetes pela sua informação, clique em COPIAR e cole na ferramenta indicada no cabeçalho de cada um.</p>
+    </div>
+    <div class="bloco-nota bn-dica rv" style="margin-top:0;">
+      <span class="bt">→ Um segredo</span>
+      <p>No dia a dia, quase tudo aqui você consegue pedir com uma frase curta (tipo "me dá pautas"). Mas
+      quem manda o prompt <b>completo</b>, com contexto e objetivo, tira um resultado muito melhor. Por isso
+      eu te dou aqui a versão caprichada de cada um.</p>
     </div>
 
     <!-- A · ANALISAR O PERFIL -->
@@ -432,6 +413,12 @@ Textos:
 
 No fim, salva esse resumo na minha pasta meu-sistema/materiais/ com um nome claro, porque eu quero usar isso pra afinar o meu sistema.</pre>
       </div>
+
+      <div class="prompt">
+        <div class="prompt-head"><span class="pt">Guardar um material novo na gaveta do sistema</span><div class="right"><span class="tool">Claude</span><button class="copy">Copiar</button></div></div>
+        <pre>Guarda isso na minha pasta de materiais (meu-sistema/materiais/) com um nome claro, porque eu quero que você use na próxima análise do meu perfil. Me confirma onde salvou. Aqui está o material:
+[COLE A ANÁLISE, O TEXTO OU O PRINT]</pre>
+      </div>
     </div>
 
     <!-- B · CRIAR CONTEÚDO -->
@@ -475,6 +462,12 @@ Me entrega as 4 saídas (Reel, carrossel, LinkedIn e blog) e no final me diz qua
       <h3>C · Distribuir <span class="terra">nas redes</span></h3>
       <p>Gravou o Reel? Agora ele aparece em todas as redes de uma vez, sem você postar uma por uma. Regra
       de ouro: o Claude sempre te mostra o preview e espera o seu "sim" antes de agendar.</p>
+
+      <div class="prompt">
+        <div class="prompt-head"><span class="pt">Editar o vídeo antes de postar</span><div class="right"><span class="tool">Claude</span><button class="copy">Copiar</button></div></div>
+        <pre>Edita esse vídeo pra mim e me deixa pronto pra postar: corta as partes paradas e os "é", "ãã", deixa o ritmo puxado, põe legenda e um título que prenda nos 3 primeiros segundos. Me mostra o resultado antes de finalizar pra eu aprovar. O vídeo está aqui:
+[ARQUIVO OU LINK DO VÍDEO]</pre>
+      </div>
 
       <div class="prompt">
         <div class="prompt-head"><span class="pt">Distribuir um vídeo nas 4 redes</span><div class="right"><span class="tool">Claude</span><button class="copy">Copiar</button></div></div>
@@ -542,7 +535,7 @@ Sugere o melhor horário de cada rede com base no meu Metricool, adapta a legend
   <div class="wrap">
     <div class="sec-head rv">
       <span class="kick">O que separa o bom do genérico</span>
-      <h2><span class="sec-num">5.</span>Dicas <span class="terra">de ouro</span></h2>
+      <h2><span class="sec-num">4.</span>Dicas <span class="terra">de ouro</span></h2>
       <p>São essas oito coisas que fazem o seu sistema sair com a sua voz, e não com cara de robô. Vale a
       pena ler antes de começar.</p>
     </div>
