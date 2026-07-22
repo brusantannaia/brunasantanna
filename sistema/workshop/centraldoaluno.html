@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Central do Aluno · Instala Comigo | A Virada IA</title>
+<meta name="description" content="Tudo do workshop Instala Comigo num lugar só: a aula gravada, a skill atualizada pra baixar, o passo a passo, a biblioteca de prompts completos e as dicas de ouro.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --bg:#F3EEE3; --bg-2:#ECE5D6; --card:#FBF9F3; --cream:#F4F3EF;
+    --ink:#14373C; --ink-2:#2C4F54; --green:#435D51;
+    --terra:#B06E4A; --terra-l:#C4835E; --terra-d:#985A3B;
+    --text:#233133; --muted:#6E7A75; --line:rgba(20,55,60,.16);
+    --anton:'Anton',sans-serif; --hank:'Hanken Grotesk',sans-serif;
+  }
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--hank);background:var(--bg);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  ::selection{background:var(--terra);color:#fff;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 20px;}
+  .kick{font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--terra);}
+
+  #bar{position:fixed;top:0;left:0;height:4px;width:0;background:var(--terra);z-index:99;transition:width .1s linear;}
+
+  /* HEADER */
+  header.top{position:sticky;top:0;z-index:50;background:rgba(243,238,227,.92);backdrop-filter:blur(8px);border-bottom:2px solid var(--ink);}
+  .top-inner{display:flex;align-items:center;justify-content:space-between;max-width:1000px;margin:0 auto;padding:13px 20px;}
+  .logo{font-family:var(--anton);font-size:1.05rem;text-transform:uppercase;letter-spacing:.02em;color:var(--ink);display:flex;align-items:center;gap:9px;}
+  .logo .tag{font-family:var(--hank);font-weight:700;font-size:.56rem;letter-spacing:.12em;color:var(--terra);border:1.5px solid var(--terra);padding:3px 9px;border-radius:100px;}
+  .top-nav{display:flex;gap:16px;font-size:.8rem;font-weight:700;}
+  .top-nav a:hover{color:var(--terra);}
+  @media(max-width:720px){.top-nav{display:none;}}
+
+  /* HERO */
+  .hero{position:relative;overflow:hidden;border-bottom:1.5px solid var(--line);}
+  .hero-glow{position:absolute;width:560px;height:560px;border-radius:50%;top:-280px;right:-180px;background:radial-gradient(circle,rgba(176,110,74,.14),transparent 62%);pointer-events:none;}
+  .hero .wrap{position:relative;z-index:2;padding:54px 20px 48px;}
+  .hero-eyebrow{display:inline-flex;align-items:center;gap:9px;margin-bottom:16px;flex-wrap:wrap;}
+  .hero-eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--terra);box-shadow:0 0 0 4px rgba(176,110,74,.18);}
+  .hero-eyebrow .sep{color:var(--line);}
+  .hero-eyebrow .data{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
+  .hero h1{font-family:var(--anton);font-weight:400;font-size:clamp(2.5rem,8.5vw,4.4rem);line-height:.92;text-transform:uppercase;color:var(--ink);max-width:16ch;}
+  .hero h1 .terra{color:var(--terra);}
+  .hero p.sub{margin-top:18px;font-size:1.08rem;font-weight:300;color:var(--ink-2);max-width:54ch;}
+  .hero p.sub b{font-weight:600;color:var(--ink);}
+  .hero-stats{display:flex;gap:30px;flex-wrap:wrap;margin-top:30px;}
+  .hero-stats .n{font-family:var(--anton);font-size:2rem;color:var(--ink);line-height:1;}
+  .hero-stats .n span{color:var(--terra);}
+  .hero-stats .l{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:5px;}
+
+  /* SECTIONS */
+  section.bloco{padding:46px 0;}
+  .sec-head{margin-bottom:24px;}
+  .sec-head .kick{display:block;margin-bottom:10px;}
+  .sec-head h2{font-family:var(--anton);font-weight:400;font-size:clamp(1.7rem,5.4vw,2.5rem);line-height:.98;text-transform:uppercase;color:var(--ink);}
+  .sec-head h2 .terra{color:var(--terra);}
+  .sec-head p{margin-top:10px;color:var(--ink-2);max-width:62ch;}
+  .sec-num{font-family:var(--anton);color:var(--terra);margin-right:8px;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  @media(max-width:720px){.grid2{grid-template-columns:1fr;}}
+
+  .ocard{background:var(--card);border:2px solid var(--ink);border-radius:16px;padding:22px;box-shadow:7px 7px 0 var(--green);}
+  .ocard h3{font-family:var(--anton);font-weight:400;font-size:1.25rem;text-transform:uppercase;color:var(--ink);line-height:1.05;margin-bottom:8px;}
+  .ocard p{font-size:.95rem;color:var(--ink-2);}
+  .ocard p b{color:var(--ink);}
+  .ocard.terra-card{box-shadow:7px 7px 0 var(--terra);}
+  .ocard.dark{background:var(--ink);border-color:var(--ink);box-shadow:7px 7px 0 var(--terra);}
+  .ocard.dark h3{color:#fff;}
+  .ocard.dark p{color:rgba(244,243,239,.82);}
+  .ocard.dark p b{color:#fff;}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:.8rem;letter-spacing:.04em;text-transform:uppercase;padding:14px 24px;border-radius:100px;cursor:pointer;border:none;transition:transform .14s,box-shadow .14s,background .2s;margin-top:14px;}
+  .btn-terra{background:var(--terra);color:#fff;box-shadow:4px 4px 0 rgba(20,55,60,.85);}
+  .btn-terra:hover{background:var(--terra-d);transform:translate(-2px,-2px);box-shadow:6px 6px 0 rgba(20,55,60,.85);}
+  .btn-ink{background:var(--ink);color:#fff;box-shadow:4px 4px 0 rgba(176,110,74,.6);}
+  .btn-ink:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 rgba(176,110,74,.6);}
+  .dark .btn-terra{box-shadow:4px 4px 0 rgba(0,0,0,.4);}
+
+  .pill-data{display:inline-block;background:var(--bg);border:1.5px solid var(--terra);border-radius:100px;padding:7px 16px;font-family:var(--anton);font-size:.85rem;letter-spacing:.03em;text-transform:uppercase;color:var(--terra-d);margin-top:12px;}
+  .badge-novo{display:inline-flex;align-items:center;gap:6px;background:var(--green);color:#fff;border-radius:100px;padding:5px 13px;font-size:.66rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;}
+
+  /* PASSOS */
+  .passos{counter-reset:passo;display:grid;gap:10px;margin-top:18px;}
+  .passo{display:flex;gap:14px;align-items:flex-start;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;}
+  .passo::before{counter-increment:passo;content:counter(passo);flex-shrink:0;width:30px;height:30px;border-radius:100px;background:var(--terra);color:#fff;font-family:var(--anton);font-size:.95rem;display:flex;align-items:center;justify-content:center;}
+  .passo p{font-size:.93rem;color:var(--ink-2);}
+  .passo p b{color:var(--ink);}
+  code{background:var(--bg-2);border:1px solid var(--line);border-radius:6px;padding:1px 7px;font-size:.86em;color:var(--ink);font-family:ui-monospace,Menlo,monospace;}
+
+  /* MÓDULOS (mapa da skill) */
+  .mods{display:grid;gap:10px;margin-top:8px;}
+  .mod{display:flex;gap:15px;align-items:flex-start;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:15px 17px;}
+  .mod .mn{flex-shrink:0;width:34px;height:34px;border-radius:10px;background:var(--ink);color:#fff;font-family:var(--anton);font-size:1rem;display:flex;align-items:center;justify-content:center;}
+  .mod.on .mn{background:var(--terra);}
+  .mod .mb h4{font-size:1rem;font-weight:800;color:var(--ink);margin-bottom:3px;}
+  .mod .mb p{font-size:.9rem;color:var(--ink-2);}
+
+  .magic{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px;}
+  @media(max-width:640px){.magic{grid-template-columns:1fr;}}
+  .magic .mcard{background:var(--ink);border-radius:16px;padding:20px 22px;box-shadow:6px 6px 0 var(--terra);}
+  .magic .mcard .ml{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--terra-l);margin-bottom:9px;display:block;}
+  .magic .mcard .mp{display:flex;align-items:center;justify-content:space-between;gap:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:11px 14px;}
+  .magic .mcard .mp b{color:#fff;font-size:1rem;}
+  .magic .mcard>p{color:rgba(244,243,239,.7);font-size:.85rem;margin-top:11px;}
+  .copy-mini{flex-shrink:0;background:var(--terra);color:#fff;border:none;border-radius:100px;padding:6px 13px;font-family:var(--hank);font-weight:800;font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:background .2s;}
+  .copy-mini:hover{background:var(--terra-d);}
+  .copy-mini.done{background:var(--green);}
+
+  /* COMANDOS */
+  .cmd-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  @media(max-width:720px){.cmd-grid{grid-template-columns:1fr;}}
+  .cmd{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;}
+  .cmd .c-txt b{display:block;font-size:.92rem;color:var(--ink);}
+  .cmd .c-txt span{font-size:.78rem;color:var(--muted);}
+  .copy{flex-shrink:0;background:var(--terra);color:#fff;border:none;border-radius:100px;padding:7px 15px;font-family:var(--hank);font-weight:800;font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:background .2s;}
+  .copy:hover{background:var(--terra-d);}
+  .copy.done{background:var(--green);}
+
+  /* PROMPTS */
+  .prompt-grupo{margin-bottom:34px;}
+  .prompt-grupo h3{font-family:var(--anton);font-weight:400;font-size:1.35rem;text-transform:uppercase;color:var(--ink);margin-bottom:6px;}
+  .prompt-grupo h3 .terra{color:var(--terra);}
+  .prompt-grupo>p{font-size:.93rem;color:var(--muted);margin-bottom:14px;max-width:66ch;}
+  .prompt{background:var(--card);border:1.5px solid var(--line);border-left:7px solid var(--terra);border-radius:12px;overflow:hidden;margin-bottom:14px;}
+  .prompt-head{display:flex;align-items:center;justify-content:space-between;gap:12px;background:rgba(176,110,74,.1);padding:10px 16px;}
+  .prompt-head .pt{font-weight:700;font-size:.86rem;color:var(--ink);}
+  .prompt-head .tool{flex-shrink:0;font-size:.6rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;padding:3px 9px;border-radius:100px;border:1.5px solid var(--ink);color:var(--ink);}
+  .prompt-head .tool.manus{border-color:var(--green);color:var(--green);}
+  .prompt-head .right{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+  .prompt pre{white-space:pre-wrap;font-family:var(--hank);font-size:.92rem;color:var(--text);padding:16px 18px;line-height:1.6;}
+
+  /* BLOCOS / DICAS */
+  .bloco-nota{border-radius:14px;padding:18px 22px;margin:22px 0;border:1.5px solid var(--line);}
+  .bloco-nota .bt{display:block;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:7px;}
+  .bloco-nota p{font-size:.95rem;line-height:1.62;}
+  .bloco-nota p+p{margin-top:9px;}
+  .bloco-nota b{color:var(--ink);}
+  .bn-dica{background:rgba(67,93,81,.08);border-left:5px solid var(--green);}
+  .bn-dica .bt{color:var(--green);}
+  .bn-atencao{background:rgba(176,110,74,.09);border-left:5px solid var(--terra);}
+  .bn-atencao .bt{color:var(--terra-d);}
+
+  .dicas{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media(max-width:720px){.dicas{grid-template-columns:1fr;}}
+  .dica{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:18px 20px;}
+  .dica .dn{font-family:var(--anton);font-size:1.05rem;color:var(--terra);}
+  .dica h4{font-size:1rem;font-weight:800;color:var(--ink);margin:6px 0 5px;}
+  .dica p{font-size:.9rem;color:var(--ink-2);line-height:1.6;}
+  .dica p b{color:var(--ink);}
+
+  /* SOCORRO */
+  .socorro-table{width:100%;border-collapse:collapse;margin-top:6px;font-size:.95rem;}
+  .socorro-table th{text-align:left;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--terra-d);padding:10px 14px;border-bottom:2px solid var(--line);}
+  .socorro-table td{padding:14px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.55;color:var(--ink-2);}
+  .socorro-table tr:last-child td{border-bottom:none;}
+  .socorro-table td:first-child{font-weight:700;color:var(--ink);width:36%;}
+  .socorro-cards{display:none;}
+  @media(max-width:640px){
+    .socorro-table{display:none;}
+    .socorro-cards{display:block;}
+    .socorro-card{background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:15px 17px;margin-bottom:11px;}
+    .socorro-card b{display:block;color:var(--ink);margin-bottom:5px;}
+    .socorro-card p{font-size:.92rem;color:var(--ink-2);line-height:1.55;}
+  }
+
+  /* FAIXA */
+  .faixa{background:var(--bg-2);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);padding:36px 0;}
+  .faixa .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+  .faixa h2{font-family:var(--anton);font-weight:400;font-size:clamp(1.4rem,4.6vw,2rem);text-transform:uppercase;color:var(--ink);line-height:1;}
+  .faixa h2 .terra{color:var(--terra);}
+  .faixa p{color:var(--ink-2);font-size:.95rem;margin-top:6px;max-width:52ch;}
+
+  /* CURSO */
+  .curso-banner{background:var(--ink);color:var(--cream);}
+  .curso-banner .wrap{padding:50px 20px;display:flex;align-items:center;justify-content:space-between;gap:26px;flex-wrap:wrap;}
+  .curso-banner .cb-text{flex:1;min-width:250px;}
+  .curso-banner .kick{color:var(--terra-l);display:block;margin-bottom:10px;}
+  .curso-banner h2{font-family:var(--anton);font-weight:400;font-size:clamp(1.6rem,5vw,2.4rem);text-transform:uppercase;color:#fff;line-height:1;margin-bottom:10px;}
+  .curso-banner h2 .terra{color:var(--terra-l);}
+  .curso-banner p{color:rgba(244,243,239,.72);font-weight:300;max-width:46ch;}
+  .curso-banner p b{color:#fff;font-weight:600;}
+
+  footer{background:var(--ink);color:rgba(244,243,239,.6);padding:34px 0;}
+  footer .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;}
+  footer .fb{font-family:var(--anton);text-transform:uppercase;font-size:1rem;color:#fff;}
+  footer a{color:var(--terra-l);font-weight:700;font-size:.85rem;}
+
+  .rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1);}
+  .rv.in{opacity:1;transform:none;}
+  @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none;}html{scroll-behavior:auto;}}
+</style>
+</head>
+<body>
+<div id="bar" aria-hidden="true"></div>
+
+<header class="top">
+  <div class="top-inner">
+    <span class="logo">Bruna Santanna<span class="tag">A VIRADA IA</span></span>
+    <nav class="top-nav">
+      <a href="#aula">A aula</a>
+      <a href="#skill">Baixar a skill</a>
+      <a href="#passo">Passo a passo</a>
+      <a href="#comandos">Comandos</a>
+      <a href="#prompts">Prompts</a>
+      <a href="#dicas">Dicas</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-eyebrow rv">
+      <span class="dot"></span>
+      <span class="kick">Workshop Instala Comigo</span>
+      <span class="sep">·</span>
+      <span class="data">Central do Aluno</span>
+    </div>
+    <h1 class="rv">Sua central <span class="terra">do sistema.</span></h1>
+    <p class="sub rv">Tudo pra montar (e rodar) o seu sistema de conteúdo, num lugar só: a
+    <b>aula gravada</b>, a <b>skill atualizada</b> pra baixar, o <b>passo a passo</b>, a
+    <b>biblioteca de prompts completos</b> e as <b>dicas de ouro</b>. Salva essa página nos favoritos.</p>
+    <div class="hero-stats rv">
+      <div><div class="n">1<span>×</span></div><div class="l">você monta, roda pra sempre</div></div>
+      <div><div class="n">1</div><div class="l">ideia vira 4 formatos</div></div>
+      <div><div class="n">20+</div><div class="l">prompts prontos</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- A AULA -->
+<section class="bloco" id="aula">
+  <div class="wrap">
+    <div class="grid2">
+      <div class="ocard dark rv">
+        <span class="kick" style="color:var(--terra-l);">Comece por aqui</span>
+        <h3 style="margin-top:8px;">A aula gravada</h3>
+        <p>O workshop completo, gravado, pra você assistir no seu ritmo e voltar <b>quantas vezes quiser</b>.
+        Fica na sua área de aluno do Kiwify (o mesmo login da compra).</p>
+        <a class="btn btn-terra" href="https://members.kiwify.com" target="_blank" rel="noopener">Assistir a aula →</a>
+      </div>
+      <div class="ocard terra-card rv">
+        <span class="kick">Ao vivo comigo</span>
+        <h3 style="margin-top:8px;">Encontro de dúvidas</h3>
+        <p>Um encontro ao vivo pra tirar <b>todas</b> as suas dúvidas da montagem, junto com quem tá
+        fazendo também. Anota na agenda:</p>
+        <span class="pill-data">Quinta, 30/07 · 19h (Brasília)</span>
+        <p style="margin-top:12px;font-size:.85rem;color:var(--muted);">O link da sala chega no seu e-mail no dia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 1. BAIXAR A SKILL -->
+<section class="bloco" id="skill" style="padding-top:6px;">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kick">Passo 1 · o kit do workshop</span>
+      <h2><span class="sec-num">1.</span>Baixe a sua <span class="terra">skill</span></h2>
+      <p>Skill é um "manual" que o Claude aprende. O kit traz a <b>Construtora</b> (a
+      <code>sistema-virada</code>, que monta o sistema inteiro com você, entrevistando e fazendo por você)
+      e a <b>Edição</b> (<code>edita-meu-video</code>, seu vídeo pronto conversando). Você só instala a
+      Construtora agora; a de edição a própria Construtora instala na hora certa.</p>
+    </div>
+
+    <div class="ocard rv" style="margin-bottom:18px;">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:6px;">
+        <h3 style="margin:0;">Kit completo <span style="color:var(--terra);">(recomendado)</span></h3>
+        <span class="badge-novo">● Atualizado · 21/07/2026</span>
+      </div>
+      <p>Um arquivo só com tudo: as duas skills na <b>versão mais nova</b> (com os módulos 0 a 8, o
+      dashboard e o radar) e o passo a passo de instalação (LEIA-ME). Se você baixou antes, baixe de novo:
+      essa é a versão atual.</p>
+      <a class="btn btn-terra" href="kit-instala-comigo.zip" download>Baixar o kit atualizado ↓</a>
+    </div>
+
+    <div class="passos rv">
+      <div class="passo"><p><b>Baixe e descompacte o kit.</b> Clique com o botão direito no arquivo baixado e escolha "Extrair tudo". Deixe a pasta num lugar fácil, tipo Downloads ou Desktop.</p></div>
+      <div class="passo"><p><b>Abra o app do Claude no computador</b> (não é o do navegador nem o do celular: é o aplicativo, com a conta paga). É ele que enxerga suas pastas e roda as skills.</p></div>
+      <div class="passo"><p><b>Peça pro Claude instalar por você:</b> escreva <code>instala a skill sistema-virada que está na minha pasta Downloads</code>. Ele acha, copia pro lugar certo (a pasta <code>.claude/skills</code>) e confirma. Se preferir na mão, é copiar a pasta <code>sistema-virada</code> inteira pra dentro de <code>.claude/skills</code>.</p></div>
+      <div class="passo"><p><b>Feche e abra o Claude de novo.</b> É isso que faz ele "enxergar" a skill nova.</p></div>
+      <div class="passo"><p><b>Confirme que instalou:</b> peça <code>lista as skills que você tem</code>. Se aparecer <code>sistema-virada</code>, deu certo. Agora é só a frase mágica: <code>vamos montar meu sistema</code>.</p></div>
+    </div>
+
+    <div class="bloco-nota bn-dica rv">
+      <span class="bt">→ Se travar em qualquer passo</span>
+      <p>Fala com o Claude como você falaria com uma pessoa: <b>"travei na instalação, me ajuda"</b> ou
+      <b>"não achei a pasta de skills, abre pra mim"</b>. Ele resolve com você, e faz por você o que der.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 2. PASSO A PASSO DA SKILL -->
+<section class="faixa" style="border-bottom:none;padding-bottom:6px;">
+  <div class="wrap" style="display:block;">
+    <div class="sec-head rv" style="margin-bottom:0;">
+      <span class="kick">Passo 2 · como a construtora funciona</span>
+      <h2><span class="sec-num">2.</span>O passo a passo <span class="terra">da skill</span></h2>
+      <p>Depois de instalada, a Construtora te leva do zero ao sistema funcionando, um módulo por vez, um
+      passo por vez. Você nunca fica perdido: ela pergunta uma coisa, você responde, ela faz a parte
+      técnica por você. Este é o caminho inteiro.</p>
+    </div>
+  </div>
+</section>
+<section class="bloco" style="padding-top:26px;" id="passo">
+  <div class="wrap">
+    <div class="mods rv">
+      <div class="mod on"><div class="mn">0</div><div class="mb"><h4>Preparo</h4><p>Ela cria a sua pasta <code>meu-sistema</code> e a gaveta de materiais. Você joga lá tudo que já tem: prints do Metricool, posts que bombaram, e-mails, textos seus.</p></div></div>
+      <div class="mod"><div class="mn">1</div><div class="mb"><h4>Definir o processo (o seu perfil)</h4><p>A entrevista. Ela descobre os seus pilares, o seu tom de voz real e o seu formato-âncora, e salva tudo num <code>perfil.md</code>. É aqui que o sistema ganha a SUA cara.</p></div></div>
+      <div class="mod"><div class="mn">2</div><div class="mb"><h4>Construir o motor</h4><p>Com o seu perfil na mão, ela gera o SEU motor de conteúdo (uma skill sua), instala e testa. Uma ideia entra, o Reel + carrossel + LinkedIn + blog saem.</p></div></div>
+      <div class="mod"><div class="mn">3</div><div class="mb"><h4>Edição de vídeo</h4><p>Ela instala a skill de edição e te mostra como deixar um vídeo pronto conversando: corte das partes paradas, legenda, título, ritmo.</p></div></div>
+      <div class="mod"><div class="mn">4</div><div class="mb"><h4>Expandir formatos</h4><p>Um input vira vários formatos de uma vez, com honestidade sobre o que cada rede pede.</p></div></div>
+      <div class="mod"><div class="mn">5</div><div class="mb"><h4>Distribuição (Metricool)</h4><p>Conecta o Metricool e agenda de verdade nas suas redes. Nada sobe sem o seu "sim".</p></div></div>
+      <div class="mod"><div class="mn">6</div><div class="mb"><h4>Dashboard</h4><p>Ela monta o seu painel: a fila do que vai sair, os resultados do que já saiu e o que está funcionando, tudo num lugar só.</p></div></div>
+      <div class="mod"><div class="mn">7</div><div class="mb"><h4>Newsletter</h4><p>No fim da semana, ela compila o rascunho da sua newsletter sozinha, a partir do que você produziu.</p></div></div>
+      <div class="mod"><div class="mn">8</div><div class="mb"><h4>Rotina do radar</h4><p>Ela deixa um radar rodando sozinho todo dia: você acorda com o painel atualizado e as pautas quentes prontas.</p></div></div>
+    </div>
+
+    <div class="magic">
+      <div class="mcard rv">
+        <span class="ml">Pra começar (ou recomeçar do zero)</span>
+        <div class="mp"><b>vamos montar meu sistema</b><button class="copy-mini" data-txt="vamos montar meu sistema">Copiar</button></div>
+        <p>A frase que liga tudo. A partir daí ela te entrevista, uma pergunta por vez.</p>
+      </div>
+      <div class="mcard rv">
+        <span class="ml">Se você parou no meio</span>
+        <div class="mp"><b>continuar o workshop</b><button class="copy-mini" data-txt="continuar o workshop">Copiar</button></div>
+        <p>Ela retoma exatamente de onde você parou. O progresso fica salvo sozinho num arquivo <code style="color:#eadfd0;background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);">progresso.md</code>, você nunca perde o que já andou.</p>
+      </div>
+    </div>
+
+    <div class="bloco-nota bn-dica rv" style="margin-top:22px;">
+      <span class="bt">→ Quer ainda mais detalhe?</span>
+      <p>Tem o <b>guia completo do workshop</b>, com cada módulo explicado por extenso, os diagramas e o
+      passo a passo do Metricool. <a href="guia" style="color:var(--terra-d);font-weight:700;border-bottom:1.5px solid var(--terra);">Abrir o guia completo →</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- 3. COMANDOS -->
+<section class="bloco" id="comandos" style="padding-top:6px;">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kick">O dia a dia</span>
+      <h2><span class="sec-num">3.</span>Os <span class="terra">comandos</span> do seu sistema</h2>
+      <p>Com o sistema montado, é isso que você fala com o Claude no dia a dia. Simples assim: fala a frase,
+      ele faz. Clique em COPIAR e cole numa conversa nova.</p>
+    </div>
+    <div class="cmd-grid rv">
+      <div class="cmd"><div class="c-txt"><b>vamos montar meu sistema</b><span>começa (ou recomeça) a montagem do zero</span></div><button class="copy" data-txt="vamos montar meu sistema">Copiar</button></div>
+      <div class="cmd"><div class="c-txt"><b>continuar o workshop</b><span>retoma exatamente de onde você parou</span></div><button class="copy" data-txt="continuar o workshop">Copiar</button></div>
+      <div class="cmd"><div class="c-txt"><b>roda o motor com o tema: [X]</b><span>uma ideia vira conteúdo pra todas as suas redes</span></div><button class="copy" data-txt="roda o motor com o tema: ">Copiar</button></div>
+      <div class="cmd"><div class="c-txt"><b>me dá pautas</b><span>5 pautas quentes do seu nicho, sem repetir o que já fez</span></div><button class="copy" data-txt="me dá pautas">Copiar</button></div>
+      <div class="cmd"><div class="c-txt"><b>edita esse vídeo</b><span>corte, legenda, título: seu vídeo pronto conversando</span></div><button class="copy" data-txt="edita esse vídeo">Copiar</button></div>
+      <div class="cmd"><div class="c-txt"><b>distribui esse vídeo: [link]</b><span>legenda por rede + agendamento (com o seu OK)</span></div><button class="copy" data-txt="distribui esse vídeo: ">Copiar</button></div>
+      <div class="cmd"><div class="c-txt"><b>analisa minha semana</b><span>seus números vs. sua meta + 1 recomendação prática</span></div><button class="copy" data-txt="analisa minha semana">Copiar</button></div>
+      <div class="cmd"><div class="c-txt"><b>atualiza meu dashboard</b><span>o painel sempre vivo, com resultados e meta</span></div><button class="copy" data-txt="atualiza meu dashboard">Copiar</button></div>
+      <div class="cmd"><div class="c-txt"><b>compila minha newsletter</b><span>o rascunho da semana, nascido do que você criou</span></div><button class="copy" data-txt="compila minha newsletter">Copiar</button></div>
+      <div class="cmd"><div class="c-txt"><b>guarda isso nos meus materiais</b><span>arquiva análises e textos novos na gaveta do sistema</span></div><button class="copy" data-txt="guarda isso nos meus materiais">Copiar</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. BIBLIOTECA DE PROMPTS -->
+<section class="bloco" id="prompts" style="padding-top:6px;">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kick">A biblioteca prometida</span>
+      <h2><span class="sec-num">4.</span>Biblioteca de <span class="terra">prompts</span></h2>
+      <p>Os textos completos pra copiar e colar. São os mesmos que eu uso. Troque o que estiver entre
+      colchetes pela sua informação, clique em COPIAR e cole na ferramenta indicada no cabeçalho de cada um.</p>
+    </div>
+
+    <!-- A · ANALISAR O PERFIL -->
+    <div class="prompt-grupo rv">
+      <h3>A · Analisar o seu perfil <span class="terra">(a matéria-prima do sistema)</span></h3>
+      <p>Rode uma (ou todas) e salve o resultado na sua pasta <b>meu-sistema/materiais/</b>. É isso que faz
+      o seu motor nascer com a SUA cara, e não com um molde genérico.</p>
+
+      <div class="prompt">
+        <div class="prompt-head"><span class="pt">Análise profunda do seu Instagram</span><div class="right"><span class="tool manus">Manus</span><button class="copy">Copiar</button></div></div>
+        <pre>Analise profundamente o meu perfil do Instagram @SEU-ARROBA-AQUI. Quero um relatório completo com:
+
+1. Meus 10 posts com melhor desempenho (com números).
+2. Os PADRÕES dos meus Reels que performam: como eles abrem (o tipo de gancho), a estrutura do roteiro, a duração média e o ritmo.
+3. A estrutura dos meus carrosséis que funcionam: quantos slides, como abrem, como fecham.
+4. Meus pilares de conteúdo: os temas que se repetem nos posts que dão certo.
+5. Meu tom de voz, com 5 frases reais minhas como exemplo.
+6. Meus melhores dias e horários de postagem.
+7. O que eu deveria fazer MAIS, e o que deveria parar de fazer.
+
+Entregue como um relatório organizado, porque eu vou salvar esse arquivo pra alimentar o meu sistema de conteúdo.</pre>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head"><span class="pt">Análise dos seus melhores posts</span><div class="right"><span class="tool">Claude</span><button class="copy">Copiar</button></div></div>
+        <pre>Vou colar abaixo os meus 3 a 5 posts que mais performaram. Analise e me devolva:
+1. Os temas que se repetem (meus pilares de conteúdo).
+2. Meu tom de voz, citando 2 a 3 frases minhas reais como exemplo.
+3. O padrão do que funciona: como esses posts abrem, o formato deles, por que você acha que engajaram.
+4. O formato que parece ser meu ponto forte (Reel, carrossel ou texto).
+
+Posts:
+[COLE AQUI OS SEUS POSTS]</pre>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head"><span class="pt">Descobrir o seu tom de voz pelos seus textos</span><div class="right"><span class="tool">Claude</span><button class="copy">Copiar</button></div></div>
+        <pre>Vou colar abaixo textos que EU mesmo(a) escrevi no dia a dia (e-mails pra clientes, mensagens, textos do meu site). Analise como eu escrevo de verdade e me devolva:
+1. Meu tom de voz descrito em 2 a 3 frases.
+2. As palavras e expressões que eu uso muito.
+3. 5 frases minhas que representam bem o meu jeito (pra servirem de exemplo de tom).
+
+Textos:
+[COLE AQUI OS SEUS TEXTOS]</pre>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head"><span class="pt">Ler os seus números (com o Metricool conectado)</span><div class="right"><span class="tool">Claude</span><button class="copy">Copiar</button></div></div>
+        <pre>Puxa do meu Metricool os meus últimos 30 dias e me faz um raio-x:
+1. Meus 5 melhores posts, com os números de cada um.
+2. O formato que mais rende pra mim (Reel, carrossel, foto).
+3. Meu melhor dia e horário pra postar.
+4. Um padrão do que funciona comigo, em 1 frase.
+
+No fim, salva esse resumo na minha pasta meu-sistema/materiais/ com um nome claro, porque eu quero usar isso pra afinar o meu sistema.</pre>
+      </div>
+    </div>
+
+    <!-- B · CRIAR CONTEÚDO -->
+    <div class="prompt-grupo rv">
+      <h3>B · Criar conteúdo <span class="terra">(o motor no modo profissional)</span></h3>
+      <p>O comando curto "roda o motor" já funciona. Mas quando você dá contexto e objetivo, o resultado
+      sobe de nível. Estes são os prompts que fazem o motor entregar o melhor.</p>
+
+      <div class="prompt">
+        <div class="prompt-head"><span class="pt">Rodar o motor (do jeito profissional)</span><div class="right"><span class="tool">Claude</span><button class="copy">Copiar</button></div></div>
+        <pre>Roda o motor com o tema: [seu tema].
+Contexto: essa semana eu quero atrair [tipo de cliente].
+Objetivo desse conteúdo: [salvamentos / leads / vendas].
+Palavra-chave do CTA: [PALAVRA].
+Me entrega as 4 saídas (Reel, carrossel, LinkedIn e blog) e no final me diz qual gancho você testaria primeiro e por quê.</pre>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head"><span class="pt">Pedir pautas estratégicas</span><div class="right"><span class="tool">Claude</span><button class="copy">Copiar</button></div></div>
+        <pre>Me dá 5 pautas com base no meu perfil e na minha base de conteúdo: 2 de continuação do que já performou, 2 sobre dores do meu público que eu ainda não cobri e 1 de opinião/posicionamento pra gerar conversa. Pra cada uma: título, gancho pronto e palavra-chave do CTA. No fim, me pergunta se eu quero que você rode o motor com alguma delas.</pre>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head"><span class="pt">Transformar um texto que eu já tenho</span><div class="right"><span class="tool">Claude</span><button class="copy">Copiar</button></div></div>
+        <pre>Tenho esse texto/ideia já escrito: [COLE AQUI]. Roda o motor em cima dele: transforma no meu Reel-âncora + carrossel + post de LinkedIn, no meu tom, sem perder a essência. Só adapta o formato de cada rede.</pre>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head"><span class="pt">Gerar 8 ganchos pra um Reel</span><div class="right"><span class="tool">Claude</span><button class="copy">Copiar</button></div></div>
+        <pre>Me dá 8 ganchos diferentes pros 3 primeiros segundos de um Reel sobre [tema], todos no meu tom. Cada um com um ângulo diferente: dor, curiosidade, número, contra-intuitivo, história, promessa, pergunta, erro comum. No fim, me diz qual você apostaria primeiro e por quê.</pre>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head"><span class="pt">Deixar um roteiro mais forte</span><div class="right"><span class="tool">Claude</span><button class="copy">Copiar</button></div></div>
+        <pre>Esse é o meu roteiro de Reel: [COLE AQUI]. Deixa ele mais forte sem descaracterizar o meu jeito: um gancho que prende nos 3 primeiros segundos, corta o que está sobrando, e um CTA claro no fim com a palavra [PALAVRA]. Me mostra a versão nova e me explica em 3 tópicos o que você mudou.</pre>
+      </div>
+    </div>
+
+    <!-- C · DISTRIBUIR -->
+    <div class="prompt-grupo rv">
+      <h3>C · Distribuir <span class="terra">nas redes</span></h3>
+      <p>Gravou o Reel? Agora ele aparece em todas as redes de uma vez, sem você postar uma por uma. Regra
+      de ouro: o Claude sempre te mostra o preview e espera o seu "sim" antes de agendar.</p>
+
+      <div class="prompt">
+        <div class="prompt-head"><span class="pt">Distribuir um vídeo nas 4 redes</span><div class="right"><span class="tool">Claude</span><button class="copy">Copiar</button></div></div>
+        <pre>Distribui esse vídeo nas minhas redes: [link do Dropbox terminando em dl=1].
+Tema do vídeo em 1 frase: [tema].
+Sugere o melhor horário de cada rede com base no meu Metricool, adapta a legenda pra cada uma (YouTube com título e #Shorts, Threads em tom de conversa sem lista de hashtag) e me mostra o preview completo de tudo antes. Nada sobe sem o meu OK.</pre>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head"><span class="pt">Preparar o vídeo (converter e criar o link)</span><div class="right"><span class="tool">Claude</span><button class="copy">Copiar</button></div></div>
+        <pre>Meu vídeo está em .mov e não sobe no Metricool. Converte pra mp4 pra mim e me lembra do jeito mais fácil de colocar num link que o Metricool aceita (Dropbox com o final do link trocado de dl=0 pra dl=1).</pre>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head"><span class="pt">Descobrir os melhores horários da semana</span><div class="right"><span class="tool">Claude</span><button class="copy">Copiar</button></div></div>
+        <pre>Olha o meu Metricool e me diz o melhor horário pra postar essa semana em cada rede: Instagram, TikTok, YouTube e Threads. Me explica em 1 frase por que cada horário.</pre>
+      </div>
+    </div>
+
+    <!-- D · MEDIR E CRESCER -->
+    <div class="prompt-grupo rv">
+      <h3>D · Medir e <span class="terra">crescer</span></h3>
+      <p>O sistema não é só criar: é olhar o que funcionou e ajustar. Estes prompts fecham o ciclo.</p>
+
+      <div class="prompt">
+        <div class="prompt-head"><span class="pt">Atualizar o dashboard com análise</span><div class="right"><span class="tool">Claude</span><button class="copy">Copiar</button></div></div>
+        <pre>Atualiza meu dashboard: puxa do Metricool os meus últimos 30 dias, calcula a minha média de views, marca o que ficou 30% acima ou abaixo, e me diz em 3 frases o que os números sugerem que eu faça MAIS e o que eu devo parar de fazer.</pre>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head"><span class="pt">Analisar a minha semana vs. a meta</span><div class="right"><span class="tool">Claude</span><button class="copy">Copiar</button></div></div>
+        <pre>Analisa a minha semana: puxa os meus resultados do Metricool, compara com a minha meta de 90 dias, me diz se eu estou no caminho e quanto falta, e fecha com 1 recomendação prática do que dobrar a aposta essa semana. Atualiza o dashboard no fim.</pre>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head"><span class="pt">Compilar a newsletter da semana</span><div class="right"><span class="tool">Claude</span><button class="copy">Copiar</button></div></div>
+        <pre>Compila a minha newsletter da semana a partir da minha base de conteúdo: 2 opções de assunto (uma de curiosidade, uma direta), uma abertura curta com uma história minha da semana, o melhor conteúdo que eu postei, 1 dica prática inédita (que eu não postei em rede nenhuma) e um convite pro [seu produto ou serviço]. No meu tom, no máximo 400 palavras.</pre>
+      </div>
+    </div>
+
+    <!-- E · DESTRAVAR -->
+    <div class="prompt-grupo rv">
+      <h3>E · Destravar <span class="terra">(quando emperrar)</span></h3>
+
+      <div class="prompt">
+        <div class="prompt-head"><span class="pt">Editar no estilo de uma referência</span><div class="right"><span class="tool">Claude</span><button class="copy">Copiar</button></div></div>
+        <pre>Vi um Reel que eu amei e quero o meu vídeo nesse estilo. A referência é essa: [LINK OU DESCRIÇÃO DO REEL]. O meu vídeo está aqui: [ARQUIVO OU LINK]. Analisa o que faz a referência funcionar (ritmo, cortes, legendas, título) e edita o meu vídeo nessa pegada.</pre>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head"><span class="pt">Refazer o meu perfil</span><div class="right"><span class="tool">Claude</span><button class="copy">Copiar</button></div></div>
+        <pre>Refazer meu perfil: me mostra o que você anotou de mim pergunta por pergunta, eu confirmo ou corrijo cada uma, e no final você regenera o meu motor com o perfil novo.</pre>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head"><span class="pt">Socorro universal (quando você não sabe o que perguntar)</span><div class="right"><span class="tool">Claude</span><button class="copy">Copiar</button></div></div>
+        <pre>Travei na montagem do meu sistema de conteúdo do workshop Instala Comigo (da Bruna Santanna). O que aconteceu foi: [DESCREVA EM 1 FRASE O QUE TRAVOU]. Me ajuda a resolver, me guiando um passo de cada vez, e faz por mim o que você conseguir fazer.</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. DICAS DE OURO -->
+<section class="bloco" id="dicas" style="padding-top:6px;">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kick">O que separa o bom do genérico</span>
+      <h2><span class="sec-num">5.</span>Dicas <span class="terra">de ouro</span></h2>
+      <p>São essas oito coisas que fazem o seu sistema sair com a sua voz, e não com cara de robô. Vale a
+      pena ler antes de começar.</p>
+    </div>
+    <div class="dicas rv">
+      <div class="dica"><div class="dn">01</div><h4>Capricha na entrevista</h4><p>A qualidade do motor depende inteirinha das suas respostas. Responde como se contasse do seu negócio pra uma amiga num café: <b>sem filtro corporativo</b>. Quanto mais real, mais o conteúdo sai com a sua voz.</p></div>
+      <div class="dica"><div class="dn">02</div><h4>Fuja da resposta vaga</h4><p>"Meu público é todo mundo" e "meu tom é normal" não servem. Sempre que travar, puxe um exemplo real: <b>um post seu que bombou, uma frase que você diria de verdade</b>. Vago que entra vira conteúdo de robô que sai.</p></div>
+      <div class="dica"><div class="dn">03</div><h4>Uma coisa por vez</h4><p>Deixe o Claude te guiar passo a passo, sem pressa. Se quiser acelerar, peça <b>"pode me mandar as perguntas em blocos de 3 ou 4"</b>. Você escolhe o ritmo.</p></div>
+      <div class="dica"><div class="dn">04</div><h4>Materiais primeiro</h4><p>Antes de qualquer análise, jogue tudo que você já tem na pasta <code>materiais/</code>: prints do Metricool, posts que performaram, e-mails, sua bio. <b>Quanto mais matéria-prima, menos ele precisa adivinhar.</b></p></div>
+      <div class="dica"><div class="dn">05</div><h4>Vídeo: mp4 e dl=1</h4><p>Vídeo de iPhone sai em <code>.mov</code> e não sobe: peça <b>"converte pra mp4"</b>. E no link do Dropbox, troque o final <code>dl=0</code> por <code>dl=1</code> pra virar link de download.</p></div>
+      <div class="dica"><div class="dn">06</div><h4>Nada vai pro ar sem o seu OK</h4><p>O Claude <b>sempre</b> te mostra o preview (legenda, redes, horário) e espera o seu "sim" antes de agendar qualquer coisa. Você está no controle o tempo todo.</p></div>
+      <div class="dica"><div class="dn">07</div><h4>Travou? "continuar o workshop"</h4><p>Essa frase retoma exatamente de onde você parou. O seu progresso fica salvo sozinho, <b>você nunca perde o que já andou</b>. Pode fechar e voltar amanhã.</p></div>
+      <div class="dica"><div class="dn">08</div><h4>Não crie do zero, rode o motor</h4><p>Toda semana: 1 Reel vira 4 formatos + o rascunho da newsletter + uma página de blog. <b>Você grava uma vez, o sistema multiplica.</b> É pra isso que ele existe.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCORRO -->
+<section class="bloco" style="padding-top:6px;" id="socorro">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kick">Troubleshooting</span>
+      <h2>Travou? <span class="terra">Respira.</span></h2>
+      <p>Quase tudo cai num destes cinco casos, e cada um tem uma saída rápida.</p>
+    </div>
+    <div class="rv">
+      <table class="socorro-table">
+        <thead><tr><th>O problema</th><th>O que fazer</th></tr></thead>
+        <tbody>
+          <tr><td>O Claude não achou a skill</td><td>Confira se a pasta <code>sistema-virada</code> inteira está dentro da pasta de skills, e feche e abra o Claude de novo. Peça <code>lista as skills que você tem</code> pra checar.</td></tr>
+          <tr><td>Travei no meio da montagem</td><td>Fala pro Claude: <code>continuar o workshop</code>. Ele retoma de onde você parou, porque o progresso fica salvo no <code>progresso.md</code>.</td></tr>
+          <tr><td>O Metricool não aceitou meu vídeo</td><td>Provavelmente é <code>.mov</code>. Peça <code>converte esse vídeo pra mp4</code> e tente de novo. Confira também se o link do Dropbox termina em <code>dl=1</code>.</td></tr>
+          <tr><td>Não sei o que postar</td><td>Peça: <code>me dá 5 pautas com base no meu perfil</code>. Ele usa o que já sabe de você pra sugerir temas.</td></tr>
+          <tr><td>Quero refazer a entrevista</td><td>Cole o prompt <b>Refazer o meu perfil</b> (grupo E, ali em cima). Ele mostra o que anotou, pergunta por pergunta, e regenera o motor.</td></tr>
+        </tbody>
+      </table>
+      <div class="socorro-cards">
+        <div class="socorro-card"><b>O Claude não achou a skill</b><p>Confira se a pasta <code>sistema-virada</code> inteira está dentro da pasta de skills, e feche e abra o Claude de novo. Peça <code>lista as skills que você tem</code>.</p></div>
+        <div class="socorro-card"><b>Travei no meio</b><p>Fala pro Claude: <code>continuar o workshop</code>. Ele retoma de onde você parou.</p></div>
+        <div class="socorro-card"><b>O Metricool não aceitou meu vídeo</b><p>Provavelmente é <code>.mov</code>. Peça <code>converte esse vídeo pra mp4</code>. Confira se o link do Dropbox termina em <code>dl=1</code>.</p></div>
+        <div class="socorro-card"><b>Não sei o que postar</b><p>Peça: <code>me dá 5 pautas com base no meu perfil</code>.</p></div>
+        <div class="socorro-card"><b>Quero refazer a entrevista</b><p>Cole o prompt <b>Refazer o meu perfil</b> (grupo E).</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAIXA SOCORRO HUMANO -->
+<section class="faixa">
+  <div class="wrap" style="display:block;">
+    <h2>Ainda travado? <span class="terra">Me chama.</span></h2>
+    <p>Primeiro fala com o Claude ("travei, me ajuda"). Se não resolver, me chama: responde qualquer
+    e-mail meu que eu te ajudo. E tem o encontro ao vivo <b>dia 30/07 às 19h</b> pra destravar tudo junto.</p>
+  </div>
+</section>
+
+<!-- CURSO -->
+<section class="curso-banner">
+  <div class="wrap">
+    <div class="cb-text">
+      <span class="kick">Próximo passo</span>
+      <h2>Isso foi o <span class="terra">sistema</span>.</h2>
+      <p>A profundidade vem no <b>Claude com Profundidade</b>: envio automático da newsletter, blog no ar,
+      e muito mais. A Turma 1 começa <b>17/08</b>.</p>
+    </div>
+    <a href="/curso" class="btn btn-terra">Quero o curso →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="fb">A Virada IA · Bruna Santanna</span>
+    <span style="font-size:.82rem;">Não é mágica. É a ferramenta certa, do jeito certo. ·
+    <a href="https://instagram.com/brusantanna.ai" target="_blank" rel="noopener">@brusantanna.ai</a></span>
+  </div>
+</footer>
+
+<script>
+  // barra de leitura
+  var bar=document.getElementById('bar');
+  addEventListener('scroll',function(){var h=document.documentElement;bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';},{passive:true});
+
+  // reveal
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+  setTimeout(function(){document.querySelectorAll('.rv:not(.in)').forEach(function(el){el.classList.add('in');});},2500);
+
+  // copiar (data-txt ou o <pre> do bloco)
+  document.querySelectorAll('.copy,.copy-mini').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var txt=btn.getAttribute('data-txt');
+      if(!txt){var pre=btn.closest('.prompt').querySelector('pre');txt=pre?pre.innerText.trim():'';}
+      var done=function(){var o=btn.textContent;btn.textContent='Copiado!';btn.classList.add('done');setTimeout(function(){btn.textContent=o;btn.classList.remove('done');},1700);};
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done).catch(done);}
+      else{var t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(t);done();}
+    });
+  });
+</script>
+</body>
+</html>
