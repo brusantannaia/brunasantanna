@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://brunasantanna.com/</loc><lastmod>2026-07-03</lastmod><priority>1.0</priority></url>
+  <url><loc>https://brunasantanna.com/</loc><lastmod>2026-07-22</lastmod><priority>1.0</priority></url>
   <url><loc>https://brunasantanna.com/biblioteca</loc><lastmod>2026-07-03</lastmod><priority>0.9</priority></url>
   <url><loc>https://brunasantanna.com/claude</loc><lastmod>2026-07-03</lastmod><priority>0.9</priority></url>
-  <url><loc>https://brunasantanna.com/curso</loc><lastmod>2026-07-03</lastmod><priority>0.9</priority></url>
+  <url><loc>https://brunasantanna.com/curso</loc><lastmod>2026-07-22</lastmod><priority>0.9</priority></url>
   <url><loc>https://brunasantanna.com/treinamentos</loc><lastmod>2026-07-03</lastmod><priority>0.9</priority></url>
   <url><loc>https://brunasantanna.com/quem-sou</loc><lastmod>2026-07-03</lastmod><priority>0.8</priority></url>
   <url><loc>https://brunasantanna.com/mentoria</loc><lastmod>2026-07-03</lastmod><priority>0.8</priority></url>
-  <url><loc>https://brunasantanna.com/comece</loc><lastmod>2026-07-03</lastmod><priority>0.8</priority></url>
+  <url><loc>https://brunasantanna.com/comece</loc><lastmod>2026-07-22</lastmod><priority>0.8</priority></url>
   <url><loc>https://brunasantanna.com/hackathon-de-ia</loc><lastmod>2026-07-03</lastmod><priority>0.8</priority></url>
   <url><loc>https://brunasantanna.com/formacao-claude-empresas</loc><lastmod>2026-07-04</lastmod><priority>0.8</priority></url>
   <url><loc>https://brunasantanna.com/treinamento-de-ia-para-empresas</loc><lastmod>2026-07-03</lastmod><priority>0.8</priority></url>
@@ -29,5 +29,5 @@
   <url><loc>https://brunasantanna.com/guia-economizar-uso</loc><lastmod>2026-07-03</lastmod><priority>0.8</priority></url>
   <url><loc>https://brunasantanna.com/guia-claude</loc><lastmod>2026-07-03</lastmod><priority>0.7</priority></url>
   <url><loc>https://brunasantanna.com/prompts-claude</loc><lastmod>2026-07-03</lastmod><priority>0.6</priority></url>
-  <url><loc>https://brunasantanna.com/sistema</loc><lastmod>2026-07-09</lastmod><priority>0.9</priority></url>
+  <url><loc>https://brunasantanna.com/sistema</loc><lastmod>2026-07-22</lastmod><priority>0.9</priority></url>
 </urlset>
