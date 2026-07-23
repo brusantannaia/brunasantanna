@@ -29,95 +29,124 @@
             --ink:#14373C; --ink-2:#2C4F54; --green:#435D51;
             --terra:#B06E4A; --terra-l:#C4835E; --terra-d:#985A3B;
             --text:#233133; --muted:#6E7A75; --line:rgba(20,55,60,0.14);
-            --cream:#F4F3EF;
+            --cream:#F4F3EF; --wa:#25908A;
         }
         html { scroll-behavior: smooth; }
         body {
             font-family:'Hanken Grotesk',sans-serif; color:var(--text); line-height:1.55;
             -webkit-font-smoothing:antialiased; overflow-x:hidden;
             background:var(--bg);
-            background-image:radial-gradient(circle at 15% 0%, rgba(176,110,74,0.08), transparent 42%),
-                             radial-gradient(circle at 90% 12%, rgba(67,93,81,0.07), transparent 40%);
+            background-image:radial-gradient(circle at 12% -2%, rgba(176,110,74,0.09), transparent 40%),
+                             radial-gradient(circle at 92% 10%, rgba(67,93,81,0.07), transparent 38%);
             background-attachment:fixed;
         }
         img { max-width:100%; display:block; }
         a { color:inherit; text-decoration:none; }
         ::selection { background:var(--terra); color:#fff; }
 
-        .shell { max-width:500px; margin:0 auto; padding:0 22px 70px; }
+        .shell { max-width:500px; margin:0 auto; padding:0 22px 72px; }
 
         /* ---------- MINI-HEADER ---------- */
-        .topbar { display:flex; align-items:center; justify-content:center; padding:24px 0 6px; }
+        .topbar { display:flex; align-items:center; justify-content:center; padding:24px 0 4px; }
         .topbar a { font-family:'Anton',sans-serif; font-size:1.05rem; letter-spacing:.02em; text-transform:uppercase; color:var(--ink); display:inline-flex; align-items:center; }
         .topbar .brand-tag { font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:.54rem; letter-spacing:.13em; color:var(--terra); border:1.5px solid var(--terra); padding:3px 8px; border-radius:100px; margin-left:9px; }
 
         /* ---------- PERFIL ---------- */
         .profile { text-align:center; padding:26px 0 8px; }
-        .avatar { width:118px; height:118px; border-radius:50%; margin:0 auto 20px; overflow:hidden; border:3px solid var(--ink); box-shadow:7px 7px 0 var(--terra); background:linear-gradient(135deg,#1d4a4f,#14373C 55%,#0e2a2e); position:relative; }
-        .avatar img { position:relative; z-index:2; width:100%; height:100%; object-fit:cover; }
-        .avatar .fallback { position:absolute; z-index:1; inset:0; display:flex; align-items:center; justify-content:center; font-family:'Anton',sans-serif; font-size:2.4rem; color:rgba(245,243,239,.9); }
-        .profile h1 { font-family:'Anton',sans-serif; font-weight:400; font-size:2.1rem; text-transform:uppercase; color:var(--ink); line-height:.98; letter-spacing:.01em; }
+        .avatar { width:124px; height:124px; border-radius:50%; margin:0 auto 20px; overflow:hidden; border:3px solid var(--ink); box-shadow:7px 7px 0 var(--terra); background:linear-gradient(135deg,#1d4a4f,#14373C 55%,#0e2a2e); position:relative; }
+        .avatar img { position:relative; z-index:2; width:100%; height:100%; object-fit:cover; object-position:center 18%; }
+        .avatar .fallback { position:absolute; z-index:1; inset:0; display:flex; align-items:center; justify-content:center; font-family:'Anton',sans-serif; font-size:2.6rem; color:rgba(245,243,239,.9); }
+        .profile h1 { font-family:'Anton',sans-serif; font-weight:400; font-size:2.15rem; text-transform:uppercase; color:var(--ink); line-height:.98; letter-spacing:.01em; }
         .profile .role { font-size:.68rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--terra); margin-top:10px; }
-        .profile .bio { font-size:.98rem; color:var(--ink-2); font-weight:400; margin-top:14px; max-width:32ch; margin-left:auto; margin-right:auto; }
+        .profile .bio { font-size:.98rem; color:var(--ink-2); font-weight:400; margin-top:14px; max-width:33ch; margin-left:auto; margin-right:auto; }
         .profile .bio b { color:var(--ink); font-weight:700; }
 
         /* ---------- SOCIAIS ---------- */
-        .social { display:flex; justify-content:center; gap:12px; margin:22px 0 6px; }
-        .social a { width:46px; height:46px; border-radius:50%; background:var(--card); border:1.5px solid var(--ink); display:flex; align-items:center; justify-content:center; color:var(--ink); transition:transform .15s, background .2s, color .2s; }
+        .social { display:flex; justify-content:center; gap:12px; margin:22px 0 4px; }
+        .social a { width:47px; height:47px; border-radius:50%; background:var(--card); border:1.5px solid var(--ink); display:flex; align-items:center; justify-content:center; color:var(--ink); transition:transform .15s, background .2s, color .2s; }
         .social a:hover { transform:translateY(-3px); background:var(--ink); color:#fff; }
         .social svg { width:21px; height:21px; }
 
         /* ---------- LABEL DE SEÇÃO (editorial) ---------- */
-        .grp { display:flex; align-items:center; gap:14px; margin:38px 4px 20px; }
-        .grp::before, .grp::after { content:''; flex:1; height:1.5px; background:var(--line); }
-        .grp span { font-family:'Anton',sans-serif; font-size:.86rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink); white-space:nowrap; }
+        .grp { display:flex; align-items:center; gap:13px; margin:40px 2px 20px; }
+        .grp .tri { flex-shrink:0; color:var(--terra); font-size:.7rem; }
+        .grp span { font-family:'Anton',sans-serif; font-size:.92rem; letter-spacing:.13em; text-transform:uppercase; color:var(--ink); white-space:nowrap; }
+        .grp::after { content:''; flex:1; height:1.5px; background:var(--line); }
 
-        /* ---------- CARD DE CURSO (destaque grande) ---------- */
+        /* ---------- CARD DE CURSO (capa tipográfica, sem preço) ---------- */
         .course { position:relative; display:block; border-radius:22px; overflow:hidden; margin-bottom:20px; border:2.5px solid var(--ink); box-shadow:7px 7px 0 var(--ink); transition:transform .16s ease, box-shadow .16s ease; -webkit-tap-highlight-color:transparent; }
         .course:active { transform:translate(3px,3px); box-shadow:4px 4px 0 var(--ink); }
         @media (hover:hover){ .course:hover { transform:translate(-2px,-2px); box-shadow:10px 10px 0 var(--ink); } }
-        .course .thumb { height:132px; position:relative; overflow:hidden; background:var(--ink); }
-        .course .thumb img { width:100%; height:100%; object-fit:cover; opacity:.9; }
-        .course .thumb::after { content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(20,55,60,0) 30%, rgba(20,55,60,.72) 100%); }
-        .course .badge { position:absolute; top:13px; left:13px; z-index:2; display:inline-flex; align-items:center; gap:6px; font-size:.6rem; font-weight:800; letter-spacing:.09em; text-transform:uppercase; color:#fff; background:var(--terra); padding:6px 12px; border-radius:100px; box-shadow:2px 2px 0 rgba(0,0,0,.25); }
-        .course .thumb-title { position:absolute; left:16px; right:16px; bottom:12px; z-index:2; font-family:'Anton',sans-serif; font-weight:400; font-size:1.55rem; line-height:1; text-transform:uppercase; color:#fff; letter-spacing:.005em; }
-        .course .body { background:var(--card); padding:18px 18px 20px; }
-        .course .desc { font-size:.92rem; color:var(--ink-2); line-height:1.5; }
-        .course .desc b { color:var(--ink); }
-        .course .chips { display:flex; flex-wrap:wrap; gap:6px; margin:13px 0 15px; }
-        .course .chips span { font-size:.68rem; font-weight:700; letter-spacing:.02em; color:var(--green); background:rgba(67,93,81,.09); border:1px solid rgba(67,93,81,.22); padding:5px 10px; border-radius:100px; }
-        .course .foot { display:flex; align-items:center; justify-content:space-between; gap:12px; }
-        .course .price { line-height:1.05; }
-        .course .price .big { font-family:'Anton',sans-serif; font-size:1.35rem; color:var(--ink); text-transform:uppercase; }
-        .course .price .big b { color:var(--terra); font-weight:400; }
-        .course .price .sub { font-size:.72rem; color:var(--muted); font-weight:600; margin-top:2px; }
-        .course .go { flex-shrink:0; display:inline-flex; align-items:center; gap:7px; background:var(--terra); color:#fff; font-family:'Hanken Grotesk',sans-serif; font-weight:800; font-size:.78rem; letter-spacing:.03em; text-transform:uppercase; padding:12px 18px; border-radius:100px; transition:background .2s; }
+        .course .cover { position:relative; overflow:hidden; padding:22px 20px 20px; }
+        .course .cover .glow { position:absolute; width:280px; height:280px; border-radius:50%; top:-150px; right:-110px; pointer-events:none; }
+        .course .badge { position:relative; z-index:2; display:inline-flex; align-items:center; gap:7px; font-size:.6rem; font-weight:800; letter-spacing:.09em; text-transform:uppercase; padding:6px 12px; border-radius:100px; margin-bottom:14px; }
+        .course .badge .dot { width:6px; height:6px; border-radius:50%; }
+        .course .ctitle { position:relative; z-index:2; font-family:'Anton',sans-serif; font-weight:400; font-size:2rem; line-height:.94; text-transform:uppercase; letter-spacing:.005em; }
+        .course .ctitle .tt { display:block; font-size:.62em; opacity:.85; }
+        .course .body { padding:17px 20px 20px; }
+        .course .desc { font-size:.94rem; line-height:1.5; }
+        .course .desc b { font-weight:700; }
+        .course .chips { display:flex; flex-wrap:wrap; gap:6px; margin:14px 0 16px; }
+        .course .chips span { font-size:.68rem; font-weight:700; letter-spacing:.02em; padding:5px 10px; border-radius:100px; }
+        .course .go { display:flex; align-items:center; justify-content:space-between; gap:10px; font-family:'Hanken Grotesk',sans-serif; font-weight:800; font-size:.82rem; letter-spacing:.03em; text-transform:uppercase; padding:13px 18px; border-radius:100px; background:var(--terra); color:#fff; transition:background .2s; }
         .course:hover .go { background:var(--terra-d); }
-        /* variante escura (Claude 2.0) */
+        .course .go .arw { font-family:'Anton',sans-serif; }
+
+        /* variante ESCURA (Claude 2.0) */
+        .course.dark { background:var(--ink); }
+        .course.dark .cover .glow { background:radial-gradient(circle, rgba(196,131,94,.4), transparent 65%); }
+        .course.dark .badge { color:#fff; background:var(--terra); }
+        .course.dark .badge .dot { background:#fff; }
+        .course.dark .ctitle { color:#fff; }
         .course.dark .body { background:var(--ink); }
         .course.dark .desc { color:rgba(244,243,239,.82); }
         .course.dark .desc b { color:#fff; }
-        .course.dark .chips span { color:var(--terra-l); background:rgba(196,131,94,.12); border-color:rgba(196,131,94,.3); }
-        .course.dark .price .big { color:#fff; }
-        .course.dark .price .sub { color:rgba(244,243,239,.55); }
+        .course.dark .chips span { color:var(--terra-l); background:rgba(196,131,94,.14); border:1px solid rgba(196,131,94,.3); }
 
-        /* ---------- CARD SIMPLES (grátis / empresa) ---------- */
-        .link { display:flex; align-items:center; gap:15px; width:100%; min-height:64px; padding:16px 18px; margin-bottom:13px; background:var(--card); border:2px solid var(--ink); border-radius:16px; box-shadow:4px 4px 0 var(--ink); transition:transform .14s ease, box-shadow .14s ease; -webkit-tap-highlight-color:transparent; }
+        /* variante CLARA (Motor) */
+        .course.light { background:var(--card); }
+        .course.light .cover { background:var(--terra); }
+        .course.light .cover .glow { background:radial-gradient(circle, rgba(255,255,255,.28), transparent 62%); }
+        .course.light .badge { color:var(--terra-d); background:#fff; }
+        .course.light .badge .dot { background:var(--terra); }
+        .course.light .ctitle { color:#fff; }
+        .course.light .body { background:var(--card); }
+        .course.light .desc { color:var(--ink-2); }
+        .course.light .desc b { color:var(--ink); }
+        .course.light .chips span { color:var(--green); background:rgba(67,93,81,.09); border:1px solid rgba(67,93,81,.22); }
+
+        /* ---------- CARD DE SERVIÇO (WhatsApp) ---------- */
+        .serv { display:flex; align-items:center; gap:15px; width:100%; padding:17px 18px; margin-bottom:13px; background:var(--card); border:2px solid var(--ink); border-radius:16px; box-shadow:4px 4px 0 var(--ink); transition:transform .14s ease, box-shadow .14s ease; -webkit-tap-highlight-color:transparent; }
+        .serv:active { transform:translate(2px,2px); box-shadow:2px 2px 0 var(--ink); }
+        @media (hover:hover){ .serv:hover { transform:translate(-1px,-1px); box-shadow:6px 6px 0 var(--ink); } }
+        .serv .ic { flex:0 0 auto; width:44px; height:44px; border-radius:13px; background:var(--bg-2); display:flex; align-items:center; justify-content:center; color:var(--ink); }
+        .serv .ic svg { width:23px; height:23px; }
+        .serv .txt { flex:1; min-width:0; }
+        .serv .t { display:block; font-weight:700; font-size:1.02rem; color:var(--ink); line-height:1.2; }
+        .serv .s { display:flex; align-items:center; gap:6px; font-size:.8rem; color:var(--wa); font-weight:700; margin-top:3px; }
+        .serv .s svg { width:14px; height:14px; }
+        .serv .arw { flex:0 0 auto; font-family:'Anton',sans-serif; color:var(--terra); font-size:1.15rem; }
+
+        /* ---------- CARD SIMPLES (grátis) ---------- */
+        .link { display:flex; align-items:center; gap:15px; width:100%; padding:17px 18px; margin-bottom:13px; background:var(--card); border:2px solid var(--ink); border-radius:16px; box-shadow:4px 4px 0 var(--ink); transition:transform .14s ease, box-shadow .14s ease; -webkit-tap-highlight-color:transparent; }
         .link:active { transform:translate(2px,2px); box-shadow:2px 2px 0 var(--ink); }
         @media (hover:hover){ .link:hover { transform:translate(-1px,-1px); box-shadow:6px 6px 0 var(--ink); } }
-        .link .ic { flex:0 0 auto; width:42px; height:42px; border-radius:12px; background:var(--bg-2); display:flex; align-items:center; justify-content:center; font-size:1.35rem; }
+        .link .ic { flex:0 0 auto; width:44px; height:44px; border-radius:13px; display:flex; align-items:center; justify-content:center; }
+        .link .ic svg { width:23px; height:23px; }
         .link .txt { flex:1; min-width:0; }
-        .link .t { display:block; font-weight:700; font-size:1rem; color:var(--ink); line-height:1.2; }
+        .link .t { display:block; font-weight:700; font-size:1.02rem; line-height:1.2; }
         .link .s { display:block; font-size:.8rem; color:var(--muted); margin-top:3px; line-height:1.35; }
         .link .arw { flex:0 0 auto; font-family:'Anton',sans-serif; color:var(--terra); font-size:1.15rem; }
         .link.dark { background:var(--ink); border-color:var(--ink); box-shadow:4px 4px 0 var(--terra); }
-        .link.dark .ic { background:rgba(255,255,255,.08); }
+        .link.dark .ic { background:rgba(255,255,255,.08); color:var(--terra-l); }
         .link.dark .t { color:#fff; } .link.dark .s { color:rgba(244,243,239,.6); } .link.dark .arw { color:var(--terra-l); }
         .link.dark:active { box-shadow:2px 2px 0 var(--terra); }
         @media (hover:hover){ .link.dark:hover { box-shadow:6px 6px 0 var(--terra); } }
+        .link.light .ic { background:var(--bg-2); color:var(--ink); }
+        .link.light .t { color:var(--ink); }
 
         /* ---------- CAPTURA DE EMAIL ---------- */
-        .cap { background:var(--bg-2); border:2px solid var(--ink); border-radius:20px; padding:26px 22px; margin-top:34px; box-shadow:5px 5px 0 var(--ink); text-align:center; }
+        .cap { background:var(--bg-2); border:2px solid var(--ink); border-radius:20px; padding:26px 22px; margin-top:36px; box-shadow:5px 5px 0 var(--ink); text-align:center; }
         .cap h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:1.5rem; text-transform:uppercase; color:var(--ink); line-height:1; }
         .cap p { font-size:.9rem; color:var(--ink-2); margin:10px 0 17px; }
         .cap form { display:flex; flex-direction:column; gap:10px; }
@@ -154,12 +183,12 @@
     <!-- PERFIL -->
     <div class="profile">
         <div class="avatar rv">
-            <img src="fotos/bruna-hero.jpg" alt="Bruna Santanna" onerror="this.remove()">
+            <img src="fotos/bruna-retrato.jpg" alt="Bruna Santanna" onerror="this.remove()">
             <div class="fallback">BS</div>
         </div>
         <h1 class="rv">Bruna Santanna</h1>
         <div class="role rv">Estrategista de IA</div>
-        <p class="bio rv">Te ensino a usar o <b>Claude</b> e a IA de verdade — e a colocar a IA para trabalhar por você. 👇</p>
+        <p class="bio rv">Te ensino a usar o <b>Claude</b> e a IA de verdade — e a colocar a IA para trabalhar por você.</p>
         <nav class="social rv" aria-label="Redes sociais">
             <a href="https://instagram.com/brusantanna.ai" target="_blank" rel="noopener" aria-label="Instagram" data-label="instagram">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg>
@@ -177,61 +206,73 @@
     </div>
 
     <!-- MEUS CURSOS -->
-    <div class="grp rv"><span>Meus cursos</span></div>
+    <div class="grp rv"><span class="tri">▶</span><span>Meus cursos</span></div>
 
     <a href="/curso" class="course dark rv" data-label="curso-claude-2">
-        <div class="thumb">
-            <span class="badge">● Gravado · acesso imediato</span>
-            <img src="fotos/bruna-ensina.jpg" alt="Curso Claude com Profundidade 2.0" onerror="this.remove()">
-            <div class="thumb-title">Claude com Profundidade 2.0</div>
+        <div class="cover">
+            <div class="glow"></div>
+            <span class="badge"><span class="dot"></span>Gravado · acesso imediato</span>
+            <div class="ctitle">Claude com Profundidade <span class="tt">Virada IA 2.0</span></div>
         </div>
         <div class="body">
             <p class="desc">O curso de Claude e IA para quem quer <b>parar de usar 10%</b> e usar de verdade. Sem programar.</p>
             <div class="chips"><span>7 módulos</span><span>+5 horas</span><span>Atualizado jul/2026</span></div>
-            <div class="foot">
-                <div class="price"><div class="big">12x de <b>R$35,89</b></div><div class="sub">ou R$347 à vista · garantia 7 dias</div></div>
-                <span class="go">Quero →</span>
-            </div>
+            <span class="go">Quero conhecer <span class="arw">→</span></span>
         </div>
     </a>
 
-    <a href="/sistema" class="course rv" data-label="curso-motor">
-        <div class="thumb">
-            <span class="badge">● Novo · acesso imediato</span>
-            <img src="fotos/dashboard-print.png" alt="Curso Motor de Conteúdo" onerror="this.remove()">
-            <div class="thumb-title">Motor de Conteúdo</div>
+    <a href="/sistema" class="course light rv" data-label="curso-motor">
+        <div class="cover">
+            <div class="glow"></div>
+            <span class="badge"><span class="dot"></span>Novo · acesso imediato</span>
+            <div class="ctitle">Motor de Conteúdo</div>
         </div>
         <div class="body">
-            <p class="desc">Agentes de IA que <b>criam seu conteúdo e editam seus vídeos</b> em todas as redes. Você só grava.</p>
+            <p class="desc">Agentes de IA que <b>criam o seu conteúdo e editam os seus vídeos</b> em todas as redes. Você só grava.</p>
             <div class="chips"><span>2 skills</span><span>Aula completa</span><span>Edição de vídeo</span></div>
-            <div class="foot">
-                <div class="price"><div class="big">R$169</div><div class="sub">ou 12x de R$17,48 · seu para sempre</div></div>
-                <span class="go">Quero →</span>
-            </div>
+            <span class="go">Quero conhecer <span class="arw">→</span></span>
         </div>
+    </a>
+
+    <!-- COMO POSSO TE AJUDAR HOJE -->
+    <div class="grp rv"><span class="tri">▶</span><span>Como posso te ajudar hoje</span></div>
+
+    <a href="https://wa.me/5511971901020?text=Oi%20Bruna!%20Tenho%20interesse%20na%20mentoria%20individual.%20Trabalho%20com%3A%20" target="_blank" rel="noopener" class="serv rv" data-label="wa-mentoria">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M5.5 21a6.5 6.5 0 0 1 13 0"/></svg></span>
+        <span class="txt"><span class="t">Mentoria individual</span><span class="s"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Z"/></svg>Iniciar conversa no WhatsApp</span></span>
+        <span class="arw">→</span>
+    </a>
+
+    <a href="https://wa.me/5511971901020?text=Oi%20Bruna!%20Quero%20levar%20um%20treinamento%20de%20IA%20pra%20minha%20empresa.%20Me%20conta%20como%20funciona%3F" target="_blank" rel="noopener" class="serv rv" data-label="wa-corporativo">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V7l8-4 8 4v14"/><path d="M4 21h16"/><path d="M9 21v-4h6v4"/><path d="M8 10h.01M12 10h.01M16 10h.01M8 14h.01M16 14h.01"/></svg></span>
+        <span class="txt"><span class="t">Treinamentos corporativos</span><span class="s"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Z"/></svg>Iniciar conversa no WhatsApp</span></span>
+        <span class="arw">→</span>
+    </a>
+
+    <a href="https://wa.me/5511971901020?text=Oi%20Bruna!%20Gostaria%20de%20te%20convidar%20para%20uma%20palestra%2Fevento.%20" target="_blank" rel="noopener" class="serv rv" data-label="wa-palestras">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l14-7v16L3 13v5H1v-7h2Z"/><path d="M17 8a3 3 0 0 1 0 8"/></svg></span>
+        <span class="txt"><span class="t">Palestras e eventos</span><span class="s"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Z"/></svg>Iniciar conversa no WhatsApp</span></span>
+        <span class="arw">→</span>
+    </a>
+
+    <a href="https://wa.me/5511971901020?text=Oi%20Bruna!%20Tenho%20uma%20proposta%20de%20publicidade%2Fparceria.%20" target="_blank" rel="noopener" class="serv rv" data-label="wa-publicidade">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v2a1 1 0 0 0 1 1h2l4 4V6L6 10H4a1 1 0 0 0-1 1Z"/><path d="M14 8a4 4 0 0 1 0 8"/><path d="M17 5a8 8 0 0 1 0 14"/></svg></span>
+        <span class="txt"><span class="t">Publicidade e parcerias</span><span class="s"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Z"/></svg>Iniciar conversa no WhatsApp</span></span>
+        <span class="arw">→</span>
     </a>
 
     <!-- GRÁTIS -->
-    <div class="grp rv"><span>Grátis, para começar</span></div>
+    <div class="grp rv"><span class="tri">▶</span><span>Grátis, para começar</span></div>
 
     <a href="/biblioteca" class="link dark rv" data-label="biblioteca">
-        <span class="ic">📚</span>
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H12v16H6.5A2.5 2.5 0 0 0 4 21.5V5.5Z"/><path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H12v16h5.5a2.5 2.5 0 0 1 2.5 2.5V5.5Z"/></svg></span>
         <span class="txt"><span class="t">Biblioteca completa</span><span class="s">Todos os guias e prompts, prontos para copiar</span></span>
         <span class="arw">→</span>
     </a>
-    <a href="/claude" class="link rv" data-label="guia-do-claude">
-        <span class="ic">📖</span>
+    <a href="/claude" class="link light rv" data-label="guia-do-claude">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 3H20v18H6.5A2.5 2.5 0 0 1 4 18.5v-13A2.5 2.5 0 0 1 6.5 3Z"/></svg></span>
         <span class="txt"><span class="t">Guia do Claude</span><span class="s">Entenda de uma vez por que todo mundo fala do Claude</span></span>
         <span class="arw">→</span>
-    </a>
-
-    <!-- EMPRESA -->
-    <div class="grp rv"><span>Para a sua empresa</span></div>
-
-    <a href="https://newscale.tech" target="_blank" rel="noopener" class="link rv" data-label="newscale">
-        <span class="ic">💼</span>
-        <span class="txt"><span class="t">IA na sua empresa · NewScale</span><span class="s">Automações e treinamentos corporativos</span></span>
-        <span class="arw">↗</span>
     </a>
 
     <!-- CAPTURA DE EMAIL -->
