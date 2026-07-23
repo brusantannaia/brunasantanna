@@ -125,7 +125,16 @@
         .serv .t { display:block; font-weight:700; font-size:1.02rem; color:var(--ink); line-height:1.2; }
         .serv .s { display:flex; align-items:center; gap:6px; font-size:.8rem; color:var(--wa); font-weight:700; margin-top:3px; }
         .serv .s svg { width:14px; height:14px; }
+        .serv .s.site { color:var(--terra-d); }
         .serv .arw { flex:0 0 auto; font-family:'Anton',sans-serif; color:var(--terra); font-size:1.15rem; }
+        /* card da NewScale: destaque escuro */
+        .serv.brand { background:var(--ink); border-color:var(--ink); box-shadow:4px 4px 0 var(--terra); }
+        .serv.brand .ic { background:rgba(255,255,255,.08); color:var(--terra-l); }
+        .serv.brand .t { color:#fff; }
+        .serv.brand .s.site { color:var(--terra-l); }
+        .serv.brand .arw { color:var(--terra-l); }
+        .serv.brand:active { box-shadow:2px 2px 0 var(--terra); }
+        @media (hover:hover){ .serv.brand:hover { box-shadow:6px 6px 0 var(--terra); } }
 
         /* ---------- CARD SIMPLES (grátis) ---------- */
         .link { display:flex; align-items:center; gap:15px; width:100%; padding:17px 18px; margin-bottom:13px; background:var(--card); border:2px solid var(--ink); border-radius:16px; box-shadow:4px 4px 0 var(--ink); transition:transform .14s ease, box-shadow .14s ease; -webkit-tap-highlight-color:transparent; }
@@ -215,7 +224,7 @@
             <div class="ctitle">Claude com Profundidade <span class="tt">Virada IA 2.0</span></div>
         </div>
         <div class="body">
-            <p class="desc">O curso de Claude e IA para quem quer <b>parar de usar 10%</b> e usar de verdade. Sem programar.</p>
+            <p class="desc">O curso de Claude e IA para quem quer usar <b>com profundidade</b> — a forma de pensar, não só a ferramenta. Sem programar.</p>
             <div class="chips"><span>7 módulos</span><span>+5 horas</span><span>Atualizado jul/2026</span></div>
             <span class="go">Quero conhecer <span class="arw">→</span></span>
         </div>
@@ -259,6 +268,12 @@
         <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v2a1 1 0 0 0 1 1h2l4 4V6L6 10H4a1 1 0 0 0-1 1Z"/><path d="M14 8a4 4 0 0 1 0 8"/><path d="M17 5a8 8 0 0 1 0 14"/></svg></span>
         <span class="txt"><span class="t">Publicidade e parcerias</span><span class="s"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Z"/></svg>Iniciar conversa no WhatsApp</span></span>
         <span class="arw">→</span>
+    </a>
+
+    <a href="https://newscale.tech" target="_blank" rel="noopener" class="serv brand rv" data-label="newscale">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg></span>
+        <span class="txt"><span class="t">Automação de IA para empresas</span><span class="s site">NewScale · consultoria e implementação</span></span>
+        <span class="arw">↗</span>
     </a>
 
     <!-- GRÁTIS -->
