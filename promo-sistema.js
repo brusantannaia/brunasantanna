@@ -1,4 +1,4 @@
-/* Promo site-wide: os 2 cursos gravados (Monte seu Sistema + Claude com Profundidade 2.0)
+/* Promo site-wide: os 2 cursos gravados (Motor de Conteúdo + Claude com Profundidade 2.0)
    Banner de topo + popup 1x/24h. Evergreen — sem countdown, sem data. */
 (function () {
     var path = location.pathname.replace(/\/+$/, '').toLowerCase();
@@ -43,9 +43,9 @@
         var bar = document.createElement('div');
         bar.id = 'psBar';
         bar.innerHTML =
-            '<span><b>CURSOS GRAVADOS NO AR</b><span class="ps-hide-m"> — acesso imediato, no seu ritmo</span></span>' +
-            '<a href="/curso" data-ga="claude-2.0">Claude 2.0 · 12x R$35,89</a>' +
-            '<a href="/sistema" class="ps-alt" data-ga="sistema">Monte seu Sistema · R$169</a>' +
+            '<span><b>MEUS CURSOS GRAVADOS</b><span class="ps-hide-m"> — acesso imediato, no seu ritmo</span></span>' +
+            '<a href="/curso" data-ga="claude-2.0">Curso de Claude · 12x R$35,89</a>' +
+            '<a href="/sistema" class="ps-alt" data-ga="sistema">Motor de Conteúdo · R$169</a>' +
             '<button class="ps-x" id="psBarX" aria-label="Fechar aviso">✕</button>';
         document.body.insertBefore(bar, document.body.firstChild);
         document.getElementById('psBarX').onclick = function () { sessionStorage.setItem('psBarOff', '1'); bar.remove(); };
@@ -67,11 +67,11 @@
         pop.setAttribute('role', 'dialog'); pop.setAttribute('aria-modal', 'true');
         pop.innerHTML =
             '<button class="ps-close" id="psClose" aria-label="Fechar">✕</button>' +
-            '<span class="ps-kick">Gravados · acesso imediato</span>' +
-            '<h3>Dois cursos para você parar de usar 10% da IA</h3>' +
-            '<p>Os dois gravados, atualizados em julho de 2026, para assistir no seu ritmo. Escolhe o seu (ou leva os dois):</p>' +
-            '<a href="/curso" class="ps-cta" data-ga="claude-2.0">Claude com Profundidade 2.0 →<small>8 módulos, do zero ao agente · 12x de R$35,89</small></a>' +
-            '<a href="/sistema" class="ps-cta ps-dark" data-ga="sistema">Curso Monte seu Sistema →<small>Seu conteúdo em loop, você só grava · R$169</small></a>' +
+            '<span class="ps-kick">Cursos gravados · acesso imediato</span>' +
+            '<h3>Domine o Claude. Ou coloque agentes para criar o seu conteúdo.</h3>' +
+            '<p>Meus dois cursos, gravados e atualizados em julho de 2026:</p>' +
+            '<a href="/curso" class="ps-cta" data-ga="claude-2.0">Claude com Profundidade 2.0 →<small>Aprenda a usar IA de verdade, sem programar · 12x de R$35,89</small></a>' +
+            '<a href="/sistema" class="ps-cta ps-dark" data-ga="sistema">Curso Motor de Conteúdo →<small>Agentes que criam seu conteúdo e editam seus vídeos · R$169</small></a>' +
             '<button class="ps-nao" id="psNao">Agora não</button>';
         document.body.appendChild(ov); document.body.appendChild(pop);
         setTimeout(function () { ov.classList.add('on'); pop.classList.add('on'); }, 30);
