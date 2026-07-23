@@ -54,8 +54,8 @@
         /* ---------- PERFIL ---------- */
         .profile { text-align:center; padding:26px 0 8px; }
         .avatar { width:118px; height:118px; border-radius:50%; margin:0 auto 20px; overflow:hidden; border:3px solid var(--ink); box-shadow:7px 7px 0 var(--terra); background:linear-gradient(135deg,#1d4a4f,#14373C 55%,#0e2a2e); position:relative; }
-        .avatar img { width:100%; height:100%; object-fit:cover; }
-        .avatar .fallback { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:'Anton',sans-serif; font-size:2.4rem; color:rgba(245,243,239,.9); }
+        .avatar img { position:relative; z-index:2; width:100%; height:100%; object-fit:cover; }
+        .avatar .fallback { position:absolute; z-index:1; inset:0; display:flex; align-items:center; justify-content:center; font-family:'Anton',sans-serif; font-size:2.4rem; color:rgba(245,243,239,.9); }
         .profile h1 { font-family:'Anton',sans-serif; font-weight:400; font-size:2.1rem; text-transform:uppercase; color:var(--ink); line-height:.98; letter-spacing:.01em; }
         .profile .role { font-size:.68rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--terra); margin-top:10px; }
         .profile .bio { font-size:.98rem; color:var(--ink-2); font-weight:400; margin-top:14px; max-width:32ch; margin-left:auto; margin-right:auto; }
@@ -107,8 +107,8 @@
         @media (hover:hover){ .link:hover { transform:translate(-1px,-1px); box-shadow:6px 6px 0 var(--ink); } }
         .link .ic { flex:0 0 auto; width:42px; height:42px; border-radius:12px; background:var(--bg-2); display:flex; align-items:center; justify-content:center; font-size:1.35rem; }
         .link .txt { flex:1; min-width:0; }
-        .link .t { font-weight:700; font-size:1rem; color:var(--ink); line-height:1.2; }
-        .link .s { font-size:.8rem; color:var(--muted); margin-top:2px; line-height:1.35; }
+        .link .t { display:block; font-weight:700; font-size:1rem; color:var(--ink); line-height:1.2; }
+        .link .s { display:block; font-size:.8rem; color:var(--muted); margin-top:3px; line-height:1.35; }
         .link .arw { flex:0 0 auto; font-family:'Anton',sans-serif; color:var(--terra); font-size:1.15rem; }
         .link.dark { background:var(--ink); border-color:var(--ink); box-shadow:4px 4px 0 var(--terra); }
         .link.dark .ic { background:rgba(255,255,255,.08); }
