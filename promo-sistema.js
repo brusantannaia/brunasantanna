@@ -68,8 +68,8 @@
         pop.innerHTML =
             '<button class="ps-close" id="psClose" aria-label="Fechar">✕</button>' +
             '<span class="ps-kick">Gravados · acesso imediato</span>' +
-            '<h3>Dois cursos pra você parar de usar 10% da IA</h3>' +
-            '<p>Os dois gravados, atualizados em julho de 2026, pra assistir no seu ritmo. Escolhe o seu (ou leva os dois):</p>' +
+            '<h3>Dois cursos para você parar de usar 10% da IA</h3>' +
+            '<p>Os dois gravados, atualizados em julho de 2026, para assistir no seu ritmo. Escolhe o seu (ou leva os dois):</p>' +
             '<a href="/curso" class="ps-cta" data-ga="claude-2.0">Claude com Profundidade 2.0 →<small>8 módulos, do zero ao agente · 12x de R$35,89</small></a>' +
             '<a href="/sistema" class="ps-cta ps-dark" data-ga="sistema">Curso Monte seu Sistema →<small>Seu conteúdo em loop, você só grava · R$169</small></a>' +
             '<button class="ps-nao" id="psNao">Agora não</button>';
