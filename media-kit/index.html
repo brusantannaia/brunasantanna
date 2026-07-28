@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bruna Santanna — Media Kit</title>
+<meta name="description" content="Bruna Santanna (@brusantanna.ai) — I teach AI to people who have a job to do. Media kit, 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F3EEE3; --bg-2:#ECE5D6; --card:#FBF9F3; --cream:#F4F3EF;
+  --ink:#14373C; --ink-2:#2C4F54; --green:#435D51;
+  --terra:#B06E4A; --terra-l:#C4835E; --terra-d:#985A3B;
+  --text:#233133; --muted:#6E7A75; --line:rgba(20,55,60,.16);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+::selection{background:var(--terra);color:#fff}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Hanken Grotesk',system-ui,sans-serif;font-weight:300;line-height:1.55;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(243,238,227,.92);backdrop-filter:blur(8px);border-bottom:2px solid var(--ink)}
+.hd{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:15px 0}
+.logo{font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:1.25rem;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:11px}
+.logo .tag{border:1.5px solid var(--terra);border-radius:100px;font-family:'Hanken Grotesk';font-weight:700;font-size:.6rem;letter-spacing:.16em;color:var(--terra);padding:5px 12px}
+.hd-right{display:flex;align-items:center;gap:18px}
+.hd-link{font-weight:600;font-size:.84rem;color:var(--ink-2);text-decoration:none;border-bottom:2px solid transparent;transition:.2s}
+.hd-link:hover{color:var(--terra);border-bottom-color:var(--terra)}
+
+/* buttons */
+.btn{display:inline-block;border-radius:100px;font-weight:700;font-size:.82rem;text-transform:uppercase;letter-spacing:.04em;padding:14px 26px;text-decoration:none;transition:.22s cubic-bezier(.2,.7,.2,1)}
+.btn-terra{background:var(--terra);color:#fff}
+.btn-terra:hover{background:var(--terra-d);transform:translateY(-2px);box-shadow:0 10px 26px rgba(176,110,74,.35)}
+.btn-ghost{border:1.5px solid var(--line);color:var(--ink);background:var(--card)}
+.btn-ghost:hover{border-color:var(--ink);transform:translateY(-2px);box-shadow:5px 5px 0 var(--line)}
+
+/* kicker */
+.kicker{font-weight:700;font-size:.72rem;text-transform:uppercase;letter-spacing:.16em;color:var(--terra);display:flex;align-items:center;gap:10px}
+.kicker::before{content:"";width:26px;height:2px;background:var(--terra);flex:none}
+
+/* hero */
+.hero{position:relative;padding:76px 0 70px;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-200px;right:-140px;width:660px;height:660px;background:radial-gradient(circle,rgba(176,110,74,.16),transparent 62%);pointer-events:none}
+.hero-in{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+h1{font-family:'Anton';font-weight:400;text-transform:uppercase;line-height:.88;font-size:clamp(2.9rem,7vw,5.2rem);color:var(--ink);margin:18px 0 22px}
+h1 .terra{color:var(--terra)}
+.lead{font-size:1.16rem;font-weight:300;color:var(--ink-2);max-width:43ch}
+.lead b{font-weight:600;color:var(--ink)}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.handles{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
+.handle{background:var(--card);border:1.5px solid var(--line);border-radius:100px;padding:9px 17px;font-weight:600;font-size:.8rem;color:var(--ink);text-decoration:none;transition:.2s cubic-bezier(.2,.7,.2,1)}
+.handle span{color:var(--muted);font-weight:400}
+.handle:hover{border-color:var(--terra);color:var(--terra);transform:translateY(-2px)}
+.handle:hover span{color:var(--terra-l)}
+
+.photo{border-radius:16px;overflow:hidden;background:var(--bg-2);box-shadow:9px 9px 0 var(--terra)}
+.photo img{width:100%;height:100%;object-fit:cover}
+.hero-photo{aspect-ratio:4/5}
+
+/* manifesto */
+.manifesto{background:var(--bg-2);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);padding:56px 0;margin:0 0 76px}
+.manifesto p{font-family:'Anton';font-weight:400;text-transform:uppercase;line-height:1.04;font-size:clamp(1.75rem,4.6vw,3.1rem);color:var(--ink);max-width:26ch}
+.manifesto .terra{color:var(--terra)}
+
+/* section */
+section{padding:8px 0}
+h2{font-family:'Anton';font-weight:400;text-transform:uppercase;line-height:.9;font-size:clamp(2.2rem,6vw,3.4rem);color:var(--ink);margin:14px 0 34px}
+h2 .terra{color:var(--terra)}
+
+/* headline number */
+.headline{display:grid;grid-template-columns:auto 1fr;gap:38px;align-items:center;background:var(--ink);border-radius:20px;padding:44px 46px;box-shadow:10px 10px 0 var(--terra);margin-bottom:56px}
+.headline .hn{font-family:'Anton';font-weight:400;line-height:.82;font-size:clamp(4.2rem,13vw,8rem);color:var(--terra-l);font-variant-numeric:tabular-nums}
+.headline b{display:block;font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:clamp(1.1rem,2.6vw,1.7rem);color:var(--cream);line-height:1.05;letter-spacing:.01em}
+.headline span.sub{display:block;font-size:.98rem;color:rgba(244,243,239,.72);margin-top:12px;max-width:44ch}
+.headline span.sub em{font-style:normal;color:var(--terra-l);font-weight:600}
+
+.headline .eyebrow{display:inline-block;border:1.5px solid var(--terra-l);border-radius:100px;font-weight:700;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--terra-l);padding:5px 13px;margin-bottom:14px}
+
+/* section divider */
+.subhead{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;border-top:2px solid var(--ink);padding-top:16px;margin-bottom:6px}
+.subhead .t{font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:clamp(1.5rem,3.6vw,2.1rem);color:var(--ink);line-height:1}
+.subhead .t em{font-style:normal;color:var(--terra)}
+.subhead .n{font-size:.85rem;color:var(--muted);font-weight:400}
+
+/* numbers */
+.figs{display:grid;grid-template-columns:repeat(3,1fr)}
+.fig{padding:32px 26px 28px;border-top:1.5px solid var(--line);border-right:1.5px solid var(--line);transition:background .25s}
+.fig:hover{background:rgba(176,110,74,.045)}
+.fig:nth-child(3n){border-right:0}
+.fig:nth-last-child(-n+3){border-bottom:1.5px solid var(--line)}
+.fig .n{font-family:'Anton';font-weight:400;line-height:.86;font-size:clamp(3rem,7vw,4.6rem);color:var(--terra);font-variant-numeric:tabular-nums}
+.fig .l{font-weight:600;font-size:.94rem;color:var(--ink);margin-top:14px}
+.fig .s{font-size:.8rem;color:var(--muted);margin-top:3px}
+.fig.hl .n{color:var(--ink)}
+
+/* proof */
+.proof{display:grid;grid-template-columns:.85fr 1.15fr;gap:46px;align-items:center}
+.proof h2{margin-bottom:18px}
+.proof p{font-size:1.02rem;max-width:38ch}
+.proof p + p{margin-top:14px}
+.proof b{font-weight:600;color:var(--ink)}
+.stage{box-shadow:9px 9px 0 var(--green)}
+
+/* what I do */
+.doing{display:grid;grid-template-columns:repeat(4,1fr);margin-top:46px}
+.doing div{padding:24px 22px;border-top:1.5px solid var(--line);border-right:1.5px solid var(--line);transition:background .25s}
+.doing div:last-child{border-right:0}
+.doing div:hover{background:rgba(176,110,74,.045)}
+.doing b{display:block;font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:1.12rem;color:var(--terra);letter-spacing:.01em}
+.doing span{display:block;font-size:.86rem;color:var(--text);margin-top:9px}
+
+/* cards */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:28px 26px;transition:.25s cubic-bezier(.2,.7,.2,1)}
+.card:hover{transform:translateY(-4px);border-color:var(--ink);box-shadow:6px 6px 0 var(--line)}
+.card .tag{font-weight:700;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--terra)}
+.card h3{font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:1.5rem;line-height:1;color:var(--ink);margin:12px 0 10px}
+.card p{font-size:.94rem}
+
+/* credentials */
+.credwrap{display:grid;grid-template-columns:1.25fr .75fr;gap:48px;align-items:start}
+.creds div{border-bottom:1.5px solid var(--line);padding:14px 0;display:flex;gap:14px;align-items:baseline}
+.creds b{font-family:'Anton';font-weight:400;color:var(--terra);font-size:1.05rem;flex:none;min-width:22px}
+.creds span{font-size:.95rem}
+.creds a{color:var(--ink);text-decoration:none;border-bottom:2px solid var(--terra)}
+.creds a:hover{color:var(--terra)}
+.credwrap .photo{aspect-ratio:3/4;box-shadow:7px 7px 0 var(--green);position:sticky;top:100px}
+
+/* marquee */
+.marq{background:var(--ink);overflow:hidden;padding:16px 0;margin-top:76px;display:flex;align-items:center;gap:20px}
+.marq .lbl{flex:none;padding-left:28px;font-weight:700;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--terra-l)}
+.track{display:flex;gap:34px;white-space:nowrap;animation:slide 30s linear infinite}
+.track span{font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:1.4rem;color:rgba(244,243,239,.5)}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* closing */
+.closing{padding:78px 0 20px;text-align:center}
+.closing .big{font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:clamp(1.9rem,5.2vw,3.2rem);color:var(--ink);line-height:.96}
+.closing .big .terra{color:var(--terra)}
+.closing .sub{color:var(--ink-2);font-size:1.05rem;margin-top:18px;max-width:44ch;margin-left:auto;margin-right:auto}
+.closing .cta{justify-content:center;margin-top:30px}
+
+/* footer */
+footer{padding:52px 0 70px;text-align:center}
+.fline{height:1.5px;background:var(--line);margin:0 auto 34px;max-width:1024px}
+footer .m{color:var(--muted);font-size:.92rem;line-height:1.9}
+footer .name{font-weight:700;color:var(--ink);font-size:1rem}
+footer a{color:var(--terra);font-weight:600;text-decoration:none;border-bottom:2px solid var(--terra)}
+footer a:hover{color:var(--terra-d)}
+.note{margin-top:26px;font-size:.74rem;color:var(--muted)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(22px);transition:.7s cubic-bezier(.2,.7,.2,1)}
+.rv.on{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.track{animation:none}html{scroll-behavior:auto}}
+
+@media(max-width:900px){
+  .hero-in{grid-template-columns:1fr;gap:40px}
+  .hero{padding:46px 0 44px}
+  .hd-right .hd-link{display:none}
+  .headline{grid-template-columns:1fr;gap:16px;padding:34px 30px;box-shadow:7px 7px 0 var(--terra);margin-bottom:44px}
+  .figs{grid-template-columns:repeat(2,1fr)}
+  .fig:nth-child(3n){border-right:1.5px solid var(--line)}
+  .fig:nth-child(2n){border-right:0}
+  .fig:nth-last-child(-n+3){border-bottom:0}
+  .fig:nth-last-child(-n+2){border-bottom:1.5px solid var(--line)}
+  .grid3{grid-template-columns:1fr}
+  .doing{grid-template-columns:repeat(2,1fr);margin-top:34px}
+  .doing div:nth-child(2n){border-right:0}
+  .doing div:nth-child(2){border-right:0}
+  .proof,.credwrap{grid-template-columns:1fr;gap:34px}
+  .credwrap .photo{position:static;max-width:340px}
+  .manifesto{margin-bottom:54px;padding:42px 0}
+  .photo{box-shadow:6px 6px 0 var(--terra)}
+  .stage,.credwrap .photo{box-shadow:6px 6px 0 var(--green)}
+}
+@media(max-width:520px){
+  .figs{grid-template-columns:1fr}
+  .fig{border-right:0!important;border-bottom:0}
+  .fig:last-child{border-bottom:1.5px solid var(--line)}
+  .doing{grid-template-columns:1fr}
+  .doing div{border-right:0!important}
+  .btn{width:100%;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap hd">
+    <a class="logo" href="https://brunasantanna.com" target="_blank" rel="noopener">Bruna Santanna <span class="tag">A Virada IA</span></a>
+    <div class="hd-right">
+      <a class="hd-link" href="https://brunasantanna.com" target="_blank" rel="noopener">brunasantanna.com</a>
+      <a class="btn btn-terra" href="mailto:bruna@newscale.tech">Work with me</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="hero-in">
+      <div>
+        <div class="kicker">AI educator · Founder · Creator</div>
+        <h1>I teach AI<br>to people who<br><span class="terra">have a job to do</span></h1>
+        <p class="lead">My audience isn't here to watch AI demos. They're here to finish the work that's already on their desk. <b>Everything I post, I use first — to run my own company, with my own clients.</b></p>
+        <div class="cta">
+          <a class="btn btn-terra" href="https://brunasantanna.com" target="_blank" rel="noopener">Visit brunasantanna.com</a>
+          <a class="btn btn-ghost" href="https://www.instagram.com/brusantanna.ai/" target="_blank" rel="noopener">See the content</a>
+        </div>
+        <div class="handles">
+          <a class="handle" href="https://www.instagram.com/brusantanna.ai/" target="_blank" rel="noopener">@brusantanna.ai <span>· Instagram</span></a>
+          <a class="handle" href="https://www.tiktok.com/@brusantanna.ai" target="_blank" rel="noopener">@brusantanna.ai <span>· TikTok</span></a>
+          <a class="handle" href="https://newscale.tech" target="_blank" rel="noopener">newscale.tech <span>· Founder</span></a>
+        </div>
+      </div>
+      <div class="photo hero-photo">
+        <img src="img/bruna-hero.jpg" alt="Bruna Santanna" width="1100" height="1650">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="manifesto">
+  <div class="wrap">
+    <p>A follower count is a number. An audience that <span class="terra">shows up</span> is a business.</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section class="rv">
+    <div class="kicker">Performance</div>
+    <h2>The <span class="terra">numbers</span></h2>
+
+    <div class="headline">
+      <div class="hn" data-to="2.2" data-dec="1" data-suffix="M">0</div>
+      <div>
+        <span class="eyebrow">Aug 2025 — Jul 2026</span>
+        <b>Views in the last 12 months</b>
+        <span class="sub"><em>1.9M of those came in 2026 alone.</em> I'm reaching roughly four times the audience per month that I was at the end of last year — and it's still climbing.</span>
+      </div>
+    </div>
+
+    <div class="subhead">
+      <span class="t">Now zoom in — the <em>last 30 days</em></span>
+      <span class="n">27 June – 27 July 2026 · Instagram + TikTok</span>
+    </div>
+    <div class="figs">
+      <div class="fig hl"><div class="n" data-to="333" data-suffix="K">0</div><div class="l">Total views</div><div class="s">Instagram + TikTok</div></div>
+      <div class="fig"><div class="n" data-to="181" data-suffix="K">0</div><div class="l">Accounts reached</div><div class="s">Real people, not impressions</div></div>
+      <div class="fig hl"><div class="n" data-to="9.9" data-dec="1" data-suffix="K">0</div><div class="l">Comments</div><div class="s">They don't just watch — they answer</div></div>
+      <div class="fig"><div class="n" data-to="28.7" data-dec="1" data-suffix="K">0</div><div class="l">Total interactions</div><div class="s">Likes, comments, saves, shares</div></div>
+      <div class="fig"><div class="n" data-to="5.6" data-dec="1" data-suffix="K">0</div><div class="l">Saves</div><div class="s">Kept to use later</div></div>
+      <div class="fig"><div class="n" data-to="3.7" data-dec="1" data-suffix="K">0</div><div class="l">Shares</div><div class="s">Sent to a colleague or friend</div></div>
+      <div class="fig hl"><div class="n" data-to="18" data-suffix="%">0</div><div class="l">Engagement on reach</div><div class="s">Category average: 3–6%</div></div>
+      <div class="fig"><div class="n" data-to="32.1" data-dec="1" data-suffix="K">0</div><div class="l">TikTok views</div><div class="s">Secondary platform, growing</div></div>
+      <div class="fig"><div class="n" data-to="12" data-prefix="+" data-suffix="%">0</div><div class="l">Follower growth</div><div class="s">+4,323 in 38 days</div></div>
+    </div>
+
+    <div class="subhead" style="margin-top:64px">
+      <span class="t">And the <em>all-time</em> marks</span>
+      <span class="n">Cumulative, not a 30-day snapshot</span>
+    </div>
+    <div class="figs">
+      <div class="fig hl"><div class="n" data-to="183.1" data-dec="1" data-suffix="K">0</div><div class="l">Best Reel ever</div><div class="s">Four Reels have passed 100K</div></div>
+      <div class="fig hl"><div class="n" data-to="10198" data-sep="1">0</div><div class="l">Email subscribers</div><div class="s">An audience I own, not rent</div></div>
+      <div class="fig"><div class="n" data-to="43.5" data-dec="1" data-suffix="K">0</div><div class="l">Total followers</div><div class="s">Instagram + TikTok</div></div>
+    </div>
+  </section>
+
+  <section class="rv" style="padding-top:76px">
+    <div class="proof">
+      <div class="photo stage">
+        <img src="img/bruna-stage.jpg" alt="Bruna Santanna speaking to a corporate audience" width="1800" height="810">
+      </div>
+      <div>
+        <div class="kicker">The other half of the job</div>
+        <h2>I'm not only <span class="terra">a creator</span></h2>
+        <p>Most of my week isn't spent filming. I consult for companies implementing AI, mentor founders one-on-one, and speak to auditoriums of people who came to learn something they can use on Monday.</p>
+        <p>That's why the content lands. It's the same material I'm paid to deliver at <b>Corteva, Stoller, Magalu, OLX and B3</b> — rewritten for everyone whose employer isn't footing the bill.</p>
+      </div>
+    </div>
+
+    <div class="doing">
+      <div><b>Consulting</b><span>AI &amp; automation implementation for companies, through NewScale</span></div>
+      <div><b>1:1 Mentoring</b><span>Founders and executives putting AI to work in their own business</span></div>
+      <div><b>Keynotes</b><span>Corporate stages and events, from packed auditoriums to boardrooms</span></div>
+      <div><b>Team training</b><span>Hands-on programs — 1,000+ people trained so far</span></div>
+    </div>
+  </section>
+
+  <section class="rv" style="padding-top:76px">
+    <div class="kicker">Audience</div>
+    <h2>Who is <span class="terra">on the other side</span></h2>
+    <div class="grid3">
+      <div class="card">
+        <div class="tag">Professionals</div>
+        <h3>People with a job</h3>
+        <p>Employees, managers and specialists. Not students of AI — practitioners of something else who need it to get through Monday. For them, a certificate is a promotion.</p>
+      </div>
+      <div class="card">
+        <div class="tag">Business owners</div>
+        <h3>People who sign off</h3>
+        <p>Founders, executives and small business owners — the same profile that hires me for consulting and mentoring. They don't just watch the content. They buy from it.</p>
+      </div>
+      <div class="card">
+        <div class="tag">Behaviour</div>
+        <h3>They act on it</h3>
+        <p>18% engagement on reach. 9.9K comments in a single month. And 10,198 who handed over their email for my free guides. When I ask, they move.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="rv" style="padding-top:76px">
+    <div class="kicker">Background</div>
+    <h2>Why they <span class="terra">listen to me</span></h2>
+    <div class="credwrap">
+      <div class="creds">
+        <div><b>01</b><span><b>1,000+ people trained</b> in applied AI, in person and online</span></div>
+        <div><b>02</b><span>Founder of <a href="https://newscale.tech" target="_blank" rel="noopener">NewScale</a> — AI consulting for Brazilian companies</span></div>
+        <div><b>03</b><span><b>1:1 mentoring and keynotes</b> for founders and corporate teams</span></div>
+        <div><b>04</b><span><b>10,198 email subscribers</b> — an audience I own, not rent</span></div>
+        <div><b>05</b><span><b>10+ years</b> running my own business before any of this</span></div>
+        <div><b>06</b><span><b>ESPM + MBA USP</b> · ex-Whirlpool, ex-SulAmérica</span></div>
+        <div><b>07</b><span><b>Ex-Blackbox AI</b>, Silicon Valley — then back to Brazil on purpose</span></div>
+        <div><b>08</b><span>Mentor at <b>Potenc.IA</b> — OLX, Magalu, B3, CI&amp;T</span></div>
+        <div><b>09</b><span>Corporate clients: <b>Corteva, Stoller, Ismart, OneGlobal</b></span></div>
+      </div>
+      <div class="photo">
+        <img src="img/bruna-portrait.jpg" alt="Bruna Santanna" width="900" height="1200">
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="marq">
+  <div class="lbl">Trained teams at</div>
+  <div class="track">
+    <span>Corteva</span><span>·</span><span>Stoller</span><span>·</span><span>Ismart</span><span>·</span><span>OneGlobal</span><span>·</span><span>Sorridents</span><span>·</span><span>Magalu</span><span>·</span><span>OLX</span><span>·</span><span>B3</span><span>·</span><span>CI&amp;T</span><span>·</span>
+    <span>Corteva</span><span>·</span><span>Stoller</span><span>·</span><span>Ismart</span><span>·</span><span>OneGlobal</span><span>·</span><span>Sorridents</span><span>·</span><span>Magalu</span><span>·</span><span>OLX</span><span>·</span><span>B3</span><span>·</span><span>CI&amp;T</span><span>·</span>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="closing rv">
+    <div class="big">If your brand teaches people<br>to <span class="terra">get better at their work</span>,<br>we're already saying the same thing.</div>
+    <p class="sub">Let's talk about what we can build together.</p>
+    <div class="cta">
+      <a class="btn btn-terra" href="mailto:bruna@newscale.tech">bruna@newscale.tech</a>
+      <a class="btn btn-ghost" href="https://brunasantanna.com" target="_blank" rel="noopener">brunasantanna.com</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="fline"></div>
+  <div class="wrap">
+    <div class="m">
+      <span class="name">Bruna Santanna</span> · Founder, NewScale<br>
+      <a href="https://brunasantanna.com" target="_blank" rel="noopener">brunasantanna.com</a> ·
+      <a href="https://newscale.tech" target="_blank" rel="noopener">newscale.tech</a> ·
+      <a href="https://www.instagram.com/brusantanna.ai/" target="_blank" rel="noopener">Instagram</a> ·
+      <a href="https://www.tiktok.com/@brusantanna.ai" target="_blank" rel="noopener">TikTok</a>
+    </div>
+    <div class="note">Metrics: Instagram and TikTok, via Metricool. Each block states its own period: 12 months covers Aug 2025 – Jul 2026 · the 30-day block covers 27 June – 27 July 2026 · all-time marks are cumulative to 27 July 2026.</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function render(el, val){
+    var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
+    var s = val.toFixed(dec);
+    if (el.getAttribute('data-sep')) s = s.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    el.textContent = (el.getAttribute('data-prefix') || '') + s + (el.getAttribute('data-suffix') || '');
+  }
+  function countUp(el){
+    var to = parseFloat(el.getAttribute('data-to'));
+    if (isNaN(to)) return;
+    if (reduce){ render(el, to); return; }
+    var dur = 1400, t0 = null;
+    function step(ts){
+      if (t0 === null) t0 = ts;
+      var p = Math.min((ts - t0) / dur, 1);
+      render(el, to * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(step); else render(el, to);
+    }
+    requestAnimationFrame(step);
+  }
+
+  var figs = [].slice.call(document.querySelectorAll('.fig .n, .headline .hn'));
+  var revs = [].slice.call(document.querySelectorAll('.rv'));
+
+  if (!('IntersectionObserver' in window)){
+    revs.forEach(function(e){ e.classList.add('on'); });
+    figs.forEach(function(e){ render(e, parseFloat(e.getAttribute('data-to'))); });
+    return;
+  }
+
+  var ioFig = new IntersectionObserver(function(entries){
+    entries.forEach(function(e, i){
+      if (e.isIntersecting){ setTimeout(function(){ countUp(e.target); }, i * 90); ioFig.unobserve(e.target); }
+    });
+  }, {threshold:.4});
+  figs.forEach(function(e){ ioFig.observe(e); });
+
+  var ioRv = new IntersectionObserver(function(entries){
+    entries.forEach(function(e, i){
+      if (e.isIntersecting){ setTimeout(function(){ e.target.classList.add('on'); }, i * 70); ioRv.unobserve(e.target); }
+    });
+  }, {threshold:.12});
+  revs.forEach(function(e){ ioRv.observe(e); });
+
+  setTimeout(function(){
+    revs.forEach(function(e){ e.classList.add('on'); });
+    figs.forEach(function(e){ if (e.textContent === '0') render(e, parseFloat(e.getAttribute('data-to'))); });
+  }, 2500);
+})();
+</script>
+
+</body>
+</html>
