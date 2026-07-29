@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing matinal com o Claude: seu dia inteiro pronto antes do primeiro e-mail | A Virada IA · Bruna Santanna</title>
+    <meta name="description" content="Todo dia de manhã o Claude lê sua agenda, seus e-mails e suas tarefas e te entrega o dia pronto. Como montar esse briefing automático em 3 passos.">
+    <meta name="author" content="Bruna Santanna">
+    <link rel="canonical" href="https://brunasantanna.com/guia-briefing-manha">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://brunasantanna.com/guia-briefing-manha">
+    <meta property="og:title" content="Briefing matinal com o Claude: seu dia inteiro pronto antes do primeiro e-mail | A Virada IA">
+    <meta property="og:description" content="Todo dia de manhã o Claude lê sua agenda, seus e-mails e suas tarefas e te entrega o dia pronto. Como montar esse briefing automático em 3 passos.">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DCW0QVCWB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-7DCW0QVCWB');
+    </script>
+
+    <!-- JSON-LD: Article -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Briefing matinal com o Claude: seu dia inteiro pronto antes do primeiro e-mail",
+        "description": "Todo dia de manhã o Claude lê sua agenda, seus e-mails e suas tarefas e te entrega o dia pronto. Como montar esse briefing automático em 3 passos.",
+        "inLanguage": "pt-BR",
+        "url": "https://brunasantanna.com/guia-briefing-manha",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://brunasantanna.com/guia-briefing-manha"
+        },
+        "datePublished": "2026-07-29",
+        "dateModified": "2026-07-29",
+        "author": {
+            "@type": "Person",
+            "name": "Bruna Santanna",
+            "url": "https://brunasantanna.com",
+            "sameAs": [
+                "https://instagram.com/brusantanna.ai",
+                "https://www.linkedin.com/in/bruna-araujo-santanna/"
+            ]
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "A Virada IA · Bruna Santanna",
+            "url": "https://brunasantanna.com"
+        },
+        "about": "Produtividade"
+    }
+    </script>
+
+    <!-- JSON-LD: FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Preciso de algum plano pago pra deixar o briefing rodando sozinho?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "O briefing automático depende de duas coisas: os conectores (Google Calendar, Gmail, Notion) e uma tarefa agendada no Cowork, que é o modo do Claude que trabalha sozinho enquanto você faz outra coisa. Se você já usa o Cowork, é só pedir e ele agenda. Sem isso, você ainda consegue o mesmo briefing pedindo na mão toda manhã, só não chega pronto antes de você abrir o computador."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "O Claude vai ler todos os meus e-mails?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Ele lê o que o conector deixa ele ver, e só quando a tarefa roda. Na prática, pro briefing ele olha os e-mails recentes pra entender contexto de reunião e o que virou pendência. Se tem caixa que você não quer no meio disso, diga isso no pedido: fale quais remetentes ou marcadores importam e quais ele deve ignorar."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Funciona com Outlook, Notion e outras ferramentas?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Funciona. Quando você pede o briefing, o próprio Claude te pergunta o que você usa: Gmail ou Outlook, onde fica sua lista de tarefas, qual calendário vale. Dá pra conectar Notion, Monday e outros serviços de organização. O importante é que a informação esteja num lugar que ele consiga acessar, porque é de lá que ele monta o resumo."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <!-- JSON-LD: Person -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Bruna Santanna",
+        "url": "https://brunasantanna.com",
+        "jobTitle": "Estrategista de IA",
+        "description": "Fundadora da NewScale e criadora de A Virada IA. Ensina profissionais e empresas a usarem IA na prática, sem programar.",
+        "sameAs": [
+            "https://instagram.com/brusantanna.ai",
+            "https://www.linkedin.com/in/bruna-araujo-santanna/"
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg:#F3EEE3; --bg-2:#ECE5D6; --card:#FBF9F3;
+            --ink:#14373C; --ink-2:#2C4F54; --green:#435D51;
+            --terra:#B06E4A; --terra-l:#C4835E; --terra-d:#985A3B;
+            --text:#233133; --muted:#6E7A75; --line:rgba(20,55,60,0.16);
+            --cream:#F4F3EF;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family:'Hanken Grotesk',sans-serif; background:var(--bg); color:var(--text); line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+        img { max-width:100%; display:block; }
+        a { color:inherit; text-decoration:none; }
+        ::selection { background:var(--terra); color:#fff; }
+        .wrap { max-width:1100px; margin:0 auto; padding:0 30px; }
+        .kick { font-size:0.72rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--terra); }
+
+        /* ---------- HEADER ---------- */
+        .site-header { position:sticky; top:0; z-index:50; background:rgba(243,238,227,0.92); backdrop-filter:blur(8px); border-bottom:2px solid var(--ink); }
+        .header-inner { display:flex; align-items:center; justify-content:space-between; gap:24px; max-width:1100px; padding:16px 30px; }
+        .logo { display:inline-flex; align-items:center; white-space:nowrap; font-family:'Anton',sans-serif; font-size:1.2rem; letter-spacing:0.02em; text-transform:uppercase; color:var(--ink); }
+        .logo .brand-tag { font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:0.62rem; letter-spacing:0.12em; color:var(--terra); border:1.5px solid var(--terra); padding:3px 8px; border-radius:100px; margin-left:10px; }
+        .main-nav { display:flex; align-items:center; gap:14px; }
+        .main-nav a { font-size:0.86rem; font-weight:600; color:var(--ink-2); white-space:nowrap; transition:color .18s; }
+        .main-nav a:hover, .main-nav a.active { color:var(--terra); }
+        .nav-cta { background:var(--terra); color:#fff !important; padding:10px 18px; border-radius:100px; font-size:0.8rem !important; transition:background .2s, transform .15s; }
+        .nav-cta:hover { background:var(--terra-d); transform:translateY(-1px); }
+        .nav-toggle { display:none; background:none; border:none; font-size:1.5rem; color:var(--ink); cursor:pointer; line-height:1; }
+        @media (max-width: 1180px) {
+            .nav-toggle { display:block; }
+            .main-nav { display:none; position:absolute; top:100%; left:0; right:0; flex-direction:column; align-items:flex-start; gap:0; background:var(--bg); border-bottom:2px solid var(--ink); padding:8px 30px 20px; }
+            .main-nav.open { display:flex; box-shadow:0 28px 46px -20px rgba(20,55,60,0.55); max-height:calc(100dvh - 62px); overflow-y:auto; }
+            .site-header:has(.main-nav.open)::after { content:""; position:fixed; left:0; right:0; top:62px; bottom:0; background:rgba(20,55,60,0.38); z-index:40; pointer-events:none; }
+            .main-nav a { padding:12px 0; width:100%; border-top:1px solid var(--line); font-size:1rem; }
+            .nav-cta { margin-top:12px; text-align:center; border-top:none; }
+        }
+
+        /* botão genérico */
+        .btn { display:inline-flex; align-items:center; gap:9px; justify-content:center; font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:0.85rem; letter-spacing:0.04em; text-transform:uppercase; padding:15px 28px; border-radius:100px; border:none; cursor:pointer; transition:transform .15s, box-shadow .15s, background .2s; }
+        .btn-terra { background:var(--terra); color:#fff; }
+        .btn-terra:hover { background:var(--terra-d); transform:translateY(-2px); box-shadow:0 10px 26px rgba(176,110,74,.35); }
+        .btn-ink { background:var(--ink); color:#fff; }
+        .btn-ink:hover { background:var(--ink-2); transform:translateY(-2px); }
+
+        /* ---------- HERO COMPACTO ---------- */
+        .hero { position:relative; overflow:hidden; border-bottom:1.5px solid var(--line); }
+        .hero-glow { position:absolute; width:560px; height:560px; border-radius:50%; top:-240px; right:-160px; background:radial-gradient(circle,rgba(176,110,74,.13),transparent 62%); pointer-events:none; }
+        .hero .wrap { position:relative; z-index:2; padding:54px 30px 48px; max-width:820px; }
+        .hero-eyebrow { display:inline-flex; align-items:center; gap:9px; margin-bottom:20px; flex-wrap:wrap; }
+        .hero-eyebrow .dot { width:7px; height:7px; border-radius:50%; background:var(--terra); box-shadow:0 0 0 4px rgba(176,110,74,.18); }
+        .hero-eyebrow .sep { color:var(--line); }
+        .hero-eyebrow .data { font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); }
+        .hero h1 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(2.4rem,7vw,4.2rem); line-height:0.94; letter-spacing:-0.01em; text-transform:uppercase; color:var(--ink); }
+        .hero h1 .terra { color:var(--terra); }
+        .hero-sub { font-size:1.12rem; color:var(--ink-2); font-weight:300; max-width:54ch; margin-top:20px; }
+        .hero-sub b { color:var(--ink); font-weight:600; }
+
+        /* ---------- LAYOUT ARTIGO ---------- */
+        .artigo { padding:56px 0 40px; }
+        .artigo .wrap { max-width:760px; }
+
+        /* corpo do post */
+        .corpo { font-size:1.06rem; color:var(--text); line-height:1.75; }
+        .corpo > p { margin-bottom:20px; }
+        .corpo > p:first-of-type { font-size:1.16rem; color:var(--ink-2); }
+        .corpo h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.6rem,4.5vw,2.2rem); text-transform:uppercase; color:var(--ink); line-height:1.05; letter-spacing:-0.01em; margin:44px 0 16px; }
+        .corpo h3 { font-size:1.2rem; font-weight:700; color:var(--ink); margin:30px 0 10px; }
+        .corpo a { color:var(--terra-d); font-weight:600; border-bottom:1.5px solid var(--terra); }
+        .corpo a:hover { color:var(--terra); }
+        .corpo strong, .corpo b { color:var(--ink); font-weight:700; }
+        .corpo ul { list-style:none; margin:6px 0 22px; padding:0; }
+        .corpo ul li { position:relative; padding-left:26px; margin-bottom:12px; }
+        .corpo ul li::before { content:'→'; position:absolute; left:0; top:0; color:var(--terra); font-weight:800; }
+        .corpo ol { margin:6px 0 22px 22px; }
+        .corpo ol li { margin-bottom:12px; padding-left:6px; }
+        .corpo ol li::marker { color:var(--terra); font-weight:800; }
+
+        /* blocos didáticos */
+        .bloco { border-radius:14px; padding:22px 24px 22px 26px; margin:26px 0; border:1.5px solid var(--line); }
+        .bloco .bloco-tag { display:block; font-size:0.72rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:8px; }
+        .bloco p { font-size:0.98rem; line-height:1.65; margin:0; }
+        .bloco p + p { margin-top:10px; }
+        .bloco-dica { background:rgba(67,93,81,0.08); border-left:5px solid var(--green); }
+        .bloco-dica .bloco-tag { color:var(--green); }
+        .bloco-atencao { background:rgba(176,110,74,0.09); border-left:5px solid var(--terra); }
+        .bloco-atencao .bloco-tag { color:var(--terra-d); }
+        .bloco-case { background:var(--ink); border-left:5px solid var(--terra-l); border-color:var(--ink); }
+        .bloco-case .bloco-tag { color:var(--terra-l); }
+        .bloco-case p { color:rgba(244,243,239,.88); }
+        .bloco-case b { color:#fff; }
+
+        /* antes/depois */
+        .antes-depois { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:26px 0; }
+        @media (max-width:600px) { .antes-depois { grid-template-columns:1fr; } }
+        .ad-ruim, .ad-bom { border-radius:12px; padding:18px 20px; font-size:0.95rem; line-height:1.6; border:1.5px solid var(--line); }
+        .ad-ruim { background:rgba(150,90,59,0.06); }
+        .ad-bom { background:rgba(67,93,81,0.08); }
+        .ad-ruim .ad-label, .ad-bom .ad-label { display:block; font-size:0.74rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:8px; }
+        .ad-ruim .ad-label { color:var(--terra-d); }
+        .ad-bom .ad-label { color:var(--green); }
+
+        /* prompt box com botão copiar */
+        .prompt-box { background:var(--ink); border-radius:16px; padding:22px 24px; margin:28px 0; position:relative; box-shadow:8px 8px 0 var(--green); }
+        .prompt-box .pb-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; }
+        .prompt-box .pb-label { font-size:0.72rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--terra-l); }
+        .prompt-box pre { font-family:'Hanken Grotesk',ui-monospace,monospace; font-size:0.95rem; line-height:1.6; color:rgba(244,243,239,.92); white-space:pre-wrap; word-wrap:break-word; margin:0; }
+        .copy-btn { flex-shrink:0; display:inline-flex; align-items:center; gap:6px; background:var(--terra); color:#fff; border:none; border-radius:100px; padding:8px 16px; font-family:'Hanken Grotesk',sans-serif; font-size:0.74rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer; transition:background .2s, transform .15s; }
+        .copy-btn:hover { background:var(--terra-d); transform:translateY(-1px); }
+        .copy-btn.copied { background:var(--green); }
+
+        /* continue aprendendo */
+        .continue { margin:40px 0 8px; }
+        .continue h3 { font-family:'Anton',sans-serif; font-weight:400; font-size:1.3rem; text-transform:uppercase; color:var(--ink); letter-spacing:0.01em; margin-bottom:14px; }
+
+        /* ---------- CONTENT UPGRADE (gated) ---------- */
+        .upgrade { margin:52px 0; }
+        .upgrade .wl-card { background:var(--ink); color:#fff; border-radius:18px; padding:34px 32px; box-shadow:8px 8px 0 var(--terra); }
+        .upgrade .wl-card .kick { color:var(--terra-l); display:block; margin-bottom:12px; }
+        .upgrade .wl-card h3 { font-family:'Anton',sans-serif; font-weight:400; font-size:1.7rem; text-transform:uppercase; line-height:1; margin-bottom:8px; }
+        .upgrade .wl-card .wl-sub { font-size:0.95rem; color:rgba(255,255,255,0.72); margin-bottom:22px; max-width:46ch; }
+        .upgrade .wl-form { display:flex; gap:10px; flex-wrap:wrap; }
+        .field { flex:1; min-width:220px; padding:16px 20px; font-family:inherit; font-size:1rem; background:rgba(255,255,255,0.07); border:1.5px solid rgba(255,255,255,0.22); border-radius:10px; color:#fff; outline:none; transition:border-color .2s, background .2s; }
+        .field::placeholder { color:rgba(255,255,255,0.5); }
+        .field:focus { border-color:var(--terra); background:rgba(255,255,255,0.12); }
+        .btn-form { padding:16px 26px; font-family:'Hanken Grotesk',sans-serif; font-size:0.82rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer; background:var(--terra); color:#fff; border:none; border-radius:10px; transition:transform .15s, box-shadow .15s, background .2s; white-space:nowrap; }
+        .btn-form:hover { background:var(--terra-d); transform:translateY(-2px); box-shadow:0 8px 22px rgba(176,110,74,0.35); }
+        .btn-form:disabled { opacity:.6; cursor:not-allowed; transform:none; }
+        .upgrade .fine { margin-top:14px; font-size:0.76rem; color:rgba(255,255,255,0.55); }
+        .wl-ok { display:none; background:rgba(67,93,81,0.35); border:1.5px solid var(--terra-l); border-radius:10px; padding:18px 20px; font-size:0.98rem; line-height:1.5; color:#fff; }
+        .wl-ok b { color:var(--terra-l); }
+        .wl-done .wl-ok { display:block; }
+        .wl-done .wl-form, .wl-done .fine { display:none; }
+
+        /* ---------- FAQ ---------- */
+        .faq-sec { padding:8px 0 20px; }
+        .faq-sec .wrap { max-width:760px; }
+        .faq-sec h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.6rem,4.5vw,2.2rem); text-transform:uppercase; color:var(--ink); line-height:1; margin-bottom:22px; }
+        .faq-list { max-width:760px; }
+        .faq-item { border:1.5px solid var(--line); border-radius:14px; background:var(--card); margin-bottom:12px; overflow:hidden; }
+        .faq-q { width:100%; display:flex; justify-content:space-between; align-items:center; gap:16px; text-align:left; background:none; border:none; cursor:pointer; padding:20px 24px; font-family:'Hanken Grotesk',sans-serif; font-size:1.02rem; font-weight:700; color:var(--ink); }
+        .faq-q .mark { font-family:'Anton',sans-serif; font-size:1.3rem; color:var(--terra); transition:transform .25s; flex-shrink:0; line-height:1; }
+        .faq-item.open .faq-q .mark { transform:rotate(45deg); }
+        .faq-a { display:none; padding:0 24px 22px; font-size:0.96rem; color:var(--ink-2); line-height:1.7; }
+        .faq-item.open .faq-a { display:block; }
+        .faq-a b { color:var(--ink); }
+
+        /* ---------- BANNER DO CURSO ---------- */
+        .curso-banner { background:var(--ink); color:var(--cream); margin:40px 0 0; }
+        .curso-banner .wrap { max-width:900px; padding:56px 30px; display:flex; align-items:center; justify-content:space-between; gap:30px; flex-wrap:wrap; }
+        .curso-banner .cb-text { flex:1; min-width:260px; }
+        .curso-banner .kick { color:var(--terra-l); display:block; margin-bottom:12px; }
+        .curso-banner h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.7rem,5vw,2.6rem); text-transform:uppercase; color:#fff; line-height:1; margin-bottom:12px; max-width:20ch; }
+        .curso-banner h2 .terra { color:var(--terra-l); }
+        .curso-banner p { color:rgba(244,243,239,.72); font-weight:300; font-size:1rem; max-width:46ch; }
+
+        /* volta pro hub */
+        .voltar-hub { text-align:center; padding:40px 0 8px; }
+        .voltar-hub a { font-size:0.9rem; font-weight:700; letter-spacing:0.02em; color:var(--ink); border-bottom:2px solid var(--terra); padding-bottom:3px; transition:color .18s; }
+        .voltar-hub a:hover { color:var(--terra); }
+
+        /* footer */
+        footer { background:var(--ink); color:rgba(244,243,239,.6); padding:40px 0 48px; margin-top:30px; }
+        .footer-row { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+        .footer-brand { font-family:'Anton',sans-serif; font-size:1.1rem; text-transform:uppercase; color:#fff; }
+        .footer-links { display:flex; gap:20px; flex-wrap:wrap; }
+        .footer-links a { font-size:0.84rem; font-weight:600; color:rgba(244,243,239,.7); }
+        .footer-links a:hover { color:var(--terra-l); }
+        .footer-copy { font-size:0.76rem; color:rgba(244,243,239,.4); margin-top:14px; }
+
+        /* reveal */
+        .rv { opacity:0; transform:translateY(22px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+        .rv.in { opacity:1; transform:none; }
+        @media (prefers-reduced-motion:reduce) { .rv { opacity:1; transform:none; } }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="wrap header-inner">
+        <a href="/" class="logo">Bruna Santanna<span class="brand-tag">A Virada IA</span></a>
+        <nav class="main-nav" id="mainNav">
+            <a href="/">Home</a>
+            <a href="/biblioteca">Biblioteca</a>
+            <a href="/claude">Guia do Claude</a>
+            <a href="/quem-sou">Quem Sou</a>
+            <a href="/treinamentos">Treinamentos Corporativos</a>
+            <a href="/mentoria">Mentoria</a>
+            <a href="https://newscale.tech" target="_blank" rel="noopener">IA na sua Empresa</a>
+            <a href="/comece" class="nav-cta">Cursos</a>
+        </nav>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">☰</button>
+    </div>
+</header>
+
+<!-- ========== HERO COMPACTO ========== -->
+<section class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="wrap">
+        <div class="hero-eyebrow rv">
+            <span class="dot"></span>
+            <span class="kick">Produtividade</span>
+            <span class="sep">·</span>
+            <span class="data">Julho de 2026</span>
+        </div>
+        <h1 class="rv">Briefing matinal com o Claude: seu dia inteiro pronto antes do <span class="terra">primeiro e-mail</span></h1>
+        <p class="hero-sub rv">Ele lê a agenda, os e-mails e as tarefas, separa as reuniões que pedem preparo e te entrega tudo organizado antes de você abrir o computador.</p>
+    </div>
+</section>
+
+<!-- ========== ARTIGO ========== -->
+<article class="artigo">
+    <div class="wrap">
+
+        <div class="corpo rv">
+
+            <p>Um briefing matinal automático é uma tarefa agendada no Claude que roda todo dia antes de você começar a trabalhar. Ele puxa sua agenda, seus e-mails e sua lista de tarefas, entende o que é prioridade e te entrega o dia organizado: quais reuniões pedem preparo, o que precisa de material antes e onde você só vai ouvir.</p>
+
+            <p>Eu passei anos abrindo o computador de manhã e queimando os primeiros quarenta minutos só decidindo por onde começar. Abria o e-mail, abria a agenda, olhava a lista de tarefas, e no meio disso já tinha respondido três coisas que não eram urgentes. O dia começava reagindo.</p>
+
+            <p>Hoje o Claude me manda o dia pronto antes de eu abrir o primeiro e-mail. E o ganho principal não foi tempo, foi outra coisa que eu não esperava.</p>
+
+            <h2>O ganho não é tempo, é ansiedade</h2>
+
+            <p>Todo mundo vende automação prometendo horas economizadas. O briefing economiza tempo, sim, mas o que mudou de verdade foi acordar sabendo exatamente o que fazer.</p>
+
+            <p>Aquela sensação de abrir o notebook e sentir o peso de não saber onde a bomba está: isso acabou. Quando alguém te entrega o mapa do dia antes de você entrar nele, você começa no controle em vez de correndo atrás.</p>
+
+            <p>O que chega no meu todo dia:</p>
+
+            <ul>
+                <li>As <b>reuniões do dia</b>, separadas entre as que pedem material preparado antes e as que eu entro só de ouvinte.</li>
+                <li>O que <b>virou pendência</b> nos e-mails que eu ainda não abri.</li>
+                <li>As <b>tarefas</b> que já estavam na minha lista e vencem hoje.</li>
+                <li>O contexto de cada reunião, puxado do histórico e do que ele já sabe sobre mim.</li>
+                <li>Até a <b>previsão do tempo</b>, porque eu pedi.</li>
+            </ul>
+
+            <div class="bloco bloco-dica rv">
+                <span class="bloco-tag">→ Dica</span>
+                <p>A parte que faz mais diferença é a que separa "reunião que pede preparo" de "reunião que eu só escuto". É isso que evita você chegar numa call e descobrir que era você quem devia levar o material.</p>
+            </div>
+
+            <h2>Passo 1: ligue os conectores</h2>
+
+            <p>O Claude não adivinha seu dia. Ele lê de algum lugar. Esse lugar são os conectores: as ferramentas que você autoriza ele a acessar.</p>
+
+            <p>No meu caso são três:</p>
+
+            <ul>
+                <li><b>Google Calendar</b>, que é de onde sai a agenda e os horários.</li>
+                <li><b>Gmail</b>, que é de onde sai o contexto das reuniões e o que virou pendência.</li>
+                <li><b>Notion</b>, que é onde vivem as minhas tarefas.</li>
+            </ul>
+
+            <p>Se você usa Outlook em vez de Gmail, ou Monday em vez de Notion, funciona igual. O que importa é a informação estar num lugar que ele consiga abrir, porque é de lá que ele monta o resumo. Sem conector, ele só sabe o que você digitar na conversa.</p>
+
+            <div class="bloco bloco-atencao rv">
+                <span class="bloco-tag">⚠ Atenção</span>
+                <p>Conector é acesso de verdade à sua caixa de entrada e à sua agenda. Vale ligar um por vez e olhar o que ele traz antes de ligar todos. Se existe caixa ou calendário que você prefere manter fora disso, diga isso no pedido em vez de contar com a sorte.</p>
+            </div>
+
+            <h2>Passo 2: peça no Cowork pra rodar toda manhã</h2>
+
+            <p>Aqui está o pulo do gato. Não é um prompt que você cola todo dia: é uma <b>tarefa agendada</b>. Você abre uma conversa nova no Cowork e pede pra ele fazer isso todas as manhãs, sozinho.</p>
+
+            <p>E fala com o máximo de detalhe possível. É a diferença entre um resumo genérico e um briefing que parece feito por alguém que te conhece. Cola esse prompt e troca o que está entre colchetes:</p>
+
+            <div class="prompt-box rv">
+                <div class="pb-head">
+                    <span class="pb-label">Prompt · briefing matinal agendado</span>
+                    <button class="copy-btn">Copiar</button>
+                </div>
+<pre>Quero que você monte e me entregue um briefing do meu dia, automaticamente,
+todas as manhãs às [HORÁRIO].
+
+QUEM EU SOU: [seu nome, o que você faz, quem são seus clientes]
+MINHAS FERRAMENTAS: [Google Calendar / Outlook, Gmail, Notion / Monday]
+
+O QUE O BRIEFING PRECISA TER:
+1. Minhas reuniões de hoje, com horário.
+2. Pra cada reunião: se eu preciso preparar material antes ou se eu entro
+   só de ouvinte. Use os e-mails e o convite pra decidir isso.
+3. O que virou pendência nos e-mails que eu ainda não abri.
+4. As tarefas que vencem hoje.
+5. [o que mais importa pra você: previsão do tempo, aniversários,
+   cobranças em aberto, follow-up de proposta]
+
+O QUE É PRIORIDADE PRA MIM: [ex.: cliente pagante vem antes de reunião
+interna; qualquer coisa de dinheiro vem primeiro]
+O QUE EU NÃO QUERO VER: [ex.: newsletters, notificações automáticas]
+
+FORMATO: [ex.: texto curto, em tópicos, que eu leia em 2 minutos no celular]
+
+Antes de agendar, me pergunte tudo que ficou faltando pra você acertar
+de primeira.</pre>
+            </div>
+
+            <p>Repare na última linha. Ela é de propósito: em vez de ele adivinhar, ele te entrevista. É o que faz o briefing sair do seu jeito na primeira semana em vez de na terceira.</p>
+
+            <h2>Passo 3: responda as perguntas e ajuste o formato</h2>
+
+            <p>Quando ele for gerar, o Claude vai te fazer perguntas. Se você usa Gmail ou Outlook. Onde fica sua lista de tarefas. Qual calendário vale. Responde tudo, e vai respondendo até ficar exatamente do jeito que você quer ler.</p>
+
+            <p>Você também pode customizar como o briefing chega. Eu pedi um formato que eu leio em dois minutos no celular, antes de sentar. Se você prefere uma tabela, ou dividido por período do dia, é só pedir.</p>
+
+            <div class="antes-depois">
+                <div class="ad-ruim">
+                    <span class="ad-label">❌ Pedido vago</span>
+                    "Me manda um resumo do meu dia toda manhã." Ele manda uma lista de compromissos que você já sabia, sem contexto e sem prioridade. Você lê uma vez e desiste na terceira manhã.
+                </div>
+                <div class="ad-bom">
+                    <span class="ad-label">✅ Pedido detalhado</span>
+                    Você diz quem é você, o que é prioridade, o que ignorar e em que formato ler. Ele entrega o dia com contexto e decisão tomada. Você abre e já sabe por onde começar.
+                </div>
+            </div>
+
+            <div class="bloco bloco-case rv">
+                <span class="bloco-tag">✦ Case real</span>
+                <p>A minha memória permanente é o que faz o briefing ficar bom de verdade: ele já sabe quem são meus clientes, quais projetos estão abertos e o que eu considero urgente, então não preciso reexplicar isso toda manhã. <b>Se a sua memória do Claude está vazia, o briefing começa mais burro do que precisa.</b></p>
+            </div>
+
+            <h2>O fechamento do dia, o par que quase ninguém faz</h2>
+
+            <p>O briefing da manhã é metade. No fim do dia eu tenho um fechamento: ele me conta como foi, o que ficou pendente e como vai ser o meu amanhã.</p>
+
+            <p>Isso fecha o ciclo. Você não termina o dia com a lista aberta na cabeça, e a manhã seguinte já começa com o contexto de ontem em vez de partir do zero. Se você for montar só um dos dois, comece pela manhã. Mas o fechamento é o que faz o hábito parar de depender de você lembrar.</p>
+
+            <h2>O que fazer hoje</h2>
+
+            <ol>
+                <li>Ligue os conectores das ferramentas onde seu dia realmente vive (calendário, e-mail, tarefas).</li>
+                <li>Abra uma conversa nova no Cowork e cole o prompt acima, preenchido com a sua realidade.</li>
+                <li>Responda as perguntas que ele fizer, sem pressa, até o formato ficar do seu jeito.</li>
+                <li>Deixe rodar três manhãs e ajuste o que sobrou ou faltou.</li>
+                <li>Quando a manhã estiver redonda, peça o fechamento do fim do dia.</li>
+            </ol>
+
+            <p>Não é mágica, é a informação que já era sua chegando organizada na hora em que ela decide o seu dia.</p>
+
+            <div class="continue rv">
+                <h3>Continue aprendendo</h3>
+                <ul>
+                    <li>Pra deixar o e-mail redondo antes de virar briefing: <a href="/guia-gmail-inbox">zere sua caixa de entrada com o Claude conectado ao Gmail</a>.</li>
+                    <li>Pra entender o Cowork, que é quem roda a tarefa sozinho: <a href="/guia-cowork-no-celular">o Claude Cowork agora cabe no seu bolso</a>.</li>
+                    <li>Pra o briefing te conhecer de verdade: <a href="/guia-memoria-claude">a memória do Claude mudou, agora ele lembra do seu negócio</a>.</li>
+                    <li>Se você ainda está começando, o passo a passo do zero está no <a href="/claude">Guia do Claude</a>. Os outros guias ficam na <a href="/biblioteca">Biblioteca</a>.</li>
+                </ul>
+            </div>
+
+                </div>
+
+        <!-- ─── CONTENT UPGRADE (gated → list: 'biblioteca') ───────────── -->
+        <div class="upgrade rv">
+            <div class="wl-card" id="upgradeCard">
+                <span class="kick">Guia grátis · PDF</span>
+                <h3>O Guia Completo do Claude em PDF</h3>
+                <p class="wl-sub">Meu guia do Claude do zero ao avançado, em PDF pra você salvar e consultar quando quiser. Deixa seu email que eu libero na hora, e você ainda entra na Biblioteca.</p>
+                <form class="wl-form" novalidate>
+                    <input class="field" type="email" placeholder="Seu melhor email" required autocomplete="email">
+                    <button type="submit" class="btn-form">Quero o guia do Claude</button>
+                </form>
+                <div class="wl-ok"><b>Prontinho, tá dentro.</b> Baixa agora: <a href="/guia-claude-bruna.pdf" target="_blank" rel="noopener">o Guia Completo do Claude em PDF</a>. As próximas novidades da Biblioteca chegam no seu email.</div>
+                <p class="fine">Zero spam. Só o que vale a pena sobre IA na prática.</p>
+            </div>
+        </div>
+
+    </div>
+</article>
+
+<!-- ========== FAQ ========== -->
+<section class="faq-sec">
+    <div class="wrap">
+        <h2 class="rv">Dúvidas rápidas</h2>
+        <div class="faq-list rv">
+            <div class="faq-item">
+                <button class="faq-q">Preciso de algum plano pago pra deixar o briefing rodando sozinho?<span class="mark">+</span></button>
+                <div class="faq-a">O briefing automático depende de duas coisas: os conectores (Google Calendar, Gmail, Notion) e uma tarefa agendada no Cowork, que é o modo do Claude que trabalha sozinho enquanto você faz outra coisa. Se você já usa o Cowork, é só pedir e ele agenda. Sem isso, você ainda consegue o mesmo briefing pedindo na mão toda manhã, só não chega pronto antes de você abrir o computador.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">O Claude vai ler todos os meus e-mails?<span class="mark">+</span></button>
+                <div class="faq-a">Ele lê o que o conector deixa ele ver, e só quando a tarefa roda. Na prática, pro briefing ele olha os e-mails recentes pra entender contexto de reunião e o que virou pendência. Se tem caixa que você não quer no meio disso, diga isso no pedido: fale quais remetentes ou marcadores importam e quais ele deve ignorar.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Funciona com Outlook, Notion e outras ferramentas?<span class="mark">+</span></button>
+                <div class="faq-a">Funciona. Quando você pede o briefing, o próprio Claude te pergunta o que você usa: Gmail ou Outlook, onde fica sua lista de tarefas, qual calendário vale. Dá pra conectar Notion, Monday e outros serviços de organização. O importante é que a informação esteja num lugar que ele consiga acessar, porque é de lá que ele monta o resumo.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== BANNER DO CURSO ========== -->
+<section class="curso-banner">
+    <div class="wrap">
+        <div class="cb-text">
+            <span class="kick">Curso de Claude · Turma 1</span>
+            <h2>Quer ir <span class="terra">além</span> desse guia?</h2>
+            <p>No Claude com Profundidade 2.0 você aprende a pensar e usar IA de verdade, do zero, sem programar. Gravado em estúdio, acesso imediato, 12x de R$35,89.</p>
+        </div>
+        <a href="/curso" class="btn btn-terra">Quero o curso</a>
+    </div>
+</section>
+
+<!-- volta pro hub -->
+<div class="voltar-hub">
+    <a href="/biblioteca">← Voltar pra Biblioteca</a>
+</div>
+
+<footer>
+    <div class="wrap">
+        <div class="footer-row">
+            <span class="footer-brand">A Virada IA</span>
+            <nav class="footer-links">
+                <a href="/biblioteca">Biblioteca</a>
+                <a href="/claude">Guia do Claude</a>
+                <a href="/curso">Curso de Claude</a>
+                <a href="/mentoria">Mentoria</a>
+                <a href="/comece">Comece por aqui</a>
+                <a href="https://instagram.com/brusantanna.ai" target="_blank" rel="noopener">Instagram</a>
+                <a href="https://newscale.tech" target="_blank" rel="noopener">NewScale</a>
+                <a href="mailto:eu@brunasantanna.com">Contato</a>
+            </nav>
+        </div>
+        <p class="footer-copy">© 2026 Bruna Santanna · A Virada IA</p>
+    </div>
+</footer>
+
+<script>
+    // ===== Copiar prompt =====
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const box = btn.closest('.prompt-box');
+            const pre = box.querySelector('pre');
+            const text = pre ? pre.innerText : '';
+            navigator.clipboard.writeText(text).then(() => {
+                const original = btn.textContent;
+                btn.textContent = '✓ Copiado';
+                btn.classList.add('copied');
+                setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, 1800);
+            });
+        });
+    });
+
+    // ===== Content upgrade (Apps Script, list: 'biblioteca') =====
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx90IdrA_L6n3jVdoYBinBPxPfWq0h6Iua1MrI8gQ7-RgBXhU1rOqF9dM2n7mLdAeMW/exec";
+
+    document.querySelectorAll('.wl-form').forEach(form => {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const input = form.querySelector('input[type="email"]');
+            const btn = form.querySelector('button[type="submit"]');
+            const email = input.value.trim();
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { input.focus(); return; }
+            btn.disabled = true; btn.textContent = 'Enviando...';
+            try {
+                await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, list: 'biblioteca', timestamp: new Date().toISOString(), source: location.href }) });
+            } catch(_) {}
+            if (typeof gtag === 'function') gtag('event', 'lead_signup', { list: 'biblioteca' });
+            document.querySelectorAll('.upgrade .wl-card').forEach(c => c.classList.add('wl-done'));
+            localStorage.setItem('biblioteca_lead', '1');
+        });
+    });
+    if (localStorage.getItem('biblioteca_lead') === '1') {
+        document.querySelectorAll('.upgrade .wl-card').forEach(c => c.classList.add('wl-done'));
+    }
+
+    // ===== FAQ accordion =====
+    document.querySelectorAll('.faq-q').forEach(q => {
+        q.addEventListener('click', () => q.closest('.faq-item').classList.toggle('open'));
+    });
+
+    // ===== menu mobile =====
+    const navToggle = document.getElementById('navToggle'), mainNav = document.getElementById('mainNav');
+    navToggle.addEventListener('click', () => mainNav.classList.toggle('open'));
+    mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mainNav.classList.remove('open')));
+
+    // ===== reveal on scroll =====
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0, rootMargin:'0px 0px -40px 0px' });
+    document.querySelectorAll('.rv').forEach((el,i) => { el.style.transitionDelay = (i%3*70)+'ms'; io.observe(el); });
+    /* rv-safety: garante que o conteudo nunca fica invisivel */
+    setTimeout(function(){ document.querySelectorAll('.rv:not(.in)').forEach(function(el){ el.classList.add('in'); }); }, 2500);
+</script>
+
+<script src="/promo-sistema.js" defer></script>
+</body>
+</html>
