@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapeie o seu processo · Regina Rios × A Virada IA</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#F3EEE3; --bg-2:#ECE5D6; --card:#FBF9F3; --cream:#F4F3EF;
+  --ink:#14373C; --ink-2:#2C4F54; --green:#435D51;
+  --terra:#B06E4A; --terra-l:#C4835E; --terra-d:#985A3B;
+  --text:#233133; --muted:#6E7A75; --line:rgba(20,55,60,.2);
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Hanken Grotesk',sans-serif;background:var(--bg);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased;}
+::selection{background:var(--terra);color:#fff;}
+.wrap{max-width:980px;margin:0 auto;padding:0 24px;}
+
+/* header co-marca */
+.site-header{position:sticky;top:0;z-index:60;background:rgba(243,238,227,.94);backdrop-filter:blur(8px);border-bottom:2px solid var(--ink);}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 0;}
+.lock{display:inline-flex;align-items:center;gap:12px;}
+.lock img.oicon{height:30px;width:auto;display:block;}
+.lock .bs{font-family:'Anton',sans-serif;font-size:1rem;text-transform:uppercase;color:var(--ink);letter-spacing:.02em;}
+.lock .bs span{color:var(--terra);}
+.brand-tag{font-weight:700;font-size:.58rem;letter-spacing:.12em;color:var(--terra);border:1.5px solid var(--terra);padding:3px 10px;border-radius:100px;white-space:nowrap;}
+@media (max-width:520px){.lock .bs{font-size:.82rem;} .brand-tag{display:none;}}
+
+/* hero */
+.hero{position:relative;overflow:hidden;border-bottom:2px solid var(--ink);}
+.hero::before{content:"";position:absolute;top:-220px;right:-160px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(176,110,74,.16),transparent 62%);pointer-events:none;}
+.hero .wrap{position:relative;z-index:2;padding:56px 24px 46px;}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;margin-bottom:20px;}
+.eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--terra);box-shadow:0 0 0 4px rgba(176,110,74,.18);}
+.eyebrow span{font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--terra);}
+h1{font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(3rem,10.5vw,6rem);line-height:.88;text-transform:uppercase;color:var(--ink);}
+h1 .hl{color:#fff;background:var(--terra);padding:0 14px;box-shadow:6px 6px 0 var(--ink);display:inline-block;}
+.hero-sub{font-size:1.14rem;color:var(--ink-2);font-weight:300;max-width:54ch;margin:26px 0 0;}
+.hero-sub b{color:var(--ink);font-weight:600;}
+.hero-badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px;}
+.hbadge{font-size:.74rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);background:var(--card);border:2px solid var(--ink);border-radius:100px;padding:8px 16px;box-shadow:4px 4px 0 rgba(20,55,60,.18);}
+.hbadge.t{background:var(--ink);color:#fff;box-shadow:4px 4px 0 var(--terra);}
+
+/* sections */
+section{padding:52px 0;}
+.sec-head{display:flex;align-items:flex-start;gap:20px;margin-bottom:26px;}
+.sec-big{font-family:'Anton',sans-serif;font-size:clamp(3rem,8vw,4.6rem);color:var(--terra);line-height:.82;flex:0 0 auto;}
+.sec-head h2{font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(1.7rem,4.8vw,2.6rem);line-height:.94;text-transform:uppercase;color:var(--ink);}
+.sec-head h2 .terra{color:var(--terra);}
+.sec-head p{font-size:.98rem;color:var(--ink-2);font-weight:300;max-width:58ch;margin-top:8px;}
+.sec-kicker{font-size:.68rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--terra);}
+.band{background:var(--bg-2);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);}
+.dark{background:var(--ink);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);}
+.dark .sec-head h2{color:#fff;}
+.dark .sec-head p{color:rgba(244,243,239,.72);}
+.dark .sec-big{color:var(--terra-l);}
+.dark .sec-kicker{color:var(--terra-l);}
+
+/* q cards */
+.qgrid{display:grid;gap:16px;}
+.qcard{background:var(--card);border:2px solid var(--ink);border-radius:16px;padding:22px 22px;box-shadow:7px 7px 0 rgba(20,55,60,.14);transition:box-shadow .15s,transform .15s;}
+.qcard:focus-within{box-shadow:7px 7px 0 var(--terra);transform:translateY(-2px);}
+.qcard .qh{display:flex;align-items:center;gap:14px;margin-bottom:8px;}
+.qcard .qn{font-family:'Anton',sans-serif;font-size:1.9rem;color:var(--terra);line-height:1;}
+.qcard .qt{font-family:'Anton',sans-serif;font-weight:400;font-size:1.25rem;text-transform:uppercase;letter-spacing:.02em;color:var(--ink);}
+.qcard .qhint{font-size:.92rem;color:var(--muted);margin-bottom:12px;font-weight:300;}
+textarea,input[type=text]{width:100%;font-family:'Hanken Grotesk',sans-serif;font-size:.98rem;color:var(--text);background:var(--bg);border:1.5px solid var(--line);border-radius:11px;padding:13px 15px;transition:border-color .15s;}
+textarea:focus,input:focus{outline:none;border-color:var(--terra);}
+textarea{resize:vertical;min-height:78px;line-height:1.5;}
+.qcard.tacit{background:var(--ink);border-color:var(--ink);box-shadow:7px 7px 0 var(--terra);}
+.qcard.tacit .qt{color:#fff;}
+.qcard.tacit .qn{color:var(--terra-l);}
+.qcard.tacit .qhint{color:rgba(244,243,239,.62);}
+.qcard.tacit textarea{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.2);color:var(--cream);}
+.qcard.tacit textarea::placeholder{color:rgba(244,243,239,.4);}
+.tip{display:flex;gap:12px;background:rgba(67,93,81,.1);border:1.5px solid rgba(67,93,81,.32);border-radius:12px;padding:13px 16px;margin-top:18px;}
+.tip .b{flex:0 0 auto;font-size:.62rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--green);border-radius:100px;padding:4px 11px;height:fit-content;}
+.tip p{font-size:.9rem;color:var(--ink-2);font-weight:400;}
+.tip p b{color:var(--ink);font-weight:700;}
+
+/* task rows */
+.task-row{display:grid;grid-template-columns:1fr auto auto auto;gap:14px;align-items:center;background:var(--card);border:2px solid var(--ink);border-radius:14px;padding:14px 16px;margin-bottom:12px;box-shadow:5px 5px 0 rgba(20,55,60,.12);}
+@media (max-width:720px){.task-row{grid-template-columns:1fr;}}
+.task-row input[type=text]{background:var(--bg);}
+.seg{display:flex;flex-direction:column;gap:4px;}
+.seg .lab{font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+.toggle{display:flex;border:2px solid var(--ink);border-radius:100px;overflow:hidden;}
+.toggle button{font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:.76rem;padding:7px 15px;border:none;background:var(--card);color:var(--muted);cursor:pointer;transition:background .15s,color .15s;}
+.toggle button.on{background:var(--terra);color:#fff;}
+.task-del{background:none;border:none;color:var(--muted);font-size:1.4rem;cursor:pointer;line-height:1;padding:4px 8px;}
+.task-del:hover{color:var(--terra-d);}
+.addbtn{display:inline-flex;align-items:center;gap:8px;font-family:'Hanken Grotesk',sans-serif;font-weight:800;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;color:var(--terra-d);background:var(--card);border:2px dashed var(--terra);border-radius:100px;padding:12px 22px;cursor:pointer;transition:background .15s,transform .15s;}
+.addbtn:hover{background:rgba(176,110,74,.1);transform:translateY(-2px);}
+
+/* matriz */
+.matrix-wrap{display:grid;grid-template-columns:38px 1fr;gap:12px;align-items:stretch;}
+.m-y{display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:6px 0;}
+.m-y .cap{font-size:.68rem;font-weight:800;color:var(--muted);text-transform:uppercase;}
+.m-y .word{writing-mode:vertical-rl;transform:rotate(180deg);font-family:'Anton',sans-serif;font-size:1.15rem;letter-spacing:.08em;color:var(--terra);text-transform:uppercase;}
+.m-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:12px;min-height:440px;}
+.quad{border-radius:16px;padding:18px 18px 16px;display:flex;flex-direction:column;position:relative;min-height:210px;border:2px solid var(--ink);}
+.quad .qhh{font-size:.64rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;opacity:.85;}
+.quad .qvv{font-family:'Anton',sans-serif;font-size:1.3rem;text-transform:uppercase;line-height:1;margin:5px 0 8px;}
+.quad .qee{font-size:.8rem;font-weight:300;line-height:1.35;margin-bottom:10px;}
+.quad .drop{flex:1;display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start;}
+.chip{font-size:.82rem;font-weight:700;padding:7px 13px;border-radius:100px;background:#fff;color:var(--ink);border:2px solid var(--ink);box-shadow:2px 2px 0 rgba(20,55,60,.3);}
+.q-faz{background:var(--green);color:#fff;box-shadow:6px 6px 0 rgba(67,93,81,.35);}
+.q-ass{background:var(--terra);color:#fff;box-shadow:6px 6px 0 rgba(176,110,74,.35);}
+.q-rev{background:var(--card);color:var(--ink);box-shadow:6px 6px 0 rgba(20,55,60,.12);}
+.q-hum{background:var(--ink);color:var(--cream);box-shadow:6px 6px 0 rgba(20,55,60,.3);}
+.q-faz .chip,.q-ass .chip,.q-hum .chip{background:rgba(255,255,255,.16);color:#fff;border-color:rgba(255,255,255,.5);box-shadow:2px 2px 0 rgba(0,0,0,.2);}
+.q-faz .badge-start{position:absolute;top:-13px;right:14px;background:#fff;color:var(--green);font-size:.6rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;border:2px solid var(--green);border-radius:100px;padding:3px 10px;}
+.q-faz .selo{font-size:.66rem;font-weight:700;letter-spacing:.04em;opacity:.9;margin-top:6px;}
+.m-x{grid-column:2;display:flex;justify-content:space-between;align-items:center;padding:8px 2px 0;}
+.m-x .cap{font-size:.68rem;font-weight:800;color:var(--muted);text-transform:uppercase;}
+.m-x .word{font-family:'Anton',sans-serif;font-size:1.15rem;letter-spacing:.08em;color:var(--terra);text-transform:uppercase;}
+.emptyhint{font-size:.78rem;color:rgba(255,255,255,.55);font-style:italic;}
+.q-rev .emptyhint{color:var(--muted);}
+
+/* prompt boxes (secao final) */
+.pgrid{display:grid;gap:16px;}
+.pbox{background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.22);border-radius:16px;padding:20px 20px 18px;}
+.pbox .ph{font-family:'Anton',sans-serif;font-size:1.15rem;text-transform:uppercase;color:#fff;margin-bottom:6px;}
+.pbox .pq{font-size:.86rem;color:rgba(244,243,239,.7);font-weight:300;margin-bottom:12px;}
+.pbox .ptxt{font-family:'Hanken Grotesk',sans-serif;font-size:.95rem;color:var(--cream);background:rgba(0,0,0,.22);border-left:3px solid var(--terra-l);border-radius:0 10px 10px 0;padding:14px 16px;white-space:pre-wrap;line-height:1.5;}
+.pcopy{margin-top:12px;display:inline-flex;align-items:center;gap:8px;font-family:'Hanken Grotesk',sans-serif;font-weight:800;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);background:var(--terra-l);border:2px solid var(--terra-l);border-radius:100px;padding:9px 18px;cursor:pointer;transition:background .15s,transform .15s;}
+.pcopy:hover{background:#fff;border-color:#fff;transform:translateY(-2px);}
+
+/* actions */
+.actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:30px;}
+.btn{display:inline-flex;align-items:center;gap:9px;font-family:'Hanken Grotesk',sans-serif;font-weight:800;font-size:.85rem;letter-spacing:.04em;text-transform:uppercase;padding:15px 30px;border-radius:100px;border:2px solid var(--ink);cursor:pointer;transition:transform .15s,box-shadow .15s,background .2s;}
+.btn-terra{background:var(--terra);color:#fff;border-color:var(--ink);box-shadow:5px 5px 0 var(--ink);}
+.btn-terra:hover{background:var(--terra-d);transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink);}
+.btn-ink{background:var(--ink);color:#fff;box-shadow:5px 5px 0 var(--terra);}
+.btn-ink:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--terra);}
+.btn-ghost{background:var(--card);color:var(--ink);box-shadow:5px 5px 0 rgba(20,55,60,.15);}
+.btn-ghost:hover{transform:translate(-2px,-2px);}
+.saved{text-align:center;font-size:.84rem;color:var(--green);font-weight:700;margin-top:14px;min-height:22px;}
+.autosave{text-align:center;font-size:.78rem;color:var(--muted);font-weight:600;margin-top:2px;min-height:20px;transition:color .2s;}
+.autosave.on{color:var(--green);}
+
+/* footer */
+footer{background:var(--ink);color:rgba(244,243,239,.6);padding:32px 0 38px;}
+.footer-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.footer-brand{display:flex;align-items:center;gap:14px;}
+.footer-brand .t{font-family:'Anton',sans-serif;font-size:1rem;text-transform:uppercase;color:#fff;}
+.footer-brand img{height:26px;width:auto;display:block;opacity:.95;}
+.footer-copy{font-size:.74rem;color:rgba(244,243,239,.45);}
+
+.rv{opacity:0;transform:translateY(20px);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1);}
+.rv.in{opacity:1;transform:none;}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <span class="lock">
+      <span class="bs">A <span>Virada</span> IA × Regina Rios</span>
+    </span>
+    <span class="brand-tag">FORMAÇÃO CLAUDE · ENTRE O ENCONTRO 01 E O 02</span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span><span>Sua vez · mão na massa</span></div>
+    <h1>Mapeie o<br><span class="hl">seu processo</span></h1>
+    <p class="hero-sub">É o Fluxo da Virada na prática. Preencha aqui o processo que mais te incomoda — e traga pronto no Encontro 02, para <b>a gente construir junto</b> . <b>Se o processo está falho, a IA se perde junto. Se está claro, ela multiplica.</b> Preencha as fases e saia com o mapa do que dá pra delegar pro Claude.</p>
+    <div class="hero-badges">
+      <span class="hbadge t">1 · Sonho</span>
+      <span class="hbadge">2 · Raio-X</span>
+      <span class="hbadge">3 · Decisão</span>
+      <span class="hbadge">4 · Execução</span>
+    </div>
+  </div>
+</section>
+
+<!-- FASE 1 · SONHO -->
+<section>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-big">01</div>
+      <div>
+        <span class="sec-kicker">Fase 1 · Sonho</span>
+        <h2>Comece pelo <span class="terra">sonho</span></h2>
+        <p>Antes da tarefa, a meta. Se você não decidiu onde quer chegar, a IA também não sabe.</p>
+      </div>
+    </div>
+    <div class="qgrid rv">
+      <div class="qcard">
+        <div class="qh"><span class="qn">★</span><span class="qt">Qual é a meta?</span></div>
+        <div class="qhint">O resultado dos sonhos, em uma frase.</div>
+        <textarea id="p0" style="min-height:56px;" placeholder="Ex.: montar o e-mail marketing em 15 minutos em vez de uma manhã; nunca mais descobrir pedido atrasado pela reclamação da cliente."></textarea>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FASE 2 · RAIO-X -->
+<section class="band">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-big">02</div>
+      <div>
+        <span class="sec-kicker">Fase 2 · Raio-X</span>
+        <h2>Enxergue o que <span class="terra">você tem</span></h2>
+        <p>Pense na tarefa que te leva até essa meta. Responda do jeito que você contaria pra um colega — sem caprichar.</p>
+      </div>
+    </div>
+    <div class="qgrid rv">
+      <div class="qcard">
+        <div class="qh"><span class="qn">01</span><span class="qt">O que você faz?</span></div>
+        <div class="qhint">A tarefa em uma frase, e o resultado que ela entrega.</div>
+        <textarea id="p1" placeholder="Ex.: monto o e-mail marketing do dia: escolho o tema, os produtos, as fotos, escrevo o assunto e o texto."></textarea>
+      </div>
+      <div class="qcard">
+        <div class="qh"><span class="qn">02</span><span class="qt">Que informações você tem — e onde elas moram?</span></div>
+        <div class="qhint">Relatórios exportados, planilhas, fotos, e-mails, conversas, papel… e onde: Nuvemshop, Bling, Mártz, Excel, Drive, e-mail, WhatsApp, Instagram, na cabeça de alguém?</div>
+        <textarea id="p4" placeholder="Ex.: relatório de vendas da Nuvemshop, estoque no Bling, fotos no OneDrive, planilha da agência no Drive, e os combinados que só existem no WhatsApp."></textarea>
+      </div>
+      <div class="qcard">
+        <div class="qh"><span class="qn">03</span><span class="qt">Que entregável você espera?</span></div>
+        <div class="qhint">Texto pronto? Planilha? Lista de produtos? Conferência? Painel? Resposta pra cliente?</div>
+        <textarea id="p5" style="min-height:56px;" placeholder="Ex.: o e-mail pronto com assunto, pre-header e texto, com os produtos já escolhidos, sempre no mesmo formato."></textarea>
+      </div>
+      <div class="qcard">
+        <div class="qh"><span class="qn">04</span><span class="qt">Como você faz, passo a passo?</span></div>
+        <div class="qhint">O caminho que você percorre quase no automático. Liste os passos, na ordem.</div>
+        <textarea id="p2" placeholder="Ex.: abro a Nuvemshop, vejo o que vendeu, confiro o estoque no Bling, escolho as fotos no OneDrive, escrevo o texto e mando pra montagem."></textarea>
+      </div>
+      <div class="qcard tacit">
+        <div class="qh"><span class="qn">05</span><span class="qt">O que só está na sua cabeça?</span></div>
+        <div class="qhint">As regras que ninguém escreveu — e que fazem sair do seu jeito.</div>
+        <textarea id="p3" placeholder="Ex.: couro legítimo nunca entra em campanha de Sale; numeração 33 e 34 não vai pro e-mail; modelo com menos de 5 pares não vira destaque."></textarea>
+      </div>
+      <div class="qcard">
+        <div class="qh"><span class="qn">06</span><span class="qt">Quem mais entra nesse processo?</span></div>
+        <div class="qhint">Quem te manda alguma coisa, quem espera a sua entrega, quem faz um pedaco junto com voce. Escreva os nomes.</div>
+        <textarea id="p6" placeholder="Ex.: a Simone me manda as fotos, a Julia atualiza o preco antes, e a Nuzia confere o estoque depois."></textarea>
+      </div>
+    </div>
+    <div class="tip rv"><span class="b">Dica</span><p>A resposta 5 é a mais importante. <b>É o contexto que, escrito, faz o Claude parar de chutar</b> e trabalhar no padrão da Regina Rios.</p></div>
+  </div>
+</section>
+
+<!-- FASE 3 · DECISÃO -->
+<section>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-big">03</div>
+      <div>
+        <span class="sec-kicker">Fase 3 · Decisão</span>
+        <h2>Duas perguntas <span class="terra">por tarefa</span></h2>
+        <p>Liste as tarefas que você quer levar pro Claude. Pra cada uma: se errar, qual o risco? E acontece sempre do mesmo jeito? Elas se posicionam sozinhas na Matriz.</p>
+      </div>
+    </div>
+    <div id="tasks" class="rv"></div>
+    <button class="addbtn rv" onclick="addTask()">＋ Adicionar tarefa</button>
+  </div>
+</section>
+
+<!-- FASE 3 · MATRIZ -->
+<section class="band">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-big">04</div>
+      <div>
+        <span class="sec-kicker">Fase 3 · Decisão</span>
+        <h2>A Matriz <span class="terra">Risco × Repetição</span></h2>
+        <p>Quanto maior o estrago se errar, mais perto o humano fica. Quanto mais repetida, mais vale automatizar. Comece pelo canto de baixo, à direita.</p>
+      </div>
+    </div>
+    <div class="matrix-wrap rv">
+      <div class="m-y">
+        <div class="cap">Alto</div>
+        <div class="word">Risco</div>
+        <div class="cap">Baixo</div>
+      </div>
+      <div>
+        <div class="m-grid">
+          <div class="quad q-hum">
+            <div class="qhh">Alto risco · pouco repetido</div>
+            <div class="qvv">100% humano</div>
+            <div class="qee">A IA só ajuda a pensar. Você decide tudo. Ex.: fechar a compra da coleção com a fábrica.</div>
+            <div class="drop" data-q="hum"><span class="emptyhint">Suas tarefas caem aqui.</span></div>
+          </div>
+          <div class="quad q-ass">
+            <div class="qhh">Alto risco · muito repetido</div>
+            <div class="qvv">IA assiste, você decide</div>
+            <div class="qee">Ela aponta, o martelo é seu. Ex.: conferir o estoque do Bling contra a Nuvemshop.</div>
+            <div class="drop" data-q="ass"><span class="emptyhint">Suas tarefas caem aqui.</span></div>
+          </div>
+          <div class="quad q-rev">
+            <div class="qhh">Baixo risco · pouco repetido</div>
+            <div class="qvv">IA faz, você revisa</div>
+            <div class="qee">Ela monta, você lê e ajusta. Ex.: um relatório pontual pra uma reunião.</div>
+            <div class="drop" data-q="rev"><span class="emptyhint">Suas tarefas caem aqui.</span></div>
+          </div>
+          <div class="quad q-faz">
+            <span class="badge-start">Comece aqui</span>
+            <div class="qhh">Baixo risco · muito repetido</div>
+            <div class="qvv">IA assume, você valida</div>
+            <div class="qee">A rotina você passa pra IA — e valida. Ex.: escrever o descritivo de um modelo novo.</div>
+            <div class="drop" data-q="faz"><span class="emptyhint">Suas tarefas caem aqui.</span></div>
+            <div class="selo">O humano sempre valida.</div>
+          </div>
+        </div>
+        <div class="m-x">
+          <div class="cap">Baixa</div>
+          <div class="word">Repetição ▶</div>
+          <div class="cap">Alta</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions rv">
+      <button class="btn btn-terra" onclick="copyClaude(this)">Copiar prompt</button>
+      <button class="btn btn-ink" onclick="download()">Baixar o meu mapa</button>
+      <button class="btn btn-ghost" onclick="wipe()">Limpar tudo</button>
+    </div>
+    <div class="saved" id="saved"></div>
+    <div class="autosave" id="autosave">Suas respostas ficam salvas neste computador — pode fechar e voltar depois.</div>
+    <div class="tip rv" style="margin-top:20px;"><span class="b">Fase 4 · Execução</span><p><b>"Copiar prompt"</b> monta o prompt com as suas respostas dentro. Cole no seu Claude: ele vira estrategista — mostra onde a IA entra, o que vira skill, planilha ou rotina, e escreve o prompt longo pra executar tudo.</p></div>
+  </div>
+</section>
+
+<!-- SEGUNDA-FEIRA -->
+<section class="dark">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-big">05</div>
+      <div>
+        <span class="sec-kicker">Todo dia · a partir de agora</span>
+        <h2>A pergunta que <span class="terra">abre tudo</span></h2>
+        <p>Não precisa saber a resposta antes. Toda vez que você começar uma tarefa, faça esta pergunta ao próprio Claude — ele te mostra o caminho. É assim que a virada acontece: uma tarefa de cada vez.</p>
+      </div>
+    </div>
+    <div class="pgrid rv">
+      <div class="pbox">
+        <div class="ph">Antes de começar qualquer tarefa</div>
+        <div class="pq">Cole no Claude, trocando a tarefa pela sua.</div>
+        <div class="ptxt" id="pr1">Vou começar uma tarefa da minha rotina aqui na Regina Rios: [descreva a tarefa em uma ou duas frases].
+
+Você pode me ajudar nessa tarefa? Como? Me mostre as formas de me ajudar, da mais simples à mais completa.
+
+Antes de responder, me faça as perguntas que precisar pra entender o meu processo de verdade — uma de cada vez. Se faltar informação, pergunte em vez de chutar.</div>
+        <button class="pcopy" onclick="copyPrompt('pr1',this)">Copiar este prompt</button>
+      </div>
+      <div class="pbox">
+        <div class="ph">Quando a tarefa se repete toda semana</div>
+        <div class="pq">Deu certo uma vez? Então ensine uma vez e ele repete sempre.</div>
+        <div class="ptxt" id="pr2">Essa tarefa que acabamos de resolver eu repito [todo dia / toda semana] aqui na Regina Rios.
+
+Escreva o passo a passo do jeito que deu certo, com o prompt pronto pra eu colar da próxima vez, e me diga o que eu preciso te mandar em cada rodada (quais arquivos, quais informações).
+
+Depois me explique, em português simples, se vale transformar isso numa skill — e como eu faço.</div>
+        <button class="pcopy" onclick="copyPrompt('pr2',this)">Copiar este prompt</button>
+      </div>
+    </div>
+    <div class="saved" id="saved2" style="color:var(--terra-l);"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-row">
+    <div class="footer-brand">
+      <span class="t">A Virada IA · NewScale</span>
+    </div>
+    <div class="footer-copy">Formação Claude × Regina Rios · 2026</div>
+  </div>
+</footer>
+
+<script>
+const KEY='reginarios-mapa-processo-v1';
+let tasks=[];
+let booting=true;
+
+function quadOf(risco,rep){
+  if(risco==='alto'&&rep==='baixa')return'hum';
+  if(risco==='alto'&&rep==='alta')return'ass';
+  if(risco==='baixo'&&rep==='baixa')return'rev';
+  return'faz';
+}
+function render(){
+  const box=document.getElementById('tasks');
+  box.innerHTML='';
+  tasks.forEach((t,i)=>{
+    const row=document.createElement('div');
+    row.className='task-row';
+    row.innerHTML=`
+      <input type="text" placeholder="Nome da tarefa (ex.: montar o e-mail marketing do dia)" value="${(t.nome||'').replace(/"/g,'&quot;')}" oninput="updNome(${i},this.value)">
+      <div class="seg"><span class="lab">Se errar, qual o risco?</span>
+        <div class="toggle">
+          <button class="${t.risco==='baixo'?'on':''}" onclick="upd(${i},'risco','baixo')">Baixo</button>
+          <button class="${t.risco==='alto'?'on':''}" onclick="upd(${i},'risco','alto')">Alto</button>
+        </div>
+      </div>
+      <div class="seg"><span class="lab">Acontece sempre?</span>
+        <div class="toggle">
+          <button class="${t.rep==='baixa'?'on':''}" onclick="upd(${i},'rep','baixa')">Pouco</button>
+          <button class="${t.rep==='alta'?'on':''}" onclick="upd(${i},'rep','alta')">Muito</button>
+        </div>
+      </div>
+      <button class="task-del" title="Remover" onclick="del(${i})">×</button>`;
+    box.appendChild(row);
+  });
+  paintMatrix();
+  save();
+}
+function paintMatrix(){
+  document.querySelectorAll('.drop').forEach(d=>d.innerHTML='');
+  const has={hum:0,ass:0,rev:0,faz:0};
+  tasks.forEach(t=>{
+    if(!t.nome||!t.risco||!t.rep)return;
+    const q=quadOf(t.risco,t.rep);has[q]++;
+    const c=document.createElement('span');c.className='chip';c.textContent=t.nome;
+    document.querySelector(`.drop[data-q="${q}"]`).appendChild(c);
+  });
+  ['hum','ass','rev','faz'].forEach(q=>{
+    if(!has[q]){const d=document.querySelector(`.drop[data-q="${q}"]`);const h=document.createElement('span');h.className='emptyhint';h.textContent='Suas tarefas caem aqui.';d.appendChild(h);}
+  });
+}
+function addTask(){
+  tasks.push({nome:'',risco:'',rep:''});render();
+  const campos=document.querySelectorAll('#tasks input[type=text]');
+  if(campos.length)campos[campos.length-1].focus();
+}
+// Só o nome + a matriz: reconstruir as linhas aqui tiraria o foco do campo a cada tecla.
+function updNome(i,v){tasks[i].nome=v;paintMatrix();save();}
+function upd(i,k,v){tasks[i][k]=v;render();}
+function del(i){tasks.splice(i,1);render();}
+function txt(id){return (document.getElementById(id)||{}).value||'';}
+const AVISO_SALVO='Suas respostas ficam salvas neste computador — pode fechar e voltar depois.';
+let avisoT=null;
+function aviso(msg,ok){
+  const el=document.getElementById('autosave');
+  if(!el||booting)return;
+  el.textContent=msg;el.classList.toggle('on',!!ok);
+  clearTimeout(avisoT);
+  avisoT=setTimeout(()=>{el.textContent=AVISO_SALVO;el.classList.remove('on');},2400);
+}
+function save(){
+  try{
+    localStorage.setItem(KEY,JSON.stringify({p0:txt('p0'),p1:txt('p1'),p2:txt('p2'),p3:txt('p3'),p4:txt('p4'),p5:txt('p5'),p6:txt('p6'),tasks}));
+    aviso('Salvo neste computador ✓',true);
+  }catch(e){
+    aviso('Não consegui salvar aqui (navegação anônima?). Use "Baixar o meu mapa" pra não perder nada.',false);
+  }
+}
+function load(){
+  try{
+    const d=JSON.parse(localStorage.getItem(KEY)||'{}');
+    if(d.p0)document.getElementById('p0').value=d.p0;
+    if(d.p1)document.getElementById('p1').value=d.p1;
+    if(d.p4)document.getElementById('p4').value=d.p4;
+    if(d.p5)document.getElementById('p5').value=d.p5;
+    if(d.p2)document.getElementById('p2').value=d.p2;
+    if(d.p3)document.getElementById('p3').value=d.p3;
+    if(d.p6)document.getElementById('p6').value=d.p6;
+    tasks=Array.isArray(d.tasks)?d.tasks:[];
+  }catch(e){tasks=[];}
+  if(!tasks.length)tasks=[{nome:'',risco:'',rep:''}];
+  render();
+  booting=false;
+}
+['p0','p1','p2','p3','p4','p5','p6'].forEach(id=>document.getElementById(id).addEventListener('input',save));
+function flash(m,alvo){const s=document.getElementById(alvo||'saved');s.textContent=m;setTimeout(()=>s.textContent='',3200);}
+function wipe(){if(confirm('Limpar tudo que você preencheu?')){localStorage.removeItem(KEY);['p0','p1','p2','p3','p4','p5','p6'].forEach(id=>document.getElementById(id).value='');tasks=[{nome:'',risco:'',rep:''}];render();flash('Tudo limpo.');}}
+const rot={hum:'100% humano',ass:'IA assiste, você decide',rev:'IA faz, você revisa',faz:'IA assume, você valida (comece por aqui)'};
+function mapa(){
+  let o='O FLUXO DA VIRADA · MEU MAPA · Imersão Claude x Regina Rios\n\n';
+  o+='FASE 1 · SONHO (a meta):\n'+(txt('p0')||'(vazio)')+'\n\n';
+  o+='FASE 2 · RAIO-X\n';
+  o+='1. O que eu faço:\n'+(txt('p1')||'(vazio)')+'\n\n';
+  o+='2. Que informações eu tenho e onde elas moram:\n'+(txt('p4')||'(vazio)')+'\n\n';
+  o+='3. Que entregável eu espero:\n'+(txt('p5')||'(vazio)')+'\n\n';
+  o+='4. Como eu faço, passo a passo:\n'+(txt('p2')||'(vazio)')+'\n\n';
+  o+='5. O que só está na minha cabeça (o contexto):\n'+(txt('p3')||'(vazio)')+'\n\n';
+  o+='6. Quem mais entra nesse processo:\n'+(txt('p6')||'(vazio)')+'\n\n';
+  o+='FASE 3 · DECISAO\n';
+  o+='TAREFAS NA MATRIZ RISCO x REPETICAO:\n';
+  const val=tasks.filter(t=>t.nome&&t.risco&&t.rep);
+  if(!val.length)o+='(nenhuma tarefa classificada ainda)\n';
+  val.forEach(t=>{o+='- '+t.nome+'  ->  '+rot[quadOf(t.risco,t.rep)]+'\n';});
+  return o;
+}
+function copyClaude(btn){
+  const p=`Vou colar abaixo o meu mapa do Fluxo da Virada: a meta (sonho), o raio-x das informações e o meu processo, com as tarefas já classificadas na matriz risco x repetição. Trabalho na Regina Rios, marca de sapatos e sandálias femininas em couro.
+
+Quero que você seja meu estrategista de IA e me ajude a enxergar esse processo por inteiro. Faça o seguinte, na ordem:
+
+1. Primeiro, me faça todas as perguntas que precisar pra entender de verdade o processo. Uma de cada vez, e não avance enquanto tiver dúvida.
+2. Me mostre o que eu talvez NÃO esteja vendo: gargalos, retrabalho escondido, riscos, passos que dá pra cortar ou juntar.
+3. Aponte as oportunidades: o que dá pra deixar a IA fazer, onde eu economizo mais tempo e o que ganha mais qualidade. Respeite a matriz — quanto maior o risco, mais perto o humano fica, e a conferência é sempre minha.
+4. Sugira caminhos e ferramentas que eu poderia usar (skills, projetos, planilhas, arquivos exportados dos sistemas que eu já uso, conectores como Drive e Gmail), inclusive coisas que eu ainda não imaginei. Pode ser ousado nas ideias.
+5. Me diga o que cada parte deve virar: skill, rotina do dia, planilha ou uma combinação, e justifique.
+6. No fim, junte tudo num plano completo e escreva o PROMPT LONGO que eu colaria numa conversa nova pra executar de uma vez.
+
+Não invente fatos: se faltar informação, pergunte antes.
+
+---
+
+${mapa()}`;
+  navigator.clipboard.writeText(p).then(()=>{flash('Prompt copiado com as suas respostas. Cole no seu Claude.');}).catch(()=>{flash('Não consegui copiar — use o botão Baixar.');});
+}
+function copyPrompt(id,btn){
+  const t=document.getElementById(id).textContent;
+  navigator.clipboard.writeText(t).then(()=>{
+    const antigo=btn.textContent;btn.textContent='Copiado ✓';
+    flash('Prompt copiado. Cole no seu Claude.','saved2');
+    setTimeout(()=>btn.textContent=antigo,2400);
+  }).catch(()=>{flash('Não consegui copiar — selecione o texto e copie na mão.','saved2');});
+}
+function download(){
+  const o=mapa()+'\nRegra de ouro: quanto maior o estrago se errar, mais perto o humano fica.\n';
+  const b=new Blob([o],{type:'text/plain;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='meu-mapa-processo-regina-rios.txt';a.click();
+  flash('Mapa baixado. Traga no Encontro 02.');
+}
+load();
+const obs=new IntersectionObserver((es)=>{es.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('in'),i*50);obs.unobserve(e.target);}});},{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+setTimeout(()=>document.querySelectorAll('.rv:not(.in)').forEach(el=>el.classList.add('in')),2200);
+</script>
+</body>
+</html>
