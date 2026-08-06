@@ -610,6 +610,15 @@ deck-stage section::after{
 .iphone .btn-lat.vol2{ left:-3px; top:216px; width:4px; height:52px; }
 .iphone .btn-lat.pwr{ right:-3px; top:186px; width:4px; height:86px; }
 
+/* iPhone pequeno, para sobrepor a uma foto */
+.iphone.mini{ width:212px; padding:7px; border-radius:31px; box-shadow:0 26px 56px rgba(20,55,60,0.42), inset 0 0 0 1px rgba(255,255,255,0.18); }
+.iphone.mini .tela{ height:436px; border-radius:25px; }
+.iphone.mini .tela::after{ height:64px; }
+.iphone.mini .ilha{ top:8px; width:58px; height:16px; }
+.iphone.mini .ilha::after{ right:8px; width:5px; height:5px; }
+.iphone.mini .barrinha{ bottom:6px; width:72px; height:3px; }
+.iphone.mini .btn-lat{ display:none; }
+
 /* ── Link "abrir ao vivo" (não avança o slide ao clicar) ── */
 .abrir{ display:inline-flex; align-items:center; gap:9px; text-decoration:none;
   border:1px solid rgba(139,115,85,0.4); border-radius:999px; padding:7px 16px;
@@ -684,7 +693,7 @@ deck-stage section::after{
 <!-- ═══════════ 02 · QUEM CONDUZ ═══════════ -->
 <section class="bg-offwhite" data-label="Quem conduz esta aula">
   <div class="slide-inner">
-    <div style="display:grid; grid-template-columns:1fr 800px; gap:52px; flex:1; align-items:center;">
+    <div style="display:grid; grid-template-columns:1fr 600px; gap:58px; flex:1; align-items:stretch;">
       <div style="display:flex; flex-direction:column; justify-content:center;">
         <div class="kicker seq" data-step="1" style="font-size:16px;">QUEM CONDUZ ESTA AULA</div>
         <h2 class="slide-title seq" data-step="1" style="margin-top:14px; font-size:76px; line-height:0.96;">BRUNA<br>SANTANNA</h2>
@@ -715,16 +724,21 @@ deck-stage section::after{
         </div>
       </div>
 
-      <div class="seq-zoom" data-step="3" style="display:flex; flex-direction:column; align-items:center; gap:16px;">
-        <div class="iphone">
-          <span class="btn-lat vol1"></span><span class="btn-lat vol2"></span><span class="btn-lat pwr"></span>
+      <div class="seq-zoom" data-step="3" style="position:relative; align-self:stretch; margin:8px 0;">
+        <div style="position:absolute; inset:0; border-radius:20px; overflow:hidden; box-shadow:0 34px 78px rgba(20,55,60,0.24);">
+          <img src="foto-bruna.jpg" alt="Bruna Santanna" style="width:100%; height:100%; object-fit:cover; object-position:center 20%; display:block;">
+          <div style="position:absolute; left:0; right:0; bottom:0; padding:28px 32px; background:linear-gradient(to top, rgba(14,40,44,0.92), rgba(14,40,44,0));">
+            <div style="font-family:var(--sans); font-weight:700; font-size:26px; color:#fff;">Bruna Santanna</div>
+            <div style="font-family:var(--sans); font-size:13px; letter-spacing:0.22em; text-transform:uppercase; color:var(--terracota-soft); margin-top:4px;">A VIRADA IA</div>
+          </div>
+        </div>
+        <div class="iphone mini seq" data-step="4" style="position:absolute; right:-42px; bottom:-24px; z-index:3;">
           <div class="tela">
             <span class="ilha"></span>
             <img src="shot-instagram.png" alt="Meu perfil no Instagram">
             <span class="barrinha"></span>
           </div>
         </div>
-        <div class="cap seq" data-step="4" style="text-align:center; color:var(--taupe); max-width:400px;">Tudo que eu mostro aqui hoje <b style="color:var(--terracota);">eu publico lá, todo dia.</b></div>
       </div>
     </div>
   </div>
