@@ -1,0 +1,1997 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>De conversar a fazer — Aula inaugural do Programa ILIKIA · 06/08/2026</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   A VIRADA IA — Sistema do deck da Bruna (Anton + Hanken Grotesk)
+   Bege #F3EEE3 base, intercalado com petróleo #14373C. Limpo e reto.
+   Autocontido / offline: fontes com fallback system-ui/Arial.
+   ══════════════════════════════════════════════════════════════ */
+:root {
+  --terracota: #B06E4A;
+  --terracota-soft: #C4835E;
+  --terracota-wash: #E0BBA4;
+  --terracota-deep: #985A3B;
+  --petroleo: #14373C;
+  --petroleo-deep: #0E282C;
+  --ink-2: #2C4F54;
+  --sage: #435D51;
+  --green: #435D51;
+  --offwhite: #F3EEE3;
+  --creme: #ECE5D6;
+  --card-bg: #FBF9F3;
+  --bege-palido: #E8EBE6;
+  --taupe: #6E7A75;
+  --taupe-soft: #9AA39E;
+  --ink: #233133;
+  --white: #FFFFFF;
+
+  --anton: 'Anton', 'Arial Narrow', system-ui, sans-serif;
+  --serif: 'Anton', 'Arial Narrow', system-ui, sans-serif;
+  --sans: 'Hanken Grotesk', system-ui, Arial, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: #000;
+  font-family: var(--sans);
+  color: var(--ink);
+  overflow: hidden;
+}
+
+deck-stage section {
+  width: 1920px;
+  height: 1080px;
+  position: relative;
+  overflow: hidden;
+  background: var(--offwhite);
+  color: var(--ink);
+  font-family: var(--sans);
+}
+
+/* Backgrounds */
+.bg-offwhite { background: var(--offwhite); color: var(--ink); }
+.bg-petroleo { background: var(--petroleo); color: var(--white); }
+.bg-petroleo::before {
+  content: '';
+  position: absolute; inset: 0;
+  box-shadow: inset 0 0 260px rgba(0,0,0,0.45);
+  pointer-events: none;
+  z-index: 1;
+}
+.bg-terracota { background: var(--terracota); color: var(--white); }
+.bg-creme { background: var(--creme); color: var(--ink); }
+
+/* Slide chrome */
+.slide-inner {
+  position: absolute;
+  inset: 80px 120px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.slide-num {
+  position: absolute;
+  left: 60px; bottom: 40px;
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--taupe);
+  letter-spacing: 0.1em;
+  z-index: 3;
+}
+.bg-petroleo .slide-num, .bg-terracota .slide-num { color: rgba(255,255,255,0.45); }
+
+.logo-micro {
+  position: absolute;
+  right: 60px; bottom: 40px;
+  font-family: var(--serif);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  color: var(--taupe);
+  z-index: 3;
+}
+.bg-petroleo .logo-micro, .bg-terracota .logo-micro { color: rgba(255,255,255,0.45); }
+
+/* Typography */
+.kicker {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--terracota);
+}
+.bg-petroleo .kicker { color: var(--terracota-soft); }
+
+.slide-title {
+  font-family: var(--anton);
+  font-weight: 400;
+  font-size: 76px;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  line-height: 0.96;
+  color: var(--petroleo);
+}
+.bg-petroleo .slide-title { color: var(--white); }
+
+.slide-subtitle {
+  font-family: var(--sans);
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--ink-2);
+  line-height: 1.4;
+}
+.bg-petroleo .slide-subtitle { color: rgba(255,255,255,0.72); }
+
+.anchor {
+  font-family: var(--sans);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--ink-2);
+  letter-spacing: 0.005em;
+}
+.bg-petroleo .anchor { color: rgba(255,255,255,0.75); }
+
+.divider-line {
+  height: 1px;
+  background: var(--terracota);
+  transform-origin: left center;
+}
+
+/* Animation primitives — default entry: fade-up */
+.seq { opacity: 0; transform: translateY(20px); transition: opacity 500ms ease-out, transform 500ms ease-out; }
+.seq.in { opacity: 1; transform: translateY(0); }
+.bg-petroleo .seq, .bg-terracota .seq { transform: translateY(0); }
+.bg-petroleo .seq { transition: opacity 700ms ease-out; }
+.bg-terracota .seq { transition: opacity 700ms ease-out; }
+
+.seq-line {
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 800ms ease-in-out;
+  opacity: 1;
+}
+.seq-line.in { transform: scaleX(1); }
+
+.seq-zoom { opacity: 0; transform: scale(0.95); transition: opacity 600ms ease-out, transform 600ms ease-out; }
+.seq-zoom.in { opacity: 1; transform: scale(1); }
+
+/* Numbered blocks */
+.num-big {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 72px;
+  color: var(--terracota);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+}
+
+/* Anton só funciona bem em CAIXA ALTA */
+em, i { font-style: normal; }
+[style*="var(--serif)"] { text-transform: uppercase; letter-spacing: 0.005em; }
+
+/* Handle no canto superior direito de todos os slides */
+deck-stage section::after{
+  content:"@brusantanna.ai";
+  position:absolute; top:36px; right:60px;
+  font-family:var(--sans); font-size:12px; letter-spacing:0.14em;
+  color:var(--taupe); opacity:0.65; z-index:3; pointer-events:none;
+}
+.bg-petroleo::after, .bg-terracota::after{ color:rgba(255,255,255,0.6); }
+
+/* ── Extras reaproveitados dos slides dela ── */
+@keyframes blink { 0%,49%{opacity:1;} 50%,100%{opacity:0;} }
+@keyframes sweep { 0%{background-position:0% 0;} 100%{background-position:220% 0;} }
+.body-lg   { font-size:24px; line-height:1.6; }
+.body      { font-size:21px; line-height:1.6; }
+.cap       { font-size:17px; line-height:1.55; }
+.label-sm  { font-family:var(--sans); font-size:14px; font-weight:600; letter-spacing:0.26em; text-transform:uppercase; }
+.perm-band {
+  border-radius:999px;
+  background-size:220% 100%;
+  animation:sweep 6s linear infinite;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.band-projeto { background:linear-gradient(90deg,#1f4f57 0%,#2c6670 26%,#5b8a8f 46%,#2c6670 66%,#1f4f57 92%); box-shadow:0 12px 34px rgba(20,55,60,0.5); }
+.chip { font-family:var(--sans); font-size:14px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; padding:8px 18px; border-radius:999px; }
+
+/* ── Foto da Bruna (embutida, offline) ── */
+/* ── Helpers da aula JB — mesmo sistema, limpo e reto ── */
+.live-pill{ display:inline-flex; align-items:center; gap:11px; background:var(--terracota); color:#fff;
+  border-radius:999px; padding:9px 22px; font-family:var(--sans); font-weight:700; font-size:14px;
+  letter-spacing:0.22em; text-transform:uppercase; }
+.live-pill .dot{ width:9px; height:9px; border-radius:50%; background:#fff; animation:livepulse 1.8s ease-in-out infinite; }
+@keyframes livepulse{ 0%,100%{opacity:1} 50%{opacity:0.35} }
+
+.jb-card{ background:var(--white); border:1px solid rgba(139,115,85,0.15); border-radius:16px; padding:36px 40px; }
+.bg-petroleo .jb-card, .bg-terracota .jb-card{ background:rgba(255,255,255,0.06); border-color:rgba(255,255,255,0.14); }
+.jb-row{ display:flex; gap:20px; align-items:flex-start; }
+.jb-row .jn{ font-family:var(--serif); font-weight:700; font-size:34px; color:var(--terracota); line-height:0.9; flex:0 0 auto; min-width:46px; }
+.bg-petroleo .jb-row .jn{ color:var(--terracota-soft); }
+.jb-row .jt{ font-size:24px; line-height:1.4; color:var(--ink); padding-top:4px; }
+.bg-petroleo .jb-row .jt{ color:rgba(255,255,255,0.85); }
+.jb-row .jt b{ color:var(--petroleo); font-weight:700; }
+.bg-petroleo .jb-row .jt b{ color:#fff; }
+
+/* Matriz 2×2 — reta */
+.matrix{ display:grid; grid-template-columns:66px 1fr; grid-template-rows:1fr 58px; gap:14px; flex:1; margin-top:14px; }
+.m-y{ grid-column:1; grid-row:1; display:flex; flex-direction:column; align-items:center; justify-content:space-between; padding:6px 0; }
+.m-x{ grid-column:2; grid-row:2; display:flex; flex-direction:row; align-items:center; justify-content:space-between; padding:2px 8px 0; }
+.m-mid{ display:flex; flex-direction:column; align-items:center; gap:8px; }
+.m-mid-h{ display:flex; flex-direction:row; align-items:center; gap:10px; }
+.m-cap{ font-family:var(--sans); font-weight:800; font-size:13px; letter-spacing:0.12em; text-transform:uppercase; color:var(--taupe); }
+.m-word{ font-family:var(--serif); font-size:26px; text-transform:uppercase; color:var(--petroleo); letter-spacing:0.08em; }
+.m-y .m-word{ writing-mode:vertical-rl; transform:rotate(180deg); }
+.m-arrow{ font-size:19px; line-height:1; color:var(--terracota); }
+.m-grid{ grid-column:2; grid-row:1; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:18px; }
+.quad{ border-radius:16px; padding:20px 30px; display:flex; flex-direction:column; gap:6px; }
+.quad .qh{ font-family:var(--sans); font-weight:700; font-size:14px; letter-spacing:0.1em; text-transform:uppercase; opacity:0.72; }
+.quad .qv{ font-family:var(--serif); font-weight:700; font-size:30px; line-height:1; text-transform:uppercase; }
+.quad .qe{ margin-top:auto; font-family:var(--sans); font-size:19px; line-height:1.32; opacity:0.92; }
+.quad-hum{ background:var(--white); border:2.5px solid var(--petroleo); color:var(--petroleo); }
+.quad-ass{ background:var(--petroleo); color:#fff; } .quad-ass .qv{ color:var(--terracota-soft); }
+.quad-rev{ background:var(--white); border:1px solid rgba(139,115,85,0.22); color:var(--petroleo); }
+.quad-faz{ background:var(--sage); color:#fff; } .quad-faz .qv{ color:#fff; }
+
+/* Movimento reduzido / impressão */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{ animation:none !important; transition:none !important; }
+  .seq,.seq-zoom{ opacity:1 !important; transform:none !important; }
+  .seq-line{ transform:scaleX(1) !important; }
+}
+@media print{
+  *,*::before,*::after{ animation:none !important; transition:none !important; }
+  .seq,.seq-zoom{ opacity:1 !important; transform:none !important; }
+  .seq-line{ transform:scaleX(1) !important; }
+  .live-pill .dot{ animation:none !important; }
+  .road-prog{ display:none !important; }
+}
+
+/* ══ ILUSTRAÇÃO + ATMOSFERA (restauradas) ══════════════════════ */
+
+/* Linhas topográficas — atmosfera sutil das capas de seção */
+.topo{ position:absolute; inset:0; width:100%; height:100%; z-index:0; pointer-events:none; }
+.topo path{ fill:none; stroke-width:2; stroke-linecap:round;
+  stroke-dasharray:10 16; animation:topoflow 26s linear infinite; }
+.topo .slow{ animation-duration:40s; }
+@keyframes topoflow{ to{ stroke-dashoffset:-520; } }
+
+/* Painel-moldura para ilustrações grandes */
+.illus-panel{ position:relative; overflow:hidden; border-radius:22px;
+  background:var(--white); border:1px solid rgba(139,115,85,0.16);
+  display:flex; align-items:center; justify-content:center; }
+.bg-petroleo .illus-panel, .bg-terracota .illus-panel{
+  background:rgba(255,255,255,0.045); border-color:rgba(255,255,255,0.14); }
+.illus-panel::before{ content:''; position:absolute; inset:0;
+  background:radial-gradient(120% 90% at 50% 12%, rgba(176,110,74,0.10), transparent 62%); pointer-events:none; }
+.illus-panel svg{ position:relative; z-index:1; max-width:82%; height:auto; }
+
+/* Movimentos de ilustração */
+@keyframes floaty{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-9px); } }
+.floaty{ animation:floaty 5.5s ease-in-out infinite; transform-origin:center; }
+@keyframes floaty2{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-6px); } }
+.floaty2{ animation:floaty2 4.2s ease-in-out infinite; }
+@keyframes dashflow{ to{ stroke-dashoffset:-220; } }
+.flowline{ stroke-dasharray:6 9; animation:dashflow 2.6s linear infinite; }
+@keyframes stamp{ 0%,62%,100%{ transform:translateY(0); } 74%{ transform:translateY(26px); } 84%{ transform:translateY(20px); } }
+.stamp-press{ animation:stamp 3.6s ease-in-out infinite; transform-origin:center bottom; }
+@keyframes needleSwing{ 0%,100%{ transform:rotate(-11deg); } 50%{ transform:rotate(16deg); } }
+.needle{ animation:needleSwing 4.8s ease-in-out infinite; transform-box:fill-box; transform-origin:bottom center; }
+@keyframes wheelroll{ to{ transform:rotate(360deg); } }
+.wheel{ animation:wheelroll 5s linear infinite; transform-box:fill-box; transform-origin:center; }
+@keyframes soundpulse{ 0%,100%{ opacity:0.35; transform:scale(0.9);} 50%{ opacity:1; transform:scale(1);} }
+.sndwave{ transform-box:fill-box; transform-origin:left center; }
+.sndwave.w1{ animation:soundpulse 1.8s ease-in-out infinite; }
+.sndwave.w2{ animation:soundpulse 1.8s ease-in-out 0.25s infinite; }
+.sndwave.w3{ animation:soundpulse 1.8s ease-in-out 0.5s infinite; }
+
+/* Ícone de porta dentro de card */
+.door-ico{ width:64px; height:64px; }
+
+/* Balões de fala (slide 06) */
+.bubble{ position:relative; border-radius:20px; padding:30px 34px; }
+.bubble.vago{ background:var(--white); border:1px solid rgba(139,115,85,0.2); }
+.bubble.bom{ background:var(--petroleo); color:#fff; }
+.bubble::after{ content:''; position:absolute; bottom:-16px; width:0; height:0;
+  border:16px solid transparent; border-top-color:inherit; border-bottom:0; }
+.bubble.vago::after{ left:44px; border-top-color:var(--white); }
+.bubble.bom::after{ right:44px; border-top-color:var(--petroleo); }
+
+/* "Estrada da aula" — progresso discreto no rodapé */
+.road-prog{ position:fixed; left:50%; bottom:15px; transform:translateX(-50%);
+  width:320px; height:26px; z-index:40; pointer-events:none; }
+.road-prog .rline{ position:absolute; left:0; right:0; top:50%; height:2px; transform:translateY(-50%);
+  background:repeating-linear-gradient(90deg, rgba(176,110,74,0.42) 0 7px, transparent 7px 15px); border-radius:2px; }
+.road-prog .rprog{ position:absolute; left:0; top:50%; height:3px; transform:translateY(-50%);
+  width:0; border-radius:2px; transition:width 620ms cubic-bezier(.2,.8,.2,1);
+  background:repeating-linear-gradient(90deg, var(--terracota) 0 9px, rgba(176,110,74,0.18) 9px 15px); }
+@keyframes stepwalk{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-2px); } }
+.road-prog .rtr .heel{ animation:stepwalk 3s ease-in-out infinite; transform-origin:23% 90%; }
+@media (prefers-reduced-motion: reduce){ .road-prog .rtr .heel{ animation:none !important; } }
+.road-prog .rtr{ position:absolute; top:50%; left:0; transform:translate(-50%,-50%);
+  transition:left 620ms cubic-bezier(.2,.8,.2,1); line-height:0; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.4)); }
+@media (prefers-reduced-motion: reduce){ .road-prog .rprog,.road-prog .rtr{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<script>
+/* deck-stage — motor inline (offline) */
+(() => {
+  const DESIGN_W_DEFAULT = 1920;
+  const DESIGN_H_DEFAULT = 1080;
+  const STORAGE_PREFIX = 'deck-stage:slide:';
+  const OVERLAY_HIDE_MS = 1800;
+  const VALIDATE_ATTR = 'no_overflowing_text,no_overlapping_text,slide_sized_text';
+  const pad2 = (n) => String(n).padStart(2, '0');
+  const stylesheet = `
+    :host { position: fixed; inset: 0; display: block; background: #000; color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif; overflow: hidden; }
+    .stage { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+    .canvas { position: relative; transform-origin: center center; flex-shrink: 0; background: #fff; will-change: transform; }
+    ::slotted(*) { position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important;
+      box-sizing: border-box !important; overflow: hidden; opacity: 0; pointer-events: none; visibility: hidden; }
+    ::slotted([data-deck-active]) { opacity: 1; pointer-events: auto; visibility: visible; }
+    .tapzones { position: fixed; inset: 0; display: flex; z-index: 2147482000; pointer-events: none; }
+    .tapzone { flex: 1; pointer-events: auto; -webkit-tap-highlight-color: transparent; }
+    @media (hover: hover) and (pointer: fine) { .tapzones { display: none; } }
+    .overlay { position: fixed; left: 50%; bottom: 22px; transform: translate(-50%, 6px) scale(0.92); filter: blur(6px);
+      display: flex; align-items: center; gap: 4px; padding: 4px; background: #000; color: #fff; border-radius: 999px;
+      font-size: 12px; font-feature-settings: "tnum" 1; letter-spacing: 0.01em; opacity: 0; pointer-events: none;
+      transition: opacity 260ms ease, transform 260ms cubic-bezier(.2,.8,.2,1), filter 260ms ease;
+      transform-origin: center bottom; z-index: 2147483000; user-select: none; }
+    .overlay[data-visible] { opacity: 1; pointer-events: auto; transform: translate(-50%, 0) scale(1); filter: blur(0); }
+    .btn { appearance: none; -webkit-appearance: none; background: transparent; border: 0; margin: 0; padding: 0;
+      color: inherit; font: inherit; cursor: default; display: inline-flex; align-items: center; justify-content: center;
+      height: 28px; min-width: 28px; border-radius: 999px; color: rgba(255,255,255,0.72);
+      transition: background 140ms ease, color 140ms ease; -webkit-tap-highlight-color: transparent; }
+    .btn:hover { background: rgba(255,255,255,0.12); color: #fff; }
+    .btn:active { background: rgba(255,255,255,0.18); }
+    .btn:focus { outline: none; } .btn:focus-visible { outline: none; }
+    .btn svg { width: 14px; height: 14px; display: block; }
+    .btn.reset { font-size: 11px; font-weight: 500; letter-spacing: 0.02em; padding: 0 10px 0 12px; gap: 6px; color: rgba(255,255,255,0.72); }
+    .btn.reset .kbd { display: inline-flex; align-items: center; justify-content: center; min-width: 16px; height: 16px;
+      padding: 0 4px; font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 10px; line-height: 1;
+      color: rgba(255,255,255,0.88); background: rgba(255,255,255,0.12); border-radius: 4px; }
+    .count { font-variant-numeric: tabular-nums; color: #fff; font-weight: 500; padding: 0 8px; min-width: 42px; text-align: center; font-size: 12px; }
+    .count .sep { color: rgba(255,255,255,0.45); margin: 0 3px; font-weight: 400; }
+    .count .total { color: rgba(255,255,255,0.55); }
+    .divider { width: 1px; height: 14px; background: rgba(255,255,255,0.18); margin: 0 2px; }
+    @media print {
+      :host { position: static; inset: auto; background: none; overflow: visible; color: inherit; }
+      .stage { position: static; display: block; }
+      .canvas { transform: none !important; width: auto !important; height: auto !important; background: none; will-change: auto; }
+      ::slotted(*) { position: relative !important; inset: auto !important; width: var(--deck-design-w) !important;
+        height: var(--deck-design-h) !important; box-sizing: border-box !important; opacity: 1 !important; visibility: visible !important;
+        pointer-events: auto; break-after: page; page-break-after: always; break-inside: avoid; overflow: hidden; }
+      ::slotted(*:last-child) { break-after: auto; page-break-after: auto; }
+      .overlay, .tapzones { display: none !important; }
+    }
+  `;
+  class DeckStage extends HTMLElement {
+    static get observedAttributes() { return ['width', 'height', 'noscale']; }
+    constructor() {
+      super();
+      this._root = this.attachShadow({ mode: 'open' });
+      this._index = 0; this._slides = []; this._notes = []; this._hideTimer = null; this._mouseIdleTimer = null;
+      this._storageKey = STORAGE_PREFIX + (this.getAttribute('storage-key') || location.pathname || '/');
+      this._onKey = this._onKey.bind(this); this._onResize = this._onResize.bind(this);
+      this._onSlotChange = this._onSlotChange.bind(this); this._onMouseMove = this._onMouseMove.bind(this);
+      this._onTapBack = this._onTapBack.bind(this); this._onTapForward = this._onTapForward.bind(this);
+    }
+    get designWidth() { return parseInt(this.getAttribute('width'), 10) || DESIGN_W_DEFAULT; }
+    get designHeight() { return parseInt(this.getAttribute('height'), 10) || DESIGN_H_DEFAULT; }
+    connectedCallback() {
+      this._render(); this._loadNotes(); this._syncPrintPageRule();
+      window.addEventListener('keydown', this._onKey);
+      window.addEventListener('resize', this._onResize);
+      window.addEventListener('mousemove', this._onMouseMove, { passive: true });
+    }
+    disconnectedCallback() {
+      window.removeEventListener('keydown', this._onKey); window.removeEventListener('resize', this._onResize);
+      window.removeEventListener('mousemove', this._onMouseMove);
+      if (this._hideTimer) clearTimeout(this._hideTimer); if (this._mouseIdleTimer) clearTimeout(this._mouseIdleTimer);
+    }
+    attributeChangedCallback() {
+      if (this._canvas) {
+        this._canvas.style.width = this.designWidth + 'px'; this._canvas.style.height = this.designHeight + 'px';
+        this._canvas.style.setProperty('--deck-design-w', this.designWidth + 'px');
+        this._canvas.style.setProperty('--deck-design-h', this.designHeight + 'px');
+        this._fit(); this._syncPrintPageRule();
+      }
+    }
+    _render() {
+      const style = document.createElement('style'); style.textContent = stylesheet;
+      const stage = document.createElement('div'); stage.className = 'stage';
+      const canvas = document.createElement('div'); canvas.className = 'canvas';
+      canvas.style.width = this.designWidth + 'px'; canvas.style.height = this.designHeight + 'px';
+      canvas.style.setProperty('--deck-design-w', this.designWidth + 'px');
+      canvas.style.setProperty('--deck-design-h', this.designHeight + 'px');
+      const slot = document.createElement('slot'); slot.addEventListener('slotchange', this._onSlotChange);
+      canvas.appendChild(slot); stage.appendChild(canvas);
+      const tapzones = document.createElement('div'); tapzones.className = 'tapzones export-hidden';
+      tapzones.setAttribute('aria-hidden', 'true');
+      const tzBack = document.createElement('div'); tzBack.className = 'tapzone tapzone--back';
+      const tzMid = document.createElement('div'); tzMid.className = 'tapzone tapzone--mid'; tzMid.style.pointerEvents = 'none';
+      const tzFwd = document.createElement('div'); tzFwd.className = 'tapzone tapzone--fwd';
+      tzBack.addEventListener('click', this._onTapBack); tzFwd.addEventListener('click', this._onTapForward);
+      tapzones.append(tzBack, tzMid, tzFwd);
+      const overlay = document.createElement('div'); overlay.className = 'overlay export-hidden';
+      overlay.setAttribute('role', 'toolbar'); overlay.setAttribute('aria-label', 'Controles');
+      overlay.innerHTML = `
+        <button class="btn prev" type="button" aria-label="Anterior" title="Anterior (←)">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3L5 8l5 5"/></svg>
+        </button>
+        <span class="count" aria-live="polite"><span class="current">1</span><span class="sep">/</span><span class="total">1</span></span>
+        <button class="btn next" type="button" aria-label="Próximo" title="Próximo (→)">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg>
+        </button>
+        <span class="divider"></span>
+        <button class="btn reset" type="button" aria-label="Início" title="Início (R)">Início<span class="kbd">R</span></button>
+      `;
+      overlay.querySelector('.prev').addEventListener('click', () => this._go(this._index - 1, 'click'));
+      overlay.querySelector('.next').addEventListener('click', () => this._go(this._index + 1, 'click'));
+      overlay.querySelector('.reset').addEventListener('click', () => this._go(0, 'click'));
+      this._root.append(style, stage, tapzones, overlay);
+      this._canvas = canvas; this._slot = slot; this._overlay = overlay;
+      this._countEl = overlay.querySelector('.current'); this._totalEl = overlay.querySelector('.total');
+    }
+    _syncPrintPageRule() {
+      const id = 'deck-stage-print-page'; let tag = document.getElementById(id);
+      if (!tag) { tag = document.createElement('style'); tag.id = id; document.head.appendChild(tag); }
+      tag.textContent =
+        '@page { size: ' + this.designWidth + 'px ' + this.designHeight + 'px; margin: 0; } ' +
+        '@media print { html, body { margin: 0 !important; padding: 0 !important; background: none !important; overflow: visible !important; height: auto !important; } ' +
+        '* { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }';
+    }
+    _onSlotChange() {
+      this._collectSlides(); this._restoreIndex();
+      this._applyIndex({ showOverlay: false, broadcast: true, reason: 'init' }); this._fit();
+    }
+    _collectSlides() {
+      const assigned = this._slot.assignedElements({ flatten: true });
+      this._slides = assigned.filter((el) => { const tag = el.tagName; return tag !== 'TEMPLATE' && tag !== 'SCRIPT' && tag !== 'STYLE'; });
+      this._slides.forEach((slide, i) => {
+        const n = i + 1;
+        let label = slide.getAttribute('data-label');
+        if (!label) { const existing = slide.getAttribute('data-screen-label'); if (existing) { label = existing.replace(/^\s*\d+\s*/, '').trim() || existing; } }
+        if (!label) { const h = slide.querySelector('h1, h2, h3, [data-title]'); if (h) label = (h.textContent || '').trim().slice(0, 40); }
+        if (!label) label = 'Slide';
+        slide.setAttribute('data-screen-label', `${pad2(n)} ${label}`);
+        if (!slide.hasAttribute('data-om-validate')) slide.setAttribute('data-om-validate', VALIDATE_ATTR);
+        slide.setAttribute('data-deck-slide', String(i));
+      });
+      if (this._totalEl) this._totalEl.textContent = String(this._slides.length || 1);
+      if (this._index >= this._slides.length) this._index = Math.max(0, this._slides.length - 1);
+    }
+    _loadNotes() {
+      const tag = document.getElementById('speaker-notes'); if (!tag) { this._notes = []; return; }
+      try { const parsed = JSON.parse(tag.textContent || '[]'); if (Array.isArray(parsed)) this._notes = parsed; }
+      catch (e) { this._notes = []; }
+    }
+    _restoreIndex() {
+      try { const raw = localStorage.getItem(this._storageKey);
+        if (raw != null) { const n = parseInt(raw, 10); if (Number.isFinite(n) && n >= 0 && n < this._slides.length) this._index = n; }
+      } catch (e) {}
+    }
+    _persistIndex() { try { localStorage.setItem(this._storageKey, String(this._index)); } catch (e) {} }
+    _applyIndex({ showOverlay = true, broadcast = true, reason = 'init' } = {}) {
+      if (!this._slides.length) return;
+      const prev = this._prevIndex == null ? -1 : this._prevIndex; const curr = this._index;
+      this._slides.forEach((s, i) => { if (i === curr) s.setAttribute('data-deck-active', ''); else s.removeAttribute('data-deck-active'); });
+      if (this._countEl) this._countEl.textContent = String(curr + 1); this._persistIndex();
+      if (broadcast) {
+        try { window.postMessage({ slideIndexChanged: curr }, '*'); } catch (e) {}
+        const detail = { index: curr, previousIndex: prev, total: this._slides.length,
+          slide: this._slides[curr] || null, previousSlide: prev >= 0 ? (this._slides[prev] || null) : null, reason: reason };
+        this.dispatchEvent(new CustomEvent('slidechange', { detail, bubbles: true, composed: true }));
+      }
+      this._prevIndex = curr; if (showOverlay) this._flashOverlay();
+    }
+    _flashOverlay() {
+      if (!this._overlay) return; this._overlay.setAttribute('data-visible', '');
+      if (this._hideTimer) clearTimeout(this._hideTimer);
+      this._hideTimer = setTimeout(() => { this._overlay.removeAttribute('data-visible'); }, OVERLAY_HIDE_MS);
+    }
+    _fit() {
+      if (!this._canvas) return;
+      if (this.hasAttribute('noscale')) { this._canvas.style.transform = 'none'; return; }
+      const vw = window.innerWidth, vh = window.innerHeight;
+      const s = Math.min(vw / this.designWidth, vh / this.designHeight);
+      this._canvas.style.transform = `scale(${s})`;
+    }
+    _onResize() { this._fit(); }
+    _onMouseMove() { this._flashOverlay(); }
+    _onTapBack(e) { e.preventDefault(); this._go(this._index - 1, 'tap'); }
+    _onTapForward(e) { e.preventDefault(); this._go(this._index + 1, 'tap'); }
+    _onKey(e) {
+      const t = e.target;
+      if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      const key = e.key; let handled = true;
+      if (key === 'ArrowRight' || key === 'PageDown' || key === ' ' || key === 'Spacebar') { this._go(this._index + 1, 'keyboard'); }
+      else if (key === 'ArrowLeft' || key === 'PageUp') { this._go(this._index - 1, 'keyboard'); }
+      else if (key === 'Home') { this._go(0, 'keyboard'); }
+      else if (key === 'End') { this._go(this._slides.length - 1, 'keyboard'); }
+      else if (key === 'r' || key === 'R') { this._go(0, 'keyboard'); }
+      else if (/^[0-9]$/.test(key)) { const n = key === '0' ? 9 : parseInt(key, 10) - 1; if (n < this._slides.length) this._go(n, 'keyboard'); }
+      else { handled = false; }
+      if (handled) { e.preventDefault(); this._flashOverlay(); }
+    }
+    _go(i, reason = 'api') {
+      if (!this._slides.length) return;
+      const clamped = Math.max(0, Math.min(this._slides.length - 1, i));
+      if (clamped === this._index) { this._flashOverlay(); return; }
+      this._index = clamped; this._applyIndex({ showOverlay: true, broadcast: true, reason });
+    }
+    get index() { return this._index; } get length() { return this._slides.length; }
+    goTo(i) { this._go(i, 'api'); } next() { this._go(this._index + 1, 'api'); }
+    prev() { this._go(this._index - 1, 'api'); } reset() { this._go(0, 'api'); }
+  }
+  if (!customElements.get('deck-stage')) customElements.define('deck-stage', DeckStage);
+})();
+</script>
+
+<style>
+/* ══════════════════════════════════════════════════════════════
+   EXTRAS DESTE DECK — trilho, mockups, nós, fios, worklog
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Trilho / linha do tempo das gerações ── */
+.st-dot{ width:30px; height:30px; border-radius:50%; background:var(--offwhite);
+  border:4px solid var(--terracota); position:relative; z-index:2; }
+.st-dot.on{ background:var(--terracota); }
+@keyframes pulsering{ 0%{ box-shadow:0 0 0 0 rgba(176,110,74,.45);} 70%{ box-shadow:0 0 0 26px rgba(176,110,74,0);} 100%{ box-shadow:0 0 0 0 rgba(176,110,74,0);} }
+.pulse{ animation:pulsering 2.6s ease-out infinite; }
+.era-card{ background:var(--white); border:1px solid rgba(139,115,85,0.15); border-radius:16px; padding:28px 30px; display:flex; flex-direction:column; height:100%; }
+.era-card.on{ background:var(--petroleo); border-color:var(--petroleo); box-shadow:0 26px 62px rgba(20,55,60,0.26); }
+.era-card.on .ec-t{ color:#fff; } .era-card.on .ec-b{ color:rgba(255,255,255,0.85); }
+.era-card.on .ec-y{ color:var(--terracota-soft); }
+.ec-y{ font-family:var(--mono); font-size:14px; letter-spacing:0.18em; color:var(--taupe); }
+.ec-t{ font-family:var(--serif); font-size:52px; line-height:0.98; color:var(--petroleo); text-transform:uppercase; margin:10px 0 12px; }
+.ec-b{ font-family:var(--sans); font-size:20px; line-height:1.45; color:var(--taupe); }
+
+/* ── Mockup de navegador em volta dos prints ── */
+.browser{ border-radius:16px; overflow:hidden; background:#0E282C;
+  box-shadow:0 32px 76px rgba(20,55,60,0.32); border:1px solid rgba(255,255,255,0.10); }
+.browser .bar{ height:36px; display:flex; align-items:center; gap:8px; padding:0 16px; background:#17393B; }
+.browser .bar i{ width:10px; height:10px; border-radius:50%; display:block; }
+.browser .bar .url{ margin-left:16px; font-family:var(--mono); font-size:12px; letter-spacing:0.07em; color:rgba(255,255,255,0.48); }
+.browser img{ display:block; width:100%; height:auto; }
+.browser .shot{ overflow:hidden; }
+.browser .shot img{ height:100%; object-fit:cover; object-position:top center; }
+
+/* ── Worklog (a IA trabalhando) ── */
+.wl{ font-family:var(--mono); font-size:20px; line-height:2.05; color:rgba(255,255,255,0.88); }
+.wl .ok{ color:#7FB069; font-weight:500; }
+.wl .dim{ color:rgba(255,255,255,0.45); }
+.caret{ display:inline-block; width:11px; height:20px; background:var(--terracota-soft); vertical-align:-3px; animation:blink 1.1s infinite; }
+.chatb{ border-radius:16px 16px 4px 16px; padding:14px 22px; font-family:var(--sans); font-size:20px; align-self:flex-end; max-width:88%; }
+.chatr{ border-radius:16px 16px 16px 4px; padding:12px 20px; font-family:var(--sans); font-size:18px; align-self:flex-start; max-width:88%; }
+
+/* ── Nós e fios dos diagramas de conexão ── */
+.node{ border-radius:13px; padding:13px 18px; font-family:var(--sans); font-size:19px; font-weight:600; line-height:1.25; }
+.node .ns{ display:block; font-weight:400; font-size:15px; opacity:0.62; margin-top:3px; }
+.node-in{ background:var(--white); border:1px solid rgba(139,115,85,0.2); color:var(--petroleo); }
+.bg-petroleo .node-in{ background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.16); color:#fff; }
+.node-core{ background:var(--terracota); color:#fff; box-shadow:0 22px 54px rgba(176,110,74,0.34); }
+.node-out{ background:var(--petroleo); color:#fff; }
+.bg-petroleo .node-out{ background:var(--sage); }
+.loopback{ font-family:var(--mono); font-size:14px; letter-spacing:0.14em; text-transform:uppercase; color:var(--terracota); }
+
+/* ── Link "abrir ao vivo" (não avança o slide ao clicar) ── */
+.abrir{ display:inline-flex; align-items:center; gap:9px; text-decoration:none;
+  border:1px solid rgba(139,115,85,0.4); border-radius:999px; padding:7px 16px;
+  font-family:var(--mono); font-size:12px; letter-spacing:0.16em; text-transform:uppercase;
+  color:var(--terracota-deep); background:rgba(255,255,255,0.6); transition:background 160ms ease; }
+.abrir:hover{ background:#fff; }
+.bg-petroleo .abrir, .bg-terracota .abrir{ color:#fff; border-color:rgba(255,255,255,0.4); background:rgba(255,255,255,0.10); }
+.bg-petroleo .abrir:hover, .bg-terracota .abrir:hover{ background:rgba(255,255,255,0.2); }
+.abrir svg{ width:13px; height:13px; }
+@media print{ .abrir{ display:none !important; } }
+
+/* ── Chips de case ── */
+.case-chip{ display:inline-flex; align-items:center; gap:10px; background:var(--petroleo); color:#fff;
+  border-radius:999px; padding:8px 20px; font-family:var(--sans); font-size:13px; font-weight:700;
+  letter-spacing:0.2em; text-transform:uppercase; }
+.case-chip.t{ background:var(--terracota); }
+.bg-petroleo .case-chip{ background:var(--terracota); }
+
+/* ── Métrica seca ── */
+.metric{ font-family:var(--serif); font-weight:700; line-height:0.9; color:var(--terracota); }
+.metric-l{ font-family:var(--sans); font-size:16px; letter-spacing:0.04em; color:var(--taupe); margin-top:8px; }
+.bg-petroleo .metric-l{ color:rgba(255,255,255,0.62); }
+
+/* ── Cartõezinhos do índice de cases ── */
+.mini{ background:rgba(255,255,255,0.13); border:1px solid rgba(255,255,255,0.24); border-radius:16px;
+  padding:28px 30px; display:flex; flex-direction:column; gap:10px; }
+.mini .mn{ font-family:var(--mono); font-size:13px; letter-spacing:0.18em; color:rgba(255,255,255,0.72); }
+.mini .mt{ font-family:var(--serif); font-size:38px; color:#fff; line-height:1.02; text-transform:uppercase; }
+.mini .mb{ font-family:var(--sans); font-size:20px; color:rgba(255,255,255,0.88); line-height:1.4; }
+.mini .mf{ margin-top:auto; padding-top:16px; border-top:1px solid rgba(255,255,255,0.22);
+  font-family:var(--mono); font-size:14px; letter-spacing:0.1em; color:rgba(255,255,255,0.72); }
+
+/* ── Horizonte do futuro ── */
+.hz{ border-radius:16px; padding:28px 30px; display:flex; flex-direction:column; height:100%; }
+.hz-1{ background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.14); }
+.hz-2{ background:rgba(255,255,255,0.09); border:1px solid rgba(255,255,255,0.2); }
+.hz-3{ background:var(--terracota); box-shadow:0 26px 64px rgba(176,110,74,0.3); }
+</style>
+
+<deck-stage width="1920" height="1080" storage-key="ilikia-agentica-v4">
+
+<!-- ═══════════ 01 · CAPA ═══════════ -->
+<section class="bg-petroleo" data-label="Capa · De conversar a fazer">
+  <svg class="topo" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g stroke="#C4835E" opacity="0.16">
+      <path d="M-60,150 C320,70 640,230 960,160 1280,90 1600,240 1980,160"/>
+      <path d="M-60,270 C340,200 660,350 980,285 1300,220 1620,360 1980,285"/>
+      <path class="slow" d="M-60,400 C360,330 680,470 1000,410 1320,350 1640,480 1980,405"/>
+      <path d="M-60,690 C360,620 680,760 1000,700 1320,640 1640,770 1980,695"/>
+      <path class="slow" d="M-60,820 C340,750 660,895 980,830 1300,765 1620,905 1980,825"/>
+      <path d="M-60,945 C320,875 640,1020 960,955 1280,890 1600,1030 1980,950"/>
+    </g>
+    <g stroke="#7FB0A6" opacity="0.12" class="slow">
+      <path d="M1360,470 C1470,430 1590,470 1640,560 1690,650 1610,720 1490,720 1370,720 1290,640 1330,545 1345,510 1350,490 1360,470Z"/>
+      <path d="M1410,520 C1480,498 1556,522 1584,578 1612,634 1560,678 1486,678 1412,678 1366,628 1392,572 1400,552 1404,538 1410,520Z"/>
+    </g>
+  </svg>
+  <div class="slide-inner" style="justify-content:center; align-items:center; text-align:center;">
+    <div class="kicker seq" data-step="1" style="font-size:17px; letter-spacing:0.32em;">AULA INAUGURAL &nbsp;·&nbsp; PROGRAMA ILIKIA &nbsp;·&nbsp; 06 DE AGOSTO DE 2026</div>
+    <h1 class="seq" data-step="1" style="font-family:var(--serif); font-weight:400; font-size:176px; color:var(--white); letter-spacing:0.02em; line-height:0.9; margin-top:34px; text-transform:uppercase;">DE CONVERSAR<br><span style="color:var(--terracota-soft);">A FAZER</span></h1>
+    <div class="divider-line seq-line" data-step="2" style="width:220px; margin:44px auto; background:var(--terracota);"></div>
+    <div class="seq" data-step="2" style="font-family:var(--sans); font-weight:300; font-size:38px; color:rgba(255,255,255,0.85); max-width:30ch;">A virada da IA que responde para a IA que <span style="color:#fff; font-weight:600;">trabalha</span>.</div>
+    <div class="seq" data-step="3" style="margin-top:52px; display:flex; flex-direction:column; align-items:center; gap:14px;">
+      <img src="logo-newscale.png" alt="NewScale" style="height:46px; filter:brightness(0) invert(1); opacity:0.95;">
+      <div style="font-family:var(--sans); font-size:19px; letter-spacing:0.24em; text-transform:uppercase; color:var(--terracota-soft); font-weight:700;">Bruna Santanna</div>
+    </div>
+  </div>
+  <div class="slide-num">01 / 23</div>
+  <div class="logo-micro">VIRADA</div>
+</section>
+
+<!-- ═══════════ 02 · QUEM CONDUZ ═══════════ -->
+<section class="bg-offwhite" data-label="Quem conduz esta aula">
+  <div class="slide-inner">
+    <div style="display:grid; grid-template-columns:1fr 800px; gap:52px; flex:1; align-items:center;">
+      <div style="display:flex; flex-direction:column; justify-content:center;">
+        <div class="kicker seq" data-step="1" style="font-size:16px;">QUEM CONDUZ ESTA AULA</div>
+        <h2 class="slide-title seq" data-step="1" style="margin-top:14px; font-size:76px; line-height:0.96;">BRUNA<br>SANTANNA</h2>
+        <div class="slide-subtitle seq" data-step="1" style="margin-top:16px; font-size:26px; color:var(--taupe);">Estrategista e mentora de Inteligência Artificial</div>
+        <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:22px;"></div>
+        <div class="body-lg seq" data-step="2" style="color:var(--ink); margin-top:28px; max-width:700px;">Empresária há mais de 10 anos e cofundadora da NewScale. Eu passo os meus dias dentro de empresas, sentada do lado de quem faz o trabalho.</div>
+        <div class="seq" data-step="2" style="display:flex; gap:18px; margin-top:26px; max-width:700px;">
+          <div style="background:var(--white); border:1px solid rgba(139,115,85,0.16); border-radius:14px; padding:20px 26px; flex:1;">
+            <div style="font-family:var(--serif); font-weight:800; font-size:48px; color:var(--terracota); line-height:0.88;">10<span style="font-size:26px;">+</span></div>
+            <div style="font-family:var(--sans); font-size:15px; color:var(--taupe); margin-top:8px;">anos como empresária</div>
+          </div>
+          <div style="background:var(--petroleo); border-radius:14px; padding:20px 26px; flex:1.35; box-shadow:0 18px 44px rgba(20,55,60,0.16);">
+            <div style="font-family:var(--serif); font-weight:800; font-size:48px; color:var(--terracota-soft); line-height:0.88;">1.000<span style="font-size:26px;">+</span></div>
+            <div style="font-family:var(--sans); font-size:15px; color:rgba(255,255,255,0.72); margin-top:8px;">profissionais formados</div>
+          </div>
+        </div>
+
+        <!-- @ EM DESTAQUE + QR -->
+        <div class="seq" data-step="4" style="margin-top:30px; display:flex; align-items:stretch; gap:24px; max-width:700px;">
+          <div style="flex:1; background:var(--petroleo); border-radius:16px; padding:26px 30px; display:flex; flex-direction:column; justify-content:center; box-shadow:0 24px 56px rgba(20,55,60,0.22);">
+            <div style="font-family:var(--mono); font-size:13px; letter-spacing:0.2em; text-transform:uppercase; color:var(--terracota-soft);">todo dia eu posto uma dessas lá</div>
+            <div style="font-family:var(--serif); font-size:56px; color:#fff; line-height:1; margin-top:12px; letter-spacing:0.01em;">@BRUSANTANNA<span style="color:var(--terracota-soft);">.AI</span></div>
+          </div>
+          <div style="width:150px; background:var(--white); border:1px solid rgba(139,115,85,0.2); border-radius:16px; padding:16px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;">
+            <img src="qr-instagram.svg" alt="QR do Instagram" style="width:106px; height:106px; display:block;">
+            <div style="font-family:var(--mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--taupe);">aponta a câmera</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="seq-zoom" data-step="3">
+        <div class="browser">
+          <div class="bar"><i style="background:#E06C5A"></i><i style="background:#E0B45A"></i><i style="background:#7FB069"></i><span class="url">instagram.com/brusantanna.ai</span></div>
+          <img src="shot-instagram.png" alt="Perfil no Instagram">
+        </div>
+        <div class="cap seq" data-step="4" style="margin-top:14px; text-align:center; color:var(--taupe);">Tudo que eu mostro aqui hoje <b style="color:var(--terracota);">eu publico lá, todo dia.</b></div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">02 / 23</div>
+</section>
+
+<!-- ═══════════ 03 · O TRILHO DAS TRÊS GERAÇÕES ═══════════ -->
+<section class="bg-creme" data-label="As três gerações · o trilho">
+  <div class="slide-inner">
+    <div class="kicker seq" data-step="1" style="font-size:16px;">ONDE A GENTE ESTÁ NESSA HISTÓRIA</div>
+    <h2 class="slide-title seq" data-step="1" style="margin-top:12px; font-size:60px;">A IA NÃO SÓ FICOU MAIS ESPERTA.<br>ELA <span style="color:var(--terracota);">SAIU DA CONVERSA E PARTIU PARA A AÇÃO</span>.</h2>
+    <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:18px;"></div>
+    <div class="slide-subtitle seq" data-step="1" style="margin-top:14px; font-size:26px;">Ela fica mais inteligente todos os dias — isso é verdade e não vai parar. Mas o que virou a chave para o seu trabalho foi outra coisa.</div>
+
+    <!-- O trilho -->
+    <div class="seq" data-step="2" style="position:relative; margin-top:44px; height:78px;">
+      <svg viewBox="0 0 1680 78" width="1680" height="78" style="position:absolute; inset:0;" aria-hidden="true">
+        <line x1="60" y1="39" x2="1620" y2="39" stroke="#D6C9B4" stroke-width="6" stroke-linecap="round"/>
+        <line class="flowline" x1="60" y1="39" x2="1620" y2="39" stroke="#B06E4A" stroke-width="6" stroke-linecap="round"/>
+      </svg>
+      <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:space-between; padding:0 267px;">
+        <div class="st-dot"></div>
+        <div class="st-dot"></div>
+        <div class="st-dot on pulse"></div>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:30px; margin-top:26px; flex:1;">
+      <div class="era-card seq" data-step="2">
+        <div class="ec-y">ATÉ 2023 &nbsp;·&nbsp; GERAÇÃO 01</div>
+        <div class="ec-t">Ela<br>responde</div>
+        <div class="ec-b">Você pergunta, ela escreve um texto. Copiar, colar, conferir e <b>fazer</b> continua inteiro com você.</div>
+        <div style="margin-top:26px; background:var(--offwhite); border-radius:10px; padding:16px 20px; font-family:var(--mono); font-size:16px; color:var(--ink-2); line-height:1.5;">"me explique como<br>montar esse relatório"</div>
+        <div style="margin-top:auto; padding-top:20px; border-top:1px solid rgba(139,115,85,0.16); font-family:var(--mono); font-size:15px; color:var(--taupe);">o trabalho continua na sua mão</div>
+      </div>
+      <div class="era-card seq" data-step="3">
+        <div class="ec-y">2024 – 2025 &nbsp;·&nbsp; GERAÇÃO 02</div>
+        <div class="ec-t">Ela<br>raciocina</div>
+        <div class="ec-b">Ela para, pensa antes de responder, confere o próprio raciocínio e erra bem menos. Mas ainda entrega <b>texto</b>.</div>
+        <div style="margin-top:26px; background:var(--offwhite); border-radius:10px; padding:16px 20px; font-family:var(--mono); font-size:16px; color:var(--ink-2); line-height:1.5;">"analise estes números<br>e me diga o que preocupa"</div>
+        <div style="margin-top:auto; padding-top:20px; border-top:1px solid rgba(139,115,85,0.16); font-family:var(--mono); font-size:15px; color:var(--taupe);">a resposta melhora, o trabalho não sai</div>
+      </div>
+      <div class="era-card on seq" data-step="4">
+        <div class="ec-y">2026 &nbsp;·&nbsp; GERAÇÃO 03 · AGORA</div>
+        <div class="ec-t">Ela<br>age</div>
+        <div class="ec-b">Ela abre arquivo, lê site, cruza planilha, monta a página, confere o resultado e volta com <b>o trabalho pronto</b>.</div>
+        <div style="margin-top:26px; background:rgba(255,255,255,0.09); border-radius:10px; padding:16px 20px; font-family:var(--mono); font-size:16px; color:#fff; line-height:1.5;">"pega as 8 planilhas e<br>me devolve o painel pronto"</div>
+        <div style="margin-top:auto; padding-top:20px; border-top:1px solid rgba(255,255,255,0.2); font-family:var(--mono); font-size:15px; color:var(--terracota-soft);">o entregável sai da conversa</div>
+      </div>
+    </div>
+
+    <div class="anchor seq" data-step="5" style="margin-top:24px;">A grande virada não é a IA escrever melhor. <em style="color:var(--terracota);">É ela conseguir trabalhar.</em></div>
+  </div>
+  <div class="slide-num">03 / 23</div>
+  <div class="logo-micro">VIRADA</div>
+</section>
+
+<!-- ═══════════ 04 · O MESMO PEDIDO, DUAS ERAS ═══════════ -->
+<section class="bg-petroleo" data-label="O mesmo pedido · duas eras">
+  <div class="slide-inner">
+    <div class="kicker seq" data-step="1" style="font-size:16px; color:var(--terracota-soft);">O MESMO PEDIDO, NAS DUAS ERAS</div>
+    <h2 class="slide-title seq" data-step="1" style="margin-top:12px; color:#fff; font-size:62px;">"ME MOSTRA COMO ESTÁ<br>O CAIXA DESTE MÊS."</h2>
+    <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:20px; background:var(--terracota);"></div>
+
+    <div style="display:grid; grid-template-columns:1fr 1.12fr; gap:36px; margin-top:34px; flex:1; align-items:stretch;">
+      <!-- ERA 1 -->
+      <div class="seq" data-step="2" style="background:rgba(255,255,255,0.04); border:1.5px dashed rgba(255,255,255,0.26); border-radius:18px; padding:28px 32px; display:flex; flex-direction:column;">
+        <div class="label-sm" style="color:rgba(255,255,255,0.5); margin-bottom:20px;">A IA que responde</div>
+        <div style="display:flex; flex-direction:column; gap:14px; flex:1; justify-content:center;">
+          <div class="chatb" style="background:rgba(255,255,255,0.11); color:rgba(255,255,255,0.88);">"Me mostra como está o caixa deste mês."</div>
+          <div class="chatr" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:rgba(255,255,255,0.6);">"Claro! Para analisar o fluxo de caixa, comece separando entradas e saídas em três blocos…"</div>
+          <div class="chatb" style="background:rgba(255,255,255,0.11); color:rgba(255,255,255,0.88);">"Mas eu queria o <b>meu</b> caixa."</div>
+          <div class="chatr" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:rgba(255,255,255,0.6);">"Sem problema — me cole os dados aqui que eu organizo."</div>
+        </div>
+        <div style="margin-top:20px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.12); font-family:var(--sans); font-size:20px; color:rgba(255,255,255,0.55); line-height:1.4;">Ela te ensina a fazer. <b style="color:rgba(255,255,255,0.8);">Quem faz continua sendo você.</b></div>
+      </div>
+
+      <!-- ERA 2 -->
+      <div class="seq" data-step="3" style="background:rgba(255,255,255,0.05); border:2px solid var(--terracota); border-radius:18px; padding:28px 34px; display:flex; flex-direction:column; box-shadow:0 26px 66px rgba(193,122,90,0.24);">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;">
+          <div class="label-sm" style="color:var(--terracota-soft);">A IA que age</div>
+          <div class="live-pill" style="font-size:12px; padding:7px 16px;"><span class="dot"></span>trabalhando</div>
+        </div>
+        <div class="wl" style="flex:1;">
+          <div class="seq" data-step="3"><span class="ok">✓</span> abri as <b>8 planilhas</b> das filiais <span class="dim">· 3 formatos diferentes</span></div>
+          <div class="seq" data-step="4"><span class="ok">✓</span> juntei com os títulos em aberto do sistema</div>
+          <div class="seq" data-step="4"><span class="ok">✓</span> achei <b>2 lançamentos duplicados</b> <span class="dim">· separei pra você</span></div>
+          <div class="seq" data-step="5"><span class="ok">✓</span> montei o painel com os 12 meses projetados</div>
+          <div class="seq" data-step="5"><span class="ok">✓</span> conferi os totais contra o extrato</div>
+          <div class="seq" data-step="6" style="color:var(--terracota-soft);">→ pronto: <b>painel aberto no seu navegador</b><span class="caret"></span></div>
+        </div>
+
+        <!-- ILUSTRAÇÃO DO ENTREGÁVEL -->
+        <div class="seq-zoom" data-step="7" style="margin-top:18px; border-radius:12px; overflow:hidden; background:#0B2226; border:1px solid rgba(255,255,255,0.16);">
+          <div style="height:26px; display:flex; align-items:center; gap:6px; padding:0 12px; background:rgba(255,255,255,0.07);">
+            <i style="width:7px;height:7px;border-radius:50%;background:#E06C5A;display:block;"></i>
+            <i style="width:7px;height:7px;border-radius:50%;background:#E0B45A;display:block;"></i>
+            <i style="width:7px;height:7px;border-radius:50%;background:#7FB069;display:block;"></i>
+            <span style="margin-left:10px; font-family:var(--mono); font-size:10px; letter-spacing:0.08em; color:rgba(255,255,255,0.45);">o entregável · caixa consolidado</span>
+          </div>
+          <div style="padding:16px 18px; display:flex; gap:14px; align-items:flex-end;">
+            <div style="display:flex; align-items:flex-end; gap:7px; height:78px;">
+              <span style="width:14px;height:34%;background:#435D51;border-radius:3px;display:block;"></span>
+              <span style="width:14px;height:62%;background:#435D51;border-radius:3px;display:block;"></span>
+              <span style="width:14px;height:22%;background:#8E4436;border-radius:3px;display:block;"></span>
+              <span style="width:14px;height:88%;background:#435D51;border-radius:3px;display:block;"></span>
+              <span style="width:14px;height:46%;background:#435D51;border-radius:3px;display:block;"></span>
+              <span style="width:14px;height:30%;background:#8E4436;border-radius:3px;display:block;"></span>
+              <span style="width:14px;height:70%;background:#435D51;border-radius:3px;display:block;"></span>
+            </div>
+            <div style="flex:1; display:flex; flex-direction:column; gap:7px;">
+              <div style="display:flex; justify-content:space-between; background:rgba(255,255,255,0.07); border-radius:6px; padding:7px 11px;">
+                <span style="font-family:var(--sans); font-size:14px; color:rgba(255,255,255,0.8);">as 8 filiais, num número só</span>
+                <span style="font-family:var(--mono); font-size:13px; color:#7FB069;">consolidado</span></div>
+              <div style="display:flex; justify-content:space-between; background:rgba(255,255,255,0.07); border-radius:6px; padding:7px 11px;">
+                <span style="font-family:var(--sans); font-size:14px; color:rgba(255,255,255,0.8);">o que não bate</span>
+                <span style="font-family:var(--mono); font-size:13px; color:var(--terracota-soft);">2 apontados</span></div>
+              <div style="display:flex; justify-content:space-between; background:rgba(193,122,90,0.2); border:1px solid rgba(193,122,90,0.4); border-radius:6px; padding:7px 11px;">
+                <span style="font-family:var(--sans); font-size:14px; color:#fff;">o que precisa da sua decisão</span>
+                <span style="font-family:var(--mono); font-size:13px; color:#fff;">1 alerta</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="seq" data-step="7" style="margin-top:14px; padding-top:14px; border-top:1px solid rgba(255,255,255,0.16); font-family:var(--sans); font-size:20px; color:rgba(255,255,255,0.88); line-height:1.4;">Ela não explicou como fazer. <b style="color:#fff;">Ela fez</b> — e você revisa no fim.</div>
+      </div>
+    </div>
+
+    <div class="anchor seq" data-step="7" style="margin-top:22px; color:rgba(255,255,255,0.82);">Repare no verbo. <em style="color:var(--terracota-soft);">É a diferença entre uma resposta e um trabalho concluído.</em></div>
+  </div>
+  <div class="slide-num">04 / 23</div>
+</section>
+
+<!-- ═══════════ 05 · O QUE ELA GANHOU ═══════════ -->
+<section class="bg-offwhite" data-label="Os quatro poderes novos">
+  <div class="slide-inner">
+    <div class="kicker seq" data-step="1" style="font-size:16px;">O QUE MUDOU POR BAIXO</div>
+    <h2 class="slide-title seq" data-step="1" style="margin-top:12px; font-size:66px;">QUATRO COISAS QUE ELA<br>NÃO TINHA E AGORA TEM</h2>
+    <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:20px;"></div>
+
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:24px; margin-top:auto; margin-bottom:auto;">
+      <div class="seq" data-step="2" style="background:var(--white); border:1px solid rgba(139,115,85,0.15); border-radius:16px; padding:32px 30px; min-height:500px; display:flex; flex-direction:column;">
+        <svg viewBox="0 0 90 90" width="76" aria-hidden="true" class="floaty2">
+          <rect x="10" y="30" width="70" height="46" rx="10" fill="#F3EEE3" stroke="#14373C" stroke-width="3"/>
+          <path d="M30 30V22a15 15 0 0 1 30 0v8" fill="none" stroke="#B06E4A" stroke-width="5" stroke-linecap="round"/>
+          <circle cx="45" cy="52" r="7" fill="#B06E4A"/>
+        </svg>
+        <div class="ec-y" style="margin-top:20px;">PODER 01</div>
+        <div style="font-family:var(--serif); font-size:44px; color:var(--petroleo); text-transform:uppercase; line-height:1; margin:10px 0 14px;">Ferramentas</div>
+        <div style="font-family:var(--sans); font-size:20px; color:var(--taupe); line-height:1.45;">Ela abre arquivo, entra em site, lê PDF, roda planilha. <b style="color:var(--petroleo);">Só o que você autorizar.</b></div>
+        <div style="margin-top:auto; padding-top:22px; border-top:1px solid rgba(139,115,85,0.16); font-family:var(--mono); font-size:15px; color:var(--terracota); line-height:1.5;">antes: ela só sabia<br>o que você colava</div>
+      </div>
+
+      <div class="seq" data-step="3" style="background:var(--white); border:1px solid rgba(139,115,85,0.15); border-radius:16px; padding:32px 30px; min-height:500px; display:flex; flex-direction:column;">
+        <svg viewBox="0 0 90 90" width="76" aria-hidden="true" class="floaty2">
+          <rect x="16" y="14" width="58" height="66" rx="9" fill="#F3EEE3" stroke="#14373C" stroke-width="3"/>
+          <path d="M28 32h34M28 45h34M28 58h22" stroke="#B06E4A" stroke-width="5" stroke-linecap="round"/>
+        </svg>
+        <div class="ec-y" style="margin-top:20px;">PODER 02</div>
+        <div style="font-family:var(--serif); font-size:44px; color:var(--petroleo); text-transform:uppercase; line-height:1; margin:10px 0 14px;">Memória</div>
+        <div style="font-family:var(--sans); font-size:20px; color:var(--taupe); line-height:1.45;">Ela guarda o contexto do seu trabalho. <b style="color:var(--petroleo);">Não recomeça do zero toda conversa.</b></div>
+        <div style="margin-top:auto; padding-top:22px; border-top:1px solid rgba(139,115,85,0.16); font-family:var(--mono); font-size:15px; color:var(--terracota); line-height:1.5;">antes: toda conversa<br>era o primeiro dia</div>
+      </div>
+
+      <div class="seq" data-step="4" style="background:var(--white); border:1px solid rgba(139,115,85,0.15); border-radius:16px; padding:32px 30px; min-height:500px; display:flex; flex-direction:column;">
+        <svg viewBox="0 0 90 90" width="76" aria-hidden="true">
+          <g class="wheel" style="transform-origin:45px 45px;">
+            <circle cx="45" cy="45" r="28" fill="none" stroke="#B06E4A" stroke-width="6" stroke-dasharray="118 40" stroke-linecap="round"/>
+          </g>
+          <path d="M62 20l6 14-15 1z" fill="#14373C"/>
+        </svg>
+        <div class="ec-y" style="margin-top:20px;">PODER 03</div>
+        <div style="font-family:var(--serif); font-size:44px; color:var(--petroleo); text-transform:uppercase; line-height:1; margin:10px 0 14px;">O loop</div>
+        <div style="font-family:var(--sans); font-size:20px; color:var(--taupe); line-height:1.45;">Ela tenta, confere o resultado, vê o que não ficou bom e <b style="color:var(--petroleo);">refaz sozinha</b>.</div>
+        <div style="margin-top:auto; padding-top:22px; border-top:1px solid rgba(139,115,85,0.16); font-family:var(--mono); font-size:15px; color:var(--terracota); line-height:1.5;">antes: quem corrigia<br>o erro era você</div>
+      </div>
+
+      <div class="seq" data-step="5" style="background:var(--petroleo); border-radius:16px; padding:32px 30px; min-height:500px; display:flex; flex-direction:column; box-shadow:0 28px 68px rgba(20,55,60,0.24);">
+        <svg viewBox="0 0 90 90" width="76" aria-hidden="true" class="floaty">
+          <circle cx="24" cy="30" r="11" fill="#C4835E"/><circle cx="66" cy="30" r="11" fill="#C4835E"/><circle cx="45" cy="66" r="11" fill="#F3EEE3"/>
+          <g class="flowline" stroke="#C4835E" stroke-width="3" fill="none"><path d="M30 38 L40 58"/><path d="M60 38 L50 58"/><path d="M35 30 H55"/></g>
+        </svg>
+        <div class="ec-y" style="margin-top:20px; color:var(--terracota-soft);">PODER 04</div>
+        <div style="font-family:var(--serif); font-size:44px; color:#fff; text-transform:uppercase; line-height:1; margin:10px 0 14px;">Equipe</div>
+        <div style="font-family:var(--sans); font-size:20px; color:rgba(255,255,255,0.85); line-height:1.45;">Ela dispara <b style="color:#fff;">vários agentes ao mesmo tempo</b> e junta o resultado no fim.</div>
+        <div style="margin-top:auto; padding-top:22px; border-top:1px solid rgba(255,255,255,0.2); font-family:var(--mono); font-size:15px; color:var(--terracota-soft); line-height:1.5;">antes: uma tarefa<br>por vez, na fila</div>
+      </div>
+    </div>
+
+    <div class="anchor seq" data-step="6" style="margin-top:24px;">Juntando os quatro, você para de pedir uma resposta <em style="color:var(--terracota);">e passa a delegar um resultado.</em></div>
+  </div>
+  <div class="slide-num">05 / 23</div>
+  <div class="logo-micro">VIRADA</div>
+</section>
+
+<!-- ═══════════ 06 · OS 3 PILARES ═══════════ -->
+<section class="bg-offwhite" data-label="Os 3 pilares">
+  <div class="slide-inner" style="inset:74px 120px 62px;">
+    <div class="kicker seq" data-step="1" style="font-size:16px;">A RÉGUA PARA CLASSIFICAR TUDO QUE VEM A SEGUIR</div>
+    <h2 class="slide-title seq" data-step="1" style="margin-top:12px;">OS 3 PILARES</h2>
+    <div class="slide-subtitle seq" data-step="1" style="margin-top:12px; font-size:28px;">Tudo que a IA faz pelo seu trabalho cabe em três caixas.</div>
+    <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:20px;"></div>
+    <div style="display:grid; grid-template-columns:1fr 1.12fr 1fr; gap:28px; align-items:end; margin-top:auto; padding-bottom:6px;">
+      <div class="seq" data-step="2" style="background:var(--white); border:1px solid rgba(139,115,85,0.15); border-radius:14px; padding:38px 34px; min-height:500px; display:flex; flex-direction:column;">
+        <div class="label-sm" style="color:var(--terracota);">Pilar 01</div>
+        <div style="font-family:var(--serif); font-weight:700; font-size:78px; color:var(--petroleo); line-height:0.96; margin:12px 0;">MAIS<br>RÁPIDO</div>
+        <div style="display:flex; align-items:baseline; gap:14px;"><span style="font-family:var(--serif); font-weight:700; font-size:72px; color:var(--terracota);">10×</span><span style="color:var(--taupe); text-transform:uppercase; letter-spacing:0.12em; font-size:17px; line-height:1.3;">em 10%<br>do tempo</span></div>
+        <div style="margin-top:auto; padding-top:22px; border-top:1px solid rgba(139,115,85,0.15); font-family:var(--sans); font-size:24px; color:var(--taupe); line-height:1.5;">A ata da reunião, o e-mail que já chegou dez vezes, a lista de pendências do dia.</div>
+        <div style="margin-top:14px; font-family:var(--sans); font-size:21px; color:var(--terracota); line-height:1.4;"><span style="font-family:var(--mono); font-size:13px; letter-spacing:0.14em; text-transform:uppercase; opacity:0.8;">Aqui na ILIKIA</span><br>O relatório de vendas por filial que hoje se monta na mão toda segunda.</div>
+      </div>
+      <div class="seq" data-step="3" style="background:var(--terracota); color:var(--white); border-radius:14px; padding:36px 38px; min-height:520px; display:flex; flex-direction:column; box-shadow:0 32px 80px rgba(193,122,90,0.34);">
+        <div class="label-sm" style="color:rgba(255,255,255,0.85);">Pilar 02</div>
+        <div style="font-family:var(--serif); font-weight:700; font-size:98px; color:var(--white); line-height:0.96; margin:14px 0;">MELHOR</div>
+        <div style="display:flex; align-items:baseline; gap:14px;"><span style="font-family:var(--sans); font-weight:700; font-size:54px; color:rgba(255,255,255,0.95);">um par de olhos</span><span style="color:rgba(255,255,255,0.8); text-transform:uppercase; letter-spacing:0.12em; font-size:17px;">· 24h</span></div>
+        <div style="margin-top:auto; padding-top:24px; border-top:1px solid rgba(255,255,255,0.25); font-family:var(--sans); font-size:24px; color:rgba(255,255,255,0.95); line-height:1.5;">Revisar antes de assinar, conferir antes de publicar, achar o número que não bate entre duas planilhas.</div>
+        <div style="margin-top:14px; font-family:var(--sans); font-size:21px; color:#fff; line-height:1.4;"><span style="font-family:var(--mono); font-size:13px; letter-spacing:0.14em; text-transform:uppercase; opacity:0.8;">Aqui na ILIKIA</span><br>Conferir um material antes de ele ir para o médico — e apontar o que precisa de revisão.</div>
+      </div>
+      <div class="seq" data-step="4" style="background:var(--white); border:1px solid rgba(139,115,85,0.15); border-radius:14px; padding:38px 34px; min-height:500px; display:flex; flex-direction:column;">
+        <div class="label-sm" style="color:var(--terracota);">Pilar 03</div>
+        <div style="font-family:var(--serif); font-weight:700; font-size:78px; color:var(--petroleo); line-height:0.96; margin:12px 0;">NOVO</div>
+        <div style="display:flex; align-items:baseline; gap:12px;"><span style="font-family:var(--serif); font-weight:700; font-size:72px; color:var(--terracota);">0→1</span><span style="color:var(--taupe); text-transform:uppercase; letter-spacing:0.12em; font-size:17px; line-height:1.3;">do impossível<br>ao feito</span></div>
+        <div style="margin-top:auto; padding-top:22px; border-top:1px solid rgba(139,115,85,0.15); font-family:var(--sans); font-size:24px; color:var(--taupe); line-height:1.5;">Um painel, uma página, um controle que não existia — sem programar.</div>
+        <div style="margin-top:14px; font-family:var(--sans); font-size:21px; color:var(--terracota); line-height:1.4;"><span style="font-family:var(--mono); font-size:13px; letter-spacing:0.14em; text-transform:uppercase; opacity:0.8;">Aqui na ILIKIA</span><br>Uma tela que mostra o que o comercial prometeu e o que a operação consegue entregar.</div>
+      </div>
+    </div>
+    <div class="anchor seq" data-step="5" style="margin-top:14px; text-align:center; font-size:23px;">Guardem essas três caixas. <em>Todo case que vem agora cai em uma delas.</em></div>
+  </div>
+  <div class="slide-num">06 / 23</div>
+</section>
+
+<!-- ═══════════ 08 · CASE 01 · JUCA NA BALADA ═══════════ -->
+<section class="bg-offwhite" data-label="Case 01 · O PDF que virou site">
+  <div class="slide-inner">
+    <div class="seq" data-step="1" style="display:flex; align-items:center; gap:16px;">
+      <span class="case-chip t">Case 01</span><span class="case-chip">Pilar 03 · Novo</span>
+      <span class="kicker" style="font-size:15px;">AGÊNCIA QUE VENDE VIAGEM PARA FESTIVAL</span>
+    </div>
+    <h2 class="slide-title seq" data-step="1" style="margin-top:16px; font-size:62px;">O PDF QUE NINGUÉM AGUENTAVA<br>MAIS REFAZER</h2>
+    <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:18px;"></div>
+
+    <div style="display:grid; grid-template-columns:1fr 1.06fr; gap:52px; margin-top:32px; flex:1; align-items:center;">
+      <div style="display:flex; flex-direction:column;">
+        <div class="seq" data-step="2" style="background:rgba(139,115,85,0.07); border:1.5px dashed rgba(139,115,85,0.42); border-radius:16px; padding:24px 28px;">
+          <div class="label-sm" style="color:var(--taupe); margin-bottom:10px;">Como era</div>
+          <div style="font-family:var(--sans); font-size:22px; color:var(--ink); line-height:1.45;">A cada lançamento, o time montava o material do zero: entrava no site de <b>6 hotéis</b>, copiava preço, data e o que inclui, baixava foto por foto. <b>Uma semana</b> para virar um PDF. E a cada mudança de preço, o PDF inteiro era refeito.</div>
+        </div>
+
+        <!-- diagrama de conexões -->
+        <div class="seq" data-step="3" style="margin-top:26px; display:grid; grid-template-columns:1fr 74px 1fr; gap:14px; align-items:center;">
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <div class="node node-in">Sites dos 6 hotéis<span class="ns">preço, data, o que inclui</span></div>
+            <div class="node node-in">As fotos, na fonte<span class="ns">sem baixar e renomear</span></div>
+            <div class="node node-in">Lançamentos anteriores<span class="ns">o padrão que já funcionava</span></div>
+          </div>
+          <svg viewBox="0 0 74 190" width="74" aria-hidden="true">
+            <g class="flowline" stroke="#B06E4A" stroke-width="3" fill="none" stroke-linecap="round">
+              <path d="M4 95 C 30 95, 32 34, 70 34"/><path d="M4 95 H 70"/><path d="M4 95 C 30 95, 32 156, 70 156"/>
+            </g>
+          </svg>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <div class="node node-core">A IA lê e organiza<span class="ns" style="opacity:.8;">um site por vez, sozinha</span></div>
+            <div class="node node-out">Constrói a página<span class="ns">não um texto sobre ela</span></div>
+            <div class="node node-out">Confere e corrige<span class="ns">e eu reviso no fim</span></div>
+          </div>
+        </div>
+
+        <div class="seq" data-step="4" style="margin-top:24px; display:flex; gap:44px; align-items:flex-end;">
+          <div><div class="metric" style="font-size:64px;">1 semana</div><div class="metric-l">virou uma tarde</div></div>
+          <div style="border-left:3px solid var(--terracota); padding-left:24px;"><div style="font-family:var(--sans); font-size:22px; color:var(--petroleo); line-height:1.4;">Mudou o preço? <b>A página muda.</b><br>Ninguém refaz nada.</div></div>
+        </div>
+      </div>
+
+      <div class="seq-zoom" data-step="2" class-note="print">
+        <div class="browser">
+          <div class="bar"><i style="background:#E06C5A"></i><i style="background:#E0B45A"></i><i style="background:#7FB069"></i><span class="url">jucanabalada · pacote completo · festival em itu 2027</span></div>
+          <img src="shot-juca.png" alt="Página do pacote, montada pela IA">
+        </div>
+        <div class="cap seq" data-step="4" style="margin-top:14px; text-align:center; color:var(--taupe);">Print da página real, no ar. <b style="color:var(--terracota);">Ela busca a foto do hotel direto do site.</b></div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">07 / 23</div>
+  <div class="logo-micro">VIRADA</div>
+</section>
+
+<!-- ═══════════ 09 · CASE 02 · STRINGHETTA ═══════════ -->
+<section class="bg-petroleo" data-label="Case 02 · O caixa de 8 contas">
+  <div class="slide-inner">
+    <div class="seq" data-step="1" style="display:flex; align-items:center; gap:16px;">
+      <span class="case-chip">Case 02</span><span class="case-chip" style="background:var(--sage);">Pilar 02 + 03</span>
+      <span class="kicker" style="font-size:15px; color:var(--terracota-soft);">UM GRUPO DO AGRONEGÓCIO · VÁRIAS UNIDADES</span>
+      <a class="abrir seq" data-step="1" href="exemplo-cockpit-caixa.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4L11 13"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg><span>abrir o painel</span></a>
+    </div>
+    <h2 class="slide-title seq" data-step="1" style="margin-top:16px; color:#fff; font-size:62px;">O FLUXO DE CAIXA QUE MORAVA<br>EM PLANILHAS QUE NÃO CONVERSAVAM</h2>
+    <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:18px; background:var(--terracota);"></div>
+
+    <div style="display:grid; grid-template-columns:1fr 1.04fr; gap:46px; margin-top:28px; flex:1; align-items:center;">
+      <div style="display:flex; flex-direction:column;">
+        <div class="seq" data-step="2" style="display:grid; grid-template-columns:1fr 62px 1fr; gap:12px; align-items:center;">
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <div class="node node-in">Extratos de vários bancos<span class="ns">cada um num formato</span></div>
+            <div class="node node-in">O que está em aberto<span class="ns">no sistema da operação</span></div>
+            <div class="node node-in">Planilhas de cada unidade<span class="ns">cada uma do jeito de quem fez</span></div>
+          </div>
+          <svg viewBox="0 0 62 190" width="62" aria-hidden="true">
+            <g class="flowline" stroke="#C4835E" stroke-width="3" fill="none" stroke-linecap="round">
+              <path d="M4 95 C 26 95, 28 34, 58 34"/><path d="M4 95 H 58"/><path d="M4 95 C 26 95, 28 156, 58 156"/>
+            </g>
+          </svg>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <div class="node node-core">A IA lê e cruza tudo<span class="ns" style="opacity:.85;">e aponta o que não bate</span></div>
+            <div class="node node-out" style="background:var(--sage);">Uma tela só<span class="ns">a operação inteira de uma vez</span></div>
+            <div class="node node-in">O dono decide<span class="ns">a leitura continua sendo dele</span></div>
+          </div>
+        </div>
+
+        <div class="seq" data-step="4" style="margin-top:28px; display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+          <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.14); border-radius:14px; padding:20px 24px;">
+            <div style="font-family:var(--sans); font-weight:700; font-size:23px; color:#fff;">O tempo volta</div>
+            <div style="font-family:var(--sans); font-size:18px; color:rgba(255,255,255,0.75); line-height:1.4; margin-top:6px;">Dias de consolidação manual viram uma tela que já está pronta quando você abre.</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.14); border-radius:14px; padding:20px 24px;">
+            <div style="font-family:var(--sans); font-weight:700; font-size:23px; color:#fff;">A informação bate</div>
+            <div style="font-family:var(--sans); font-size:18px; color:rgba(255,255,255,0.75); line-height:1.4; margin-top:6px;">Consolidada e conferida. Some a discussão sobre qual planilha está certa.</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.14); border-radius:14px; padding:20px 24px;">
+            <div style="font-family:var(--sans); font-weight:700; font-size:23px; color:#fff;">Cruzamentos que ninguém fazia</div>
+            <div style="font-family:var(--sans); font-size:18px; color:rgba(255,255,255,0.75); line-height:1.4; margin-top:6px;">Porque dava trabalho demais para valer a pena. Agora é uma pergunta.</div>
+          </div>
+          <div style="background:var(--terracota); border-radius:14px; padding:20px 24px; box-shadow:0 20px 48px rgba(176,110,74,0.28);">
+            <div style="font-family:var(--sans); font-weight:700; font-size:23px; color:#fff;">O alerta chega antes</div>
+            <div style="font-family:var(--sans); font-size:18px; color:rgba(255,255,255,0.92); line-height:1.4; margin-top:6px;">Ela avisa que algo saiu do padrão — em vez de você descobrir no fechamento.</div>
+          </div>
+        </div>
+
+        <div class="seq" data-step="5" style="margin-top:26px; border-left:3px solid var(--terracota); padding-left:26px;">
+          <div style="font-family:var(--sans); font-size:24px; color:rgba(255,255,255,0.9); line-height:1.45;">Ninguém trocou de sistema. <b style="color:#fff;">A IA leu o que já existia</b> — e o ganho não foi o número: foi decidir com informação inteira, no dia certo.</div>
+        </div>
+      </div>
+
+      <div class="seq-zoom" data-step="3">
+        <div class="browser">
+          <div class="bar"><i style="background:#E06C5A"></i><i style="background:#E0B45A"></i><i style="background:#7FB069"></i><span class="url">cockpit executivo · fluxo de caixa consolidado</span></div>
+          <div class="shot" style="height:648px;"><img src="shot-caixa.png" alt="Cockpit executivo de fluxo de caixa"></div>
+        </div>
+        <div class="cap seq" data-step="5" style="margin-top:14px; text-align:center; color:rgba(255,255,255,0.6);">A mesma informação que estava espalhada em oito arquivos — <b style="color:var(--terracota-soft);">numa tela que se entende em dez segundos.</b></div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">08 / 23</div>
+</section>
+
+<!-- ═══════════ 10 · CASE 03 · HACKATHON ═══════════ -->
+<section class="bg-offwhite" data-label="Case 03 · O hackathon">
+  <div class="slide-inner">
+    <div style="display:grid; grid-template-columns:1.16fr 1fr; gap:52px; flex:1; align-items:stretch;">
+      <div style="display:flex; flex-direction:column;">
+        <div class="seq" data-step="1" style="display:flex; align-items:center; gap:16px;">
+          <span class="case-chip t">Case 03</span><span class="kicker" style="font-size:15px;">70 PESSOAS · UM MÊS · UM HACKATHON NO FIM</span>
+        </div>
+        <h2 class="slide-title seq" data-step="1" style="margin-top:16px; font-size:56px;">O QUE A IA REVELOU<br>ANTES DE AUTOMATIZAR NADA</h2>
+        <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:18px;"></div>
+        <div class="body-lg seq" data-step="2" style="margin-top:24px; color:var(--ink);">Uma fundação de 35 anos. Um mês de aulas semanais, acesso liberado para todo mundo — <b>da diretoria ao estagiário</b> — e um hackathon no fim, com as áreas misturadas de propósito e os diretores como jurados.</div>
+        <div class="seq" data-step="3" style="margin-top:22px; border-left:3px solid var(--terracota); padding-left:28px;">
+          <div style="font-family:var(--sans); font-weight:600; font-size:31px; color:var(--petroleo); line-height:1.35;">Os grupos chegaram todos na <em style="color:var(--terracota);">mesma dor</em>: ninguém achava informação antiga. O conhecimento de 35 anos não estava em lugar nenhum.</div>
+        </div>
+        <!-- ══ BRUNA: troque os três textos abaixo pelas soluções reais do drive deles ══ -->
+        <div class="seq" data-step="4" style="margin-top:24px;">
+          <div class="label-sm" style="color:var(--terracota); margin-bottom:12px;">E as soluções que saíram de lá, em dois dias</div>
+          <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:14px;">
+            <div style="background:var(--white); border:1px solid rgba(139,115,85,0.18); border-left:4px solid var(--terracota); border-radius:0 12px 12px 0; padding:16px 18px;">
+              <div style="font-family:var(--sans); font-weight:700; font-size:20px; color:var(--petroleo); line-height:1.2;">Solução 1</div>
+              <div style="font-family:var(--sans); font-size:16px; color:var(--taupe); line-height:1.35; margin-top:5px;">o que o grupo construiu</div>
+            </div>
+            <div style="background:var(--white); border:1px solid rgba(139,115,85,0.18); border-left:4px solid var(--terracota); border-radius:0 12px 12px 0; padding:16px 18px;">
+              <div style="font-family:var(--sans); font-weight:700; font-size:20px; color:var(--petroleo); line-height:1.2;">Solução 2</div>
+              <div style="font-family:var(--sans); font-size:16px; color:var(--taupe); line-height:1.35; margin-top:5px;">o que o grupo construiu</div>
+            </div>
+            <div style="background:var(--white); border:1px solid rgba(139,115,85,0.18); border-left:4px solid var(--terracota); border-radius:0 12px 12px 0; padding:16px 18px;">
+              <div style="font-family:var(--sans); font-weight:700; font-size:20px; color:var(--petroleo); line-height:1.2;">Solução 3</div>
+              <div style="font-family:var(--sans); font-size:16px; color:var(--taupe); line-height:1.35; margin-top:5px;">o que o grupo construiu</div>
+            </div>
+          </div>
+          <div style="margin-top:12px; font-family:var(--sans); font-size:19px; color:var(--taupe); line-height:1.4;">Nenhuma delas foi encomendada por alguém de cima. <b style="color:var(--petroleo);">Saíram de quem faz o trabalho.</b></div>
+        </div>
+
+        <div class="seq" data-step="5" style="margin-top:auto; background:var(--petroleo); border-radius:16px; padding:24px 30px;">
+          <div class="label-sm" style="color:var(--terracota-wash);">O QUE A DIRETORIA DISSE</div>
+          <div style="font-family:var(--sans); font-size:25px; color:#fff; margin-top:10px; line-height:1.4;">"Eu sabia que isso era um problema, mas eu não tinha visibilidade de que <em style="color:var(--terracota-soft);">todos</em> os colaboradores estavam sofrendo com a mesma dor."</div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:16px; min-height:0;">
+        <div class="seq-zoom" data-step="2" style="height:440px; border-radius:16px; overflow:hidden; box-shadow:0 26px 60px rgba(35,49,51,0.18);">
+          <img src="foto-ismart.jpg" alt="Turma em formação" style="width:100%; height:100%; object-fit:cover; display:block;">
+        </div>
+        <div class="seq-zoom" data-step="3" style="height:340px; border-radius:16px; overflow:hidden; box-shadow:0 26px 60px rgba(35,49,51,0.18);">
+          <img src="foto-hackathon.jpg" alt="Hackathon" style="width:100%; height:100%; object-fit:cover; display:block;">
+        </div>
+      </div>
+    </div>
+    <div class="anchor seq" data-step="6" style="margin-top:18px;">Às vezes a IA não revela primeiro uma automação. <em style="color:var(--terracota);">Ela revela um problema que a empresa inteira aprendeu a contornar em silêncio.</em></div>
+  </div>
+  <div class="slide-num">09 / 23</div>
+  <div class="logo-micro">VIRADA</div>
+</section>
+
+<!-- ═══════════ 11 · CASE 04 · PROPOSTA COMERCIAL ═══════════ -->
+<section class="bg-creme" data-label="Case 04 · A proposta comercial">
+  <div class="slide-inner">
+    <div class="seq" data-step="1" style="display:flex; align-items:center; gap:16px;">
+      <span class="case-chip t">Case 04</span><span class="case-chip">Pilar 01 · Mais rápido</span>
+      <span class="kicker" style="font-size:15px;">O MEU PRÓPRIO COMERCIAL</span>
+    </div>
+    <h2 class="slide-title seq" data-step="1" style="margin-top:16px; font-size:62px;">DA CONVERSA GRAVADA<br>À PROPOSTA NO AR</h2>
+    <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:18px;"></div>
+
+    <div style="display:grid; grid-template-columns:1fr 1.12fr; gap:52px; margin-top:30px; flex:1; align-items:center;">
+      <div>
+        <div class="seq" data-step="2" style="display:flex; flex-direction:column; gap:12px;">
+          <div style="display:flex; align-items:center; gap:18px;">
+            <span style="font-family:var(--serif); font-size:36px; color:var(--terracota); min-width:44px;">01</span>
+            <div class="node node-in" style="flex:1;">Eu saio da reunião<span class="ns">a gravação e as minhas anotações soltas</span></div>
+          </div>
+          <div style="padding-left:62px;"><svg width="30" height="26" aria-hidden="true"><path class="flowline" d="M15 2 V 24" stroke="#B06E4A" stroke-width="3" stroke-linecap="round"/></svg></div>
+          <div style="display:flex; align-items:center; gap:18px;">
+            <span style="font-family:var(--serif); font-size:36px; color:var(--terracota); min-width:44px;">02</span>
+            <div class="node node-core" style="flex:1;">A IA lê a conversa inteira<span class="ns" style="opacity:.85;">e puxa o meu jeito de escrever proposta</span></div>
+          </div>
+          <div style="padding-left:62px;"><svg width="30" height="26" aria-hidden="true"><path class="flowline" d="M15 2 V 24" stroke="#B06E4A" stroke-width="3" stroke-linecap="round"/></svg></div>
+          <div style="display:flex; align-items:center; gap:18px;">
+            <span style="font-family:var(--serif); font-size:36px; color:var(--terracota); min-width:44px;">03</span>
+            <div class="node node-out" style="flex:1;">Sai uma página, não um arquivo<span class="ns">com link, no ar, aberta no celular do cliente</span></div>
+          </div>
+          <div style="padding-left:62px;"><svg width="30" height="26" aria-hidden="true"><path class="flowline" d="M15 2 V 24" stroke="#B06E4A" stroke-width="3" stroke-linecap="round"/></svg></div>
+          <div style="display:flex; align-items:center; gap:18px;">
+            <span style="font-family:var(--serif); font-size:36px; color:var(--terracota); min-width:44px;">04</span>
+            <div class="node node-in" style="flex:1;">Eu reviso e ajusto o preço<span class="ns">a decisão comercial continua minha</span></div>
+          </div>
+        </div>
+        <div class="seq" data-step="4" style="margin-top:30px; display:flex; gap:40px; align-items:flex-end;">
+          <div><div class="metric" style="font-size:58px;">2 dias</div><div class="metric-l">viraram 40 minutos</div></div>
+          <div style="border-left:3px solid var(--terracota); padding-left:24px; max-width:420px;"><div style="font-family:var(--sans); font-size:21px; color:var(--petroleo); line-height:1.4;">E eu paro de perder a proposta porque a semana ficou cheia.</div></div>
+        </div>
+      </div>
+
+      <div class="seq-zoom" data-step="3">
+        <div class="browser">
+          <div class="bar"><i style="background:#E06C5A"></i><i style="background:#E0B45A"></i><i style="background:#7FB069"></i><span class="url">newscale.tech · proposta · versão do cliente</span></div>
+          <img src="shot-proposta.png" alt="Proposta comercial em página">
+        </div>
+        <div class="cap seq" data-step="4" style="margin-top:14px; text-align:center; color:var(--taupe);">Uma proposta real, montada assim. <b style="color:var(--terracota);">Nenhum slide foi usado no processo.</b></div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">10 / 23</div>
+</section>
+
+<!-- ═══════════ 12 · CASE 05 · O MEU FLUXO DE CONTEÚDO ═══════════ -->
+<section class="bg-petroleo" data-label="Case 05 · O meu fluxo de conteúdo">
+  <div class="slide-inner" style="inset:70px 100px 58px;">
+    <div class="seq" data-step="1" style="display:flex; align-items:center; gap:16px;">
+      <span class="case-chip">Case 05</span><span class="case-chip" style="background:var(--sage);">Sistema</span>
+      <span class="kicker" style="font-size:15px; color:var(--terracota-soft);">O MEU PRÓPRIO CONTEÚDO · @BRUSANTANNA.AI</span>
+    </div>
+    <h2 class="slide-title seq" data-step="1" style="margin-top:14px; color:#fff; font-size:58px;">UMA IDEIA ENTRA.<br>QUATRO REDES RECEBEM. <span style="color:var(--terracota-soft);">O PAINEL VOLTA.</span></h2>
+    <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:16px; background:var(--terracota);"></div>
+
+    <!-- DIAGRAMA DE CONEXÕES -->
+    <div style="display:grid; grid-template-columns:0.72fr 54px 0.9fr 54px 0.9fr 54px 1.05fr; gap:0 12px; align-items:center; margin-top:32px;">
+      <div class="seq" data-step="2" style="display:flex; flex-direction:column; gap:10px;">
+        <div class="label-sm" style="color:rgba(255,255,255,0.42);">Entra</div>
+        <div class="node node-in">Uma ideia<span class="ns">um áudio de 40 segundos</span></div>
+      </div>
+      <svg class="seq" data-step="2" viewBox="0 0 54 40" width="54" aria-hidden="true"><path class="flowline" d="M2 20 H 50" stroke="#C4835E" stroke-width="3" stroke-linecap="round"/></svg>
+
+      <div class="seq" data-step="3" style="display:flex; flex-direction:column; gap:10px;">
+        <div class="label-sm" style="color:var(--terracota-soft);">Módulo 01</div>
+        <div class="node node-core">O MOTOR<span class="ns" style="opacity:.85;">escreve nos meus formatos</span></div>
+        <div style="display:flex; flex-wrap:wrap; gap:7px;">
+          <span class="chip" style="background:rgba(255,255,255,0.1); color:#fff; font-size:12px; padding:6px 13px;">Reel</span>
+          <span class="chip" style="background:rgba(255,255,255,0.1); color:#fff; font-size:12px; padding:6px 13px;">Carrossel</span>
+          <span class="chip" style="background:rgba(255,255,255,0.1); color:#fff; font-size:12px; padding:6px 13px;">LinkedIn</span>
+          <span class="chip" style="background:rgba(255,255,255,0.1); color:#fff; font-size:12px; padding:6px 13px;">Blog</span>
+        </div>
+      </div>
+      <svg class="seq" data-step="3" viewBox="0 0 54 40" width="54" aria-hidden="true"><path class="flowline" d="M2 20 H 50" stroke="#C4835E" stroke-width="3" stroke-linecap="round"/></svg>
+
+      <div class="seq" data-step="4" style="display:flex; flex-direction:column; gap:10px;">
+        <div class="label-sm" style="color:var(--terracota-soft);">Módulo 02</div>
+        <div class="node node-out" style="background:var(--sage);">O DISTRIBUIDOR<span class="ns">adapta e agenda a hora certa</span></div>
+        <div style="display:flex; flex-wrap:wrap; gap:7px;">
+          <span class="chip" style="background:rgba(255,255,255,0.1); color:#fff; font-size:12px; padding:6px 13px;">Instagram</span>
+          <span class="chip" style="background:rgba(255,255,255,0.1); color:#fff; font-size:12px; padding:6px 13px;">TikTok</span>
+          <span class="chip" style="background:rgba(255,255,255,0.1); color:#fff; font-size:12px; padding:6px 13px;">Shorts</span>
+          <span class="chip" style="background:rgba(255,255,255,0.1); color:#fff; font-size:12px; padding:6px 13px;">Threads</span>
+        </div>
+      </div>
+      <svg class="seq" data-step="4" viewBox="0 0 54 40" width="54" aria-hidden="true"><path class="flowline" d="M2 20 H 50" stroke="#C4835E" stroke-width="3" stroke-linecap="round"/></svg>
+
+      <div class="seq" data-step="5" style="display:flex; flex-direction:column; gap:10px;">
+        <div class="label-sm" style="color:var(--terracota-soft);">Módulo 03</div>
+        <div class="node node-core">O PAINEL<span class="ns" style="opacity:.85;">lê os números e sugere a próxima pauta</span></div>
+        <div style="display:flex; gap:18px; padding-left:4px;">
+          <div><div style="font-family:var(--serif); font-size:30px; color:#fff;">40.630</div><div style="font-family:var(--sans); font-size:13px; color:rgba(255,255,255,0.55);">seguidores</div></div>
+          <div><div style="font-family:var(--serif); font-size:30px; color:var(--terracota-soft);">+120%</div><div style="font-family:var(--sans); font-size:13px; color:rgba(255,255,255,0.55);">vs. semana anterior</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- laço de retorno -->
+    <div class="seq" data-step="6" style="margin-top:14px; display:flex; align-items:center; gap:18px;">
+      <svg viewBox="0 0 1400 46" width="100%" height="46" preserveAspectRatio="none" aria-hidden="true" style="flex:1;">
+        <path class="flowline" d="M1380 6 V 30 H 30 V 6" fill="none" stroke="#7FB069" stroke-width="3" stroke-linecap="round"/>
+        <path d="M30 6 l-7 12 l14 0 z" fill="#7FB069"/>
+      </svg>
+    </div>
+    <div class="seq" data-step="6" style="text-align:center; margin-top:-6px;"><span class="loopback" style="color:#7FB069;">o que funcionou volta e vira a próxima ideia — esse é o loop</span></div>
+
+    <div style="display:grid; grid-template-columns:1.15fr 1fr; gap:44px; margin-top:22px; flex:1; align-items:center;">
+      <div class="seq-zoom" data-step="7">
+        <div class="browser">
+          <div class="bar"><i style="background:#E06C5A"></i><i style="background:#E0B45A"></i><i style="background:#7FB069"></i><span class="url">central de conteúdo · gerada por agente, todo dia às 7h30</span></div>
+          <div class="shot" style="height:392px;"><img src="shot-conteudo.png" alt="Painel de conteúdo"></div>
+        </div>
+      </div>
+      <div class="seq" data-step="7" style="border-left:3px solid var(--terracota); padding-left:28px;">
+        <div style="font-family:var(--sans); font-size:25px; color:rgba(255,255,255,0.9); line-height:1.45;">Eu não montei um robô que posta por mim. <b style="color:#fff;">Eu montei um processo que eu já fazia</b> — e ensinei ele uma vez.</div>
+        <div style="margin-top:20px; font-family:var(--sans); font-size:21px; color:var(--terracota-soft); line-height:1.4;">Nada vai ao ar sem eu aprovar. O sistema prepara; a assinatura continua minha.</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">11 / 23</div>
+</section>
+
+<!-- ═══════════ 13 · O VÍDEO SE EDITA SOZINHO ═══════════ -->
+<section class="bg-offwhite" data-label="O vídeo cru vira isso">
+  <div class="slide-inner">
+    <div class="seq" data-step="1" style="display:flex; align-items:center; gap:16px;">
+      <span class="case-chip t">Case 05 · parte 2</span>
+      <span class="kicker" style="font-size:15px;">A PARTE DO SISTEMA QUE MAIS ASSUSTA QUANDO EU MOSTRO</span>
+    </div>
+    <h2 class="slide-title seq" data-step="1" style="margin-top:14px; font-size:66px;">O VÍDEO CRU <span style="color:var(--terracota);">VIRA ISSO</span></h2>
+    <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:18px;"></div>
+    <div class="slide-subtitle seq" data-step="1" style="margin-top:14px; font-size:27px; max-width:1400px;">Sem editor, sem programa complicado, sem ninguém contratado. Eu só falei: <b style="color:var(--petroleo);">"corta as partes paradas, põe as legendas e o título"</b>.</div>
+
+    <div style="display:grid; grid-template-columns:368px 92px 368px 1fr; gap:34px; margin-top:32px; flex:1; align-items:center;">
+      <div class="seq-zoom" data-step="2" style="display:flex; flex-direction:column; gap:12px;">
+        <div class="label-sm" style="color:var(--taupe); text-align:center;">Antes · como saiu da câmera</div>
+        <video src="video-antes.mp4" muted loop autoplay playsinline
+          style="width:368px; height:654px; object-fit:cover; border-radius:20px; background:#000; border:3px solid var(--petroleo); box-shadow:0 26px 60px rgba(20,55,60,0.24); display:block;"></video>
+      </div>
+
+      <div class="seq" data-step="3" style="display:flex; flex-direction:column; align-items:center; gap:14px;">
+        <svg viewBox="0 0 96 60" width="96" aria-hidden="true">
+          <path class="flowline" d="M4 30 H 74" stroke="#B06E4A" stroke-width="4" stroke-linecap="round" fill="none"/>
+          <path d="M92 30 l-18 -10 l0 20 z" fill="#B06E4A"/>
+        </svg>
+        <div style="font-family:var(--mono); font-size:13px; letter-spacing:0.12em; text-transform:uppercase; color:var(--terracota); text-align:center; line-height:1.6;">uma<br>frase</div>
+      </div>
+
+      <div class="seq-zoom" data-step="3" style="display:flex; flex-direction:column; gap:12px;">
+        <div class="label-sm" style="color:var(--terracota-deep); text-align:center;">Depois · editado pela skill</div>
+        <video src="video-depois.mp4" muted loop autoplay playsinline
+          style="width:368px; height:654px; object-fit:cover; border-radius:20px; background:#000; border:3px solid var(--terracota); box-shadow:0 26px 60px rgba(176,110,74,0.34); display:block;"></video>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div class="seq" data-step="4" style="display:flex; gap:16px; align-items:flex-start;">
+          <span style="font-family:var(--serif); font-size:30px; color:var(--terracota); min-width:40px; line-height:1;">01</span>
+          <div><div style="font-family:var(--sans); font-weight:700; font-size:24px; color:var(--petroleo);">Corta as partes paradas</div><div style="font-family:var(--sans); font-size:19px; color:var(--taupe); line-height:1.35;">Ela ouve o áudio inteiro e tira o silêncio, a gagueira e a repetição.</div></div>
+        </div>
+        <div class="seq" data-step="4" style="display:flex; gap:16px; align-items:flex-start;">
+          <span style="font-family:var(--serif); font-size:30px; color:var(--terracota); min-width:40px; line-height:1;">02</span>
+          <div><div style="font-family:var(--sans); font-weight:700; font-size:24px; color:var(--petroleo);">Escreve e sincroniza a legenda</div><div style="font-family:var(--sans); font-size:19px; color:var(--taupe); line-height:1.35;">Palavra por palavra, no tempo da fala.</div></div>
+        </div>
+        <div class="seq" data-step="5" style="display:flex; gap:16px; align-items:flex-start;">
+          <span style="font-family:var(--serif); font-size:30px; color:var(--terracota); min-width:40px; line-height:1;">03</span>
+          <div><div style="font-family:var(--sans); font-weight:700; font-size:24px; color:var(--petroleo);">Põe o título e os destaques</div><div style="font-family:var(--sans); font-size:19px; color:var(--taupe); line-height:1.35;">Na minha tipografia, na minha cor, do meu jeito.</div></div>
+        </div>
+        <div class="seq" data-step="5" style="display:flex; gap:16px; align-items:flex-start;">
+          <span style="font-family:var(--serif); font-size:30px; color:var(--terracota); min-width:40px; line-height:1;">04</span>
+          <div><div style="font-family:var(--sans); font-weight:700; font-size:24px; color:var(--petroleo);">Devolve pronto para postar</div><div style="font-family:var(--sans); font-size:19px; color:var(--taupe); line-height:1.35;">E eu assisto antes. Sempre.</div></div>
+        </div>
+        <div class="seq" data-step="6" style="margin-top:10px; background:var(--petroleo); border-radius:14px; padding:20px 24px;">
+          <div style="font-family:var(--sans); font-size:21px; color:#fff; line-height:1.4;">Esse Reel foi para o meu perfil <b style="color:var(--terracota-soft);">exatamente assim</b>. E foi o que mais rendeu na semana.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="anchor seq" data-step="6" style="margin-top:18px;">Ensinei uma vez o que eu queria. <em style="color:var(--terracota);">Agora todo vídeo sai assim, sem eu abrir nada.</em></div>
+  </div>
+  <div class="slide-num">12 / 23</div>
+  <div class="logo-micro">VIRADA</div>
+</section>
+
+<!-- ═══════════ 14 · CASE 06 · O GUIA DO DIA ═══════════ -->
+<section class="bg-creme" data-label="Case 06 · O guia do meu dia">
+  <div class="slide-inner" style="inset:70px 100px 58px;">
+    <div class="seq" data-step="1" style="display:flex; align-items:center; gap:16px;">
+      <span class="case-chip t">Case 06</span><span class="case-chip">Sistema</span>
+      <span class="kicker" style="font-size:15px;">O QUE ME ESPERA TODA MANHÃ, ANTES DE EU ABRIR O COMPUTADOR</span>
+    </div>
+    <h2 class="slide-title seq" data-step="1" style="margin-top:14px; font-size:60px;">O GUIA DO MEU DIA</h2>
+    <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:16px;"></div>
+
+    <div style="display:grid; grid-template-columns:1.02fr 1fr; gap:46px; margin-top:26px; flex:1; align-items:center;">
+      <!-- DIAGRAMA -->
+      <div>
+        <div style="display:grid; grid-template-columns:1fr 78px 0.92fr; gap:14px; align-items:center;">
+          <div class="seq" data-step="2" style="display:flex; flex-direction:column; gap:9px;">
+            <div class="label-sm" style="color:var(--taupe); margin-bottom:2px;">Ela lê, sozinha</div>
+            <div class="node node-in">Minha agenda<span class="ns">hoje e os próximos 7 dias</span></div>
+            <div class="node node-in">Meu e-mail<span class="ns">só o que pede ação</span></div>
+            <div class="node node-in">O meu radar<span class="ns">propostas, prazos, decisões</span></div>
+            <div class="node node-in">Reuniões novas<span class="ns">transcrições que chegaram</span></div>
+          </div>
+          <svg viewBox="0 0 78 300" width="78" aria-hidden="true">
+            <g class="flowline" stroke="#B06E4A" stroke-width="3" fill="none" stroke-linecap="round">
+              <path d="M4 150 C 34 150, 36 36, 74 36"/>
+              <path d="M4 150 C 34 150, 36 112, 74 112"/>
+              <path d="M4 150 C 34 150, 36 188, 74 188"/>
+              <path d="M4 150 C 34 150, 36 264, 74 264"/>
+            </g>
+          </svg>
+          <div class="seq" data-step="3" style="display:flex; flex-direction:column; gap:9px;">
+            <div class="label-sm" style="color:var(--terracota); margin-bottom:2px;">Ela cruza e devolve</div>
+            <div class="node node-core">Reunião sem material<span class="ns" style="opacity:.85;">e quantos dias faltam</span></div>
+            <div class="node node-core">Proposta parada<span class="ns" style="opacity:.85;">com o valor, para eu agir</span></div>
+            <div class="node node-core">A tarefa inegociável<span class="ns" style="opacity:.85;">uma só, escolhida por ela</span></div>
+            <div class="node node-out">3 a 5 perguntas fechadas<span class="ns">eu respondo em áudio</span></div>
+          </div>
+        </div>
+
+        <div class="seq" data-step="4" style="margin-top:20px;">
+          <svg viewBox="0 0 760 44" width="100%" height="44" preserveAspectRatio="none" aria-hidden="true">
+            <path class="flowline" d="M740 6 V 32 H 24 V 6" fill="none" stroke="#435D51" stroke-width="3" stroke-linecap="round"/>
+            <path d="M24 6 l-7 12 l14 0 z" fill="#435D51"/>
+          </svg>
+          <div style="text-align:center; margin-top:-4px;"><span class="loopback" style="color:var(--sage);">as minhas respostas voltam para o radar — nada cai no vazio</span></div>
+        </div>
+
+        <div class="seq" data-step="5" style="margin-top:22px; background:var(--petroleo); border-radius:16px; padding:24px 30px;">
+          <div style="font-family:var(--sans); font-size:23px; color:#fff; line-height:1.45;">Não é um resumo da agenda. <b style="color:var(--terracota-soft);">É a memória que não deixa nada cair</b> — e que me cobra quando eu esqueço.</div>
+        </div>
+      </div>
+
+      <div class="seq-zoom" data-step="3">
+        <div class="browser">
+          <div class="bar"><i style="background:#E06C5A"></i><i style="background:#E0B45A"></i><i style="background:#7FB069"></i><span class="url">o guia de hoje · quarta, 5 de agosto</span></div>
+          <div class="shot" style="height:610px;"><img src="shot-cosmos.png" alt="Painel do guia do dia"></div>
+        </div>
+        <div class="cap seq" data-step="5" style="margin-top:14px; text-align:center; color:var(--taupe);">Print de <b style="color:var(--terracota);">hoje de manhã</b>. 18 coisas para hoje, 19 perguntas esperando resposta.</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">13 / 23</div>
+  <div class="logo-micro">VIRADA</div>
+</section>
+
+<!-- ═══════════ 16 · SABE ONDE QUER CHEGAR ═══════════ -->
+<section class="bg-petroleo" data-label="Sabe onde quer chegar?">
+  <div class="slide-inner" style="justify-content:center;">
+    <div class="kicker seq" data-step="1" style="color:var(--terracota-soft); font-size:16px;">ANTES DE QUALQUER PROMPT</div>
+    <div class="seq" data-step="2" style="margin-top:40px; font-family:var(--serif); font-weight:700; font-size:138px; color:var(--white); letter-spacing:0.02em; line-height:0.95; text-transform:uppercase;">Sabe onde<br>quer chegar?</div>
+    <div class="divider-line seq-line" data-step="3" style="width:110px; margin-top:46px; background:var(--terracota);"></div>
+    <div class="seq" data-step="3" style="margin-top:40px; font-family:var(--sans); font-size:34px; color:rgba(255,255,255,0.85); line-height:1.45; max-width:1250px;">Se você não decidiu o resultado que quer, <strong style="color:var(--terracota-soft);">a IA também não sabe.</strong></div>
+    <div class="seq" data-step="3" style="margin-top:20px; font-family:var(--sans); font-size:22px; color:rgba(255,255,255,0.55); line-height:1.4; max-width:1250px;"><em>Prompt = o pedido que você escreve para a IA.</em></div>
+    <div class="seq" data-step="4" style="margin-top:52px; display:grid; grid-template-columns:1fr 1fr; gap:28px; max-width:1150px;">
+      <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); border-radius:14px; padding:36px 42px;">
+        <div class="label-sm" style="color:rgba(255,255,255,0.45); margin-bottom:16px; font-size:14px;">Pergunta 1</div>
+        <div style="font-family:var(--sans); font-size:30px; color:var(--white); line-height:1.35;">Como é o resultado pronto?</div>
+      </div>
+      <div style="background:rgba(193,122,90,0.22); border:1px solid rgba(193,122,90,0.5); border-radius:14px; padding:36px 42px;">
+        <div class="label-sm" style="color:var(--terracota-soft); margin-bottom:16px; font-size:14px;">Pergunta 2</div>
+        <div style="font-family:var(--sans); font-size:30px; color:var(--white); line-height:1.35;">O que vou fazer com ele?</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">14 / 23</div>
+</section>
+
+<!-- ═══════════ 15 · O PROCESSO VEM ANTES DA IA ═══════════ -->
+<section class="bg-offwhite" data-label="O processo vem antes da IA">
+  <div class="slide-inner">
+    <div class="kicker seq" data-step="1" style="font-size:16px;">A PARTE MAIS IMPORTANTE DESTA MANHÃ</div>
+    <h2 class="slide-title seq" data-step="1" style="margin-top:12px;">O PROCESSO VEM <span style="color:var(--terracota);">ANTES</span> DA IA</h2>
+    <div class="slide-subtitle seq" data-step="1" style="margin-top:14px; font-size:28px;">Definir o processo é a parte mais importante do uso de inteligência artificial.</div>
+    <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:22px;"></div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:26px; margin-top:32px;">
+      <div class="seq" data-step="2" style="background:rgba(139,115,85,0.07); border:1.5px dashed rgba(139,115,85,0.45); border-radius:16px; padding:26px 32px; display:flex; align-items:center; gap:28px;">
+        <svg viewBox="0 0 220 96" width="210" aria-hidden="true" style="flex-shrink:0;">
+          <circle cx="30" cy="48" r="20" fill="#F4F3EF" stroke="#14373C" stroke-width="2.6"/>
+          <path d="M10 48 Q8 22 30 20 Q52 22 50 48 L50 38 Q41 28 30 28 Q19 28 10 38Z" fill="#2C2320"/>
+          <path d="M52 48 C 78 18, 92 84, 112 40 S 136 76, 152 48" fill="none" stroke="#985A3B" stroke-width="3.2" stroke-linecap="round" stroke-dasharray="7 7"/>
+          <rect x="158" y="30" width="40" height="36" rx="9" fill="#fff" stroke="#14373C" stroke-width="2.6"/>
+          <circle cx="171" cy="45" r="3" fill="#14373C"/><circle cx="185" cy="45" r="3" fill="#14373C"/>
+          <path d="M170 56 q4 -3 8 0 q4 3 8 0" stroke="#14373C" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <text x="204" y="34" font-family="Anton, sans-serif" font-size="26" fill="#B06E4A">?</text>
+        </svg>
+        <div>
+          <div class="label-sm" style="color:var(--taupe); margin-bottom:8px;">Processo falho</div>
+          <div style="font-family:var(--sans); font-size:23px; color:var(--ink); line-height:1.4;">Se o processo está torto na sua cabeça, <strong style="color:var(--petroleo);">a IA se perde junto</strong> — e entrega torto, com confiança.</div>
+        </div>
+      </div>
+      <div class="seq" data-step="3" style="background:var(--petroleo); border-radius:16px; padding:26px 32px; display:flex; align-items:center; gap:28px; box-shadow:0 22px 54px rgba(20,55,60,0.24);">
+        <svg viewBox="0 0 220 96" width="210" aria-hidden="true" style="flex-shrink:0;">
+          <circle cx="30" cy="48" r="20" fill="#F3EEE3"/>
+          <path d="M10 48 Q8 22 30 20 Q52 22 50 48 L50 38 Q41 28 30 28 Q19 28 10 38Z" fill="#0E282C"/>
+          <g font-family="Anton, sans-serif" font-size="13" fill="#14373C">
+            <rect x="58" y="38" width="24" height="20" rx="5" fill="#C4835E"/><text x="66" y="53" fill="#fff">1</text>
+            <rect x="88" y="38" width="24" height="20" rx="5" fill="#C4835E"/><text x="96" y="53" fill="#fff">2</text>
+            <rect x="118" y="38" width="24" height="20" rx="5" fill="#C4835E"/><text x="125" y="53" fill="#fff">3</text>
+          </g>
+          <path class="flowline" d="M146 48 H156" stroke="#C4835E" stroke-width="3" stroke-linecap="round"/>
+          <rect x="158" y="30" width="40" height="36" rx="9" fill="#F3EEE3"/>
+          <circle cx="171" cy="45" r="3" fill="#14373C"/><circle cx="185" cy="45" r="3" fill="#14373C"/>
+          <path d="M169 55 Q178 62 187 55" stroke="#14373C" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+          <circle cx="205" cy="30" r="11" fill="#435D51"/>
+          <path d="M200 30 l3.5 4 7 -8" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div>
+          <div class="label-sm" style="color:var(--terracota-soft); margin-bottom:8px;">Processo claro</div>
+          <div style="font-family:var(--sans); font-size:23px; color:rgba(255,255,255,0.92); line-height:1.4;">Se está claro e escrito, <strong style="color:#fff;">você passa direito</strong> — e ela executa no seu padrão, toda vez.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="seq label-sm" data-step="4" style="color:var(--terracota); margin-top:34px;">Como tirar o processo da cabeça</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr 0.9fr; gap:18px; margin-top:14px; flex:1; align-items:center;">
+      <div class="seq" data-step="4" style="background:var(--white); border:1px solid rgba(139,115,85,0.16); border-radius:14px; padding:24px 26px; min-height:240px;">
+        <div style="font-family:var(--serif); font-weight:700; font-size:38px; color:var(--terracota); line-height:0.9;">01</div>
+        <div style="font-family:var(--sans); font-weight:700; font-size:25px; color:var(--petroleo); margin-top:10px;">O que você faz</div>
+        <div style="font-family:var(--sans); font-size:19px; color:var(--taupe); line-height:1.4; margin-top:6px;">A tarefa em uma frase — e o resultado que ela entrega.</div>
+      </div>
+      <div class="seq" data-step="5" style="background:var(--white); border:1px solid rgba(139,115,85,0.16); border-radius:14px; padding:24px 26px; min-height:240px;">
+        <div style="font-family:var(--serif); font-weight:700; font-size:38px; color:var(--terracota); line-height:0.9;">02</div>
+        <div style="font-family:var(--sans); font-weight:700; font-size:25px; color:var(--petroleo); margin-top:10px;">Como faz, passo a passo</div>
+        <div style="font-family:var(--sans); font-size:19px; color:var(--taupe); line-height:1.4; margin-top:6px;">Todos os passos, na ordem — até os que você faz no automático.</div>
+      </div>
+      <div class="seq" data-step="6" style="background:var(--white); border:1px solid rgba(139,115,85,0.16); border-radius:14px; padding:24px 26px; min-height:240px;">
+        <div style="font-family:var(--serif); font-weight:700; font-size:38px; color:var(--terracota); line-height:0.9;">03</div>
+        <div style="font-family:var(--sans); font-weight:700; font-size:25px; color:var(--petroleo); margin-top:10px;">As regras da cabeça</div>
+        <div style="font-family:var(--sans); font-size:19px; color:var(--taupe); line-height:1.4; margin-top:6px;">Os "poréns" que ninguém escreveu. O cliente que sempre pede desconto. O fornecedor que atrasa.</div>
+      </div>
+      <div class="seq" data-step="7" style="background:var(--terracota); border-radius:14px; padding:24px 26px; min-height:240px; display:flex; flex-direction:column; justify-content:center; box-shadow:0 20px 50px rgba(176,110,74,0.32);">
+        <div style="font-family:var(--sans); font-size:15px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:rgba(255,255,255,0.85);">Agora sim</div>
+        <div style="font-family:var(--serif); font-size:32px; color:#fff; line-height:1.05; margin-top:8px; text-transform:uppercase;">Passe pra IA</div>
+      </div>
+    </div>
+
+    <div class="anchor seq" data-step="8" style="margin-top:22px; text-align:center;">A IA não conserta processo confuso. <em style="color:var(--terracota);">Ela acelera o que você definiu.</em></div>
+  </div>
+  <div class="slide-num">15 / 23</div>
+  <div class="logo-micro">VIRADA</div>
+</section>
+
+<!-- ═══════════ 14 · O QUE OS SEIS TÊM EM COMUM ═══════════ -->
+<section class="bg-offwhite" data-label="O que os seis casos têm em comum">
+  <div class="slide-inner">
+    <div class="kicker seq" data-step="1" style="font-size:16px;">SEIS SISTEMAS DIFERENTES, A MESMA RECEITA</div>
+    <h2 class="slide-title seq" data-step="1" style="margin-top:12px; font-size:66px;">NENHUM DELES COMEÇOU<br>PELA <span style="color:var(--terracota);">FERRAMENTA</span></h2>
+    <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:20px;"></div>
+
+    <!-- A META -->
+    <div class="seq" data-step="2" style="margin-top:30px; background:var(--petroleo); border-radius:16px; padding:26px 34px; display:flex; align-items:center; gap:30px;">
+      <span style="font-family:var(--serif); font-size:44px; color:var(--terracota-soft); line-height:1;">&#9733;</span>
+      <div>
+        <div class="label-sm" style="color:var(--terracota-soft);">Antes das cinco perguntas, uma</div>
+        <div style="font-family:var(--sans); font-weight:700; font-size:34px; color:#fff; margin-top:6px; line-height:1.2;">Qual é a meta? <span style="font-weight:400; color:rgba(255,255,255,0.72);">O resultado dos sonhos, em uma frase.</span></div>
+      </div>
+    </div>
+
+    <div class="seq label-sm" data-step="3" style="color:var(--terracota); margin-top:28px;">Depois, o raio-x da tarefa que te leva até ela — do jeito que você contaria para um colega, sem caprichar</div>
+
+    <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:18px; margin-top:16px; flex:1;">
+      <div class="seq" data-step="3" style="background:var(--white); border:1px solid rgba(139,115,85,0.16); border-radius:14px; padding:24px 24px; display:flex; flex-direction:column;">
+        <div class="num-big" style="font-size:44px;">01</div>
+        <div style="font-family:var(--sans); font-weight:700; font-size:25px; color:var(--petroleo); margin-top:12px; line-height:1.2;">O que você faz?</div>
+        <div style="font-family:var(--sans); font-size:18px; color:var(--taupe); line-height:1.4; margin-top:8px;">A tarefa em uma frase, e o resultado que ela entrega.</div>
+        <div style="margin-top:auto; padding-top:18px; font-family:var(--mono); font-size:13px; letter-spacing:0.08em; color:var(--terracota); text-transform:uppercase; line-height:1.5;">sem isso ela<br>chuta o formato</div>
+      </div>
+      <div class="seq" data-step="4" style="background:var(--white); border:1px solid rgba(139,115,85,0.16); border-radius:14px; padding:24px 24px; display:flex; flex-direction:column;">
+        <div class="num-big" style="font-size:44px;">02</div>
+        <div style="font-family:var(--sans); font-weight:700; font-size:25px; color:var(--petroleo); margin-top:12px; line-height:1.2;">Que informações você tem — e onde elas moram?</div>
+        <div style="font-family:var(--sans); font-size:18px; color:var(--taupe); line-height:1.4; margin-top:8px;">Planilha, e-mail, sistema, WhatsApp, papel… ou a cabeça de alguém.</div>
+        <div style="margin-top:auto; padding-top:18px; font-family:var(--mono); font-size:13px; letter-spacing:0.08em; color:var(--terracota); text-transform:uppercase; line-height:1.5;">é aqui que mora<br>a segurança</div>
+      </div>
+      <div class="seq" data-step="4" style="background:var(--white); border:1px solid rgba(139,115,85,0.16); border-radius:14px; padding:24px 24px; display:flex; flex-direction:column;">
+        <div class="num-big" style="font-size:44px;">03</div>
+        <div style="font-family:var(--sans); font-weight:700; font-size:25px; color:var(--petroleo); margin-top:12px; line-height:1.2;">Que entregável você espera?</div>
+        <div style="font-family:var(--sans); font-size:18px; color:var(--taupe); line-height:1.4; margin-top:8px;">Lista? Relatório? Planilha? Painel? Resposta pronta para enviar?</div>
+        <div style="margin-top:auto; padding-top:18px; font-family:var(--mono); font-size:13px; letter-spacing:0.08em; color:var(--terracota); text-transform:uppercase; line-height:1.5;">é o "onde<br>quer chegar"</div>
+      </div>
+      <div class="seq" data-step="5" style="background:var(--white); border:1px solid rgba(139,115,85,0.16); border-radius:14px; padding:24px 24px; display:flex; flex-direction:column;">
+        <div class="num-big" style="font-size:44px;">04</div>
+        <div style="font-family:var(--sans); font-weight:700; font-size:25px; color:var(--petroleo); margin-top:12px; line-height:1.2;">Como você faz, passo a passo?</div>
+        <div style="font-family:var(--sans); font-size:18px; color:var(--taupe); line-height:1.4; margin-top:8px;">O caminho que você percorre quase no automático. Na ordem.</div>
+        <div style="margin-top:auto; padding-top:18px; font-family:var(--mono); font-size:13px; letter-spacing:0.08em; color:var(--terracota); text-transform:uppercase; line-height:1.5;">é o que ela<br>vai executar</div>
+      </div>
+      <div class="seq" data-step="6" style="background:var(--terracota); border-radius:14px; padding:24px 24px; display:flex; flex-direction:column; box-shadow:0 24px 58px rgba(176,110,74,0.32);">
+        <div class="num-big" style="font-size:44px; color:#fff;">05</div>
+        <div style="font-family:var(--sans); font-weight:700; font-size:25px; color:#fff; margin-top:12px; line-height:1.2;">O que só está na sua cabeça?</div>
+        <div style="font-family:var(--sans); font-size:18px; color:rgba(255,255,255,0.92); line-height:1.4; margin-top:8px;">As regras que ninguém escreveu — e que fazem sair do <b>seu</b> jeito.</div>
+        <div style="margin-top:auto; padding-top:18px; font-family:var(--mono); font-size:13px; letter-spacing:0.08em; color:#fff; text-transform:uppercase; line-height:1.5;">a pergunta<br>que vale ouro</div>
+      </div>
+    </div>
+
+    <div class="seq" data-step="7" style="margin-top:22px; border-top:2px solid var(--terracota); padding-top:20px;">
+      <div style="font-family:var(--sans); font-weight:600; font-size:34px; color:var(--petroleo); line-height:1.3;">Todos os seis começaram por um processo que eu conseguia explicar.<br><em style="color:var(--terracota);">E é exatamente aí que a maioria das empresas trava.</em></div>
+    </div>
+  </div>
+  <div class="slide-num">16 / 23</div>
+</section>
+
+<!-- ═══════════ 17 · CONTEXTO É TUDO ═══════════ -->
+<section class="bg-offwhite" data-label="Contexto é tudo">
+  <div class="slide-inner">
+    <div class="kicker seq" data-step="1" style="font-size:16px;">O PRINCÍPIO Nº 1</div>
+    <h2 class="slide-title seq" data-step="1" style="margin-top:12px; font-size:82px;">CONTEXTO É TUDO</h2>
+    <div class="slide-subtitle seq" data-step="1" style="margin-top:14px; font-size:28px;">Dar contexto e escrever um bom prompt são a mesma habilidade.</div>
+    <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:24px;"></div>
+    <div style="display:grid; grid-template-columns:1.1fr 1fr; gap:56px; margin-top:44px; flex:1; align-items:center;">
+      <div>
+        <div class="seq label-sm" data-step="2" style="color:var(--terracota); margin-bottom:20px;">Os 6 tipos de contexto que mudam tudo</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+          <div class="seq" data-step="2" style="padding:22px 26px; border:1px solid rgba(139,115,85,0.15); border-radius:12px; background:var(--white);"><div style="font-family:var(--sans); font-weight:700; font-size:23px; color:var(--petroleo);">Quem você é</div></div>
+          <div class="seq" data-step="2" style="padding:22px 26px; border:1px solid rgba(139,115,85,0.15); border-radius:12px; background:var(--white);"><div style="font-family:var(--sans); font-weight:700; font-size:23px; color:var(--petroleo);">Para quem é</div></div>
+          <div class="seq" data-step="3" style="padding:22px 26px; border:1px solid rgba(139,115,85,0.15); border-radius:12px; background:var(--white);"><div style="font-family:var(--sans); font-weight:700; font-size:23px; color:var(--petroleo);">O que já existe</div></div>
+          <div class="seq" data-step="3" style="padding:22px 26px; border:1px solid rgba(139,115,85,0.15); border-radius:12px; background:var(--white);"><div style="font-family:var(--sans); font-weight:700; font-size:23px; color:var(--petroleo);">O que você quer</div></div>
+          <div class="seq" data-step="4" style="padding:22px 26px; border-radius:12px; background:var(--terracota); color:#fff;"><div style="font-family:var(--sans); font-weight:700; font-size:23px;">Como você quer</div></div>
+          <div class="seq" data-step="4" style="padding:22px 26px; border:1px solid rgba(139,115,85,0.15); border-radius:12px; background:var(--creme);"><div style="font-family:var(--sans); font-weight:700; font-size:23px; color:var(--petroleo);">O que NÃO quer</div></div>
+        </div>
+        <div class="seq" data-step="5" style="margin-top:26px; padding:26px 34px; background:var(--petroleo); color:#fff; border-radius:14px;">
+          <div style="font-family:var(--sans); font-weight:700; font-size:27px; line-height:1.3;">Um <span style="color:var(--terracota-soft);">espaço por projeto</span> guarda esse contexto de forma permanente.</div>
+        </div>
+      </div>
+      <div class="seq-zoom" data-step="5" style="background:var(--white); border:1px solid rgba(139,115,85,0.2); border-radius:14px; padding:38px; box-shadow:0 30px 70px rgba(20,55,60,0.1);">
+        <div style="font-family:var(--mono); font-size:15px; letter-spacing:0.12em; text-transform:uppercase; color:var(--taupe); margin-bottom:22px;">PROJETO · COMERCIAL ILIKIA</div>
+        <div style="display:flex; flex-direction:column; gap:13px; font-family:var(--sans); font-size:20px; color:var(--ink);">
+          <div style="padding:14px 18px; background:var(--offwhite); border-radius:8px; display:flex; align-items:center; gap:12px;"><span style="color:var(--terracota);">&#128196;</span> O portfólio e o que cada linha resolve</div>
+          <div style="padding:14px 18px; background:var(--offwhite); border-radius:8px; display:flex; align-items:center; gap:12px;"><span style="color:var(--terracota);">&#128196;</span> As regras do que pode e não pode ser dito</div>
+          <div style="padding:14px 18px; background:var(--offwhite); border-radius:8px; display:flex; align-items:center; gap:12px;"><span style="color:var(--terracota);">&#128196;</span> Quem responde por cada filial</div>
+          <div style="padding:14px 18px; background:var(--offwhite); border-radius:8px; display:flex; align-items:center; gap:12px;"><span style="color:var(--terracota);">&#128196;</span> O jeito da casa de falar com o médico</div>
+        </div>
+        <div style="margin-top:26px; padding-top:22px; border-top:1px solid rgba(139,115,85,0.15); font-family:var(--sans); font-size:21px; color:var(--terracota); text-align:center;">Cada conversa já começa conhecendo a ILIKIA.</div>
+      </div>
+    </div>
+    <div class="anchor seq" data-step="6" style="margin-top:20px; font-size:24px;">Configura uma vez. <em>Colhe para sempre.</em></div>
+  </div>
+  <div class="slide-num">17 / 23</div>
+</section>
+
+<!-- ═══════════ 18 · ELEMENTOS DE UM BOM PROMPT ═══════════ -->
+<section class="bg-offwhite" data-label="Como eu escrevo um prompt">
+  <div class="slide-inner">
+    <div class="kicker seq" data-step="1" style="font-size:16px;">O JEITO QUE EU ENSINO — E USO TODO DIA</div>
+    <h2 class="slide-title seq" data-step="1" style="margin-top:12px; font-size:66px;">A ANATOMIA DE UM <span style="color:var(--terracota);">BOM PROMPT</span></h2>
+    <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:18px;"></div>
+    <div class="slide-subtitle seq" data-step="1" style="margin-top:14px; font-size:26px;">Cinco peças. Nunca precisa das cinco — mas quanto mais você põe, menos ela chuta.</div>
+
+    <div style="display:grid; grid-template-columns:0.86fr 1.14fr; gap:46px; margin-top:28px; flex:1; align-items:start;">
+
+      <!-- AS 5 PEÇAS -->
+      <div style="display:flex; flex-direction:column; gap:11px;">
+        <div class="seq" data-step="2" style="display:flex; align-items:center; gap:18px; background:var(--white); border:1px solid rgba(139,115,85,0.16); border-left:6px solid #B06E4A; border-radius:0 13px 13px 0; padding:15px 22px;">
+          <span style="font-family:var(--serif); font-size:40px; color:#B06E4A; line-height:1;">P</span>
+          <div><div style="font-family:var(--sans); font-weight:700; font-size:24px; color:var(--petroleo);">Pessoa</div><div style="font-family:var(--sans); font-size:18px; color:var(--taupe); line-height:1.3;">quem ela deve ser para te responder</div></div>
+        </div>
+        <div class="seq" data-step="3" style="display:flex; align-items:center; gap:18px; background:var(--white); border:1px solid rgba(139,115,85,0.16); border-left:6px solid #14373C; border-radius:0 13px 13px 0; padding:15px 22px;">
+          <span style="font-family:var(--serif); font-size:40px; color:#14373C; line-height:1;">I</span>
+          <div><div style="font-family:var(--sans); font-weight:700; font-size:24px; color:var(--petroleo);">Instrução</div><div style="font-family:var(--sans); font-size:18px; color:var(--taupe); line-height:1.3;">o que ela tem que fazer, com verbo</div></div>
+        </div>
+        <div class="seq" data-step="4" style="display:flex; align-items:center; gap:18px; background:var(--white); border:1px solid rgba(139,115,85,0.16); border-left:6px solid #435D51; border-radius:0 13px 13px 0; padding:15px 22px;">
+          <span style="font-family:var(--serif); font-size:40px; color:#435D51; line-height:1;">C</span>
+          <div><div style="font-family:var(--sans); font-weight:700; font-size:24px; color:var(--petroleo);">Contexto</div><div style="font-family:var(--sans); font-size:18px; color:var(--taupe); line-height:1.3;">o que ela precisa saber para não chutar</div></div>
+        </div>
+        <div class="seq" data-step="5" style="display:flex; align-items:center; gap:18px; background:var(--white); border:1px solid rgba(139,115,85,0.16); border-left:6px solid #8B6BA8; border-radius:0 13px 13px 0; padding:15px 22px;">
+          <span style="font-family:var(--serif); font-size:40px; color:#8B6BA8; line-height:1;">F</span>
+          <div><div style="font-family:var(--sans); font-weight:700; font-size:24px; color:var(--petroleo);">Formato</div><div style="font-family:var(--sans); font-size:18px; color:var(--taupe); line-height:1.3;">como você quer receber de volta</div></div>
+        </div>
+        <div class="seq" data-step="6" style="display:flex; align-items:center; gap:18px; background:var(--petroleo); border-radius:13px; padding:15px 22px;">
+          <span style="font-family:var(--serif); font-size:40px; color:var(--terracota-soft); line-height:1;">R</span>
+          <div><div style="font-family:var(--sans); font-weight:700; font-size:24px; color:#fff;">Restrições</div><div style="font-family:var(--sans); font-size:18px; color:rgba(255,255,255,0.75); line-height:1.3;">o que você <b style="color:#fff;">não</b> quer — vale tanto quanto o resto</div></div>
+        </div>
+
+        <div class="seq" data-step="7" style="margin-top:8px; background:var(--creme); border-radius:13px; padding:18px 22px;">
+          <div style="font-family:var(--mono); font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--terracota-deep); margin-bottom:8px;">O atalho que resolve 80%</div>
+          <div style="font-family:var(--sans); font-size:20px; color:var(--ink); line-height:1.4;">Cole no fim de qualquer pedido: <b style="color:var(--petroleo);">"sem listas, parágrafos curtos, como se estivesse conversando comigo."</b></div>
+        </div>
+      </div>
+
+      <!-- O PROMPT ANOTADO -->
+      <div class="seq" data-step="2" style="display:flex; flex-direction:column;">
+        <div class="label-sm" style="color:var(--terracota); margin-bottom:12px;">O mesmo pedido, escrito assim</div>
+        <div style="background:var(--white); border:1px solid rgba(139,115,85,0.2); border-radius:16px; padding:28px 32px; box-shadow:0 26px 62px rgba(20,55,60,0.1);">
+          <div style="font-family:var(--mono); font-size:19px; line-height:2.0; color:var(--ink);">
+            <span class="seq" data-step="2" style="background:rgba(176,110,74,0.16); border-bottom:2px solid #B06E4A; padding:2px 5px;">Você é o meu gerente comercial.</span>
+            <span class="seq" data-step="3" style="background:rgba(20,55,60,0.10); border-bottom:2px solid #14373C; padding:2px 5px;">Escreva o resumo da semana para a diretoria.</span>
+            <span class="seq" data-step="4" style="background:rgba(67,93,81,0.14); border-bottom:2px solid #435D51; padding:2px 5px;">Anexei as planilhas das filiais e as atas das reuniões; o que a diretoria quer saber é onde a meta escorregou e por quê.</span>
+            <span class="seq" data-step="5" style="background:rgba(139,107,168,0.14); border-bottom:2px solid #8B6BA8; padding:2px 5px;">Uma página, em parágrafos curtos, com os três pontos mais críticos no topo.</span>
+            <span class="seq" data-step="6" style="background:rgba(176,110,74,0.28); border-bottom:2px solid #985A3B; padding:2px 5px;">Não invente número que não esteja nos arquivos e não abra com "Claro!".</span>
+          </div>
+        </div>
+
+        <div class="seq" data-step="7" style="margin-top:20px; display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+          <div style="background:var(--white); border:1px solid rgba(139,115,85,0.16); border-radius:13px; padding:18px 22px;">
+            <div style="font-family:var(--sans); font-weight:700; font-size:21px; color:var(--petroleo);">Dê um exemplo</div>
+            <div style="font-family:var(--sans); font-size:17px; color:var(--taupe); line-height:1.35; margin-top:4px;">Anexe um resumo que você já fez. Vale mais que dez linhas de explicação.</div>
+          </div>
+          <div style="background:var(--white); border:1px solid rgba(139,115,85,0.16); border-radius:13px; padding:18px 22px;">
+            <div style="font-family:var(--sans); font-weight:700; font-size:21px; color:var(--petroleo);">Peça para pensar antes</div>
+            <div style="font-family:var(--sans); font-size:17px; color:var(--taupe); line-height:1.35; margin-top:4px;">"Antes de escrever, liste os pontos principais." Ativa o raciocínio dela.</div>
+          </div>
+          <div style="background:var(--white); border:1px solid rgba(139,115,85,0.16); border-radius:13px; padding:18px 22px;">
+            <div style="font-family:var(--sans); font-weight:700; font-size:21px; color:var(--petroleo);">Peça 3 versões, não "a melhor"</div>
+            <div style="font-family:var(--sans); font-size:17px; color:var(--taupe); line-height:1.35; margin-top:4px;">Você escolhe e refina. Ela trava menos quando tem liberdade.</div>
+          </div>
+          <div style="background:var(--terracota); border-radius:13px; padding:18px 22px; box-shadow:0 18px 44px rgba(176,110,74,0.28);">
+            <div style="font-family:var(--sans); font-weight:700; font-size:21px; color:#fff;">Peça ajuda para pedir</div>
+            <div style="font-family:var(--sans); font-size:17px; color:rgba(255,255,255,0.94); line-height:1.35; margin-top:4px;">"Reescreve esse prompt para você me dar um resultado melhor."</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="anchor seq" data-step="8" style="margin-top:20px;">E se não quiser decorar nada: <em style="color:var(--terracota);">abra o app no celular e fale por dois minutos.</em> Depois peça para ela organizar o seu próprio áudio em um pedido.</div>
+  </div>
+  <div class="slide-num">18 / 23</div>
+  <div class="logo-micro">VIRADA</div>
+</section>
+
+<!-- ═══════════ 19 · A NOVA FORMA DE TRABALHAR ═══════════ -->
+<section class="bg-petroleo" data-label="A nova forma de trabalhar">
+  <div class="slide-inner">
+    <div class="kicker seq" data-step="1" style="font-size:16px; color:var(--terracota-soft);">O INSIGHT QUE MUDA O JOGO</div>
+    <h2 class="slide-title seq" data-step="1" style="margin-top:12px; color:#fff;">A NOVA FORMA DE <span style="color:var(--terracota-soft);">TRABALHAR</span></h2>
+    <div class="slide-subtitle seq" data-step="1" style="margin-top:14px; font-size:28px; color:rgba(255,255,255,0.8);">Pare de pedir uma coisinha de cada vez. Prompts maiores, várias tarefas juntas — e ela dispara uma equipe.</div>
+    <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:22px; background:var(--terracota);"></div>
+
+    <div style="display:grid; grid-template-columns:0.82fr 1.18fr; gap:40px; margin-top:36px; flex:1; align-items:stretch;">
+      <div class="seq" data-step="2" style="background:rgba(255,255,255,0.04); border:1.5px dashed rgba(255,255,255,0.28); border-radius:18px; padding:30px 34px; display:flex; flex-direction:column;">
+        <div class="label-sm" style="color:rgba(255,255,255,0.5); margin-bottom:20px;">Como a gente aprendeu · ping-pong</div>
+        <div style="display:flex; flex-direction:column; gap:13px; flex:1; justify-content:center;">
+          <div style="align-self:flex-end; background:rgba(255,255,255,0.1); border-radius:14px 14px 4px 14px; padding:12px 20px; font-family:var(--sans); font-size:19px; color:rgba(255,255,255,0.85); max-width:85%;">"Resume essa reunião"</div>
+          <div style="align-self:flex-start; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:14px 14px 14px 4px; padding:10px 18px; font-family:var(--sans); font-size:17px; color:rgba(255,255,255,0.5);">pronto ✓ &nbsp;<em>…e você espera</em></div>
+          <div style="align-self:flex-end; background:rgba(255,255,255,0.1); border-radius:14px 14px 4px 14px; padding:12px 20px; font-family:var(--sans); font-size:19px; color:rgba(255,255,255,0.85); max-width:85%;">"Agora tira as pendências"</div>
+          <div style="align-self:flex-start; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:14px 14px 14px 4px; padding:10px 18px; font-family:var(--sans); font-size:17px; color:rgba(255,255,255,0.5);">pronto ✓ &nbsp;<em>…e você espera</em></div>
+          <div style="align-self:flex-end; background:rgba(255,255,255,0.1); border-radius:14px 14px 4px 14px; padding:12px 20px; font-family:var(--sans); font-size:19px; color:rgba(255,255,255,0.85); max-width:85%;">"Agora escreve as cobranças…"</div>
+        </div>
+        <div style="margin-top:18px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.12); font-family:var(--sans); font-size:19px; color:rgba(255,255,255,0.55); line-height:1.4;">Um pedido por vez. Você vira o gargalo da fila.</div>
+      </div>
+
+      <div class="seq" data-step="3" style="background:rgba(255,255,255,0.05); border:2px solid var(--terracota); border-radius:18px; padding:30px 34px; display:flex; flex-direction:column; box-shadow:0 26px 66px rgba(193,122,90,0.22);">
+        <div class="label-sm" style="color:var(--terracota-soft); margin-bottom:20px;">Como a gente vai trabalhar · o pacote completo</div>
+        <div style="display:grid; grid-template-columns:1fr 64px 1fr; gap:14px; align-items:center; flex:1;">
+          <div style="background:rgba(14,40,44,0.75); border:1px solid rgba(255,255,255,0.14); border-radius:14px; padding:20px 22px;">
+            <div style="font-family:var(--mono); font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--terracota-soft); margin-bottom:10px;">Um prompt grande</div>
+            <div style="font-family:var(--sans); font-size:19px; color:rgba(255,255,255,0.9); line-height:1.55;">"Fechou a reunião de segunda:<br>1. resuma a ata em dez linhas<br>2. liste as pendências com responsável e prazo<br>3. escreva o e-mail de cobrança de cada uma<br>4. me diga o que ficou sem dono"</div>
+          </div>
+          <svg viewBox="0 0 64 160" width="64" aria-hidden="true">
+            <g class="flowline" stroke="#C4835E" stroke-width="3" fill="none" stroke-linecap="round">
+              <path d="M4 80 C 28 80, 30 28, 58 28"/><path d="M4 80 H 58"/><path d="M4 80 C 28 80, 30 132, 58 132"/>
+            </g>
+          </svg>
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <div style="display:flex; align-items:center; gap:14px; background:rgba(255,255,255,0.07); border-radius:12px; padding:12px 18px;">
+              <span style="flex-shrink:0; width:34px; height:34px; border-radius:50%; background:var(--terracota); display:flex; align-items:center; justify-content:center;"><svg viewBox="0 0 24 24" width="18" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v6l4 2"/><circle cx="12" cy="12" r="9"/></svg></span>
+              <div style="font-family:var(--sans); font-size:19px; color:#fff;">Agente 1 · resumo da ata</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:14px; background:rgba(255,255,255,0.07); border-radius:12px; padding:12px 18px;">
+              <span style="flex-shrink:0; width:34px; height:34px; border-radius:50%; background:var(--sage); display:flex; align-items:center; justify-content:center;"><svg viewBox="0 0 24 24" width="18" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M6 4h9l4 4v12H6z"/><path d="M9 12h7M9 16h5"/></svg></span>
+              <div style="font-family:var(--sans); font-size:19px; color:#fff;">Agente 2 · pendências</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:14px; background:rgba(255,255,255,0.07); border-radius:12px; padding:12px 18px;">
+              <span style="flex-shrink:0; width:34px; height:34px; border-radius:50%; background:#6B7C95; display:flex; align-items:center; justify-content:center;"><svg viewBox="0 0 24 24" width="18" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M4 8l8 6 8-6"/></svg></span>
+              <div style="font-family:var(--sans); font-size:19px; color:#fff;">Agente 3 · cobranças</div>
+            </div>
+            <div style="font-family:var(--sans); font-size:16px; color:var(--terracota-soft); padding-left:6px;">trabalhando em paralelo, ao mesmo tempo</div>
+          </div>
+        </div>
+        <div style="margin-top:18px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.14); font-family:var(--sans); font-size:19px; color:rgba(255,255,255,0.85); line-height:1.4;">Ela volta com <strong style="color:#fff;">tudo pronto</strong>. Você revisa e manda o próximo pacote. <em style="color:var(--terracota-soft);">Esse é o loop.</em></div>
+      </div>
+    </div>
+
+    <div class="anchor seq" data-step="4" style="margin-top:24px; text-align:center; color:rgba(255,255,255,0.8);">Quanto melhor o seu processo mapeado, <em style="color:var(--terracota-soft);">maior o pacote que dá para entregar de uma vez.</em></div>
+  </div>
+  <div class="slide-num">19 / 23</div>
+  <div class="logo-micro">VIRADA</div>
+</section>
+
+<!-- ═══════════ 20 · O QUE ESPERAR DA IA ═══════════ -->
+<section class="bg-petroleo" data-label="O que esperar da IA">
+  <div class="slide-inner">
+    <div class="kicker seq" data-step="1" style="font-size:16px; color:var(--terracota-soft);">PARA ONDE ISSO ESTÁ INDO</div>
+    <h2 class="slide-title seq" data-step="1" style="margin-top:12px; color:#fff; font-size:66px;">O QUE ESPERAR DA IA</h2>
+    <div class="slide-subtitle seq" data-step="1" style="margin-top:14px; font-size:27px; color:rgba(255,255,255,0.78);">Não é futurologia. É a direção que já dá para ver de onde a gente está.</div>
+    <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:20px; background:var(--terracota);"></div>
+
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:26px; margin-top:auto; margin-bottom:auto; align-items:end;">
+      <div class="hz hz-1 seq" data-step="2" style="min-height:470px;">
+        <div style="font-family:var(--mono); font-size:14px; letter-spacing:0.18em; color:rgba(255,255,255,0.5);">JÁ ESTÁ AQUI</div>
+        <div style="font-family:var(--serif); font-size:46px; color:#fff; text-transform:uppercase; line-height:1; margin:14px 0 20px;">Ela<br>executa</div>
+        <div style="display:flex; flex-direction:column; gap:12px; font-family:var(--sans); font-size:20px; color:rgba(255,255,255,0.82); line-height:1.4;">
+          <div>▪ Trabalha sobre os seus arquivos e sistemas</div>
+          <div>▪ Constrói páginas, painéis e relatórios</div>
+          <div>▪ Roda sozinha em horário marcado</div>
+          <div>▪ Dispara vários agentes de uma vez</div>
+        </div>
+        <div style="margin-top:auto; padding-top:22px; border-top:1px solid rgba(255,255,255,0.16); font-family:var(--mono); font-size:15px; color:rgba(255,255,255,0.5); line-height:1.5;">tudo que vocês viram<br>nos seis cases</div>
+      </div>
+
+      <div class="hz hz-2 seq" data-step="3" style="min-height:540px;">
+        <div style="font-family:var(--mono); font-size:14px; letter-spacing:0.18em; color:rgba(255,255,255,0.6);">OS PRÓXIMOS MESES</div>
+        <div style="font-family:var(--serif); font-size:46px; color:#fff; text-transform:uppercase; line-height:1; margin:14px 0 20px;">Ela<br>acompanha</div>
+        <div style="display:flex; flex-direction:column; gap:12px; font-family:var(--sans); font-size:20px; color:rgba(255,255,255,0.88); line-height:1.4;">
+          <div>▪ Trabalhos longos, de horas, sem perder o fio</div>
+          <div>▪ Ligada aos sistemas da empresa, não só a arquivos</div>
+          <div>▪ Percebe que algo saiu do padrão e avisa antes</div>
+          <div>▪ Cada área com o seu próprio agente, com as regras da casa</div>
+        </div>
+        <div style="margin-top:auto; padding-top:22px; border-top:1px solid rgba(255,255,255,0.2); font-family:var(--mono); font-size:15px; color:rgba(255,255,255,0.62); line-height:1.5;">quem tiver processo escrito<br>chega aqui primeiro</div>
+      </div>
+
+      <div class="hz hz-3 seq" data-step="4" style="min-height:600px;">
+        <div style="font-family:var(--mono); font-size:14px; letter-spacing:0.18em; color:rgba(255,255,255,0.78);">ADIANTE</div>
+        <div style="font-family:var(--serif); font-size:46px; color:#fff; text-transform:uppercase; line-height:1; margin:14px 0 20px;">A empresa<br>vira o sistema</div>
+        <div style="display:flex; flex-direction:column; gap:12px; font-family:var(--sans); font-size:20px; color:rgba(255,255,255,0.95); line-height:1.4;">
+          <div>▪ O processo escrito passa a valer mais que a ferramenta</div>
+          <div>▪ A passagem de bastão entre áreas deixa de se perder</div>
+          <div>▪ Quem sabe explicar o próprio trabalho vira a pessoa mais valiosa da sala</div>
+          <div>▪ E o gargalo deixa de ser tempo — passa a ser <b>clareza</b></div>
+        </div>
+        <div style="margin-top:auto; padding-top:22px; border-top:1px solid rgba(255,255,255,0.3); font-family:var(--mono); font-size:15px; color:rgba(255,255,255,0.82); line-height:1.5;">e isso não se compra:<br>se constrói, área por área</div>
+      </div>
+    </div>
+
+    <div class="anchor seq" data-step="5" style="margin-top:26px; color:rgba(255,255,255,0.82);">Repare que a coluna que mais cresce <em style="color:var(--terracota-soft);">não fala de tecnologia. Fala de organização.</em></div>
+  </div>
+  <div class="slide-num">20 / 23</div>
+</section>
+
+<!-- ═══════════ 21 · O QUE NÃO MUDA ═══════════ -->
+<section class="bg-terracota" data-label="O que não muda">
+  <div class="slide-inner" style="justify-content:center;">
+    <div class="kicker seq" data-step="1" style="font-size:16px; color:rgba(255,255,255,0.82);">E ANTES QUE ALGUÉM SAIA DAQUI ASSUSTADO</div>
+    <div class="seq" data-step="2" style="margin-top:30px; font-family:var(--serif); font-weight:700; font-size:104px; color:#fff; line-height:0.95; text-transform:uppercase;">O que <span style="color:var(--petroleo);">não</span> muda</div>
+    <div class="divider-line seq-line" data-step="3" style="width:150px; margin-top:40px; background:rgba(255,255,255,0.85);"></div>
+
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:30px; margin-top:56px;">
+      <div class="seq" data-step="3" style="background:rgba(255,255,255,0.14); border:1px solid rgba(255,255,255,0.24); border-radius:16px; padding:38px 36px; min-height:330px;">
+        <div style="font-family:var(--serif); font-size:40px; color:#fff; text-transform:uppercase; line-height:1.05;">O julgamento</div>
+        <div style="margin-top:16px; font-family:var(--sans); font-size:22px; color:rgba(255,255,255,0.92); line-height:1.45;">Ela pode preparar a decisão inteira. <b>Quem bate o martelo é gente</b> — e num setor regulado, isso não é opcional.</div>
+      </div>
+      <div class="seq" data-step="4" style="background:rgba(255,255,255,0.14); border:1px solid rgba(255,255,255,0.24); border-radius:16px; padding:34px 34px;">
+        <div style="font-family:var(--serif); font-size:40px; color:#fff; text-transform:uppercase; line-height:1.05;">A responsabilidade</div>
+        <div style="margin-top:16px; font-family:var(--sans); font-size:22px; color:rgba(255,255,255,0.92); line-height:1.45;">Saiu com o seu nome, é seu. <b>A IA não assina nada.</b> Ela devolve tempo para você conferir melhor.</div>
+      </div>
+      <div class="seq" data-step="5" style="background:var(--petroleo); border-radius:16px; padding:34px 34px; box-shadow:0 28px 66px rgba(20,55,60,0.32);">
+        <div style="font-family:var(--serif); font-size:40px; color:#fff; text-transform:uppercase; line-height:1.05;">A relação</div>
+        <div style="margin-top:16px; font-family:var(--sans); font-size:22px; color:rgba(255,255,255,0.9); line-height:1.45;">O médico do outro lado quer falar com <b>uma pessoa</b>. O que a IA tira do seu dia é justamente o que te afastava dele.</div>
+      </div>
+    </div>
+
+    <div class="seq" data-step="6" style="margin-top:52px; font-family:var(--sans); font-weight:600; font-size:32px; color:#fff; line-height:1.4; max-width:1450px;">Nada disso muda. <em style="color:var(--petroleo);">O que muda é quanto do seu dia sobra para fazer essas três coisas bem.</em></div>
+  </div>
+  <div class="slide-num">21 / 23</div>
+  <div class="logo-micro">VIRADA</div>
+</section>
+
+<!-- ═══════════ 22 · FECHAMENTO ═══════════ -->
+<section class="bg-petroleo" data-label="Fechamento · a sua tarefa de quatro dias">
+  <div class="slide-inner" style="justify-content:center; align-items:center; text-align:center;">
+    <svg class="topo" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <g stroke="#C4835E" opacity="0.13">
+        <path d="M-60,220 C340,150 660,300 980,235 1300,170 1620,310 1980,235"/>
+        <path class="slow" d="M-60,860 C340,790 660,935 980,870 1300,805 1620,945 1980,865"/>
+      </g>
+    </svg>
+    <div class="kicker seq" data-step="1" style="font-size:16px; color:var(--terracota-soft);">A PERGUNTA QUE EU DEIXO COM VOCÊS</div>
+    <div class="seq" data-step="2" style="margin-top:34px; font-family:var(--serif); font-weight:400; font-size:82px; color:#fff; line-height:1.05; text-transform:uppercase; max-width:1560px;">Qual é a sua tarefa de<br><span style="color:var(--terracota-soft);">quatro dias</span> —<br>e o que se tornaria possível<br>se ela deixasse de ocupar quatro dias?</div>
+    <div class="divider-line seq-line" data-step="3" style="width:200px; margin:44px auto; background:var(--terracota);"></div>
+    <div class="seq" data-step="3" style="font-family:var(--sans); font-weight:300; font-size:31px; color:rgba(255,255,255,0.85); max-width:1300px;">Não é sobre o tempo que sobra. <b style="color:#fff; font-weight:600;">É sobre o trabalho que você passaria a conseguir fazer com ele.</b></div>
+    <div class="seq" data-step="4" style="margin-top:auto; display:flex; flex-direction:column; align-items:center; gap:12px;">
+      <img src="logo-newscale.png" alt="NewScale" style="height:42px; filter:brightness(0) invert(1); opacity:0.9;">
+      <div style="font-family:var(--sans); font-weight:700; font-size:27px; color:#fff; letter-spacing:0.03em; margin-top:6px;">Bruna Santanna</div>
+      <div style="font-family:var(--sans); font-size:15px; color:rgba(255,255,255,0.6); letter-spacing:0.2em; text-transform:uppercase;">newscale.tech &nbsp;·&nbsp; @brusantanna.ai</div>
+    </div>
+  </div>
+  <div class="slide-num">22 / 23</div>
+</section>
+
+<!-- ═══════════ 24 · VAMOS CONECTAR? ═══════════ -->
+<section class="bg-terracota" data-label="Vamos conectar?">
+  <svg class="topo" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g stroke="#FFFFFF" opacity="0.10">
+      <path d="M-60,190 C340,120 660,270 980,205 1300,140 1620,280 1980,205"/>
+      <path class="slow" d="M-60,410 C360,340 680,480 1000,420 1320,360 1640,490 1980,415"/>
+      <path d="M-60,700 C360,630 680,770 1000,710 1320,650 1640,780 1980,705"/>
+      <path class="slow" d="M-60,900 C340,830 660,975 980,910 1300,845 1620,985 1980,905"/>
+    </g>
+  </svg>
+  <div class="slide-inner">
+    <div class="kicker seq" data-step="1" style="font-size:16px; color:rgba(255,255,255,0.85);">ISSO AQUI NÃO ACABA QUANDO EU DESLIGAR A TELA</div>
+    <h2 class="seq" data-step="1" style="margin-top:14px; font-family:var(--serif); font-weight:400; font-size:104px; color:#fff; line-height:0.95; text-transform:uppercase;">VAMOS CONECTAR?</h2>
+    <div class="divider-line seq-line" data-step="1" style="width:140px; margin-top:24px; background:rgba(255,255,255,0.85);"></div>
+    <div class="seq" data-step="1" style="margin-top:16px; font-family:var(--sans); font-weight:300; font-size:29px; color:rgba(255,255,255,0.94); max-width:1500px;">Eu testo IA todo dia e conto tudo que descubro — o que funciona, o que quebra e o que acabou de sair. <b style="font-weight:600;">É de graça e é diário.</b></div>
+
+    <div style="display:grid; grid-template-columns:1.55fr 1fr; gap:44px; margin-top:34px; flex:1; align-items:center;">
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <a class="seq" data-step="2" href="https://www.instagram.com/brusantanna.ai/" target="_blank" rel="noopener" style="text-decoration:none; display:flex; align-items:center; gap:26px; background:rgba(255,255,255,0.16); border:1px solid rgba(255,255,255,0.3); border-radius:16px; padding:22px 28px;">
+          <svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="#fff" stroke-width="1.9" aria-hidden="true" style="flex-shrink:0;"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.4" cy="6.6" r="1.2" fill="#fff" stroke="none"/></svg>
+          <div style="flex:1;"><div style="font-family:var(--serif); font-size:34px; color:#fff; line-height:1;">@BRUSANTANNA.AI</div><div style="font-family:var(--sans); font-size:19px; color:rgba(255,255,255,0.88); margin-top:5px;">Um vídeo por dia. É onde eu mostro o que a IA acabou de aprender a fazer.</div></div>
+        </a>
+        <a class="seq" data-step="3" href="https://www.linkedin.com/in/bruna-araujo-santanna" target="_blank" rel="noopener" style="text-decoration:none; display:flex; align-items:center; gap:26px; background:rgba(255,255,255,0.16); border:1px solid rgba(255,255,255,0.3); border-radius:16px; padding:22px 28px;">
+          <svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="#fff" stroke-width="1.9" aria-hidden="true" style="flex-shrink:0;"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7.2 10.4v6.4M7.2 7.4v.1M11.4 16.8v-6.4M11.4 13.2c0-1.6 1-2.6 2.4-2.6s2.4 1 2.4 2.6v3.6" stroke-linecap="round"/></svg>
+          <div style="flex:1;"><div style="font-family:var(--serif); font-size:34px; color:#fff; line-height:1;">BRUNA ARAUJO SANTANNA</div><div style="font-family:var(--sans); font-size:19px; color:rgba(255,255,255,0.88); margin-top:5px;">A versão para quem toma decisão dentro de empresa. Novidades e cases.</div></div>
+        </a>
+        <a class="seq" data-step="4" href="https://brunasantanna.com" target="_blank" rel="noopener" style="text-decoration:none; display:flex; align-items:center; gap:26px; background:rgba(255,255,255,0.16); border:1px solid rgba(255,255,255,0.3); border-radius:16px; padding:22px 28px;">
+          <svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="#fff" stroke-width="1.9" aria-hidden="true" style="flex-shrink:0;"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 3 2.6 15 0 18M12 3c-2.6 3-2.6 15 0 18"/></svg>
+          <div style="flex:1;"><div style="font-family:var(--serif); font-size:34px; color:#fff; line-height:1;">BRUNASANTANNA.COM</div><div style="font-family:var(--sans); font-size:19px; color:rgba(255,255,255,0.88); margin-top:5px;">Os guias completos de tudo que eu mostro — abertos, sem cadastro.</div></div>
+        </a>
+        <div class="seq" data-step="5" style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+          <a href="https://newscale.tech" target="_blank" rel="noopener" style="text-decoration:none; background:var(--petroleo); border-radius:16px; padding:20px 26px; display:block;">
+            <div style="font-family:var(--mono); font-size:12px; letter-spacing:0.2em; text-transform:uppercase; color:var(--terracota-soft);">A consultoria</div>
+            <div style="font-family:var(--serif); font-size:30px; color:#fff; line-height:1; margin-top:8px;">NEWSCALE.TECH</div>
+          </a>
+          <a href="mailto:contato@newscale.tech" style="text-decoration:none; background:var(--petroleo); border-radius:16px; padding:20px 26px; display:block;">
+            <div style="font-family:var(--mono); font-size:12px; letter-spacing:0.2em; text-transform:uppercase; color:var(--terracota-soft);">Me escreve</div>
+            <div style="font-family:var(--sans); font-weight:700; font-size:25px; color:#fff; line-height:1.1; margin-top:8px;">contato@newscale.tech</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="seq-zoom" data-step="2" style="display:flex; flex-direction:column; align-items:center; gap:20px;">
+        <div style="background:#fff; border-radius:22px; padding:26px; box-shadow:0 30px 70px rgba(0,0,0,0.22);">
+          <img src="qr-instagram.svg" alt="QR do Instagram" style="width:268px; height:268px; display:block;">
+        </div>
+        <div style="text-align:center;">
+          <div style="font-family:var(--serif); font-size:36px; color:#fff; line-height:1;">APONTA A CÂMERA</div>
+          <div style="font-family:var(--sans); font-size:20px; color:rgba(255,255,255,0.9); margin-top:8px; line-height:1.35;">Cai direto no meu perfil.<br>Me manda um oi contando qual é a <b>sua</b> tarefa de quatro dias.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">23 / 23</div>
+  <div class="logo-micro">VIRADA</div>
+</section>
+</deck-stage>
+
+<script>
+/* Motor de revelação por passos (data-step) — inline, offline */
+(function(){
+  const stage = document.querySelector('deck-stage');
+  if(!stage) return;
+  const state = new Map();
+  function getActiveSection(){
+    const sections = stage.querySelectorAll(':scope > section');
+    for(const s of sections){
+      const style = getComputedStyle(s);
+      if(style.display !== 'none' && style.visibility !== 'hidden') return s;
+    }
+    return sections[0];
+  }
+  function slideIndex(section){
+    const sections = [...stage.querySelectorAll(':scope > section')];
+    return sections.indexOf(section);
+  }
+  function maxStep(section){
+    let m = 0;
+    section.querySelectorAll('[data-step]').forEach(el => { const s = parseInt(el.dataset.step,10); if(s>m) m=s; });
+    return m;
+  }
+  function applyStep(section, step){
+    section.querySelectorAll('.seq, .seq-line, .seq-zoom').forEach(el => {
+      const s = el.dataset.step;
+      if(s === undefined){
+        const idx = [...section.querySelectorAll('.seq:not([data-step]), .seq-line:not([data-step]), .seq-zoom:not([data-step])')].indexOf(el);
+        setTimeout(() => el.classList.add('in'), 80 + idx * 160);
+      } else {
+        const sNum = parseInt(s,10);
+        if(sNum <= step) el.classList.add('in');
+        else el.classList.remove('in');
+      }
+    });
+  }
+  function initStep(section){
+    const hasStep1 = section.querySelector('[data-step="1"]');
+    return hasStep1 ? 1 : 0;
+  }
+  function advance(section){
+    const idx = slideIndex(section);
+    const cur = state.get(idx) || 0;
+    const mx = maxStep(section);
+    if(cur < mx){ state.set(idx, cur+1); applyStep(section, cur+1); return true; }
+    return false;
+  }
+  function retreat(section){
+    const idx = slideIndex(section);
+    const cur = state.get(idx) || 0;
+    if(cur > 0){ state.set(idx, cur-1); applyStep(section, cur-1); return true; }
+    return false;
+  }
+  window.addEventListener('keydown', (e) => {
+    const section = getActiveSection();
+    if(!section) return;
+    if(e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown'){
+      if(advance(section)){ e.stopPropagation(); e.preventDefault(); }
+    } else if(e.key === 'ArrowLeft' || e.key === 'PageUp'){
+      if(retreat(section)){ e.stopPropagation(); e.preventDefault(); }
+    }
+  }, true);
+  document.addEventListener('click', (e) => {
+    if(e.target.closest('button, a')) return;
+    const section = getActiveSection();
+    if(!section) return;
+    advance(section);
+  });
+  function enterSlide(sec, idx){
+    if(!sec) return;
+    sec.querySelectorAll('.seq.in, .seq-line.in, .seq-zoom.in').forEach(el => el.classList.remove('in'));
+    const startStep = initStep(sec);
+    state.set(idx, startStep);
+    applyStep(sec, startStep);
+  }
+  stage.addEventListener('slidechange', (e) => {
+    const idx = (e.detail && typeof e.detail.index === 'number') ? e.detail.index : null;
+    const sections = [...stage.querySelectorAll(':scope > section')];
+    const sec = idx !== null ? sections[idx] : getActiveSection();
+    const finalIdx = idx !== null ? idx : sections.indexOf(sec);
+    enterSlide(sec, finalIdx);
+  });
+  window.addEventListener('message', (e) => {
+    if(e.data && typeof e.data.slideIndexChanged === 'number'){
+      const sections = [...stage.querySelectorAll(':scope > section')];
+      enterSlide(sections[e.data.slideIndexChanged], e.data.slideIndexChanged);
+    }
+  });
+  let lastActiveIdx = -1;
+  function checkActive(){
+    const sections = [...stage.querySelectorAll(':scope > section')];
+    let activeIdx = sections.findIndex(s => s.hasAttribute('data-deck-active'));
+    if(activeIdx === -1){
+      activeIdx = sections.findIndex(s => { const cs = getComputedStyle(s); return cs.visibility !== 'hidden' && parseFloat(cs.opacity) > 0.01; });
+    }
+    if(activeIdx === -1) activeIdx = 0;
+    if(activeIdx !== lastActiveIdx){ lastActiveIdx = activeIdx; enterSlide(sections[activeIdx], activeIdx); }
+  }
+  checkActive();
+  const pollId = setInterval(checkActive, 50);
+  setTimeout(() => clearInterval(pollId), 3000);
+  const mo = new MutationObserver(checkActive);
+  [...stage.querySelectorAll(':scope > section')].forEach(s => {
+    mo.observe(s, { attributes: true, attributeFilter: ['data-deck-active', 'style', 'class'] });
+  });
+})();
+</script>
+
+<!-- Estrada da aula — progresso discreto -->
+<div class="road-prog" aria-hidden="true">
+  <div class="rline"></div>
+  <div class="rprog"></div>
+  <div class="rtr">
+    <svg class="heel" width="26" height="26" viewBox="0 0 100 100" fill="none">
+      <!-- prancheta: o que ficou combinado -->
+      <rect x="16" y="18" width="62" height="74" rx="9" fill="#C4835E"/>
+      <rect x="16" y="18" width="62" height="74" rx="9" stroke="#985A3B" stroke-width="4"/>
+      <rect x="36" y="8" width="22" height="16" rx="5" fill="#985A3B"/>
+      <path d="M29 42h36M29 55h22" stroke="#F3EEE3" stroke-width="6" stroke-linecap="round" opacity=".85"/>
+      <path d="M30 70l8 9 18-21" stroke="#0E282C" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </svg>
+  </div>
+</div>
+<script>
+/* Estrada da aula — move o carrinho conforme o slide (inline, offline) */
+(function(){
+  const stage = document.querySelector('deck-stage');
+  const road = document.querySelector('.road-prog');
+  if(!stage || !road) return;
+  const prog = road.querySelector('.rprog'), tr = road.querySelector('.rtr');
+  function set(idx, total){
+    const t = Math.max(1, (total||1) - 1);
+    const p = Math.min(1, Math.max(0, (idx||0) / t));
+    prog.style.width = (p*100) + '%';
+    tr.style.left = (p*100) + '%';
+  }
+  stage.addEventListener('slidechange', (e)=>{ if(e.detail) set(e.detail.index, e.detail.total); });
+  let tries = 0;
+  const id = setInterval(()=>{ set(stage.index||0, stage.length||27); if(++tries>20) clearInterval(id); }, 120);
+})();
+</script>
+</body>
+</html>
+
