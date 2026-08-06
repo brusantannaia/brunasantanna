@@ -590,6 +590,26 @@ deck-stage section::after{
 .bg-petroleo .node-out{ background:var(--sage); }
 .loopback{ font-family:var(--mono); font-size:14px; letter-spacing:0.14em; text-transform:uppercase; color:var(--terracota); }
 
+/* ── Mockup de iPhone ── */
+.iphone{ position:relative; width:392px; padding:13px; border-radius:56px;
+  background:linear-gradient(150deg,#3A4348 0%,#161D20 42%,#2C363A 100%);
+  box-shadow:0 42px 90px rgba(20,55,60,0.34), inset 0 0 0 1px rgba(255,255,255,0.16); }
+.iphone .tela{ position:relative; border-radius:44px; overflow:hidden; background:#0B0C0E;
+  height:790px; box-shadow:inset 0 0 0 2px rgba(0,0,0,0.85); }
+.iphone .tela img{ display:block; width:100%; height:auto; }
+.iphone .tela::after{ content:''; position:absolute; left:0; right:0; bottom:0; height:120px;
+  background:linear-gradient(to bottom, rgba(11,12,14,0), #0B0C0E 78%); pointer-events:none; }
+.iphone .ilha{ position:absolute; top:14px; left:50%; transform:translateX(-50%);
+  width:104px; height:29px; border-radius:999px; background:#000; z-index:2; }
+.iphone .ilha::after{ content:''; position:absolute; right:13px; top:50%; transform:translateY(-50%);
+  width:9px; height:9px; border-radius:50%; background:#12232B; box-shadow:inset 0 0 0 1px rgba(90,140,160,0.5); }
+.iphone .barrinha{ position:absolute; bottom:9px; left:50%; transform:translateX(-50%);
+  width:130px; height:5px; border-radius:99px; background:rgba(255,255,255,0.55); z-index:2; }
+.iphone .btn-lat{ position:absolute; background:#20292D; border-radius:2px; }
+.iphone .btn-lat.vol1{ left:-3px; top:150px; width:4px; height:52px; }
+.iphone .btn-lat.vol2{ left:-3px; top:216px; width:4px; height:52px; }
+.iphone .btn-lat.pwr{ right:-3px; top:186px; width:4px; height:86px; }
+
 /* ── Link "abrir ao vivo" (não avança o slide ao clicar) ── */
 .abrir{ display:inline-flex; align-items:center; gap:9px; text-decoration:none;
   border:1px solid rgba(139,115,85,0.4); border-radius:999px; padding:7px 16px;
@@ -695,12 +715,16 @@ deck-stage section::after{
         </div>
       </div>
 
-      <div class="seq-zoom" data-step="3">
-        <div class="browser">
-          <div class="bar"><i style="background:#E06C5A"></i><i style="background:#E0B45A"></i><i style="background:#7FB069"></i><span class="url">instagram.com/brusantanna.ai</span></div>
-          <img src="shot-instagram.png" alt="Perfil no Instagram">
+      <div class="seq-zoom" data-step="3" style="display:flex; flex-direction:column; align-items:center; gap:16px;">
+        <div class="iphone">
+          <span class="btn-lat vol1"></span><span class="btn-lat vol2"></span><span class="btn-lat pwr"></span>
+          <div class="tela">
+            <span class="ilha"></span>
+            <img src="shot-instagram.png" alt="Meu perfil no Instagram">
+            <span class="barrinha"></span>
+          </div>
         </div>
-        <div class="cap seq" data-step="4" style="margin-top:14px; text-align:center; color:var(--taupe);">Tudo que eu mostro aqui hoje <b style="color:var(--terracota);">eu publico lá, todo dia.</b></div>
+        <div class="cap seq" data-step="4" style="text-align:center; color:var(--taupe); max-width:400px;">Tudo que eu mostro aqui hoje <b style="color:var(--terracota);">eu publico lá, todo dia.</b></div>
       </div>
     </div>
   </div>
@@ -1067,24 +1091,23 @@ deck-stage section::after{
         <div class="seq" data-step="3" style="margin-top:22px; border-left:3px solid var(--terracota); padding-left:28px;">
           <div style="font-family:var(--sans); font-weight:600; font-size:31px; color:var(--petroleo); line-height:1.35;">Os grupos chegaram todos na <em style="color:var(--terracota);">mesma dor</em>: ninguém achava informação antiga. O conhecimento de 35 anos não estava em lugar nenhum.</div>
         </div>
-        <!-- ══ BRUNA: troque os três textos abaixo pelas soluções reais do drive deles ══ -->
         <div class="seq" data-step="4" style="margin-top:24px;">
-          <div class="label-sm" style="color:var(--terracota); margin-bottom:12px;">E as soluções que saíram de lá, em dois dias</div>
+          <div class="label-sm" style="color:var(--terracota); margin-bottom:12px;">E o que 12 grupos construíram em dois dias — protótipo funcional, não slide</div>
           <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:14px;">
             <div style="background:var(--white); border:1px solid rgba(139,115,85,0.18); border-left:4px solid var(--terracota); border-radius:0 12px 12px 0; padding:16px 18px;">
-              <div style="font-family:var(--sans); font-weight:700; font-size:20px; color:var(--petroleo); line-height:1.2;">Solução 1</div>
-              <div style="font-family:var(--sans); font-size:16px; color:var(--taupe); line-height:1.35; margin-top:5px;">o que o grupo construiu</div>
+              <div style="font-family:var(--sans); font-weight:700; font-size:21px; color:var(--petroleo); line-height:1.2;">Teia</div>
+              <div style="font-family:var(--sans); font-size:16px; color:var(--taupe); line-height:1.35; margin-top:5px;">Conecta o aluno a um ex-aluno com a <b style="color:var(--petroleo);">mesma história</b> — mesma escola, mesmo sonho.</div>
             </div>
             <div style="background:var(--white); border:1px solid rgba(139,115,85,0.18); border-left:4px solid var(--terracota); border-radius:0 12px 12px 0; padding:16px 18px;">
-              <div style="font-family:var(--sans); font-weight:700; font-size:20px; color:var(--petroleo); line-height:1.2;">Solução 2</div>
-              <div style="font-family:var(--sans); font-size:16px; color:var(--taupe); line-height:1.35; margin-top:5px;">o que o grupo construiu</div>
+              <div style="font-family:var(--sans); font-weight:700; font-size:21px; color:var(--petroleo); line-height:1.2;">Trilha Med + Observatório</div>
+              <div style="font-family:var(--sans); font-size:16px; color:var(--taupe); line-height:1.35; margin-top:5px;">Dois apps no ar: um para o aluno, <b style="color:var(--petroleo);">outro para quem acompanha ele</b>.</div>
             </div>
             <div style="background:var(--white); border:1px solid rgba(139,115,85,0.18); border-left:4px solid var(--terracota); border-radius:0 12px 12px 0; padding:16px 18px;">
-              <div style="font-family:var(--sans); font-weight:700; font-size:20px; color:var(--petroleo); line-height:1.2;">Solução 3</div>
-              <div style="font-family:var(--sans); font-size:16px; color:var(--taupe); line-height:1.35; margin-top:5px;">o que o grupo construiu</div>
+              <div style="font-family:var(--sans); font-weight:700; font-size:21px; color:var(--petroleo); line-height:1.2;">Central do Vestibular</div>
+              <div style="font-family:var(--sans); font-size:16px; color:var(--taupe); line-height:1.35; margin-top:5px;">O vestibular de cada aluno <b style="color:var(--petroleo);">numa tela só</b>, junto com o portal do aluno.</div>
             </div>
           </div>
-          <div style="margin-top:12px; font-family:var(--sans); font-size:19px; color:var(--taupe); line-height:1.4;">Nenhuma delas foi encomendada por alguém de cima. <b style="color:var(--petroleo);">Saíram de quem faz o trabalho.</b></div>
+          <div style="margin-top:12px; font-family:var(--sans); font-size:19px; color:var(--taupe); line-height:1.4;">E ainda: Ismart 360, Trilha Ismart, Bússola, Horizonte IA. <b style="color:var(--petroleo);">Nenhuma foi encomendada por alguém de cima</b> — saíram de quem faz o trabalho.</div>
         </div>
 
         <div class="seq" data-step="5" style="margin-top:auto; background:var(--petroleo); border-radius:16px; padding:24px 30px;">
@@ -1246,11 +1269,11 @@ deck-stage section::after{
     <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:18px;"></div>
     <div class="slide-subtitle seq" data-step="1" style="margin-top:14px; font-size:27px; max-width:1400px;">Sem editor, sem programa complicado, sem ninguém contratado. Eu só falei: <b style="color:var(--petroleo);">"corta as partes paradas, põe as legendas e o título"</b>.</div>
 
-    <div style="display:grid; grid-template-columns:368px 92px 368px 1fr; gap:34px; margin-top:32px; flex:1; align-items:center;">
+    <div style="display:grid; grid-template-columns:346px 92px 346px 1fr; gap:34px; margin-top:32px; flex:1; align-items:center;">
       <div class="seq-zoom" data-step="2" style="display:flex; flex-direction:column; gap:12px;">
         <div class="label-sm" style="color:var(--taupe); text-align:center;">Antes · como saiu da câmera</div>
         <video src="video-antes.mp4" muted loop autoplay playsinline
-          style="width:368px; height:654px; object-fit:cover; border-radius:20px; background:#000; border:3px solid var(--petroleo); box-shadow:0 26px 60px rgba(20,55,60,0.24); display:block;"></video>
+          style="width:346px; height:615px; object-fit:cover; border-radius:20px; background:#000; border:3px solid var(--petroleo); box-shadow:0 26px 60px rgba(20,55,60,0.24); display:block;"></video>
       </div>
 
       <div class="seq" data-step="3" style="display:flex; flex-direction:column; align-items:center; gap:14px;">
@@ -1264,7 +1287,7 @@ deck-stage section::after{
       <div class="seq-zoom" data-step="3" style="display:flex; flex-direction:column; gap:12px;">
         <div class="label-sm" style="color:var(--terracota-deep); text-align:center;">Depois · editado pela skill</div>
         <video src="video-depois.mp4" muted loop autoplay playsinline
-          style="width:368px; height:654px; object-fit:cover; border-radius:20px; background:#000; border:3px solid var(--terracota); box-shadow:0 26px 60px rgba(176,110,74,0.34); display:block;"></video>
+          style="width:346px; height:615px; object-fit:cover; border-radius:20px; background:#000; border:3px solid var(--terracota); box-shadow:0 26px 60px rgba(176,110,74,0.34); display:block;"></video>
       </div>
 
       <div style="display:flex; flex-direction:column; gap:14px;">
