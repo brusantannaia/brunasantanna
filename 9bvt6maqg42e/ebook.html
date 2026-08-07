@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Claude na prática — Aula 1 · MG Contécnica</title>
+<style>
+  :root{
+    --ink:#1b1d21;
+    --ink-soft:#4a4f57;
+    --ink-faint:#7c828c;
+    --paper:#fbfaf7;
+    --paper-2:#ffffff;
+    --line:#e4e0d8;
+    --accent:#b4531f;
+    --accent-soft:#f6ede6;
+    --navy:#22303f;
+    --mark:#fdf3d8;
+    --maxw:44rem;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --ink:#e8e6e1;
+      --ink-soft:#b6b3ac;
+      --ink-faint:#8b8880;
+      --paper:#14161a;
+      --paper-2:#1b1e23;
+      --line:#2e3238;
+      --accent:#e0834a;
+      --accent-soft:#2a211b;
+      --navy:#cfd8e0;
+      --mark:#33301f;
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth; scroll-padding-top:4.5rem}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,ui-serif,serif;
+    font-size:18px;
+    line-height:1.72;
+    -webkit-font-smoothing:antialiased;
+  }
+  header.bar{
+    position:sticky; top:0; z-index:50;
+    background:color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter:saturate(180%) blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .bar-inner{
+    max-width:70rem; margin:0 auto; padding:.7rem 1.25rem;
+    display:flex; align-items:center; gap:1rem;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  .bar-title{font-size:.82rem; font-weight:600; letter-spacing:.02em; color:var(--ink-soft)}
+  .bar-title b{color:var(--ink)}
+  .bar-spacer{flex:1}
+  .bar-btn{
+    font:inherit; font-size:.78rem; font-weight:600;
+    border:1px solid var(--line); background:var(--paper-2); color:var(--ink-soft);
+    padding:.35rem .7rem; border-radius:999px; cursor:pointer;
+  }
+  .bar-btn:hover{color:var(--accent); border-color:var(--accent)}
+  .progress{position:absolute; left:0; bottom:-1px; height:2px; background:var(--accent); width:0}
+
+  .wrap{max-width:70rem; margin:0 auto; padding:0 1.25rem; display:flex; gap:3rem}
+  nav.toc{
+    width:16rem; flex:none; position:sticky; top:4.2rem; align-self:flex-start;
+    max-height:calc(100vh - 6rem); overflow-y:auto; padding:2rem 0 3rem;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size:.8rem; line-height:1.45;
+  }
+  nav.toc .toc-h{
+    text-transform:uppercase; letter-spacing:.09em; font-size:.66rem; font-weight:700;
+    color:var(--ink-faint); margin:1.6rem 0 .55rem;
+  }
+  nav.toc .toc-h:first-child{margin-top:0}
+  nav.toc a{
+    display:block; padding:.28rem .55rem .28rem .6rem; color:var(--ink-soft);
+    text-decoration:none; border-left:2px solid transparent; border-radius:0 4px 4px 0;
+  }
+  nav.toc a:hover{color:var(--accent); background:var(--accent-soft)}
+  nav.toc a.on{color:var(--accent); border-left-color:var(--accent); font-weight:600}
+  main{flex:1; min-width:0; max-width:var(--maxw); padding-bottom:6rem}
+
+  .cover{padding:4.5rem 0 3rem; border-bottom:1px solid var(--line); margin-bottom:3rem}
+  .eyebrow{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    text-transform:uppercase; letter-spacing:.16em; font-size:.68rem; font-weight:700;
+    color:var(--accent); margin-bottom:1.1rem;
+  }
+  .cover h1{
+    font-size:clamp(2.3rem,6vw,3.4rem); line-height:1.08; margin:0 0 .8rem;
+    letter-spacing:-.02em; font-weight:600;
+  }
+  .cover .sub{font-size:1.3rem; color:var(--ink-soft); line-height:1.45; margin:0 0 2rem; font-style:italic}
+  .meta{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    font-size:.82rem; color:var(--ink-faint); line-height:1.9;
+    border-top:1px solid var(--line); padding-top:1.2rem;
+  }
+  .meta b{color:var(--ink-soft); font-weight:600}
+
+  h2.part{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    font-size:.72rem; text-transform:uppercase; letter-spacing:.16em; font-weight:700;
+    color:var(--accent); margin:4.5rem 0 0; padding-bottom:.6rem; border-bottom:2px solid var(--accent);
+  }
+  h3.ch{
+    font-size:1.85rem; line-height:1.22; letter-spacing:-.015em; font-weight:600;
+    margin:2.6rem 0 .3rem;
+  }
+  h3.ch .num{
+    display:block;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; font-weight:700;
+    color:var(--ink-faint); margin-bottom:.5rem;
+  }
+  h4{font-size:1.12rem; font-weight:600; margin:2.2rem 0 .4rem; letter-spacing:-.005em}
+  p{margin:0 0 1.15rem}
+  .lede{font-size:1.12rem; color:var(--ink-soft); font-style:italic; margin-bottom:1.8rem}
+  a{color:var(--accent)}
+  strong{font-weight:600}
+  ul,ol{margin:0 0 1.3rem; padding-left:1.3rem}
+  li{margin-bottom:.5rem}
+  li::marker{color:var(--accent)}
+
+  blockquote.say{
+    margin:2rem 0; padding:.2rem 0 .2rem 1.5rem; border-left:3px solid var(--accent);
+    font-size:1.12rem; font-style:italic; color:var(--ink);
+  }
+  blockquote.say cite{
+    display:block; margin-top:.7rem; font-style:normal; font-size:.78rem;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    color:var(--ink-faint); letter-spacing:.03em;
+  }
+  .box{
+    background:var(--paper-2); border:1px solid var(--line); border-radius:10px;
+    padding:1.3rem 1.5rem; margin:2rem 0;
+  }
+  .box .box-h{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    font-size:.68rem; text-transform:uppercase; letter-spacing:.13em; font-weight:700;
+    color:var(--accent); margin-bottom:.7rem;
+  }
+  .box p:last-child,.box ul:last-child,.box ol:last-child{margin-bottom:0}
+  .box.case{border-left:3px solid var(--navy)}
+  .box.case .box-h{color:var(--navy)}
+  .box.warn{background:var(--mark); border-color:transparent}
+  .box.warn .box-h{color:var(--ink)}
+
+  .prompt{
+    font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+    font-size:.86rem; line-height:1.6; background:var(--paper-2);
+    border:1px solid var(--line); border-radius:8px; padding:1rem 1.15rem; margin:1.6rem 0;
+    white-space:pre-wrap; color:var(--ink-soft);
+  }
+  .prompt b{color:var(--accent); font-weight:600}
+
+  table{width:100%; border-collapse:collapse; margin:2rem 0; font-size:.92rem}
+  th,td{text-align:left; padding:.65rem .7rem; border-bottom:1px solid var(--line); vertical-align:top}
+  th{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    font-size:.7rem; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-faint);
+    border-bottom:1.5px solid var(--line);
+  }
+
+  .pause{
+    margin:4rem 0; padding:1.6rem; text-align:center;
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  }
+  .pause .p-mark{font-size:1.5rem; color:var(--accent); letter-spacing:.3em; margin-bottom:.5rem}
+  .pause .p-t{font-size:.72rem; text-transform:uppercase; letter-spacing:.16em; font-weight:700; color:var(--ink-faint)}
+  .pause .p-d{font-size:.9rem; color:var(--ink-soft); margin-top:.5rem; font-family:inherit}
+
+  .steps{list-style:none; padding:0; counter-reset:s}
+  .steps li{counter-increment:s; position:relative; padding-left:2.6rem; margin-bottom:1.1rem}
+  .steps li::before{
+    content:counter(s); position:absolute; left:0; top:.15rem;
+    width:1.75rem; height:1.75rem; border-radius:50%;
+    background:var(--accent-soft); color:var(--accent);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    font-size:.8rem; font-weight:700; display:flex; align-items:center; justify-content:center;
+  }
+
+  .matrix{display:grid; grid-template-columns:1fr 1fr; gap:.75rem; margin:2rem 0}
+  .cell{border:1px solid var(--line); border-radius:10px; padding:1rem 1.1rem; background:var(--paper-2)}
+  .cell .c-h{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; margin-bottom:.4rem;
+  }
+  .cell p{font-size:.92rem; margin:0; color:var(--ink-soft)}
+  .cell.go{border-color:var(--accent); background:var(--accent-soft)}
+  .cell.go .c-h{color:var(--accent)}
+  .cell.no .c-h{color:var(--ink-faint)}
+
+  footer.end{
+    border-top:1px solid var(--line); margin-top:5rem; padding:2.5rem 0 4rem;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    font-size:.8rem; color:var(--ink-faint); line-height:1.8;
+  }
+
+  @media (max-width:900px){
+    nav.toc{display:none}
+    .wrap{gap:0; padding:0 1.15rem}
+    body{font-size:17px}
+    .matrix{grid-template-columns:1fr}
+  }
+  @media print{
+    header.bar,nav.toc{display:none}
+    body{background:#fff; color:#000; font-size:11pt}
+    .wrap{display:block; max-width:none; padding:0}
+    h3.ch{page-break-after:avoid}
+    .box,blockquote.say,table{page-break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="bar-inner">
+    <span class="bar-title"><b>Claude na prática</b> · Aula 1 — Nivelamento</span>
+    <span class="bar-spacer"></span>
+    <button class="bar-btn" onclick="window.print()">Imprimir / PDF</button>
+  </div>
+  <div class="progress" id="prog"></div>
+</header>
+
+<div class="wrap">
+
+<nav class="toc" id="toc">
+  <div class="toc-h">Abertura</div>
+  <a href="#abertura">Sobre este material</a>
+  <a href="#turma">O retrato da turma</a>
+
+  <div class="toc-h">Parte I · Antes de abrir a ferramenta</div>
+  <a href="#c1">1. Os três ganhos</a>
+  <a href="#c2">2. Como a IA pensa (e erra)</a>
+  <a href="#c3">3. O funcionário novo</a>
+  <a href="#c4">4. O processo vem antes</a>
+  <a href="#c5">5. Fale, não digite</a>
+  <a href="#c6">6. Da pergunta à orquestração</a>
+
+  <div class="toc-h">Parte II · A ferramenta na prática</div>
+  <a href="#c7">7. Chat, Cowork e Code</a>
+  <a href="#c8">8. Escolher o modelo</a>
+  <a href="#c9">9. Pastas e Projetos</a>
+  <a href="#c10">10. Skills</a>
+  <a href="#c11">11. Claude fora do Claude</a>
+  <a href="#c12">12. HTML, o atalho visual</a>
+
+  <div class="toc-h">Parte III · Encerramento</div>
+  <a href="#c13">13. Tokens e a janela de 5h</a>
+  <a href="#c14">14. O que automatizar</a>
+  <a href="#c15">15. O método em 5 passos</a>
+
+  <div class="toc-h">Anexos</div>
+  <a href="#a1">A. Glossário</a>
+  <a href="#a2">B. Perguntas da turma</a>
+  <a href="#a3">C. Checklist da semana</a>
+</nav>
+
+<main>
+
+<section class="cover">
+  <div class="eyebrow">MG Contécnica · Formação em Inteligência Artificial</div>
+  <h1>Claude na prática</h1>
+  <p class="sub">Aula 1 — Nivelamento: o que a ferramenta faz, e o que você precisa entregar para ela fazer bem.</p>
+  <div class="meta">
+    <b>Data</b> · 5 de agosto de 2026 &nbsp;·&nbsp; <b>Duração</b> · 3h05<br>
+    <b>Condução</b> · Bruna e Bruno — New Scale, consultoria de inteligência artificial<br>
+    <b>Formato</b> · Aula teórica de nivelamento, com demonstração ao vivo da ferramenta
+  </div>
+</section>
+
+<section id="abertura">
+<h3 class="ch"><span class="num">Abertura</span>Sobre este material</h3>
+
+<p class="lede">Este ebook é a Aula 1 transformada em texto. Nada foi inventado: tudo que está aqui foi dito na sala. O que mudou foi a ordem e o corte das repetições.</p>
+
+<p>O material está dividido em duas partes. Na <strong>Parte I</strong>, a conversa é conceitual — como a inteligência artificial funciona, por que ela erra, e o que você precisa preparar antes de sequer abrir o programa. Na <strong>Parte II</strong>, Bruna abre o Claude na tela e mostra cada parte da ferramenta funcionando.</p>
+
+<p>Uma nota de leitura: os exemplos que Bruna e Bruno contam ao longo da aula são de clientes reais deles e da própria operação da New Scale. Eles estão aqui porque são o melhor argumento da aula — mostram o tamanho do que é possível sem ninguém precisar programar nada.</p>
+</section>
+
+<section id="turma">
+<h3 class="ch"><span class="num">Abertura</span>O retrato da turma</h3>
+
+<p>Antes da aula, a New Scale enviou uma pesquisa para os participantes. Nove pessoas responderam, e as respostas orientaram o recorte do dia.</p>
+
+<p>Duas coisas ficaram evidentes. A primeira: <strong>a maior parte da turma vem da gestão</strong> — pessoas que coordenam equipes, cobram entregas, montam relatórios e respondem por resultado. Por isso a aula puxou os exemplos para esse lado, mesmo quando o assunto era técnico.</p>
+
+<p>A segunda é uma dor que Bruna diz encontrar em praticamente toda empresa em que entra:</p>
+
+<blockquote class="say">
+A informação está espalhada. Essa é a dor de quase toda empresa em que eu entro hoje — e é exatamente onde a gente ganha mais quando coloca a IA para rodar lá dentro.
+<cite>Bruna, na abertura</cite>
+</blockquote>
+
+<p>Número em uma planilha, decisão em uma ata, combinado em um e-mail, contexto na cabeça de alguém. Cada pedaço em um lugar. É justamente esse cenário — informação fragmentada em muitos lugares diferentes — que a IA resolve melhor do que qualquer coisa que existia antes, desde que ela consiga alcançar esses lugares. Guarde essa frase, porque ela é o fio condutor da aula inteira.</p>
+
+<div class="box">
+<div class="box-h">O combinado da aula</div>
+<p>Bruna deixou claro logo no início que a Aula 1 seria de nivelamento — apresentação da ferramenta, possibilidades, e principalmente <em>o que você precisa ter de material e de informação para que ela faça um bom trabalho para você</em>. A Aula 2 é mão na massa: mapear processos reais da MG do começo ao fim e colocá-los para rodar.</p>
+</div>
+</section>
+
+<h2 class="part">Parte I · Antes de abrir a ferramenta</h2>
+
+<section id="c1">
+<h3 class="ch"><span class="num">Capítulo 1</span>Os três ganhos da IA</h3>
+
+<p class="lede">Tudo que a inteligência artificial faz por você cai em uma de três caixas. Saber em qual caixa está a sua tarefa muda a expectativa que você deve ter do resultado.</p>
+
+<p>Da hora em que você liga o computador até a hora em que o desliga, quase tudo que você faz passa por um destes três lugares.</p>
+
+<h4>Fazer mais rápido</h4>
+
+<p>É onde quase todo mundo começa, e não há nada de errado nisso. Escrever um e-mail, montar uma ata de reunião, redigir uma mensagem para a equipe, listar pendências, revisar um contrato, conferir uma demonstração. São coisas que você já sabe fazer — a IA só encurta o caminho.</p>
+
+<h4>Fazer muito melhor</h4>
+
+<p>Aqui a coisa fica mais interessante, porque o resultado passa a ser melhor do que você conseguiria sozinho. Bruna deu o exemplo dela mesma: é formada em marketing, não é designer, e sempre teve dificuldade com apresentações. Hoje faz apresentações boas, porque a IA cobre exatamente a parte que ela não domina.</p>
+
+<p>O mesmo vale para análise de dados em volume. Bruno descreveu um cliente do agronegócio com planilhas organizadas desde 2004 — duas décadas de dados que ninguém nunca tinha conseguido analisar de ponta a ponta, simplesmente porque olhar aquilo tudo levaria meses. Com a IA, vira gráfico, vira linha de tendência, vira projeção para frente. Não é instantâneo, mas é possível.</p>
+
+<blockquote class="say">
+Coisas que eram muito onerosas do ponto de vista de capacidade cognitiva — conseguir olhar todos os dados, separar os importantes, projetar para frente — hoje ela faz. A capacidade de cruzar dados e enxergar um pouco além do que a gente consegue, quando o volume de informação é muito grande.
+<cite>Bruno</cite>
+</blockquote>
+
+<h4>Fazer o que antes era impossível</h4>
+
+<p>A terceira caixa é a que Bruna diz amar. É criar coisas que antes exigiriam tempo, dinheiro e uma equipe inteira: um dashboard, um site, um sisteminha interno, uma integração entre ferramentas que não conversavam.</p>
+
+<p>Ela contou o histórico de dor com sites — pagar agência, mandar briefing, receber errado, pedir alteração, esperar. Hoje, o que custava semanas e um orçamento sai em horas. E o exemplo mais concreto disso aparece mais adiante, no <a href="#c12">Capítulo 12</a>: as propostas comerciais da New Scale hoje são páginas web feitas pelo próprio Claude em minutos.</p>
+
+<div class="box warn">
+<div class="box-h">O contraponto — e ele importa</div>
+<p>Bruno fez questão de marcar isso: <strong>o capital humano continua sendo o que decide o resultado.</strong> Bruna resumiu com uma imagem forte — o Claude é capaz de ajudar a criar uma vacina para uma doença que ainda não tem vacina. Mas ela, Bruna, não conseguiria chegar lá, porque não sabe qual é o fluxo de trabalho, o que precisa vir primeiro, quais fontes serviriam de referência.</p>
+<p>Quem direciona é quem traz a expertise. E ela acrescentou uma observação que costuma surpreender: <strong>pessoas mais experientes, que começaram no analógico e aprenderam a fazer os processos na mão, tendem a se sair melhor nesta nova era</strong> — justamente porque têm a bagagem para conduzir a IA e para validar o que ela devolve. Quem está começando a carreira não tem esse repertório.</p>
+</div>
+
+<p>Existe ainda uma quarta possibilidade, que não é bem uma caixa: usar a IA para os primeiros 80% e ficar com os 20% finais. Como Bruno colocou, às vezes ela te dá 80% de velocidade no processo e a lapidação final é sua — é onde o trabalho ganha a sua cara.</p>
+</section>
+
+<section id="c2">
+<h3 class="ch"><span class="num">Capítulo 2</span>Como a IA pensa — e por que ela erra</h3>
+
+<p class="lede">Este é o capítulo mais técnico da aula, e Bruna o colocou logo no começo de propósito. Entender como a máquina raciocina é o que impede você de confiar demais nela.</p>
+
+<h4>Probabilidade, não raciocínio</h4>
+
+<p>Toda vez que a IA responde alguma coisa, ela está fazendo análise preditiva. Está calculando qual é a probabilidade de aquela palavra fazer sentido naquela frase, ou de aquele trecho de código funcionar naquele sistema. Ela trabalha sempre com probabilidade.</p>
+
+<p>A consequência prática disso é direta: <strong>ela não pensa como a gente, e por isso ela pode errar.</strong> Ela pode errar porque o que mais aparece na internet nem sempre é o correto, e porque ela não tem o mesmo raciocínio que nós temos para desconfiar de uma informação estranha.</p>
+
+<h4>O problema de não saber dizer "não sei"</h4>
+
+<p>Existe um defeito de nascença que se propagou nas inteligências artificiais desde as primeiras: elas têm muita dificuldade de dizer "eu não sei fazer isso". Elas saem fazendo.</p>
+
+<blockquote class="say">
+Se você perguntar uma porcentagem para ela e ela não souber, ela pode inventar uma e te entregar aquele dado errado com muita segurança.
+<cite>Bruna</cite>
+</blockquote>
+
+<p>Bruna foi honesta ao dizer que os modelos novos estão ficando muito melhores nisso — cada vez erram menos, cada vez conseguem olhar mais dados sem se perder. Mas a regra permanece: <strong>o que sai na tela não é verdade absoluta.</strong></p>
+
+<p>E existe um agravante conhecido: quanto mais longa fica a conversa, maior a chance de erro. Ela precisa olhar para muitos lugares ao mesmo tempo, começa a não lembrar bem do que estava no começo, e embaralha. Esse ponto volta no <a href="#c13">Capítulo 13</a>, quando falarmos de tokens.</p>
+
+<h4>Ela tende a pegar o caminho mais fácil</h4>
+
+<p>Bruno acrescentou uma observação prática. Quando você começar a usar o Claude, vai perceber que ele mostra o raciocínio na tela e às vezes abre, na lateral, a lista de tarefas que montou para chegar ao resultado. E, olhando isso, você percebe que <strong>muitas vezes ele escolhe o caminho mais curto.</strong></p>
+
+<p>A defesa é simples e sempre a mesma: <em>peça a bibliografia.</em></p>
+
+<div class="box case">
+<div class="box-h">O caso do dado de vendedor</div>
+<p>Bruno estava fazendo uma pesquisa e o Claude trouxe números de ganho de produtividade e economia média de folha. Quando ele pediu a fonte, o próprio Claude assumiu: os dados vinham de blogs e de material de empresas que vendem software — ou seja, <strong>dado de venda, não dado validado</strong>. Não havia consultoria por trás, nem painel com várias empresas.</p>
+<p>Ele mesmo se corrigiu: "eu acabei pegando dessas fontes mais simples, não aprofundei essa pesquisa — espera aí que eu vou fazer agora". Voltou com dados de institutos de pesquisa, com bibliografia. E a análise mudou.</p>
+</div>
+
+<h4>O que isso significa para quem trabalha com contabilidade</h4>
+
+<p>Bruna endereçou a turma diretamente neste ponto, e vale reproduzir o raciocínio dela. Quem trabalha com um assunto cheio de detalhe, em que um deslize custa caro, precisa ter uma coisa clara na cabeça: <strong>a IA pode inventar uma norma que não existe.</strong> Pode inventar um dado que não existe.</p>
+
+<p>Mas — e este "mas" é o coração do capítulo — a conclusão não é "melhor não usar". A conclusão é <em>direcionar direito</em>:</p>
+
+<ul>
+<li><strong>Pergunte a origem.</strong> "De onde você tirou essa norma?" resolve boa parte dos casos.</li>
+<li><strong>Restrinja as fontes.</strong> Você pode dizer a ele quais sites ele pode consultar, e pode proibi-lo de usar blogs ou fontes secundárias.</li>
+<li><strong>Transforme isso em regra permanente.</strong> Como veremos no <a href="#c10">Capítulo 10</a>, dá para criar uma <em>skill</em> que obriga o Claude a só buscar em fontes que você aprovou. Feito uma vez, vale para sempre.</li>
+</ul>
+
+<p>Uma pergunta da turma foi exatamente sobre isso — "eu já posso pedir a bibliografia agora?". A resposta é sim, sempre. E, com o uso, ele começa a entender o seu perfil e passa a trazer a fonte sem você pedir.</p>
+
+<div class="box warn">
+<div class="box-h">A regra que não muda</div>
+<p>No dia a dia, a gente acaba fazendo prompts curtos e sem direcionamento. Nesses momentos, a conferência é sua. Especialmente em matéria fiscal e contábil, onde o erro tem custo — <strong>conferir muito, muito mesmo</strong>.</p>
+</div>
+</section>
+
+<section id="c3">
+<h3 class="ch"><span class="num">Capítulo 3</span>O funcionário novo</h3>
+
+<p class="lede">Esta é a analogia central da aula inteira. Se você guardar uma única ideia da Aula 1, que seja esta.</p>
+
+<p>Bruna pediu para a turma parar de olhar para a IA como um programa e passar a olhar para ela como uma pessoa que acabou de entrar no time. Não no sentido místico — no sentido prático de <em>onboarding</em>.</p>
+
+<p>Uma pessoa nova precisa conhecer a empresa. Precisa passar pelos processos, saber quais são os sistemas, quem são os pares, como funciona cada fluxo. Ela não chega sabendo. E se ninguém der esse direcionamento, ela erra — por mais talentosa que seja.</p>
+
+<blockquote class="say">
+Eu poderia trazer o Steve Jobs para trabalhar aqui dentro. Se ele não souber quais são os processos da empresa, quais são as metas, aonde a empresa quer chegar, qual é o nicho, o que a sua área faz, quem é você — ele não vai conseguir direcionar o trabalho.
+<cite>Bruna</cite>
+</blockquote>
+
+<p>E aqui entra a palavra que Bruna avisou que repetiria a aula inteira: <strong>contexto</strong>.</p>
+
+<h4>O que ele nunca vai adivinhar</h4>
+
+<p>Uma inteligência artificial que não sabe quem é você, qual é o seu histórico, quais são as informações da empresa e como funcionam seus processos <strong>não vai conseguir te ajudar de verdade — ela vai ser genérica.</strong></p>
+
+<p>Bruna usou o LinkedIn como exemplo do que acontece quando falta contexto: aqueles textos que você bate o olho e sabe na hora que a pessoa jogou uma frase no chat e colou o resultado. Sem tom de voz, sem estilo, sem assunto próprio.</p>
+
+<p>Há quatro coisas que ele não tem como adivinhar sozinho:</p>
+
+<ul>
+<li><strong>Suas metas do ano.</strong></li>
+<li><strong>De onde você tira cada informação.</strong></li>
+<li><strong>Quem são os clientes e as pessoas com quem você precisa falar.</strong></li>
+<li><strong>O que te torna um bom profissional</strong> — o seu diferencial.</li>
+</ul>
+
+<h4>Pedido vago × pedido com contexto</h4>
+
+<p>O contraste que Bruna usou na sala é o resumo mais útil do capítulo:</p>
+
+<table>
+<tr><th>Pedido vago</th><th>Pedido com contexto</th></tr>
+<tr>
+<td><em>"Me manda os números."</em><br><span style="font-size:.85rem;color:var(--ink-faint)">Que números? De ontem? Do mês passado? Do ano fechado? De quais clientes?</span></td>
+<td><em>"Me manda as pendências abertas da equipe fiscal, da mais atrasada para a menos atrasada, com o responsável de cada uma."</em></td>
+</tr>
+</table>
+
+<p>Bruno completou com um teste mental que funciona bem: <strong>se o seu pedido confundiria o colega que acabou de chegar, ele vai confundir o Claude também.</strong></p>
+
+<h4>Contexto + instruções</h4>
+
+<p>Na prática, todo bom pedido carrega duas coisas. <strong>Contexto</strong> — o que ele precisa saber para não chutar. E <strong>instruções</strong> — o que exatamente você quer.</p>
+
+<p>Bruna observa que muita gente diz "não consigo, ele não faz". A pergunta de volta é sempre a mesma: <em>como você está pedindo? O que de fato você pediu? Está claro ali o que você quer?</em></p>
+
+<p>E uma boa notícia sobre o volume de trabalho: no começo, os prompts vão precisar ser enormes. Depois eles encolhem, porque ele já vai ter acumulado o seu contexto. Hoje, Bruna consegue dizer apenas "gera uma proposta para o cliente X" e receber uma proposta completa — porque tudo que ele precisa já está guardado.</p>
+</section>
+
+<section id="c4">
+<h3 class="ch"><span class="num">Capítulo 4</span>O processo vem antes da ferramenta</h3>
+
+<p class="lede">Antes de perguntar "o que a IA consegue fazer?", a pergunta certa é "o que exatamente eu faço?". Quase ninguém sabe responder isso com precisão — e é aí que trava.</p>
+
+<p>Bruna contou um hábito pessoal: todo dia ela se faz o mesmo desafio — <em>será que o Claude consegue fazer isso por mim?</em> E vai descobrindo, conversando, até onde ele consegue ir. Mas para conseguir pedir, ela precisou primeiro definir os próprios processos.</p>
+
+<p>E "processo" aqui não é o processo formal da empresa, aquele que atravessa várias áreas. É algo muito mais simples e mais pessoal: <strong>o que você faz quando senta na cadeira?</strong> Da menor tarefa à maior.</p>
+
+<h4>O exercício: desmontar a tarefa</h4>
+
+<p>O exemplo que ela usou na sala foi dar feedback para a equipe. Hoje é dia de feedback. Você senta. E aí?</p>
+
+<ol class="steps">
+<li>Você começa olhando as <strong>metas de cada colaborador</strong>.</li>
+<li>Depois olha os <strong>entregáveis do período</strong>.</li>
+<li>Entra no <strong>sistema</strong> e vê o resultado que está lá.</li>
+<li>Cruza com o que você <strong>já falou com essa pessoa</strong> antes.</li>
+<li>Soma a <strong>sua percepção</strong> — que só existe na sua cabeça.</li>
+<li>E ainda tem a <strong>pesquisa de clima</strong> que a empresa fez.</li>
+</ol>
+
+<h4>Onde mora cada informação</h4>
+
+<p>Repare no exercício acima: <strong>cada uma dessas informações está em um lugar diferente da sua vida.</strong> Uma parte está no sistema da empresa. Outra nos seus e-mails. Outra na sua cabeça. Outra em um arquivo de pesquisa.</p>
+
+<p>Mapear isso é metade do trabalho. Bruna sugeriu literalmente escrever:</p>
+
+<div class="prompt"><b>1.</b> Qual é a tarefa?
+<b>2.</b> Qual é o passo a passo, do início ao fim?
+<b>3.</b> Onde mora cada informação que eu uso em cada passo?
+<b>4.</b> O que dessa informação eu consigo entregar para ele?</div>
+
+<p>Nem tudo vai ser entregável, e tudo bem. Se ele não consegue entrar no sistema da empresa, você extrai a informação e entrega o arquivo. Se está na sua cabeça, você conta.</p>
+
+<div class="box case">
+<div class="box-h">Até o login é processo</div>
+<p>Bruno deu o exemplo mais simples que existe: o que você faz para entrar em um sistema? Abre o navegador, vai na URL, digita as credenciais, entra em um módulo específico, extrai um relatório. <strong>Se você der a URL e as credenciais ao Claude, ele acessa o sistema</strong> e segue o roteiro que você descreveu. Se não der, ele vai bater na porta de login e parar.</p>
+</div>
+
+<div class="box case">
+<div class="box-h">O caso do Instagram — quando o robô é bloqueado</div>
+<p>Na New Scale, antes de montar uma proposta, eles fazem uma varredura sobre o cliente: Google Meu Negócio, LinkedIn, Instagram, site institucional. Só que LinkedIn e Instagram bloqueiam acesso automatizado — a Meta tem interesse em canalizar esse acesso pela própria IA dela.</p>
+<p>A solução foi contornar por onde já existe permissão: <strong>deixar o perfil logado no navegador e pedir ao Claude que trabalhe ali.</strong> Ele entra na conta do cliente, lê a bio, abre todos os destaques (que costumam ser onde mora o que a empresa considera importante), analisa os últimos 70 posts, identifica o estilo de escrita, os assuntos recorrentes, os produtos principais e o que as pessoas dizem nos comentários.</p>
+<p>Como Bruno resumiu: é uma tarefa que você daria a um estagiário ou a um analista de marketing, e que levaria horas. Isso exige a extensão do Chrome, assunto do <a href="#c11">Capítulo 11</a>.</p>
+</div>
+
+<h4>Escolha pelo que te incomoda</h4>
+
+<p>Na hora de decidir por onde começar, Bruna deu um critério simples e muito humano: <strong>pegue o que você menos gosta de fazer.</strong></p>
+
+<blockquote class="say">
+Eu odeio ter que fazer o relatório que eu mando todo mês. Levo dois dias. Tenho que abrir sete Excels, puxar um monte de extrato do sistema, acessar um monte de coisa e ir preenchendo na mão. E eu odeio ter que cobrar o meu time.
+<cite>Bruna</cite>
+</blockquote>
+
+<p>E o recado que fecha o capítulo: <strong>automatize o caminho inteiro, não micro-tarefas soltas.</strong> Em vez de usar a IA para vinte pedidos avulsos por dia, pegue um processo do começo — da hora em que você começa — até o fim — a hora em que entrega para o chefe ou para o cliente — e descubra em que pontos o Claude entra. Pode ser que ele não cubra tudo. Mas normalmente cobre entre 30% e 90%.</p>
+</section>
+
+<section id="c5">
+<h3 class="ch"><span class="num">Capítulo 5</span>Fale, não digite</h3>
+
+<p class="lede">A forma mais rápida de dar contexto não é escrever. É falar.</p>
+
+<p>Bruna praticamente não escreve prompts longos. Quando vai começar algo complicado — um projeto novo, uma aula, ou logo depois de uma reunião cheia de insights — ela aperta o microfone e grava um áudio.</p>
+
+<p>O motivo é aritmético: <strong>falamos cerca de quatro vezes mais palavras por minuto do que escrevemos.</strong> Em dois minutos de fala você entrega o que levaria dez minutos digitando.</p>
+
+<p>E não é preciso falar organizado. Este é o ponto que costuma travar as pessoas — "mas eu falo confuso, eu vou pulando de assunto". Não tem problema: <strong>ela é muito boa em organizar pensamento.</strong></p>
+
+<div class="box">
+<div class="box-h">O que colocar no áudio</div>
+<ul>
+<li><strong>Contexto</strong> — de onde vem isso, o que aconteceu antes.</li>
+<li><strong>Objetivo</strong> — o que você quer no final.</li>
+<li><strong>O quê e por quê</strong> — o que você quer que ela faça, e a razão.</li>
+<li><strong>Como</strong> — se você já tem um jeito preferido, descreva.</li>
+</ul>
+</div>
+
+<h4>A regra de ouro: peça o plano antes</h4>
+
+<p>Depois de despejar o contexto, vem a instrução mais importante do capítulo — e talvez a mais fácil de esquecer:</p>
+
+<blockquote class="say">
+Peça para ela organizar e planejar com você <em>antes</em> de sair executando. Porque às vezes ela sai executando. "Calma, calma, não. Apresenta um plano. Vamos apenas planejar."
+<cite>Bruna</cite>
+</blockquote>
+
+<p>Você planeja junto, corrige o rumo enquanto ainda é barato corrigir, e só então libera a execução. Bruna descreveu o fluxo dela assim: grava o áudio, dá acesso às pastas com o material de apoio, pede o plano, valida, e aí ele pergunta "posso começar?".</p>
+
+<h4>O prompt escrito por ela mesma</h4>
+
+<p>Há alguns anos se falava que "engenheiro de prompt" seria a profissão do futuro. Bruna é categórica: <strong>isso já passou.</strong> Hoje a própria IA escreve o prompt para você.</p>
+
+<p>O que ela precisa de você continua sendo o mesmo tripé: <strong>informação, contexto e objetivo.</strong> O resto — se vai usar Python, se vai gerar um HTML, se vai rodar um script — é problema dela.</p>
+
+<blockquote class="say">
+Eu tenho coisas que criei em Python. Eu nem sei direito o que é Python. Mas ele cria, ele põe para rodar. Ele é que precisa saber o que é — não você. Você só precisa saber pedir.
+<cite>Bruna</cite>
+</blockquote>
+
+<div class="box case">
+<div class="box-h">Reuniões viram matéria-prima</div>
+<p>Bruno descreveu o uso que mudou o dia a dia dele. Ele grava a reunião com o cliente e depois entrega a transcrição com um pedido só: <em>leia na íntegra, organize as ideias, identifique o que o cliente trouxe como dor principal, liste os sistemas que ele disse que usa, e pesquise na internet se esses sistemas têm API aberta.</em></p>
+<p>O retorno vem estruturado: isto foi diagnosticado, isto você sugeriu como solução, disto o cliente gostou, disto ele pareceu não gostar. <strong>Sem ele ter anotado uma linha</strong> — o que significa que ele ficou inteiro na conversa, olhando para o cliente, em vez de escrevendo.</p>
+<p>Vale para vocês igual: reunião de alinhamento, reunião com cliente insatisfeito, reunião de fechamento. Grave, transcreva, entregue.</p>
+</div>
+
+<p>Bruna e Bruno fazem isso até com as reuniões de sócios. Gravam o planejamento, organizam num documento simples e jogam na memória do projeto de estratégia. Depois, quando surge a dúvida, ninguém precisa mais abrir documento nenhum:</p>
+
+<blockquote class="say">
+"O que a gente combinou mesmo sobre treinamento corporativo?" E ele responde: vocês discutiram isso, isso e isso, ficaram no impasse sobre aquilo, e no final concluíram que o caminho é esse. Inclusive, olhando a pasta, vocês estão longe da meta, porque ainda não começaram.
+<cite>Bruno</cite>
+</blockquote>
+</section>
+
+<section id="c6">
+<h3 class="ch"><span class="num">Capítulo 6</span>Da pergunta-e-resposta à orquestração</h3>
+
+<p class="lede">A mudança mais importante dos últimos meses não foi a IA ficar mais inteligente. Foi ela ter passado a agir.</p>
+
+<h4>O "uso Google"</h4>
+
+<p>Bruna chama de <em>uso Google</em> o modo como quase todo mundo aprendeu a usar IA: você faz uma pergunta, recebe uma resposta, e <strong>você</strong> age. Foi assim que o ChatGPT ensinou o mundo a trabalhar — ping-pong: peço uma tarefa, recebo uma resposta, peço outra, recebo outra.</p>
+
+<p>O exemplo dela é uma viagem. No modelo antigo: você pergunta qual a melhor cidade da Itália, recebe a resposta, entra em vários sites, pesquisa, monta o roteiro, pede ajuda para organizar, recebe o roteiro em Word, e então <em>você</em> vai buscar os voos e os hotéis.</p>
+
+<h4>O modelo agêntico</h4>
+
+<p>Hoje é outra coisa. Você diz: <em>"vou passar dez dias na Itália, meu orçamento é este, pesquise os voos, pesquise os hotéis, me diga qual é a melhor combinação, e se estiver bom, entre no site de reservas e reserve."</em> E ele faz.</p>
+
+<p>O nome disso é IA conversacional agêntica — mas o que importa não é o nome. É que <strong>você manda ele fazer, e ele faz.</strong></p>
+
+<div class="box case">
+<div class="box-h">A rotina de manhã da Bruna</div>
+<p>Este é o exemplo que melhor mostra o que "agir" significa. Ela chega, liga o computador, e o Claude já:</p>
+<ul>
+<li>leu a agenda dela do dia;</li>
+<li>cruzou com o e-mail;</li>
+<li>varreu as pastas do computador para ver em que pé está cada demanda;</li>
+<li>e conectou com o financeiro.</li>
+</ul>
+<p>E aí ele cobra. Literalmente: <em>"você vai dar uma aula na MG Contécnica às 17h. O material já está pronto? Entrei na sua pasta e não vi material."</em> Ou: <em>"você passou um orçamento para o cliente X há dez dias. Já fez o follow-up? Podemos tirar da nossa lista ou ainda vai?"</em></p>
+<p>E o fecho: <strong>tudo isso ela montou sem ser desenvolvedora.</strong> Conversando.</p>
+</div>
+
+<h4>Um prompt grande em vez de dez pequenos</h4>
+
+<p>A consequência prática dessa mudança altera a forma de pedir. Antigamente era: resume a ata. Agora tira as pendências. Agora escreve um e-mail. Agora manda para o pessoal. Quatro idas e vindas.</p>
+
+<p>Hoje o certo é o contrário — <strong>um pedido grande, com várias tarefas de uma vez:</strong></p>
+
+<div class="prompt">Fechou a reunião de segunda.
+
+<b>1.</b> Resume a ata.
+<b>2.</b> Lista as pendências com os responsáveis.
+<b>3.</b> Escreve o e-mail de cobrança de cada uma.
+<b>4.</b> Me diz o que ficou sem dono.</div>
+
+<p>Por trás, ele divide o trabalho entre vários processos paralelos — com um deles verificando se as partes estão coerentes entre si. Você não precisa saber disso; só precisa saber que <strong>o resultado vem mais coerente assim do que fatiado em quatro conversas.</strong></p>
+
+<p>Bruno resumiu a lógica nova em uma frase: <em>quem decide como fazer é ele. Você valida, vê se está bom e pede a correção.</em></p>
+
+<p>E há um ganho colateral relevante, que é de economia — pedidos grandes consomem menos do que muitas idas e vindas. Isso volta no <a href="#c13">Capítulo 13</a>.</p>
+
+<div class="box warn">
+<div class="box-h">Nada disso é estável</div>
+<p>Bruna fez questão de dizer: se ela desse essa mesma aula em janeiro, a aula seria completamente diferente. Já aconteceu de ela responder "isso não dá para fazer" em uma aula, chegar em casa, abrir o aplicativo e encontrar uma notificação dizendo que agora dá.</p>
+<p>Então trate tudo neste material como o retrato de agosto de 2026 — e tenha o hábito de testar de novo aquilo que não funcionou.</p>
+</div>
+</section>
+
+<div class="pause">
+  <div class="p-mark">· · ·</div>
+  <div class="p-t">Intervalo</div>
+  <div class="p-d">Até aqui, nenhuma tela foi aberta. Daqui em diante, Bruna compartilha o Claude ao vivo e mostra cada parte funcionando.</div>
+</div>
+
+<h2 class="part">Parte II · A ferramenta na prática</h2>
+
+<section id="c7">
+<h3 class="ch"><span class="num">Capítulo 7</span>Chat, Cowork e Code</h3>
+
+<p class="lede">O Claude tem três modos de uso. A escolha entre eles é a primeira decisão que você toma, e ela muda tudo o que vem depois.</p>
+
+<p>Ao abrir o Claude, a cara é a mesma de qualquer IA que você já usou — uma caixa de conversa. Bruna começou por aí justamente para tirar o medo: <em>é na base da conversa, não é sistema, não é desenvolvimento.</em> Mas logo em seguida ela pediu que a turma já começasse pelo modo mais profundo.</p>
+
+<h4>Chat</h4>
+
+<p>É o modo tradicional, igual ao que todo mundo conhece. Funciona no navegador e no celular. A limitação é que <strong>você precisa entregar os arquivos dentro da conversa, toda vez.</strong> É como se ele entrasse em cada assunto do zero.</p>
+
+<h4>Cowork — o modo recomendado</h4>
+
+<p>Aqui está a diferença que justifica a aula. No Cowork, <strong>o Claude entra nas pastas do seu computador</strong> — para ler, editar e criar arquivos.</p>
+
+<p>Por regra, ele só edita o que ele mesmo criou; ele não sai mexendo nos seus arquivos por conta própria. E ele não deleta nada por programação própria — só se você pedir. Bruna comentou que usa todo dia, com camadas extras de segurança configuradas, e que ele nunca apagou nada.</p>
+
+<div class="box">
+<div class="box-h">A sugestão prática: a pasta-mãe</div>
+<p>Tenha <strong>uma pasta que é a pasta do Claude</strong>, e concentre ali tudo com que ele vai trabalhar. Bruna mantém a dela no desktop, chamada <em>workstation</em>. Isso reduz risco e — o efeito colateral que ela adora — obriga você a ficar organizado.</p>
+<p>Se você precisar que ele veja uma pasta antiga, cheia de arquivos desde 2010, não precisa duplicar nada: existe a opção de adicionar uma segunda pasta apenas para consulta (ver <a href="#c9">Capítulo 9</a>).</p>
+</div>
+
+<h4>Code</h4>
+
+<p>O Code é praticamente idêntico ao Cowork no uso — mesma interface, mesma conversa. Duas diferenças importam:</p>
+
+<ul>
+<li><strong>Ele consegue empurrar coisas para fora da sua máquina.</strong> Publicar um site em um servidor, conectar com uma base de dados externa, colocar um sistema no ar — isso só o Code faz.</li>
+<li><strong>Ele não tem Projetos.</strong> Você simplesmente dá acesso à pasta e pronto — o que, segundo Bruna, é a coisa de que ela mais sente falta ao usar o Code.</li>
+</ul>
+
+<p>Bruno usa o Code para desenvolver sistemas de verdade. O motor financeiro da New Scale — conciliação bancária, fatura de cartão, provisão de receitas e despesas — foi feito assim, e roda uma rotina automática todo dia às 9h. Eles não têm ERP: têm as regras que foram construindo, conectadas a um banco de dados barato.</p>
+
+<div class="box warn">
+<div class="box-h">A limitação do Cowork que você precisa saber agora</div>
+<p>O Cowork está <strong>vinculado a uma máquina</strong>. Se você tem dois computadores, não vai conseguir usar o Cowork nos dois com a mesma organização — cada máquina tem seus próprios caminhos de pasta. E não dá para dividir uma conta entre funcionários (uma pergunta que surgiu na sala): <em>vira uma bagunça</em>, nas palavras de Bruna.</p>
+<p>A saída para trabalhar em mais de um lugar é o Drive sincronizado, assunto do <a href="#c9">Capítulo 9</a>. E o histórico de conversas do Cowork, que era limitado, já começou a aparecer no celular — Bruna aposta que o problema estará resolvido em pouco tempo.</p>
+</div>
+
+<table>
+<tr><th>Modo</th><th>Quando usar</th><th>Limite</th></tr>
+<tr><td><strong>Chat</strong></td><td>No celular, fora do computador, para perguntas rápidas</td><td>Você entrega os arquivos toda vez</td></tr>
+<tr><td><strong>Cowork</strong></td><td>O dia a dia. Ele age nas suas pastas, tem Projetos e memória</td><td>Preso a uma máquina</td></tr>
+<tr><td><strong>Code</strong></td><td>Publicar site, conectar sistema externo, criar aplicativo</td><td>Sem Projetos</td></tr>
+</table>
+</section>
+
+<section id="c8">
+<h3 class="ch"><span class="num">Capítulo 8</span>Escolher o modelo — do júnior ao presidente</h3>
+
+<p class="lede">Usar o modelo errado é a causa número um da frustração de quem começa. É o motivo pelo qual alguém sai da aula animado e, dois dias depois, conclui que "essa ferramenta não faz nada disso".</p>
+
+<p>Dentro do Claude existem modelos diferentes. Bruna usou a analogia que a turma entendeu na hora: <strong>é como escolher entre um profissional júnior e o presidente da empresa.</strong> De baixo para cima, sobe a capacidade de raciocínio — e sobe o custo de uso.</p>
+
+<table>
+<tr><th>Modelo</th><th>Perfil</th><th>Use quando</th></tr>
+<tr>
+  <td><strong>Sonnet</strong></td>
+  <td>O bom executor. Bruna compara ao nível a que estávamos acostumados no ChatGPT — <em>não é ruim, é muito bom</em>.</td>
+  <td>O processo já está definido, a skill já existe, é só executar a receita.</td>
+</tr>
+<tr>
+  <td><strong>Opus</strong></td>
+  <td>O estratégico. Pensa melhor, enxerga mais longe, é melhor designer.</td>
+  <td><strong>Sempre que você começa algo.</strong> Estratégia nova, análise, primeira montagem de um processo, apresentação.</td>
+</tr>
+<tr>
+  <td><strong>Fable</strong></td>
+  <td>O consultor sênior caríssimo. Lançado há pouco tempo. Recebe uma tarefa, some por horas testando, e volta com a coisa pronta.</td>
+  <td>Análise estratégica profunda, ou construir uma ferramenta do zero. Estoura o limite rápido.</td>
+</tr>
+</table>
+
+<p>Existe ainda um modelo mais leve na base da lista, bom para varrer volumes enormes de dados, mas fraco em qualquer coisa que exija elaboração. Bruna não usa.</p>
+
+<h4>A regra prática</h4>
+
+<blockquote class="say">
+Comece no Opus e depois migre para o Sonnet. O Opus vai ser mais estratégico, mais inteligente, vai te trazer insights melhores e vai ser o melhor designer. Depois que já está automatizado, depois que você já tem contexto e já tem as skills, aí você roda tranquilamente no Sonnet.
+<cite>Bruna</cite>
+</blockquote>
+
+<p>E o alerta que ela repetiu com ênfase: <strong>se você fizer tudo no modelo mais fraco, vai achar que a aula inteira foi conversa fiada.</strong> Não é que a ferramenta não faz — é que o modelo está inadequado para o que você pediu.</p>
+
+<p>Há também um cálculo de economia que não é óbvio. O modelo mais caro costuma acertar de primeira. O mais barato pode exigir cinco rodadas de correção — e cinco rodadas de correção consomem mais do que uma execução bem feita. Como Bruna colocou: <em>às vezes vale mais a pena gastar fazendo direito no Opus do que ficar arrumando o que você não gostou várias vezes.</em></p>
+
+<div class="box case">
+<div class="box-h">O que o modelo mais forte é capaz de fazer</div>
+<p>Bruna edita os próprios vídeos para o Instagram e levava 40 minutos por vídeo. Ela contou ao Claude, no Fable, exatamente o processo dela: qual filtro aplica, que tipo de corte faz, onde corta, como monta a legenda. E terminou com <em>"dá um jeito de começar a editar meus vídeos"</em>.</p>
+<p>Ele rodou por horas. Não funcionou de primeira — ela teve que corrigir várias vezes. Mas hoje <strong>ela manda o vídeo cru e recebe o vídeo editado.</strong> Algo que, até pouco tempo atrás, ela diria ser impossível.</p>
+</div>
+
+<h4>Privacidade — a pergunta que sempre aparece</h4>
+
+<p>Bruna dedicou um trecho da aula a isso, e o resumo é o seguinte.</p>
+
+<p>Nos planos pagos — e principalmente no plano empresarial, que é o caso da MG — os termos de uso estabelecem que <strong>os seus dados não são usados para treinar a inteligência artificial e não se tornam públicos.</strong> Sempre que o plano é pago, essa proteção vale.</p>
+
+<p>Ela foi honesta sobre o que não sabe: como esses dados são tratados internamente é algo que ninguém de fora consegue auditar. Mas o mesmo raciocínio vale para qualquer serviço hospedado em nuvem que a empresa já contrata hoje — o dado existe em algum lugar, e o que protege você é o contrato.</p>
+
+<p>Bruno complementou com o realismo de quem já geriu operação grande: risco existe em qualquer ambiente digital, inclusive em servidor próprio dentro da empresa — servidor sofre ataque, máquina é roubada. O que se faz é reduzir risco com política de segurança e com contrato. E, no caso, o contrato é explícito sobre não usar nem compartilhar as informações.</p>
+
+<div class="box">
+<div class="box-h">Quem é quem</div>
+<p>A <strong>Anthropic</strong> é a empresa responsável pelo Claude, assim como a OpenAI é responsável pelo ChatGPT e o Google pelo Gemini.</p>
+</div>
+</section>
+
+<section id="c9">
+<h3 class="ch"><span class="num">Capítulo 9</span>Pastas e Projetos</h3>
+
+<p class="lede">Este é o capítulo mais operacional do ebook, e provavelmente o mais valioso. Organização de pasta deixou de ser mania e virou infraestrutura.</p>
+
+<h4>Hierarquia: ele enxerga tudo que está abaixo</h4>
+
+<p>A regra é simples e você precisa entendê-la antes de dar qualquer acesso. <strong>O Claude só trabalha na pasta que você entregar a ele — e em tudo que estiver dentro dela.</strong></p>
+
+<p>Se você entregar o desktop inteiro, ele vê tudo que está no desktop, incluindo todas as subpastas. Se entregar uma pasta específica, ele fica ali. Toda vez que você dá acesso a alguma coisa, você está dando acesso <em>em hierarquia</em>.</p>
+
+<h4>Google Drive e OneDrive</h4>
+
+<p>Ele lê o que está no Drive e no OneDrive — com uma condição: <strong>o Drive precisa estar baixado na máquina.</strong> Aquele atalho que aparece na lateral do explorador de arquivos, apontando para uma pasta local. É disso que ele precisa: do endereço.</p>
+
+<p>Bruna sugeriu como truque: mesmo em empresa que não usa Drive intensamente, vale instalar o cliente no computador, porque assim você ganha o endereço local e ele consegue trabalhar.</p>
+
+<h4>O que é um Projeto</h4>
+
+<p>Projetos existem no Cowork e são, na prática, <strong>o espelho de uma pasta do seu computador dentro do Claude</strong>.</p>
+
+<p>A imagem que Bruna usou: um projeto é uma <em>caixa de areia</em> — um lugar onde ele pode brincar, e de onde ele não sai. Bruno complementou com outra: é um arcabouço fechado de informação, um lago do qual ele pode beber, mas que tem margens.</p>
+
+<div class="box">
+<div class="box-h">Como criar um projeto (o passo a passo da tela)</div>
+<ol class="steps">
+<li>Na lateral, clique para <strong>criar um projeto</strong>.</li>
+<li><strong>Antes de dar nome</strong>, clique em "usar uma pasta" — o nome da pasta preenche o projeto sozinho.</li>
+<li>Selecione a pasta e <strong>permita o acesso</strong> quando ele perguntar.</li>
+<li>Se quiser, renomeie o projeto. Isso não muda o nome da pasta.</li>
+<li>Se precisar, <strong>adicione pastas extras</strong> para consulta.</li>
+</ol>
+</div>
+
+<h4>A pasta principal e as pastas de consulta</h4>
+
+<p>Quando você adiciona mais de uma pasta ao projeto, vale uma regra que evita confusão: <strong>a primeira pasta é onde ele salva o que produz.</strong> As demais servem só para consulta — a menos que você peça explicitamente para salvar em outra.</p>
+
+<p>Isso resolve um caso comum: você tem dois clientes do mesmo segmento e quer que ele se inspire no material do primeiro ao trabalhar no segundo. Basta adicionar a pasta do primeiro como consulta.</p>
+
+<h4>O que define um projeto</h4>
+
+<p>Como decidir se algo é um projeto ou não? Bruno respondeu direto: <strong>o que define é o conjunto de arquivos que ele vai precisar olhar em tarefas que têm a ver umas com as outras.</strong></p>
+
+<p>Na New Scale, cada cliente é um projeto — cada cliente tem o próprio universo. Mas pode ser outra coisa qualquer: eles têm um projeto que é só Finanças, onde entram extrato bancário, fatura de cartão e conciliação.</p>
+
+<p>E o contra-exemplo importa tanto quanto o exemplo: <strong>não adianta jogar um monte de coisa sem conexão dentro de um projeto.</strong> Você piora a sua própria experiência — ele fica perdido tentando entender que mistura é aquela.</p>
+
+<div class="box case">
+<div class="box-h">O que cabe dentro da pasta de um cliente</div>
+<p>Bruna abriu na tela a pasta de um cliente com quem trabalharam meses. Dentro dela havia: transcrição da reunião de kick-off, transcrição das reuniões de alinhamento, a pesquisa que a equipe respondeu, a proposta de treinamento da diretoria, os projetos de mentoria, a pesquisa de satisfação, os logos, o manual de marca, e até o cronômetro em HTML que ela criou para uma dinâmica.</p>
+<p><strong>Tudo que ela trabalhou com aquele cliente está ali.</strong> E o resultado é que ela nunca mais começa do zero: quando entra um novo trabalho, ela já parte do histórico inteiro.</p>
+</div>
+
+<h4>Ele lê praticamente tudo</h4>
+
+<p>Dentro dessas pastas ele consegue ler PowerPoint, PDF, HTML, Excel, imagem, captura de tela, extrato de sistema, nota fiscal. E quando não consegue diretamente, ele dá um jeito — escreve um código na hora para conseguir ler o arquivo.</p>
+
+<div class="box case">
+<div class="box-h">Quando ele improvisa sozinho</div>
+<p>Um cliente da New Scale é um convênio de saúde do Rio de Janeiro, com vários planos, valores que variam por faixa etária e dependentes, e um manual em PDF listando toda a rede credenciada por região — uma tabela enorme.</p>
+<p>O arquivo era grande demais para ele processar direto. Então ele, sozinho: <strong>tirou print de todas as páginas que precisava, aproximou a imagem para ler o detalhe, extraiu a informação e montou a tabela.</strong> Depois avisou: "criei uma pasta com todos os screenshots na raiz da pasta do cliente, pode deletar, não preciso mais". E como o Drive costuma bloquear exclusão automática, ele orientou como apagar manualmente.</p>
+</div>
+
+<blockquote class="say">
+Quanto mais curioso e investigativo a gente for, e não desistir na primeira — se ele disser "não sei fazer", responda: você sabe fazer, procura caminhos, traz opções. Ele acha. Essa é a beleza: ele consegue combinar milhões de variações, testar muitos caminhos e dizer "aqui tem jeito".
+<cite>Bruna</cite>
+</blockquote>
+
+<h4>A memória — que ele escreve sozinho</h4>
+
+<p>Dentro de um projeto, o Claude mantém arquivos de memória com extensão <strong>.md</strong> (Markdown — um formato de texto simples, fácil de ele ler). Há um arquivo geral e um arquivo específico de cada pasta.</p>
+
+<p>Bruna fez questão de sublinhar: <strong>quem escreve esses arquivos é ele, não você.</strong> A cada trabalho feito na pasta, ele atualiza a própria memória.</p>
+
+<p>Ele também consegue reler, quando necessário, as conversas anteriores do mesmo projeto — não o tempo todo, porque seria pesado demais, mas quando faz falta.</p>
+
+<p>E o isolamento entre projetos é intencional e desejável: <strong>ele não vai puxar informação do cliente A para o cliente B.</strong> Se você quer algo em comum entre todos os clientes — um padrão de proposta, uma regra de marca — isso não é papel do projeto; é papel da skill, assunto do próximo capítulo.</p>
+
+<div class="box">
+<div class="box-h">O teste que Bruna fez ao vivo</div>
+<p>Ela apontou o Claude para a pasta da MG Contécnica e perguntou coisas que <strong>não existem na internet</strong>: quem são os diretores, quais os cargos, quais foram as datas das reuniões, quem é o Walter. Ele respondeu — porque leu as transcrições e os documentos que estavam na pasta.</p>
+<p>É o argumento mais direto a favor de manter tudo organizado em pasta. Como ela disse: <em>ele tem basicamente uma memória infinita.</em> "O que a gente combinou na reunião de alinhamento do dia tal?" — ele procura, acha o arquivo, responde quem ficou responsável por quê, quais são os prazos, e ainda avisa que um deles já estourou.</p>
+</div>
+
+<h4>O ganho estratégico que quase ninguém percebe</h4>
+
+<p>Bruno levantou um ponto que vale para a diretoria da MG: <strong>como toda a informação está em pastas suas, na sua máquina, você não fica refém da ferramenta.</strong></p>
+
+<p>Se daqui a um ano a empresa decidir que outra IA ficou melhor, basta apontar as mesmas pastas para ela. O ativo é a organização da informação — não o software.</p>
+</section>
+
+<section id="c10">
+<h3 class="ch"><span class="num">Capítulo 10</span>Skills — a receita de bolo</h3>
+
+<p class="lede">Se contexto é o que ele sabe, skill é o jeito como ele faz. Este é, segundo Bruna, um dos pontos áureos do Claude.</p>
+
+<h4>O que é</h4>
+
+<p><em>Skill</em> é a palavra em inglês para habilidade. Uma skill é <strong>um manual de regras</strong> que ensina o Claude a executar uma tarefa sempre do mesmo jeito.</p>
+
+<p>A analogia que Bruna usou é a de uma receita. O jeito de fazer um risoto é sempre o mesmo; o que muda é o recheio — hoje gorgonzola, amanhã cogumelo. A técnica base, a ordem dos passos e o ponto de entrada não mudam.</p>
+
+<p>Traduzindo para o trabalho: o processo de fazer uma proposta comercial é o mesmo para todos os clientes. A lógica de gerar um contrato é a mesma. <strong>O que muda é o conteúdo — o contexto daquele cliente.</strong> Por isso a divisão funciona tão bem:</p>
+
+<div class="box">
+<div class="box-h">A divisão de trabalho</div>
+<p><strong>Projeto</strong> = o que ele sabe sobre <em>este</em> cliente, <em>este</em> assunto. Fechado, isolado.<br>
+<strong>Skill</strong> = como ele faz <em>este tipo</em> de tarefa. Atravessa todos os projetos.</p>
+</div>
+
+<p>Uma consequência organizacional importante para a MG: <strong>uma skill pode ser instalada em todos os Claudes da equipe.</strong> Aí todo mundo que for fazer uma proposta comercial produz no mesmo padrão. E Bruna fez uma ressalva que vale reter — <em>não é um padrão engessado; é um padrão de raciocínio</em>. O resultado sai personalizado, mas a lógica é a mesma.</p>
+
+<h4>Como criar uma — e é aqui que a maioria se surpreende</h4>
+
+<p>Você não escreve a skill. <strong>Quem escreve é ele.</strong></p>
+
+<p>O procedimento é este, e não tem nada além disso:</p>
+
+<ol class="steps">
+<li>Faça uma tarefa do começo ao fim, com todo o contexto, até ficar <strong>realmente boa</strong>.</li>
+<li>No momento em que você olhar e pensar "nossa, arrasou" — <strong>na mesma conversa</strong>, diga: <em>"agora cria uma skill desse processo."</em></li>
+<li>Ele lê a conversa inteira, pega o contexto da pasta, extrai todas as regras que usou e monta o manual.</li>
+<li>Você salva. E pronto.</li>
+</ol>
+
+<p>Da próxima vez, um prompt de duas linhas ativa tudo. Bruna mostrou o dela na tela:</p>
+
+<div class="prompt">Claude, de acordo com a memória, a <b>skill</b> e a transcrição da reunião
+com a cliente, além de uma pesquisa sobre a empresa, cria a proposta
+comercial de educação da equipe para a Flávia.</div>
+
+<p>Um pedido curto. Ele ativa a skill sozinho — normalmente ativa com muita facilidade, sem você precisar nomeá-la — lê o manual antes de agir, e executa linha a linha no padrão definido.</p>
+
+<div class="box warn">
+<div class="box-h">A primeira vez leva uma hora. E está certo.</div>
+<p>Bruna foi direta sobre isso, porque é onde as pessoas desistem: quando ela senta com alguém para mapear um processo e montar o primeiro prompt, <strong>leva cerca de uma hora</strong>. Não porque o prompt precise ser mega estruturado, mas porque ela está contando o máximo de coisas possível de uma vez.</p>
+<p>Você não está errado ao demorar. Você está compilando informação. <strong>Feito isso uma vez, e criada a skill, a próxima vez leva dois minutos.</strong></p>
+</div>
+
+<h4>A skill não é escrita em pedra</h4>
+
+<p>Faltou uma cláusula no contrato que ela gerou? Não recomece. Peça a correção na conversa — <em>"ficou faltando esta cláusula, arruma"</em> — e, quando estiver bom, diga <em>"edita a skill".</em> Ela vai sendo lapidada com o uso.</p>
+
+<p>As skills ficam em <strong>Personalizar › Habilidades</strong>, na lateral. No começo você terá apenas uma: a <em>skill creator</em> — a skill que o Claude usa para criar skills.</p>
+
+<h4>Casos reais contados na aula</h4>
+
+<div class="box case">
+<div class="box-h">1 · Proposta → contrato → cronograma</div>
+<p>É o processo comercial da New Scale, e o exemplo mais completo da aula. A partir da transcrição de uma reunião de diagnóstico, o Claude gerou uma proposta comercial completa — <strong>em formato de página web</strong>, com as fotos puxadas do computador dela, dentro do padrão de marca e com um botão que leva direto para o WhatsApp com mensagem pré-escrita.</p>
+<p>Ela pediu ajustes — mexeu no preço, cortou trechos — e ele foi refazendo. A proposta foi aprovada. Aí: <em>"Claude, gera o contrato simples de acordo com a proposta."</em> Ele puxou as informações da proposta, os dados da memória e usou a skill de contrato para preencher tudo, cláusula por cláusula.</p>
+<p>E Bruno descreveu onde isso chega: <strong>uma skill vai entregando para a próxima.</strong> "A proposta foi aprovada." → "Posso gerar o contrato?" → "O cliente assinou." → "Posso gerar o cronograma do projeto?"</p>
+<p>Detalhe fino: a New Scale tem duas linhas de negócio — educação e automação. Pela transcrição da reunião, <strong>a skill identifica sozinha para qual lado a proposta deve ir</strong>, e monta uma estrutura diferente para cada uma.</p>
+</div>
+
+<div class="box case">
+<div class="box-h">2 · Os aniversários que ele sempre esquecia</div>
+<p>Bruna perguntou a um gestor o que ele mais odiava fazer. Resposta: lembrar dos aniversários e mandar parabéns no grupo — ele esquecia sempre e levava bronca.</p>
+<p>A skill criada roda todo dia às 7h: consulta a planilha de aniversários, vê se tem alguém no dia, gera a mensagem, abre o WhatsApp Web e manda. E tem um detalhe humano bem pensado — <strong>manda primeiro para a dona da empresa</strong>, cinco a dez minutos antes, porque ela gosta de ser a primeira a parabenizar. Se ela não mandar, aí vai para o grupo.</p>
+<p>Bruna usou esse caso como o exemplo perfeito de <em>risco zero, repetição alta</em>: se errar o dia, todo mundo ri e ninguém se machuca.</p>
+</div>
+
+<div class="box case">
+<div class="box-h">3 · As certificações que venciam sem ninguém ver</div>
+<p>Na mesma empresa, com muitos colaboradores, o gestor estava perdendo as datas de exames periódicos e certificações obrigatórias.</p>
+<p>Hoje, quando entra um colaborador novo, a skill lê o cadastro e <strong>já cria no calendário todas as datas dos exames periódicos e das obrigações</strong> — incluindo o que precisa ir para o eSocial. Roda todo dia, verifica e agenda.</p>
+</div>
+
+<div class="box case">
+<div class="box-h">4 · A diretora que parou de cobrar diretor</div>
+<p>Uma diretora de planejamento estratégico era responsável por organizar as atas e precisava puxar dados dos outros diretores toda semana — o que significava ficar cobrando gente sênior por informação.</p>
+<p>A skill roda todo dia às 7h quando ela liga a máquina: verifica no WhatsApp Web quem já mandou o material, preenche a planilha no Drive onde todos têm acesso, e <strong>manda mensagem cobrando quem não mandou.</strong> Nas palavras dela: "isso salvou a minha vida".</p>
+</div>
+
+<h4>Skills que orquestram skills</h4>
+
+<p>O nível seguinte — e Bruna avisou que é conversa mais avançada — é ter <strong>uma skill que aciona outras skills.</strong> É isso que ela chama de "ter um sistema" ou "ter um agente".</p>
+
+<p>O motor de conteúdo dela funciona assim: entra um insumo, e ela orquestra a skill de edição de vídeo, a de roteiro, a de publicação. Uma regra possível seria: <em>toda manhã, verifique se chegou e-mail de proposta aprovada; se chegou, busque as informações do cliente na pasta e gere o contrato.</em> Quando ela chega, o contrato já está lá — só falta validar.</p>
+
+<h4>Agendamento</h4>
+
+<p>Todo esse conjunto depende de uma peça simples: <strong>o agendamento é apenas você dizer ao Claude "quero que isso aconteça todo dia às 7h".</strong> Só isso. Ele passa a rodar sozinho.</p>
+
+<div class="box warn">
+<div class="box-h">Cuidado com dado desatualizado</div>
+<p>Bruno levantou um ponto importante para rotinas agendadas: se a skill puxa dado de um sistema, o dado pode estar velho. A prática dele é <strong>sempre incluir na skill uma verificação de latência</strong> — checar quando aquele dado foi atualizado pela última vez. Se estiver defasado, ele deixa um alerta no rodapé do relatório: "este dado está defasado em 3 dias".</p>
+</div>
+
+<h4>Por onde começar</h4>
+
+<p>A sugestão de Bruna para a primeira skill da MG é bem concreta: <strong>pegue o manual de marca da empresa</strong>, se houver um atualizado, e transforme em skill. Um manual de marca já é, por definição, uma série de regras — que fonte usar, quais cores, como aplicar o logo. É o material que mais facilmente vira skill, e a partir dele tudo que o Claude produzir sai dentro do padrão da MG.</p>
+</section>
+
+<section id="c11">
+<h3 class="ch"><span class="num">Capítulo 11</span>Claude fora do Claude</h3>
+
+<p class="lede">Até aqui, tudo aconteceu dentro das suas pastas. Agora ele sai — para o navegador e para os sistemas que a empresa já usa.</p>
+
+<h4>A extensão do Chrome</h4>
+
+<p>É um plugin que se instala no Google Chrome — basta procurar pela extensão do Claude para Chrome. Depois de instalada, você faz login uma vez e ela fica disponível.</p>
+
+<p>O que ela permite: <strong>o Claude enxerga o que está na sua tela e executa ações no navegador.</strong> É por isso que ela resolve o problema dos sites que bloqueiam acesso automatizado — ele age dentro da sua sessão, já autenticada.</p>
+
+<div class="box">
+<div class="box-h">O que dá para fazer com ela</div>
+<ul>
+<li><strong>WhatsApp Web.</strong> "Manda um oi no grupo da MG Contécnica" — ele abre, procura o grupo e manda.</li>
+<li><strong>Varredura de pendências.</strong> O uso favorito de Bruna, toda sexta: <em>"entra no meu WhatsApp e vê se eu deixei alguém sem resposta essa semana."</em> Ele volta com a lista — "tem três clientes que você não respondeu".</li>
+<li><strong>Clientes esquecidos.</strong> "Quais clientes eu não troco mensagem há 45 dias ou mais?"</li>
+<li><strong>Instagram e LinkedIn.</strong> A análise de perfil descrita no <a href="#c4">Capítulo 4</a>.</li>
+<li><strong>Prospecção.</strong> Ver exemplo abaixo.</li>
+<li><strong>Agenda por voz.</strong> Com o Google conectado, um áudio basta: "cria uma reunião amanhã às 10h30 com fulano".</li>
+</ul>
+</div>
+
+<div class="box case">
+<div class="box-h">Prospecção no LinkedIn</div>
+<p>O prompt que Bruna descreveu, gravado como áudio: <em>"hoje eu preciso prospectar 10 diretores de redes de mercado da região tal, ativos no LinkedIn, que tenham publicado qualquer coisa nos últimos 45 dias — não quero aquele perfil parado que nunca vai me responder."</em></p>
+<p>Ele abre o LinkedIn, busca as pessoas, e depois devolve <strong>uma análise de cada uma e as mensagens já escritas para você enviar.</strong> Ela fez isso uma vez, achou as mensagens excelentes, e virou skill.</p>
+</div>
+
+<div class="box warn">
+<div class="box-h">Dois avisos sobre o WhatsApp</div>
+<p><strong>Não use para disparo em massa.</strong> Ele consegue mandar mensagem para 100 clientes — e o seu número pode ser bloqueado. Bruna desaconselha explicitamente.</p>
+<p><strong>Você pode limitar a leitura.</strong> Para quem se assustou com a ideia de dar acesso ao WhatsApp pessoal: dá para pedir apenas para ler e reportar, sem enviar nada. Bruna usa muito e diz que ele nunca mandou uma mensagem que não devia.</p>
+</div>
+
+<h4>Conectores — o que são</h4>
+
+<p>Conectores são <strong>integrações prontas, embutidas no próprio Claude</strong>. Não precisam do navegador, não precisam de nada: ele simplesmente se conecta ao sistema e puxa — ou cria — informação lá dentro.</p>
+
+<p>Ficam em <strong>Personalizar › Conectores › Navegar conectores</strong>. E há uma observação importante para a MG:</p>
+
+<div class="box warn">
+<div class="box-h">No plano empresarial, quem libera é o administrador</div>
+<p>Cada usuário <strong>não</strong> instala os conectores que quiser. Quem instalou o Claude para a equipe é quem pode habilitá-los. O Microsoft 365 em especial exige essa liberação — o Gmail conecta com facilidade.</p>
+</div>
+
+<p>O nome técnico dessa tecnologia é <strong>MCP</strong>, e ela não é exclusiva do Claude — funciona também para as outras IAs. Por isso as empresas de software estão correndo para oferecer o próprio conector como diferencial competitivo. Bruna citou o Mercado Livre, que acabou de lançar o seu, e uma plataforma brasileira de e-commerce cujo conector saiu havia cinco dias — e o cliente dela estava eufórico, porque agora puxa os dados direto.</p>
+
+<p>Ela mesma usa poucos: Google Drive, calendário, e-mail, Zoom. Em clientes já viu Slack e Asana. Vale a pena navegar a lista e ver se o sistema que a MG usa já está lá — sistemas brasileiros muito nichados provavelmente ainda não estarão, e nesses casos existem outros caminhos.</p>
+
+<h4>Plugins</h4>
+
+<p>Plugins são <strong>conjuntos de skills já prontas, feitas pela comunidade.</strong> Ficam em <strong>Personalizar › Plugins › Navegar</strong>.</p>
+
+<p>Bruna destacou um voltado para a área jurídica, que os alunos advogados dela elogiam muito — ele já traz uma série de regras que fazem o Claude raciocinar como advogado e montar bons contratos. Há também plugins de produtividade, design, marketing e finanças — este último com rotinas de fechamento de mês, diário de entradas e conciliação, o que provavelmente interessa à MG.</p>
+
+<p>A maior parte está em inglês, porque ainda não foi traduzida. Isso não é problema: <strong>basta pedir que ele traduza.</strong></p>
+</section>
+
+<section id="c12">
+<h3 class="ch"><span class="num">Capítulo 12</span>HTML, o atalho visual</h3>
+
+<p class="lede">Bruna chamou o HTML de "o segredinho do Claude". É a dica com maior relação entre esforço e resultado da aula inteira.</p>
+
+<p>Quando você quiser algo visual — um dashboard, uma apresentação, um relatório bonito, uma página — <strong>peça em HTML.</strong></p>
+
+<p>Não é preciso saber o que é HTML. Bruna foi honesta: <em>se você me pedir para criar um HTML, eu não sei nem por onde começar. Mas o Claude sabe, e eu sei pedir para ele — é isso que importa.</em> A apresentação que ela usou na própria aula era um HTML.</p>
+
+<h4>Por que ele é tão superior ao que existia antes</h4>
+
+<p>Bruno, que já trabalhou com wireframe e layout, explicou o contraste. Antigamente, montar uma página era um inferno: você mexia uma caixa para a direita, o cliente pedia uma alteração, e a estrutura inteira quebrava. Depois era preciso testar em celular, testar em telas diferentes.</p>
+
+<p>Hoje o ciclo é este: <em>"tira um print da tela e garante que isso aqui vai ficar melhor. Acessei pelo celular e quebrou, tem um pedaço saindo da caixa."</em> Ele entende, corrige e devolve para testar.</p>
+
+<blockquote class="say">
+É como se eu tivesse uma agência muito rápida e muito efetiva à minha disposição agora. Só basta direcionar.
+<cite>Bruno</cite>
+</blockquote>
+
+<p>E há a razão econômica, que fecha com o próximo capítulo: <strong>HTML é o formato que menos consome recurso.</strong> PDF é o que mais consome. Portanto, itere no HTML até ficar bom, e só converta para PDF no final.</p>
+
+<h4>Os adjetivos funcionam</h4>
+
+<p>Esta é a dica que mais causou surpresa na sala. Adjetivos subjetivos <strong>mudam mesmo o resultado</strong> — eles dão a ele uma noção de padrão de qualidade a perseguir.</p>
+
+<div class="prompt">Cria um dashboard <b>impressionante</b> em HTML com essas informações.
+Quero <b>cruzamentos de dados inteligentes</b>, um visual <b>lindo</b>,
+que <b>impressione o meu time</b>.</div>
+
+<p>"Impressionante" e "bonito" ajudam muito, segundo Bruna. Eles empurram o Claude a ser um designer melhor e a buscar cruzamentos de informação mais interessantes.</p>
+
+<div class="box">
+<div class="box-h">O teste que Bruna pediu para a turma fazer</div>
+<p>Pegue uma planilha qualquer que você já usa. Entregue para ele. Peça um dashboard em HTML que impressione a sua equipe. É o exercício mais rápido para entender do que a ferramenta é capaz.</p>
+</div>
+
+<div class="box case">
+<div class="box-h">A coruja que piscava o olho</div>
+<p>Um cliente da New Scale tinha uma coruja no logo. Bruna havia criado um cronômetro em HTML para uma dinâmica de grupo e, olhando para a tela, pensou: <em>será que dá para essa coruja piscar o olho?</em></p>
+<p>Ela perguntou achando que ele não conseguiria. Ele conseguiu. Nas palavras dela — <em>eu nem sei o que ele fez, mas a corujinha piscou.</em></p>
+<p>A moral que ela tirou: <strong>não subestime o que dá para pedir.</strong> "Quero automatizar essa análise que eu faço na mão desde 1990" — será que ele não consegue? Pede.</p>
+</div>
+</section>
+
+<h2 class="part">Parte III · Encerramento</h2>
+
+<section id="c13">
+<h3 class="ch"><span class="num">Capítulo 13</span>Tokens e a janela de 5 horas</h3>
+
+<p class="lede">Bruna anunciou este assunto como "um assunto chato". É o mais prático do ebook — é o que separa quem trabalha o dia inteiro de quem trava no meio da manhã.</p>
+
+<h4>O que é token</h4>
+
+<p>Na definição mais simples: <strong>token é pedaço de palavra.</strong> Para processar o que você escreve, a IA precisa transformar as palavras em código — e esse código é contado em tokens.</p>
+
+<p>Isso é novo para quem vem do ChatGPT, onde o uso era praticamente ilimitado. Aqui existe um limite, e você vai esbarrar nele.</p>
+
+<p>Vale saber também que <strong>você "paga" nos dois sentidos</strong>: pelo que envia (input) e pelo que ele devolve (output).</p>
+
+<h4>Quanto dá para usar? Não há resposta exata</h4>
+
+<p>Bruna foi transparente: não existe número fixo. O limite varia com o horário — se for horário de pico em São Francisco, onde fica a empresa, o limite disponível é menor. E as regras mudam com o tempo.</p>
+
+<p>Um dado útil de agosto de 2026: <strong>o uso no Cowork está valendo o dobro</strong>, porque a Anthropic quer estimular esse modo. É uma promoção que já foi prorrogada duas vezes.</p>
+
+<h4>O que consome mais</h4>
+
+<table>
+<tr><th>Formato</th><th>Consumo</th><th>Por quê</th></tr>
+<tr><td><strong>HTML</strong></td><td>Baixo</td><td>É texto estruturado. Gera arquivos bonitos com pouco custo.</td></tr>
+<tr><td><strong>PowerPoint</strong></td><td>Médio-alto</td><td>Mais pesado que HTML.</td></tr>
+<tr><td><strong>PDF</strong></td><td>O mais caro</td><td>Ele precisa renderizar, capturar a tela, conferir, voltar e refazer até o PDF sair bom. Há um processo enorme por trás.</td></tr>
+</table>
+
+<p>Daí a regra: <strong>construa e itere em HTML; converta para PDF só na última etapa</strong>, quando já estiver aprovado.</p>
+
+<h4>Conversa longa não presta</h4>
+
+<p>Este é o ponto mais contraintuitivo. Cada mensagem que você manda faz ele reler <em>toda a conversa</em>, não apenas a sua última frase. Ou seja: <strong>uma conversa longa fica progressivamente mais cara e mais burra.</strong></p>
+
+<p>Você vai ver um aviso vermelho no canto indicando que o contexto está grande demais. O que isso significa na prática é que ele já parou de entender bem o que estava no começo e começou a embaralhar as ideias.</p>
+
+<p>A conduta certa: <strong>prompts maiores, com várias tarefas, e conversas curtas.</strong> Resolveu, abre uma nova. E se você estiver dentro de um projeto, não há perda nenhuma — a memória continua toda lá.</p>
+
+<h4>A janela de 5 horas</h4>
+
+<p>O limite funciona por janelas. <strong>No momento em que você manda a primeira mensagem do dia, começa a contar um cronômetro de 5 horas.</strong> Usando ou não, aquela janela corre.</p>
+
+<div class="box">
+<div class="box-h">O macete do "oi"</div>
+<p>Se você chega às 8h mas só vai realmente trabalhar às 9h, mande um "oi" às 8h. A janela começa a contar ali. Assim, quando você for usar de verdade às 9h, já terá consumido uma hora do relógio sem gastar nada — e a próxima janela zerada chega mais cedo.</p>
+<p>Sem o macete, você começa às 9h, estoura o limite, e fica esperando até as 14h.</p>
+</div>
+
+<div class="box warn">
+<div class="box-h">Você vai bater no limite — e está tudo bem</div>
+<p>Bruna preparou a turma para isso: <strong>vocês vão bater no limite</strong>, principalmente agora, no começo, enquanto estiverem montando os primeiros motores, as primeiras skills e mapeando os primeiros processos. Até chegar no resultado final, demora.</p>
+<p>Depois que a coisa está construída, o consumo cai muito — porque ele passa a acertar de primeira.</p>
+</div>
+
+<h4>Os sete hábitos que economizam</h4>
+
+<ol class="steps">
+<li><strong>Edite o pedido em vez de repetir.</strong> Reescrever o pedido custa menos que empilhar tentativas.</li>
+<li><strong>Comece uma conversa nova</strong> quando o assunto virar.</li>
+<li><strong>Junte várias tarefas em um pedido só.</strong></li>
+<li><strong>Coloque arquivos na pasta ou no projeto — nunca dentro da conversa.</strong> Bruna chamou isso de "o maior atacante de tokens que existe": arquivo subido na conversa é relido a cada mensagem. Na pasta, ele lê quando precisa.</li>
+<li><strong>Use o modelo certo.</strong> Opus para começar, Sonnet para executar (<a href="#c8">Capítulo 8</a>).</li>
+<li><strong>Distribua as janelas ao longo do dia.</strong></li>
+<li><strong>Prefira HTML.</strong> Deixe o PDF por último.</li>
+</ol>
+</section>
+
+<section id="c14">
+<h3 class="ch"><span class="num">Capítulo 14</span>O que automatizar — a matriz risco × repetição</h3>
+
+<p class="lede">Nem tudo deve ser automatizado. Bruna mostrou a matriz que ela usa quando entra em um cliente para decidir o que vai e o que não vai.</p>
+
+<p>São dois eixos apenas: <strong>o quanto a tarefa se repete</strong> e <strong>qual o risco se ela sair errada.</strong></p>
+
+<div class="matrix">
+  <div class="cell go">
+    <div class="c-h">Muita repetição · Baixo risco</div>
+    <p><strong>Automatize sem medo.</strong> Parabéns de aniversário no WhatsApp — se errar o dia, todo mundo ri. Ata da reunião diária enviada por e-mail. Relatório interno recorrente.</p>
+  </div>
+  <div class="cell">
+    <div class="c-h">Muita repetição · Alto risco</div>
+    <p><strong>Automatize a produção, mantenha a validação humana.</strong> Ele faz tudo, deixa pronto — e você confere e aperta enviar. Proposta comercial, contrato, qualquer coisa que sai para o cliente.</p>
+  </div>
+  <div class="cell">
+    <div class="c-h">Pouca repetição · Baixo risco</div>
+    <p><strong>Use pontualmente, sem construir skill.</strong> Não compensa o esforço de montar processo para algo que acontece uma vez.</p>
+  </div>
+  <div class="cell no">
+    <div class="c-h">Pouca repetição · Alto risco</div>
+    <p><strong>Continua sendo seu.</strong> Decisão sensível, caso excepcional, julgamento profissional. Ele pode ajudar a pensar — a decisão é humana.</p>
+  </div>
+</div>
+
+<p>O raciocínio que atravessa a matriz é sempre o mesmo: <strong>avalie o risco de cada etapa da tarefa separadamente.</strong> Muitas vezes ele pode fazer o trabalho inteiro; o que você retém é o último passo, o do envio — que é justamente a parte arriscada.</p>
+
+<p>Para a MG, isso tende a significar: automatize a coleta, a compilação, a formatação, o rascunho e o alerta. Mantenha sob revisão humana tudo que envolva número que vai para o cliente, obrigação com prazo legal e interpretação de norma.</p>
+
+<div class="box">
+<div class="box-h">A matriz está no material de apoio</div>
+<p>Bruna disse na aula que essa matriz ficaria dentro do material que ela vai enviar, junto com o site de mapeamento de processos.</p>
+</div>
+</section>
+
+<section id="c15">
+<h3 class="ch"><span class="num">Capítulo 15</span>O método em cinco passos</h3>
+
+<p class="lede">O último slide da aula é também o resumo mais útil dela. Toda vez que você for colocar algo no Claude, passe por estes cinco pontos.</p>
+
+<ol class="steps">
+<li><strong>Defina a meta.</strong> Onde você quer chegar. Bruna insistiu: sem saber onde se quer chegar, não se chega a lugar nenhum — na vida e com a IA.</li>
+<li><strong>Enxergue o que você já tem.</strong> Quais informações existem? Planilhas, e-mails, post-its, fotos no celular, e-mails antigos, coisas que só estão na sua cabeça ou na cabeça de outra pessoa.</li>
+<li><strong>Defina o entregável.</strong> É uma planilha? Um aplicativo? Uma automação? Um relatório? <strong>Se já existe um modelo, entregue o modelo para ele</strong> — coloque na pasta. Segundo Bruna, essa é a melhor coisa que você pode fazer.</li>
+<li><strong>Descreva o processo.</strong> Onde mora a informação — Outlook, Teams, sistema, e-mail, sua cabeça — e como você faz hoje, passo a passo.</li>
+<li><strong>Passe pela matriz.</strong> O que dá para automatizar de cada etapa, e o que continua sendo seu.</li>
+</ol>
+
+<p>Com esses cinco pontos respondidos, o prompt sai pronto — e, se você preferir, o próprio Claude escreve o prompt a partir daí.</p>
+
+<div class="box case">
+<div class="box-h">Uma ideia extra: peça referência de mercado</div>
+<p>Bruna contou o que tem feito quando vai criar ou reformar uma planilha. Além de entregar a planilha atual, ela <strong>pede ao Claude que pesquise boas práticas de mercado</strong> para aquele tipo de análise.</p>
+<p>O exemplo foi de fazendas usando uma planilha específica havia anos. Ele buscou como o mercado faz aquilo hoje, achou referências, e a planilha melhorou em uma tarde — um arquivo que ninguém tinha coragem de mexer. O mesmo vale para conciliação bancária, controle de horas, matriz de esforço, qualquer coisa.</p>
+<p>A recomendação dela: <em>crie uma cópia e teste.</em></p>
+</div>
+
+<h4>O que vem na Aula 2</h4>
+
+<p>Bruna fechou explicando que a Aula 1 foi deliberadamente mais teórica — nivelamento, para todo mundo entender o básico. A Aula 2 é mão na massa:</p>
+
+<ul>
+<li><strong>Mapear processos reais da MG</strong>, de cabo a rabo, e colocá-los para rodar ao vivo.</li>
+<li><strong>Criar uma skill juntos</strong>, do começo ao fim.</li>
+<li><strong>Criar agendamentos.</strong></li>
+<li><strong>Montar um modelo</strong> de planilha ou de análise que a equipe use de verdade.</li>
+</ul>
+
+<div class="box">
+<div class="box-h">A lição de casa</div>
+<p>Bruna combinou três coisas com a turma entre uma aula e outra:</p>
+<ul>
+<li>Ela enviaria <strong>este material de apoio</strong>, com a matriz e o resumo do que foi discutido.</li>
+<li>Ela enviaria também <strong>um site que ajuda a mapear processos</strong> e a gerar os primeiros prompts.</li>
+<li>Seria criado um <strong>grupo de WhatsApp</strong> para dúvidas entre as aulas.</li>
+</ul>
+<p>E o pedido dela: <strong>mapeiem processos de vocês e mandem.</strong> A partir do que chegar, ela seleciona os casos que serão trabalhados ao vivo na Aula 2. Quanto mais gente mandar, mais a próxima aula será sobre o trabalho de vocês.</p>
+</div>
+
+<blockquote class="say">
+A ideia é todo mundo ver como a gente consegue transformar coisas que parecem impossíveis em algo que o Claude simplesmente faz.
+<cite>Bruna, encerrando a Aula 1</cite>
+</blockquote>
+</section>
+
+<h2 class="part">Anexos</h2>
+
+<section id="a1">
+<h3 class="ch"><span class="num">Anexo A</span>Glossário</h3>
+
+<p>Os termos que apareceram na aula e valem para o dia a dia.</p>
+
+<table>
+<tr><th>Termo</th><th>O que é</th></tr>
+<tr><td><strong>Contexto</strong></td><td>Tudo que o Claude sabe sobre você, a empresa, o cliente e o assunto. A palavra mais repetida da aula.</td></tr>
+<tr><td><strong>Prompt</strong></td><td>O pedido que você faz. Pode ser escrito ou gravado por áudio.</td></tr>
+<tr><td><strong>Chat</strong></td><td>Modo tradicional de conversa. Funciona no navegador e no celular; os arquivos vão dentro da conversa.</td></tr>
+<tr><td><strong>Cowork</strong></td><td>Modo em que o Claude acessa as pastas do seu computador para ler, editar e criar arquivos. É o modo recomendado.</td></tr>
+<tr><td><strong>Code</strong></td><td>Modo capaz de publicar coisas para fora da sua máquina — subir um site, conectar uma base de dados externa.</td></tr>
+<tr><td><strong>Projeto</strong></td><td>Uma pasta do seu computador espelhada dentro do Claude. Isolada das demais.</td></tr>
+<tr><td><strong>Skill</strong></td><td>Manual de regras que ensina o Claude a fazer uma tarefa sempre do mesmo jeito. Ele mesmo escreve.</td></tr>
+<tr><td><strong>Opus</strong></td><td>O modelo estratégico. Use para começar qualquer coisa: análise, criação, primeira montagem de um processo.</td></tr>
+<tr><td><strong>Sonnet</strong></td><td>O modelo executor. Use quando o processo já está definido e a skill já existe.</td></tr>
+<tr><td><strong>Fable</strong></td><td>O modelo mais avançado. Recebe uma tarefa longa, trabalha por horas e devolve algo pronto.</td></tr>
+<tr><td><strong>Conector / MCP</strong></td><td>Integração pronta com um sistema externo (Drive, e-mail, calendário, CRM). MCP é o nome do padrão.</td></tr>
+<tr><td><strong>Plugin</strong></td><td>Conjunto de skills prontas, feitas pela comunidade.</td></tr>
+<tr><td><strong>Token</strong></td><td>Pedaço de palavra. É a unidade de consumo.</td></tr>
+<tr><td><strong>Janela</strong></td><td>Período de 5 horas de uso, contado a partir da primeira mensagem.</td></tr>
+<tr><td><strong>Agendamento</strong></td><td>Dizer ao Claude para rodar algo em horário fixo. "Todo dia às 7h."</td></tr>
+<tr><td><strong>Memória (.md)</strong></td><td>Arquivos que o Claude escreve sozinho registrando o que aprendeu em cada pasta. <em>.md</em> é Markdown, um formato de texto simples.</td></tr>
+<tr><td><strong>Sandbox</strong></td><td>"Caixa de areia" — o espaço fechado de um projeto, de onde ele não sai.</td></tr>
+<tr><td><strong>Alucinação</strong></td><td>Quando ele inventa um dado ou uma norma com aparência de verdade.</td></tr>
+<tr><td><strong>HTML</strong></td><td>Formato de página web. O mais barato e o mais bonito para dashboards e propostas.</td></tr>
+<tr><td><strong>Anthropic</strong></td><td>A empresa responsável pelo Claude — assim como a OpenAI pelo ChatGPT e o Google pelo Gemini.</td></tr>
+</table>
+</section>
+
+<section id="a2">
+<h3 class="ch"><span class="num">Anexo B</span>Perguntas da turma</h3>
+
+<p>As dúvidas levantadas durante a aula, com as respostas dadas na hora.</p>
+
+<h4>Já posso pedir para ele trazer a bibliografia?</h4>
+<p>Sim, a qualquer momento. E, com o uso, ele começa a entender o seu perfil e passa a trazer sozinho. Para garantir sempre, dá para criar uma skill que o obrigue a pesquisar apenas em fontes que você aprovou — inclusive designando sites específicos e bloqueando blogs.</p>
+
+<h4>Qual a diferença entre esses modelos que aparecem na lista?</h4>
+<p>É capacidade de processamento e de raciocínio. De baixo para cima sobe a inteligência — e o custo de uso. Comece no Opus, execute no Sonnet. Ver <a href="#c8">Capítulo 8</a>.</p>
+
+<h4>Por que não deixam só o modelo mais inteligente?</h4>
+<p>Porque custa muito mais caro. Por isso se orquestra: o modelo forte para pensar e criar, o modelo executor para rodar o que já está definido.</p>
+
+<h4>Os nossos dados ficam guardados? Alguém pode ver?</h4>
+<p>Nos planos pagos — e no plano empresarial em particular — os termos garantem que os dados não são usados para treinar a IA nem se tornam públicos. Como são tratados internamente ninguém de fora audita, mas isso vale para qualquer serviço em nuvem. Ver <a href="#c8">Capítulo 8</a>.</p>
+
+<h4>Dá para dividir uma conta entre funcionários?</h4>
+<p>Não é recomendado, porque o Cowork fica vinculado a uma máquina. Cada computador tem seus próprios caminhos de pasta e a coisa vira bagunça.</p>
+
+<h4>Tem pontos negativos em usar o Cowork?</h4>
+<p>Tem dois. Ele funciona vinculado a uma máquina, então dois computadores diferentes não compartilham a mesma organização. E o histórico de conversas era limitado — mas isso já começou a melhorar, com as conversas aparecendo no celular.</p>
+
+<h4>E se a gente decidir mudar de IA depois?</h4>
+<p>Não há prejuízo. Como toda a informação está organizada em pastas na sua máquina, basta apontar as mesmas pastas para outra ferramenta. Você não fica refém.</p>
+
+<h4>Por que ele às vezes começa a escrever em inglês?</h4>
+<p>Quando ele escreve em inglês, normalmente está pensando sozinho — não está falando com você. É o processo de raciocínio dele aparecendo na tela. Depois ele volta ao português. Dá para configurar para responder em português, e não é algo com que se preocupar.</p>
+
+<h4>Preciso ter o plugin do Chrome para o WhatsApp e o LinkedIn?</h4>
+<p>Sim. As ações no navegador dependem da extensão do Claude para Chrome. Ver <a href="#c11">Capítulo 11</a>.</p>
+
+<h4>Ele pode deletar arquivos meus?</h4>
+<p>Por programação, ele não deleta — a não ser que você peça. Ainda assim, a recomendação é concentrar o trabalho em uma pasta dedicada. E o Drive costuma bloquear exclusões automáticas, exigindo confirmação sua.</p>
+</section>
+
+<section id="a3">
+<h3 class="ch"><span class="num">Anexo C</span>Checklist da semana</h3>
+
+<p>O que fazer entre a Aula 1 e a Aula 2, em ordem de esforço.</p>
+
+<h4>Configuração — 30 minutos</h4>
+<ul>
+<li>Abrir o Claude e escolher o modo <strong>Cowork</strong>, não o Chat.</li>
+<li>Criar a <strong>pasta-mãe</strong> onde o Claude vai trabalhar.</li>
+<li>Se a empresa usa Google Drive ou OneDrive, garantir que estão <strong>baixados na máquina</strong>.</li>
+<li>Instalar a <strong>extensão do Claude para Chrome</strong>.</li>
+<li>Verificar com quem administra a conta quais <strong>conectores</strong> podem ser liberados.</li>
+</ul>
+
+<h4>Primeiro projeto — 1 hora</h4>
+<ul>
+<li>Escolher <strong>um cliente ou um tema</strong> e criar um projeto apontando para a pasta dele.</li>
+<li>Jogar dentro da pasta tudo que existir: contratos, e-mails relevantes, transcrições, planilhas, atas.</li>
+<li>Fazer o teste da Bruna: perguntar a ele algo que <strong>só existe nesses arquivos</strong> — nomes, datas, o que ficou combinado.</li>
+</ul>
+
+<h4>Primeiro resultado visível — 30 minutos</h4>
+<ul>
+<li>Pegar uma planilha qualquer que você já usa.</li>
+<li>Pedir: <em>"cria um dashboard impressionante em HTML com esses dados."</em></li>
+<li>Pedir dois ou três ajustes e ver como ele responde.</li>
+</ul>
+
+<h4>Preparação para a Aula 2 — o mais importante</h4>
+<ul>
+<li>Escolher <strong>a tarefa que você menos gosta de fazer</strong> e que se repete.</li>
+<li>Escrever o passo a passo dela, do início ao fim.</li>
+<li>Anotar, em cada passo, <strong>onde mora a informação</strong>.</li>
+<li>Passar pela <a href="#c14">matriz risco × repetição</a>.</li>
+<li><strong>Mandar isso para a Bruna</strong> — é a partir desses mapeamentos que a Aula 2 será montada.</li>
+</ul>
+
+<div class="box warn">
+<div class="box-h">Três coisas para não esquecer</div>
+<ul>
+<li><strong>Comece no Opus.</strong> Se usar o modelo fraco, vai achar que nada disso funciona.</li>
+<li><strong>Arquivo vai na pasta, nunca na conversa.</strong></li>
+<li><strong>Confira sempre</strong> o que sai — especialmente número, norma e prazo.</li>
+</ul>
+</div>
+</section>
+
+<footer class="end">
+  <strong>Claude na prática — Aula 1: Nivelamento</strong><br>
+  Treinamento realizado em 5 de agosto de 2026 para a equipe da MG Contécnica, conduzido por Bruna e Bruno, da New Scale.<br>
+  Os participantes da MG Contécnica não são identificados nominalmente.
+</footer>
+
+</main>
+</div>
+
+<script>
+(function(){
+  var prog = document.getElementById('prog');
+  var links = Array.prototype.slice.call(document.querySelectorAll('#toc a'));
+  var targets = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+
+  function onScroll(){
+    var h = document.documentElement;
+    var pct = h.scrollTop / (h.scrollHeight - h.clientHeight);
+    prog.style.width = (pct * 100) + '%';
+
+    var idx = 0;
+    for (var i = 0; i < targets.length; i++){
+      if (targets[i] && targets[i].getBoundingClientRect().top <= 120) idx = i;
+    }
+    links.forEach(function(a,i){ a.classList.toggle('on', i === idx); });
+
+    var active = links[idx];
+    if (active){
+      var nav = document.getElementById('toc');
+      var r = active.getBoundingClientRect(), nr = nav.getBoundingClientRect();
+      if (r.top < nr.top || r.bottom > nr.bottom){
+        nav.scrollTop += (r.top - nr.top) - nr.height/2;
+      }
+    }
+  }
+  document.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
+</script>
+</body>
+</html>
