@@ -71,6 +71,24 @@ pre{white-space:pre-wrap;font-family:'JetBrains Mono',monospace;font-size:.88rem
 .btn{display:inline-block;text-decoration:none;font-weight:800;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:13px 24px;border:2px solid var(--ink);color:var(--ink)}
 .btn-terra{background:var(--terra);color:#fff;border-color:var(--terra)}
 
+/* materiais da aula */
+.mat{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:16px;margin-top:4px}
+@media(max-width:860px){.mat{grid-template-columns:1fr}}
+.mt{display:flex;flex-direction:column;background:var(--card);border:2px solid var(--ink);border-radius:var(--r);padding:24px 26px;text-decoration:none;color:var(--text);box-shadow:7px 7px 0 var(--green);transition:transform .15s ease,box-shadow .15s ease}
+.mt:hover{transform:translate(-3px,-3px);box-shadow:10px 10px 0 var(--green)}
+.mt-k{display:inline-flex;align-items:center;gap:7px;font-size:.67rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--terra-d)}
+.mt-k i{width:7px;height:7px;border-radius:50%;background:var(--terra);font-style:normal}
+.mt h3{font-size:1.3rem;margin:11px 0 9px;color:var(--ink);line-height:1}
+.mt p{margin:0;font-size:.93rem;color:var(--muted);flex:1;line-height:1.45}
+.mt-go{margin-top:18px;font-size:.76rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--terra-d)}
+.mt.hi{background:var(--ink);border-color:var(--ink);box-shadow:7px 7px 0 var(--terra)}
+.mt.hi:hover{box-shadow:10px 10px 0 var(--terra)}
+.mt.hi .mt-k{color:var(--terra-l)}
+.mt.hi .mt-k i{background:var(--terra-l)}
+.mt.hi h3{color:#fff}
+.mt.hi p{color:rgba(255,255,255,.82)}
+.mt.hi .mt-go{color:var(--wash)}
+
 .socorro{background:var(--card);border:2px dashed var(--terra);border-radius:14px;padding:17px 20px;margin-top:18px}
 .socorro h3{font-size:1.02rem;margin:0 0 6px;color:var(--terra-d)}
 .socorro p{margin:0;font-size:.94rem;color:var(--ink-2)}
@@ -117,12 +135,35 @@ footer b{color:#fff;font-family:Anton,sans-serif;font-weight:400;text-transform:
     <div class="ru"><b>Campos entre colchetes</b><span>O conteúdo entre colchetes deve ser substituído. O restante permanece como está.</span></div>
     <div class="ru"><b>Registro de dificuldades</b><span>Anote onde o resultado não saiu como esperado. Será tratado na Aula 2.</span></div>
   </div>
-  <div class="btnrow">
-    <a class="btn btn-terra" href="https://brunasantanna.com/9bvt6maqg42e/mapeie-seu-processo" target="_blank" rel="noopener">Mapeie o seu processo</a>
-    <a class="btn" href="https://brunasantanna.com/9bvt6maqg42e/apresentacao" target="_blank" rel="noopener">Apresentação da aula</a>
-    <a class="btn" href="https://brunasantanna.com/9bvt6maqg42e/ebook" target="_blank" rel="noopener">A aula em texto</a>
-  </div>
 </div>
+
+<section>
+  <div class="wrap">
+    <div class="snum">Materiais da aula</div>
+    <h2>Os três links <span style="color:var(--terra)">permanentes</span></h2>
+    <p class="sub">Ficam disponíveis depois da aula. O primeiro é a atividade a ser entregue; os outros dois são consulta.</p>
+    <div class="mat">
+      <a class="mt hi" href="https://brunasantanna.com/9bvt6maqg42e/mapeie-seu-processo" target="_blank" rel="noopener">
+        <span class="mt-k"><i></i>Atividade · até a Aula 2</span>
+        <h3>Mapeie o seu processo</h3>
+        <p>Conduz o mapeamento pergunta por pergunta, em cerca de vinte minutos, e ao final gera o pedido pronto com as suas respostas incorporadas. Baixe o mapa ao terminar.</p>
+        <span class="mt-go">Começar o mapeamento →</span>
+      </a>
+      <a class="mt" href="https://brunasantanna.com/9bvt6maqg42e/apresentacao" target="_blank" rel="noopener">
+        <span class="mt-k"><i></i>Consulta</span>
+        <h3>A apresentação</h3>
+        <p>Os slides exibidos na aula, na mesma ordem, para rever qualquer trecho.</p>
+        <span class="mt-go">Abrir os slides →</span>
+      </a>
+      <a class="mt" href="https://brunasantanna.com/9bvt6maqg42e/ebook" target="_blank" rel="noopener">
+        <span class="mt-k"><i></i>Consulta</span>
+        <h3>A aula em texto</h3>
+        <p>A Aula 1 transformada em material de leitura, com glossário, as perguntas da turma e o checklist da semana.</p>
+        <span class="mt-go">Ler o material →</span>
+      </a>
+    </div>
+  </div>
+</section>
 
 <!-- BLOCO 1 -->
 <section class="alt">
@@ -377,16 +418,13 @@ Me faça perguntas antes de responder, uma de cada vez.</pre>
       <h3>Material a preparar para a Aula 2</h3>
       <p class="s">Na Aula 2 não haverá exemplos externos: o trabalho será sobre os processos de vocês. Traga o arquivo real, anonimizado.</p>
       <ul>
-        <li><b>Walter:</b> a lista do que você cobra hoje e de quem — do jeito que ela existe hoje, mesmo que seja de cabeça.</li>
-        <li><b>Nilton:</b> o material de uma reunião da GM, do começo ao fim.</li>
-        <li><b>Laura:</b> a sua planilha de acompanhamento de pendências.</li>
-        <li><b>Claudio:</b> três atas dos masters e a agenda de uma semana.</li>
-        <li><b>Felipe:</b> um documento que você analisa toda semana.</li>
-        <li><b>Raphael:</b> os dois excels que não conversam, exportados.</li>
-        <li><b>Thiago:</b> o checklist de infraestrutura.</li>
-        <li><b>Ronaldo:</b> um contrato para revisar, com os nomes trocados.</li>
-        <li><b>Alessandra:</b> um relatório comercial e a base de onde ele sai.</li>
-        <li><b>Todo mundo:</b> o mapa do seu processo, baixado.</li>
+        <li><b>Quem acompanha pendências:</b> a lista do que se cobra hoje e de quem, no formato em que ela existe — planilha, caderno ou e-mail.</li>
+        <li><b>Quem conduz reuniões:</b> três atas já escritas no padrão da casa e a agenda de uma semana.</li>
+        <li><b>Quem analisa números:</b> dois relatórios ou planilhas que não conversam entre si, exportados.</li>
+        <li><b>Quem revisa documentos:</b> um contrato ou parecer que passa pela sua mesa com frequência.</li>
+        <li><b>Quem responde pela área comercial:</b> um relatório e a base de dados de onde ele sai.</li>
+        <li><b>Quem cuida de infraestrutura:</b> um checklist ou procedimento recorrente.</li>
+        <li><b>Todos:</b> o mapa do seu processo, baixado ao final da página de mapeamento.</li>
       </ul>
     </div>
   </div>
