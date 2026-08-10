@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Janaina · Encontro 01 · Mentoria A Virada IA</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#F3EEE3; --bg-2:#ECE5D6; --card:#FBF9F3;
+  --ink:#14373C; --ink-2:#2C4F54; --green:#435D51;
+  --terra:#B06E4A; --terra-l:#C4835E; --terra-d:#985A3B;
+  --text:#233133; --muted:#6E7A75;
+  --line:rgba(20,55,60,.16);
+  --anton:'Anton', sans-serif; --hank:'Hanken Grotesk', sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--hank);background:var(--bg);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+::selection{background:var(--terra);color:#fff;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 30px;}
+h1,h2,h3{font-family:var(--anton);font-weight:400;text-transform:uppercase;letter-spacing:-.01em;line-height:.92;}
+.terra{color:var(--terra);}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--terra);}
+.eyebrow::before{content:'';width:26px;height:2px;background:var(--terra);}
+#bar{position:fixed;top:0;left:0;height:4px;width:0;background:var(--terra);z-index:99;transition:width .1s linear;}
+
+.hd{position:sticky;top:0;z-index:50;background:rgba(243,238,227,.92);backdrop-filter:blur(8px);border-bottom:2px solid var(--ink);}
+.hd-in{display:flex;align-items:center;justify-content:space-between;padding:14px 30px;max-width:1180px;margin:0 auto;}
+.hd .logo{font-family:var(--anton);font-size:1.15rem;text-transform:uppercase;color:var(--ink);letter-spacing:.02em;display:inline-flex;align-items:center;}
+.hd .logo .tag{font-family:var(--hank);font-weight:700;font-size:.6rem;letter-spacing:.12em;color:var(--terra);border:1.5px solid var(--terra);padding:3px 8px;border-radius:100px;margin-left:10px;text-transform:uppercase;}
+.hd nav{display:flex;gap:20px;}
+.hd nav a{font-size:.82rem;font-weight:600;color:var(--ink-2);text-decoration:none;transition:.18s;}
+.hd nav a:hover{color:var(--terra);}
+@media(max-width:860px){.hd nav{display:none;}}
+
+section{padding:76px 0;position:relative;}
+.snum{font-family:var(--anton);font-size:clamp(3rem,8vw,5.5rem);color:var(--terra);line-height:.8;display:block;}
+.sec-h{font-size:clamp(2.1rem,6vw,3.6rem);color:var(--ink);margin:6px 0 14px;}
+.lead{font-size:1.15rem;color:var(--ink-2);max-width:56ch;}
+.lead b{color:var(--ink);font-weight:700;}
+.alt{background:var(--bg-2);}
+
+.hero{padding:64px 0 52px;}
+.hero h1{font-size:clamp(3rem,11vw,6.6rem);color:var(--ink);margin:18px 0 0;}
+.hero .sub{font-size:1.25rem;color:var(--ink-2);max-width:44ch;margin-top:22px;}
+.hero .sub b{color:var(--ink);font-weight:700;}
+.statrow{display:flex;gap:34px;flex-wrap:wrap;margin-top:38px;}
+.statrow .n{font-family:var(--anton);font-size:2.4rem;color:var(--ink);line-height:1;}
+.statrow .n span{color:var(--terra);}
+.statrow .l{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:5px;}
+
+.mani{background:var(--ink);padding:60px 0;}
+.mani p{font-family:var(--anton);text-transform:uppercase;font-size:clamp(1.7rem,5vw,3.2rem);line-height:1.02;color:#fff;max-width:26ch;}
+.mani p span{color:var(--terra-l);}
+.marq{background:var(--bg-2);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);padding:15px 0;overflow:hidden;}
+.marq-t{display:flex;gap:40px;width:max-content;animation:slide 30s linear infinite;align-items:center;}
+@keyframes slide{to{transform:translateX(-50%);}}
+.marq span{font-family:var(--anton);font-size:1.4rem;text-transform:uppercase;color:var(--ink);white-space:nowrap;}
+.marq span.d{color:var(--terra);}
+
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px;}
+@media(max-width:680px){.split{grid-template-columns:1fr;}}
+.col{border-radius:16px;padding:24px 26px;}
+.col.no{background:var(--bg-2);border:1.5px dashed var(--line);}
+.col.yes{background:var(--ink);color:#fff;box-shadow:7px 7px 0 var(--terra);}
+.alt .col.no{background:var(--card);}
+.col .lab{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;}
+.col.no .lab{color:var(--muted);} .col.yes .lab{color:var(--terra-l);}
+.col h4{font-family:var(--hank);font-weight:800;font-size:1.35rem;text-transform:uppercase;line-height:1.08;margin-bottom:8px;}
+.col.no h4{color:var(--ink);} .col.yes h4{color:#fff;}
+.col p{font-size:.95rem;} .col.no p{color:var(--ink-2);} .col.yes p{color:rgba(255,255,255,.85);}
+
+.callout{margin-top:20px;background:rgba(176,110,74,.1);border-left:4px solid var(--terra);border-radius:0 12px 12px 0;padding:15px 19px;font-size:1rem;color:var(--ink-2);}
+.callout b{color:var(--terra);}
+
+.spot{margin-top:26px;background:var(--ink);border-radius:18px;padding:32px 34px;box-shadow:7px 7px 0 var(--green);}
+.spot .lab{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra-l);margin-bottom:12px;}
+.spot h3{font-family:var(--anton);text-transform:uppercase;font-size:clamp(1.5rem,4vw,2.2rem);color:#fff;line-height:1;}
+.spot h3 span{color:var(--terra-l);}
+.spot p{color:rgba(255,255,255,.86);font-size:1.04rem;margin-top:14px;max-width:56ch;}
+.spot p b{color:#fff;}
+.spot .verbs{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;}
+.spot .verbs i{font-style:normal;font-family:var(--anton);text-transform:uppercase;letter-spacing:.04em;font-size:1rem;color:#fff;background:rgba(196,131,94,.22);border:1.5px solid var(--terra-l);border-radius:100px;padding:7px 18px;}
+
+.flow{display:flex;align-items:stretch;margin-top:28px;flex-wrap:wrap;}
+.fstep{flex:1;min-width:150px;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:18px;}
+.alt .fstep{background:var(--card);}
+.fstep.dark{background:var(--ink);box-shadow:7px 7px 0 var(--terra);border-color:var(--ink);}
+.fstep .fn{font-family:var(--anton);font-size:1.3rem;color:var(--terra);}
+.fstep.dark .fn{color:var(--terra-l);}
+.fstep .ft{font-family:var(--anton);text-transform:uppercase;font-size:1.02rem;color:var(--ink);margin-top:4px;line-height:1.02;}
+.fstep.dark .ft{color:#fff;}
+.fstep p{font-size:.83rem;color:var(--ink-2);margin-top:6px;}.fstep.dark p{color:rgba(255,255,255,.8);}
+.farrow{display:flex;align-items:center;justify-content:center;font-family:var(--anton);color:var(--terra);font-size:1.7rem;padding:0 12px;}
+@media(max-width:680px){.flow{flex-direction:column;}.farrow{transform:rotate(90deg);padding:8px 0;}}
+
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;}
+.chip{font-family:var(--hank);font-weight:700;font-size:.82rem;background:var(--bg-2);border:1.5px solid var(--line);border-radius:100px;padding:8px 16px;color:var(--ink);}
+.alt .chip{background:var(--card);}
+.chip.hot{background:var(--terra);color:#fff;border-color:var(--terra);}
+
+/* linhas do DRE */
+.lines{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:28px;}
+.lcard{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:22px 20px;transition:.2s;}
+.lcard:hover{border-color:var(--ink);box-shadow:6px 6px 0 var(--line);transform:translateY(-3px);}
+.lcard .num{font-family:var(--anton);font-size:2.6rem;color:var(--terra);line-height:.9;}
+.lcard .num small{font-family:var(--hank);font-size:.66rem;font-weight:700;letter-spacing:.14em;color:var(--muted);display:block;text-transform:uppercase;margin-bottom:2px;}
+.lcard h4{font-family:var(--anton);text-transform:uppercase;font-size:1.12rem;color:var(--ink);margin-top:8px;line-height:1.02;}
+.lcard p{font-size:.86rem;color:var(--ink-2);margin-top:6px;}
+.lcard.wide{grid-column:span 2;}
+@media(max-width:680px){.lcard.wide{grid-column:span 1;}}
+
+/* benchmark bars */
+.bench{margin-top:26px;display:grid;gap:16px;}
+.brow{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:18px 20px;}
+.alt .brow{background:var(--card);}
+.brow .bt{display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap;}
+.brow .bt h4{font-family:var(--anton);text-transform:uppercase;font-size:1.05rem;color:var(--ink);}
+.brow .bt em{font-style:normal;font-family:var(--anton);font-size:1.5rem;color:var(--terra);}
+.brow .track{margin-top:12px;height:14px;border-radius:100px;background:var(--bg-2);border:1.5px solid var(--line);overflow:hidden;}
+.brow .fill{height:100%;background:var(--terra);width:0;transition:width 1.1s cubic-bezier(.2,.8,.2,1);}
+.in .brow .fill.f12{width:12%;} .in .brow .fill.f15{width:15%;}
+.brow small{display:block;margin-top:8px;font-size:.82rem;color:var(--muted);}
+
+/* passos numerados */
+.steps{margin-top:30px;display:grid;gap:12px;counter-reset:st;}
+.st{display:flex;gap:18px;align-items:flex-start;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:20px 22px;}
+.alt .st{background:var(--card);}
+.st.key{background:var(--ink);box-shadow:7px 7px 0 var(--terra);border-color:var(--ink);}
+.st .stn{flex-shrink:0;width:38px;height:38px;border-radius:10px;background:var(--terra);color:#fff;font-family:var(--anton);font-size:1.25rem;display:flex;align-items:center;justify-content:center;line-height:1;}
+.st.key .stn{background:var(--terra-l);color:var(--ink);}
+.st .stc h4{font-family:var(--anton);text-transform:uppercase;font-size:1.16rem;color:var(--ink);line-height:1.02;}
+.st.key .stc h4{color:#fff;}
+.st .stc p{font-size:.95rem;color:var(--ink-2);margin-top:5px;}
+.st.key .stc p{color:rgba(255,255,255,.86);}
+.st .stc a{color:var(--terra);font-weight:700;text-decoration:none;border-bottom:2px solid var(--terra);}
+.st.key .stc a{color:var(--terra-l);border-color:var(--terra-l);}
+.st .stc a:hover{color:var(--terra-d);}
+
+/* árvore de pastas */
+.tree{margin-top:28px;background:var(--ink);border-radius:16px;padding:26px 28px;box-shadow:7px 7px 0 var(--terra);font-family:var(--hank);}
+.tree .row{display:flex;align-items:center;gap:9px;color:rgba(255,255,255,.9);font-size:.95rem;padding:5px 0;font-weight:600;}
+.tree .row.root{color:#fff;font-family:var(--anton);text-transform:uppercase;letter-spacing:.03em;font-size:1.05rem;}
+.tree .ic{width:20px;text-align:center;flex-shrink:0;color:var(--terra-l);}
+.tree .row.file{color:var(--terra-l);}
+.tree .ind1{padding-left:26px;} .tree .ind2{padding-left:52px;}
+.tree .note{color:rgba(255,255,255,.45);font-weight:400;font-size:.82rem;margin-left:6px;}
+
+/* prompt */
+.prompt{margin-top:22px;background:var(--card);border:1.5px solid var(--line);border-left:7px solid var(--terra);border-radius:0 14px 14px 0;overflow:hidden;}
+.prompt .pl{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;background:rgba(176,110,74,.1);}
+.prompt .pl span{font-family:var(--hank);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);display:inline-flex;align-items:center;gap:9px;flex-wrap:wrap;}
+.live{background:var(--terra);color:#fff;padding:3px 8px;border-radius:6px;letter-spacing:.06em;}
+.copy{font-family:var(--hank);font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--terra);border:none;border-radius:100px;padding:7px 16px;cursor:pointer;transition:.18s;white-space:nowrap;}
+.copy:hover{background:var(--terra-d);}.copy.done{background:var(--green);}
+.prompt pre{font-family:var(--hank);font-size:.93rem;line-height:1.58;color:var(--text);padding:20px;white-space:pre-wrap;word-break:break-word;}
+.pnote{font-size:.9rem;color:var(--muted);margin-top:10px;max-width:60ch;}
+
+/* regras de ouro */
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:30px;}
+.rule{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:24px 22px;transition:.2s;}
+.alt .rule{background:var(--card);}
+.rule:hover{border-color:var(--ink);box-shadow:6px 6px 0 var(--line);transform:translateY(-3px);}
+.rule .rn{font-family:var(--anton);font-size:.8rem;letter-spacing:.14em;color:var(--terra);text-transform:uppercase;}
+.rule h4{font-family:var(--anton);text-transform:uppercase;font-size:1.2rem;color:var(--ink);margin:6px 0 8px;line-height:1.02;}
+.rule p{font-size:.92rem;color:var(--ink-2);}
+.rule p b{color:var(--ink);font-weight:700;}
+
+.misscard{background:var(--ink);color:#fff;border-radius:20px;padding:40px;box-shadow:9px 9px 0 var(--green);}
+.misscard h2{color:#fff;font-size:clamp(1.8rem,5vw,2.8rem);}.misscard h2 span{color:var(--terra-l);}
+.misscard .msub{color:rgba(255,255,255,.75);margin-top:10px;font-size:1rem;}
+.check{margin-top:26px;display:grid;gap:11px;}
+.ck{display:flex;gap:14px;align-items:flex-start;}
+.ck .bx{flex-shrink:0;width:24px;height:24px;border-radius:6px;border:2px solid var(--terra-l);margin-top:1px;}
+.ck p{color:rgba(255,255,255,.9);font-size:1.02rem;}.ck p b{color:#fff;}
+
+.teaser{background:var(--bg-2);}
+.teaser .pill{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra);border:1.5px solid var(--terra);border-radius:100px;padding:5px 14px;margin-bottom:16px;}
+.teaser h2{font-size:clamp(2rem,5.5vw,3.4rem);color:var(--ink);max-width:22ch;}.teaser h2 span{color:var(--terra);}
+.teaser p{margin-top:14px;color:var(--ink-2);max-width:56ch;font-size:1.05rem;}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:26px;}
+.tg{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:20px;}
+.tg h4{font-family:var(--anton);text-transform:uppercase;font-size:1.08rem;color:var(--ink);}
+.tg p{font-size:.88rem;color:var(--ink-2);margin-top:6px;}
+
+.close{background:var(--ink);text-align:center;}
+.close h2{font-size:clamp(2.4rem,8vw,5rem);color:#fff;}.close h2 span{color:var(--terra-l);}
+.close .sig{margin-top:18px;font-size:.9rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra-l);}
+.sign{display:flex;align-items:center;justify-content:space-between;gap:12px;color:rgba(255,255,255,.85);font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;padding:18px 30px;background:#0E282C;flex-wrap:wrap;}
+.sign .ns{font-family:var(--anton);letter-spacing:.28em;color:var(--terra-l);font-size:1rem;}
+
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);}
+.rv.in{opacity:1;transform:none;}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;}.marq-t{animation:none;}.brow .fill{transition:none;}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+
+<header class="hd">
+  <div class="hd-in">
+    <div class="logo">Bruna Santanna<span class="tag">A Virada IA</span></div>
+    <nav>
+      <a href="#combinado">O combinado</a>
+      <a href="#linhas">As 5 linhas</a>
+      <a href="#setup">Setup</a>
+      <a href="#prompts">Prompts</a>
+      <a href="#regras">Regras</a>
+      <a href="#licao">Lição de casa</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap rv">
+    <span class="eyebrow">Mentoria 1:1 · Encontro 01 · 06 de agosto de 2026</span>
+    <h1>JANAINA,<br>TUDO QUE A GENTE<br>COMBINOU <span class="terra">ESTÁ AQUI.</span></h1>
+    <p class="sub">Uma hora e quarenta e quatro minutos de conversa viraram <b>um mapa, um passo a passo e cinco prompts prontos.</b> É só seguir de cima pra baixo.</p>
+    <div class="statrow">
+      <div><div class="n">46</div><div class="l">lojas na sua carteira</div></div>
+      <div><div class="n"><span>5</span></div><div class="l">linhas do DRE que importam</div></div>
+      <div><div class="n">3</div><div class="l">lojas no piloto</div></div>
+      <div><div class="n"><span>1</span></div><div class="l">pasta que muda tudo</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="marq">
+  <div class="marq-t">
+    <span>Mapear o processo <span class="d">·</span></span><span class="d">Extrair os dados ·</span><span>Contar tudo pro Claude <span class="d">·</span></span><span class="d">Refinar até ficar lindo ·</span><span>Virar skill <span class="d">·</span></span>
+    <span>Mapear o processo <span class="d">·</span></span><span class="d">Extrair os dados ·</span><span>Contar tudo pro Claude <span class="d">·</span></span><span class="d">Refinar até ficar lindo ·</span><span>Virar skill <span class="d">·</span></span>
+  </div>
+</div>
+
+<!-- 01 O COMBINADO -->
+<section id="combinado">
+  <div class="wrap rv">
+    <span class="snum">01</span>
+    <h2 class="sec-h">O que a gente <span class="terra">decidiu.</span></h2>
+    <p class="lead">Você chegou com duas dores: <b>o checklist financeiro dos franqueados</b> e <b>o ranking de vendas que você manda três vezes por semana.</b> A gente escolheu atacar o checklist primeiro — é o que te dá diferencial na frente dos outros 24 supervisores.</p>
+
+    <div class="split">
+      <div class="col no">
+        <div class="lab">O que a gente NÃO vai automatizar agora</div>
+        <h4>A extração dos dados</h4>
+        <p>O Checklist Fácil não exporta a carteira inteira de uma vez — o suporte deles já confirmou que é loja por loja. E o BI da Natura exige aquela sequência de cliques com o sistema pensando. Com a restrição de segurança da Natura, não dá pra conectar o Claude direto nesses sistemas. A extração continua na sua mão.</p>
+      </div>
+      <div class="col yes">
+        <div class="lab">O que a gente VAI automatizar</div>
+        <h4>Tudo depois da extração</h4>
+        <p>Você extrai e joga na pasta. A partir dali é o Claude: ler os DRE, cruzar com o sell-out do BI, aplicar suas regras de negócio, gerar o dashboard de cada loja, montar o plano de ação e ainda te entregar a visão consolidada pra levar pra sua gerente.</p>
+      </div>
+    </div>
+
+    <div class="callout">Duas dicas que já valem pra amanhã: exporte sempre em <b>XLS</b> (não em PDF — o Claude lê mais rápido e gasta menos token), e no filtro do Checklist Fácil marque <b>"todos"</b> em vez de "página atual", senão vem só o que está na tela.</div>
+
+    <div class="spot">
+      <div class="lab">O objetivo por trás do objetivo</div>
+      <h3>Não é sobre planilha.<br>É sobre <span>ser insubstituível.</span></h3>
+      <p>Você me disse com todas as letras: administrar melhor o tempo, ter controle fino das 46 lojas e <b>construir autoridade</b> entre os 25 supervisores. Num mercado incerto, diferencial é emprego. Todo material desta página foi montado com isso em mente — e você vai contar isso pro Claude também, porque os modelos novos entregam melhor quando entendem por que o trabalho importa.</p>
+      <div class="verbs"><i>Tempo</i><i>Controle</i><i>Autoridade</i></div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 O MAPA -->
+<section class="alt" id="mapa">
+  <div class="wrap rv">
+    <span class="snum">02</span>
+    <h2 class="sec-h">O seu processo, <span class="terra">mapeado.</span></h2>
+    <p class="lead">A gente gastou uma hora nisso na call e não foi tempo perdido — <b>mapear o processo é a parte que faz a mágica funcionar depois.</b> Este é o fluxo que a gente desenhou junta:</p>
+
+    <div class="flow">
+      <div class="fstep"><div class="fn">01</div><div class="ft">Checklist Fácil</div><p>Filtra por supervisor + gestão financeira + período. Exporta em XLS, loja por loja. Você usa a aba DRE.</p></div>
+      <div class="farrow">→</div>
+      <div class="fstep"><div class="fn">02</div><div class="ft">BI Natura</div><p>Seleciona mês, regional e lojas. Exporta a tabela de referência cruzada com o sell-out.</p></div>
+      <div class="farrow">→</div>
+      <div class="fstep"><div class="fn">03</div><div class="ft">A pasta</div><p>Tudo isso vai pra uma pasta única no computador: DRE, BI, plano de ação e manual da marca.</p></div>
+      <div class="farrow">→</div>
+      <div class="fstep dark"><div class="fn">04</div><div class="ft">Claude</div><p>Lê, cruza, aplica suas regras e entrega dashboard por loja, consolidado e plano de ação.</p></div>
+    </div>
+
+    <div class="callout">O que hoje você faz na mão — cruzar o DRE com o sell-out, formatar a planilha pra ficar legível, escrever o plano de ação de cada franqueado — <b>é exatamente o pedaço que sai da sua mesa.</b></div>
+  </div>
+</section>
+
+<!-- 03 AS 5 LINHAS -->
+<section id="linhas">
+  <div class="wrap rv">
+    <span class="snum">03</span>
+    <h2 class="sec-h">As cinco linhas <span class="terra">que importam.</span></h2>
+    <p class="lead">Você sabia todas de cabeça na call. Elas estão aqui porque <b>o Claude não adivinha</b> — ele precisa que você aponte onde olhar. Este bloco vai dentro do prompt.</p>
+
+    <div class="lines">
+      <div class="lcard">
+        <div class="num"><small>Linha</small>110</div>
+        <h4>Ponto de equilíbrio</h4>
+        <p>Quanto a loja precisa vender pra pagar as próprias despesas.</p>
+      </div>
+      <div class="lcard">
+        <div class="num"><small>Linha</small>108</div>
+        <h4>Lucro líquido</h4>
+        <p>O resultado real da loja no mês.</p>
+      </div>
+      <div class="lcard">
+        <div class="num"><small>Linha</small>38</div>
+        <h4>Aluguel</h4>
+        <p>Loja de rua: só a 38. Loja de shopping: soma condomínio e fundo de promoção (39 e 40).</p>
+      </div>
+      <div class="lcard">
+        <div class="num"><small>Linha</small>47</div>
+        <h4>Despesa com pessoal</h4>
+        <p>Folha de pagamento, vale-transporte e vale-refeição.</p>
+      </div>
+      <div class="lcard wide">
+        <div class="num"><small>Rodapé da planilha</small>Ano</div>
+        <h4>Total acumulado</h4>
+        <p>O fechamento do ano até o mês atual, com o percentual de cada despesa sobre a receita — é o que você abre quando senta com o franqueado.</p>
+      </div>
+    </div>
+
+    <div class="bench">
+      <div class="brow">
+        <div class="bt"><h4>Folha de pagamento saudável</h4><em>até 12%</em></div>
+        <div class="track"><div class="fill f12"></div></div>
+        <small>Do faturamento da loja. Acima disso, entra na lista de alerta.</small>
+      </div>
+      <div class="brow">
+        <div class="bt"><h4>Aluguel saudável</h4><em>até 15%</em></div>
+        <div class="track"><div class="fill f15"></div></div>
+        <small>Do faturamento da loja, somando condomínio e fundo de promoção quando for shopping.</small>
+      </div>
+    </div>
+
+    <div class="callout">Toda regra de negócio que hoje mora só na sua cabeça precisa entrar no prompt. <b>Se você não contar, ele não vai considerar</b> — e é justamente esse conhecimento que faz o material ser seu, e não genérico.</div>
+  </div>
+</section>
+
+<!-- 04 SETUP -->
+<section class="alt" id="setup">
+  <div class="wrap rv">
+    <span class="snum">04</span>
+    <h2 class="sec-h">Seu setup, <span class="terra">passo a passo.</span></h2>
+    <p class="lead">Faça na ordem, no seu computador pessoal (o da Natura tem a restrição de instalação). <b>Do passo 1 ao 7 dá menos de uma hora</b> — a maior parte é download.</p>
+
+    <div class="steps">
+      <div class="st">
+        <div class="stn">1</div>
+        <div class="stc">
+          <h4>Baixe o Claude Desktop</h4>
+          <p>A versão de navegador não enxerga suas pastas. Baixe a versão para Windows em <a href="https://claude.ai/download" target="_blank" rel="noopener">claude.ai/download</a> e faça login com a conta paga.</p>
+        </div>
+      </div>
+      <div class="st key">
+        <div class="stn">2</div>
+        <div class="stc">
+          <h4>Instale o Git e reinicie o computador</h4>
+          <p>É isso que estava faltando pro seu Cowork funcionar. Baixe em <a href="https://git-scm.com/download/win" target="_blank" rel="noopener">git-scm.com/download/win</a>, instale com as opções padrão (é só ir clicando em "Next") e <b>reinicie a máquina</b> — sem reiniciar, o Claude não reconhece.</p>
+        </div>
+      </div>
+      <div class="st">
+        <div class="stn">3</div>
+        <div class="stc">
+          <h4>Teste o Cowork</h4>
+          <p>Abra o Claude Desktop, clique no campo do chat e escolha <b>Cowork</b> no menu de baixo. Se abrir sem mensagem de erro, funcionou. Me avisa no WhatsApp se aparecer alguma coisa estranha.</p>
+        </div>
+      </div>
+      <div class="st">
+        <div class="stn">4</div>
+        <div class="stc">
+          <h4>Crie a estrutura de pastas</h4>
+          <p>No desktop, crie uma pasta chamada <b>Claude Cowork Station</b> e, dentro dela, uma pasta <b>checklist</b>. É ali que o Claude vai trabalhar. A hierarquia importa: dando acesso à pasta de cima, ele enxerga tudo que está dentro.</p>
+        </div>
+      </div>
+      <div class="st">
+        <div class="stn">5</div>
+        <div class="stc">
+          <h4>Encha a pasta checklist</h4>
+          <p>DRE de <b>3 lojas</b> (não 46 — a gente ainda está afinando o formato, e 46 gasta muito token à toa), a extração do BI dessas mesmas lojas, seu material de plano de ação e o manual da marca Natura.</p>
+        </div>
+      </div>
+      <div class="st key">
+        <div class="stn">6</div>
+        <div class="stc">
+          <h4>Crie o Projeto e vincule a pasta</h4>
+          <p>No Claude Desktop, vá em <b>Projetos → novo projeto</b>, chame de "Checklist" e <b>na hora de criar, aponte a pasta checklist</b>. Se esquecer de vincular a pasta, o projeto nasce cego — aí não tem conserto, é apagar e criar de novo.</p>
+        </div>
+      </div>
+      <div class="st">
+        <div class="stn">7</div>
+        <div class="stc">
+          <h4>Troque o modelo para Opus</h4>
+          <p>No seletor de modelo, escolha <b>Opus</b>. Ele é o que pensa e desenha bonito. O Sonnet é ótimo executor e você vai usar depois, quando a skill estiver pronta — agora ele te faria pedir tanto ajuste que sairia mais caro no fim.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tree">
+      <div class="row root"><span class="ic">📁</span> Claude Cowork Station <span class="note">— no desktop</span></div>
+      <div class="row ind1"><span class="ic">📁</span> checklist <span class="note">— a pasta que você vincula ao Projeto</span></div>
+      <div class="row ind2 file"><span class="ic">📄</span> DRE — Loja 01.xlsx</div>
+      <div class="row ind2 file"><span class="ic">📄</span> DRE — Loja 02.xlsx</div>
+      <div class="row ind2 file"><span class="ic">📄</span> DRE — Loja 03.xlsx</div>
+      <div class="row ind2 file"><span class="ic">📄</span> BI — sell-out (mês atual).xlsx</div>
+      <div class="row ind2 file"><span class="ic">📄</span> Plano de ação — meu material.pdf</div>
+      <div class="row ind2 file"><span class="ic">📄</span> Manual da marca Natura.pdf</div>
+    </div>
+
+    <div class="callout">Por que a pasta e não o clipe de anexar arquivo? Porque <b>arquivo anexado no chat ele relê a cada mensagem</b> e queima token. Pela pasta, ele lê só quando precisa. Essa diferença é o que faz a conta fechar no fim do mês.</div>
+  </div>
+</section>
+
+<!-- 05 PROMPTS -->
+<section id="prompts">
+  <div class="wrap rv">
+    <span class="snum">05</span>
+    <h2 class="sec-h">Os prompts <span class="terra">que eu prometi.</span></h2>
+    <p class="lead">O primeiro é o grande — é a nossa conversa inteira virada em instrução. <b>Complete os trechos entre colchetes</b> com o que só você sabe, e depois grave um áudio contando o resto. Prompt não é fórmula fechada: é você explicando pra um consultor muito bom.</p>
+
+    <div class="prompt">
+      <div class="pl"><span><i class="live">Prompt 01</i> O grande — DRE, dashboards e plano de ação</span><button class="copy">Copiar</button></div>
+      <pre>Você é meu parceiro de análise financeira e de gestão de franquias. Vou te dar todo o contexto de uma vez — leia até o fim antes de responder.
+
+QUEM SOU EU E O QUE ESTÁ EM JOGO
+Sou a Janaina, supervisora de franquias da Natura. Cuido de 46 lojas em Minas Gerais. Somos 25 supervisores na empresa e eu quero ser referência entre eles: quero que meus franqueados me achem indispensável e que minha gerente enxergue que eu tenho o controle mais fino da carteira. Isso não é enfeite — é o que garante meu lugar. Então tudo que você me entregar precisa estar num nível que impressione de verdade, tanto no conteúdo quanto no visual.
+
+O QUE ESTÁ NESTA PASTA
+- Os DRE de 3 lojas, em Excel, extraídos da plataforma Checklist Fácil. Quem preenche é o próprio franqueado. Use a aba "DRE".
+- Uma extração do BI da Natura com o sell-out dessas mesmas lojas.
+- Meu material de plano de ação — é a fonte de onde você deve tirar as ações que sugerir. Não invente ação fora dele sem me avisar que é sugestão nova.
+- O manual da marca Natura. Todo material visual tem que sair na identidade da marca: cores, tipografia, tom.
+
+AS LINHAS DO DRE QUE IMPORTAM
+- Linha 110 — ponto de equilíbrio (quanto a loja precisa vender pra pagar as despesas).
+- Linha 108 — lucro líquido da loja.
+- Linha 38 — aluguel. Se a loja for de shopping, somar também condomínio e fundo de promoção (linhas 39 e 40). Se for loja de rua, só a linha 38.
+- Linha 47 — despesa com pessoal: folha, vale-transporte e vale-refeição.
+- E o total do ano acumulado, com o percentual de cada despesa sobre a receita.
+
+MINHAS REGRAS DE NEGÓCIO
+- Folha de pagamento saudável: até 12% do faturamento. Acima disso, é alerta.
+- Aluguel saudável: até 15% do faturamento. Acima disso, é alerta.
+- [COMPLETE: outras regras que você usa — margem mínima, meta de venda média, meta de cadastro de cliente, frequência de pedido, o que caracteriza queda de fluxo, o que você considera loja em risco.]
+
+O QUE EU QUERO QUE VOCÊ ENTREGUE
+1. Um dashboard em HTML por loja, arquivo único e autossuficiente, que abra no computador do franqueado sem instalar nada e sem ele precisar de conta em lugar nenhum. Tem que ser bonito e fácil de ler — meus franqueados não têm intimidade com número. Na identidade da Natura.
+2. Um dashboard consolidado só meu, cruzando as lojas: ranking, comparativo, quem está acima e abaixo dos benchmarks, e uma aba de alertas (quem não fez pedido na semana, quem caiu no sell-out, quem está com folha ou aluguel fora do padrão, quem não entregou o DRE).
+3. Um plano de ação por loja, baseado no meu material, ligando o diagnóstico do DRE ao que o BI mostra de sell-out.
+4. Uma versão em planilha dos dados consolidados, pra quando eu precisar mexer na mão.
+
+COMO EU QUERO QUE VOCÊ TRABALHE
+- Antes de produzir qualquer coisa, me faça TODAS as perguntas que precisar — de uma vez só, numeradas — pra eu responder tudo junto na mesma mensagem. Não me pergunte uma coisa de cada vez.
+- Me sugira gráficos e formas de visualizar que eu talvez não tenha pensado. Você tem mais repertório visual do que eu.
+- Se algum dado estiver faltando ou o franqueado tiver preenchido errado, me diga na cara — não preencha buraco com estimativa sem avisar.
+- Quando eu mandar um print reclamando de alguma coisa, trate como se você fosse a agência que fez o material: entenda o ajuste e refaça.
+
+[COMPLETE: grave um áudio, no microfone, contando com suas palavras o que mais você quer. Fale como se estivesse me explicando: o que te incomoda hoje, o que sua gerente valoriza, o que seus franqueados reclamam, o que você quer que apareça no dashboard e ainda não pedi aqui.]</pre>
+    </div>
+    <p class="pnote">Esse é o prompt de abertura da conversa. Ele só funciona com os arquivos já dentro da pasta — sem dado, o Claude não faz nada.</p>
+
+    <div class="prompt">
+      <div class="pl"><span><i class="live">Prompt 02</i> O refino — quando vier feio ou errado</span><button class="copy">Copiar</button></div>
+      <pre>Vou te dar todos os meus ajustes de uma vez — considere todos juntos antes de refazer.
+
+Estou mandando print da tela. Nele:
+1. [o que está feio ou quebrado — gráfico estranho, texto mal diagramado, linha por cima da outra]
+2. [a análise que não ficou boa e por quê]
+3. [o que está faltando]
+4. [o que eu quero que fique mais bonito ou mais destacado]
+
+Contexto: esse material vai pra frente do meu franqueado e da minha gerente. Precisa estar impecável, na identidade da Natura, com gráficos que qualquer pessoa entenda batendo o olho.
+
+Refaça considerando tudo isso e me diga o que você mudou.</pre>
+    </div>
+    <p class="pnote">Print + todos os feedbacks numa mensagem só. Ir pingando um ajuste por vez queima token e ele perde o fio.</p>
+
+    <div class="prompt">
+      <div class="pl"><span><i class="live">Prompt 03</i> Virar skill — só quando estiver perfeito</span><button class="copy">Copiar</button></div>
+      <pre>Está perfeito, é exatamente esse o formato que eu quero.
+
+Agora transforme todo esse processo em uma skill, pra eu poder rodar isso todo mês só entregando os arquivos novos. A skill precisa guardar:
+- de onde vêm os dados (DRE do Checklist Fácil e extração do BI da Natura) e o que fazer com cada um;
+- as linhas do DRE que importam e as minhas regras de negócio;
+- os entregáveis: dashboard por loja em HTML, consolidado pra minha gerente, plano de ação e planilha;
+- exatamente este layout, estas cores e este nível de acabamento;
+- o tom com que os textos falam com o franqueado.
+
+Depois de criar, me explique em português simples como eu aciono essa skill numa conversa nova.</pre>
+    </div>
+    <p class="pnote">Minha régua: <b>fez duas vezes, vira skill.</b> Skill pode ser uma bobagem de duas linhas ou um fluxo gigante como esse — tanto faz, o ganho é a padronização.</p>
+
+    <div class="prompt">
+      <div class="pl"><span><i class="live">Prompt 04</i> Mapear qualquer outro processo seu</span><button class="copy">Copiar</button></div>
+      <pre>Quero mapear um processo do meu trabalho pra transformar em automação com você. Vou te contar tudo de uma vez:
+
+MEU SONHO (o resultado ideal, sem me preocupar em como)
+[ex.: eu queria que o ranking de vendas das minhas 46 lojas saísse pronto, formatado, com os valores individuais ocultos e só o percentual aparecendo, três vezes por semana, sem eu tocar em nada]
+
+O QUE EU FAÇO HOJE, PASSO A PASSO
+[literalmente: sentei na cadeira, abri o quê, cliquei onde, filtrei o quê, copiei pra onde, formatei como, mandei por qual canal]
+
+QUE INFORMAÇÕES EU TENHO E ONDE ELAS ESTÃO
+[Drive, e-mail, WhatsApp, sistema, planilha — e o que está só na minha cabeça]
+
+O QUE EU ESPERO RECEBER DE VOLTA
+[relatório, planilha, dashboard em HTML, mensagem pronta pra enviar — pode ser mais de um]
+
+QUEM MAIS ENTRA NESSE PROCESSO
+[quem me manda informação, quem depende de mim, quem aprova]
+
+O QUE SÓ ESTÁ NA MINHA CABEÇA
+[os critérios, os jeitos, as exceções, o que eu faço no automático e nunca escrevi]
+
+Agora: me faça todas as perguntas que faltam — de uma vez só, numeradas — e depois monte pra mim o prompt completo desse processo, pronto pra eu colar numa conversa nova.</pre>
+    </div>
+    <p class="pnote">Use esse pro <b>ranking de vendas</b>, que é a sua segunda dor. E pro fechamento do mês. Ele é o molde: sonho → processo → informação → entregável → gente envolvida → o que está só na sua cabeça.</p>
+
+    <div class="prompt">
+      <div class="pl"><span><i class="live">Prompt 05</i> Aproveitar as transcrições das reuniões</span><button class="copy">Copiar</button></div>
+      <pre>Aqui está a transcrição completa da minha reunião: [cole o link do documento de transcrição do Google Meet, ou peça pra ele buscar no meu Gmail se o conector estiver ligado].
+
+Leia tudo e me devolva:
+1. Uma ata organizada: o que foi discutido, o que foi decidido e o que ficou em aberto.
+2. Todas as tarefas que sobraram pra mim, com prazo, e as que sobraram pros outros.
+3. O que a minha liderança sinalizou como prioridade — mesmo que não tenha dito com todas as letras.
+4. O que eu preciso levar preparado pra próxima reunião.
+5. Se aparecer alguma loja ou franqueado meu na conversa, separe o que foi dito sobre cada um.
+
+Salve essa ata na pasta do projeto.</pre>
+    </div>
+    <p class="pnote">Você perguntou se dava pra ir além do resumo do Gemini: dá. O resumo é raso; <b>a transcrição inteira é a matéria-prima boa.</b> É assim que eu processo as minhas — inclusive a nossa, que virou esta página.</p>
+  </div>
+</section>
+
+<!-- 06 REGRAS -->
+<section class="alt" id="regras">
+  <div class="wrap rv">
+    <span class="snum">06</span>
+    <h2 class="sec-h">As regras de ouro <span class="terra">da nossa call.</span></h2>
+    <p class="lead">Tudo que eu te falei solto ao longo da conversa, junto num lugar só.</p>
+
+    <div class="rules">
+      <div class="rule"><div class="rn">Modelo</div><h4>Opus pra pensar,<br>Sonnet pra executar</h4><p>Na fase de estratégia e design, <b>Opus</b>. Gasta mais token por resposta e compensa: ele acerta o design de primeira. Sonnet só depois, quando a skill já estiver pronta e for só rodar.</p></div>
+      <div class="rule"><div class="rn">Dados</div><h4>Comece com 3 lojas,<br>não com 46</h4><p>A fase de agora é afinar o formato. Fazer isso com 46 lojas demora e queima token à toa. <b>Quando o dashboard estiver lindo, aí você roda a carteira inteira.</b></p></div>
+      <div class="rule"><div class="rn">Contexto</div><h4>Pasta &gt; anexo</h4><p>Arquivo anexado no chat é relido a cada mensagem. Arquivo na pasta do Cowork ele lê <b>só quando precisa</b>. Mesma informação, fração do custo.</p></div>
+      <div class="rule"><div class="rn">Segurança</div><h4>Só na versão paga</h4><p>Na versão gratuita, seus dados podem ser usados pra treinar o modelo — sem contrato nenhum. Com dado financeiro de franqueado, <b>não dá.</b> Vale pra você e vale pra qualquer franqueado que você venha a envolver.</p></div>
+      <div class="rule"><div class="rn">Entrega</div><h4>HTML estático<br>pro franqueado</h4><p>Você gera o arquivo e manda. Ele abre no computador dele, vê a posição, e <b>não precisa pagar nada nem ter conta.</b> Não fica online e não atualiza sozinho — quem atualiza é você, quando quiser.</p></div>
+      <div class="rule"><div class="rn">Conversa</div><h4>Fale por áudio<br>e explique o porquê</h4><p>Clica no microfone e conta como se estivesse falando comigo. Pode ir e voltar, pode enrolar. <b>Contar por que o trabalho importa</b> muda o nível do que ele te entrega.</p></div>
+      <div class="rule"><div class="rn">Ajuste</div><h4>Print + tudo<br>de uma vez</h4><p>Não gostou? Print na tela, manda pra ele e dá <b>todos os feedbacks numa mensagem só.</b> Trate como agência que trabalha pra você: exigente e específica.</p></div>
+      <div class="rule"><div class="rn">Automação</div><h4>Fez duas vezes,<br>vira skill</h4><p>Qualquer coisa que você repete já justifica uma skill. Ela guarda desde o jeito de falar com você até o layout final do entregável.</p></div>
+      <div class="rule"><div class="rn">Risco</div><h4>Automatize o repetitivo,<br>revise o que sai da sua mão</h4><p>Quanto mais repetitivo e menor o risco, mais você entrega pro Claude. <b>Nada vai pro franqueado sem você olhar antes.</b> Gerar é dele, enviar é seu.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="mani">
+  <div class="wrap rv">
+    <p>O QUE DEMORA É <span>MAPEAR O PROCESSO.</span> DEPOIS DISSO, O RESTO É FÁCIL.</p>
+  </div>
+</div>
+
+<!-- 07 LIÇÃO DE CASA -->
+<section id="licao">
+  <div class="wrap rv">
+    <span class="snum">07</span>
+    <h2 class="sec-h">Sua lição de casa <span class="terra">até o encontro 2.</span></h2>
+    <div class="misscard" style="margin-top:26px;">
+      <h2>SEIS COISAS.<br><span>NENHUMA DIFÍCIL.</span></h2>
+      <p class="msub">Se travar em qualquer uma, me chama no WhatsApp — não fique parada esperando o próximo encontro.</p>
+      <div class="check">
+        <div class="ck"><div class="bx"></div><p><b>Instalar o Git</b> e reiniciar o computador. Depois me avisar se o Cowork abriu.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Criar as pastas</b> Claude Cowork Station → checklist.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Extrair os dados de 3 lojas:</b> DRE em XLS, sell-out do BI dessas mesmas lojas, e jogar tudo na pasta.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Colocar na pasta</b> seu material de plano de ação e o manual da marca Natura.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Criar o Projeto</b> no Claude vinculado à pasta checklist, com o modelo em Opus.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Rodar o Prompt 01</b> — completo com as suas regras — e ficar refinando até você olhar e falar "está perfeito".</p></div>
+      </div>
+    </div>
+    <div class="callout">Não vem perfeito de primeira. <b>Vai vir bom e você vai lapidar.</b> É nessa lapidação que você descobre o que realmente quer — e é ela que a gente congela numa skill no próximo encontro.</div>
+  </div>
+</section>
+
+<!-- 08 PRÓXIMO -->
+<section class="teaser">
+  <div class="wrap rv">
+    <span class="pill">Encontro 02</span>
+    <h2>Aí a gente faz <span>rodar sozinho.</span></h2>
+    <p>Com o formato aprovado, o próximo passo é tirar você do meio: transformar o processo em skill, ligar os conectores e agendar o que for recorrente. E colocar a cara da Natura em tudo.</p>
+    <div class="tgrid">
+      <div class="tg"><h4>Skills</h4><p>O processo inteiro congelado num manual que o Claude segue igual toda vez.</p></div>
+      <div class="tg"><h4>Conectores</h4><p>Gmail e Agenda ligados — inclusive pra puxar transcrição de reunião sozinho.</p></div>
+      <div class="tg"><h4>Agendamentos</h4><p>O que é recorrente rodando na hora certa, sem você lembrar.</p></div>
+      <div class="tg"><h4>Ranking de vendas</h4><p>Sua segunda dor: as três vezes por semana viram uma execução só.</p></div>
+    </div>
+    <div class="callout" style="margin-top:26px;">Você me contou da reunião de feedback com a sua gerente. <b>Leve o dashboard.</b> Se ele estiver pronto, é exatamente o tipo de coisa que muda a conversa de "como você está" para "como você fez isso".</div>
+  </div>
+</section>
+
+<section class="close">
+  <div class="wrap rv">
+    <h2>VOCÊ JÁ TEM<br>O <span>DADO.</span><br>AGORA É SÓ<br><span>ORGANIZAR.</span></h2>
+    <div class="sig">Bruna Santanna · @brusantanna.ai</div>
+  </div>
+</section>
+
+<div class="sign"><span>Mentoria A Virada IA · Encontro 01 · Janaina Lara · 06.08.2026</span><span class="ns">A VIRADA IA</span></div>
+
+<script>
+const bar=document.getElementById('bar');
+addEventListener('scroll',()=>{const h=document.documentElement;bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';},{passive:true});
+document.querySelectorAll('.prompt').forEach(box=>{
+  const btn=box.querySelector('.copy'),pre=box.querySelector('pre');
+  if(!btn||!pre)return;
+  btn.addEventListener('click',async()=>{
+    try{await navigator.clipboard.writeText(pre.innerText.trim());}
+    catch(e){const r=document.createRange();r.selectNode(pre);getSelection().removeAllRanges();getSelection().addRange(r);document.execCommand('copy');getSelection().removeAllRanges();}
+    const o=btn.textContent;btn.textContent='Copiado ✓';btn.classList.add('done');
+    setTimeout(()=>{btn.textContent=o;btn.classList.remove('done');},1600);
+  });
+});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+setTimeout(()=>document.querySelectorAll('.rv').forEach(el=>el.classList.add('in')),2500);
+</script>
+</body>
+</html>
