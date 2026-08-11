@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cockpit executivo · fluxo de caixa consolidado (exemplo)</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root{
+  --verde-noite:#0f2a1f;--verde-floresta:#1a3a2e;--verde-folha:#2d5a3f;
+  --verde-musgo:#4a7c59;--verde-claro:#6b9c7b;--dourado:#c9a06d;
+  --dourado-claro:#e0c094;--trigo:#d4b87a;--creme:#faf6ed;
+  --creme-quente:#f3ead5;--creme-claro:#fefcf7;--terra:#8b6b4a;
+  --tijolo:#a0392d;--vermelho-suave:#c14b3b;--vermelho-fundo:#fae8e3;
+  --amarelo-fundo:#fff4d6;--texto:#1a1a1a;--cinza-suave:#6b6155;
+  --bg:linear-gradient(180deg,#faf6ed 0%,#f3ead5 100%);
+  --card-bg:#fefcf7;--borda:rgba(139,107,74,0.12);
+}
+[data-theme="dark"]{
+  --creme:#1a1a1a;--creme-claro:#222;--creme-quente:#2a2a2a;
+  --texto:#f0e8d8;--cinza-suave:#a39a8c;
+  --bg:linear-gradient(180deg,#0a1612 0%,#1a2a22 100%);
+  --card-bg:#1f2a24;--borda:rgba(212,184,122,0.15);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--texto);min-height:100vh;overflow-x:hidden;transition:background 0.4s}
+.hero{position:relative;background:radial-gradient(ellipse at top right,rgba(201,160,109,0.15) 0%,transparent 50%),linear-gradient(135deg,var(--verde-noite) 0%,var(--verde-floresta) 50%,var(--verde-folha) 100%);color:#faf6ed;padding:36px 56px 64px;overflow:hidden;border-bottom:4px solid var(--dourado)}
+.hero::after{content:'🌾';position:absolute;font-size:280px;right:-40px;top:50%;transform:translateY(-50%) rotate(15deg);opacity:0.05;pointer-events:none}
+[data-theme="dark"] .hero{background:linear-gradient(135deg,#050d09 0%,#0f1f17 100%)}
+.hero-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:36px;position:relative;z-index:2}
+.brand{display:flex;align-items:center;gap:14px}
+.brand-mark{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,var(--dourado),var(--trigo));display:grid;place-items:center;font-size:26px;box-shadow:0 8px 24px rgba(201,160,109,0.3)}
+.brand-text h3{font-family:'Fraunces',serif;font-weight:700;font-size:20px;line-height:1.1;color:#faf6ed}
+.brand-text p{font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--dourado-claro);opacity:0.9}
+.hero-actions{display:flex;align-items:center;gap:14px}
+.theme-toggle{background:rgba(250,246,237,0.08);border:1px solid rgba(212,184,122,0.3);color:#faf6ed;cursor:pointer;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-size:18px;transition:all 0.3s}
+.theme-toggle:hover{background:rgba(212,184,122,0.2);transform:rotate(15deg)}
+.live-dot{display:inline-flex;align-items:center;gap:8px;background:rgba(74,124,89,0.25);border:1px solid rgba(212,184,122,0.4);border-radius:99px;padding:6px 14px;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#faf6ed;font-weight:500}
+.live-dot::before{content:'';width:8px;height:8px;border-radius:50%;background:#7ec98a;box-shadow:0 0 12px #7ec98a;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.6;transform:scale(1.2)}}
+.hero-content{position:relative;z-index:2;max-width:1400px}
+.hero-eyebrow{font-size:13px;letter-spacing:0.18em;text-transform:uppercase;color:var(--dourado-claro);font-weight:500;margin-bottom:10px}
+.hero-title{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(32px,4.5vw,58px);line-height:1.05;letter-spacing:-0.02em;margin-bottom:14px;color:#faf6ed}
+.hero-title .accent{color:var(--dourado-claro);font-style:italic;font-weight:500}
+.hero-subtitle{font-size:17px;line-height:1.5;color:rgba(250,246,237,0.75);max-width:680px;margin-bottom:36px}
+.hero-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.kpi-card{background:rgba(250,246,237,0.06);backdrop-filter:blur(20px);border:1px solid rgba(212,184,122,0.2);border-radius:18px;padding:22px;position:relative;overflow:hidden;transition:all 0.4s cubic-bezier(0.4,0,0.2,1);cursor:pointer}
+.kpi-card:hover{transform:translateY(-4px);border-color:rgba(212,184,122,0.5);background:rgba(250,246,237,0.1)}
+.kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--dourado),transparent);opacity:0.6}
+.kpi-icon{font-size:22px;margin-bottom:12px;opacity:0.9}
+.kpi-label{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--dourado-claro);opacity:0.9;font-weight:600;margin-bottom:6px}
+.kpi-value{font-family:'Fraunces',serif;font-size:30px;font-weight:600;letter-spacing:-0.02em;line-height:1.1;color:#faf6ed}
+.kpi-value .un{font-size:18px;opacity:0.7}
+.kpi-sub{font-size:12px;color:rgba(250,246,237,0.6);margin-top:6px}
+.kpi-card.positive .kpi-value{color:#9dd9a8}
+.kpi-card.alert .kpi-value{color:#f5b89d}
+.kpi-spark{margin-top:10px;height:36px;position:relative}
+.main{max-width:1500px;margin:0 auto;padding:48px 56px}
+.section{margin-bottom:48px}
+.section-head{display:flex;align-items:end;justify-content:space-between;margin-bottom:20px;gap:16px;flex-wrap:wrap}
+.section-title{font-family:'Fraunces',serif;font-weight:600;font-size:28px;color:var(--verde-noite);letter-spacing:-0.02em}
+[data-theme="dark"] .section-title{color:var(--dourado-claro)}
+.section-eyebrow{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--terra);font-weight:600;margin-bottom:6px}
+[data-theme="dark"] .section-eyebrow{color:var(--dourado)}
+.section-meta{font-size:13px;color:var(--cinza-suave)}
+.tog-group{display:inline-flex;background:var(--card-bg);border:1px solid var(--borda);border-radius:99px;padding:4px}
+.tog{padding:8px 16px;font-size:12px;font-weight:600;color:var(--cinza-suave);cursor:pointer;border-radius:99px;border:none;background:transparent;transition:all 0.2s;letter-spacing:0.02em;font-family:inherit}
+.tog.active{background:var(--verde-floresta);color:#faf6ed}
+[data-theme="dark"] .tog.active{background:var(--dourado);color:var(--verde-noite)}
+.grid-2{display:grid;grid-template-columns:2fr 1fr;gap:20px}
+.grid-22{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:var(--card-bg);border:1px solid var(--borda);border-radius:20px;padding:24px;box-shadow:0 4px 24px rgba(15,42,31,0.04);transition:all 0.3s}
+[data-theme="dark"] .card{box-shadow:0 4px 24px rgba(0,0,0,0.3)}
+.card:hover{box-shadow:0 8px 32px rgba(15,42,31,0.08);transform:translateY(-2px)}
+.card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:18px}
+.card-title{font-family:'Fraunces',serif;font-size:17px;font-weight:600;color:var(--texto);line-height:1.3}
+[data-theme="dark"] .card-title{color:var(--dourado-claro)}
+.card-sub{font-size:12px;color:var(--cinza-suave);margin-top:3px}
+.chart-wrap{position:relative;height:280px}
+.chart-wrap.tall{height:340px}
+.chart-wrap.huge{height:420px}
+.saldo-banner{background:linear-gradient(135deg,var(--verde-floresta),var(--verde-folha));border-radius:18px;padding:24px 28px;color:#faf6ed;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;margin-bottom:24px;position:relative;overflow:hidden}
+.saldo-banner::after{content:'💰';position:absolute;right:20px;bottom:-30px;font-size:160px;opacity:0.07}
+.saldo-info h2{font-family:'Fraunces',serif;font-weight:600;font-size:32px;letter-spacing:-0.02em;margin-bottom:4px}
+.saldo-info p{font-size:13px;opacity:0.8;letter-spacing:0.04em}
+.saldo-breakdown{display:flex;gap:20px;flex-wrap:wrap}
+.saldo-pill{background:rgba(212,184,122,0.15);border:1px solid rgba(212,184,122,0.3);padding:10px 16px;border-radius:12px}
+.saldo-pill-label{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--dourado-claro);margin-bottom:4px}
+.saldo-pill-value{font-family:'Fraunces',serif;font-weight:600;font-size:18px}
+.banco-list{display:flex;flex-direction:column;gap:8px}
+.banco-row{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-radius:12px;background:var(--creme-quente);border-left:3px solid var(--dourado);transition:all 0.2s;cursor:pointer}
+.banco-row:hover{transform:translateX(4px)}
+.banco-row.negativo{border-left-color:var(--vermelho-suave);background:#fae8e3}
+[data-theme="dark"] .banco-row.negativo{background:#3a1f1c}
+.banco-info{display:flex;flex-direction:column;gap:2px;min-width:0}
+.banco-nome{font-weight:600;font-size:13px;color:var(--texto)}
+.banco-detalhe{font-size:11px;color:var(--cinza-suave)}
+.banco-valor{font-family:'Fraunces',serif;font-weight:600;font-size:15px;color:var(--verde-floresta);white-space:nowrap}
+[data-theme="dark"] .banco-valor{color:var(--dourado-claro)}
+.banco-valor.negativo{color:var(--vermelho-suave)}
+.venc-list{display:flex;flex-direction:column;gap:10px}
+.venc-bar{display:grid;grid-template-columns:110px 1fr 130px;align-items:center;gap:14px;padding:12px 16px;border-radius:12px;background:var(--card-bg);border:1px solid var(--borda)}
+.venc-label{font-size:11px;font-weight:600;color:var(--cinza-suave);text-transform:uppercase;letter-spacing:0.06em}
+.venc-progress{height:10px;border-radius:99px;background:rgba(139,107,74,0.1);overflow:hidden}
+.venc-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--dourado),var(--trigo));transition:width 1.4s cubic-bezier(0.4,0,0.2,1)}
+.venc-fill.urgent{background:linear-gradient(90deg,var(--tijolo),var(--vermelho-suave))}
+.venc-fill.long{background:linear-gradient(90deg,var(--verde-folha),var(--verde-musgo))}
+.venc-valor{font-family:'Fraunces',serif;font-weight:600;font-size:14px;color:var(--texto);text-align:right}
+.heatmap{display:grid;grid-template-columns:repeat(12,1fr);gap:6px}
+.heat-month{display:flex;flex-direction:column;gap:6px}
+.heat-month-label{font-size:10px;text-align:center;text-transform:uppercase;letter-spacing:0.08em;color:var(--cinza-suave);font-weight:600}
+.heat-cell{aspect-ratio:1;border-radius:5px;background:rgba(139,107,74,0.08);position:relative;cursor:pointer;transition:all 0.2s}
+.heat-cell.l1{background:#e0c094}.heat-cell.l2{background:#d4a574}.heat-cell.l3{background:#c9a06d}.heat-cell.l4{background:#a87d4d}.heat-cell.l5{background:#8b6b4a}
+.heat-cell.entrada{background:#7ec98a !important}.heat-cell.entrada-big{background:#4a7c59 !important}
+.heat-cell:hover{transform:scale(1.25);z-index:5;box-shadow:0 4px 12px rgba(0,0,0,0.2)}
+.heat-cell .tip{visibility:hidden;position:absolute;bottom:120%;left:50%;transform:translateX(-50%);background:var(--verde-noite);color:#faf6ed;padding:6px 10px;border-radius:8px;font-size:11px;white-space:nowrap;z-index:10;pointer-events:none}
+.heat-cell:hover .tip{visibility:visible}
+.heat-legend{display:flex;align-items:center;justify-content:space-between;margin-top:14px;font-size:11px;color:var(--cinza-suave)}
+.heat-scale{display:flex;align-items:center;gap:6px}
+.heat-scale-box{width:14px;height:14px;border-radius:3px}
+.timeline{position:relative;padding-left:32px;max-height:520px;overflow-y:auto}
+.timeline::before{content:'';position:absolute;left:10px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,var(--dourado),var(--terra),transparent)}
+.tl-item{position:relative;padding-bottom:18px}
+.tl-item::before{content:'';position:absolute;left:-28px;top:6px;width:18px;height:18px;border-radius:50%;background:var(--dourado);border:3px solid var(--card-bg);box-shadow:0 0 0 2px var(--dourado)}
+.tl-item.entrada::before{background:var(--verde-musgo);box-shadow:0 0 0 2px var(--verde-musgo)}
+.tl-item.urgent::before{background:var(--vermelho-suave);box-shadow:0 0 0 2px var(--vermelho-suave)}
+.tl-date{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--terra);font-weight:600;margin-bottom:3px}
+.tl-title{font-weight:600;font-size:14px;color:var(--texto);margin-bottom:2px}
+.tl-meta{font-size:12px;color:var(--cinza-suave)}
+.tl-valor{font-family:'Fraunces',serif;font-weight:600;font-size:15px;color:var(--verde-floresta);margin-top:4px}
+[data-theme="dark"] .tl-valor{color:var(--dourado-claro)}
+.tl-valor.entrada{color:var(--verde-folha)}
+.tl-valor.urgent{color:var(--vermelho-suave)}
+.gauge-wrap{position:relative;display:flex;align-items:center;justify-content:center;height:200px}
+.gauge-center{position:absolute;text-align:center}
+.gauge-value{font-family:'Fraunces',serif;font-weight:600;font-size:42px;color:var(--verde-floresta);line-height:1;letter-spacing:-0.02em}
+[data-theme="dark"] .gauge-value{color:var(--dourado-claro)}
+.gauge-label{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--cinza-suave);margin-top:4px;font-weight:600}
+.top-list{display:flex;flex-direction:column;gap:8px}
+.top-row{display:flex;align-items:center;gap:14px;padding:10px 14px;border-radius:10px;transition:background 0.2s;cursor:pointer}
+.top-row:hover{background:var(--creme-quente)}
+.top-rank{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font-family:'Fraunces',serif;font-weight:600;font-size:13px;color:#faf6ed;background:var(--verde-folha);flex-shrink:0}
+.top-rank.gold{background:linear-gradient(135deg,var(--dourado),var(--trigo));color:var(--verde-noite)}
+.top-info{flex:1;min-width:0}
+.top-nome{font-size:13px;font-weight:500;color:var(--texto);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top-bar{height:5px;background:rgba(139,107,74,0.1);border-radius:99px;margin-top:4px;overflow:hidden}
+.top-bar-fill{height:100%;background:linear-gradient(90deg,var(--dourado),var(--trigo));border-radius:99px;transition:width 1s ease}
+.top-valor{font-family:'Fraunces',serif;font-weight:600;font-size:14px;color:var(--verde-floresta);white-space:nowrap}
+[data-theme="dark"] .top-valor{color:var(--dourado-claro)}
+.semaforo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.semaforo{padding:18px;border-radius:14px;background:var(--card-bg);border:1px solid var(--borda);display:flex;flex-direction:column;gap:10px;transition:all 0.3s;cursor:pointer}
+.semaforo:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,0.06)}
+.semaforo-led{width:14px;height:14px;border-radius:50%}
+.semaforo.ok .semaforo-led{background:#7ec98a;box-shadow:0 0 12px rgba(126,201,138,0.6)}
+.semaforo.atencao .semaforo-led{background:#e8b96a;box-shadow:0 0 12px rgba(232,185,106,0.6)}
+.semaforo.alerta .semaforo-led{background:#c14b3b;box-shadow:0 0 12px rgba(193,75,59,0.6)}
+.semaforo-cat{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--cinza-suave);font-weight:600}
+.semaforo-titulo{font-family:'Fraunces',serif;font-weight:600;font-size:15px;color:var(--texto);line-height:1.3}
+.semaforo-meta{font-size:12px;color:var(--cinza-suave);margin-top:2px}
+.tree{display:flex;flex-wrap:wrap;gap:6px}
+.tree-tile{border-radius:10px;padding:14px;display:flex;flex-direction:column;justify-content:space-between;color:#faf6ed;cursor:pointer;transition:all 0.2s;min-height:80px}
+.tree-tile:hover{transform:scale(1.02);filter:brightness(1.1)}
+.tree-nome{font-size:11px;font-weight:600;letter-spacing:0.02em;line-height:1.2;opacity:0.95}
+.tree-val{font-family:'Fraunces',serif;font-weight:600;font-size:15px;letter-spacing:-0.02em;margin-top:4px}
+.footer{background:var(--verde-noite);color:#faf6ed;padding:28px 56px;display:flex;justify-content:space-between;align-items:center;border-top:3px solid var(--dourado);flex-wrap:wrap;gap:14px}
+.footer-text{font-size:12px;letter-spacing:0.08em;color:var(--dourado-claro)}
+.footer-brand{font-family:'Fraunces',serif;font-weight:600;font-size:14px}
+@media (max-width:1024px){.hero-grid{grid-template-columns:repeat(2,1fr)}.grid-2,.grid-22,.grid-3{grid-template-columns:1fr}.hero,.main,.footer{padding-left:24px;padding-right:24px}.semaforo-grid{grid-template-columns:1fr}.heatmap{grid-template-columns:repeat(6,1fr)}}
+.fade-in{opacity:0;transform:translateY(20px);animation:fadeUp 0.8s cubic-bezier(0.4,0,0.2,1) forwards}
+.fade-in:nth-child(1){animation-delay:0.1s}.fade-in:nth-child(2){animation-delay:0.2s}.fade-in:nth-child(3){animation-delay:0.3s}.fade-in:nth-child(4){animation-delay:0.4s}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<section class="hero">
+  <div class="hero-top">
+    <div class="brand">
+      <div class="brand-mark">🌾</div>
+      <div class="brand-text">
+        <h3>Grupo Almeida Costa</h3>
+        <p>Fazenda Boa Vista · Interior de SP</p>
+      </div>
+    </div>
+    <div class="hero-actions">
+      <button class="theme-toggle" onclick="toggleTheme()" title="Alternar tema">🌙</button>
+      <div class="live-dot">Posição em 12 / mai / 2026</div>
+    </div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Cockpit Executivo · Fluxo de Caixa Consolidado</div>
+    <h1 class="hero-title">Bom dia, Ricardo.<br><span class="accent">A safra está em rota.</span></h1>
+    <p class="hero-subtitle">Visão estratégica das operações financeiras do Grupo Almeida Costa — receitas, despesas, posição bancária e cronograma de financiamentos consolidados.</p>
+    <div class="hero-grid">
+      <div class="kpi-card fade-in positive">
+        <div class="kpi-icon">📥</div>
+        <div class="kpi-label">Receita 2026</div>
+        <div class="kpi-value">R$ 46,4<span class="un"> mi</span></div>
+        <div class="kpi-sub">Soja + Pecuária · 35 títulos</div>
+        <div class="kpi-spark"><canvas id="sparkRec"></canvas></div>
+      </div>
+      <div class="kpi-card fade-in">
+        <div class="kpi-icon">📤</div>
+        <div class="kpi-label">Custos & Despesas</div>
+        <div class="kpi-value">R$ 37,0<span class="un"> mi</span></div>
+        <div class="kpi-sub">551 títulos em aberto</div>
+        <div class="kpi-spark"><canvas id="sparkDesp"></canvas></div>
+      </div>
+      <div class="kpi-card fade-in positive">
+        <div class="kpi-icon">💰</div>
+        <div class="kpi-label">Resultado Bruto</div>
+        <div class="kpi-value">R$ 9,4<span class="un"> mi</span></div>
+        <div class="kpi-sub">Margem bruta de 20,3%</div>
+        <div class="kpi-spark"><canvas id="sparkRes"></canvas></div>
+      </div>
+      <div class="kpi-card fade-in alert">
+        <div class="kpi-icon">🏦</div>
+        <div class="kpi-label">Dívida Total</div>
+        <div class="kpi-value">R$ 41,5<span class="un"> mi</span></div>
+        <div class="kpi-sub">130 parcelas · até 2034</div>
+        <div class="kpi-spark"><canvas id="sparkDiv"></canvas></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main class="main">
+
+  <section class="section">
+    <div class="saldo-banner">
+      <div class="saldo-info">
+        <h2>R$ 5.752.226,85</h2>
+        <p>Saldo Consolidado · 8 contas · 3 bancos</p>
+      </div>
+      <div class="saldo-breakdown">
+        <div class="saldo-pill"><div class="saldo-pill-label">Conta Corrente</div><div class="saldo-pill-value" style="color:#f5b89d">- R$ 252 mil</div></div>
+        <div class="saldo-pill"><div class="saldo-pill-label">Investimentos</div><div class="saldo-pill-value" style="color:#9dd9a8">R$ 6,00 mi</div></div>
+        <div class="saldo-pill"><div class="saldo-pill-label">Runway estimado</div><div class="saldo-pill-value">4,2 meses</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">Movimentação financeira</div>
+        <h2 class="section-title">Pulso do caixa · 12 meses</h2>
+      </div>
+      <div class="tog-group">
+        <button class="tog active" data-fluxo="mensal">Mensal</button>
+        <button class="tog" data-fluxo="acumulado">Acumulado</button>
+        <button class="tog" data-fluxo="liquido">Líquido</button>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="card-title">Entradas × Saídas projetadas</div>
+            <div class="card-sub">Baseado nos títulos em aberto no sistema da operação</div>
+          </div>
+        </div>
+        <div class="chart-wrap huge"><canvas id="chFluxo"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="card-title">Composição bancária</div>
+            <div class="card-sub">8 contas · saldo + investimento</div>
+          </div>
+        </div>
+        <div class="chart-wrap"><canvas id="chBancos"></canvas></div>
+        <div class="banco-list" id="bancoList" style="margin-top:14px"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">Calendário do agro</div>
+        <h2 class="section-title">Mapa de calor · safra 2026</h2>
+      </div>
+      <div class="section-meta">Verde = recebimento · Marrom = pagamento · Intensidade = volume</div>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="card-title">Movimentação por mês</div>
+            <div class="card-sub">Passe o mouse sobre as células para ver o detalhe</div>
+          </div>
+        </div>
+        <div class="heatmap" id="heatmap"></div>
+        <div class="heat-legend">
+          <span>Menor volume</span>
+          <div class="heat-scale">
+            <div class="heat-scale-box" style="background:rgba(139,107,74,0.08)"></div>
+            <div class="heat-scale-box" style="background:#e0c094"></div>
+            <div class="heat-scale-box" style="background:#c9a06d"></div>
+            <div class="heat-scale-box" style="background:#a87d4d"></div>
+            <div class="heat-scale-box" style="background:#7ec98a"></div>
+            <div class="heat-scale-box" style="background:#4a7c59"></div>
+          </div>
+          <span>Maior volume</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="card-title">Próximas movimentações</div>
+            <div class="card-sub">As mais relevantes nos próximos 90 dias</div>
+          </div>
+        </div>
+        <div class="timeline" id="timeline"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">Janela financeira</div>
+        <h2 class="section-title">Curva de vencimentos · a pagar</h2>
+      </div>
+      <div class="section-meta">551 títulos · R$ 37,0 mi distribuídos no tempo</div>
+    </div>
+    <div class="grid-22">
+      <div class="card">
+        <div class="venc-list" id="vencList"></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="card-title">Distribuição por categoria</div>
+            <div class="card-sub">Onde vai o dinheiro</div>
+          </div>
+        </div>
+        <div class="chart-wrap tall"><canvas id="chCategorias"></canvas></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">Carga financeira</div>
+        <h2 class="section-title">Financiamentos até 2034</h2>
+      </div>
+      <div class="tog-group">
+        <button class="tog active" data-fin="ano">Por ano</button>
+        <button class="tog" data-fin="banco">Por banco</button>
+        <button class="tog" data-fin="tipo">Por tipo</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <div class="card-title" id="finTitle">Amortização por ano</div>
+          <div class="card-sub" id="finSub">2026 concentra 30% do total — pico de pagamento</div>
+        </div>
+      </div>
+      <div class="chart-wrap huge"><canvas id="chFinanc"></canvas></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">Análises estratégicas</div>
+        <h2 class="section-title">Saúde financeira do grupo</h2>
+      </div>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="card-title">Concentração de receita</div>
+            <div class="card-sub">Por cliente · alerta de dependência</div>
+          </div>
+        </div>
+        <div class="chart-wrap tall"><canvas id="chConcRec"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="card-title">Radar de saúde · 6 dimensões</div>
+            <div class="card-sub">Score 0-100 por área</div>
+          </div>
+        </div>
+        <div class="chart-wrap tall"><canvas id="chRadar"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="card-title">Runway de caixa</div>
+            <div class="card-sub">Meses cobertos pelo saldo atual</div>
+          </div>
+        </div>
+        <div class="gauge-wrap">
+          <canvas id="chGauge" width="220" height="220"></canvas>
+          <div class="gauge-center">
+            <div class="gauge-value">4,2</div>
+            <div class="gauge-label">meses</div>
+          </div>
+        </div>
+        <div style="margin-top:18px;text-align:center;font-size:12px;color:var(--cinza-suave)">R$ 5,75 mi ÷ R$ 1,37 mi/mês de saída média</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">Mapa de concentração</div>
+        <h2 class="section-title">Fornecedores e clientes</h2>
+      </div>
+    </div>
+    <div class="grid-22">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="card-title">Top 15 fornecedores · treemap</div>
+            <div class="card-sub">Tamanho proporcional ao valor em aberto</div>
+          </div>
+        </div>
+        <div class="tree" id="treemap"></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="card-title">Top clientes · ranking</div>
+            <div class="card-sub">Boa Carne domina com 83%</div>
+          </div>
+        </div>
+        <div class="top-list" id="topCli"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">Health check semanal</div>
+        <h2 class="section-title">Alertas e validações</h2>
+      </div>
+    </div>
+    <div class="semaforo-grid" id="semaforos"></div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-text">📊 Cockpit v2 · Dados no sistema da operação · Posição 12/05/2026</div>
+  <div class="footer-brand">NewScale Consulting · Mentoria Grupo Almeida Costa</div>
+</footer>
+<script>
+const DATA = {
+  bancos:[
+    {nome:"Banco A · Coop 0818",titular:"Marcelo Almeida Costa",valor:4903969.92,saldo:-163034.50},
+    {nome:"Banco A · Coop 0730",titular:"Rodrigo Almeida Costa",valor:128887.48,saldo:-16},
+    {nome:"Banco A · Coop 0730",titular:"Marcelo Almeida Costa",valor:69187.60,saldo:0},
+    {nome:"Banco B",titular:"Conta corrente",valor:411500,saldo:-89123},
+    {nome:"Banco B",titular:"Aplicação",valor:178000,saldo:0},
+    {nome:"Banco C",titular:"Grupo Almeida Costa",valor:60681.85,saldo:0}
+  ],
+  vencimentos:[
+    {label:"≤ 7 dias",valor:463572.09,classe:"urgent"},
+    {label:"8 a 30 dias",valor:2595288.98,classe:""},
+    {label:"31 a 60 dias",valor:4684928.84,classe:""},
+    {label:"61 a 90 dias",valor:2899954.75,classe:""},
+    {label:"+ 90 dias",valor:26392237.67,classe:"long"}
+  ],
+  categorias:["Previsões receb./pgto","Custeio","Juros financ.","Investimento","Inseticidas","Fungicidas","Seguro produção","Herbicidas","Compra receb. futuro","Material pecuária"],
+  catValores:[21285721,8141108,3347298,943582,635624,387891,354297,223358,207578,185360],
+  financAno:{2026:12431988,2027:9028831,2028:7183443,2029:5473341,2030:5181157,2031:539392,2032:549445,2033:559938,2034:570890},
+  financBanco:{"Banco B":37806961,"Banco Banco A":2672182,"Banco John Deere":1039280},
+  financTipo:{"Custeio":23266409,"Juros":11229544,"Investimento":6901899,"Capital de Giro":120571},
+  topFornec:[
+    {nome:"Folha Grupo",valor:13849890},{nome:"Banco B",valor:11377629},
+    {nome:"Onor Candido",valor:3900000},{nome:"Banco Banco A",valor:1408656},
+    {nome:"Master Diesel",valor:1220700},{nome:"Neuza Cortes",valor:1000000},
+    {nome:"Romareli",valor:415820},{nome:"Agro Amazônia",valor:377600},
+    {nome:"Nutribio",valor:356268},{nome:"Syngenta",valor:299275},
+    {nome:"Nortox",valor:265657},{nome:"CCAB Agro",valor:218303},
+    {nome:"Agromave",valor:197488},{nome:"Origeo",valor:177534},
+    {nome:"Agrosul",valor:173881}
+  ],
+  topCli:[
+    {nome:"Indústria Boa Carne",valor:38525975,pct:82.8},
+    {nome:"Adelir Strapazzon",valor:4500000,pct:9.7},
+    {nome:"Grupo Almeida Costa",valor:2066666,pct:4.4},
+    {nome:"Louis Dreyfus",valor:922280,pct:2.0},
+    {nome:"ADM do Brasil",valor:514768,pct:1.1}
+  ],
+  timeline:[
+    {data:"12 mai",tipo:"urgent",titulo:"Folha Grupo Almeida Costa",meta:"Previsões receb./pgto",valor:160000,sinal:"-"},
+    {data:"13 mai",tipo:"normal",titulo:"Eletromar + Mapfre",meta:"Compras + seguro",valor:1939,sinal:"-"},
+    {data:"15 mai",tipo:"normal",titulo:"Marcelo Ramos · Pecuária",meta:"Material de uso pecuária",valor:170100,sinal:"-"},
+    {data:"19 mai",tipo:"normal",titulo:"Compra Bovinos",meta:"Mônica Vain Maske",valor:28305,sinal:"-"},
+    {data:"28 mai",tipo:"entrada",titulo:"Soja · Louis Dreyfus",meta:"12 notas de soja",valor:1010280,sinal:"+"},
+    {data:"29 mai",tipo:"entrada",titulo:"Soja · ADM do Brasil",meta:"6 notas",valor:514768,sinal:"+"},
+    {data:"05 jun",tipo:"urgent",titulo:"BB · Custeio + Juros",meta:"Banco B",valor:498519,sinal:"-"},
+    {data:"15 jun",tipo:"entrada",titulo:"Boa Carne · 1ª parcela",meta:"Pecuária — recebimento",valor:7466072,sinal:"+"},
+    {data:"28 jun",tipo:"urgent",titulo:"BB · 3 parcelas custeio",meta:"Banco B",valor:2908056,sinal:"-"},
+    {data:"30 jul",tipo:"urgent",titulo:"Folha + 13º",meta:"Grupo Almeida Costa",valor:485000,sinal:"-"}
+  ],
+  semaforos:[
+    {cat:"Receita 2026",titulo:"Validada × no sistema da operação",meta:"Divergência 0,2% — base sólida",status:"ok"},
+    {cat:"Despesas 2026",titulo:"Em conformidade",meta:"Divergência 5,4% dentro do esperado",status:"atencao"},
+    {cat:"Liquidez Imediata",titulo:"Confortável",meta:"R$ 5,7 mi vs R$ 464k em 7 dias",status:"ok"},
+    {cat:"Concentração receita",titulo:"83% em um cliente",meta:"Diversificar em 2027 é prioridade",status:"atencao"},
+    {cat:"Carga de dívida",titulo:"Pico em 2026",meta:"30% do total a amortizar este ano",status:"atencao"},
+    {cat:"Saldo em conta",titulo:"Banco A 0818 negativo",meta:"-R$ 163k · resgate auto ativo",status:"alerta"}
+  ]
+};
+const fmt = n => "R$ " + n.toLocaleString('pt-BR',{minimumFractionDigits:0,maximumFractionDigits:0});
+const fmtMi = n => "R$ " + (n/1e6).toFixed(1).replace('.',',') + " mi";
+
+function toggleTheme(){
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  document.querySelector('.theme-toggle').textContent = isDark ? '🌙' : '☀️';
+  rebuildCharts();
+}
+
+const bancoEl = document.getElementById('bancoList');
+DATA.bancos.forEach(b => {
+  const neg = b.saldo < -1000;
+  const row = document.createElement('div');
+  row.className = 'banco-row' + (neg ? ' negativo' : '');
+  row.innerHTML = '<div class="banco-info"><div class="banco-nome">' + b.nome + '</div><div class="banco-detalhe">' + b.titular + '</div></div><div class="banco-valor' + (neg?' negativo':'') + '">' + fmt(b.valor) + '</div>';
+  bancoEl.appendChild(row);
+});
+
+const vencEl = document.getElementById('vencList');
+const maxVenc = Math.max.apply(null, DATA.vencimentos.map(v=>v.valor));
+DATA.vencimentos.forEach((v,i) => {
+  const row = document.createElement('div');
+  row.className = 'venc-bar';
+  row.innerHTML = '<div class="venc-label">' + v.label + '</div><div class="venc-progress"><div class="venc-fill ' + v.classe + '" style="width:0%"></div></div><div class="venc-valor">' + fmt(v.valor) + '</div>';
+  vencEl.appendChild(row);
+  setTimeout(()=>{
+    row.querySelector('.venc-fill').style.width = (v.valor/maxVenc*100) + '%';
+  }, 300 + i*120);
+});
+
+const tlEl = document.getElementById('timeline');
+DATA.timeline.forEach(t => {
+  const d = document.createElement('div');
+  d.className = 'tl-item ' + t.tipo;
+  d.innerHTML = '<div class="tl-date">' + t.data + ' · 2026</div><div class="tl-title">' + t.titulo + '</div><div class="tl-meta">' + t.meta + '</div><div class="tl-valor ' + t.tipo + '">' + t.sinal + fmt(t.valor) + '</div>';
+  tlEl.appendChild(d);
+});
+
+const tcEl = document.getElementById('topCli');
+const maxCli = DATA.topCli[0].valor;
+DATA.topCli.forEach((c,i) => {
+  const r = document.createElement('div');
+  r.className = 'top-row';
+  r.innerHTML = '<div class="top-rank ' + (i<3?'gold':'') + '">' + (i+1) + '</div><div class="top-info"><div class="top-nome">' + c.nome + ' · ' + c.pct + '%</div><div class="top-bar"><div class="top-bar-fill" style="width:0%"></div></div></div><div class="top-valor">' + fmt(c.valor) + '</div>';
+  tcEl.appendChild(r);
+  setTimeout(()=>{r.querySelector('.top-bar-fill').style.width=(c.valor/maxCli*100)+'%'}, 400+i*100);
+});
+
+const semEl = document.getElementById('semaforos');
+DATA.semaforos.forEach(s => {
+  const d = document.createElement('div');
+  d.className = 'semaforo ' + s.status;
+  d.innerHTML = '<div style="display:flex;align-items:center;justify-content:space-between"><div class="semaforo-cat">' + s.cat + '</div><div class="semaforo-led"></div></div><div><div class="semaforo-titulo">' + s.titulo + '</div><div class="semaforo-meta">' + s.meta + '</div></div>';
+  semEl.appendChild(d);
+});
+
+const heatEl = document.getElementById('heatmap');
+const mesesAbrev = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+const heatData = {
+  Mai:{ent:0,sai:1850000},Jun:{ent:7466071,sai:4400000},Jul:{ent:1057874,sai:3100000},
+  Ago:{ent:4766666,sai:4350000},Set:{ent:11813908,sai:4700000},Out:{ent:851143,sai:4450000},
+  Nov:{ent:11187535,sai:2900000},Dez:{ent:7616110,sai:3500000},Jan:{ent:0,sai:3200000},
+  Fev:{ent:0,sai:2800000},Mar:{ent:0,sai:2650000},Abr:{ent:229689,sai:2645982}
+};
+mesesAbrev.forEach(m => {
+  const col = document.createElement('div');
+  col.className = 'heat-month';
+  col.innerHTML = '<div class="heat-month-label">' + m + '</div>';
+  const d = heatData[m] || {ent:0,sai:0};
+  const cells = [
+    {label:'Entradas',val:d.ent,tipo:'ent'},
+    {label:'Saídas',val:d.sai,tipo:'sai'},
+    {label:'Líquido',val:d.ent-d.sai,tipo:'liq'},
+    {label:'Volume médio',val:(d.ent+d.sai)/2,tipo:'acc'}
+  ];
+  cells.forEach(c => {
+    const cell = document.createElement('div');
+    let cls = 'heat-cell';
+    const v = Math.abs(c.val);
+    if(c.tipo === 'ent' && c.val > 0){
+      cls += c.val > 5e6 ? ' entrada-big' : ' entrada';
+    } else if(v > 0){
+      const lvl = v > 8e6 ? 5 : v > 5e6 ? 4 : v > 2e6 ? 3 : v > 500e3 ? 2 : 1;
+      cls += ' l' + lvl;
+    }
+    cell.className = cls;
+    cell.innerHTML = '<span class="tip">' + m + ': ' + c.label + ' ' + fmt(c.val) + '</span>';
+    col.appendChild(cell);
+  });
+  heatEl.appendChild(col);
+});
+
+const treeEl = document.getElementById('treemap');
+const totalForn = DATA.topFornec.reduce((a,b)=>a+b.valor,0);
+const treeColors = ['#1a3a2e','#2d5a3f','#4a7c59','#6b9c7b','#c9a06d','#d4b87a','#a87d4d','#8b6b4a','#a0392d','#c14b3b','#1a3a2e','#2d5a3f','#4a7c59','#c9a06d','#a87d4d'];
+DATA.topFornec.forEach((f,i) => {
+  const pct = f.valor / totalForn * 100;
+  const tile = document.createElement('div');
+  tile.className = 'tree-tile';
+  tile.style.background = treeColors[i % treeColors.length];
+  const w = Math.max(22, Math.min(48, pct * 1.5));
+  tile.style.flex = '1 1 ' + w + '%';
+  tile.style.minHeight = (60 + Math.min(100, pct*4)) + 'px';
+  tile.innerHTML = '<div class="tree-nome">' + f.nome + '</div><div class="tree-val">' + fmtMi(f.valor) + '</div>';
+  treeEl.appendChild(tile);
+});
+Chart.defaults.font.family = "'Inter', sans-serif";
+Chart.defaults.color = "#6b6155";
+const COR = {verde:"#1a3a2e",folha:"#2d5a3f",musgo:"#4a7c59",claro:"#6b9c7b",dourado:"#c9a06d",trigo:"#d4b87a",creme:"#f3ead5",tijolo:"#a0392d",vermelho:"#c14b3b"};
+let charts = {};
+
+function destroyAll(){Object.values(charts).forEach(c=>c && c.destroy && c.destroy());charts={};}
+
+function buildCharts(){
+  const isDark = document.documentElement.getAttribute('data-theme')==='dark';
+  const gridCol = isDark ? "rgba(212,184,122,0.08)" : "rgba(139,107,74,0.08)";
+  const textCol = isDark ? "#a39a8c" : "#6b6155";
+  Chart.defaults.color = textCol;
+
+  const sparkOpts = {responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{enabled:false}},scales:{x:{display:false},y:{display:false}},elements:{point:{radius:0}},animation:{duration:1500}};
+  charts.sparkRec = new Chart(document.getElementById('sparkRec'),{type:'line',data:{labels:Array(12).fill(''),datasets:[{data:[0.5,0.8,1.2,2.1,3.5,5.2,7.8,12,18,22,28,46],borderColor:'#9dd9a8',backgroundColor:'rgba(157,217,168,0.25)',fill:true,tension:0.4,borderWidth:2}]},options:sparkOpts});
+  charts.sparkDesp = new Chart(document.getElementById('sparkDesp'),{type:'line',data:{labels:Array(12).fill(''),datasets:[{data:[2,4,6,8,11,15,18,22,27,30,33,37],borderColor:'#d4b87a',backgroundColor:'rgba(212,184,122,0.25)',fill:true,tension:0.4,borderWidth:2}]},options:sparkOpts});
+  charts.sparkRes = new Chart(document.getElementById('sparkRes'),{type:'line',data:{labels:Array(12).fill(''),datasets:[{data:[-1.5,-3.2,-4.8,-5.9,-7.5,-9.8,-10.2,-10,-9,-8,9.4,9.4],borderColor:'#9dd9a8',backgroundColor:'rgba(157,217,168,0.25)',fill:true,tension:0.4,borderWidth:2}]},options:sparkOpts});
+  charts.sparkDiv = new Chart(document.getElementById('sparkDiv'),{type:'line',data:{labels:Array(10).fill(''),datasets:[{data:[54,52,49,47,45,43,42,41.5,40,38],borderColor:'#f5b89d',backgroundColor:'rgba(245,184,157,0.25)',fill:true,tension:0.4,borderWidth:2}]},options:sparkOpts});
+
+  buildFluxoMode('mensal');
+
+  charts.bancos = new Chart(document.getElementById('chBancos'),{
+    type:'doughnut',
+    data:{labels:DATA.bancos.map(b=>b.nome),datasets:[{data:DATA.bancos.map(b=>b.valor),backgroundColor:[COR.verde,COR.dourado,COR.folha,COR.musgo,COR.trigo,COR.claro],borderWidth:2,borderColor:isDark?'#1f2a24':'#fefcf7',hoverOffset:8}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{display:false},tooltip:{backgroundColor:COR.verde,padding:12,callbacks:{label:c=>' '+fmt(c.parsed)}}},animation:{animateRotate:true,duration:1400}}
+  });
+
+  charts.categorias = new Chart(document.getElementById('chCategorias'),{
+    type:'bar',
+    data:{labels:DATA.categorias,datasets:[{data:DATA.catValores,backgroundColor:DATA.catValores.map((v,i)=>i<3?COR.tijolo:i<6?COR.dourado:COR.musgo),borderRadius:6}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:COR.verde,padding:12,callbacks:{label:c=>' '+fmt(c.parsed.x)}}},scales:{x:{ticks:{callback:v=>"R$ "+(v/1e6).toFixed(1)+" mi"},grid:{color:gridCol}},y:{grid:{display:false}}},animation:{duration:1200}}
+  });
+
+  buildFinanc('ano');
+
+  charts.conc = new Chart(document.getElementById('chConcRec'),{
+    type:'doughnut',
+    data:{labels:DATA.topCli.map(c=>c.nome),datasets:[{data:DATA.topCli.map(c=>c.valor),backgroundColor:[COR.tijolo,COR.dourado,COR.folha,COR.musgo,COR.trigo],borderWidth:3,borderColor:isDark?'#1f2a24':'#fefcf7'}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{position:'bottom',labels:{boxWidth:10,padding:8,font:{size:11}}},tooltip:{backgroundColor:COR.verde,padding:12,callbacks:{label:c=>' '+fmt(c.parsed)}}},animation:{animateRotate:true,duration:1400}}
+  });
+
+  charts.radar = new Chart(document.getElementById('chRadar'),{
+    type:'radar',
+    data:{labels:['Liquidez','Margem','Endividam.','Diversif. Receita','Aderência ERP','Concentr. Banco'],datasets:[{label:'Score',data:[78,68,42,25,94,30],backgroundColor:'rgba(201,160,109,0.25)',borderColor:COR.dourado,borderWidth:2,pointBackgroundColor:COR.dourado,pointBorderColor:'#fff',pointRadius:5}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:COR.verde,padding:12,callbacks:{label:c=>c.parsed.r+' / 100'}}},scales:{r:{min:0,max:100,ticks:{stepSize:25,backdropColor:'transparent',font:{size:10}},pointLabels:{font:{size:11,weight:'600'}},grid:{color:gridCol},angleLines:{color:gridCol}}},animation:{duration:1400}}
+  });
+
+  const runway = 4.2, runwayMax = 12;
+  charts.gauge = new Chart(document.getElementById('chGauge'),{
+    type:'doughnut',
+    data:{datasets:[{data:[runway,runwayMax-runway],backgroundColor:[runway>6?COR.musgo:runway>3?COR.dourado:COR.tijolo,isDark?'rgba(212,184,122,0.1)':'rgba(139,107,74,0.08)'],borderWidth:0,circumference:270,rotation:225}]},
+    options:{responsive:false,cutout:'78%',plugins:{legend:{display:false},tooltip:{enabled:false}},animation:{duration:1800}}
+  });
+}
+
+function buildFinanc(modo){
+  if(charts.financ) charts.financ.destroy();
+  const isDark = document.documentElement.getAttribute('data-theme')==='dark';
+  const gridCol = isDark ? "rgba(212,184,122,0.08)" : "rgba(139,107,74,0.08)";
+  let labels, data, type='bar', colors, indexAxis='x', title='', sub='';
+  if(modo==='ano'){
+    labels=Object.keys(DATA.financAno);data=Object.values(DATA.financAno);
+    colors=data.map(v=>v>10e6?COR.tijolo:v>5e6?COR.dourado:COR.musgo);
+    title='Amortização por ano';sub='2026 concentra 30% do total — pico de pagamento';
+  } else if(modo==='banco'){
+    labels=Object.keys(DATA.financBanco);data=Object.values(DATA.financBanco);
+    colors=[COR.tijolo,COR.dourado,COR.musgo];
+    title='Exposição por banco';sub='Banco B concentra 91% da dívida';
+    indexAxis='y';
+  } else if(modo==='tipo'){
+    labels=Object.keys(DATA.financTipo);data=Object.values(DATA.financTipo);
+    colors=[COR.folha,COR.tijolo,COR.dourado,COR.musgo];
+    title='Composição por tipo';sub='Custeio (ciclo agrícola) é o maior bloco';
+    type='doughnut';
+  }
+  document.getElementById('finTitle').textContent=title;
+  document.getElementById('finSub').textContent=sub;
+  if(type==='doughnut'){
+    charts.financ = new Chart(document.getElementById('chFinanc'),{
+      type:'doughnut',
+      data:{labels,datasets:[{data,backgroundColor:colors,borderWidth:2,borderColor:isDark?'#1f2a24':'#fefcf7'}]},
+      options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{position:'right',labels:{padding:14,boxWidth:14,font:{size:12}}},tooltip:{backgroundColor:COR.verde,padding:12,callbacks:{label:c=>' '+c.label+': '+fmt(c.parsed)}}},animation:{animateRotate:true,duration:1200}}
+    });
+  } else {
+    charts.financ = new Chart(document.getElementById('chFinanc'),{
+      type:'bar',
+      data:{labels,datasets:[{data,backgroundColor:colors,borderRadius:8,borderSkipped:false}]},
+      options:{indexAxis,responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:COR.verde,padding:12,callbacks:{label:c=>' '+fmt(indexAxis==='y'?c.parsed.x:c.parsed.y)}}},scales:indexAxis==='y'?{x:{ticks:{callback:v=>"R$ "+(v/1e6).toFixed(1)+" mi"},grid:{color:gridCol}},y:{grid:{display:false}}}:{y:{ticks:{callback:v=>"R$ "+(v/1e6).toFixed(1)+" mi"},grid:{color:gridCol}},x:{grid:{display:false}}},animation:{duration:1200}}
+    });
+  }
+}
+
+function buildFluxoMode(modo){
+  if(charts.fluxo) charts.fluxo.destroy();
+  const isDark = document.documentElement.getAttribute('data-theme')==='dark';
+  const gridCol = isDark ? "rgba(212,184,122,0.08)" : "rgba(139,107,74,0.08)";
+  const meses = ['mai/26','jun','jul','ago','set','out','nov','dez','jan/27','fev','mar','abr'];
+  const entradas = [3500000,7466071,1057874,4766666,11813908,851143,11187535,7616110,800000,600000,400000,229689];
+  const saidas = [1850000,4400000,3100000,4350000,4700000,4450000,2900000,3500000,3200000,2800000,2650000,2645982];
+  let datasets, chartType='bar';
+  if(modo==='mensal'){
+    datasets=[
+      {label:'Entradas',data:entradas,backgroundColor:COR.folha,borderRadius:6,borderSkipped:false},
+      {label:'Saídas',data:saidas.map(v=>-v),backgroundColor:COR.tijolo,borderRadius:6,borderSkipped:false}
+    ];
+  } else if(modo==='acumulado'){
+    let s1=0, s2=0;
+    const accEnt = entradas.map(v=>{s1+=v;return s1;});
+    const accSai = saidas.map(v=>{s2+=v;return s2;});
+    datasets=[
+      {label:'Entradas acumuladas',data:accEnt,borderColor:COR.folha,backgroundColor:'rgba(45,90,63,0.2)',fill:true,tension:0.4,borderWidth:3},
+      {label:'Saídas acumuladas',data:accSai,borderColor:COR.tijolo,backgroundColor:'rgba(160,57,45,0.2)',fill:true,tension:0.4,borderWidth:3}
+    ];
+    chartType='line';
+  } else {
+    const liq = entradas.map((e,i)=>e-saidas[i]);
+    datasets=[{label:'Caixa líquido',data:liq,backgroundColor:liq.map(v=>v>=0?COR.folha:COR.tijolo),borderRadius:6,borderSkipped:false}];
+  }
+  charts.fluxo = new Chart(document.getElementById('chFluxo'),{
+    type:chartType,
+    data:{labels:meses,datasets},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:modo!=='liquido',position:'top',align:'end',labels:{boxWidth:12,padding:14}},tooltip:{backgroundColor:COR.verde,padding:12,callbacks:{label:c=>c.dataset.label+': '+fmt(Math.abs(c.parsed.y))}}},scales:{y:{ticks:{callback:v=>"R$ "+(Math.abs(v)/1e6).toFixed(1)+" mi"},grid:{color:gridCol}},x:{grid:{display:false}}},animation:{duration:1000}}
+  });
+}
+
+function rebuildCharts(){destroyAll();buildCharts();}
+
+document.querySelectorAll('[data-fin]').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('[data-fin]').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    buildFinanc(b.dataset.fin);
+  });
+});
+document.querySelectorAll('[data-fluxo]').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('[data-fluxo]').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    buildFluxoMode(b.dataset.fluxo);
+  });
+});
+
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded', buildCharts);
+} else {
+  buildCharts();
+}
+</script>
+</body>
+</html>
