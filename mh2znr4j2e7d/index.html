@@ -631,7 +631,7 @@ deck-stage > section[data-deck-active] .browser .scroll .sbar i{ animation-play-
   box-shadow:0 42px 90px rgba(20,55,60,0.34), inset 0 0 0 1px rgba(255,255,255,0.16); }
 .iphone .tela{ position:relative; border-radius:44px; overflow:hidden; background:#0B0C0E;
   height:790px; box-shadow:inset 0 0 0 2px rgba(0,0,0,0.85); }
-.iphone .tela img{ display:block; width:100%; height:auto; }
+.iphone .tela img{ display:block; width:100%; height:100%; object-fit:cover; object-position:top center; }
 .iphone .tela::after{ content:''; position:absolute; left:0; right:0; bottom:0; height:120px;
   background:linear-gradient(to bottom, rgba(11,12,14,0), #0B0C0E 78%); pointer-events:none; }
 .iphone .ilha{ position:absolute; top:14px; left:50%; transform:translateX(-50%);
@@ -647,7 +647,7 @@ deck-stage > section[data-deck-active] .browser .scroll .sbar i{ animation-play-
 
 /* iPhone pequeno, para sobrepor a uma foto */
 .iphone.mini{ width:212px; padding:7px; border-radius:31px; box-shadow:0 26px 56px rgba(20,55,60,0.42), inset 0 0 0 1px rgba(255,255,255,0.18); }
-.iphone.mini .tela{ height:436px; border-radius:25px; }
+.iphone.mini .tela{ height:352px; border-radius:25px; }
 .iphone.mini .tela::after{ height:64px; }
 .iphone.mini .ilha{ top:8px; width:58px; height:16px; }
 .iphone.mini .ilha::after{ right:8px; width:5px; height:5px; }
@@ -826,7 +826,7 @@ deck-stage > section[data-deck-active] .browser .scroll .sbar i{ animation-play-
         <div class="ec-y">2026 &nbsp;·&nbsp; GERAÇÃO 03 · AGORA</div>
         <div class="ec-t">Ela<br>age</div>
         <div class="ec-b">Ela abre arquivo, lê site, cruza planilha, monta a página, confere o resultado e volta com <b>o trabalho pronto</b>.</div>
-        <div style="margin-top:26px; background:rgba(255,255,255,0.09); border-radius:10px; padding:16px 20px; font-family:var(--mono); font-size:16px; color:#fff; line-height:1.5;">"pega as 8 planilhas e<br>me devolve o painel pronto"</div>
+        <div style="margin-top:26px; background:rgba(255,255,255,0.09); border-radius:10px; padding:16px 20px; font-family:var(--mono); font-size:16px; color:#fff; line-height:1.5;">"pegue as 8 planilhas e<br>me devolva o painel pronto"</div>
         <div style="margin-top:auto; padding-top:20px; border-top:1px solid rgba(255,255,255,0.2); font-family:var(--mono); font-size:15px; color:var(--terracota-soft);">o entregável sai da conversa</div>
       </div>
     </div>
@@ -841,7 +841,7 @@ deck-stage > section[data-deck-active] .browser .scroll .sbar i{ animation-play-
 <section class="bg-petroleo" data-label="O mesmo pedido · duas eras">
   <div class="slide-inner">
     <div class="kicker seq" data-step="1" style="font-size:16px; color:var(--terracota-soft);">O MESMO PEDIDO, NAS DUAS ERAS</div>
-    <h2 class="slide-title seq" data-step="1" style="margin-top:12px; color:#fff; font-size:62px;">"ME MOSTRA COMO ESTÁ<br>O CAIXA DESTE MÊS."</h2>
+    <h2 class="slide-title seq" data-step="1" style="margin-top:12px; color:#fff; font-size:62px;">"ME MOSTRE COMO ESTÁ<br>O CAIXA DESTE MÊS."</h2>
     <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:20px; background:var(--terracota);"></div>
 
     <div style="display:grid; grid-template-columns:1fr 1.12fr; gap:36px; margin-top:34px; flex:1; align-items:stretch;">
@@ -849,7 +849,7 @@ deck-stage > section[data-deck-active] .browser .scroll .sbar i{ animation-play-
       <div class="seq" data-step="2" style="background:rgba(255,255,255,0.04); border:1.5px dashed rgba(255,255,255,0.26); border-radius:18px; padding:28px 32px; display:flex; flex-direction:column;">
         <div class="label-sm" style="color:rgba(255,255,255,0.5); margin-bottom:20px;">A IA que responde</div>
         <div style="display:flex; flex-direction:column; gap:14px; flex:1; justify-content:center;">
-          <div class="chatb" style="background:rgba(255,255,255,0.11); color:rgba(255,255,255,0.88);">"Me mostra como está o caixa deste mês."</div>
+          <div class="chatb" style="background:rgba(255,255,255,0.11); color:rgba(255,255,255,0.88);">"Me mostre como está o caixa deste mês."</div>
           <div class="chatr" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:rgba(255,255,255,0.6);">"Claro! Para analisar o fluxo de caixa, comece separando entradas e saídas em três blocos…"</div>
           <div class="chatb" style="background:rgba(255,255,255,0.11); color:rgba(255,255,255,0.88);">"Mas eu queria o <b>meu</b> caixa."</div>
           <div class="chatr" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:rgba(255,255,255,0.6);">"Sem problema — me cole os dados aqui que eu organizo."</div>
@@ -1374,7 +1374,7 @@ deck-stage > section[data-deck-active] .browser .scroll .sbar i{ animation-play-
     </div>
     <h2 class="slide-title seq" data-step="1" style="margin-top:14px; font-size:66px;">O VÍDEO CRU <span style="color:var(--terracota);">VIRA ISSO</span></h2>
     <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:18px;"></div>
-    <div class="slide-subtitle seq" data-step="1" style="margin-top:14px; font-size:27px; max-width:1400px;">Sem editor, sem programa complicado, sem ninguém contratado. Eu só falei: <b style="color:var(--petroleo);">"corta as partes paradas, põe as legendas e o título"</b>.</div>
+    <div class="slide-subtitle seq" data-step="1" style="margin-top:14px; font-size:27px; max-width:1400px;">Sem editor, sem programa complicado, sem ninguém contratado. Eu só falei: <b style="color:var(--petroleo);">"corte as partes paradas, ponha as legendas e o título"</b>.</div>
 
     <div style="display:grid; grid-template-columns:346px 92px 346px 1fr; gap:34px; margin-top:32px; flex:1; align-items:center;">
       <div class="seq-zoom" data-step="2" style="display:flex; flex-direction:column; gap:12px;">
@@ -1777,9 +1777,9 @@ deck-stage > section[data-deck-active] .browser .scroll .sbar i{ animation-play-
         <div style="display:flex; flex-direction:column; gap:13px; flex:1; justify-content:center;">
           <div style="align-self:flex-end; background:rgba(255,255,255,0.1); border-radius:14px 14px 4px 14px; padding:12px 20px; font-family:var(--sans); font-size:19px; color:rgba(255,255,255,0.85); max-width:85%;">"Resume essa reunião"</div>
           <div style="align-self:flex-start; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:14px 14px 14px 4px; padding:10px 18px; font-family:var(--sans); font-size:17px; color:rgba(255,255,255,0.5);">pronto ✓ &nbsp;<em>…e você espera</em></div>
-          <div style="align-self:flex-end; background:rgba(255,255,255,0.1); border-radius:14px 14px 4px 14px; padding:12px 20px; font-family:var(--sans); font-size:19px; color:rgba(255,255,255,0.85); max-width:85%;">"Agora tira as pendências"</div>
+          <div style="align-self:flex-end; background:rgba(255,255,255,0.1); border-radius:14px 14px 4px 14px; padding:12px 20px; font-family:var(--sans); font-size:19px; color:rgba(255,255,255,0.85); max-width:85%;">"Agora tire as pendências"</div>
           <div style="align-self:flex-start; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:14px 14px 14px 4px; padding:10px 18px; font-family:var(--sans); font-size:17px; color:rgba(255,255,255,0.5);">pronto ✓ &nbsp;<em>…e você espera</em></div>
-          <div style="align-self:flex-end; background:rgba(255,255,255,0.1); border-radius:14px 14px 4px 14px; padding:12px 20px; font-family:var(--sans); font-size:19px; color:rgba(255,255,255,0.85); max-width:85%;">"Agora escreve as cobranças…"</div>
+          <div style="align-self:flex-end; background:rgba(255,255,255,0.1); border-radius:14px 14px 4px 14px; padding:12px 20px; font-family:var(--sans); font-size:19px; color:rgba(255,255,255,0.85); max-width:85%;">"Agora escreva as cobranças…"</div>
         </div>
         <div style="margin-top:18px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.12); font-family:var(--sans); font-size:19px; color:rgba(255,255,255,0.55); line-height:1.4;">Um pedido por vez. Você vira o gargalo da fila.</div>
       </div>
@@ -1910,7 +1910,7 @@ deck-stage > section[data-deck-active] .browser .scroll .sbar i{ animation-play-
 <section class="bg-creme" data-label="Segunda-feira de manhã">
   <div class="slide-inner" style="inset:66px 96px 56px;">
     <div class="kicker seq" data-step="1" style="font-size:16px;">VOCÊ NÃO PRECISA APRENDER NADA ANTES DE COMEÇAR</div>
-    <h2 class="slide-title seq" data-step="1" style="margin-top:14px; font-size:74px;">SEGUNDA DE MANHÃ,<br><span style="color:var(--terracota);">FAZ ASSIM</span></h2>
+    <h2 class="slide-title seq" data-step="1" style="margin-top:14px; font-size:74px;">SEGUNDA DE MANHÃ,<br><span style="color:var(--terracota);">FAÇA ASSIM</span></h2>
     <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:18px;"></div>
 
     <div style="display:grid; grid-template-columns:1fr 1.12fr; gap:52px; margin-top:34px; flex:1; align-items:center;">
@@ -1925,7 +1925,7 @@ deck-stage > section[data-deck-active] .browser .scroll .sbar i{ animation-play-
         </div>
         <div class="seq" data-step="4" style="display:flex; gap:22px; align-items:flex-start;">
           <span style="font-family:var(--serif); font-size:44px; color:var(--terracota); min-width:58px; line-height:1;">03</span>
-          <div><div style="font-family:var(--sans); font-weight:700; font-size:28px; color:var(--petroleo);">Peça o entregável, não o conselho</div><div style="font-family:var(--sans); font-size:21px; color:var(--taupe); line-height:1.4; margin-top:4px;">"Me explica como fazer" devolve texto. "Me devolve a lista pronta" devolve trabalho.</div></div>
+          <div><div style="font-family:var(--sans); font-weight:700; font-size:28px; color:var(--petroleo);">Peça o entregável, não o conselho</div><div style="font-family:var(--sans); font-size:21px; color:var(--taupe); line-height:1.4; margin-top:4px;">"Me explique como fazer" devolve texto. "Me devolva a lista pronta" devolve trabalho.</div></div>
         </div>
         <div class="seq" data-step="5" style="margin-top:6px; background:var(--petroleo); border-radius:14px; padding:22px 26px;">
           <div style="font-family:var(--sans); font-size:22px; color:#fff; line-height:1.4;">E mande <b style="color:var(--terracota-soft);">o pacote inteiro de uma vez</b>. Uma coisinha por vez é o jeito antigo — e é o que faz vocês desistirem na terça.</div>
@@ -1936,7 +1936,7 @@ deck-stage > section[data-deck-active] .browser .scroll .sbar i{ animation-play-
         <div class="label-sm" style="color:var(--taupe); margin-bottom:16px;">O texto que vocês podem copiar hoje — serve para qualquer uma das quatro</div>
         <div style="font-family:var(--mono); font-size:19px; color:var(--ink); line-height:1.75; background:var(--offwhite); border-left:4px solid var(--terracota); border-radius:8px; padding:24px 26px;">
           Você é o meu gerente de operação de uma clínica de vacinação.<br><br>
-          Todo mês eu perco tempo com <span style="color:var(--terracota);">[conta aqui a sua reclamação]</span>.<br><br>
+          Todo mês eu perco tempo com <span style="color:var(--terracota);">[conte aqui a sua reclamação]</span>.<br><br>
           Eu quero chegar em <span style="color:var(--terracota);">[o resultado pronto que você quer]</span>.<br><br>
           <b>Antes de responder, me faça todas as perguntas que você precisar — de uma vez só, numeradas — que eu respondo todas juntas.</b><br><br>
           Depois me devolva o passo a passo e o material pronto, não uma explicação.
@@ -2018,7 +2018,7 @@ deck-stage > section[data-deck-active] .browser .scroll .sbar i{ animation-play-
             <div style="font-family:var(--serif); font-size:30px; color:#fff; line-height:1; margin-top:8px;">NEWSCALE.TECH</div>
           </a>
           <a href="mailto:contato@newscale.tech" style="text-decoration:none; background:var(--petroleo); border-radius:16px; padding:20px 26px; display:block;">
-            <div style="font-family:var(--mono); font-size:12px; letter-spacing:0.2em; text-transform:uppercase; color:var(--terracota-soft);">Me escreve</div>
+            <div style="font-family:var(--mono); font-size:12px; letter-spacing:0.2em; text-transform:uppercase; color:var(--terracota-soft);">Me escreva</div>
             <div style="font-family:var(--sans); font-weight:700; font-size:25px; color:#fff; line-height:1.1; margin-top:8px;">contato@newscale.tech</div>
           </a>
         </div>
@@ -2029,8 +2029,8 @@ deck-stage > section[data-deck-active] .browser .scroll .sbar i{ animation-play-
           <img src="qr-instagram.svg" alt="QR do Instagram" style="width:268px; height:268px; display:block;">
         </div>
         <div style="text-align:center;">
-          <div style="font-family:var(--serif); font-size:36px; color:#fff; line-height:1;">APONTA A CÂMERA</div>
-          <div style="font-family:var(--sans); font-size:20px; color:rgba(255,255,255,0.9); margin-top:8px; line-height:1.35;">Cai direto no meu perfil.<br>Me manda um oi contando qual é a <b>sua</b> tarefa mais repetitiva.</div>
+          <div style="font-family:var(--serif); font-size:36px; color:#fff; line-height:1;">APONTE A CÂMERA</div>
+          <div style="font-family:var(--sans); font-size:20px; color:rgba(255,255,255,0.9); margin-top:8px; line-height:1.35;">Cai direto no meu perfil.<br>Me mande um oi contando qual é a <b>sua</b> tarefa mais repetitiva.</div>
         </div>
       </div>
     </div>
