@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bruna Santanna · A Virada IA</title>
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#0E282C">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --deep:#0E282C; --deep-2:#14373C;
+  --terra:#B06E4A; --terra-l:#C4835E;
+  --w:#FFFFFF; --w-70:rgba(255,255,255,.70); --w-50:rgba(255,255,255,.50);
+  --w-38:rgba(255,255,255,.38); --hair:rgba(255,255,255,.12);
+}
+body{font-family:'Hanken Grotesk',sans-serif;background:var(--deep);color:var(--w);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+::selection{background:var(--terra);color:#fff}
+
+.page{max-width:480px;margin:0 auto;position:relative;background:var(--deep)}
+.pad{padding:0 26px}
+
+/* ═══════════ SLIDE DE CAPA ═══════════ */
+.slide{position:relative;width:100%;height:min(88vh,760px);min-height:540px;overflow:hidden;background:var(--deep)}
+.slide>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 10%}
+.slide .scrim{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to top,
+    rgba(14,40,44,.985) 0%,
+    rgba(14,40,44,.95) 21%,
+    rgba(14,40,44,.74) 34%,
+    rgba(14,40,44,.30) 48%,
+    rgba(14,40,44,.05) 63%,
+    rgba(14,40,44,0) 74%),
+  linear-gradient(to bottom, rgba(14,40,44,.38) 0%, rgba(14,40,44,0) 17%)}
+
+.meta{position:absolute;z-index:3;top:24px;left:26px;right:26px;display:flex;align-items:center;justify-content:space-between;
+  font-size:.58rem;font-weight:700;letter-spacing:.19em;text-transform:uppercase;color:var(--w-50)}
+.meta .brandline{display:flex;align-items:center;gap:10px}
+.meta .brandline::before{content:'';width:20px;height:1.5px;background:var(--w-50)}
+
+.slide .content{position:absolute;z-index:3;left:0;right:0;bottom:0;padding:0 26px 26px}
+.slide h1{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;line-height:.87;letter-spacing:.008em;
+  color:var(--w);font-size:clamp(2.9rem,13.5vw,4.05rem)}
+.slide h1 em{font-style:normal;color:var(--terra-l);display:block}
+.slide .sub{font-size:1.03rem;font-weight:300;color:var(--w-70);line-height:1.45;margin-top:18px;max-width:31ch}
+.slide .sub strong{color:var(--w);font-weight:600}
+.slide .foot{display:flex;align-items:center;justify-content:space-between;margin-top:26px;padding-top:16px;border-top:1px solid var(--hair)}
+.slide .handle{font-size:.86rem;font-weight:700;color:var(--w);letter-spacing:.01em}
+.slide .handle span{color:var(--terra-l)}
+.slide .scrolltag{font-size:.58rem;font-weight:700;letter-spacing:.19em;text-transform:uppercase;color:var(--w-38);display:flex;align-items:center;gap:7px}
+.slide .scrolltag i{font-style:normal;animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(3px)}}
+@media(prefers-reduced-motion:reduce){.slide .scrolltag i{animation:none}}
+
+/* ═══════════ NÚMEROS ═══════════ */
+.stats{display:flex;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.stats>div{flex:1 1 0;min-width:0;padding:20px 6px;border-left:1px solid var(--hair);text-align:center}
+.stats>div:first-child{border-left:0}
+.stats .n{display:block;font-family:'Anton',sans-serif;font-weight:400;font-size:1.62rem;color:var(--terra-l);line-height:1;white-space:nowrap}
+.stats .l{display:block;font-size:.55rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--w-38);line-height:1.25;margin-top:8px}
+
+/* ═══════════ LINKS ═══════════ */
+.label{font-size:.58rem;font-weight:700;letter-spacing:.19em;text-transform:uppercase;color:var(--w-38);
+  display:flex;align-items:center;gap:10px;margin:38px 0 6px}
+.label::after{content:'';flex:1;height:1px;background:var(--hair)}
+
+.row{display:flex;align-items:center;gap:16px;padding:21px 0;border-top:1px solid var(--hair);
+  transition:padding .2s cubic-bezier(.2,.7,.2,1);-webkit-tap-highlight-color:transparent}
+.row:last-of-type{border-bottom:1px solid var(--hair)}
+.row .no{flex:0 0 auto;width:22px;font-size:.62rem;font-weight:700;letter-spacing:.1em;color:var(--terra-l)}
+.row .body{flex:1;min-width:0}
+.row .t{display:block;font-family:'Anton',sans-serif;font-weight:400;font-size:1.72rem;line-height:.98;
+  text-transform:uppercase;color:var(--w);transition:color .2s}
+.row .s{display:block;font-size:.79rem;font-weight:400;color:var(--w-50);margin-top:5px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .ic{flex:0 0 auto;width:19px;height:19px;color:var(--w-38);transition:color .2s}
+.row .ic svg{width:100%;height:100%}
+.row .arw{flex:0 0 auto;font-family:'Anton',sans-serif;font-size:1.35rem;color:var(--terra-l);
+  transition:transform .2s cubic-bezier(.2,.7,.2,1)}
+.row:active{padding-left:10px}
+.row:active .t{color:var(--terra-l)}
+.row:active .arw{transform:translateX(6px)}
+@media(hover:hover){
+  .row:hover{padding-left:10px}
+  .row:hover .t{color:var(--terra-l)}
+  .row:hover .ic{color:var(--terra-l)}
+  .row:hover .arw{transform:translateX(6px)}
+}
+
+/* ═══════════ FECHO ═══════════ */
+.end{padding:44px 0 46px}
+.end p{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;line-height:1;
+  font-size:clamp(1.5rem,6vw,1.95rem);color:var(--w)}
+.end p em{font-style:normal;color:var(--terra-l)}
+.end .u{margin-top:18px;font-family:'Hanken Grotesk',sans-serif;font-size:.72rem;font-weight:700;
+  letter-spacing:.17em;text-transform:uppercase;color:var(--w-38)}
+
+/* ═══════════ REVEAL ═══════════ */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .75s cubic-bezier(.2,.7,.2,1),transform .75s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ═══ CAPA ═══ -->
+  <section class="slide">
+    <img src="fotos/pal-hero.jpg" alt="Bruna Santanna" fetchpriority="high" decoding="async">
+    <div class="scrim"></div>
+
+    <div class="meta">
+      <span class="brandline">A Virada IA</span>
+      <span>Links</span>
+    </div>
+
+    <div class="content">
+      <h1>Bruna<em>Santanna</em></h1>
+      <p class="sub">Estrategista de IA. Te ensino a usar o <strong>Claude</strong> de verdade — e a colocar a IA pra trabalhar por você.</p>
+      <div class="foot">
+        <span class="handle">@brusantanna<span>.ai</span></span>
+        <span class="scrolltag">Rola <i>↓</i></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="pad">
+
+    <div class="stats">
+      <div><div class="n">+1.000</div><div class="l">Treinadas</div></div>
+      <div><div class="n">+10 mil</div><div class="l">Na biblioteca</div></div>
+      <div><div class="n">10 anos</div><div class="l">Empreendendo</div></div>
+    </div>
+
+    <div class="label rv">Comece por aqui</div>
+
+    <a href="https://brunasantanna.com/comece" class="row rv" data-label="palestra-site">
+      <span class="no">01</span>
+      <span class="body"><span class="t">Meu site</span><span class="s">Cursos, guias e biblioteca gratuita</span></span>
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18Z"/></svg></span>
+      <span class="arw">→</span>
+    </a>
+
+    <a href="https://newscale.tech" target="_blank" rel="noopener" class="row rv" data-label="palestra-newscale">
+      <span class="no">02</span>
+      <span class="body"><span class="t">NewScale</span><span class="s">IA e automação pra sua empresa</span></span>
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V8l8-4 8 4v12"/><path d="M4 20h16"/><path d="M9 20v-5h6v5"/></svg></span>
+      <span class="arw">→</span>
+    </a>
+
+    <a href="https://instagram.com/brusantanna.ai" target="_blank" rel="noopener" class="row rv" data-label="palestra-instagram">
+      <span class="no">03</span>
+      <span class="body"><span class="t">Instagram</span><span class="s">@brusantanna.ai</span></span>
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg></span>
+      <span class="arw">→</span>
+    </a>
+
+    <a href="https://www.linkedin.com/in/bruna-araujo-santanna/" target="_blank" rel="noopener" class="row rv" data-label="palestra-linkedin">
+      <span class="no">04</span>
+      <span class="body"><span class="t">LinkedIn</span><span class="s">Bruna Araujo Santanna</span></span>
+      <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm6 0h3.8v1.7h.05c.53-1 1.83-2.05 3.76-2.05C20.4 8.65 22 10.5 22 14v7h-4v-6.2c0-1.48-.03-3.4-2.07-3.4-2.07 0-2.39 1.62-2.39 3.29V21H9V9Z"/></svg></span>
+      <span class="arw">→</span>
+    </a>
+
+    <a href="https://wa.me/5511971901020?text=Oi%20Bruna!%20Te%20vi%20na%20palestra%20e%20quero%20conversar." target="_blank" rel="noopener" class="row rv" data-label="palestra-whatsapp">
+      <span class="no">05</span>
+      <span class="body"><span class="t">WhatsApp</span><span class="s">Falar comigo agora</span></span>
+      <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Z"/></svg></span>
+      <span class="arw">→</span>
+    </a>
+
+    <a href="mailto:eu@brunasantanna.com?subject=Vim%20da%20palestra" class="row rv" data-label="palestra-email">
+      <span class="no">06</span>
+      <span class="body"><span class="t">E-mail</span><span class="s">eu@brunasantanna.com</span></span>
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 5.5L20 7"/></svg></span>
+      <span class="arw">→</span>
+    </a>
+
+    <div class="end">
+      <p class="rv">Eu só ensino <em>o que eu uso</em> todo dia.</p>
+      <p class="u rv">brunasantanna.com</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:0,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(i%4*70)+'ms';io.observe(el)});
+setTimeout(()=>document.querySelectorAll('.rv:not(.in)').forEach(el=>el.classList.add('in')),2500);
+</script>
+</body>
+</html>
