@@ -585,8 +585,8 @@ deck-stage > section[data-deck-active] .browser .scroll img{ animation-play-stat
 /* Só movimento, sem opacidade: se a animação não rodar por qualquer
    motivo, a imagem fica parada no topo — exatamente como o print antigo. */
 @keyframes pagescroll{
-  0%, 14%   { transform:translateY(0); }
-  92%, 100% { transform:translateY(var(--d,0)); }
+  0%, 4%    { transform:translateY(0); }
+  96%, 100% { transform:translateY(var(--d,0)); }
 }
 /* barrinha lateral discreta, só para o olho entender que a página é longa */
 .browser .scroll .sbar{ position:absolute; top:8px; right:7px; bottom:8px; width:4px;
@@ -596,8 +596,8 @@ deck-stage > section[data-deck-active] .browser .scroll img{ animation-play-stat
   animation:sbarmove var(--dur,16s) linear infinite; animation-play-state:paused; }
 deck-stage > section[data-deck-active] .browser .scroll .sbar i{ animation-play-state:running; }
 @keyframes sbarmove{
-  0%, 14%   { top:0; }
-  92%, 100% { top:calc(100% - var(--th,26%)); }
+  0%, 4%    { top:0; }
+  96%, 100% { top:calc(100% - var(--th,26%)); }
 }
 @media (prefers-reduced-motion: reduce){
   .browser .scroll img, .browser .scroll .sbar i{ animation:none !important; transform:none !important; opacity:1 !important; }
@@ -1065,6 +1065,58 @@ deck-stage > section[data-deck-active] .browser .scroll .sbar i{ animation-play-
   <div class="logo-micro">VIRADA</div>
 </section>
 
+<!-- ═══════════ NOVO · CASE 01 PARTE 2 · PUNTA CANA ═══════════ -->
+<section class="bg-creme" data-label="Case 01 · parte 2 · O segundo destino">
+  <div class="slide-inner" style="inset:66px 96px 56px;">
+    <div class="seq" data-step="1" style="display:flex; align-items:center; gap:16px;">
+      <span class="case-chip t">Case 01 · parte 2</span>
+      <span class="kicker" style="font-size:15px;">A PROVA DE QUE NÃO FOI SORTE DE UMA VEZ</span>
+    </div>
+    <h2 class="slide-title seq" data-step="1" style="margin-top:14px; font-size:62px;">O DESTINO SEGUINTE SAIU<br><span style="color:var(--terracota);">NA MESMA TARDE</span></h2>
+    <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:16px;"></div>
+
+    <div style="display:grid; grid-template-columns:1fr 1.16fr; gap:50px; margin-top:28px; flex:1; align-items:center;">
+      <div style="display:flex; flex-direction:column;">
+        <div class="seq" data-step="2" style="font-family:var(--sans); font-size:25px; color:var(--ink); line-height:1.45;">O primeiro pacote levou uma tarde para nascer. Quando veio o <b>Punta Cana</b>, ninguém começou do zero: <b style="color:var(--terracota);">o processo já estava escrito.</b> Trocou o destino, trocou os hotéis, trocou as datas — a página se montou de novo.</div>
+
+        <div style="display:flex; flex-direction:column; gap:13px; margin-top:26px;">
+          <div class="seq" data-step="3" style="display:flex; gap:18px; align-items:flex-start; background:var(--white); border:1px solid rgba(139,115,85,0.18); border-radius:13px; padding:17px 22px;">
+            <span style="font-family:var(--serif); font-size:27px; color:var(--terracota); min-width:34px; line-height:1;">01</span>
+            <div style="font-family:var(--sans); font-size:21px; color:var(--ink); line-height:1.38;"><b>A tabela de preços virou a página.</b> Quatro categorias de quarto, três formas de pagamento, tudo saindo da mesma planilha.</div>
+          </div>
+          <div class="seq" data-step="3" style="display:flex; gap:18px; align-items:flex-start; background:var(--white); border:1px solid rgba(139,115,85,0.18); border-radius:13px; padding:17px 22px;">
+            <span style="font-family:var(--serif); font-size:27px; color:var(--terracota); min-width:34px; line-height:1;">02</span>
+            <div style="font-family:var(--sans); font-size:21px; color:var(--ink); line-height:1.38;"><b>O cliente escolhe e vê o preço na hora.</b> Sem esperar o vendedor responder segunda-feira.</div>
+          </div>
+          <div class="seq" data-step="4" style="display:flex; gap:18px; align-items:flex-start; background:var(--white); border:1px solid rgba(139,115,85,0.18); border-radius:13px; padding:17px 22px;">
+            <span style="font-family:var(--serif); font-size:27px; color:var(--terracota); min-width:34px; line-height:1;">03</span>
+            <div style="font-family:var(--sans); font-size:21px; color:var(--ink); line-height:1.38;"><b>Voo, hotel, translado e passeio</b> na mesma página — o material que antes eram seis arquivos soltos no WhatsApp.</div>
+          </div>
+        </div>
+
+        <div class="seq" data-step="5" style="margin-top:26px; display:flex; gap:44px; align-items:flex-end;">
+          <div><div class="metric" style="font-size:60px;">2º destino</div><div class="metric-l">sem refazer o processo</div></div>
+          <div style="border-left:3px solid var(--terracota); padding-left:24px;"><div style="font-family:var(--sans); font-size:22px; color:var(--petroleo); line-height:1.4;">O trabalho foi feito <b>uma vez.</b><br>Do segundo em diante é só usar.</div></div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column;">
+        <div class="seq-zoom" data-step="2">
+          <div class="browser">
+            <div class="bar"><i style="background:#E06C5A"></i><i style="background:#E0B45A"></i><i style="background:#7FB069"></i><span class="url">jucanabalada · punta cana · virada no paraíso 2027</span></div>
+            <div class="scroll" style="height:600px"><img src="page-puntacana.webp" alt="Página do pacote de Punta Cana, montada pela IA"><div class="sbar" aria-hidden="true"><i></i></div></div>
+          </div>
+        </div>
+        <div class="cap seq" data-step="5" style="margin-top:14px; text-align:center; color:var(--taupe);">A página inteira, rolando. <b style="color:var(--terracota);">Foto, preço e tabela vieram da fonte — ninguém montou isso à mão.</b></div>
+      </div>
+    </div>
+
+    <div class="anchor seq" data-step="6" style="margin-top:16px;">É essa a diferença entre usar a IA uma vez e <em style="color:var(--terracota);">deixar um processo montado.</em></div>
+  </div>
+  <div class="slide-num">08 / 25</div>
+  <div class="logo-micro">VIRADA</div>
+</section>
+
 <!-- ═══════════ 09 · CASE 02 · STRINGHETTA ═══════════ -->
 <section class="bg-petroleo" data-label="Case 02 · O caixa de 8 contas">
   <div class="slide-inner">
@@ -1227,7 +1279,7 @@ deck-stage > section[data-deck-active] .browser .scroll .sbar i{ animation-play-
       <div class="seq-zoom" data-step="3">
         <div class="browser">
           <div class="bar"><i style="background:#E06C5A"></i><i style="background:#E0B45A"></i><i style="background:#7FB069"></i><span class="url">newscale.tech · proposta · versão do cliente</span></div>
-          <div class="scroll" style="height:540px"><img src="page-proposta.webp" alt="Proposta comercial em página"><div class="sbar" aria-hidden="true"><i></i></div></div>
+          <div class="scroll" style="height:540px"><img src="page-santos.webp" alt="Proposta da Comercial Santos, montada como página"><div class="sbar" aria-hidden="true"><i></i></div></div>
         </div>
         <div class="cap seq" data-step="4" style="margin-top:14px; text-align:center; color:var(--taupe);">Uma proposta real, montada assim. <b style="color:var(--terracota);">Nenhum slide foi usado no processo.</b></div>
       </div>
@@ -1433,105 +1485,6 @@ deck-stage > section[data-deck-active] .browser .scroll .sbar i{ animation-play-
         <div class="cap seq" data-step="5" style="margin-top:14px; text-align:center; color:var(--taupe);">Print de <b style="color:var(--terracota);">hoje de manhã</b>. 18 coisas para hoje, 19 perguntas esperando resposta.</div>
       </div>
     </div>
-  </div>
-  <div class="slide-num">13 / 23</div>
-  <div class="logo-micro">VIRADA</div>
-</section>
-
-<!-- ═══════════ NOVO · E SE FOSSE A SUA UNIDADE ═══════════ -->
-<section class="bg-offwhite" data-label="E se fosse a sua unidade">
-  <div class="slide-inner" style="inset:64px 92px 54px;">
-    <div class="seq" data-step="1" style="display:flex; align-items:center; gap:16px;">
-      <span class="case-chip t">Agora vocês</span><span class="case-chip">Pilar 01 + 02 + 03</span>
-      <span class="kicker" style="font-size:15px;">SEIS CASES DE FORA. E DENTRO DE CASA?</span>
-      <img src="logo-amo.webp" alt="Amo Vacinas" style="height:38px; margin-left:auto;">
-    </div>
-    <h2 class="slide-title seq" data-step="1" style="margin-top:14px; font-size:62px;">E SE FOSSE <span style="color:#7B5FA8;">A SUA UNIDADE</span>?</h2>
-    <div class="divider-line seq-line" data-step="1" style="width:90px; margin-top:16px; background:#7B5FA8;"></div>
-
-    <div style="display:grid; grid-template-columns:1fr 1.02fr; gap:46px; margin-top:26px; flex:1; align-items:center;">
-      <div style="display:flex; flex-direction:column;">
-        <div class="label-sm seq" data-step="2" style="color:var(--taupe); margin-bottom:14px;">Quatro coisas que já estão acontecendo aí — e ninguém tem tempo de olhar</div>
-        <div style="display:flex; flex-direction:column; gap:13px;">
-          <div class="seq" data-step="2" style="display:flex; gap:18px; align-items:flex-start; background:var(--white); border:1px solid rgba(139,115,85,0.18); border-radius:13px; padding:17px 22px;">
-            <span style="font-family:var(--serif); font-size:27px; color:#7B5FA8; min-width:34px; line-height:1;">01</span>
-            <div style="font-family:var(--sans); font-size:21px; color:var(--ink); line-height:1.38;">Quem tomou a <b>1ª dose e nunca voltou</b> para a segunda. Está no seu sistema. Ninguém abre.</div>
-          </div>
-          <div class="seq" data-step="3" style="display:flex; gap:18px; align-items:flex-start; background:var(--white); border:1px solid rgba(139,115,85,0.18); border-radius:13px; padding:17px 22px;">
-            <span style="font-family:var(--serif); font-size:27px; color:#7B5FA8; min-width:34px; line-height:1;">02</span>
-            <div style="font-family:var(--sans); font-size:21px; color:var(--ink); line-height:1.38;">O <b>lote que vence no fim do mês</b> — e vira prejuízo em vez de virar campanha.</div>
-          </div>
-          <div class="seq" data-step="3" style="display:flex; gap:18px; align-items:flex-start; background:var(--white); border:1px solid rgba(139,115,85,0.18); border-radius:13px; padding:17px 22px;">
-            <span style="font-family:var(--serif); font-size:27px; color:#7B5FA8; min-width:34px; line-height:1;">03</span>
-            <div style="font-family:var(--sans); font-size:21px; color:var(--ink); line-height:1.38;">A <b>campanha da sazonalidade</b> — influenza, volta às aulas, viagem. Post, mensagem e lista, sempre do zero.</div>
-          </div>
-          <div class="seq" data-step="4" style="display:flex; gap:18px; align-items:flex-start; background:var(--white); border:1px solid rgba(139,115,85,0.18); border-radius:13px; padding:17px 22px;">
-            <span style="font-family:var(--serif); font-size:27px; color:#7B5FA8; min-width:34px; line-height:1;">04</span>
-            <div style="font-family:var(--sans); font-size:21px; color:var(--ink); line-height:1.38;">A <b>empresa a três quadras</b> que vacinaria 80 funcionários — e a proposta nunca saiu.</div>
-          </div>
-        </div>
-
-        <div class="seq" data-step="5" style="margin-top:22px; display:grid; grid-template-columns:1fr 58px 1fr; gap:12px; align-items:center;">
-          <div style="display:flex; flex-direction:column; gap:9px;">
-            <div class="node node-in">O relatório do sistema<span class="ns">exportado sem nome de paciente</span></div>
-            <div class="node node-in">A planilha do estoque<span class="ns">lote e validade</span></div>
-          </div>
-          <svg viewBox="0 0 58 130" width="58" aria-hidden="true">
-            <g class="flowline" stroke="#7B5FA8" stroke-width="3" fill="none" stroke-linecap="round">
-              <path d="M4 65 C 24 65, 26 30, 54 30"/><path d="M4 65 C 24 65, 26 100, 54 100"/>
-            </g>
-          </svg>
-          <div style="display:flex; flex-direction:column; gap:9px;">
-            <div class="node" style="background:#7B5FA8; color:#fff; box-shadow:0 20px 48px rgba(123,95,168,0.3);">A lista de quem voltar<span class="ns" style="opacity:.85;">com a mensagem já escrita</span></div>
-            <div class="node node-out">O alerta antes de vencer<span class="ns">enquanto ainda dá para agir</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div style="display:flex; flex-direction:column;">
-        <div class="seq-zoom" data-step="2">
-          <div class="browser">
-            <div class="bar"><i style="background:#E06C5A"></i><i style="background:#E0B45A"></i><i style="background:#7FB069"></i><span class="url">minha unidade · painel de hoje · exemplo</span></div>
-            <div style="background:#FBFAFD; padding:26px 28px;">
-              <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px;">
-                <div style="background:#fff; border:1px solid rgba(123,95,168,0.2); border-radius:12px; padding:16px 18px;">
-                  <div style="font-family:var(--mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#8A8FA3;">Agenda de hoje</div>
-                  <div style="font-family:var(--serif); font-size:46px; color:#7B5FA8; line-height:1.05; margin-top:4px;">34</div>
-                  <div style="font-family:var(--sans); font-size:15px; color:#8A8FA3;">6 ainda sem confirmar</div>
-                </div>
-                <div style="background:#fff; border:1px solid rgba(41,171,226,0.24); border-radius:12px; padding:16px 18px;">
-                  <div style="font-family:var(--mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#8A8FA3;">Não voltaram</div>
-                  <div style="font-family:var(--serif); font-size:46px; color:#29ABE2; line-height:1.05; margin-top:4px;">38</div>
-                  <div style="font-family:var(--sans); font-size:15px; color:#8A8FA3;">2ª e 3ª dose vencidas</div>
-                </div>
-                <div style="background:#fff; border:1px solid rgba(139,115,85,0.18); border-radius:12px; padding:16px 18px;">
-                  <div style="font-family:var(--mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#8A8FA3;">Mês vs. meta</div>
-                  <div style="font-family:var(--serif); font-size:46px; color:#233133; line-height:1.05; margin-top:4px;">84%</div>
-                  <div style="font-family:var(--sans); font-size:15px; color:#8A8FA3;">faltam 9 dias</div>
-                </div>
-              </div>
-
-              <div style="margin-top:14px; background:#FFF6E8; border:1px solid #E8C88A; border-left:5px solid #D99B2E; border-radius:12px; padding:16px 20px;">
-                <div style="font-family:var(--sans); font-weight:700; font-size:19px; color:#7A5410;">⚠ 12 doses vencem em 26 dias</div>
-                <div style="font-family:var(--sans); font-size:17px; color:#8A6B2E; line-height:1.35; margin-top:3px;">Dá tempo de virar campanha. Separei os 38 nomes que combinam com esse lote e escrevi a mensagem de cada um.</div>
-              </div>
-
-              <div style="margin-top:14px; background:#fff; border:1px solid rgba(139,115,85,0.16); border-radius:12px; padding:16px 20px;">
-                <div style="font-family:var(--mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#8A8FA3; margin-bottom:10px;">De onde veio quem agendou</div>
-                <div style="display:flex; flex-direction:column; gap:8px; font-family:var(--sans); font-size:16px; color:#4A5057;">
-                  <div style="display:flex; align-items:center; gap:12px;"><span style="width:88px;">WhatsApp</span><span style="flex:1; height:11px; border-radius:6px; background:#EFEBF6; display:block; overflow:hidden;"><i style="display:block; width:46%; height:100%; background:#7B5FA8;"></i></span><b style="width:44px; text-align:right;">46%</b></div>
-                  <div style="display:flex; align-items:center; gap:12px;"><span style="width:88px;">Google</span><span style="flex:1; height:11px; border-radius:6px; background:#EFEBF6; display:block; overflow:hidden;"><i style="display:block; width:31%; height:100%; background:#29ABE2;"></i></span><b style="width:44px; text-align:right;">31%</b></div>
-                  <div style="display:flex; align-items:center; gap:12px;"><span style="width:88px;">Indicação</span><span style="flex:1; height:11px; border-radius:6px; background:#EFEBF6; display:block; overflow:hidden;"><i style="display:block; width:23%; height:100%; background:#8FD8F7;"></i></span><b style="width:44px; text-align:right;">23%</b></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="cap seq" data-step="5" style="margin-top:13px; text-align:center; color:var(--taupe); font-size:18px;">Exemplo montado para esta manhã, com números inventados. <b style="color:#7B5FA8;">Não é a sua unidade — é o desenho do que dá para fazer com o que você já tem hoje.</b></div>
-      </div>
-    </div>
-
-    <div class="anchor seq" data-step="6" style="margin-top:16px;">Nenhuma das quatro pede sistema novo. <em style="color:#7B5FA8;">Elas pedem alguém com tempo para olhar — e é exatamente isso que ela devolve.</em></div>
   </div>
   <div class="slide-num">13 / 23</div>
   <div class="logo-micro">VIRADA</div>
@@ -2240,8 +2193,8 @@ deck-stage > section[data-deck-active] .browser .scroll .sbar i{ animation-play-
    Para deixar mais lento ou mais rápido, mexa só no VELOCIDADE abaixo:
    é quantos pixels a página desce por segundo.                        */
 (function(){
-  const VELOCIDADE = 230;   // px/s — menor = mais devagar
-  const MIN = 10, MAX = 30; // segundos de rolagem, piso e teto
+  const VELOCIDADE = 150;   // px/s — menor = mais devagar
+  const MIN = 14, MAX = 48; // segundos de rolagem, piso e teto
 
   const boxes = Array.from(document.querySelectorAll('.browser .scroll'));
   if (!boxes.length) return;
@@ -2252,7 +2205,7 @@ deck-stage > section[data-deck-active] .browser .scroll .sbar i{ animation-play-
     const alturaExibida = box.clientWidth * img.naturalHeight / img.naturalWidth;
     const distancia = Math.max(0, alturaExibida - box.clientHeight);
     const segundos = Math.min(MAX, Math.max(MIN, distancia / VELOCIDADE));
-    const total = (segundos / 0.78).toFixed(1) + 's';
+    const total = (segundos / 0.92).toFixed(1) + 's';  // 0.92 = fatia do ciclo que rola (4% de pausa no topo, 4% no fim)
     img.style.setProperty('--d', (-distancia) + 'px');
     img.style.setProperty('--dur', total);
     const polegar = box.querySelector('.sbar i');
