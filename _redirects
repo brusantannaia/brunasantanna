@@ -1,0 +1,5 @@
+# Netlify redirects — brunasantanna.com
+# /guia-claude era a versão antiga do guia do Claude: página sem menu, sem
+# captura de email e sem link pro curso. Recebia ~67 visitas/mês vindas de
+# links antigos e as perdia em 6 segundos. Manda pro pilar atual.
+/guia-claude    /claude    301

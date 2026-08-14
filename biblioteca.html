@@ -223,6 +223,49 @@
             box-shadow: 8px 8px 0 var(--green);
         }
         .pack.at-end { margin: 64px 0 0; box-shadow: 8px 8px 0 var(--terra); }
+
+        /* ── OFERTA DO CURSO ──────────────────────────────────────────────
+           Card CLARO de propósito: os cards escuros (.pack/.featured) são o
+           material gratuito; este é o único bloco pago da página, então ele
+           se distingue pela inversão de cor, não por mais um ink escuro. */
+        .curso-cta {
+            display: flex; align-items: center; gap: 30px; flex-wrap: wrap;
+            background: var(--card); color: var(--text);
+            border: 2px solid var(--ink); border-radius: 20px;
+            padding: 34px 38px; margin: 0 0 56px;
+            box-shadow: 8px 8px 0 var(--terra);
+        }
+        .curso-cta-body { flex: 1; min-width: 260px; }
+        .curso-cta .cc-kick {
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em;
+            text-transform: uppercase; color: var(--terra-d); margin-bottom: 10px;
+        }
+        .curso-cta h3 {
+            font-family: 'Anton', sans-serif; font-weight: 400;
+            font-size: clamp(1.5rem, 4vw, 2rem); text-transform: uppercase;
+            line-height: 1; color: var(--ink); margin-bottom: 10px; max-width: 22ch;
+        }
+        .curso-cta h3 .terra { color: var(--terra); }
+        .curso-cta p { font-size: 0.95rem; color: var(--muted); max-width: 50ch; margin: 0; }
+        .curso-cta .cc-price {
+            display: block; margin-top: 12px; font-size: 0.88rem;
+            font-weight: 700; color: var(--text);
+        }
+        .curso-cta .cc-price b { color: var(--terra-d); }
+        .curso-cta-action { flex-shrink: 0; }
+        .curso-cta .cc-btn {
+            display: inline-block; padding: 17px 30px;
+            font-family: 'Hanken Grotesk', sans-serif; font-size: 0.86rem; font-weight: 700;
+            letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap;
+            background: var(--terra); color: #fff; border-radius: 10px;
+            transition: transform .15s, box-shadow .15s, background .2s;
+        }
+        .curso-cta .cc-btn:hover { background: var(--terra-d); transform: translateY(-2px); box-shadow: 0 10px 24px rgba(176,110,74,.32); }
+        .curso-cta .cc-btn:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+        @media (max-width: 640px) {
+            .curso-cta { padding: 28px 24px; }
+            .curso-cta-action, .curso-cta .cc-btn { width: 100%; text-align: center; }
+        }
         .pack-kick { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--terra); margin-bottom: 10px; }
         .pack h3 { font-family: 'Anton', sans-serif; font-weight: 400; font-size: 2rem; text-transform: uppercase; line-height: 1; margin-bottom: 10px; }
         .pack p { font-size: 0.95rem; color: rgba(255,255,255,0.72); font-weight: 300; max-width: 520px; margin-bottom: 22px; }
@@ -451,6 +494,19 @@
             </div>
         </div>
 
+        <!-- OFERTA DO CURSO — única oferta paga da página -->
+        <div class="curso-cta">
+            <div class="curso-cta-body">
+                <div class="cc-kick">Claude com Profundidade · curso</div>
+                <h3>Os guias te ensinam <span class="terra">tarefas</span>. O curso te ensina a <span class="terra">pensar</span>.</h3>
+                <p>Tudo que está aqui embaixo é grátis e continua sendo. Se você já tentou e sentiu que estava usando 10% da ferramenta, o curso é o caminho inteiro: 8 módulos, do zero, sem programar.</p>
+                <span class="cc-price">Acesso imediato · <b>12x de R$35,89</b> ou R$347 à vista</span>
+            </div>
+            <div class="curso-cta-action">
+                <a href="/curso" class="cc-btn" data-cta="biblioteca">Ver o curso</a>
+            </div>
+        </div>
+
         <div class="filters-head">
             <h2>O feed</h2>
             <div style="display:flex; align-items:center; gap:14px;">
@@ -570,6 +626,10 @@
           descricao: 'Ele lê sua agenda, seus e-mails e suas tarefas e te entrega o dia organizado antes de você abrir o computador, inclusive quais reuniões pedem preparo. Como montar em 3 passos.' },
         { slug: 'guia-opus-5', titulo: 'Claude Opus 5: o que mudou, quanto custa e quando vale usar', tema: 'Modelos', data: '2026-07',
           descricao: 'O Opus 5 chegou a meio por cento do Fable 5 por metade do preço e já está no plano Pro. O que mudou, por que a concorrência forçou isso e o detalhe polêmico dos modelos antigos.' },
+        { slug: 'guia-setup-claude', titulo: 'Como configurar o Claude em um dia: os 5 primeiros passos', tema: 'Setup', data: '2026-07',
+          descricao: 'App de computador, instruções, conectores, troca de modelo e um projeto. As cinco etapas na ordem certa — a maioria pula e depois acha que a IA é genérica.' },
+        { slug: 'guia-agente-skill-workflow', titulo: 'Agente, skill e workflow no Claude: a diferença que muda tudo', tema: 'Fundamentos', data: '2026-07',
+          descricao: 'Agente é o papel, skill é a habilidade, workflow é o processo. Separar essas 3 camadas é o que faz a IA parar de parecer bicho de 7 cabeças e começar a trabalhar.' },
         { slug: 'guia-motor-de-conteudo', titulo: 'Motor de conteúdo no Claude: da ideia ao Reel editado sem sair da conversa', tema: 'Conteúdo', data: '2026-07',
           descricao: 'Um sistema no Claude que acha a pauta, escreve Reel, carrossel e LinkedIn, publica o guia no site e edita o vídeo. Como montar o seu, peça por peça, sem programar.' },
         { slug: 'guia-memoria-claude', titulo: 'A memória do Claude mudou: agora ele lembra do seu negócio', tema: 'Memória', data: '2026-07',
