@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Janaina · Encontro 02 · Mentoria A Virada IA</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#F3EEE3; --bg-2:#ECE5D6; --card:#FBF9F3;
+  --ink:#14373C; --ink-2:#2C4F54; --green:#435D51;
+  --terra:#B06E4A; --terra-l:#C4835E; --terra-d:#985A3B;
+  --text:#233133; --muted:#6E7A75;
+  --line:rgba(20,55,60,.16);
+  --anton:'Anton', sans-serif; --hank:'Hanken Grotesk', sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--hank);background:var(--bg);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+::selection{background:var(--terra);color:#fff;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 30px;}
+h1,h2,h3{font-family:var(--anton);font-weight:400;text-transform:uppercase;letter-spacing:-.01em;line-height:.92;}
+.terra{color:var(--terra);}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--terra);}
+.eyebrow::before{content:'';width:26px;height:2px;background:var(--terra);}
+#bar{position:fixed;top:0;left:0;height:4px;width:0;background:var(--terra);z-index:99;transition:width .1s linear;}
+
+.hd{position:sticky;top:0;z-index:50;background:rgba(243,238,227,.92);backdrop-filter:blur(8px);border-bottom:2px solid var(--ink);}
+.hd-in{display:flex;align-items:center;justify-content:space-between;padding:14px 30px;max-width:1180px;margin:0 auto;}
+.hd .logo{font-family:var(--anton);font-size:1.15rem;text-transform:uppercase;color:var(--ink);letter-spacing:.02em;display:inline-flex;align-items:center;}
+.hd .logo .tag{font-family:var(--hank);font-weight:700;font-size:.6rem;letter-spacing:.12em;color:var(--terra);border:1.5px solid var(--terra);padding:3px 8px;border-radius:100px;margin-left:10px;text-transform:uppercase;}
+.hd nav{display:flex;gap:20px;}
+.hd nav a{font-size:.82rem;font-weight:600;color:var(--ink-2);text-decoration:none;transition:.18s;}
+.hd nav a:hover{color:var(--terra);}
+@media(max-width:860px){.hd nav{display:none;}}
+
+section{padding:76px 0;position:relative;}
+.snum{font-family:var(--anton);font-size:clamp(3rem,8vw,5.5rem);color:var(--terra);line-height:.8;display:block;}
+.sec-h{font-size:clamp(2.1rem,6vw,3.6rem);color:var(--ink);margin:6px 0 14px;}
+.lead{font-size:1.15rem;color:var(--ink-2);max-width:56ch;}
+.lead b{color:var(--ink);font-weight:700;}
+.alt{background:var(--bg-2);}
+
+.hero{padding:64px 0 52px;}
+.hero h1{font-size:clamp(3rem,11vw,6.6rem);color:var(--ink);margin:18px 0 0;}
+.hero .sub{font-size:1.25rem;color:var(--ink-2);max-width:44ch;margin-top:22px;}
+.hero .sub b{color:var(--ink);font-weight:700;}
+.statrow{display:flex;gap:34px;flex-wrap:wrap;margin-top:38px;}
+.statrow .n{font-family:var(--anton);font-size:2.4rem;color:var(--ink);line-height:1;}
+.statrow .n span{color:var(--terra);}
+.statrow .l{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:5px;}
+
+.mani{background:var(--ink);padding:60px 0;}
+.mani p{font-family:var(--anton);text-transform:uppercase;font-size:clamp(1.7rem,5vw,3.2rem);line-height:1.02;color:#fff;max-width:26ch;}
+.mani p span{color:var(--terra-l);}
+.marq{background:var(--bg-2);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);padding:15px 0;overflow:hidden;}
+.marq-t{display:flex;gap:40px;width:max-content;animation:slide 30s linear infinite;align-items:center;}
+@keyframes slide{to{transform:translateX(-50%);}}
+.marq span{font-family:var(--anton);font-size:1.4rem;text-transform:uppercase;color:var(--ink);white-space:nowrap;}
+.marq span.d{color:var(--terra);}
+
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px;}
+@media(max-width:680px){.split{grid-template-columns:1fr;}}
+.col{border-radius:16px;padding:24px 26px;}
+.col.no{background:var(--bg-2);border:1.5px dashed var(--line);}
+.col.yes{background:var(--ink);color:#fff;box-shadow:7px 7px 0 var(--terra);}
+.alt .col.no{background:var(--card);}
+.col .lab{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;}
+.col.no .lab{color:var(--muted);} .col.yes .lab{color:var(--terra-l);}
+.col h4{font-family:var(--hank);font-weight:800;font-size:1.35rem;text-transform:uppercase;line-height:1.08;margin-bottom:8px;}
+.col.no h4{color:var(--ink);} .col.yes h4{color:#fff;}
+.col p{font-size:.95rem;} .col.no p{color:var(--ink-2);} .col.yes p{color:rgba(255,255,255,.85);}
+
+.callout{margin-top:20px;background:rgba(176,110,74,.1);border-left:4px solid var(--terra);border-radius:0 12px 12px 0;padding:15px 19px;font-size:1rem;color:var(--ink-2);}
+.callout b{color:var(--terra);}
+
+.spot{margin-top:26px;background:var(--ink);border-radius:18px;padding:32px 34px;box-shadow:7px 7px 0 var(--green);}
+.spot .lab{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra-l);margin-bottom:12px;}
+.spot h3{font-family:var(--anton);text-transform:uppercase;font-size:clamp(1.5rem,4vw,2.2rem);color:#fff;line-height:1;}
+.spot h3 span{color:var(--terra-l);}
+.spot p{color:rgba(255,255,255,.86);font-size:1.04rem;margin-top:14px;max-width:56ch;}
+.spot p b{color:#fff;}
+.spot .verbs{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;}
+.spot .verbs i{font-style:normal;font-family:var(--anton);text-transform:uppercase;letter-spacing:.04em;font-size:1rem;color:#fff;background:rgba(196,131,94,.22);border:1.5px solid var(--terra-l);border-radius:100px;padding:7px 18px;}
+
+.flow{display:flex;align-items:stretch;margin-top:28px;flex-wrap:wrap;}
+.fstep{flex:1;min-width:150px;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:18px;}
+.alt .fstep{background:var(--card);}
+.fstep.dark{background:var(--ink);box-shadow:7px 7px 0 var(--terra);border-color:var(--ink);}
+.fstep .fn{font-family:var(--anton);font-size:1.3rem;color:var(--terra);}
+.fstep.dark .fn{color:var(--terra-l);}
+.fstep .ft{font-family:var(--anton);text-transform:uppercase;font-size:1.02rem;color:var(--ink);margin-top:4px;line-height:1.02;}
+.fstep.dark .ft{color:#fff;}
+.fstep p{font-size:.83rem;color:var(--ink-2);margin-top:6px;}.fstep.dark p{color:rgba(255,255,255,.8);}
+.farrow{display:flex;align-items:center;justify-content:center;font-family:var(--anton);color:var(--terra);font-size:1.7rem;padding:0 12px;}
+@media(max-width:680px){.flow{flex-direction:column;}.farrow{transform:rotate(90deg);padding:8px 0;}}
+
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;}
+.chip{font-family:var(--hank);font-weight:700;font-size:.82rem;background:var(--bg-2);border:1.5px solid var(--line);border-radius:100px;padding:8px 16px;color:var(--ink);}
+.alt .chip{background:var(--card);}
+.chip.hot{background:var(--terra);color:#fff;border-color:var(--terra);}
+
+/* linhas do DRE */
+.lines{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:28px;}
+.lcard{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:22px 20px;transition:.2s;}
+.lcard:hover{border-color:var(--ink);box-shadow:6px 6px 0 var(--line);transform:translateY(-3px);}
+.lcard .num{font-family:var(--anton);font-size:2.6rem;color:var(--terra);line-height:.9;}
+.lcard .num small{font-family:var(--hank);font-size:.66rem;font-weight:700;letter-spacing:.14em;color:var(--muted);display:block;text-transform:uppercase;margin-bottom:2px;}
+.lcard h4{font-family:var(--anton);text-transform:uppercase;font-size:1.12rem;color:var(--ink);margin-top:8px;line-height:1.02;}
+.lcard p{font-size:.86rem;color:var(--ink-2);margin-top:6px;}
+.lcard.wide{grid-column:span 2;}
+@media(max-width:680px){.lcard.wide{grid-column:span 1;}}
+
+/* benchmark bars */
+.bench{margin-top:26px;display:grid;gap:16px;}
+.brow{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:18px 20px;}
+.alt .brow{background:var(--card);}
+.brow .bt{display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap;}
+.brow .bt h4{font-family:var(--anton);text-transform:uppercase;font-size:1.05rem;color:var(--ink);}
+.brow .bt em{font-style:normal;font-family:var(--anton);font-size:1.5rem;color:var(--terra);}
+.brow .track{margin-top:12px;height:14px;border-radius:100px;background:var(--bg-2);border:1.5px solid var(--line);overflow:hidden;}
+.brow .fill{height:100%;background:var(--terra);width:0;transition:width 1.1s cubic-bezier(.2,.8,.2,1);}
+.in .brow .fill.f12{width:12%;} .in .brow .fill.f15{width:15%;}
+.brow small{display:block;margin-top:8px;font-size:.82rem;color:var(--muted);}
+
+/* passos numerados */
+.steps{margin-top:30px;display:grid;gap:12px;counter-reset:st;}
+.st{display:flex;gap:18px;align-items:flex-start;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:20px 22px;}
+.alt .st{background:var(--card);}
+.st.key{background:var(--ink);box-shadow:7px 7px 0 var(--terra);border-color:var(--ink);}
+.st .stn{flex-shrink:0;width:38px;height:38px;border-radius:10px;background:var(--terra);color:#fff;font-family:var(--anton);font-size:1.25rem;display:flex;align-items:center;justify-content:center;line-height:1;}
+.st.key .stn{background:var(--terra-l);color:var(--ink);}
+.st .stc h4{font-family:var(--anton);text-transform:uppercase;font-size:1.16rem;color:var(--ink);line-height:1.02;}
+.st.key .stc h4{color:#fff;}
+.st .stc p{font-size:.95rem;color:var(--ink-2);margin-top:5px;}
+.st.key .stc p{color:rgba(255,255,255,.86);}
+.st .stc a{color:var(--terra);font-weight:700;text-decoration:none;border-bottom:2px solid var(--terra);}
+.st.key .stc a{color:var(--terra-l);border-color:var(--terra-l);}
+.st .stc a:hover{color:var(--terra-d);}
+
+/* árvore de pastas */
+.tree{margin-top:28px;background:var(--ink);border-radius:16px;padding:26px 28px;box-shadow:7px 7px 0 var(--terra);font-family:var(--hank);}
+.tree .row{display:flex;align-items:center;gap:9px;color:rgba(255,255,255,.9);font-size:.95rem;padding:5px 0;font-weight:600;}
+.tree .row.root{color:#fff;font-family:var(--anton);text-transform:uppercase;letter-spacing:.03em;font-size:1.05rem;}
+.tree .ic{width:20px;text-align:center;flex-shrink:0;color:var(--terra-l);}
+.tree .row.file{color:var(--terra-l);}
+.tree .ind1{padding-left:26px;} .tree .ind2{padding-left:52px;}
+.tree .note{color:rgba(255,255,255,.45);font-weight:400;font-size:.82rem;margin-left:6px;}
+
+/* prompt */
+.prompt{margin-top:22px;background:var(--card);border:1.5px solid var(--line);border-left:7px solid var(--terra);border-radius:0 14px 14px 0;overflow:hidden;}
+.prompt .pl{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;background:rgba(176,110,74,.1);}
+.prompt .pl span{font-family:var(--hank);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);display:inline-flex;align-items:center;gap:9px;flex-wrap:wrap;}
+.live{background:var(--terra);color:#fff;padding:3px 8px;border-radius:6px;letter-spacing:.06em;}
+.copy{font-family:var(--hank);font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--terra);border:none;border-radius:100px;padding:7px 16px;cursor:pointer;transition:.18s;white-space:nowrap;}
+.copy:hover{background:var(--terra-d);}.copy.done{background:var(--green);}
+.prompt pre{font-family:var(--hank);font-size:.93rem;line-height:1.58;color:var(--text);padding:20px;white-space:pre-wrap;word-break:break-word;}
+.pnote{font-size:.9rem;color:var(--muted);margin-top:10px;max-width:60ch;}
+
+/* regras de ouro */
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:30px;}
+.rule{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:24px 22px;transition:.2s;}
+.alt .rule{background:var(--card);}
+.rule:hover{border-color:var(--ink);box-shadow:6px 6px 0 var(--line);transform:translateY(-3px);}
+.rule .rn{font-family:var(--anton);font-size:.8rem;letter-spacing:.14em;color:var(--terra);text-transform:uppercase;}
+.rule h4{font-family:var(--anton);text-transform:uppercase;font-size:1.2rem;color:var(--ink);margin:6px 0 8px;line-height:1.02;}
+.rule p{font-size:.92rem;color:var(--ink-2);}
+.rule p b{color:var(--ink);font-weight:700;}
+
+.misscard{background:var(--ink);color:#fff;border-radius:20px;padding:40px;box-shadow:9px 9px 0 var(--green);}
+.misscard h2{color:#fff;font-size:clamp(1.8rem,5vw,2.8rem);}.misscard h2 span{color:var(--terra-l);}
+.misscard .msub{color:rgba(255,255,255,.75);margin-top:10px;font-size:1rem;}
+.check{margin-top:26px;display:grid;gap:11px;}
+.ck{display:flex;gap:14px;align-items:flex-start;}
+.ck .bx{flex-shrink:0;width:24px;height:24px;border-radius:6px;border:2px solid var(--terra-l);margin-top:1px;}
+.ck p{color:rgba(255,255,255,.9);font-size:1.02rem;}.ck p b{color:#fff;}
+
+.teaser{background:var(--bg-2);}
+.teaser .pill{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra);border:1.5px solid var(--terra);border-radius:100px;padding:5px 14px;margin-bottom:16px;}
+.teaser h2{font-size:clamp(2rem,5.5vw,3.4rem);color:var(--ink);max-width:22ch;}.teaser h2 span{color:var(--terra);}
+.teaser p{margin-top:14px;color:var(--ink-2);max-width:56ch;font-size:1.05rem;}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:26px;}
+.tg{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:20px;}
+.tg h4{font-family:var(--anton);text-transform:uppercase;font-size:1.08rem;color:var(--ink);}
+.tg p{font-size:.88rem;color:var(--ink-2);margin-top:6px;}
+
+.close{background:var(--ink);text-align:center;}
+.close h2{font-size:clamp(2.4rem,8vw,5rem);color:#fff;}.close h2 span{color:var(--terra-l);}
+.close .sig{margin-top:18px;font-size:.9rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra-l);}
+.sign{display:flex;align-items:center;justify-content:space-between;gap:12px;color:rgba(255,255,255,.85);font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;padding:18px 30px;background:#0E282C;flex-wrap:wrap;}
+.sign .ns{font-family:var(--anton);letter-spacing:.28em;color:var(--terra-l);font-size:1rem;}
+
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);}
+.rv.in{opacity:1;transform:none;}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;}.marq-t{animation:none;}.brow .fill{transition:none;}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+
+<header class="hd">
+  <div class="hd-in">
+    <div class="logo">Bruna Santanna<span class="tag">A Virada IA</span></div>
+    <nav>
+      <a href="index.html">Todos os encontros</a>
+      <a href="#decidiu">O que decidimos</a>
+      <a href="#pa">O indicador</a>
+      <a href="#ajustes">Os ajustes</a>
+      <a href="#prompts">Prompts</a>
+      <a href="#regras">Regras</a>
+      <a href="#licao">Li&ccedil;&atilde;o de casa</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap rv">
+    <span class="eyebrow">Mentoria 1:1 &middot; Encontro 02 &middot; 19 de agosto de 2026</span>
+    <h1>O DASHBOARD<br>SAIU DO PAPEL.<br>AGORA &Eacute; <span class="terra">LAPIDA&Ccedil;&Atilde;O.</span></h1>
+    <p class="sub">No encontro 01 a gente mapeou. Neste, o painel <b>existe, roda e mostra n&uacute;mero de verdade.</b> O que sobrou n&atilde;o &eacute; construir &mdash; &eacute; afinar at&eacute; voc&ecirc; olhar e falar "&eacute; isso".</p>
+    <div class="statrow">
+      <div><div class="n">1h47</div><div class="l">de call virando esta p&aacute;gina</div></div>
+      <div><div class="n"><span>1,68</span></div><div class="l">o PA de hoje</div></div>
+      <div><div class="n">2,10</div><div class="l">o PA da regional</div></div>
+      <div><div class="n"><span>1</span></div><div class="l">conversa s&oacute;, do come&ccedil;o ao fim</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="marq">
+  <div class="marq-t">
+    <span>Header executivo <span class="d">&middot;</span></span><span class="d">Plano de a&ccedil;&atilde;o no topo &middot;</span><span>Informa&ccedil;&atilde;o dentro da aba <span class="d">&middot;</span></span><span class="d">Cor da Natura &middot;</span><span>Alerta autom&aacute;tico <span class="d">&middot;</span></span><span class="d">Extens&atilde;o do Chrome &middot;</span>
+    <span>Header executivo <span class="d">&middot;</span></span><span class="d">Plano de a&ccedil;&atilde;o no topo &middot;</span><span>Informa&ccedil;&atilde;o dentro da aba <span class="d">&middot;</span></span><span class="d">Cor da Natura &middot;</span><span>Alerta autom&aacute;tico <span class="d">&middot;</span></span><span class="d">Extens&atilde;o do Chrome &middot;</span>
+  </div>
+</div>
+
+<!-- 01 O QUE DECIDIMOS -->
+<section id="decidiu">
+  <div class="wrap rv">
+    <span class="snum">01</span>
+    <h2 class="sec-h">O que a gente <span class="terra">decidiu.</span></h2>
+    <p class="lead">Voc&ecirc; chegou com a li&ccedil;&atilde;o de casa feita: pastas criadas, dados de loja na pasta, projeto no Claude e o dashboard j&aacute; gerado. <b>A conversa deixou de ser "como faz" e virou "como fica bom".</b> Quatro decis&otilde;es sa&iacute;ram daqui.</p>
+
+    <div class="split">
+      <div class="col no">
+        <div class="lab">O que a gente decidiu N&Atilde;O fazer agora</div>
+        <h4>A skill da marca Natura</h4>
+        <p>Voc&ecirc; subiu o guia de marca pra pasta e ele ainda n&atilde;o foi lido. Criar uma skill de marca agora queima token &agrave; toa, porque o conte&uacute;do do painel ainda vai mudar muito. <b>Estrutura primeiro, est&eacute;tica depois.</b> A skill entra quando o layout parar de mexer.</p>
+      </div>
+      <div class="col yes">
+        <div class="lab">O que a gente decidiu fazer</div>
+        <h4>Lapidar o painel numa conversa s&oacute;</h4>
+        <p>Mais ou menos uma hora de ida e volta com o Claude, tudo dentro da mesma conversa, at&eacute; o dashboard ficar do jeito que voc&ecirc; mostraria pra um franqueado sem pedir desculpa.</p>
+      </div>
+    </div>
+
+    <div class="lines">
+      <div class="lcard">
+        <div class="num"><small>Decis&atilde;o 01</small>2</div>
+        <h4>Duas vers&otilde;es do painel</h4>
+        <p>Uma interna, com os valores de venda completos. Outra pro franqueado, s&oacute; com percentual e indicador &mdash; sem n&uacute;mero absoluto sens&iacute;vel na tela.</p>
+      </div>
+      <div class="lcard">
+        <div class="num"><small>Decis&atilde;o 02</small>PA</div>
+        <h4>O indicador que manda</h4>
+        <p>Pe&ccedil;as por atendimento vira o eixo do plano de a&ccedil;&atilde;o. N&atilde;o &eacute; trazer cliente novo: &eacute; aumentar o que cada cliente j&aacute; leva.</p>
+      </div>
+      <div class="lcard">
+        <div class="num"><small>Decis&atilde;o 03</small>1</div>
+        <h4>Uma conversa, do come&ccedil;o ao fim</h4>
+        <p>Todas as itera&ccedil;&otilde;es do dashboard na mesma linha de conversa. Abriu conversa nova, o Claude perdeu tudo que a gente combinou.</p>
+      </div>
+      <div class="lcard">
+        <div class="num"><small>Decis&atilde;o 04</small>3</div>
+        <h4>Continua com 3 lojas</h4>
+        <p>A carteira inteira s&oacute; depois que o formato estiver aprovado. Rodar 46 agora s&oacute; faz demorar e gastar.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      Voc&ecirc; contou que apresentou o projeto pra sua chefe e ela gostou. <b>Guarda esse dado.</b> Quando o dashboard estiver pronto, a conversa deixa de ser "como voc&ecirc; est&aacute;" e passa a ser "como voc&ecirc; fez isso".
+    </div>
+  </div>
+</section>
+
+<!-- 02 O PA -->
+<section id="pa" class="alt">
+  <div class="wrap rv">
+    <span class="snum">02</span>
+    <h2 class="sec-h">O insight que <span class="terra">saiu dos dados.</span></h2>
+    <p class="lead">Quando a gente olhou julho, ficou claro: <b>o problema n&atilde;o &eacute; falta de cliente.</b> &Eacute; o quanto cada cliente leva. E isso muda o plano de a&ccedil;&atilde;o inteiro.</p>
+
+    <div class="bench">
+      <div class="brow">
+        <div class="bt"><h4>PA da loja hoje</h4><em>1,68</em></div>
+        <div class="track"><div class="fill f12"></div></div>
+        <small>Pe&ccedil;as por atendimento &mdash; o que a loja entrega hoje.</small>
+      </div>
+      <div class="brow">
+        <div class="bt"><h4>PA da regional</h4><em>2,10</em></div>
+        <div class="track"><div class="fill f15"></div></div>
+        <small>O que as lojas compar&aacute;veis j&aacute; fazem. &Eacute; esta a r&eacute;gua do simulador &mdash; n&atilde;o a meta interna.</small>
+      </div>
+    </div>
+
+    <div class="spot">
+      <div class="lab">O ajuste que voc&ecirc; pediu no simulador</div>
+      <h3>Mostre o dinheiro que <span>ele deixa na mesa.</span></h3>
+      <p>O simulador n&atilde;o pode comparar com a meta interna &mdash; ela n&atilde;o move ningu&eacute;m. Ele tem que responder uma pergunta s&oacute;: <b>"se eu sair de 1,68 pra 2,10, quanto entra a mais no meu caixa este m&ecirc;s?"</b> &Eacute; esse n&uacute;mero que faz o franqueado agir.</p>
+      <div class="verbs"><i>Ganho em R$</i><i>N&atilde;o a meta</i><i>Comparado &agrave; regional</i><i>Com instru&ccedil;&atilde;o de uso</i></div>
+    </div>
+
+    <div class="callout">
+      A m&eacute;trica de <b>quantos dias do m&ecirc;s a loja trabalha s&oacute; pra cobrir custo</b> tamb&eacute;m ficou. &Eacute; informativa e bate forte &mdash; mant&eacute;m no painel.
+    </div>
+  </div>
+</section>
+
+<!-- 03 OS AJUSTES -->
+<section id="ajustes">
+  <div class="wrap rv">
+    <span class="snum">03</span>
+    <h2 class="sec-h">Os oito ajustes <span class="terra">que a gente anotou.</span></h2>
+    <p class="lead">Tudo que saiu da nossa revis&atilde;o de tela, na ordem em que importa. <b>Manda todos de uma vez</b> &mdash; n&atilde;o um por mensagem.</p>
+
+    <div class="steps">
+      <div class="st key"><div class="stn">1</div><div class="stc"><h4>Header com resumo executivo</h4><p>Um bloco no topo com o essencial: como a loja est&aacute;, por que est&aacute; assim e o que fazer. O franqueado pode n&atilde;o rolar a p&aacute;gina inteira &mdash; o que importa tem que estar antes da rolagem.</p></div></div>
+      <div class="st"><div class="stn">2</div><div class="stc"><h4>Plano de a&ccedil;&atilde;o sobe pro topo</h4><p>&Eacute; o item de maior valor da p&aacute;gina. Hoje ele est&aacute; no meio; tem que estar logo depois do header.</p></div></div>
+      <div class="st"><div class="stn">3</div><div class="stc"><h4>Informa&ccedil;&atilde;o dentro da aba</h4><p>Cada t&oacute;pico em sua pr&oacute;pria aba, em vez de uma p&aacute;gina que s&oacute; desce. A vis&atilde;o completa fica numa &uacute;ltima aba, chamada "Completo", pra n&atilde;o confundir.</p></div></div>
+      <div class="st"><div class="stn">4</div><div class="stc"><h4>Simulador com instru&ccedil;&atilde;o de uso</h4><p>Explicar em uma linha o que a pessoa faz ali, e comparar com o PA da regional em reais.</p></div></div>
+      <div class="st"><div class="stn">5</div><div class="stc"><h4>Cor da Natura no lugar do vinho</h4><p>Os tons de vinho dos gr&aacute;ficos viram um vermelho vivo pros estados de alerta. A paleta acompanha o manual da marca.</p></div></div>
+      <div class="st"><div class="stn">6</div><div class="stc"><h4>Bordas claras nos dados por vendedor</h4><p>A tabela por vendedor est&aacute; confusa de ler. Separa&ccedil;&atilde;o vis&iacute;vel entre as linhas resolve.</p></div></div>
+      <div class="st"><div class="stn">7</div><div class="stc"><h4>Alerta autom&aacute;tico de meta</h4><p>O painel identifica sozinho se a loja bateu ou n&atilde;o bateu, e destaca. Cruza os dados no fechamento sem voc&ecirc; conferir na m&atilde;o.</p></div></div>
+      <div class="st"><div class="stn">8</div><div class="stc"><h4>Mec&acirc;nica de engajamento no plano</h4><p>Barra de progresso, checklist e um calend&aacute;rio por semana &mdash; pra o franqueado ver o compromisso, n&atilde;o s&oacute; ler.</p></div></div>
+    </div>
+
+    <div class="callout">
+      Refer&ecirc;ncia vale mais que adjetivo. <b>Manda print do sistema da Natura</b> e fala "quero com a cara disso". E o <b>exemplo-cockpit-caixa.html</b> que te mandei por e-mail j&aacute; est&aacute; na sua pasta &mdash; aponta pra ele quando pedir o layout.
+    </div>
+  </div>
+</section>
+
+<!-- 04 PROMPTS -->
+<section id="prompts" class="alt">
+  <div class="wrap rv">
+    <span class="snum">04</span>
+    <h2 class="sec-h">Os prompts <span class="terra">deste encontro.</span></h2>
+    <p class="lead">Continuando a numera&ccedil;&atilde;o do encontro 01. <b>Cola na mesma conversa do dashboard</b> &mdash; n&atilde;o abre conversa nova.</p>
+
+    <div class="prompt">
+      <div class="pl"><span><b>Prompt 06</b> Lapidar o dashboard de uma vez <span class="live">na mesma conversa</span></span><button class="copy">Copiar</button></div>
+      <pre>Vamos refinar o dashboard que voc&ecirc; j&aacute; montou. N&atilde;o recomece: parta do arquivo atual e aplique tudo que eu listar abaixo de uma vez.
+
+O QUE MUDA NA ESTRUTURA
+1. Crie um header no topo com um resumo executivo: como a loja est&aacute;, o motivo principal do resultado e a a&ccedil;&atilde;o priorit&aacute;ria. Quem abrir e n&atilde;o rolar a p&aacute;gina tem que entender a situa&ccedil;&atilde;o s&oacute; por esse bloco.
+2. Suba o plano de a&ccedil;&atilde;o para logo depois do header &mdash; &eacute; a informa&ccedil;&atilde;o mais importante da p&aacute;gina.
+3. Reorganize o conte&uacute;do em abas por t&oacute;pico, com a informa&ccedil;&atilde;o contida dentro de cada aba em vez de uma p&aacute;gina que s&oacute; desce. A &uacute;ltima aba se chama "Completo" e mostra a vis&atilde;o inteira.
+
+O QUE MUDA NO CONTE&Uacute;DO
+4. No simulador de impacto, compare o meu PA atual (1,68) com o PA da regional (2,10) e mostre em reais quanto a loja ganharia a mais no m&ecirc;s se chegasse l&aacute;. N&atilde;o compare com a meta interna. Escreva uma instru&ccedil;&atilde;o curta explicando como usar o simulador.
+5. Crie um alerta autom&aacute;tico que identifique sozinho se a loja bateu ou n&atilde;o bateu cada meta do m&ecirc;s, e destaque isso visualmente.
+6. No plano de a&ccedil;&atilde;o, adicione mec&acirc;nicas de engajamento: barra de progresso, checklist e um calend&aacute;rio por semana com o que fazer.
+
+O QUE MUDA NO VISUAL
+7. Aplique a paleta da Natura. Troque os tons de vinho dos gr&aacute;ficos por um vermelho vivo, usado s&oacute; para estados de alerta.
+8. Deixe as bordas e a separa&ccedil;&atilde;o das linhas da tabela por vendedor bem mais claras de ler.
+9. Use como refer&ecirc;ncia de layout o arquivo exemplo-cockpit-caixa.html que est&aacute; na pasta, e o print do sistema que estou anexando.
+
+Antes de executar: me fa&ccedil;a todas as perguntas que precisar &mdash; de uma vez s&oacute;, numeradas &mdash; e depois aplique tudo e me devolva o arquivo atualizado.</pre>
+    </div>
+    <p class="pnote">Esse &eacute; o prompt do "mais uma hora" que eu te pedi. Depois dele, voc&ecirc; vai continuar mandando print e ajuste &mdash; &eacute; assim mesmo, ningu&eacute;m acerta layout de primeira.</p>
+
+    <div class="prompt">
+      <div class="pl"><span><b>Prompt 07</b> Ensinar o Claude a extrair no Checklist F&aacute;cil <span class="live">extens&atilde;o do Chrome</span></span><button class="copy">Copiar</button></div>
+      <pre>Voc&ecirc; vai usar a extens&atilde;o do Claude no Google Chrome para entrar em um sistema que eu uso no trabalho e extrair um relat&oacute;rio pra mim. Trate isso como se eu estivesse treinando um funcion&aacute;rio novo: eu explico o caminho, voc&ecirc; executa e me conta o que conseguiu.
+
+O SISTEMA
+[cole aqui a URL do Checklist F&aacute;cil]
+
+O QUE EU QUERO QUE VOC&Ecirc; TRAGA
+O DRE das lojas [nomes das 3 lojas do piloto], do m&ecirc;s de [m&ecirc;s].
+
+O CAMINHO, CLIQUE A CLIQUE
+[descreva: entrei onde, cliquei em qual menu, filtrei o qu&ecirc;, o relat&oacute;rio abre em PDF, dentro do PDF tem um link que abre uma planilha, baixei de onde]
+
+O QUE PODE DAR ERRADO
+[login, pop-up, o link interno do PDF, qualquer bloqueio que voc&ecirc; j&aacute; conhece]
+
+Execute o passo a passo, me diga em qual etapa parou se parar, e no fim salve o que conseguiu extrair na pasta do projeto. Me fa&ccedil;a todas as perguntas que precisar &mdash; de uma vez s&oacute;, numeradas &mdash; antes de come&ccedil;ar.</pre>
+    </div>
+    <p class="pnote">Faz o mesmo teste depois <b>dentro do BI da Natura</b>, com o passo a passo dos cliques. E anota quanto token cada teste consumiu &mdash; &eacute; isso que vai dizer se compensa automatizar ou continuar extraindo na m&atilde;o.</p>
+
+    <div class="prompt">
+      <div class="pl"><span><b>Prompt 08</b> Resumir os treinamentos da Academia Varejo <span class="live">NotebookLM</span></span><button class="copy">Copiar</button></div>
+      <pre>Vou te dar o conte&uacute;do de um treinamento de vendas em v&iacute;deo, com cerca de 1h30 de dura&ccedil;&atilde;o, da plataforma interna da minha empresa.
+
+Quero que voc&ecirc; me devolva:
+1. Um resumo objetivo, do tamanho de uma p&aacute;gina, que um vendedor de loja consiga ler em cinco minutos.
+2. Os tr&ecirc;s pontos pr&aacute;ticos que mais impactam pe&ccedil;as por atendimento.
+3. Um roteiro curto que eu possa mandar por mensagem pros meus franqueados repassarem na reuni&atilde;o de equipe.
+4. As perguntas que o treinamento deixou em aberto e que eu deveria responder pra eles.
+
+Me fa&ccedil;a todas as perguntas que precisar &mdash; de uma vez s&oacute;, numeradas &mdash; antes de come&ccedil;ar.</pre>
+    </div>
+    <p class="pnote">Antes disso voc&ecirc; precisa checar com a Natura se d&aacute; pra <b>obter os arquivos de v&iacute;deo da plataforma</b>. Plataforma fechada n&atilde;o deixa baixar; link p&uacute;blico de YouTube deixa. Sem o arquivo, n&atilde;o tem como processar.</p>
+  </div>
+</section>
+
+<!-- 05 REGRAS -->
+<section id="regras">
+  <div class="wrap rv">
+    <span class="snum">05</span>
+    <h2 class="sec-h">As regras de ouro <span class="terra">deste encontro.</span></h2>
+    <p class="lead">O que eu te falei solto ao longo da call, junto num lugar s&oacute;. Estas somam &agrave;s do encontro 01 &mdash; n&atilde;o substituem.</p>
+
+    <div class="rules">
+      <div class="rule"><div class="rn">Contexto</div><h4>Uma conversa s&oacute;</h4><p>Todas as itera&ccedil;&otilde;es do dashboard na mesma linha de conversa. <b>Conversa nova &eacute; mem&oacute;ria zerada</b> &mdash; voc&ecirc; vai repetir tudo e ele vai errar o que j&aacute; tinha acertado.</p></div>
+      <div class="rule"><div class="rn">Feedback</div><h4>Fale como se falasse com um designer</h4><p>N&atilde;o espere ele acertar layout de primeira. <b>Mande print, diga o que incomodou e por qu&ecirc;</b>, e volte. &Eacute; trabalho de ag&ecirc;ncia: exigente, espec&iacute;fico, iterativo.</p></div>
+      <div class="rule"><div class="rn">Refer&ecirc;ncia</div><h4>Print vale mais que adjetivo</h4><p>"Bonito" n&atilde;o diz nada. <b>"Quero com a cara deste print"</b> diz tudo. Foi por isso que te mandei o exemplo de fluxo de caixa.</p></div>
+      <div class="rule"><div class="rn">Custo</div><h4>A janela &eacute; de 5 horas</h4><p>O limite de uso renova a cada cinco horas. <b>Concentre o trabalho pesado numa janela s&oacute;</b> em vez de espalhar em pedacinhos pelo dia.</p></div>
+      <div class="rule"><div class="rn">Ordem</div><h4>Estrutura antes de est&eacute;tica</h4><p>Skill de marca s&oacute; quando o conte&uacute;do parar de mexer. <b>Fazer skill de layout agora &eacute; congelar o que ainda vai mudar</b> &mdash; e pagar token duas vezes.</p></div>
+      <div class="rule"><div class="rn">Organiza&ccedil;&atilde;o</div><h4>Arquive o que n&atilde;o usa</h4><p>Arquivo e conversa duplicada na pasta do projeto atrapalham. <b>O Claude l&ecirc; o que est&aacute; l&aacute;</b> &mdash; se est&aacute; bagun&ccedil;ado, ele responde bagun&ccedil;ado.</p></div>
+      <div class="rule"><div class="rn">Modelo</div><h4>Opus enquanto for design</h4><p>Enquanto a conversa for sobre como o painel fica, <b>Opus</b>. Sonnet quando virar rotina de execu&ccedil;&atilde;o.</p></div>
+      <div class="rule"><div class="rn">Ferramenta</div><h4>Cada uma no que &eacute; boa</h4><p><b>Claude</b> pro t&eacute;cnico e pro HTML. <b>NotebookLM</b> pra engolir volume de documento e devolver resumo. <b>ChatGPT</b> pro pessoal e criativo. N&atilde;o precisa pagar tudo.</p></div>
+    </div>
+
+    <div class="mani" style="margin-top:44px;border-radius:18px;">
+      <div class="wrap"><p>ELE N&Atilde;O ACERTA DE PRIMEIRA. <span>QUEM LAPIDA &Eacute; VOC&Ecirc;</span> &mdash; E &Eacute; NA LAPIDA&Ccedil;&Atilde;O QUE VOC&Ecirc; DESCOBRE O QUE QUER.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 LICAO DE CASA -->
+<section id="licao" class="alt">
+  <div class="wrap rv">
+    <span class="snum">06</span>
+    <div class="misscard">
+      <h2>SUA LI&Ccedil;&Atilde;O DE CASA<br>AT&Eacute; O <span>ENCONTRO 03.</span></h2>
+      <p class="msub">Sete coisas. A primeira &eacute; a que importa &mdash; as outras seis dependem dela estar feita.</p>
+      <div class="check">
+        <div class="ck"><div class="bx"></div><p><b>Reserve uma hora s&oacute; pro dashboard.</b> Cola o Prompt 06, roda, olha, manda print, ajusta. Repete at&eacute; voc&ecirc; olhar e falar "&eacute; isso". N&atilde;o pare no "est&aacute; bom".</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Confira os oito ajustes</b> um a um na tela: header, plano de a&ccedil;&atilde;o no topo, abas, simulador em reais, vermelho no lugar do vinho, bordas do vendedor, alerta de meta, engajamento no plano.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Gere a segunda vers&atilde;o</b>, a do franqueado &mdash; s&oacute; percentual e indicador, sem valor absoluto.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Teste a extens&atilde;o no Checklist F&aacute;cil</b> com o Prompt 07. Fa&ccedil;a login na extens&atilde;o antes. Anote onde ele travou.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Teste a extens&atilde;o no BI da Natura</b>, ensinando clique a clique. <b>Anote quanto token consumiu</b> em cada teste.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Pergunte internamente na Natura</b> se d&aacute; pra obter os arquivos de v&iacute;deo da Academia Varejo.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Me mande o dashboard pronto</b> antes do encontro 03. Se eu j&aacute; olhar antes, a gente usa a call inteira pra automatizar em vez de revisar.</p></div>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:26px;">
+      Travou em qualquer uma delas? <b>Me chama no WhatsApp.</b> N&atilde;o fique esperando o pr&oacute;ximo encontro pra destravar uma coisa de cinco minutos.
+    </div>
+  </div>
+</section>
+
+<!-- 07 TEASER -->
+<section class="teaser">
+  <div class="wrap rv">
+    <span class="pill">Encontro 03</span>
+    <h2>A&iacute; a gente tira <span>voc&ecirc; do meio.</span></h2>
+    <p>Com o dashboard aprovado, o encontro 03 &eacute; sobre automatizar de vez: congelar o processo numa skill, ligar os conectores e atacar a sua segunda dor &mdash; o ranking de vendas que hoje toma tr&ecirc;s manh&atilde;s por semana.</p>
+    <div class="tgrid">
+      <div class="tg"><h4>Skill do fechamento</h4><p>O processo inteiro virando um manual que o Claude segue igual toda vez, com layout e tom j&aacute; dentro.</p></div>
+      <div class="tg"><h4>Ranking de vendas</h4><p>As tr&ecirc;s vezes por semana viram uma execu&ccedil;&atilde;o s&oacute;, com os valores ocultos do jeito certo.</p></div>
+      <div class="tg"><h4>Conectores e agendamento</h4><p>Gmail e Agenda ligados, e o que &eacute; recorrente rodando na hora certa sem voc&ecirc; lembrar.</p></div>
+      <div class="tg"><h4>Extra&ccedil;&atilde;o pelo navegador</h4><p>Com base no que os seus dois testes mostrarem, a gente decide o que vale automatizar e o que continua na m&atilde;o.</p></div>
+    </div>
+    <div class="callout" style="margin-top:26px;">
+      <b>Falta marcar.</b> A gente falou em fazer um encontro de tr&ecirc;s horas seguidas pra fechar tudo de uma vez. Me diz os dias e hor&aacute;rios que funcionam pra voc&ecirc; que eu travo na agenda.
+    </div>
+  </div>
+</section>
+
+<section class="close">
+  <div class="wrap rv">
+    <h2>O PAINEL J&Aacute;<br><span>EXISTE.</span><br>AGORA &Eacute; S&Oacute;<br><span>DEIXAR LINDO.</span></h2>
+    <div class="sig">Bruna Santanna &middot; @brusantanna.ai</div>
+  </div>
+</section>
+
+<div class="sign"><span>Mentoria A Virada IA &middot; Encontro 02 &middot; Janaina Lara &middot; 19.08.2026</span><span class="ns">A VIRADA IA</span></div>
+
+<script>
+const bar=document.getElementById('bar');
+addEventListener('scroll',()=>{const h=document.documentElement;bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';},{passive:true});
+document.querySelectorAll('.prompt').forEach(box=>{
+  const btn=box.querySelector('.copy'),pre=box.querySelector('pre');
+  if(!btn||!pre)return;
+  btn.addEventListener('click',async()=>{
+    try{await navigator.clipboard.writeText(pre.innerText.trim());}
+    catch(e){const r=document.createRange();r.selectNode(pre);getSelection().removeAllRanges();getSelection().addRange(r);document.execCommand('copy');getSelection().removeAllRanges();}
+    const o=btn.textContent;btn.textContent='Copiado ✓';btn.classList.add('done');
+    setTimeout(()=>{btn.textContent=o;btn.classList.remove('done');},1600);
+  });
+});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+setTimeout(()=>document.querySelectorAll('.rv').forEach(el=>el.classList.add('in')),2500);
+</script>
+</body>
+</html>
