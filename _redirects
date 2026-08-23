@@ -3,3 +3,7 @@
 # captura de email e sem link pro curso. Recebia ~67 visitas/mês vindas de
 # links antigos e as perdia em 6 segundos. Manda pro pilar atual.
 /guia-claude    /claude    301
+
+# A mentoria da Janaina saiu de /guia-janaina para /mentorias/janaina.
+# Ela ja recebeu o link antigo em 10/08 — este redirect mantem ele vivo.
+/guia-janaina/*    /mentorias/janaina/:splat    301
