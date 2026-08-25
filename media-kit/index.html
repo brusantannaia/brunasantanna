@@ -5,245 +5,357 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bruna Santanna — Media Kit</title>
 <meta name="description" content="Bruna Santanna (@brusantanna.ai) — I teach AI to people who actually use it. Media kit, 2026.">
+<meta property="og:title" content="Bruna Santanna — Media Kit">
+<meta property="og:description" content="I teach AI to people who actually use it. 2.6M views in 12 months. Media kit, 2026.">
+<meta property="og:image" content="https://brunasantanna.com/media-kit/img/hero-stage.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#F3EEE3; --bg-2:#ECE5D6; --card:#FBF9F3; --cream:#F4F3EF;
-  --ink:#14373C; --ink-2:#2C4F54; --green:#435D51;
+  --ink:#14373C; --ink-2:#2C4F54; --ink-deep:#0E282C; --green:#435D51;
   --terra:#B06E4A; --terra-l:#C4835E; --terra-d:#985A3B;
   --text:#233133; --muted:#6E7A75; --line:rgba(20,55,60,.16);
+  --bar:38px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 ::selection{background:var(--terra);color:#fff}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Hanken Grotesk',system-ui,sans-serif;font-weight:300;line-height:1.55;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--text);font-family:'Hanken Grotesk',system-ui,sans-serif;font-weight:300;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;padding-top:var(--bar)}
 img{display:block;max-width:100%}
 a{color:inherit}
-.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 30px}
 
-/* header */
-header{position:sticky;top:0;z-index:50;background:rgba(243,238,227,.92);backdrop-filter:blur(8px);border-bottom:2px solid var(--ink)}
-.hd{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:15px 0}
-.logo{font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:1.25rem;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:11px}
-.logo .tag{border:1.5px solid var(--terra);border-radius:100px;font-family:'Hanken Grotesk';font-weight:700;font-size:.6rem;letter-spacing:.16em;color:var(--terra);padding:5px 12px}
-.hd-right{display:flex;align-items:center;gap:18px}
-.hd-link{font-weight:600;font-size:.84rem;color:var(--ink-2);text-decoration:none;border-bottom:2px solid transparent;transition:.2s}
-.hd-link:hover{color:var(--terra);border-bottom-color:var(--terra)}
+/* ============ ROTATING ANNOUNCEMENT BAR ============ */
+.bar{position:fixed;top:0;left:0;right:0;z-index:70;height:var(--bar);background:var(--ink-deep);color:var(--cream);overflow:hidden}
+.bar-track{position:absolute;top:0;left:0;right:0;animation:barroll 13s infinite}
+.bar-track span{display:flex;align-items:center;justify-content:center;height:var(--bar);font-weight:700;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap;padding:0 16px}
+.bar-track span em{font-style:normal;color:var(--terra-l)}
+@keyframes barroll{
+  0%,28%{transform:translateY(0)}
+  33%,61%{transform:translateY(calc(var(--bar) * -1))}
+  66%,94%{transform:translateY(calc(var(--bar) * -2))}
+  100%{transform:translateY(calc(var(--bar) * -3))}
+}
 
-/* buttons */
-.btn{display:inline-block;border-radius:100px;font-weight:700;font-size:.82rem;text-transform:uppercase;letter-spacing:.04em;padding:14px 26px;text-decoration:none;transition:.22s cubic-bezier(.2,.7,.2,1)}
-.btn-terra{background:var(--terra);color:#fff}
-.btn-terra:hover{background:var(--terra-d);transform:translateY(-2px);box-shadow:0 10px 26px rgba(176,110,74,.35)}
-.btn-ghost{border:1.5px solid var(--line);color:var(--ink);background:var(--card)}
-.btn-ghost:hover{border-color:var(--ink);transform:translateY(-2px);box-shadow:5px 5px 0 var(--line)}
+/* ============ HEADER ============ */
+header{position:fixed;top:var(--bar);left:0;right:0;z-index:60;transition:.35s cubic-bezier(.2,.7,.2,1);border-bottom:2px solid transparent}
+header.solid{background:rgba(243,238,227,.94);backdrop-filter:blur(10px);border-bottom-color:var(--ink)}
+.hd{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 30px;max-width:1180px;margin:0 auto}
+.logo{font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:1.2rem;color:var(--cream);text-decoration:none;display:flex;align-items:center;gap:11px;transition:color .35s}
+.logo .tag{border:1.5px solid currentColor;border-radius:100px;font-family:'Hanken Grotesk';font-weight:700;font-size:.57rem;letter-spacing:.17em;padding:5px 12px;opacity:.85}
+header.solid .logo{color:var(--ink)}
+header.solid .logo .tag{color:var(--terra);opacity:1}
+.hd-right{display:flex;align-items:center;gap:22px}
+.hd-link{font-weight:600;font-size:.79rem;color:rgba(244,243,239,.85);text-decoration:none;transition:.25s}
+.hd-link:hover{color:#fff}
+header.solid .hd-link{color:var(--ink-2)}
+header.solid .hd-link:hover{color:var(--terra)}
+.hd-cta{border:1.5px solid rgba(244,243,239,.5);border-radius:100px;padding:10px 20px;font-weight:700;font-size:.71rem;text-transform:uppercase;letter-spacing:.1em;text-decoration:none;color:var(--cream);transition:.25s cubic-bezier(.2,.7,.2,1)}
+.hd-cta:hover{background:var(--terra);border-color:var(--terra);color:#fff}
+header.solid .hd-cta{border-color:var(--terra);color:var(--terra)}
+header.solid .hd-cta:hover{background:var(--terra);color:#fff}
 
-/* kicker */
-.kicker{font-weight:700;font-size:.72rem;text-transform:uppercase;letter-spacing:.16em;color:var(--terra);display:flex;align-items:center;gap:10px}
-.kicker::before{content:"";width:26px;height:2px;background:var(--terra);flex:none}
-
-/* hero */
-.hero{position:relative;padding:76px 0 70px;overflow:hidden}
-.hero::before{content:"";position:absolute;top:-200px;right:-140px;width:660px;height:660px;background:radial-gradient(circle,rgba(176,110,74,.16),transparent 62%);pointer-events:none}
-.hero-in{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
-h1{font-family:'Anton';font-weight:400;text-transform:uppercase;line-height:.88;font-size:clamp(2.9rem,7vw,5.2rem);color:var(--ink);margin:18px 0 22px}
-h1 .terra{color:var(--terra)}
-.lead{font-size:1.16rem;font-weight:300;color:var(--ink-2);max-width:43ch}
+/* ============ SHARED ============ */
+.kicker{font-weight:700;font-size:.68rem;text-transform:uppercase;letter-spacing:.2em;color:var(--terra);display:flex;align-items:center;gap:11px}
+.kicker::before{content:"";width:28px;height:2px;background:var(--terra);flex:none}
+.kicker.light{color:var(--terra-l)}
+.kicker.light::before{background:var(--terra-l)}
+h1{font-family:'Anton';font-weight:400;text-transform:uppercase;line-height:.88}
+h2{font-family:'Anton';font-weight:400;text-transform:uppercase;line-height:.9;font-size:clamp(2.3rem,6vw,3.8rem);color:var(--ink);margin:16px 0 30px}
+h2 .terra{color:var(--terra)}
+.lead{font-size:1.12rem;font-weight:300;color:var(--ink-2);max-width:46ch}
 .lead b{font-weight:600;color:var(--ink)}
-.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
-.handles{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
-.handle{background:var(--card);border:1.5px solid var(--line);border-radius:100px;padding:9px 17px;font-weight:600;font-size:.8rem;color:var(--ink);text-decoration:none;transition:.2s cubic-bezier(.2,.7,.2,1)}
-.handle span{color:var(--muted);font-weight:400}
-.handle:hover{border-color:var(--terra);color:var(--terra);transform:translateY(-2px)}
-.handle:hover span{color:var(--terra-l)}
 
-.photo{border-radius:16px;overflow:hidden;background:var(--bg-2);box-shadow:9px 9px 0 var(--terra)}
-.photo img{width:100%;height:100%;object-fit:cover}
-.hero-photo{aspect-ratio:4/5}
+.btn{display:inline-flex;align-items:center;gap:10px;border-radius:100px;font-weight:700;font-size:.79rem;text-transform:uppercase;letter-spacing:.09em;padding:16px 30px;text-decoration:none;transition:.25s cubic-bezier(.2,.7,.2,1)}
+.btn-terra{background:var(--terra);color:#fff}
+.btn-terra:hover{background:var(--terra-d);transform:translateY(-2px);box-shadow:0 12px 30px rgba(176,110,74,.35)}
+.btn-line{border:1.5px solid rgba(244,243,239,.55);color:var(--cream)}
+.btn-line:hover{background:var(--cream);color:var(--ink);border-color:var(--cream);transform:translateY(-2px)}
+.btn-ink{background:var(--ink);color:var(--cream)}
+.btn-ink:hover{background:var(--ink-deep);transform:translateY(-2px);box-shadow:0 12px 30px rgba(20,55,60,.28)}
 
-/* manifesto */
-.manifesto{background:var(--bg-2);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);padding:56px 0;margin:0 0 76px}
-.manifesto p{font-family:'Anton';font-weight:400;text-transform:uppercase;line-height:1.04;font-size:clamp(1.75rem,4.6vw,3.1rem);color:var(--ink);max-width:26ch}
+.tlink{display:inline-flex;align-items:center;gap:12px;font-weight:700;font-size:.85rem;text-transform:uppercase;letter-spacing:.1em;text-decoration:none;color:var(--ink);border-bottom:2px solid var(--terra);padding-bottom:5px;transition:.25s}
+.tlink .ar{transition:transform .25s cubic-bezier(.2,.7,.2,1)}
+.tlink:hover{color:var(--terra)}
+.tlink:hover .ar{transform:translateX(6px)}
+.tlink.light{color:var(--cream);border-bottom-color:var(--terra-l)}
+.tlink.light:hover{color:var(--terra-l)}
+
+.rv{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv.on{opacity:1;transform:none}
+
+/* ============ HERO ============ */
+.hero{position:relative;min-height:calc(100svh - var(--bar));display:flex;align-items:flex-end;overflow:hidden;background:var(--ink-deep)}
+.hero-img{position:absolute;inset:0}
+.hero-img img{width:100%;height:100%;object-fit:cover;object-position:54% 40%}
+.hero-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,40,44,.66) 0%,rgba(14,40,44,.20) 32%,rgba(14,40,44,.74) 72%,rgba(14,40,44,.95) 100%)}
+.hero-in{position:relative;width:100%;max-width:1180px;margin:0 auto;padding:0 30px 78px}
+.hero h1{color:var(--cream);font-size:clamp(2.7rem,7.2vw,6rem);max-width:15ch;margin:26px 0 26px}
+.hero h1 .terra{color:var(--terra-l)}
+.hero .lead{color:rgba(244,243,239,.86);max-width:44ch;font-size:1.08rem}
+.hero .cta{margin-top:34px}
+.hero-meta{position:absolute;right:30px;bottom:82px;text-align:right;color:rgba(244,243,239,.5);font-size:.66rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;line-height:2}
+.scroll-cue{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);width:1px;height:42px;background:linear-gradient(180deg,transparent,rgba(244,243,239,.7));animation:cue 2.4s infinite}
+@keyframes cue{0%,100%{opacity:.3;height:26px}50%{opacity:1;height:46px}}
+
+/* ============ MANIFESTO ============ */
+.manifesto{background:var(--bg-2);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);padding:80px 0}
+.manifesto p{font-family:'Anton';font-weight:400;text-transform:uppercase;line-height:1.02;font-size:clamp(1.9rem,5.2vw,3.6rem);color:var(--ink);max-width:24ch}
 .manifesto .terra{color:var(--terra)}
 
-/* section */
-section{padding:8px 0}
-h2{font-family:'Anton';font-weight:400;text-transform:uppercase;line-height:.9;font-size:clamp(2.2rem,6vw,3.4rem);color:var(--ink);margin:14px 0 34px}
-h2 .terra{color:var(--terra)}
+section{padding:104px 0}
+.sec-head{margin-bottom:52px}
 
-/* headline number */
-.headline{display:grid;grid-template-columns:auto 1fr;gap:38px;align-items:center;background:var(--ink);border-radius:20px;padding:44px 46px;box-shadow:10px 10px 0 var(--terra);margin-bottom:56px}
-.headline .hn{font-family:'Anton';font-weight:400;line-height:.82;font-size:clamp(4.2rem,13vw,8rem);color:var(--terra-l);font-variant-numeric:tabular-nums}
-.headline b{display:block;font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:clamp(1.1rem,2.6vw,1.7rem);color:var(--cream);line-height:1.05;letter-spacing:.01em}
-.headline span.sub{display:block;font-size:.98rem;color:rgba(244,243,239,.72);margin-top:12px;max-width:44ch}
-.headline span.sub em{font-style:normal;color:var(--terra-l);font-weight:600}
+/* ============ BIG NUMBER ============ */
+.bignum{background:var(--ink);border-radius:22px;padding:54px 52px;box-shadow:12px 12px 0 var(--terra);display:grid;grid-template-columns:auto 1fr;gap:46px;align-items:center}
+.bignum .n{font-family:'Anton';font-weight:400;line-height:.8;font-size:clamp(4.4rem,13vw,8.6rem);color:var(--terra-l);font-variant-numeric:tabular-nums}
+.bignum .eyebrow{display:inline-block;border:1.5px solid var(--terra-l);border-radius:100px;font-weight:700;font-size:.57rem;letter-spacing:.19em;text-transform:uppercase;color:var(--terra-l);padding:5px 13px;margin-bottom:15px}
+.bignum b{display:block;font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:clamp(1.1rem,2.7vw,1.8rem);color:var(--cream);line-height:1.04}
+.bignum .sub{display:block;font-size:.97rem;color:rgba(244,243,239,.72);margin-top:14px;max-width:47ch}
+.bignum .sub em{font-style:normal;color:var(--terra-l);font-weight:600}
 
-.headline .eyebrow{display:inline-block;border:1.5px solid var(--terra-l);border-radius:100px;font-weight:700;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--terra-l);padding:5px 13px;margin-bottom:14px}
-
-/* section divider */
-.subhead{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;border-top:2px solid var(--ink);padding-top:16px;margin-bottom:6px}
-.subhead .t{font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:clamp(1.5rem,3.6vw,2.1rem);color:var(--ink);line-height:1}
+.subhead{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;border-top:2px solid var(--ink);padding-top:16px;margin:66px 0 0}
+.subhead .t{font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:clamp(1.4rem,3.4vw,2rem);color:var(--ink);line-height:1}
 .subhead .t em{font-style:normal;color:var(--terra)}
-.subhead .n{font-size:.85rem;color:var(--muted);font-weight:400}
-
-/* numbers */
+.subhead .n{font-size:.81rem;color:var(--muted);font-weight:400}
 .figs{display:grid;grid-template-columns:repeat(3,1fr)}
-.fig{padding:32px 26px 28px;border-top:1.5px solid var(--line);border-right:1.5px solid var(--line);transition:background .25s}
-.fig:hover{background:rgba(176,110,74,.045)}
+.fig{padding:34px 26px 30px;border-top:1.5px solid var(--line);border-right:1.5px solid var(--line);transition:background .25s}
+.fig:hover{background:rgba(176,110,74,.05)}
 .fig:nth-child(3n){border-right:0}
 .fig:nth-last-child(-n+3){border-bottom:1.5px solid var(--line)}
-.fig .n{font-family:'Anton';font-weight:400;line-height:.86;font-size:clamp(3rem,7vw,4.6rem);color:var(--terra);font-variant-numeric:tabular-nums}
-.fig .l{font-weight:600;font-size:.94rem;color:var(--ink);margin-top:14px}
-.fig .s{font-size:.8rem;color:var(--muted);margin-top:3px}
+.fig .n{font-family:'Anton';font-weight:400;line-height:.86;font-size:clamp(2.8rem,6.4vw,4.3rem);color:var(--terra);font-variant-numeric:tabular-nums}
+.fig .l{font-weight:600;font-size:.92rem;color:var(--ink);margin-top:14px}
+.fig .s{font-size:.78rem;color:var(--muted);margin-top:4px}
 .fig.hl .n{color:var(--ink)}
 
-/* proof */
-.proof{display:grid;grid-template-columns:.85fr 1.15fr;gap:46px;align-items:center}
-.proof h2{margin-bottom:18px}
-.proof p{font-size:1.02rem;max-width:38ch}
-.proof p + p{margin-top:14px}
-.proof b{font-weight:600;color:var(--ink)}
-.stage{box-shadow:9px 9px 0 var(--green)}
+/* ============ CHAPTER IMAGE PAIR ============ */
+.ch-pair{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:58px}
+.ch-pair figure{margin:0}
+.ch-pair .ph{border-radius:14px;overflow:hidden;background:var(--bg-2)}
+.ch-pair img{width:100%;aspect-ratio:4/5;object-fit:cover;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.ch-pair figure:hover img{transform:scale(1.05)}
+.ch-pair figcaption{margin-top:13px;font-size:.71rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+.chapter.dark .ch-pair figcaption{color:rgba(244,243,239,.5)}
 
-/* what I do */
-.doing{display:grid;grid-template-columns:repeat(4,1fr);margin-top:46px}
-.doing div{padding:24px 22px;border-top:1.5px solid var(--line);border-right:1.5px solid var(--line);transition:background .25s}
-.doing div:last-child{border-right:0}
-.doing div:hover{background:rgba(176,110,74,.045)}
-.doing b{display:block;font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:1.12rem;color:var(--terra);letter-spacing:.01em}
-.doing span{display:block;font-size:.86rem;color:var(--text);margin-top:9px}
+/* ============ CHAPTER ============ */S (full-bleed editorial blocks) ============ */
+.chapter{position:relative}
+.ch-img{position:relative;aspect-ratio:2/1;overflow:hidden;background:var(--ink-deep)}
+.ch-img img{width:100%;height:100%;object-fit:cover;transform:scale(1.04);transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
+.chapter:hover .ch-img img{transform:scale(1)}
+.ch-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,40,44,.42) 0%,rgba(14,40,44,.06) 40%,rgba(14,40,44,.55) 100%)}
+.ch-num{position:absolute;top:104px;left:0;right:0;z-index:2}
+.ch-num .in{max-width:1180px;margin:0 auto;padding:0 30px;font-family:'Anton';font-weight:400;font-size:clamp(3.4rem,9vw,7rem);line-height:.8;color:rgba(244,243,239,.28)}
+.ch-cap{position:absolute;left:0;right:0;bottom:30px;z-index:2}
+.ch-cap .in{max-width:1180px;margin:0 auto;padding:0 30px;font-size:.72rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(244,243,239,.78)}
+.ch-body{padding:64px 0 96px}
+.ch-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:start}
+.ch-title{font-family:'Anton';font-weight:400;text-transform:uppercase;line-height:.94;font-size:clamp(1.9rem,4.6vw,3.15rem);color:var(--ink);margin-top:18px;max-width:17ch}
+.ch-title .terra{color:var(--terra)}
+.ch-side p{font-size:1.03rem;color:var(--ink-2);max-width:42ch}
+.ch-side p + p{margin-top:15px}
+.ch-side b{font-weight:600;color:var(--ink)}
+.ch-side .tlink{margin-top:28px}
+.ch-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.ch-tags span{border:1.5px solid var(--line);border-radius:100px;padding:8px 15px;font-size:.75rem;font-weight:600;color:var(--ink-2)}
+.chapter.dark{background:var(--ink);color:var(--cream)}
+.chapter.dark .ch-title{color:var(--cream)}
+.chapter.dark .ch-title .terra{color:var(--terra-l)}
+.chapter.dark .ch-side p{color:rgba(244,243,239,.75)}
+.chapter.dark .ch-side b{color:var(--cream)}
+.chapter.dark .ch-tags span{border-color:rgba(244,243,239,.22);color:rgba(244,243,239,.8)}
 
-/* cards */
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.card{background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:28px 26px;transition:.25s cubic-bezier(.2,.7,.2,1)}
-.card:hover{transform:translateY(-4px);border-color:var(--ink);box-shadow:6px 6px 0 var(--line)}
-.card .tag{font-weight:700;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--terra)}
-.card h3{font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:1.5rem;line-height:1;color:var(--ink);margin:12px 0 10px}
-.card p{font-size:.94rem}
+/* ============ ABOUT ============ */
+.about{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:start}
+.about-photo{position:sticky;top:110px}
+.photo{border-radius:18px;overflow:hidden;background:var(--bg-2)}
+.photo img{width:100%;height:100%;object-fit:cover}
+.hard-t{box-shadow:12px 12px 0 var(--terra)}
+.hard-g{box-shadow:12px 12px 0 var(--green)}
+.photo-cap{margin-top:22px;font-size:.75rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+.about p{font-size:1.06rem;color:var(--ink-2);max-width:50ch}
+.about p + p{margin-top:16px}
+.about b{font-weight:600;color:var(--ink)}
+.creds{margin-top:44px;border-top:2px solid var(--ink)}
+.cred{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:baseline;padding:18px 4px;border-bottom:1.5px solid var(--line);transition:background .25s}
+.cred:hover{background:rgba(176,110,74,.05)}
+.cred .i{font-family:'Anton';font-weight:400;font-size:1rem;color:var(--terra);font-variant-numeric:tabular-nums}
+.cred .t{font-size:.99rem;color:var(--text)}
+.cred .t b{font-weight:600;color:var(--ink)}
 
-/* credentials */
-.credwrap{display:grid;grid-template-columns:1.25fr .75fr;gap:48px;align-items:start}
-.creds div{border-bottom:1.5px solid var(--line);padding:14px 0;display:flex;gap:14px;align-items:baseline}
-.creds b{font-family:'Anton';font-weight:400;color:var(--terra);font-size:1.05rem;flex:none;min-width:22px}
-.creds span{font-size:.95rem}
-.creds a{color:var(--ink);text-decoration:none;border-bottom:2px solid var(--terra)}
-.creds a:hover{color:var(--terra)}
-.credwrap .photo{aspect-ratio:3/4;box-shadow:7px 7px 0 var(--green);position:sticky;top:100px}
+/* ============ AUDIENCE ============ */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:30px 28px;transition:.25s cubic-bezier(.2,.7,.2,1)}
+.card:hover{transform:translateY(-4px);border-color:var(--ink);box-shadow:7px 7px 0 var(--line)}
+.card .tag{font-weight:700;font-size:.66rem;text-transform:uppercase;letter-spacing:.17em;color:var(--terra)}
+.card h3{font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:1.45rem;color:var(--ink);margin:12px 0 12px;line-height:1}
+.card p{font-size:.95rem;color:var(--text)}
 
-/* marquee */
-.marq{background:var(--ink);overflow:hidden;padding:16px 0;margin-top:76px;display:flex;align-items:center;gap:20px}
-.marq .lbl{flex:none;padding-left:28px;font-weight:700;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--terra-l)}
-.track{display:flex;gap:34px;white-space:nowrap;animation:slide 30s linear infinite}
-.track span{font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:1.4rem;color:rgba(244,243,239,.5)}
+/* ============ GALLERY (receipts) ============ */
+.gal{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.gi{position:relative;overflow:hidden;border-radius:14px;background:var(--bg-2)}
+.gi img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.gi:hover img{transform:scale(1.05)}
+.gi::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(14,40,44,.86) 100%);opacity:.92}
+.gi .meta{position:absolute;left:20px;right:20px;bottom:17px;z-index:2}
+.gi .who{font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:1.05rem;color:var(--cream);line-height:1.05}
+.gi .what{font-size:.76rem;font-weight:500;color:rgba(244,243,239,.72);margin-top:4px}
+.gi.w7{grid-column:span 7}
+.gi.w5{grid-column:span 5}
+.gi.w4{grid-column:span 4}
+.gi.w12{grid-column:span 12}
+.gi.tall{aspect-ratio:4/5}
+.gi.wide{aspect-ratio:16/10}
+.gi.band{aspect-ratio:24/7}
+
+/* ============ FORMATS ============ */
+.fmt{display:grid;grid-template-columns:repeat(3,1fr)}
+.fmt > div{padding:32px 26px;border-top:1.5px solid var(--line);border-right:1.5px solid var(--line);transition:background .25s}
+.fmt > div:nth-child(3n){border-right:0}
+.fmt > div:nth-last-child(-n+3){border-bottom:1.5px solid var(--line)}
+.fmt > div:hover{background:rgba(176,110,74,.05)}
+.fmt .i{font-family:'Anton';font-weight:400;font-size:.95rem;line-height:1;color:var(--terra)}
+.fmt b{display:block;font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:1.28rem;color:var(--ink);margin:10px 0 10px;line-height:1.02}
+.fmt span{display:block;font-size:.9rem;color:var(--text)}
+
+/* ============ RULES ============ */
+.rules{background:var(--ink);border-radius:22px;padding:52px 50px;box-shadow:12px 12px 0 var(--green);margin-top:56px}
+.rules .rk{font-weight:700;font-size:.66rem;text-transform:uppercase;letter-spacing:.2em;color:var(--terra-l);margin-bottom:26px}
+.rule{display:grid;grid-template-columns:auto 1fr;gap:22px;padding:20px 0;border-top:1px solid rgba(244,243,239,.15)}
+.rule:first-of-type{border-top:0;padding-top:0}
+.rule .i{font-family:'Anton';font-weight:400;font-size:1rem;color:var(--terra-l)}
+.rule p{font-size:.99rem;color:rgba(244,243,239,.78);max-width:62ch}
+.rule p b{font-weight:600;color:var(--cream)}
+
+/* ============ MARQUEE ============ */
+.marquee{background:var(--ink-deep);padding:26px 0;overflow:hidden;position:relative}
+.mq-label{position:absolute;left:0;top:50%;transform:translateY(-50%);z-index:2;font-weight:700;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--terra-l);background:var(--ink-deep);padding:0 24px 0 30px}
+.mq-track{display:flex;gap:0;white-space:nowrap;animation:slide 30s linear infinite;font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:1.35rem;color:rgba(244,243,239,.42)}
+.mq-track span{padding:0 22px}
 @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* closing */
-.closing{padding:78px 0 20px;text-align:center}
-.closing .big{font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:clamp(1.9rem,5.2vw,3.2rem);color:var(--ink);line-height:.96}
-.closing .big .terra{color:var(--terra)}
-.closing .sub{color:var(--ink-2);font-size:1.05rem;margin-top:18px;max-width:44ch;margin-left:auto;margin-right:auto}
-.closing .cta{justify-content:center;margin-top:30px}
+/* ============ CLOSE ============ */
+.close{background:var(--bg-2);border-top:2px solid var(--ink)}
+.close-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:60px;align-items:center}
+.close h2{font-size:clamp(2.1rem,5.4vw,3.5rem);margin-bottom:22px}
+.close p{font-size:1.08rem;color:var(--ink-2);max-width:44ch}
+.close .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.sig{margin-top:38px;padding-top:22px;border-top:1.5px solid var(--line);font-size:.85rem;color:var(--muted)}
+.sig b{display:block;font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:1.15rem;color:var(--ink);letter-spacing:.01em}
 
-/* footer */
-footer{padding:52px 0 70px;text-align:center}
-.fline{height:1.5px;background:var(--line);margin:0 auto 34px;max-width:1024px}
-footer .m{color:var(--muted);font-size:.92rem;line-height:1.9}
-footer .name{font-weight:700;color:var(--ink);font-size:1rem}
-footer a{color:var(--terra);font-weight:600;text-decoration:none;border-bottom:2px solid var(--terra)}
-footer a:hover{color:var(--terra-d)}
-.note{margin-top:26px;font-size:.74rem;color:var(--muted)}
+/* ============ FOOTER ============ */
+footer{background:var(--ink-deep);color:rgba(244,243,239,.6);padding:52px 0 44px}
+.ft{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center}
+.ft-logo{font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:1.15rem;color:var(--cream)}
+.ft a{color:rgba(244,243,239,.68);text-decoration:none;font-size:.85rem;font-weight:500;transition:.2s}
+.ft a:hover{color:var(--terra-l)}
+.ft-links{display:flex;flex-wrap:wrap;gap:20px}
+.note{margin-top:34px;padding-top:22px;border-top:1px solid rgba(244,243,239,.14);font-size:.76rem;color:rgba(244,243,239,.42);max-width:88ch;line-height:1.75}
 
-/* reveal */
-.rv{opacity:0;transform:translateY(22px);transition:.7s cubic-bezier(.2,.7,.2,1)}
-.rv.on{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.track{animation:none}html{scroll-behavior:auto}}
-
-@media(max-width:900px){
-  .hero-in{grid-template-columns:1fr;gap:40px}
-  .hero{padding:46px 0 44px}
-  .hd-right .hd-link{display:none}
-  .headline{grid-template-columns:1fr;gap:16px;padding:34px 30px;box-shadow:7px 7px 0 var(--terra);margin-bottom:44px}
+/* ============ RESPONSIVE ============ */
+@media(max-width:960px){
+  .bignum{grid-template-columns:1fr;gap:26px;padding:40px 32px;box-shadow:8px 8px 0 var(--terra)}
+  .ch-grid{grid-template-columns:1fr;gap:28px}
+  .ch-title{max-width:none}
+  .ch-pair{gap:14px;margin-top:40px}
+  .about{grid-template-columns:1fr;gap:40px}
+  .about-photo{position:static}
+  .close-grid{grid-template-columns:1fr;gap:36px}
+  .grid3{grid-template-columns:1fr}
+  .fmt{grid-template-columns:1fr}
+  .fmt > div{border-right:0}
+  .fmt > div:nth-last-child(-n+3){border-bottom:0}
+  .fmt > div:last-child{border-bottom:1.5px solid var(--line)}
+  .hero-meta{display:none}
+  .gi.w7,.gi.w5,.gi.w4,.gi.w12{grid-column:span 6}
+  .gi.wide,.gi.band{aspect-ratio:4/5}
+}
+@media(max-width:620px){
+  section{padding:74px 0}
+  .wrap{padding:0 22px}
+  .hd{padding:14px 22px}
+  .hd-link{display:none}
   .figs{grid-template-columns:repeat(2,1fr)}
   .fig:nth-child(3n){border-right:1.5px solid var(--line)}
   .fig:nth-child(2n){border-right:0}
   .fig:nth-last-child(-n+3){border-bottom:0}
   .fig:nth-last-child(-n+2){border-bottom:1.5px solid var(--line)}
-  .grid3{grid-template-columns:1fr}
-  .doing{grid-template-columns:repeat(2,1fr);margin-top:34px}
-  .doing div:nth-child(2n){border-right:0}
-  .doing div:nth-child(2){border-right:0}
-  .proof,.credwrap{grid-template-columns:1fr;gap:34px}
-  .credwrap .photo{position:static;max-width:340px}
-  .manifesto{margin-bottom:54px;padding:42px 0}
-  .photo{box-shadow:6px 6px 0 var(--terra)}
-  .stage,.credwrap .photo{box-shadow:6px 6px 0 var(--green)}
+  .ch-img{aspect-ratio:16/9}
+  .rules{padding:36px 26px;box-shadow:8px 8px 0 var(--green)}
+  .hard-t,.hard-g{box-shadow:8px 8px 0 var(--terra)}
+  .hard-g{box-shadow:8px 8px 0 var(--green)}
+  .gi.w7,.gi.w5,.gi.w4,.gi.w12{grid-column:span 12}
+  .gi.wide,.gi.band,.gi.tall{aspect-ratio:4/5}
+  .gal{gap:10px}
 }
-@media(max-width:520px){
-  .figs{grid-template-columns:1fr}
-  .fig{border-right:0!important;border-bottom:0}
-  .fig:last-child{border-bottom:1.5px solid var(--line)}
-  .doing{grid-template-columns:1fr}
-  .doing div{border-right:0!important}
-  .btn{width:100%;text-align:center}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;transition-duration:.01ms !important}
+  .bar-track{animation:none}
 }
-/* brand partnerships */
-.terms{margin-top:30px;border-left:3px solid var(--terra);padding:4px 0 4px 22px;display:grid;gap:11px}
-.terms p{font-size:.95rem;color:var(--ink-2);max-width:62ch}
-.terms p b{font-weight:600;color:var(--ink)}
-
 </style>
 </head>
 <body>
 
-<header>
-  <div class="wrap hd">
-    <a class="logo" href="https://brunasantanna.com" target="_blank" rel="noopener">Bruna Santanna <span class="tag">A Virada IA</span></a>
+<!-- ============ ROTATING BAR ============ -->
+<div class="bar">
+  <div class="bar-track">
+    <span>Media kit · Updated 24 August 2026</span>
+    <span><em>2.6M views</em>&nbsp; in the last 12 months</span>
+    <span>Partnerships · bruna@newscale.tech</span>
+    <span>Media kit · Updated 24 August 2026</span>
+  </div>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header id="hdr">
+  <div class="hd">
+    <a class="logo" href="https://brunasantanna.com">Bruna Santanna <span class="tag">A Virada IA</span></a>
     <div class="hd-right">
-      <a class="hd-link" href="https://brunasantanna.com" target="_blank" rel="noopener">brunasantanna.com</a>
-      <a class="btn btn-terra" href="mailto:bruna@newscale.tech">Work with me</a>
+      <a class="hd-link" href="#numbers">Numbers</a>
+      <a class="hd-link" href="#audience">Audience</a>
+      <a class="hd-link" href="#work">Formats</a>
+      <a class="hd-cta" href="mailto:bruna@newscale.tech">Work with me</a>
     </div>
   </div>
 </header>
 
-<div class="wrap">
-  <div class="hero">
-    <div class="hero-in">
-      <div>
-        <div class="kicker">AI educator · Founder · Creator</div>
-        <h1>I teach AI<br>to people who<br><span class="terra">actually use it</span></h1>
-        <p class="lead">My audience isn't here to watch AI demos. They're here to open the thing afterwards and try it themselves. <b>Everything I post, I use first — in my own company, with my own clients.</b></p>
-        <div class="cta">
-          <a class="btn btn-terra" href="https://brunasantanna.com" target="_blank" rel="noopener">Visit brunasantanna.com</a>
-          <a class="btn btn-ghost" href="https://www.instagram.com/brusantanna.ai/" target="_blank" rel="noopener">See the content</a>
-        </div>
-        <div class="handles">
-          <a class="handle" href="https://www.instagram.com/brusantanna.ai/" target="_blank" rel="noopener">@brusantanna.ai <span>· Instagram</span></a>
-          <a class="handle" href="https://www.tiktok.com/@brusantanna.ai" target="_blank" rel="noopener">@brusantanna.ai <span>· TikTok</span></a>
-          <a class="handle" href="https://newscale.tech" target="_blank" rel="noopener">newscale.tech <span>· Founder</span></a>
-        </div>
-      </div>
-      <div class="photo hero-photo">
-        <img src="img/bruna-hero.jpg" alt="Bruna Santanna" width="1100" height="1650">
-      </div>
-    </div>
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-img">
+    <img src="img/hero-stage.jpg" alt="Bruna Santanna on stage at a corporate congress" fetchpriority="high">
   </div>
-</div>
+  <div class="hero-in">
+    <div class="kicker light">Media kit · 2026</div>
+    <h1>I teach AI to people who <span class="terra">actually use it</span></h1>
+    <p class="lead">My audience isn't here to watch AI demos. They're here to open the thing afterwards and try it themselves. Everything I post, I use first: in my own company, with my own clients.</p>
+    <div class="cta"><a class="btn btn-terra" href="#numbers">Start with the numbers <span class="ar">→</span></a></div>
+  </div>
+  <div class="hero-meta">
+    @brusantanna.ai<br>
+    43.0K Instagram · 4.2K TikTok<br>
+    Founder, NewScale
+  </div>
+  <div class="scroll-cue"></div>
+</section>
 
+<!-- ============ MANIFESTO ============ -->
 <div class="manifesto">
   <div class="wrap">
-    <p>A follower count is a number. An audience that <span class="terra">shows up</span> is a business.</p>
+    <p class="rv">A follower count is a number. An <span class="terra">audience that shows up</span> is a business.</p>
   </div>
 </div>
 
-<div class="wrap">
+<!-- ============ NUMBERS ============ -->
+<section id="numbers">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="kicker">Performance</div>
+      <h2>The <span class="terra">numbers</span></h2>
+    </div>
 
-  <section class="rv">
-    <div class="kicker">Performance</div>
-    <h2>The <span class="terra">numbers</span></h2>
-
-    <div class="headline">
-      <div class="hn" data-to="2.6" data-dec="1" data-suffix="M">0</div>
+    <div class="bignum rv">
+      <div class="n" data-to="2.6" data-dec="1" data-suffix="M">0</div>
       <div>
         <span class="eyebrow">Sep 2025 — Aug 2026</span>
         <b>Views in the last 12 months</b>
@@ -251,150 +363,280 @@ footer a:hover{color:var(--terra-d)}
       </div>
     </div>
 
-    <div class="subhead">
-      <span class="t">Now zoom in — the <em>last 30 days</em></span>
-      <span class="n">25 July – 23 August 2026 · Instagram, organic</span>
+    <div class="subhead rv">
+      <div class="t">Now zoom in: <em>the last 30 days</em></div>
+      <div class="n">25 July – 23 August 2026 · Instagram, organic</div>
     </div>
     <div class="figs">
-      <div class="fig hl"><div class="n" data-to="426" data-suffix="K">0</div><div class="l">Total views</div><div class="s">Organic only, no paid push</div></div>
-      <div class="fig"><div class="n" data-to="256" data-suffix="K">0</div><div class="l">Accounts reached</div><div class="s">Real people, not impressions</div></div>
-      <div class="fig hl"><div class="n" data-to="10.6" data-dec="1" data-suffix="K">0</div><div class="l">Comments</div><div class="s">They don't just watch, they answer</div></div>
-      <div class="fig"><div class="n" data-to="37.2" data-dec="1" data-suffix="K">0</div><div class="l">Total interactions</div><div class="s">Likes, comments, saves, shares</div></div>
-      <div class="fig hl"><div class="n" data-to="11.8" data-dec="1" data-suffix="K">0</div><div class="l">Saves</div><div class="s">Kept to use later. More than doubled.</div></div>
-      <div class="fig"><div class="n" data-to="6.9" data-dec="1" data-suffix="K">0</div><div class="l">Shares</div><div class="s">Sent to a colleague or friend</div></div>
-      <div class="fig hl"><div class="n" data-to="14.6" data-dec="1" data-suffix="%">0</div><div class="l">Engagement on reach</div><div class="s">Category average: 3–6%</div></div>
-      <div class="fig"><div class="n" data-to="66.4" data-dec="1" data-suffix="K">0</div><div class="l">Best Reel in the period</div><div class="s">One video, inside those 30 days</div></div>
-      <div class="fig"><div class="n" data-to="7.9" data-dec="1" data-prefix="+" data-suffix="%">0</div><div class="l">Follower growth</div><div class="s">+3,163 in 30 days</div></div>
+      <div class="fig rv"><div class="n" data-to="426" data-suffix="K">0</div><div class="l">Total views</div><div class="s">Organic only, no paid push</div></div>
+      <div class="fig rv"><div class="n" data-to="256" data-suffix="K">0</div><div class="l">Accounts reached</div><div class="s">Real people, not impressions</div></div>
+      <div class="fig rv"><div class="n" data-to="10.6" data-dec="1" data-suffix="K">0</div><div class="l">Comments</div><div class="s">They don't just watch, they answer</div></div>
+      <div class="fig rv"><div class="n" data-to="37.2" data-dec="1" data-suffix="K">0</div><div class="l">Total interactions</div><div class="s">Likes, comments, saves, shares</div></div>
+      <div class="fig rv"><div class="n" data-to="11.8" data-dec="1" data-suffix="K">0</div><div class="l">Saves</div><div class="s">Kept to use later. More than doubled.</div></div>
+      <div class="fig rv"><div class="n" data-to="6.9" data-dec="1" data-suffix="K">0</div><div class="l">Shares</div><div class="s">Sent to a colleague or friend</div></div>
+      <div class="fig rv hl"><div class="n" data-to="14.6" data-dec="1" data-suffix="%">0</div><div class="l">Engagement on reach</div><div class="s">Category average: 3–6%</div></div>
+      <div class="fig rv"><div class="n" data-to="66.4" data-dec="1" data-suffix="K">0</div><div class="l">Best Reel in the period</div><div class="s">One video, inside those 30 days</div></div>
+      <div class="fig rv"><div class="n" data-to="7.9" data-dec="1" data-prefix="+" data-suffix="%">0</div><div class="l">Follower growth</div><div class="s">+3,163 in 30 days</div></div>
     </div>
 
-    <div class="subhead" style="margin-top:64px">
-      <span class="t">And the <em>all-time</em> marks</span>
-      <span class="n">Cumulative, not a 30-day snapshot</span>
+    <div class="subhead rv">
+      <div class="t">And the <em>all-time marks</em></div>
+      <div class="n">Cumulative, not a 30-day snapshot</div>
     </div>
     <div class="figs">
-      <div class="fig hl"><div class="n" data-to="183.1" data-dec="1" data-suffix="K">0</div><div class="l">Best Reel ever</div><div class="s">Four Reels have passed 100K</div></div>
-      <div class="fig hl"><div class="n" data-to="10198" data-sep="1">0</div><div class="l">Email subscribers</div><div class="s">An audience I own, not rent</div></div>
-      <div class="fig"><div class="n" data-to="47.2" data-dec="1" data-suffix="K">0</div><div class="l">Total followers</div><div class="s">43.0K Instagram · 4.2K TikTok</div></div>
+      <div class="fig rv"><div class="n" data-to="183.1" data-dec="1" data-suffix="K">0</div><div class="l">Best Reel ever</div><div class="s">Four Reels have passed 100K</div></div>
+      <div class="fig rv hl"><div class="n" data-to="10198" data-sep="1">0</div><div class="l">Email subscribers</div><div class="s">An audience I own, not rent</div></div>
+      <div class="fig rv"><div class="n" data-to="47.2" data-dec="1" data-suffix="K">0</div><div class="l">Total followers</div><div class="s">43.0K Instagram · 4.2K TikTok</div></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="rv" style="padding-top:76px">
-    <div class="proof">
-      <div class="photo stage">
-        <img src="img/bruna-stage.jpg" alt="Bruna Santanna speaking to a corporate audience" width="1800" height="810">
+<!-- ============ CHAPTER 01 — ON CAMERA ============ -->
+<div class="chapter">
+  <div class="ch-img">
+    <img src="img/studio-band.jpg" alt="Bruna Santanna at her desk, where the content gets made" loading="lazy">
+    <div class="ch-num"><div class="in">01</div></div>
+    <div class="ch-cap"><div class="in">The desk where every Reel starts · São Paulo</div></div>
+  </div>
+  <div class="ch-body">
+    <div class="wrap">
+      <div class="ch-grid">
+        <div class="rv">
+          <div class="kicker">On camera</div>
+          <div class="ch-title">The content is the <span class="terra">proof</span>, not the product</div>
+        </div>
+        <div class="ch-side rv">
+          <p>Reels, tutorials and a free library of guides. I publish what I built that week, and people open the tool while the video is still playing.</p>
+          <p><b>Four Reels have passed 100K.</b> The best one did 183.1K. None of them were boosted.</p>
+          <div class="ch-tags"><span>Reels</span><span>TikTok</span><span>YouTube Shorts</span><span>Newsletter</span></div>
+          <a class="tlink" href="https://instagram.com/brusantanna.ai" target="_blank" rel="noopener">See the content <span class="ar">→</span></a>
+        </div>
       </div>
-      <div>
-        <div class="kicker">The other half of the job</div>
-        <h2>I'm not only <span class="terra">a creator</span></h2>
-        <p>Most of my week isn't spent filming. I consult for companies implementing AI, mentor founders one-on-one, and speak to auditoriums of people who came to learn something they can actually use.</p>
-        <p>That's why the content lands. It's the same material I'm paid to deliver at <b>Corteva, Stoller, Magalu, OLX and B3</b> — rewritten for everyone who isn't in the room.</p>
+        <div class="ch-pair rv">
+          <figure><div class="ph"><img src="img/studio-desk.jpg" alt="Bruna Santanna at the recording desk" loading="lazy"></div><figcaption>In the recording booth</figcaption></figure>
+          <figure><div class="ph"><img src="img/teaching-group.jpg" alt="Bruna Santanna teaching a closed group" loading="lazy"></div><figcaption>Teaching a closed group &middot; São Paulo</figcaption></figure>
+        </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ CHAPTER 02 — ON STAGE ============ -->
+<div class="chapter dark">
+  <div class="ch-img">
+    <img src="img/stage-wide.jpg" alt="Bruna Santanna speaking to a full auditorium at a national congress" loading="lazy">
+    <div class="ch-num"><div class="in">02</div></div>
+    <div class="ch-cap"><div class="in">6º Congresso Brasileiro Stoller · main stage</div></div>
+  </div>
+  <div class="ch-body">
+    <div class="wrap">
+      <div class="ch-grid">
+        <div class="rv">
+          <div class="kicker light">On stage</div>
+          <div class="ch-title">Same material. <span class="terra">Bigger room.</span></div>
+        </div>
+        <div class="ch-side rv">
+          <p>Keynotes for corporate audiences: Stoller's national congress, Sorridents, Amo Vacinas, Insper. Auditoriums of people who came to learn something they can use on Monday.</p>
+          <p><b>It's the same material I'm paid to deliver</b> at Corteva, Stoller, Magalu, OLX and B3, rewritten for everyone who isn't in the room.</p>
+          <div class="ch-tags"><span>Keynotes</span><span>Congresses</span><span>Internal conventions</span></div>
+          <a class="tlink light" href="mailto:bruna@newscale.tech?subject=Keynote">Book a keynote <span class="ar">→</span></a>
+        </div>
+      </div>
+        <div class="ch-pair rv">
+          <figure><div class="ph"><img src="img/sorridents-stage.jpg" alt="Sorridents corporate keynote" loading="lazy"></div><figcaption>Sorridents &middot; corporate keynote</figcaption></figure>
+          <figure><div class="ph"><img src="img/amo-vacinas.jpg" alt="Amo Vacinas · opening keynote" loading="lazy"></div><figcaption>Amo Vacinas · opening keynote</figcaption></figure>
+        </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ CHAPTER 03 — IN THE ROOM ============ -->
+<div class="chapter">
+  <div class="ch-img">
+    <img src="img/hackathon-room.jpg" alt="Room full of teams working during an AI hackathon" loading="lazy">
+    <div class="ch-num"><div class="in">03</div></div>
+    <div class="ch-cap"><div class="in">Insper · AI hackathon, day one</div></div>
+  </div>
+  <div class="ch-body">
+    <div class="wrap">
+      <div class="ch-grid">
+        <div class="rv">
+          <div class="kicker">In the room</div>
+          <div class="ch-title">Where the content <span class="terra">comes from</span></div>
+        </div>
+        <div class="ch-side rv">
+          <p>Consulting and hands-on training through NewScale, plus 1:1 mentoring for founders. <b>1,000+ people trained so far.</b></p>
+          <p>Most of my week isn't spent filming. Every Reel starts as something a client asked me to solve that morning.</p>
+          <div class="ch-tags"><span>Consulting</span><span>Team training</span><span>1:1 mentoring</span><span>Hackathons</span></div>
+          <a class="tlink" href="https://newscale.tech" target="_blank" rel="noopener">How I work with companies <span class="ar">→</span></a>
+        </div>
+      </div>
+        <div class="ch-pair rv">
+          <figure><div class="ph"><img src="img/jb-agro-meeting.jpg" alt="Bruna Santanna at the table explaining to the JB Agro team" loading="lazy"></div><figcaption>JB Agro &middot; at the table with the team</figcaption></figure>
+          <figure><div class="ph"><img src="img/stringhetta.jpg" alt="Bruna Santanna working alongside a Stringhetta team member" loading="lazy"></div><figcaption>Stringhetta &middot; side by side with the team</figcaption></figure>
+        </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" style="background:var(--bg-2);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)">
+  <div class="wrap">
+    <div class="about">
+      <div class="about-photo rv">
+        <div class="photo hard-t" style="aspect-ratio:4/5"><img src="img/portrait-main.jpg" alt="Portrait of Bruna Santanna" loading="lazy"></div>
+        <div class="photo-cap">Bruna Santanna · Founder, NewScale</div>
+      </div>
+      <div class="rv">
+        <div class="kicker">Background</div>
+        <h2>Why they <span class="terra">listen to me</span></h2>
+        <p>I ran my own business for ten years before any of this, then went to Silicon Valley to work at Blackbox AI.</p>
+        <p><b>Everything I teach came out of a problem I had first.</b> That's the whole method, and it's why the content lands with people who have real work to do.</p>
+        <div class="creds">
+          <div class="cred"><div class="i">01</div><div class="t"><b>1,000+ people trained</b> in applied AI, in person and online</div></div>
+          <div class="cred"><div class="i">02</div><div class="t">Founder of <b>NewScale</b>, AI consulting for Brazilian companies</div></div>
+          <div class="cred"><div class="i">03</div><div class="t">1:1 mentoring and keynotes for founders and corporate teams</div></div>
+          <div class="cred"><div class="i">04</div><div class="t"><b>10,198 email subscribers</b>, an audience I own, not rent</div></div>
+          <div class="cred"><div class="i">05</div><div class="t">10+ years running my own business before any of this</div></div>
+          <div class="cred"><div class="i">06</div><div class="t">ESPM + MBA USP · ex-Whirlpool, ex-SulAmérica</div></div>
+          <div class="cred"><div class="i">07</div><div class="t">Ex-<b>Blackbox AI</b>, Silicon Valley</div></div>
+          <div class="cred"><div class="i">08</div><div class="t">Trained teams at <b>Magalu, OLX, B3 and CI&amp;T</b></div></div>
+          <div class="cred"><div class="i">09</div><div class="t">Corporate clients: <b>Corteva, Stoller, Ismart, OneGlobal</b></div></div>
+        </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="doing">
-      <div><b>Consulting</b><span>AI &amp; automation implementation for companies, through NewScale</span></div>
-      <div><b>1:1 Mentoring</b><span>Founders and executives putting AI to work in their own business</span></div>
-      <div><b>Keynotes</b><span>Corporate stages and events, from packed auditoriums to boardrooms</span></div>
-      <div><b>Team training</b><span>Hands-on programs — 1,000+ people trained so far</span></div>
+<!-- ============ AUDIENCE ============ -->
+<section id="audience">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="kicker">Audience</div>
+      <h2>Who is on the <span class="terra">other side</span></h2>
     </div>
-  </section>
-
-  <section class="rv" style="padding-top:76px">
-    <div class="kicker">Audience</div>
-    <h2>Who is <span class="terra">on the other side</span></h2>
     <div class="grid3">
-      <div class="card">
+      <div class="card rv">
         <div class="tag">Practitioners</div>
         <h3>People who try things</h3>
-        <p>Managers, specialists, teachers, freelancers, founders. Not students of AI — people who are good at something else and want AI to carry part of it. Most of them open the tool while the video is still playing.</p>
+        <p>Managers, specialists, teachers, freelancers, founders. Not students of AI: people who are good at something else and want AI to carry part of it. Most of them open the tool while the video is still playing.</p>
       </div>
-      <div class="card">
+      <div class="card rv">
         <div class="tag">Business owners</div>
         <h3>People who sign off</h3>
-        <p>Founders, executives and small business owners — the same profile that hires me directly. They don't just watch the content. They buy from it.</p>
+        <p>Founders, executives and small business owners, the same profile that hires me directly. They don't just watch the content. They buy from it.</p>
       </div>
-      <div class="card">
+      <div class="card rv">
         <div class="tag">Behaviour</div>
         <h3>They act on it</h3>
-        <p>14.6% engagement on reach. 10.6K comments and 11.8K saves in a single month. And 10,198 who handed over their email for my free guides. When I ask, they move.</p>
+        <p>14.6% engagement on reach. 10.6K comments and 11.8K saves in a single month. And 10,198 people who handed over their email for my free guides. When I ask, they move.</p>
       </div>
-    </div>
-  </section>
-
-  <section class="rv" style="padding-top:76px">
-    <div class="kicker">Background</div>
-    <h2>Why they <span class="terra">listen to me</span></h2>
-    <div class="credwrap">
-      <div class="creds">
-        <div><b>01</b><span><b>1,000+ people trained</b> in applied AI, in person and online</span></div>
-        <div><b>02</b><span>Founder of <a href="https://newscale.tech" target="_blank" rel="noopener">NewScale</a> — AI consulting for Brazilian companies</span></div>
-        <div><b>03</b><span><b>1:1 mentoring and keynotes</b> for founders and corporate teams</span></div>
-        <div><b>04</b><span><b>10,198 email subscribers</b> — an audience I own, not rent</span></div>
-        <div><b>05</b><span><b>10+ years</b> running my own business before any of this</span></div>
-        <div><b>06</b><span><b>ESPM + MBA USP</b> · ex-Whirlpool, ex-SulAmérica</span></div>
-        <div><b>07</b><span><b>Ex-Blackbox AI</b>, Silicon Valley — then back to Brazil on purpose</span></div>
-        <div><b>08</b><span>Trained teams at <b>Magalu, OLX, B3 and CI&amp;T</b></span></div>
-        <div><b>09</b><span>Corporate clients: <b>Corteva, Stoller, Ismart, OneGlobal</b></span></div>
-      </div>
-      <div class="photo">
-        <img src="img/bruna-portrait.jpg" alt="Bruna Santanna" width="900" height="1200">
-      </div>
-    </div>
-  </section>
-
-  <section class="rv" style="padding-top:76px">
-    <div class="kicker">Brand partnerships</div>
-    <h2>What we can <span class="terra">build together</span></h2>
-
-    <div class="doing">
-      <div><b>Sponsored Reel</b><span>One video, native to my format. Instagram, TikTok, YouTube Shorts.</span></div>
-      <div><b>Two-part series</b><span>Result first, tutorial second. Two videos, one story, double the reach.</span></div>
-      <div><b>Comment-to-DM funnel</b><span>A keyword in the comments triggers a DM with your resource. Built on my own list infrastructure.</span></div>
-      <div><b>Collab post</b><span>Published on both accounts at once, so it runs in front of your audience too.</span></div>
-      <div><b>Newsletter feature</b><span>A dedicated slot to 10,198 subscribers who opted in for AI guides.</span></div>
-      <div><b>Live workshop</b><span>A hands-on session for your users or your team, co-hosted with your brand.</span></div>
-    </div>
-
-    <div class="terms">
-      <p><b>How I work.</b> Concept and script go to you before filming. One round of notes is included. I keep the final call on tone, because that is what keeps the video working.</p>
-      <p><b>Paid partnerships carry the paid partnership label.</b> Every time, on every platform. It is the law where my audience lives, and it has never cost a campaign a single view.</p>
-      <p><b>I only take products I actually use.</b> If I cannot get a real result out of it in a week, I will tell you instead of filming it.</p>
-      <p><b>Rates on request</b>, by format and by usage. Paid media and whitelisting are priced separately from organic.</p>
-    </div>
-  </section>
-
-</div>
-
-<div class="marq">
-  <div class="lbl">Trained teams at</div>
-  <div class="track">
-    <span>Corteva</span><span>·</span><span>Stoller</span><span>·</span><span>Ismart</span><span>·</span><span>OneGlobal</span><span>·</span><span>Sorridents</span><span>·</span><span>Magalu</span><span>·</span><span>OLX</span><span>·</span><span>B3</span><span>·</span><span>CI&amp;T</span><span>·</span>
-    <span>Corteva</span><span>·</span><span>Stoller</span><span>·</span><span>Ismart</span><span>·</span><span>OneGlobal</span><span>·</span><span>Sorridents</span><span>·</span><span>Magalu</span><span>·</span><span>OLX</span><span>·</span><span>B3</span><span>·</span><span>CI&amp;T</span><span>·</span>
-  </div>
-</div>
-
-<div class="wrap">
-  <div class="closing rv">
-    <div class="big">If your product is built<br>to be <span class="terra">used, not just demoed</span>,<br>we're already saying the same thing.</div>
-    <p class="sub">Let's talk about what we can build together.</p>
-    <div class="cta">
-      <a class="btn btn-terra" href="mailto:bruna@newscale.tech">bruna@newscale.tech</a>
-      <a class="btn btn-ghost" href="https://brunasantanna.com" target="_blank" rel="noopener">brunasantanna.com</a>
     </div>
   </div>
-</div>
+</section>
 
-<footer>
-  <div class="fline"></div>
+<!-- ============ RECEIPTS / GALLERY ============ -->
+<section style="padding-top:0">
   <div class="wrap">
-    <div class="m">
-      <span class="name">Bruna Santanna</span> · Founder, NewScale<br>
-      <a href="https://brunasantanna.com" target="_blank" rel="noopener">brunasantanna.com</a> ·
-      <a href="https://newscale.tech" target="_blank" rel="noopener">newscale.tech</a> ·
-      <a href="https://www.instagram.com/brusantanna.ai/" target="_blank" rel="noopener">Instagram</a> ·
-      <a href="https://www.tiktok.com/@brusantanna.ai" target="_blank" rel="noopener">TikTok</a>
+    <div class="sec-head rv">
+      <div class="kicker">Receipts</div>
+      <h2>Where it <span class="terra">happens</span></h2>
+      <p class="lead">Not a portfolio of slides. Rooms I was actually in, this year and last.</p>
     </div>
-    <div class="note">Metrics pulled from Metricool. Each block states its own period: the 12-month figure covers Sep 2025 – Aug 2026 · the 30-day block covers 25 July – 23 August 2026, Instagram, organic only · all-time marks are cumulative to 23 August 2026. Last updated 24 August 2026.</div>
+    <div class="gal">
+      <div class="gi w7 wide rv"><img src="img/stage-green.jpg" alt="Stoller congress keynote" loading="lazy"><div class="meta"><div class="who">Stoller</div><div class="what">National congress · main stage keynote</div></div></div>
+      <div class="gi w5 tall rv"><img src="img/hackathon-me.jpg" alt="Bruna Santanna opening the AI hackathon" loading="lazy"><div class="meta"><div class="who">Insper</div><div class="what">Opening the AI hackathon</div></div></div>
+      <div class="gi w4 tall rv"><img src="img/room-virada.jpg" alt="Virada IA workshop room" loading="lazy"><div class="meta"><div class="who">Virada IA workshop</div><div class="what">Full-day hands-on session</div></div></div>
+      <div class="gi w4 tall rv"><img src="img/jb-agro-group.jpg" alt="Bruna Santanna with the JB Agro team" loading="lazy"><div class="meta"><div class="who">JB Agro</div><div class="what">The whole team, after the training</div></div></div>
+      <div class="gi w4 tall rv"><img src="img/room-training.jpg" alt="Team training session with laptops" loading="lazy"><div class="meta"><div class="who">Juca na Balada</div><div class="what">Team training, screen by screen</div></div></div>
+      <div class="gi w7 wide rv"><img src="img/hackathon-teams.jpg" alt="Teams working during the hackathon" loading="lazy"><div class="meta"><div class="who">Insper hackathon</div><div class="what">Teams building, hour six</div></div></div>
+      <div class="gi w5 tall rv"><img src="img/room-mentoring-2.jpg" alt="Mentoring session around a table" loading="lazy"><div class="meta"><div class="who">Daniella Eventos</div><div class="what">Mentoring for event planners</div></div></div>
+      <div class="gi w4 tall rv"><img src="img/group-regina.jpg" alt="Regina Rios team after training" loading="lazy"><div class="meta"><div class="who">Regina Rios</div><div class="what">The team after training</div></div></div>
+      <div class="gi w4 tall rv"><img src="img/jb-agro-desk.jpg" alt="Bruna Santanna working with a JB Agro analyst" loading="lazy"><div class="meta"><div class="who">JB Agro</div><div class="what">One screen, two people, one problem</div></div></div>
+      <div class="gi w4 tall rv"><img src="img/sharktank.jpg" alt="Bruna Santanna being filmed on the Shark Tank e-School set" loading="lazy"><div class="meta"><div class="who">Shark Tank e-School</div><div class="what">On set, being filmed</div></div></div>
+      <div class="gi w5 tall rv"><img src="img/insper-mic.jpg" alt="Bruna Santanna with a microphone in front of an audience" loading="lazy"><div class="meta"><div class="who">Insper</div><div class="what">Before the room filled up</div></div></div>
+      <div class="gi w7 wide rv"><img src="img/stringhetta-team.jpg" alt="Working session with the Stringhetta team" loading="lazy"><div class="meta"><div class="who">Stringhetta</div><div class="what">Working session with the team</div></div></div>
+      <div class="gi w7 wide rv"><img src="img/mg-contecnica.jpg" alt="Bruna Santanna teaching in front of a projected screen" loading="lazy"><div class="meta"><div class="who">MG Contécnica</div><div class="what">Live on the screen, step by step</div></div></div>
+      <div class="gi w5 tall rv"><img src="img/desk-tablet.jpg" alt="Bruna Santanna working on a tablet" loading="lazy"><div class="meta"><div class="who">The library</div><div class="what">10,198 subscribers, built one guide at a time</div></div></div>
+      <div class="gi w12 band rv"><img src="img/hackathon-group.jpg" alt="Hackathon teams holding their certificates" loading="lazy"><div class="meta"><div class="who">Insper hackathon</div><div class="what">The teams, at the finish line</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FORMATS ============ -->
+<section id="work" style="background:var(--bg-2);border-top:2px solid var(--ink)">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="kicker">Brand partnerships</div>
+      <h2>What we can <span class="terra">build together</span></h2>
+    </div>
+    <div class="fmt">
+      <div class="rv"><div class="i">01</div><b>Sponsored Reel</b><span>One video, native to my format. Instagram, TikTok, YouTube Shorts.</span></div>
+      <div class="rv"><div class="i">02</div><b>Two-part series</b><span>Result first, tutorial second. Two videos, one story, double the reach.</span></div>
+      <div class="rv"><div class="i">03</div><b>Comment-to-DM funnel</b><span>A keyword in the comments triggers a DM with your resource. Built on my own list infrastructure.</span></div>
+      <div class="rv"><div class="i">04</div><b>Collab post</b><span>Published on both accounts at once, so it runs in front of your audience too.</span></div>
+      <div class="rv"><div class="i">05</div><b>Newsletter feature</b><span>A dedicated slot to 10,198 subscribers who opted in for AI guides.</span></div>
+      <div class="rv"><div class="i">06</div><b>Live workshop</b><span>A hands-on session for your users or your team, co-hosted with your brand.</span></div>
+    </div>
+
+    <div class="rules rv">
+      <div class="rk">How I work</div>
+      <div class="rule"><div class="i">01</div><p><b>Concept and script go to you before filming.</b> One round of notes is included. I keep the final call on tone, because that is what keeps the video working.</p></div>
+      <div class="rule"><div class="i">02</div><p><b>Paid partnerships carry the paid partnership label.</b> Every time, on every platform. It is the law where my audience lives, and it has never cost a campaign a single view.</p></div>
+      <div class="rule"><div class="i">03</div><p><b>I only take products I actually use.</b> If I cannot get a real result out of it in a week, I will tell you instead of filming it.</p></div>
+      <div class="rule"><div class="i">04</div><p><b>Rates on request</b>, by format and by usage. Paid media and whitelisting are priced separately from organic.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee">
+  <div class="mq-label">Trained teams at</div>
+  <div class="mq-track">
+    <span>Corteva ·</span><span>Stoller ·</span><span>Ismart ·</span><span>OneGlobal ·</span><span>Sorridents ·</span><span>Magalu ·</span><span>OLX ·</span><span>B3 ·</span><span>CI&amp;T ·</span><span>Insper ·</span>
+    <span>Corteva ·</span><span>Stoller ·</span><span>Ismart ·</span><span>OneGlobal ·</span><span>Sorridents ·</span><span>Magalu ·</span><span>OLX ·</span><span>B3 ·</span><span>CI&amp;T ·</span><span>Insper ·</span>
+  </div>
+</div>
+
+<!-- ============ CLOSE ============ -->
+<section class="close">
+  <div class="wrap">
+    <div class="close-grid">
+      <div class="rv">
+        <div class="photo hard-g" style="aspect-ratio:4/5"><img src="img/portrait-laugh.jpg" alt="Portrait of Bruna Santanna" loading="lazy"></div>
+      </div>
+      <div class="rv">
+        <div class="kicker">Let's talk</div>
+        <h2>If your product is built to be <span class="terra">used</span>, not just demoed, we're already saying the same thing.</h2>
+        <p>Send me what you have in mind and I'll tell you honestly whether I can get a real result out of it.</p>
+        <div class="cta">
+          <a class="btn btn-terra" href="mailto:bruna@newscale.tech">bruna@newscale.tech</a>
+          <a class="btn btn-ink" href="https://brunasantanna.com">brunasantanna.com</a>
+        </div>
+        <div class="sig">
+          <b>Bruna Santanna</b>
+          Founder, NewScale · @brusantanna.ai
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="ft">
+      <div class="ft-logo">Bruna Santanna</div>
+      <div class="ft-links">
+        <a href="https://brunasantanna.com">brunasantanna.com</a>
+        <a href="https://newscale.tech">newscale.tech</a>
+        <a href="https://instagram.com/brusantanna.ai" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://tiktok.com/@brusantanna.ai" target="_blank" rel="noopener">TikTok</a>
+        <a href="mailto:bruna@newscale.tech">Email</a>
+      </div>
+    </div>
+    <div class="note">
+      Metrics pulled from Metricool. Each block states its own period: the 12-month figure covers Sep 2025 – Aug 2026 · the 30-day block covers 25 July – 23 August 2026, Instagram, organic only · all-time marks are cumulative to 23 August 2026. Last updated 24 August 2026.
+    </div>
   </div>
 </footer>
 
@@ -402,6 +644,12 @@ footer a:hover{color:var(--terra-d)}
 (function(){
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* header solid on scroll */
+  var hdr = document.getElementById('hdr');
+  function onScroll(){ hdr.classList.toggle('solid', window.scrollY > 60); }
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+
+  /* count up */
   function render(el, val){
     var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
     var s = val.toFixed(dec);
@@ -422,7 +670,7 @@ footer a:hover{color:var(--terra-d)}
     requestAnimationFrame(step);
   }
 
-  var figs = [].slice.call(document.querySelectorAll('.fig .n, .headline .hn'));
+  var figs = [].slice.call(document.querySelectorAll('.fig .n, .bignum .n'));
   var revs = [].slice.call(document.querySelectorAll('.rv'));
 
   if (!('IntersectionObserver' in window)){
@@ -430,7 +678,6 @@ footer a:hover{color:var(--terra-d)}
     figs.forEach(function(e){ render(e, parseFloat(e.getAttribute('data-to'))); });
     return;
   }
-
   var ioFig = new IntersectionObserver(function(entries){
     entries.forEach(function(e, i){
       if (e.isIntersecting){ setTimeout(function(){ countUp(e.target); }, i * 90); ioFig.unobserve(e.target); }
@@ -448,9 +695,8 @@ footer a:hover{color:var(--terra-d)}
   setTimeout(function(){
     revs.forEach(function(e){ e.classList.add('on'); });
     figs.forEach(function(e){ if (e.textContent === '0') render(e, parseFloat(e.getAttribute('data-to'))); });
-  }, 2500);
+  }, 2600);
 })();
 </script>
-
 </body>
 </html>
