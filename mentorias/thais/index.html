@@ -224,11 +224,11 @@ section{padding:76px 0;position:relative;}
 
 <div class="gate" id="gate">
   <div class="gatebox">
-    <span class="eyebrow">Consultoria IA 1:1 · Material da Ilikia</span>
+    <span class="eyebrow">Consultoria IA 1:1 · Material do encontro</span>
     <h1>SEU GUIA DO<br><span>ENCONTRO 01.</span></h1>
-    <p class="g">Esta página é sua. Digite o seu e-mail da Ilikia para abrir.</p>
+    <p class="g">Esta página é sua. Digite seu e-mail para abrir.</p>
     <form class="gform" id="gform" autocomplete="on">
-      <input type="email" id="gmail" placeholder="seu.nome@ilikia.com" autocomplete="email" required spellcheck="false">
+      <input type="email" id="gmail" placeholder="seu@email.com" autocomplete="email" required spellcheck="false">
       <button type="submit" id="gbtn">Abrir o guia</button>
       <div class="gerr" id="gerr"></div>
     </form>
@@ -286,7 +286,7 @@ async function tentar(email,silencioso){
     iniciar(html);
     return true;
   }catch(e){
-    if(!silencioso)falhou("Esse e-mail não abre este guia. Confira se digitou o seu e-mail da Ilikia, o mesmo do encontro. Se continuar sem abrir, me chame no WhatsApp.");
+    if(!silencioso)falhou("Esse e-mail não abre este guia. Confira se é o mesmo endereço do nosso encontro. Se continuar sem abrir, me chame no WhatsApp.");
     return false;
   }
 }
