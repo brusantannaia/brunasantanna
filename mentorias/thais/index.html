@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thaís · Encontro 01 · Consultoria IA</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#F3EEE3; --bg-2:#ECE5D6; --card:#FBF9F3;
+  --ink:#14373C; --ink-2:#2C4F54; --green:#435D51;
+  --terra:#B06E4A; --terra-l:#C4835E; --terra-d:#985A3B;
+  --text:#233133; --muted:#6E7A75;
+  --line:rgba(20,55,60,.16);
+  --anton:'Anton', sans-serif; --hank:'Hanken Grotesk', sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--hank);background:var(--bg);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+::selection{background:var(--terra);color:#fff;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 30px;}
+h1,h2,h3{font-family:var(--anton);font-weight:400;text-transform:uppercase;letter-spacing:-.01em;line-height:.92;}
+.terra{color:var(--terra);}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--terra);}
+.eyebrow::before{content:'';width:26px;height:2px;background:var(--terra);}
+#bar{position:fixed;top:0;left:0;height:4px;width:0;background:var(--terra);z-index:99;transition:width .1s linear;}
+
+.hd{position:sticky;top:0;z-index:50;background:rgba(243,238,227,.92);backdrop-filter:blur(8px);border-bottom:2px solid var(--ink);}
+.hd-in{display:flex;align-items:center;justify-content:space-between;padding:14px 30px;max-width:1180px;margin:0 auto;}
+.hd .logo{font-family:var(--anton);font-size:1.15rem;text-transform:uppercase;color:var(--ink);letter-spacing:.02em;display:inline-flex;align-items:center;}
+.hd .logo .tag{font-family:var(--hank);font-weight:700;font-size:.6rem;letter-spacing:.12em;color:var(--terra);border:1.5px solid var(--terra);padding:3px 8px;border-radius:100px;margin-left:10px;text-transform:uppercase;}
+.hd nav{display:flex;gap:20px;}
+.hd nav a{font-size:.82rem;font-weight:600;color:var(--ink-2);text-decoration:none;transition:.18s;}
+.hd nav a:hover{color:var(--terra);}
+@media(max-width:860px){.hd nav{display:none;}}
+
+section{padding:76px 0;position:relative;}
+.snum{font-family:var(--anton);font-size:clamp(3rem,8vw,5.5rem);color:var(--terra);line-height:.8;display:block;}
+.sec-h{font-size:clamp(2.1rem,6vw,3.6rem);color:var(--ink);margin:6px 0 14px;}
+.lead{font-size:1.15rem;color:var(--ink-2);max-width:56ch;}
+.lead b{color:var(--ink);font-weight:700;}
+.alt{background:var(--bg-2);}
+
+.hero{padding:64px 0 52px;}
+.hero h1{font-size:clamp(3rem,11vw,6.6rem);color:var(--ink);margin:18px 0 0;}
+.hero .sub{font-size:1.25rem;color:var(--ink-2);max-width:44ch;margin-top:22px;}
+.hero .sub b{color:var(--ink);font-weight:700;}
+.statrow{display:flex;gap:34px;flex-wrap:wrap;margin-top:38px;}
+.statrow .n{font-family:var(--anton);font-size:2.4rem;color:var(--ink);line-height:1;}
+.statrow .n span{color:var(--terra);}
+.statrow .l{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:5px;}
+
+.mani{background:var(--ink);padding:60px 0;}
+.mani p{font-family:var(--anton);text-transform:uppercase;font-size:clamp(1.7rem,5vw,3.2rem);line-height:1.02;color:#fff;max-width:26ch;}
+.mani p span{color:var(--terra-l);}
+.marq{background:var(--bg-2);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);padding:15px 0;overflow:hidden;}
+.marq-t{display:flex;gap:40px;width:max-content;animation:slide 30s linear infinite;align-items:center;}
+@keyframes slide{to{transform:translateX(-50%);}}
+.marq span{font-family:var(--anton);font-size:1.4rem;text-transform:uppercase;color:var(--ink);white-space:nowrap;}
+.marq span.d{color:var(--terra);}
+
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px;}
+@media(max-width:680px){.split{grid-template-columns:1fr;}}
+.col{border-radius:16px;padding:24px 26px;}
+.col.no{background:var(--bg-2);border:1.5px dashed var(--line);}
+.col.yes{background:var(--ink);color:#fff;box-shadow:7px 7px 0 var(--terra);}
+.alt .col.no{background:var(--card);}
+.col .lab{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;}
+.col.no .lab{color:var(--muted);} .col.yes .lab{color:var(--terra-l);}
+.col h4{font-family:var(--hank);font-weight:800;font-size:1.35rem;text-transform:uppercase;line-height:1.08;margin-bottom:8px;}
+.col.no h4{color:var(--ink);} .col.yes h4{color:#fff;}
+.col p{font-size:.95rem;} .col.no p{color:var(--ink-2);} .col.yes p{color:rgba(255,255,255,.85);}
+
+.callout{margin-top:20px;background:rgba(176,110,74,.1);border-left:4px solid var(--terra);border-radius:0 12px 12px 0;padding:15px 19px;font-size:1rem;color:var(--ink-2);}
+.callout b{color:var(--terra);}
+
+.spot{margin-top:26px;background:var(--ink);border-radius:18px;padding:32px 34px;box-shadow:7px 7px 0 var(--green);}
+.spot .lab{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra-l);margin-bottom:12px;}
+.spot h3{font-family:var(--anton);text-transform:uppercase;font-size:clamp(1.5rem,4vw,2.2rem);color:#fff;line-height:1;}
+.spot h3 span{color:var(--terra-l);}
+.spot p{color:rgba(255,255,255,.86);font-size:1.04rem;margin-top:14px;max-width:56ch;}
+.spot p b{color:#fff;}
+.spot .verbs{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;}
+.spot .verbs i{font-style:normal;font-family:var(--anton);text-transform:uppercase;letter-spacing:.04em;font-size:1rem;color:#fff;background:rgba(196,131,94,.22);border:1.5px solid var(--terra-l);border-radius:100px;padding:7px 18px;}
+
+.flow{display:flex;align-items:stretch;margin-top:28px;flex-wrap:wrap;}
+.fstep{flex:1;min-width:150px;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:18px;}
+.alt .fstep{background:var(--card);}
+.fstep.dark{background:var(--ink);box-shadow:7px 7px 0 var(--terra);border-color:var(--ink);}
+.fstep .fn{font-family:var(--anton);font-size:1.3rem;color:var(--terra);}
+.fstep.dark .fn{color:var(--terra-l);}
+.fstep .ft{font-family:var(--anton);text-transform:uppercase;font-size:1.02rem;color:var(--ink);margin-top:4px;line-height:1.02;}
+.fstep.dark .ft{color:#fff;}
+.fstep p{font-size:.83rem;color:var(--ink-2);margin-top:6px;}.fstep.dark p{color:rgba(255,255,255,.8);}
+.farrow{display:flex;align-items:center;justify-content:center;font-family:var(--anton);color:var(--terra);font-size:1.7rem;padding:0 12px;}
+@media(max-width:680px){.flow{flex-direction:column;}.farrow{transform:rotate(90deg);padding:8px 0;}}
+
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;}
+.chip{font-family:var(--hank);font-weight:700;font-size:.82rem;background:var(--bg-2);border:1.5px solid var(--line);border-radius:100px;padding:8px 16px;color:var(--ink);}
+.alt .chip{background:var(--card);}
+.chip.hot{background:var(--terra);color:#fff;border-color:var(--terra);}
+
+/* linhas do DRE */
+.lines{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:28px;}
+.lcard{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:22px 20px;transition:.2s;}
+.lcard:hover{border-color:var(--ink);box-shadow:6px 6px 0 var(--line);transform:translateY(-3px);}
+.lcard .num{font-family:var(--anton);font-size:2.6rem;color:var(--terra);line-height:.9;}
+.lcard .num small{font-family:var(--hank);font-size:.66rem;font-weight:700;letter-spacing:.14em;color:var(--muted);display:block;text-transform:uppercase;margin-bottom:2px;}
+.lcard h4{font-family:var(--anton);text-transform:uppercase;font-size:1.12rem;color:var(--ink);margin-top:8px;line-height:1.02;}
+.lcard p{font-size:.86rem;color:var(--ink-2);margin-top:6px;}
+.lcard.wide{grid-column:span 2;}
+@media(max-width:680px){.lcard.wide{grid-column:span 1;}}
+
+/* benchmark bars */
+.bench{margin-top:26px;display:grid;gap:16px;}
+.brow{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:18px 20px;}
+.alt .brow{background:var(--card);}
+.brow .bt{display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap;}
+.brow .bt h4{font-family:var(--anton);text-transform:uppercase;font-size:1.05rem;color:var(--ink);}
+.brow .bt em{font-style:normal;font-family:var(--anton);font-size:1.5rem;color:var(--terra);}
+.brow .track{margin-top:12px;height:14px;border-radius:100px;background:var(--bg-2);border:1.5px solid var(--line);overflow:hidden;}
+.brow .fill{height:100%;background:var(--terra);width:0;transition:width 1.1s cubic-bezier(.2,.8,.2,1);}
+.in .brow .fill.f12{width:12%;} .in .brow .fill.f15{width:15%;}
+.brow small{display:block;margin-top:8px;font-size:.82rem;color:var(--muted);}
+
+/* passos numerados */
+.steps{margin-top:30px;display:grid;gap:12px;counter-reset:st;}
+.st{display:flex;gap:18px;align-items:flex-start;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:20px 22px;}
+.alt .st{background:var(--card);}
+.st.key{background:var(--ink);box-shadow:7px 7px 0 var(--terra);border-color:var(--ink);}
+.st .stn{flex-shrink:0;width:38px;height:38px;border-radius:10px;background:var(--terra);color:#fff;font-family:var(--anton);font-size:1.25rem;display:flex;align-items:center;justify-content:center;line-height:1;}
+.st.key .stn{background:var(--terra-l);color:var(--ink);}
+.st .stc h4{font-family:var(--anton);text-transform:uppercase;font-size:1.16rem;color:var(--ink);line-height:1.02;}
+.st.key .stc h4{color:#fff;}
+.st .stc p{font-size:.95rem;color:var(--ink-2);margin-top:5px;}
+.st.key .stc p{color:rgba(255,255,255,.86);}
+.st .stc a{color:var(--terra);font-weight:700;text-decoration:none;border-bottom:2px solid var(--terra);}
+.st.key .stc a{color:var(--terra-l);border-color:var(--terra-l);}
+.st .stc a:hover{color:var(--terra-d);}
+
+/* árvore de pastas */
+.tree{margin-top:28px;background:var(--ink);border-radius:16px;padding:26px 28px;box-shadow:7px 7px 0 var(--terra);font-family:var(--hank);}
+.tree .row{display:flex;align-items:center;gap:9px;color:rgba(255,255,255,.9);font-size:.95rem;padding:5px 0;font-weight:600;}
+.tree .row.root{color:#fff;font-family:var(--anton);text-transform:uppercase;letter-spacing:.03em;font-size:1.05rem;}
+.tree .ic{width:20px;text-align:center;flex-shrink:0;color:var(--terra-l);}
+.tree .row.file{color:var(--terra-l);}
+.tree .ind1{padding-left:26px;} .tree .ind2{padding-left:52px;}
+.tree .note{color:rgba(255,255,255,.45);font-weight:400;font-size:.82rem;margin-left:6px;}
+
+/* prompt */
+.prompt{margin-top:22px;background:var(--card);border:1.5px solid var(--line);border-left:7px solid var(--terra);border-radius:0 14px 14px 0;overflow:hidden;}
+.prompt .pl{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;background:rgba(176,110,74,.1);}
+.prompt .pl span{font-family:var(--hank);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);display:inline-flex;align-items:center;gap:9px;flex-wrap:wrap;}
+.live{background:var(--terra);color:#fff;padding:3px 8px;border-radius:6px;letter-spacing:.06em;}
+.copy{font-family:var(--hank);font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--terra);border:none;border-radius:100px;padding:7px 16px;cursor:pointer;transition:.18s;white-space:nowrap;}
+.copy:hover{background:var(--terra-d);}.copy.done{background:var(--green);}
+.prompt pre{font-family:var(--hank);font-size:.93rem;line-height:1.58;color:var(--text);padding:20px;white-space:pre-wrap;word-break:break-word;}
+.pnote{font-size:.9rem;color:var(--muted);margin-top:10px;max-width:60ch;}
+
+/* regras de ouro */
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:30px;}
+.rule{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:24px 22px;transition:.2s;}
+.alt .rule{background:var(--card);}
+.rule:hover{border-color:var(--ink);box-shadow:6px 6px 0 var(--line);transform:translateY(-3px);}
+.rule .rn{font-family:var(--anton);font-size:.8rem;letter-spacing:.14em;color:var(--terra);text-transform:uppercase;}
+.rule h4{font-family:var(--anton);text-transform:uppercase;font-size:1.2rem;color:var(--ink);margin:6px 0 8px;line-height:1.02;}
+.rule p{font-size:.92rem;color:var(--ink-2);}
+.rule p b{color:var(--ink);font-weight:700;}
+
+.misscard{background:var(--ink);color:#fff;border-radius:20px;padding:40px;box-shadow:9px 9px 0 var(--green);}
+.misscard h2{color:#fff;font-size:clamp(1.8rem,5vw,2.8rem);}.misscard h2 span{color:var(--terra-l);}
+.misscard .msub{color:rgba(255,255,255,.75);margin-top:10px;font-size:1rem;}
+.check{margin-top:26px;display:grid;gap:11px;}
+.ck{display:flex;gap:14px;align-items:flex-start;}
+.ck .bx{flex-shrink:0;width:24px;height:24px;border-radius:6px;border:2px solid var(--terra-l);margin-top:1px;}
+.ck p{color:rgba(255,255,255,.9);font-size:1.02rem;}.ck p b{color:#fff;}
+
+.teaser{background:var(--bg-2);}
+.teaser .pill{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra);border:1.5px solid var(--terra);border-radius:100px;padding:5px 14px;margin-bottom:16px;}
+.teaser h2{font-size:clamp(2rem,5.5vw,3.4rem);color:var(--ink);max-width:22ch;}.teaser h2 span{color:var(--terra);}
+.teaser p{margin-top:14px;color:var(--ink-2);max-width:56ch;font-size:1.05rem;}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:26px;}
+.tg{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:20px;}
+.tg h4{font-family:var(--anton);text-transform:uppercase;font-size:1.08rem;color:var(--ink);}
+.tg p{font-size:.88rem;color:var(--ink-2);margin-top:6px;}
+
+.close{background:var(--ink);text-align:center;}
+.close h2{font-size:clamp(2.4rem,8vw,5rem);color:#fff;}.close h2 span{color:var(--terra-l);}
+.close .sig{margin-top:18px;font-size:.9rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra-l);}
+.sign{display:flex;align-items:center;justify-content:space-between;gap:12px;color:rgba(255,255,255,.85);font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;padding:18px 30px;background:#0E282C;flex-wrap:wrap;}
+.sign .ns{font-family:var(--anton);letter-spacing:.28em;color:var(--terra-l);font-size:1rem;}
+
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);}
+.rv.in{opacity:1;transform:none;}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;}.marq-t{animation:none;}.brow .fill{transition:none;}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+
+<header class="hd">
+  <div class="hd-in">
+    <a class="logo" href="#">A VIRADA IA<span class="tag">Encontro 01</span></a>
+    <nav>
+      <a href="#decidiu">O combinado</a>
+      <a href="#pronto">O que ficou pronto</a>
+      <a href="#diagnostico">Diagnóstico</a>
+      <a href="#prompts" style="color:var(--terra);font-weight:700;">Prompt da agenda ↗</a>
+      <a href="#regras">Regras</a>
+      <a href="#licao">Lição de casa</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap rv">
+    <span class="eyebrow">Consultoria IA 1:1 · Encontro 01 · 26 de agosto de 2026</span>
+    <h1>THAÍS,<br>TUDO QUE A GENTE<br>FEZ <span class="terra">ESTÁ AQUI.</span></h1>
+    <p class="sub">Uma hora e quarenta e nove de call viraram <b>o Claude instalado, o Microsoft 365 conectado, um projeto criado e a memória das três empresas começando a existir.</b> É só seguir de cima pra baixo.</p>
+    <div class="statrow">
+      <div><div class="n">1<span>h49</span></div><div class="l">de call, mão na massa</div></div>
+      <div><div class="n"><span>3</span></div><div class="l">empresas num contexto só</div></div>
+      <div><div class="n">1</div><div class="l">projeto: Estratégia de Contexto</div></div>
+      <div><div class="n"><span>11</span></div><div class="l">itens na sua lição de casa</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="marq">
+  <div class="marq-t">
+    <span>Instalar o Claude <span class="d">·</span></span><span class="d">Ligar o Microsoft 365 ·</span><span>Criar a pasta cloud <span class="d">·</span></span><span class="d">Contar tudo pro Claude ·</span><span>Responder as perguntas dele <span class="d">·</span></span><span class="d">Agendar a rotina ·</span>
+    <span>Instalar o Claude <span class="d">·</span></span><span class="d">Ligar o Microsoft 365 ·</span><span>Criar a pasta cloud <span class="d">·</span></span><span class="d">Contar tudo pro Claude ·</span><span>Responder as perguntas dele <span class="d">·</span></span><span class="d">Agendar a rotina ·</span>
+  </div>
+</div>
+
+<!-- 01 O COMBINADO -->
+<section id="decidiu">
+  <div class="wrap rv">
+    <span class="snum">01</span>
+    <h2 class="sec-h">O que a gente <span class="terra">decidiu.</span></h2>
+    <p class="lead">Você chegou com a dor nomeada em uma frase: <b>gerir três empresas ao mesmo tempo e não conseguir se organizar.</b> A informação existe, está no seu computador, nos seus e-mails e na sua agenda, mas está dispersa e desatualizada. A gente decidiu não atacar isso por ferramenta. A gente decidiu atacar por <b>contexto</b>.</p>
+
+    <div class="split">
+      <div class="col no">
+        <div class="lab">O que não íamos fazer</div>
+        <h4>Sair automatizando tarefa solta</h4>
+        <p>Automatizar uma planilha aqui, um e-mail ali. Resolve o dia, não resolve a gestão. E some em duas semanas.</p>
+      </div>
+      <div class="col yes">
+        <div class="lab">O que a gente fez</div>
+        <h4>Construir a memória primeiro</h4>
+        <p>Um projeto só, com as três empresas dentro, lendo suas pastas e seus e-mails. Depois disso, tudo que você pedir já nasce sabendo quem você é.</p>
+      </div>
+    </div>
+
+    <div class="spot">
+      <div class="lab">A frase que resume o encontro</div>
+      <h3>A IA é um funcionário de alto nível.<br><span>Ela só é tão boa quanto o contexto que você dá pra ela.</span></h3>
+      <p>É por isso que a gente gastou a primeira hora ligando sistema e mostrando arquivo, e não pedindo mágica. <b>Contexto não é etapa burocrática. É o produto.</b></p>
+      <div class="verbs"><i>Conectar</i><i>Contextualizar</i><i>Delegar</i><i>Controlar</i></div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 O QUE FICOU PRONTO -->
+<section class="alt" id="pronto">
+  <div class="wrap rv">
+    <span class="snum">02</span>
+    <h2 class="sec-h">O que já ficou <span class="terra">pronto na sua máquina.</span></h2>
+    <p class="lead">Isso aqui não é teoria de aula. É o que está instalado e funcionando no seu computador agora, sem você precisar refazer nada.</p>
+
+    <div class="steps">
+      <div class="st">
+        <div class="stn">1</div>
+        <div class="stc">
+          <h4>Claude instalado e assinado</h4>
+          <p>Versão de computador, logada com o seu e-mail corporativo. É ela que dá acesso ao modo Cowork. A do navegador e a do celular não fazem o que a gente precisa.</p>
+        </div>
+      </div>
+      <div class="st">
+        <div class="stn">2</div>
+        <div class="stc">
+          <h4>Microsoft 365 conectado</h4>
+          <p>E-mail, agenda e arquivos do 365 acessíveis pelo Claude. Foi o primeiro conector e é o que sustenta toda a rotina de agenda do bloco 04.</p>
+        </div>
+      </div>
+      <div class="st">
+        <div class="stn">3</div>
+        <div class="stc">
+          <h4>Pasta <b>cloud</b> criada na área de trabalho</h4>
+          <p>É a porta de entrada. Tudo que você quiser que o Claude leia, mexa ou organize mora ali dentro. Fora dela, ele não enxerga.</p>
+        </div>
+      </div>
+      <div class="st">
+        <div class="stn">4</div>
+        <div class="stc">
+          <h4>Projeto <b>Estratégia de Contexto</b> criado</h4>
+          <p>Um projeto agrupa arquivos, conversas e memória em torno de um tema. Toda conversa sobre gestão do grupo acontece dentro dele, nunca solta.</p>
+        </div>
+      </div>
+      <div class="st key">
+        <div class="stn">5</div>
+        <div class="stc">
+          <h4>O arquivo de contexto do grupo já existe</h4>
+          <p>O Claude leu a pasta <b>Gerencial 2026</b>, varreu os sites e o Instagram das marcas, cruzou com a sua agenda e gerou um arquivo <b>.md</b> com o contexto estruturado das três empresas. Arquivo .md é o formato que a própria IA lê rápido. Sempre que ela escreve para si mesma, escreve nele.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tree">
+      <div class="row root"><span class="ic">▣</span> Área de trabalho</div>
+      <div class="row ind1"><span class="ic">▸</span> cloud <span class="note">a pasta que o Claude enxerga</span></div>
+      <div class="row ind2"><span class="ic">▸</span> Gerencial 2026 <span class="note">sua base de hoje</span></div>
+      <div class="row ind2 file"><span class="ic">▪</span> contexto-do-grupo.md <span class="note">gerado na call</span></div>
+      <div class="row ind2 file"><span class="ic">▪</span> organograma <span class="note">pendente, você vai colocar</span></div>
+      <div class="row ind2 file"><span class="ic">▪</span> identidade visual Ilikia <span class="note">pendente, você vai colocar</span></div>
+      <div class="row ind2 file"><span class="ic">▪</span> material da Dailes <span class="note">pendente, ele não achou nada</span></div>
+    </div>
+    <p class="pnote">Cada arquivo que entra nessa pasta deixa o Claude mais preciso. Cada um que fica de fora vira um ponto cego que você explica na mão, toda vez.</p>
+  </div>
+</section>
+
+<!-- 03 DIAGNÓSTICO -->
+<section id="diagnostico">
+  <div class="wrap rv">
+    <span class="snum">03</span>
+    <h2 class="sec-h">O que ele achou <span class="terra">sem a gente pedir.</span></h2>
+    <p class="lead">Na primeira leitura das suas pastas e da sua agenda, o Claude devolveu um diagnóstico que você confirmou na hora. Guarde isso, porque é o ponto de partida do encontro 02.</p>
+
+    <div class="rules">
+      <div class="rule">
+        <div class="rn">Nó 01</div>
+        <h4>Suas três reuniões de diretoria de segunda se sobrepõem</h4>
+        <p>Diretoria, alinhamento e Iconic caem no mesmo horário. Não dá para estar em três salas ao mesmo tempo, então uma delas sempre perde.</p>
+      </div>
+      <div class="rule">
+        <div class="rn">Nó 02</div>
+        <h4>Sua agenda registra intenção, não decisão</h4>
+        <p>Boa parte dos compromissos fica em tentativo ou é cancelada na véspera. A leitura dele: <b>não é falta de organização sua, é que a agenda não está fechando nada.</b></p>
+      </div>
+      <div class="rule">
+        <div class="rn">Nó 03</div>
+        <h4>A Dailes está no momento mais crítico</h4>
+        <p>Lançamento em curso, integração do time e a campanha de Black Friday de outubro com dois nós na mesa: custo entre R$ 300 mil e R$ 1 milhão dependendo do kit, e estoque insuficiente sem um pedido novo ao MedCube.</p>
+      </div>
+      <div class="rule">
+        <div class="rn">Falta</div>
+        <h4>Organograma formal e metas de 2026</h4>
+        <p>Sem organograma ele não sabe para quem delegar. Sem meta ele não sabe o que é bom e o que é ruim. São as duas peças que mais mudam o resultado.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <b>Por que ele conseguiu ver isso:</b> porque leu a pasta Gerencial 2026 e a sua agenda de verdade, e não só o que a gente contou na call. Contexto puxa diagnóstico. Sem contexto, ele devolve texto bonito e nada mais.
+    </div>
+  </div>
+</section>
+
+<!-- 04 O PROMPT DA AGENDA -->
+<section class="alt" id="prompts">
+  <div class="wrap rv">
+    <span class="snum">04</span>
+    <h2 class="sec-h">O prompt da agenda, <span class="terra">completo.</span></h2>
+    <p class="lead">A call caiu bem na hora de montar isso, então aqui está inteiro. São dois prompts, na ordem. O primeiro cria a rotina e o painel. O segundo agenda a rotina para rodar sozinha todo dia. <b>Você não precisa entender nada do que está escrito, só colar.</b></p>
+
+    <div class="callout">
+      <b>Antes de colar:</b> abra o Claude no computador, entre no projeto <b>Estratégia de Contexto</b> e clique em <b>nova conversa</b>. Prompt novo, conversa nova. O porquê está no bloco 05.
+    </div>
+
+    <div class="prompt">
+      <div class="pl"><span><span class="live">Prompt 1</span> Criar a rotina diária e o painel</span><button class="copy">Copiar</button></div>
+      <pre>Você vai montar comigo a minha rotina diária de gestão. Antes de qualquer coisa, leia o arquivo de contexto do grupo que está na pasta do projeto, e leia também a minha agenda e os meus e-mails pelo conector do Microsoft 365. Não invente nada que você não encontrou: se faltar informação, me pergunte.
+
+QUEM EU SOU
+Sou a Thaís, sócia e CEO do grupo que reúne três empresas independentes: a Ilikia, de tecnologias para a área estética e tratamentos estéticos; a Dailes, uma curadoria e marca de skincare e dermocosméticos que está sendo lançada agora; e a Iconic. São cerca de 220 funcionários no total. Nosso sistema principal é o Salesforce, e a agenda e os e-mails estão no Microsoft 365.
+
+POR QUE EU PRECISO DISSO
+Porque eu gerencio três empresas ao mesmo tempo e hoje eu não consigo me organizar. A informação existe, mas está espalhada entre o meu computador, os meus e-mails e a minha agenda. Você já olhou isso e me disse três coisas que eu confirmo: minhas três reuniões de diretoria de segunda-feira se sobrepõem, minha agenda registra intenção e não decisão, e a Dailes está no momento mais crítico por causa do lançamento e da Black Friday de outubro. É exatamente isso que eu quero parar de deixar passar.
+
+O QUE EU QUERO QUE VOCÊ FAÇA TODO DIA
+Toda manhã, em dia útil, você vai cruzar quatro fontes: (1) a minha agenda do Microsoft 365, dos próximos 7 dias; (2) os meus e-mails não respondidos dos últimos 15 dias; (3) os arquivos da pasta cloud, incluindo a Gerencial 2026 e o arquivo de contexto do grupo; (4) tudo que ficou pendente no seu próprio relatório do dia anterior.
+
+E com isso você me entrega duas coisas:
+
+1. Um painel visual em HTML, em formato kanban, salvo na pasta cloud, sempre com o mesmo nome de arquivo, para eu abrir no navegador e ver tudo de uma vez. Colunas: A DECIDIR HOJE, ESPERANDO RESPOSTA DE ALGUÉM, EM ANDAMENTO, TRAVADO e FEITO. Cada card com o nome da tarefa, a empresa (Ilikia, Dailes ou Iconic), a pessoa responsável e há quantos dias aquilo está parado.
+
+2. Um resumo curto em texto, no chat, com no máximo dez linhas, começando pelo que é mais urgente. Se não tiver nada urgente, diga que não tem, e não invente urgência.
+
+O QUE VOCÊ TEM QUE CONTROLAR SEM EU PRECISAR PEDIR
+- Propostas comerciais: toda vez que eu enviar uma proposta, você registra e me cobra o follow-up. Nunca me deixe esquecer de cobrar alguém. Me avise no terceiro, no sétimo e no décimo quinto dia sem resposta.
+- Preparo de reunião: olhe minha agenda do dia seguinte e me diga, para cada reunião, se eu preciso preparar alguma coisa antes, o que é, e onde está o material. Se for reunião recorrente, me traga o que ficou pendente da última.
+- Choques e sobreposição: se dois compromissos meus caírem no mesmo horário, me avise com antecedência e sugira qual mover.
+- Intenção virando decisão: se um compromisso estiver marcado como tentativo, ou tiver sido remarcado ou cancelado mais de uma vez, me aponte e pergunte o que eu quero fazer com ele.
+- Pendências por diretoria: cada pendência tem um dono. Organize por pessoa e por empresa, e me mostre quem está segurando o quê.
+- Nós críticos da Dailes: acompanhe o lançamento, a integração do time, o custo da campanha de Black Friday de outubro e o estoque, incluindo a necessidade de pedido novo ao MedCube. Me avise se alguma data chegar perto sem decisão tomada.
+
+COMO EU QUERO QUE VOCÊ SEJA
+Chato. Chato de verdade. Eu não quero deixar passar nada. Prefiro que você me cobre demais a deixar uma coisa importante morrer no silêncio. Fale comigo em português direto, sem enrolação e sem termo técnico. Nunca me devolva uma lista de trinta itens: traga o que importa hoje e guarde o resto no painel.
+
+ANTES DE COMEÇAR
+Me faça todas as perguntas que você precisar para montar isso bem feito, de uma vez só e numeradas, para eu responder todas juntas na mesma mensagem. Pergunte tudo que estiver faltando: horário que eu quero receber, quem é quem no organograma, quais reuniões são fixas, o que conta como urgente para mim, o que você não encontrou nos arquivos. Depois que eu responder, monte o painel e me mostre a primeira versão.</pre>
+    </div>
+    <p class="pnote">Esse prompt é grande de propósito. É a diferença entre um assistente genérico e um que conhece a sua operação. Você escreve uma vez e usa todo dia.</p>
+
+    <div class="prompt">
+      <div class="pl"><span><span class="live">Prompt 2</span> Agendar para rodar sozinho</span><button class="copy">Copiar</button></div>
+      <pre>Agora transforme essa rotina em uma tarefa agendada, para você executar sozinho sem eu precisar pedir.
+
+Rode de segunda a sexta, às 7h30 da manhã, no meu horário de Brasília. A cada execução: refaça o cruzamento das quatro fontes, atualize o mesmo arquivo do painel na pasta cloud, e me deixe o resumo curto no chat.
+
+Duas regras fixas: na segunda-feira, olhe a semana inteira e me avise logo cedo sobre a sobreposição das reuniões de diretoria. Na sexta-feira, feche a semana me dizendo o que ficou para trás e o que entra na próxima.
+
+Se você não conseguir criar essa tarefa agendada, me diga com todas as letras que não conseguiu e por quê, e me explique em passos simples o que eu preciso clicar ou ativar para liberar isso. Não finja que agendou.</pre>
+    </div>
+    <p class="pnote">Se o agendamento automático não estiver disponível no seu plano, não tem problema: o prompt 1 continua valendo, você só cola uma frase curta todo dia — <b>roda a minha rotina de hoje</b> — e ele refaz tudo.</p>
+  </div>
+</section>
+
+<!-- 05 REGRAS DE OURO -->
+<section id="regras">
+  <div class="wrap rv">
+    <span class="snum">05</span>
+    <h2 class="sec-h">As regras de ouro <span class="terra">que eu te passei.</span></h2>
+    <p class="lead">São cinco. Elas explicam quase todo erro que as pessoas cometem no primeiro mês.</p>
+
+    <div class="rules">
+      <div class="rule">
+        <div class="rn">Regra 01</div>
+        <h4>Conversa nova a cada tarefa nova</h4>
+        <p>Existe uma coisa chamada janela de contexto. A cada mensagem sua, o Claude relê a conversa inteira. Quando ela fica muito longa, ele não alcança mais o começo e <b>vai ficando burro</b>. Tarefa nova, chat novo, sempre dentro do mesmo projeto.</p>
+      </div>
+      <div class="rule">
+        <div class="rn">Regra 02</div>
+        <h4>Fale como se fala com gente</h4>
+        <p>Prompt não precisa mais de estrutura rígida de comando. O que muda o resultado é <b>dizer o objetivo, dizer por que você quer aquilo e dar contexto</b>. Foi assim que a gente escreveu a sua primeira mensagem.</p>
+      </div>
+      <div class="rule">
+        <div class="rn">Regra 03</div>
+        <h4>Delegue como você delega para uma pessoa</h4>
+        <p>Diga qual ferramenta, qual pasta, qual pessoa, em que ordem. Instrução vaga gera entrega vaga, com IA e com humano. É a mesma conversa.</p>
+      </div>
+      <div class="rule">
+        <div class="rn">Regra 04</div>
+        <h4>Opus para o dia a dia, Fable 5 só para o pesado</h4>
+        <p>O Opus dá conta de tarefa complexa sem consumir o plano rápido. O Fable 5 é potente e queima crédito rápido: guarde para demanda grande, tipo refazer um site inteiro.</p>
+      </div>
+      <div class="rule">
+        <div class="rn">Regra 05</div>
+        <h4>Grave tudo, inclusive reunião presencial</h4>
+        <p>Reunião presencial? Abra um Teams na mesa e deixe gravando. A transcrição volta para o Claude pelo conector e vira ata, pendência e histórico. <b>Reunião não gravada é reunião que não aconteceu para a sua memória.</b></p>
+      </div>
+      <div class="rule">
+        <div class="rn">Bônus</div>
+        <h4>Sem conector, tem o navegador</h4>
+        <p>Salesforce depende de chave de API da sua equipe de TI. Enquanto ela não sai, e para sistemas sem API como o Smart e a plataforma de processos, o Claude opera dentro do Google Chrome, com você já logada, e puxa os dados de lá.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 LIÇÃO DE CASA -->
+<section class="alt" id="licao">
+  <div class="wrap rv">
+    <div class="misscard">
+      <h2>SUA LIÇÃO DE CASA<br><span>ATÉ O ENCONTRO 02.</span></h2>
+      <p class="msub">Onze itens. Os quatro primeiros são os que destravam todo o resto. Se você só fizer esses quatro, já valeu.</p>
+      <div class="check">
+        <div class="ck"><div class="bx"></div><p><b>Chaves de API do Salesforce.</b> Pedir para a equipe de tecnologia e encaminhar as instruções que você recebeu para a colega responsável.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Organograma na pasta.</b> A estrutura atual das três empresas, para ele saber quem é quem e para quem delegar.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Material da Dailes.</b> Ele não encontrou quase nada sobre a marca. Jogue o que existir na pasta.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Responder as perguntas dele no chat.</b> Ficaram perguntas em aberto para fechar a memória estratégica.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Identidade visual da Ilikia</b> dentro da pasta do projeto, para o que ele criar já sair na cara da marca.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Metas de 2026</b> das três empresas, para ele saber medir o que é bom.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Organizar os arquivos antigos</b> misturados no computador e nos e-mails, e atualizar a base das empresas.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Limpar o computador</b> com a ajuda dele: duplicados e arquivos inúteis. Pode pedir, ele faz.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Arquivo de gestão do time</b> com as responsabilidades de cada pessoa, seguindo o organograma.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Colar o prompt 1 e o prompt 2</b> do bloco 04 e deixar a rotina rodando.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Gravar as reuniões da semana</b> pelo Teams, inclusive as presenciais.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEASER -->
+<section class="teaser">
+  <div class="wrap rv">
+    <span class="pill">Encontro 02</span>
+    <h2>Aí a gente ataca <span>os três nós.</span></h2>
+    <p>Com o contexto pronto e a rotina rodando, o encontro 02 é mão na massa em cima do que ele mesmo diagnosticou.</p>
+    <div class="tgrid">
+      <div class="tg"><h4>Reuniões de segunda</h4><p>Desfazer a sobreposição e transformar cada reunião em decisão registrada, com ata e pendência com dono.</p></div>
+      <div class="tg"><h4>Gestão do time</h4><p>Com o organograma dentro, delegar e cobrar por pessoa, sem você virar o gargalo.</p></div>
+      <div class="tg"><h4>Dailes</h4><p>Lançamento, estoque e a conta da Black Friday de outubro, com os números na mesa.</p></div>
+      <div class="tg"><h4>Salesforce e Chrome</h4><p>Ligar o que der por conector e o resto pelo navegador, para puxar número sem trabalho manual.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="close">
+  <div class="wrap rv">
+    <h2>A INFORMAÇÃO<br>JÁ ERA <span>SUA.</span><br>AGORA ELA<br><span>TRABALHA.</span></h2>
+    <div class="sig">Bruna Santanna · A Virada IA</div>
+  </div>
+</section>
+
+<div class="sign">
+  <span>Consultoria IA 1:1 · Encontro 01 · 26 de agosto de 2026</span>
+  <span class="ns">NEWSCALE</span>
+</div>
+
+<script>
+const bar=document.getElementById('bar');
+addEventListener('scroll',()=>{const h=document.documentElement;bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';},{passive:true});
+document.querySelectorAll('.prompt').forEach(box=>{
+  const btn=box.querySelector('.copy'),pre=box.querySelector('pre');
+  if(!btn||!pre)return;
+  btn.addEventListener('click',async()=>{
+    try{await navigator.clipboard.writeText(pre.innerText.trim());}
+    catch(e){const r=document.createRange();r.selectNode(pre);getSelection().removeAllRanges();getSelection().addRange(r);document.execCommand('copy');getSelection().removeAllRanges();}
+    const o=btn.textContent;btn.textContent='Copiado ✓';btn.classList.add('done');
+    setTimeout(()=>{btn.textContent=o;btn.classList.remove('done');},1600);
+  });
+});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+setTimeout(()=>document.querySelectorAll('.rv').forEach(el=>el.classList.add('in')),2500);
+</script>
+</body>
+</html>
