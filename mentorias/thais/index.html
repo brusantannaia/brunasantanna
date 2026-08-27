@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Thaís · Encontro 01 · Consultoria IA</title>
+<title>Guia do Encontro 01 · Thaís</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -219,7 +219,7 @@ section{padding:76px 0;position:relative;}
 <section class="hero">
   <div class="wrap rv">
     <span class="eyebrow">Consultoria IA 1:1 · Encontro 01 · 26 de agosto de 2026</span>
-    <h1>THAÍS,<br>TUDO QUE A GENTE<br>FEZ <span class="terra">ESTÁ AQUI.</span></h1>
+    <h1>THAÍS,<br>SEU ENCONTRO 01<br><span class="terra">PASSO A PASSO.</span></h1>
     <p class="sub">Uma hora e quarenta e nove de call viraram <b>o Claude instalado, o Microsoft 365 conectado, um projeto criado e a memória das três empresas começando a existir.</b> É só seguir de cima pra baixo.</p>
     <div class="statrow">
       <div><div class="n">1<span>h49</span></div><div class="l">de call, mão na massa</div></div>
@@ -365,7 +365,7 @@ section{padding:76px 0;position:relative;}
   <div class="wrap rv">
     <span class="snum">04</span>
     <h2 class="sec-h">O prompt da agenda, <span class="terra">completo.</span></h2>
-    <p class="lead">A call caiu bem na hora de montar isso, então aqui está inteiro. São dois prompts, na ordem. O primeiro cria a rotina e o painel. O segundo agenda a rotina para rodar sozinha todo dia. <b>Você não precisa entender nada do que está escrito, só colar.</b></p>
+    <p class="lead">A call caiu bem na hora de montar isso, então aqui está inteiro. São dois prompts, na ordem. O primeiro cria a rotina e o painel, já mandando ele buscar a identidade visual da Ilikia para o painel sair na cara da marca. O segundo agenda a rotina para rodar sozinha todo dia. <b>Você não precisa entender nada do que está escrito, só colar.</b></p>
 
     <div class="callout">
       <b>Antes de colar:</b> abra o Claude no computador, entre no projeto <b>Estratégia de Contexto</b> e clique em <b>nova conversa</b>. Prompt novo, conversa nova. O porquê está no bloco 05.
@@ -386,9 +386,26 @@ Toda manhã, em dia útil, você vai cruzar quatro fontes: (1) a minha agenda do
 
 E com isso você me entrega duas coisas:
 
-1. Um painel visual em HTML, em formato kanban, salvo na pasta cloud, sempre com o mesmo nome de arquivo, para eu abrir no navegador e ver tudo de uma vez. Colunas: A DECIDIR HOJE, ESPERANDO RESPOSTA DE ALGUÉM, EM ANDAMENTO, TRAVADO e FEITO. Cada card com o nome da tarefa, a empresa (Ilikia, Dailes ou Iconic), a pessoa responsável e há quantos dias aquilo está parado.
+1. Um painel em HTML, salvo na pasta cloud, sempre com o mesmo nome de arquivo, para eu abrir no navegador e bater o olho. Ele tem que ser bonito de verdade, não uma tabela sem graça, e tem que seguir as regras do bloco PADRÃO DO PAINEL aqui embaixo.
 
 2. Um resumo curto em texto, no chat, com no máximo dez linhas, começando pelo que é mais urgente. Se não tiver nada urgente, diga que não tem, e não invente urgência.
+
+PADRÃO DO PAINEL
+Antes de desenhar, vá buscar a identidade visual da Ilikia e use ela no painel inteiro. Procure nesta ordem: primeiro os arquivos de marca dentro da pasta cloud; se não achar, abra o site oficial e o Instagram da Ilikia, da Dailes e da Iconic e tire de lá as cores exatas em hexadecimal, a tipografia, o logo e o jeito da marca. Me diga de onde você tirou cada coisa. Se não encontrar nada confiável, me pergunte em vez de inventar uma paleta.
+
+A tela é dividida em duas: calendário do mês à esquerda, lista do dia selecionado à direita. Clicou no dia, a lista troca. Só isso. Nada de três colunas cheias de texto.
+
+Regras que não podem ser quebradas:
+- Cada tarefa é UMA LINHA e um título curto, de no máximo 58 caracteres. O painel é de título. Nada de parágrafo de contexto dentro da linha: o detalhe longo vai no atributo title do HTML, aquele texto que aparece quando eu passo o mouse.
+- Cada linha tem um quadradinho para eu marcar como feita, e o que eu marcar tem que ficar marcado quando eu abrir de novo.
+- Cada linha mostra de qual empresa ela é (Ilikia, Dailes ou Iconic) e quem é o dono, com uma marcação de cor discreta, não com um bloco de texto.
+- Prazo vencido é sagrado: nunca empurre a data de uma coisa atrasada só para ela sair do vermelho. Mostre os atrasos mais antigos no topo do dia de hoje, embaixo do rótulo "Ficou pra trás", e esconda o resto atrás de um "e mais N".
+- No alto, uma barra de progresso do dia e uma frase só, dizendo o que importa hoje.
+- No rodapé, chips clicáveis que abrem uma gaveta com o que não cabe na tela principal: propostas esperando resposta, reuniões da semana, pendências por pessoa e os nós críticos da Dailes. Fechado por padrão, abre quando eu clico.
+- Um botão "copiar para o Claude", que copia o estado do dia para eu colar de volta no chat.
+- Tem que funcionar bem no computador e no celular, e o arquivo tem que ser um HTML único, que abre offline, sem depender de internet nem de nada instalado.
+
+O painel é para eu bater o olho e agir em cinco segundos. Se ele ficar cheio de texto, ele falhou.
 
 O QUE VOCÊ TEM QUE CONTROLAR SEM EU PRECISAR PEDIR
 - Propostas comerciais: toda vez que eu enviar uma proposta, você registra e me cobra o follow-up. Nunca me deixe esquecer de cobrar alguém. Me avise no terceiro, no sétimo e no décimo quinto dia sem resposta.
@@ -473,7 +490,7 @@ Se você não conseguir criar essa tarefa agendada, me diga com todas as letras 
         <div class="ck"><div class="bx"></div><p><b>Organograma na pasta.</b> A estrutura atual das três empresas, para ele saber quem é quem e para quem delegar.</p></div>
         <div class="ck"><div class="bx"></div><p><b>Material da Dailes.</b> Ele não encontrou quase nada sobre a marca. Jogue o que existir na pasta.</p></div>
         <div class="ck"><div class="bx"></div><p><b>Responder as perguntas dele no chat.</b> Ficaram perguntas em aberto para fechar a memória estratégica.</p></div>
-        <div class="ck"><div class="bx"></div><p><b>Identidade visual da Ilikia</b> dentro da pasta do projeto, para o que ele criar já sair na cara da marca.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Identidade visual da Ilikia</b> dentro da pasta do projeto. É o que faz o painel do bloco 04 sair na cara da marca, e não com cara de planilha.</p></div>
         <div class="ck"><div class="bx"></div><p><b>Metas de 2026</b> das três empresas, para ele saber medir o que é bom.</p></div>
         <div class="ck"><div class="bx"></div><p><b>Organizar os arquivos antigos</b> misturados no computador e nos e-mails, e atualizar a base das empresas.</p></div>
         <div class="ck"><div class="bx"></div><p><b>Limpar o computador</b> com a ajuda dele: duplicados e arquivos inúteis. Pode pedir, ele faz.</p></div>
