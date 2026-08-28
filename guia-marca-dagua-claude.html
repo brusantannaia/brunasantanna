@@ -546,6 +546,7 @@ No fim, me mostre em uma linha o que desse texto veio de mim e o que veio de voc
                     body: JSON.stringify({ email, list: 'biblioteca', timestamp: new Date().toISOString(), source: location.href }) });
             } catch(_) {}
             if (typeof gtag === 'function') gtag('event', 'lead_signup', { list: 'biblioteca' });
+            if (typeof fbq === 'function') fbq('track', 'Lead', { content_name: 'biblioteca' });
             document.querySelectorAll('.upgrade .wl-card').forEach(c => c.classList.add('wl-done'));
             localStorage.setItem('biblioteca_lead', '1');
         });

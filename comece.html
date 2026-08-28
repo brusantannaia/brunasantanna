@@ -381,6 +381,7 @@ src="https://www.facebook.com/tr?id=1175365551728800&ev=PageView&noscript=1"
                 body: JSON.stringify({ email, list: 'comece', timestamp: new Date().toISOString(), source: location.href }) });
         } catch(_) {}
         gtag('event', 'lead_capture', { list: 'comece' });
+        if (typeof fbq === 'function') fbq('track', 'Lead', { content_name: 'comece' });
         localStorage.setItem(CAP_KEY, email);
         showDone();
     });

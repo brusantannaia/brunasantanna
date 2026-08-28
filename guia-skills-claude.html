@@ -553,6 +553,7 @@ Depois que eu responder, escreva a Skill completa e organizada, pronta pra eu sa
                     body: JSON.stringify({ email, list: 'biblioteca', timestamp: new Date().toISOString(), source: location.href }) });
             } catch(_) {}
             if (typeof gtag === 'function') gtag('event', 'lead_signup', { list: 'biblioteca' });
+            if (typeof fbq === 'function') fbq('track', 'Lead', { content_name: 'biblioteca' });
             document.querySelectorAll('.upgrade .wl-card').forEach(c => c.classList.add('wl-done'));
             localStorage.setItem('biblioteca_lead', '1');
         });
@@ -619,6 +620,7 @@ Depois que eu responder, escreva a Skill completa e organizada, pronta pra eu sa
                     body: JSON.stringify({ email: email, list:'curso', timestamp:new Date().toISOString(), source: location.href }) });
             } catch(_) {}
             if (typeof gtag === 'function') gtag('event', 'lead_signup', { list:'curso' });
+            if (typeof fbq === 'function') fbq('track', 'Lead', { content_name: 'curso' });
             card.classList.add('done');
         });
     })();

@@ -526,6 +526,7 @@ src="https://www.facebook.com/tr?id=1175365551728800&ev=PageView&noscript=1"
                     body: JSON.stringify({ email, list: 'biblioteca', timestamp: new Date().toISOString(), source: location.href }) });
             } catch(_) {}
             if (typeof gtag === 'function') gtag('event', 'lead_signup', { list: 'biblioteca' });
+            if (typeof fbq === 'function') fbq('track', 'Lead', { content_name: 'biblioteca' });
             document.querySelectorAll('.upgrade .wl-card').forEach(c => c.classList.add('wl-done'));
             localStorage.setItem('biblioteca_lead', '1');
         });

@@ -853,6 +853,7 @@ src="https://www.facebook.com/tr?id=1175365551728800&ev=PageView&noscript=1"
                     body: JSON.stringify({ email, list: 'corporativo', timestamp: new Date().toISOString(), source }) });
             } catch(_) {}
             if (typeof gtag === 'function') gtag('event', 'lead_capture', { list: 'corporativo' });
+            if (typeof fbq === 'function') fbq('track', 'Lead', { content_name: 'corporativo' });
             document.querySelectorAll('.wl-card').forEach(c => c.classList.add('wl-done'));
             localStorage.setItem('corp_lead', '1');
         });
