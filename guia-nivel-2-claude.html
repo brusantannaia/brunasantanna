@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O que configurar no Claude depois do b&aacute;sico: as 4 coisas do n&iacute;vel 2 | A Virada IA · Bruna Santanna</title>
+    <meta name="description" content="Voc&ecirc; baixou o app, escreveu as instru&ccedil;&otilde;es e conectou o Gmail. Faltam quatro: uma skill, uma tarefa agendada, um artifact e a extens&atilde;o do Chrome.">
+    <meta name="author" content="Bruna Santanna">
+    <link rel="canonical" href="https://brunasantanna.com/guia-nivel-2-claude">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://brunasantanna.com/guia-nivel-2-claude">
+    <meta property="og:title" content="O que configurar no Claude depois do b&aacute;sico: as 4 coisas do n&iacute;vel 2 | A Virada IA">
+    <meta property="og:description" content="Voc&ecirc; baixou o app, escreveu as instru&ccedil;&otilde;es e conectou o Gmail. Faltam quatro: uma skill, uma tarefa agendada, um artifact e a extens&atilde;o do Chrome.">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DCW0QVCWB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-7DCW0QVCWB');
+    </script>
+
+    <!-- JSON-LD: Article -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "O que configurar no Claude depois do b&aacute;sico: as 4 coisas do n&iacute;vel 2",
+        "description": "Voc&ecirc; baixou o app, escreveu as instru&ccedil;&otilde;es e conectou o Gmail. Faltam quatro: uma skill, uma tarefa agendada, um artifact e a extens&atilde;o do Chrome.",
+        "inLanguage": "pt-BR",
+        "url": "https://brunasantanna.com/guia-nivel-2-claude",
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://brunasantanna.com/guia-nivel-2-claude" },
+        "datePublished": "2026-08-29",
+        "dateModified": "2026-08-29",
+        "author": { "@type": "Person", "name": "Bruna Santanna", "url": "https://brunasantanna.com" },
+        "publisher": {
+            "@type": "Organization",
+            "name": "A Virada IA · Bruna Santanna",
+            "url": "https://brunasantanna.com"
+        },
+        "about": "Setup"
+    }
+    </script>
+
+    <!-- JSON-LD: FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            { "@type": "Question", "name": "Preciso saber programar para configurar essas quatro coisas?", "acceptedAnswer": { "@type": "Answer", "text": "Não. Nenhuma das quatro envolve código. Skill e tarefa agendada você escreve em português, como quem explica um procedimento para uma pessoa nova no time. O artifact quem constrói é o Claude, a partir do que você descreve. E a extensão do Chrome se instala em dois cliques." } },
+            { "@type": "Question", "name": "Por onde eu começo, se só tenho tempo para uma?", "acceptedAnswer": { "@type": "Answer", "text": "Pela skill, e escolha a tarefa que você mais repete. É a única das quatro que devolve tempo toda vez que você usa, e ela vira a base das outras: uma tarefa agendada fica muito melhor quando o que ela executa já está escrito numa skill." } },
+            { "@type": "Question", "name": "Skill e projeto são a mesma coisa?", "acceptedAnswer": { "@type": "Answer", "text": "Não. Projeto é um lugar: guarda arquivos, contexto e histórico de um assunto. Skill é um procedimento: descreve como uma tarefa deve ser feita, e funciona em qualquer conversa. Você usa os dois juntos, com a skill rodando dentro do projeto." } }
+        ]
+    }
+    </script>
+
+    <!-- JSON-LD: Person -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Bruna Santanna",
+        "url": "https://brunasantanna.com",
+        "jobTitle": "Educadora de IA e fundadora da NewScale",
+        "sameAs": [
+            "https://instagram.com/brusantanna.ai",
+            "https://www.linkedin.com/in/bruna-araujo-santanna/"
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg:#F3EEE3; --bg-2:#ECE5D6; --card:#FBF9F3;
+            --ink:#14373C; --ink-2:#2C4F54; --green:#435D51;
+            --terra:#B06E4A; --terra-l:#C4835E; --terra-d:#985A3B;
+            --text:#233133; --muted:#6E7A75; --line:rgba(20,55,60,0.16);
+            --cream:#F4F3EF;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family:'Hanken Grotesk',sans-serif; background:var(--bg); color:var(--text); line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+        img { max-width:100%; display:block; }
+        a { color:inherit; text-decoration:none; }
+        ::selection { background:var(--terra); color:#fff; }
+        .wrap { max-width:1100px; margin:0 auto; padding:0 30px; }
+        .kick { font-size:0.72rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--terra); }
+
+        /* ---------- HEADER ---------- */
+        .site-header { position:sticky; top:0; z-index:50; background:rgba(243,238,227,0.92); backdrop-filter:blur(8px); border-bottom:2px solid var(--ink); }
+        .header-inner { display:flex; align-items:center; justify-content:space-between; gap:24px; max-width:1100px; padding:16px 30px; }
+        .logo { display:inline-flex; align-items:center; white-space:nowrap; font-family:'Anton',sans-serif; font-size:1.2rem; letter-spacing:0.02em; text-transform:uppercase; color:var(--ink); }
+        .logo .brand-tag { font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:0.62rem; letter-spacing:0.12em; color:var(--terra); border:1.5px solid var(--terra); padding:3px 8px; border-radius:100px; margin-left:10px; }
+        .main-nav { display:flex; align-items:center; gap:14px; }
+        .main-nav a { font-size:0.86rem; font-weight:600; color:var(--ink-2); white-space:nowrap; transition:color .18s; }
+        .main-nav a:hover, .main-nav a.active { color:var(--terra); }
+        .nav-cta { background:var(--terra); color:#fff !important; padding:10px 18px; border-radius:100px; font-size:0.8rem !important; transition:background .2s, transform .15s; }
+        .nav-cta:hover { background:var(--terra-d); transform:translateY(-1px); }
+        .nav-toggle { display:none; background:none; border:none; font-size:1.5rem; color:var(--ink); cursor:pointer; line-height:1; }
+        @media (max-width: 1180px) {
+            .nav-toggle { display:block; }
+            .main-nav { display:none; position:absolute; top:100%; left:0; right:0; flex-direction:column; align-items:flex-start; gap:0; background:var(--bg); border-bottom:2px solid var(--ink); padding:8px 30px 20px; }
+            .main-nav.open { display:flex; box-shadow:0 28px 46px -20px rgba(20,55,60,0.55); max-height:calc(100dvh - 62px); overflow-y:auto; }
+            .site-header:has(.main-nav.open)::after { content:""; position:fixed; left:0; right:0; top:62px; bottom:0; background:rgba(20,55,60,0.38); z-index:40; pointer-events:none; }
+            .main-nav a { padding:12px 0; width:100%; border-top:1px solid var(--line); font-size:1rem; }
+            .nav-cta { margin-top:12px; text-align:center; border-top:none; }
+        }
+
+        /* botão genérico */
+        .btn { display:inline-flex; align-items:center; gap:9px; justify-content:center; font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:0.85rem; letter-spacing:0.04em; text-transform:uppercase; padding:15px 28px; border-radius:100px; border:none; cursor:pointer; transition:transform .15s, box-shadow .15s, background .2s; }
+        .btn-terra { background:var(--terra); color:#fff; }
+        .btn-terra:hover { background:var(--terra-d); transform:translateY(-2px); box-shadow:0 10px 26px rgba(176,110,74,.35); }
+        .btn-ink { background:var(--ink); color:#fff; }
+        .btn-ink:hover { background:var(--ink-2); transform:translateY(-2px); }
+
+        /* ---------- HERO COMPACTO ---------- */
+        .hero { position:relative; overflow:hidden; border-bottom:1.5px solid var(--line); }
+        .hero-glow { position:absolute; width:560px; height:560px; border-radius:50%; top:-240px; right:-160px; background:radial-gradient(circle,rgba(176,110,74,.13),transparent 62%); pointer-events:none; }
+        .hero .wrap { position:relative; z-index:2; padding:54px 30px 48px; max-width:820px; }
+        .hero-eyebrow { display:inline-flex; align-items:center; gap:9px; margin-bottom:20px; flex-wrap:wrap; }
+        .hero-eyebrow .dot { width:7px; height:7px; border-radius:50%; background:var(--terra); box-shadow:0 0 0 4px rgba(176,110,74,.18); }
+        .hero-eyebrow .sep { color:var(--line); }
+        .hero-eyebrow .data { font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); }
+        .hero h1 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(2.4rem,7vw,4.2rem); line-height:0.94; letter-spacing:-0.01em; text-transform:uppercase; color:var(--ink); }
+        .hero h1 .terra { color:var(--terra); }
+        .hero-sub { font-size:1.12rem; color:var(--ink-2); font-weight:300; max-width:54ch; margin-top:20px; }
+        .hero-sub b { color:var(--ink); font-weight:600; }
+
+        /* ---------- LAYOUT ARTIGO ---------- */
+        .artigo { padding:56px 0 40px; }
+        .artigo .wrap { max-width:760px; }
+
+        /* bloco do reel embedado */
+        .reel-embed { margin:0 auto 44px; max-width:540px; }
+        .reel-embed .instagram-media { margin:0 auto !important; }
+        .reel-placeholder { border:1.5px dashed var(--line); border-radius:16px; background:var(--card); padding:34px 26px; text-align:center; }
+        .reel-placeholder .rp-icon { font-size:1.7rem; margin-bottom:10px; }
+        .reel-placeholder b { display:block; font-family:'Anton',sans-serif; font-weight:400; font-size:1.15rem; text-transform:uppercase; color:var(--ink); letter-spacing:.01em; margin-bottom:6px; }
+        .reel-placeholder p { font-size:0.88rem; color:var(--muted); }
+
+        /* corpo do post */
+        .corpo { font-size:1.06rem; color:var(--text); line-height:1.75; }
+        .corpo > p { margin-bottom:20px; }
+        .corpo > p:first-of-type { font-size:1.16rem; color:var(--ink-2); }
+        .corpo h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.6rem,4.5vw,2.2rem); text-transform:uppercase; color:var(--ink); line-height:1.05; letter-spacing:-0.01em; margin:44px 0 16px; }
+        .corpo h3 { font-size:1.2rem; font-weight:700; color:var(--ink); margin:30px 0 10px; }
+        .corpo a { color:var(--terra-d); font-weight:600; border-bottom:1.5px solid var(--terra); }
+        .corpo a:hover { color:var(--terra); }
+        .corpo strong, .corpo b { color:var(--ink); font-weight:700; }
+        .corpo ul { list-style:none; margin:6px 0 22px; padding:0; }
+        .corpo ul li { position:relative; padding-left:26px; margin-bottom:12px; }
+        .corpo ul li::before { content:'→'; position:absolute; left:0; top:0; color:var(--terra); font-weight:800; }
+        .corpo ol { margin:6px 0 22px 22px; }
+        .corpo ol li { margin-bottom:12px; padding-left:6px; }
+        .corpo ol li::marker { color:var(--terra); font-weight:800; }
+
+        /* blocos didáticos */
+        .bloco { border-radius:14px; padding:22px 24px 22px 26px; margin:26px 0; border:1.5px solid var(--line); }
+        .bloco .bloco-tag { display:block; font-size:0.72rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:8px; }
+        .bloco p { font-size:0.98rem; line-height:1.65; margin:0; }
+        .bloco p + p { margin-top:10px; }
+        .bloco-dica { background:rgba(67,93,81,0.08); border-left:5px solid var(--green); }
+        .bloco-dica .bloco-tag { color:var(--green); }
+        .bloco-atencao { background:rgba(176,110,74,0.09); border-left:5px solid var(--terra); }
+        .bloco-atencao .bloco-tag { color:var(--terra-d); }
+        .bloco-case { background:var(--ink); border-left:5px solid var(--terra-l); border-color:var(--ink); }
+        .bloco-case .bloco-tag { color:var(--terra-l); }
+        .bloco-case p { color:rgba(244,243,239,.88); }
+        .bloco-case b { color:#fff; }
+
+        /* antes/depois */
+        .antes-depois { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:26px 0; }
+        @media (max-width:600px) { .antes-depois { grid-template-columns:1fr; } }
+        .ad-ruim, .ad-bom { border-radius:12px; padding:18px 20px; font-size:0.95rem; line-height:1.6; border:1.5px solid var(--line); }
+        .ad-ruim { background:rgba(150,90,59,0.06); }
+        .ad-bom { background:rgba(67,93,81,0.08); }
+        .ad-ruim .ad-label, .ad-bom .ad-label { display:block; font-size:0.74rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:8px; }
+        .ad-ruim .ad-label { color:var(--terra-d); }
+        .ad-bom .ad-label { color:var(--green); }
+
+        /* prompt box com botão copiar */
+        .prompt-box { background:var(--ink); border-radius:16px; padding:22px 24px; margin:28px 0; position:relative; box-shadow:8px 8px 0 var(--green); }
+        .prompt-box .pb-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; }
+        .prompt-box .pb-label { font-size:0.72rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--terra-l); }
+        .prompt-box pre { font-family:'Hanken Grotesk',ui-monospace,monospace; font-size:0.95rem; line-height:1.6; color:rgba(244,243,239,.92); white-space:pre-wrap; word-wrap:break-word; margin:0; }
+        .copy-btn { flex-shrink:0; display:inline-flex; align-items:center; gap:6px; background:var(--terra); color:#fff; border:none; border-radius:100px; padding:8px 16px; font-family:'Hanken Grotesk',sans-serif; font-size:0.74rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer; transition:background .2s, transform .15s; }
+        .copy-btn:hover { background:var(--terra-d); transform:translateY(-1px); }
+        .copy-btn.copied { background:var(--green); }
+
+        /* ---------- CONTENT UPGRADE (gated) ---------- */
+        .upgrade { margin:52px 0; }
+        .upgrade .wl-card { background:var(--ink); color:#fff; border-radius:18px; padding:34px 32px; box-shadow:8px 8px 0 var(--terra); }
+        .upgrade .wl-card .kick { color:var(--terra-l); display:block; margin-bottom:12px; }
+        .upgrade .wl-card h3 { font-family:'Anton',sans-serif; font-weight:400; font-size:1.7rem; text-transform:uppercase; line-height:1; margin-bottom:8px; }
+        .upgrade .wl-card .wl-sub { font-size:0.95rem; color:rgba(255,255,255,0.72); margin-bottom:22px; max-width:46ch; }
+        .upgrade .wl-form { display:flex; gap:10px; flex-wrap:wrap; }
+        .field { flex:1; min-width:220px; padding:16px 20px; font-family:inherit; font-size:1rem; background:rgba(255,255,255,0.07); border:1.5px solid rgba(255,255,255,0.22); border-radius:10px; color:#fff; outline:none; transition:border-color .2s, background .2s; }
+        .field::placeholder { color:rgba(255,255,255,0.5); }
+        .field:focus { border-color:var(--terra); background:rgba(255,255,255,0.12); }
+        .btn-form { padding:16px 26px; font-family:'Hanken Grotesk',sans-serif; font-size:0.82rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer; background:var(--terra); color:#fff; border:none; border-radius:10px; transition:transform .15s, box-shadow .15s, background .2s; white-space:nowrap; }
+        .btn-form:hover { background:var(--terra-d); transform:translateY(-2px); box-shadow:0 8px 22px rgba(176,110,74,0.35); }
+        .btn-form:disabled { opacity:.6; cursor:not-allowed; transform:none; }
+        .upgrade .fine { margin-top:14px; font-size:0.76rem; color:rgba(255,255,255,0.55); }
+        .wl-ok { display:none; background:rgba(67,93,81,0.35); border:1.5px solid var(--terra-l); border-radius:10px; padding:18px 20px; font-size:0.98rem; line-height:1.5; color:#fff; }
+        .wl-ok b { color:var(--terra-l); }
+        .wl-done .wl-ok { display:block; }
+        .wl-done .wl-form, .wl-done .fine { display:none; }
+
+        /* ---------- FAQ ---------- */
+        .faq-sec { padding:8px 0 20px; }
+        .faq-sec .wrap { max-width:760px; }
+        .faq-sec h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.6rem,4.5vw,2.2rem); text-transform:uppercase; color:var(--ink); line-height:1; margin-bottom:22px; }
+        .faq-list { max-width:760px; }
+        .faq-item { border:1.5px solid var(--line); border-radius:14px; background:var(--card); margin-bottom:12px; overflow:hidden; }
+        .faq-q { width:100%; display:flex; justify-content:space-between; align-items:center; gap:16px; text-align:left; background:none; border:none; cursor:pointer; padding:20px 24px; font-family:'Hanken Grotesk',sans-serif; font-size:1.02rem; font-weight:700; color:var(--ink); }
+        .faq-q .mark { font-family:'Anton',sans-serif; font-size:1.3rem; color:var(--terra); transition:transform .25s; flex-shrink:0; line-height:1; }
+        .faq-item.open .faq-q .mark { transform:rotate(45deg); }
+        .faq-a { display:none; padding:0 24px 22px; font-size:0.96rem; color:var(--ink-2); line-height:1.7; }
+        .faq-item.open .faq-a { display:block; }
+        .faq-a b { color:var(--ink); }
+
+        /* ---------- BANNER DO CURSO ---------- */
+        .curso-banner { background:var(--ink); color:var(--cream); margin:40px 0 0; }
+        .curso-banner .wrap { max-width:900px; padding:56px 30px; display:flex; align-items:center; justify-content:space-between; gap:30px; flex-wrap:wrap; }
+        .curso-banner .cb-text { flex:1; min-width:260px; }
+        .curso-banner .kick { color:var(--terra-l); display:block; margin-bottom:12px; }
+        .curso-banner h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.7rem,5vw,2.6rem); text-transform:uppercase; color:#fff; line-height:1; margin-bottom:12px; max-width:20ch; }
+        .curso-banner h2 .terra { color:var(--terra-l); }
+        .curso-banner p { color:rgba(244,243,239,.72); font-weight:300; font-size:1rem; max-width:46ch; }
+
+        /* volta pro hub */
+        .voltar-hub { text-align:center; padding:40px 0 8px; }
+        .voltar-hub a { font-size:0.9rem; font-weight:700; letter-spacing:0.02em; color:var(--ink); border-bottom:2px solid var(--terra); padding-bottom:3px; transition:color .18s; }
+        .voltar-hub a:hover { color:var(--terra); }
+
+        /* footer */
+        footer { background:var(--ink); color:rgba(244,243,239,.6); padding:40px 0 48px; margin-top:30px; }
+        .footer-row { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+        .footer-brand { font-family:'Anton',sans-serif; font-size:1.1rem; text-transform:uppercase; color:#fff; }
+        .footer-links { display:flex; gap:20px; flex-wrap:wrap; }
+        .footer-links a { font-size:0.84rem; font-weight:600; color:rgba(244,243,239,.7); }
+        .footer-links a:hover { color:var(--terra-l); }
+        .footer-copy { font-size:0.76rem; color:rgba(244,243,239,.4); margin-top:14px; }
+
+        /* reveal */
+        .rv { opacity:0; transform:translateY(22px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+        .rv.in { opacity:1; transform:none; }
+        @media (prefers-reduced-motion:reduce) { .rv { opacity:1; transform:none; } }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="wrap header-inner">
+        <a href="/" class="logo">Bruna Santanna<span class="brand-tag">A Virada IA</span></a>
+        <nav class="main-nav" id="mainNav">
+            <a href="/">Home</a>
+            <a href="/biblioteca">Biblioteca</a>
+            <a href="/claude">Guia do Claude</a>
+            <a href="/quem-sou">Quem Sou</a>
+            <a href="/treinamentos">Treinamentos Corporativos</a>
+            <a href="/mentoria">Mentoria</a>
+            <a href="https://newscale.tech" target="_blank" rel="noopener">IA na sua Empresa</a>
+            <a href="/comece" class="nav-cta">Cursos</a>
+        </nav>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">☰</button>
+    </div>
+</header>
+
+<!-- ========== HERO COMPACTO ========== -->
+<section class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="wrap">
+        <div class="hero-eyebrow rv">
+            <span class="dot"></span>
+            <span class="kick">Setup</span>
+            <span class="sep">·</span>
+            <span class="data">Agosto de 2026</span>
+        </div>
+        <h1 class="rv">O que configurar no Claude depois do b&aacute;sico: as 4 coisas do n&iacute;vel 2</h1>
+        <p class="hero-sub rv">Voc&ecirc; baixou o app, escreveu as instru&ccedil;&otilde;es e conectou o Gmail. Faltam quatro: uma skill, uma tarefa agendada, um artifact e a extens&atilde;o do Chrome.</p>
+    </div>
+</section>
+
+<!-- ========== ARTIGO ========== -->
+<article class="artigo">
+    <div class="wrap">
+
+        <div class="corpo rv">
+            <p>Depois do setup b&aacute;sico do Claude (app, instru&ccedil;&otilde;es, conectores, modelo e um projeto), faltam quatro configura&ccedil;&otilde;es: uma <b>skill</b> para o que voc&ecirc; repete, uma <b>tarefa agendada</b> para o que acontece todo dia, um <b>artifact</b> para o que a planilha n&atilde;o resolve e a <b>extens&atilde;o do Chrome</b> para o que acontece dentro do navegador. Nenhuma delas exige programar.</p>
+
+<h2>Por que o Claude ainda responde como o ChatGPT de 2022?</h2>
+
+<p>Porque o setup b&aacute;sico ensina o Claude sobre voc&ecirc;, e s&oacute; isso. Ele passa a saber seu nome, seu neg&oacute;cio, seu tom de voz, e consegue puxar seu email quando voc&ecirc; pede. Continua sendo uma conversa: voc&ecirc; abre, pergunta, recebe, fecha. No dia seguinte come&ccedil;a do zero de novo.</p>
+
+<p>As quatro configura&ccedil;&otilde;es abaixo mudam a natureza da coisa. Elas transformam a conversa em processo. O Claude passa a ter procedimentos guardados, hor&aacute;rios pr&oacute;prios, ferramentas que ele mesmo constr&oacute;i e olhos dentro do seu navegador. &Eacute; a dist&acirc;ncia entre ter um assistente esperto e ter um assistente que trabalha.</p>
+
+<p>Se voc&ecirc; ainda nem fez o b&aacute;sico, comece por <a href="/guia-setup-claude">os 5 primeiros passos</a> e volte aqui depois. Este guia &eacute; o n&iacute;vel 2.</p>
+
+<h2>1. Uma skill, para o que voc&ecirc; repete</h2>
+
+<p>Skill &eacute; um procedimento salvo. Voc&ecirc; escreve uma vez como uma tarefa deve ser feita, e o Claude passa a executar daquele jeito todas as vezes, sem voc&ecirc; ter que reexplicar.</p>
+
+<p>O sinal de que voc&ecirc; precisa de uma &eacute; simples: voc&ecirc; pede a mesma coisa toda semana e o resultado sai diferente toda semana. Um deck que vem com outra estrutura, uma proposta com outro tom, um relat&oacute;rio com outras se&ccedil;&otilde;es. Voc&ecirc; corrige, ele acerta, e na conversa seguinte esquece tudo. Com a skill escrita, o padr&atilde;o para de depender da sua mem&oacute;ria.</p>
+
+<p>Existe uma biblioteca de skills prontas para navegar, e vale olhar antes de escrever a sua. Mas a que rende mais &eacute; sempre a que descreve o <i>seu</i> jeito de fazer, porque &eacute; a que ningu&eacute;m mais poderia ter escrito. Comece pela tarefa que voc&ecirc; mais repete, n&atilde;o pela mais complicada.</p>
+
+<div class="prompt-box">
+<pre>Quero transformar em skill uma tarefa que eu repito.
+
+Antes de escrever qualquer coisa, me fa&ccedil;a todas as perguntas que
+precisar para entender o procedimento: de uma vez s&oacute;, numeradas,
+que eu respondo todas na mesma mensagem.
+
+A tarefa &eacute;: [descreva em uma frase o que voc&ecirc; repete]
+
+Depois que eu responder, escreva a skill com: um nome curto, uma
+descri&ccedil;&atilde;o de quando ela deve ser usada, o passo a passo do
+procedimento e os erros que devem ser evitados. No fim, me diga
+onde salvar o arquivo.</pre>
+<button class="copy-btn">Copiar</button>
+</div>
+
+<p>Repare no formato do pedido: todas as perguntas de uma vez, numeradas. Isso vale para qualquer prompt grande. Uma pergunta por mensagem consome seu limite de uso &agrave; toa e ainda faz voc&ecirc; perder o fio da meada.</p>
+
+<p>O passo a passo detalhado est&aacute; em <a href="/guia-skills-claude">como criar uma skill no Claude sem programar</a>.</p>
+
+<h2>2. Uma tarefa agendada, para o que &eacute; todo dia</h2>
+
+<p>Tarefa agendada &eacute; o Claude trabalhando em hor&aacute;rio marcado, sem voc&ecirc; abrir nada. Voc&ecirc; define o que ele faz e quando, e o resultado est&aacute; l&aacute; quando voc&ecirc; chega.</p>
+
+<p>O exemplo que mais converte gente c&eacute;tica &eacute; o briefing das 8h: agenda do dia, emails que pedem resposta, o que ficou pendente de ontem, tudo num texto s&oacute;. Voc&ecirc; abre o computador e o dia j&aacute; est&aacute; organizado, em vez de gastar os primeiros quarenta minutos descobrindo por onde come&ccedil;ar.</p>
+
+<div class="bloco bloco-dica">
+<b>&rarr; DICA</b>
+<p>Agende primeiro alguma coisa que voc&ecirc; j&aacute; faz na m&atilde;o toda manh&atilde;. Tarefa agendada de algo que voc&ecirc; nunca fez costuma virar arquivo que ningu&eacute;m abre. O objetivo &eacute; tirar trabalho de voc&ecirc;, e n&atilde;o inventar trabalho novo.</p>
+</div>
+
+<p>O modelo completo do briefing, com o texto do agendamento pronto para copiar, est&aacute; em <a href="/guia-briefing-manha">briefing matinal com o Claude</a>.</p>
+
+<h2>3. Um artifact, para o que a planilha n&atilde;o resolve</h2>
+
+<p>Artifact &eacute; uma ferramenta de verdade, funcionando, que o Claude constr&oacute;i na janela ao lado da conversa. Calculadora, controle, painel, formul&aacute;rio. Voc&ecirc; descreve o que precisa em portugu&ecirc;s e ele monta a tela. Depois publica e manda o link para quem quiser usar.</p>
+
+<p>Quando isso ganha da planilha: quando o problema tem contas e regras que voc&ecirc; entende bem, mas voc&ecirc; n&atilde;o sabe como montar a tela. Ou quando outras pessoas v&atilde;o usar aquilo, e uma planilha compartilhada quebraria no primeiro clique errado.</p>
+
+<div class="prompt-box">
+<pre>Constr&oacute;i para mim uma ferramenta que resolva isto:
+[descreva o problema, n&atilde;o a tela]
+
+Quem vai usar: [voc&ecirc; sozinho / seu time / seus clientes]
+O que eu preciso ver na hora que abro: [os n&uacute;meros ou campos
+que mais importam]
+O que eu preciso poder fazer nela: [adicionar, marcar, comparar,
+exportar...]
+
+Me fa&ccedil;a todas as perguntas que faltarem, de uma vez s&oacute; e
+numeradas, antes de come&ccedil;ar a construir.</pre>
+<button class="copy-btn">Copiar</button>
+</div>
+
+<p>Descreva o problema, e n&atilde;o a tela. Quando voc&ecirc; j&aacute; entrega o layout pronto, o Claude vira desenhista do seu esbo&ccedil;o e voc&ecirc; perde a melhor parte, que &eacute; ele propor uma solu&ccedil;&atilde;o que voc&ecirc; n&atilde;o tinha imaginado.</p>
+
+<h2>4. A extens&atilde;o do Chrome, para o que acontece no navegador</h2>
+
+<p>A extens&atilde;o coloca o Claude num painel lateral enquanto voc&ecirc; navega. A diferen&ccedil;a para o chat comum &eacute; que ele enxerga a p&aacute;gina aberta e consegue agir dentro dela.</p>
+
+<p>Onde isso muda o dia: preencher candidatura de emprego, lan&ccedil;ar informa&ccedil;&atilde;o no CRM, comparar op&ccedil;&otilde;es em v&aacute;rias abas, revisar um formul&aacute;rio longo. Tudo aquilo em que voc&ecirc; hoje copia um peda&ccedil;o da tela, cola no chat, recebe a resposta e volta para colar de novo.</p>
+
+<div class="bloco bloco-atencao">
+<b>&#9888; ATEN&Ccedil;&Atilde;O</b>
+<p>A extens&atilde;o l&ecirc; o que est&aacute; na sua tela. Antes de ligar, feche as abas que voc&ecirc; n&atilde;o quer que ela veja, e n&atilde;o deixe ela agir sozinha em p&aacute;gina de banco, de pagamento ou de dado sens&iacute;vel de cliente. A regra &eacute; a mesma de emprestar o computador para algu&eacute;m: voc&ecirc; escolhe o que fica aberto.</p>
+</div>
+
+<p>O que d&aacute; e o que n&atilde;o d&aacute; para fazer com ela est&aacute; em <a href="/guia-extensao-chrome">a extens&atilde;o do Claude no Chrome</a>.</p>
+
+<h2>Em que ordem fazer isso em um dia</h2>
+
+<p>N&atilde;o tente as quatro de uma vez pela manh&atilde;. A ordem que funciona:</p>
+
+<ul>
+<li>&rarr; <b>Manh&atilde;:</b> escreva uma skill, s&oacute; uma, da tarefa que voc&ecirc; mais repete. Use e ajuste ainda no mesmo dia.</li>
+<li>&rarr; <b>Come&ccedil;o da tarde:</b> instale a extens&atilde;o do Chrome. &Eacute; a mais r&aacute;pida das quatro e a que d&aacute; retorno imediato.</li>
+<li>&rarr; <b>Fim da tarde:</b> pe&ccedil;a um artifact para um problema pequeno e real, s&oacute; para sentir como &eacute;.</li>
+<li>&rarr; <b>Antes de fechar o computador:</b> agende o briefing de amanh&atilde;. Voc&ecirc; acorda com a prova de que funcionou.</li>
+</ul>
+
+<p>Quatro configura&ccedil;&otilde;es, um dia. No dia seguinte voc&ecirc; abre o computador e o trabalho j&aacute; come&ccedil;ou sem voc&ecirc;.</p>
+
+<h2>Continue aprendendo</h2>
+
+<ul>
+<li><a href="/guia-setup-claude">Como configurar o Claude em um dia: os 5 primeiros passos</a> (o n&iacute;vel 1, se voc&ecirc; ainda n&atilde;o fez)</li>
+<li><a href="/guia-skills-claude">Como criar uma Skill no Claude, passo a passo, sem programar</a> (a primeira das quatro, em detalhe)</li>
+<li><a href="/guia-briefing-manha">Briefing matinal com o Claude</a> (a segunda das quatro, com o agendamento pronto)</li>
+<li><a href="/guia-agente-skill-workflow">Agente, skill e workflow: a diferen&ccedil;a que muda tudo</a> (para n&atilde;o confundir os nomes)</li>
+<li><a href="/claude">O Guia do Claude do zero ao avan&ccedil;ado</a> e a <a href="/biblioteca">Biblioteca completa</a></li>
+</ul>
+
+        </div>
+
+        <!-- ─── CONTENT UPGRADE (gated → list: 'biblioteca') ───────────── -->
+        <div class="upgrade rv">
+            <div class="wl-card" id="upgradeCard">
+                <span class="kick">Guia grátis · PDF</span>
+                <h3>O Guia Completo do Claude em PDF</h3>
+                <p class="wl-sub">Meu guia do Claude do zero ao avançado, em PDF pra você salvar e consultar quando quiser. Deixa seu email que eu libero na hora, e você ainda entra na Biblioteca.</p>
+                <form class="wl-form" novalidate>
+                    <input class="field" type="email" placeholder="Seu melhor email" required autocomplete="email">
+                    <button type="submit" class="btn-form">Quero o guia do Claude</button>
+                </form>
+                <div class="wl-ok"><b>Prontinho, tá dentro.</b> Baixa agora: <a href="/guia-claude-bruna.pdf" target="_blank" rel="noopener">o Guia Completo do Claude em PDF</a>. As próximas novidades da Biblioteca chegam no seu email.</div>
+                <p class="fine">Zero spam. Só o que vale a pena sobre IA na prática.</p>
+            </div>
+        </div>
+
+    </div>
+</article>
+
+<!-- ========== FAQ ========== -->
+<section class="faq-sec">
+    <div class="wrap">
+        <h2 class="rv">Dúvidas rápidas</h2>
+        <div class="faq-list rv">
+            <!-- ─── FAQ VISÍVEL ─────────────────────────────────────────────
+                 Escreva aqui as MESMAS perguntas do { "@type": "Question", "name": "Preciso saber programar para configurar essas quatro coisas?", "acceptedAnswer": { "@type": "Answer", "text": "Não. Nenhuma das quatro envolve código. Skill e tarefa agendada você escreve em português, como quem explica um procedimento para uma pessoa nova no time. O artifact quem constrói é o Claude, a partir do que você descreve. E a extensão do Chrome se instala em dois cliques." } },
+            { "@type": "Question", "name": "Por onde eu começo, se só tenho tempo para uma?", "acceptedAnswer": { "@type": "Answer", "text": "Pela skill, e escolha a tarefa que você mais repete. É a única das quatro que devolve tempo toda vez que você usa, e ela vira a base das outras: uma tarefa agendada fica muito melhor quando o que ela executa já está escrito numa skill." } },
+            { "@type": "Question", "name": "Skill e projeto são a mesma coisa?", "acceptedAnswer": { "@type": "Answer", "text": "Não. Projeto é um lugar: guarda arquivos, contexto e histórico de um assunto. Skill é um procedimento: descreve como uma tarefa deve ser feita, e funciona em qualquer conversa. Você usa os dois juntos, com a skill rodando dentro do projeto." } } (para bater com o schema).
+                 Repita o bloco .faq-item por pergunta. -->
+            <div class="faq-item">
+                <button class="faq-q">Preciso saber programar para configurar essas quatro coisas?<span class="mark">+</span></button>
+                <div class="faq-a">N&atilde;o. Nenhuma das quatro envolve c&oacute;digo. Skill e tarefa agendada voc&ecirc; escreve em portugu&ecirc;s, como quem explica um procedimento para uma pessoa nova no time. O artifact quem constr&oacute;i &eacute; o Claude, a partir do que voc&ecirc; descreve. E a extens&atilde;o do Chrome se instala em dois cliques.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Por onde eu come&ccedil;o, se s&oacute; tenho tempo para uma?<span class="mark">+</span></button>
+                <div class="faq-a">Pela skill, e escolha a tarefa que voc&ecirc; mais repete. &Eacute; a &uacute;nica das quatro que devolve tempo toda vez que voc&ecirc; usa, e ela vira a base das outras: uma tarefa agendada fica muito melhor quando o que ela executa j&aacute; est&aacute; escrito numa skill.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Skill e projeto s&atilde;o a mesma coisa?<span class="mark">+</span></button>
+                <div class="faq-a">N&atilde;o. Projeto &eacute; um lugar: guarda arquivos, contexto e hist&oacute;rico de um assunto. Skill &eacute; um procedimento: descreve como uma tarefa deve ser feita, e funciona em qualquer conversa. Voc&ecirc; usa os dois juntos, com a skill rodando dentro do projeto.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== BANNER DO CURSO ========== -->
+<section class="curso-banner">
+    <div class="wrap">
+        <div class="cb-text">
+            <span class="kick">Curso de Claude · Turma 1</span>
+            <h2>Quer ir <span class="terra">além</span> desse guia?</h2>
+            <p>No Claude com Profundidade você aprende a pensar e usar IA de verdade, do zero, sem programar. Zero tech, 100% prático.</p>
+        </div>
+        <a href="/curso" class="btn btn-terra">Quero o curso</a>
+    </div>
+</section>
+
+<!-- volta pro hub -->
+<div class="voltar-hub">
+    <a href="/biblioteca">← Voltar pra Biblioteca</a>
+</div>
+
+<footer>
+    <div class="wrap">
+        <div class="footer-row">
+            <span class="footer-brand">A Virada IA</span>
+            <nav class="footer-links">
+                <a href="/biblioteca">Biblioteca</a>
+                <a href="/claude">Guia do Claude</a>
+                <a href="/curso">Curso de Claude</a>
+                <a href="/mentoria">Mentoria</a>
+                <a href="/comece">Comece por aqui</a>
+                <a href="https://instagram.com/brusantanna.ai" target="_blank" rel="noopener">Instagram</a>
+                <a href="https://newscale.tech" target="_blank" rel="noopener">NewScale</a>
+                <a href="mailto:eu@brunasantanna.com">Contato</a>
+            </nav>
+        </div>
+        <p class="footer-copy">© 2026 Bruna Santanna · A Virada IA</p>
+    </div>
+</footer>
+
+<script>
+    // ===== Copiar prompt =====
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const box = btn.closest('.prompt-box');
+            const pre = box.querySelector('pre');
+            const text = pre ? pre.innerText : '';
+            navigator.clipboard.writeText(text).then(() => {
+                const original = btn.textContent;
+                btn.textContent = '✓ Copiado';
+                btn.classList.add('copied');
+                setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, 1800);
+            });
+        });
+    });
+
+    // ===== Content upgrade (Apps Script, list: 'biblioteca') =====
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx90IdrA_L6n3jVdoYBinBPxPfWq0h6Iua1MrI8gQ7-RgBXhU1rOqF9dM2n7mLdAeMW/exec";
+
+    document.querySelectorAll('.wl-form').forEach(form => {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const input = form.querySelector('input[type="email"]');
+            const btn = form.querySelector('button[type="submit"]');
+            const email = input.value.trim();
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { input.focus(); return; }
+            btn.disabled = true; btn.textContent = 'Enviando...';
+            try {
+                await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, list: 'biblioteca', timestamp: new Date().toISOString(), source: location.href }) });
+            } catch(_) {}
+            if (typeof gtag === 'function') gtag('event', 'lead_signup', { list: 'biblioteca' });
+            document.querySelectorAll('.upgrade .wl-card').forEach(c => c.classList.add('wl-done'));
+            localStorage.setItem('biblioteca_lead', '1');
+        });
+    });
+    if (localStorage.getItem('biblioteca_lead') === '1') {
+        document.querySelectorAll('.upgrade .wl-card').forEach(c => c.classList.add('wl-done'));
+    }
+
+    // ===== FAQ accordion =====
+    document.querySelectorAll('.faq-q').forEach(q => {
+        q.addEventListener('click', () => q.closest('.faq-item').classList.toggle('open'));
+    });
+
+    // ===== menu mobile =====
+    const navToggle = document.getElementById('navToggle'), mainNav = document.getElementById('mainNav');
+    navToggle.addEventListener('click', () => mainNav.classList.toggle('open'));
+    mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mainNav.classList.remove('open')));
+
+    // ===== reveal on scroll =====
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0, rootMargin:'0px 0px -40px 0px' });
+    document.querySelectorAll('.rv').forEach((el,i) => { el.style.transitionDelay = (i%3*70)+'ms'; io.observe(el); });
+    /* rv-safety: garante que o conteudo nunca fica invisivel */
+    setTimeout(function(){ document.querySelectorAll('.rv:not(.in)').forEach(function(el){ el.classList.add('in'); }); }, 2500);
+</script>
+
+<script src="/promo-sistema.js" defer></script>
+</body>
+</html>
