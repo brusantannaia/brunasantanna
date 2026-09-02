@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Central da turma · MG Contécnica × A Virada IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#F3EEE3;--bg-2:#ECE5D6;--card:#FBF9F3;--ink:#14373C;--ink-2:#2C4F54;--green:#435D51;--terra:#B06E4A;--terra-l:#C4835E;--terra-d:#985A3B;--text:#233133;--muted:#6E7A75;--line:rgba(20,55,60,.16);--anton:'Anton',Impact,sans-serif;--hank:'Hanken Grotesk',system-ui,sans-serif}
+body{font-family:var(--hank);background:var(--bg);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--terra);color:#fff}
+.wrap{max-width:1000px;margin:0 auto;padding:0 26px}
+h1,h2,h3{font-family:var(--anton);font-weight:400;text-transform:uppercase;letter-spacing:.01em;line-height:.92}
+a{color:var(--terra-d)}
+
+.hd{border-bottom:2px solid var(--ink);background:rgba(243,238,227,.93)}
+.hd-in{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 26px;max-width:1000px;margin:0 auto;flex-wrap:wrap}
+.hd .logo{font-family:var(--anton);font-size:1.08rem;text-transform:uppercase;color:var(--ink);display:inline-flex;align-items:center}
+.hd .logo .tag{font-family:var(--hank);font-weight:700;font-size:.6rem;letter-spacing:.12em;color:var(--terra);border:1.5px solid var(--terra);padding:3px 8px;border-radius:100px;margin-left:10px;text-transform:uppercase}
+.hd .who{font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+.hero{padding:66px 0 40px}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--terra)}
+.eyebrow::before{content:'';width:26px;height:2px;background:var(--terra)}
+.hero h1{font-size:clamp(2.8rem,10vw,5.6rem);color:var(--ink);margin:18px 0 0}
+.hero h1 span{color:var(--terra)}
+.hero .sub{font-size:1.16rem;color:var(--ink-2);max-width:56ch;margin-top:20px}
+.hero .sub b{color:var(--ink);font-weight:700}
+
+section{padding:54px 0}
+.alt{background:var(--bg-2);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+.snum{font-family:var(--anton);font-size:.86rem;letter-spacing:.14em;color:var(--terra-d);text-transform:uppercase}
+.sec-h{font-size:clamp(1.7rem,4.8vw,2.7rem);color:var(--ink);margin:8px 0 12px}
+.lead{font-size:1.04rem;color:var(--ink-2);max-width:62ch}
+.lead b{color:var(--ink);font-weight:700}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:30px}
+.c{display:block;text-decoration:none;background:var(--card);border:2px solid var(--ink);border-radius:16px;padding:24px 22px;box-shadow:6px 6px 0 var(--green);transition:.18s}
+.c:hover{transform:translateY(-3px);box-shadow:8px 8px 0 var(--terra)}
+.c .kk{font-family:var(--hank);font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra-d)}
+.c h3{font-family:var(--anton);text-transform:uppercase;font-size:1.4rem;color:var(--ink);margin:7px 0 8px;line-height:1}
+.c p{font-size:.93rem;color:var(--ink-2)}
+.c .go{display:inline-block;margin-top:14px;font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--terra-d);border-bottom:2px solid var(--terra)}
+.c.novo{background:var(--ink);box-shadow:6px 6px 0 var(--terra)}
+.c.novo .kk{color:var(--terra-l)}
+.c.novo h3{color:#fff}
+.c.novo p{color:rgba(255,255,255,.85)}
+.c.novo .go{color:var(--terra-l);border-color:var(--terra-l)}
+
+.callout{margin-top:26px;background:rgba(176,110,74,.1);border-left:4px solid var(--terra);border-radius:0 12px 12px 0;padding:16px 20px;font-size:1rem;color:var(--ink-2)}
+.callout b{color:var(--terra-d)}
+
+.close{background:var(--ink);text-align:center;padding:64px 0}
+.close h2{font-size:clamp(1.9rem,6.4vw,3.6rem);color:#fff}
+.close h2 span{color:var(--terra-l)}
+.close p{color:rgba(255,255,255,.82);margin:16px auto 0;max-width:50ch;font-size:1.02rem}
+.sign{display:flex;align-items:center;justify-content:space-between;gap:12px;color:rgba(255,255,255,.85);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;padding:17px 26px;background:#0E282C;flex-wrap:wrap}
+.sign .ns{font-family:var(--anton);letter-spacing:.28em;color:var(--terra-l);font-size:1rem}
+</style></head>
+<body>
+
+<header class="hd">
+  <div class="hd-in">
+    <span class="logo">MG Contécnica<span class="tag">Virada IA</span></span>
+    <span class="who">Material da turma</span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Claude com profundidade · Agosto de 2026</span>
+    <h1>A central da <span>turma.</span></h1>
+    <p class="sub">Tudo o que a gente fez nas duas tardes está aqui, num link só. <b>Guarde esta página nos favoritos:</b> ela continua no ar e é para onde você volta quando a dúvida aparecer no meio do trabalho.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <span class="snum">Comece por aqui</span>
+    <h2 class="sec-h">O encontro 02</h2>
+    <p class="lead">A tarde de mão na massa: a gestão do dia, o controle das mensagens do e-CAC e o mapa dos processos. <b>Os sete pedidos que a gente construiu estão prontos para copiar.</b></p>
+    <div class="cards">
+      <a class="c novo" href="tarde-02.html">
+        <div class="kk">Novo · Encontro 02</div>
+        <h3>Mão na massa</h3>
+        <p>As três frentes da segunda tarde e os sete pedidos prontos para colar no seu Claude.</p>
+        <span class="go">Abrir</span>
+      </a>
+      <a class="c" href="mapeie-seu-processo.html">
+        <div class="kk">Ferramenta</div>
+        <h3>Mapeie o seu processo</h3>
+        <p>As quatro fases, a matriz risco x repetição e o pedido montado com as suas respostas dentro.</p>
+        <span class="go">Abrir</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="snum">Encontro 01</span>
+    <h2 class="sec-h">O material da primeira tarde</h2>
+    <p class="lead">Como o Claude pensa, os limites, as formas de usar e os onze pedidos do manual. <b>Continua valendo:</b> é a base de tudo o que veio depois.</p>
+    <div class="cards">
+      <a class="c" href="manual-do-aluno.html">
+        <div class="kk">Encontro 01</div>
+        <h3>Manual do aluno</h3>
+        <p>Os onze pedidos numerados, cada um pronto para colar, com marca de feito.</p>
+        <span class="go">Abrir</span>
+      </a>
+      <a class="c" href="apresentacao.html">
+        <div class="kk">Encontro 01</div>
+        <h3>A apresentação</h3>
+        <p>O deck da primeira tarde, do jeito que foi projetado na sala.</p>
+        <span class="go">Abrir</span>
+      </a>
+      <a class="c" href="ebook.html">
+        <div class="kk">Para consultar</div>
+        <h3>Claude na prática</h3>
+        <p>O material de apoio para ler com calma depois, fora da correria da aula.</p>
+        <span class="go">Abrir</span>
+      </a>
+    </div>
+    <div class="callout"><b>Link único da turma:</b> guarde <b>brunasantanna.com/9bvt6maqg42e</b>. Todas as páginas saem daqui e a página não aparece em busca do Google.</div>
+  </div>
+</section>
+
+<section class="close">
+  <div class="wrap">
+    <h2>O material fica. <span>O hábito é de vocês.</span></h2>
+    <p>Ainda temos duas mentorias online de uma hora pela frente, e elas são feitas do que aparecer no uso do dia a dia. Anote o que travar.</p>
+  </div>
+</section>
+<div class="sign"><span class="ns">NEWSCALE</span><span>MG Contécnica × A Virada IA · uso interno</span></div>
+
+</body>
+</html>

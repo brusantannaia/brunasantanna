@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Tarde 02 · MG Contécnica × A Virada IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#F3EEE3;--bg-2:#ECE5D6;--card:#FBF9F3;--ink:#14373C;--ink-2:#2C4F54;--green:#435D51;--terra:#B06E4A;--terra-l:#C4835E;--terra-d:#985A3B;--text:#233133;--muted:#6E7A75;--line:rgba(20,55,60,.16);--anton:'Anton',Impact,sans-serif;--hank:'Hanken Grotesk',system-ui,sans-serif}
+html{scroll-behavior:smooth}
+body{font-family:var(--hank);background:var(--bg);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--terra);color:#fff}
+.wrap{max-width:1000px;margin:0 auto;padding:0 26px}
+h1,h2,h3{font-family:var(--anton);font-weight:400;text-transform:uppercase;letter-spacing:.01em;line-height:.92}
+a{color:var(--terra-d)}
+
+.hd{position:sticky;top:0;z-index:50;background:rgba(243,238,227,.93);backdrop-filter:blur(8px);border-bottom:2px solid var(--ink)}
+.hd-in{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 26px;max-width:1000px;margin:0 auto;flex-wrap:wrap}
+.hd .logo{font-family:var(--anton);font-size:1.08rem;text-transform:uppercase;color:var(--ink);display:inline-flex;align-items:center}
+.hd .logo .tag{font-family:var(--hank);font-weight:700;font-size:.6rem;letter-spacing:.12em;color:var(--terra);border:1.5px solid var(--terra);padding:3px 8px;border-radius:100px;margin-left:10px;text-transform:uppercase}
+.hd nav{display:flex;gap:18px}
+.hd nav a{font-size:.82rem;font-weight:600;color:var(--ink-2);text-decoration:none}
+.hd nav a:hover{color:var(--terra)}
+@media(max-width:760px){.hd nav{display:none}}
+
+section{padding:64px 0}
+.alt{background:var(--bg-2);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--terra)}
+.eyebrow::before{content:'';width:26px;height:2px;background:var(--terra)}
+.snum{font-family:var(--anton);font-size:clamp(2.6rem,7vw,4.6rem);color:var(--terra);line-height:.8;display:block}
+.sec-h{font-size:clamp(1.9rem,5.4vw,3.1rem);color:var(--ink);margin:8px 0 14px}
+.lead{font-size:1.06rem;color:var(--ink-2);max-width:62ch}
+.lead b{color:var(--ink);font-weight:700}
+
+.hero{padding:58px 0 46px}
+.hero h1{font-size:clamp(2.8rem,10vw,5.8rem);color:var(--ink);margin:18px 0 0}
+.hero h1 span{color:var(--terra)}
+.hero .sub{font-size:1.16rem;color:var(--ink-2);max-width:52ch;margin-top:20px}
+.hero .sub b{color:var(--ink);font-weight:700}
+.statrow{display:flex;gap:30px;flex-wrap:wrap;margin-top:32px}
+.statrow .n{font-family:var(--anton);font-size:2.1rem;color:var(--ink);line-height:1}
+.statrow .n span{color:var(--terra)}
+.statrow .l{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:5px}
+
+.frentes{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:34px}
+.fr{background:var(--card);border:2px solid var(--ink);border-radius:16px;padding:22px 20px;box-shadow:6px 6px 0 var(--green)}
+.fr .fn{font-family:var(--anton);font-size:.82rem;letter-spacing:.14em;color:var(--terra-d);text-transform:uppercase}
+.fr h4{font-family:var(--anton);text-transform:uppercase;font-size:1.22rem;color:var(--ink);margin:6px 0 8px;line-height:1.02}
+.fr p{font-size:.92rem;color:var(--ink-2)}
+
+.prompt{margin-top:20px;background:var(--card);border:1.5px solid var(--line);border-left:7px solid var(--terra);border-radius:0 14px 14px 0;overflow:hidden}
+.prompt .pl{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;background:rgba(176,110,74,.1);flex-wrap:wrap}
+.prompt .pl span{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.copy{font-family:var(--hank);font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--terra);border:none;border-radius:100px;padding:7px 16px;cursor:pointer;transition:.18s;white-space:nowrap}
+.copy:hover{background:var(--terra-d)}
+.copy.done{background:var(--green)}
+.prompt pre{font-family:var(--hank);font-size:.93rem;line-height:1.58;color:var(--text);padding:20px;white-space:pre-wrap;word-break:break-word}
+.pnote{font-size:.9rem;color:var(--muted);margin-top:10px;max-width:64ch}
+.pnote b{color:var(--ink-2)}
+
+.callout{margin-top:22px;background:rgba(176,110,74,.1);border-left:4px solid var(--terra);border-radius:0 12px 12px 0;padding:16px 20px;font-size:1rem;color:var(--ink-2)}
+.callout b{color:var(--terra-d)}
+
+.spot{margin-top:26px;background:var(--ink);border-radius:18px;padding:30px 32px;box-shadow:7px 7px 0 var(--terra)}
+.spot .lab{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra-l);margin-bottom:12px}
+.spot h3{font-family:var(--anton);text-transform:uppercase;font-size:clamp(1.4rem,4vw,2.1rem);color:#fff;line-height:1}
+.spot h3 span{color:var(--terra-l)}
+.spot p{color:rgba(255,255,255,.86);font-size:1.02rem;margin-top:14px;max-width:60ch}
+.spot p b{color:#fff}
+.spot a.btn{display:inline-block;margin-top:18px;background:var(--terra);color:#fff;text-decoration:none;font-weight:700;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;border-radius:100px;padding:11px 24px}
+.spot a.btn:hover{background:var(--terra-l)}
+
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px;margin-top:28px}
+.rule{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:22px 20px}
+.rule .rn{font-family:var(--anton);font-size:.78rem;letter-spacing:.14em;color:var(--terra);text-transform:uppercase}
+.rule h4{font-family:var(--anton);text-transform:uppercase;font-size:1.14rem;color:var(--ink);margin:6px 0 8px;line-height:1.02}
+.rule p{font-size:.92rem;color:var(--ink-2)}
+.rule p b{color:var(--ink);font-weight:700}
+
+.steps{margin-top:26px;display:grid;gap:12px}
+.st{display:flex;gap:16px;align-items:flex-start;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:19px 21px}
+.st .stn{flex-shrink:0;width:36px;height:36px;border-radius:10px;background:var(--terra);color:#fff;font-family:var(--anton);font-size:1.2rem;display:flex;align-items:center;justify-content:center;line-height:1}
+.st .stc h4{font-family:var(--anton);text-transform:uppercase;font-size:1.12rem;color:var(--ink);line-height:1.02}
+.st .stc p{font-size:.94rem;color:var(--ink-2);margin-top:5px}
+.st .stc a{color:var(--terra-d);font-weight:700;text-decoration:none;border-bottom:2px solid var(--terra)}
+
+.close{background:var(--ink);text-align:center}
+.close h2{font-size:clamp(2.1rem,7.4vw,4.4rem);color:#fff}
+.close h2 span{color:var(--terra-l)}
+.close p{color:rgba(255,255,255,.82);margin:18px auto 0;max-width:52ch;font-size:1.04rem}
+.close .sig{margin-top:20px;font-size:.86rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra-l)}
+.sign{display:flex;align-items:center;justify-content:space-between;gap:12px;color:rgba(255,255,255,.85);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;padding:17px 26px;background:#0E282C;flex-wrap:wrap}
+.sign .ns{font-family:var(--anton);letter-spacing:.28em;color:var(--terra-l);font-size:1rem}
+
+.rv{opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:var(--ink);color:#fff;font-size:.86rem;font-weight:600;padding:11px 20px;border-radius:100px;opacity:0;pointer-events:none;transition:.25s;z-index:99}
+.toast.on{opacity:1}
+</style></head>
+<body>
+
+<header class="hd">
+  <div class="hd-in">
+    <span class="logo">MG Contécnica<span class="tag">Virada IA</span></span>
+    <nav>
+      <a href="index.html">Central da turma</a>
+      <a href="#gestao">Gestão do dia</a>
+      <a href="#ecac">e-CAC</a>
+      <a href="#mapa">O seu processo</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap rv">
+    <span class="eyebrow">Encontro 02 · 19 de agosto de 2026</span>
+    <h1>Mão na <span>massa.</span></h1>
+    <p class="sub">A segunda tarde não teve slide. Foi em cima do trabalho de vocês: <b>a gestão do dia, a agenda, o controle do que chega pela Receita e o mapa dos processos</b>. Esta página guarda o que ficou, pronto para colar e usar na segunda-feira.</p>
+    <div class="statrow">
+      <div><div class="n"><span>3</span>h</div><div class="l">presenciais na MG</div></div>
+      <div><div class="n"><span>3</span></div><div class="l">frentes trabalhadas</div></div>
+      <div><div class="n"><span>7</span></div><div class="l">pedidos prontos aqui</div></div>
+    </div>
+
+    <div class="frentes">
+      <div class="fr"><div class="fn">Frente 01</div><h4>A gestão do dia</h4><p>A agenda, os e-mails e o que exige ação sua hoje, numa tela só.</p></div>
+      <div class="fr"><div class="fn">Frente 02</div><h4>A caixa do e-CAC</h4><p>As mensagens da Receita viram lista com prazo, cliente e prioridade.</p></div>
+      <div class="fr"><div class="fn">Frente 03</div><h4>O seu processo</h4><p>O mapa que cada um preencheu, agora executado na própria conversa.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="gestao">
+  <div class="wrap rv">
+    <span class="snum">01</span>
+    <h2 class="sec-h">A gestão do dia</h2>
+    <p class="lead">O ponto de partida de tudo o que a gente fez: parar de abrir cinco lugares para descobrir o que precisa da sua atenção hoje. <b>Um pedido só, com tudo dentro.</b> Cole no Claude e responda o que ele perguntar.</p>
+
+    <div class="prompt">
+      <div class="pl"><span>Pedido 01 · O meu dia em uma tela</span><button class="copy">Copiar</button></div>
+      <pre>Quero começar o meu dia sabendo o que realmente precisa de mim, sem abrir cinco lugares diferentes.
+
+Monte para mim uma leitura do meu dia com: o que tem na agenda, o que chegou por e-mail pedindo alguma ação minha, o que está prometido para hoje e o que já está atrasado. Separe por urgência e diga, em cada item, qual é a próxima ação concreta e de quem ela depende.
+
+Antes de montar, me faça todas as perguntas que precisar para fazer isso do meu jeito. Faça todas de uma vez, numeradas, para eu responder tudo em uma única mensagem. Se faltar informação, pergunte em vez de chutar.
+
+Depois de perguntar, faça aqui mesmo, nesta conversa. Não me devolva um prompt para colar em outro lugar.</pre>
+    </div>
+    <p class="pnote"><b>Se você tem o conector do Microsoft 365 ligado</b>, ele lê a sua agenda e a sua caixa direto. Se não tem, cole os e-mails e os compromissos na conversa: o resultado é o mesmo, só dá um pouco mais de trabalho.</p>
+
+    <div class="prompt">
+      <div class="pl"><span>Pedido 02 · Quem deve o quê</span><button class="copy">Copiar</button></div>
+      <pre>Vou te passar as minhas reuniões e conversas dos últimos dias (atas, e-mails, mensagens).
+
+Transforme isso numa tabela de pendências com quatro colunas: o que é, quem é o responsável, para quando, e qual o risco de deixar passar. Separe o que é meu do que é dos outros, e escreva a cobrança pronta para cada pendência que não é minha.
+
+Antes de montar, me faça todas as perguntas que precisar. Faça todas de uma vez, numeradas, para eu responder tudo em uma única mensagem.
+
+Depois faça aqui, nesta conversa. Não me devolva um prompt para colar em outro lugar.</pre>
+    </div>
+
+    <div class="prompt">
+      <div class="pl"><span>Pedido 03 · A mesma tabela virando painel</span><button class="copy">Copiar</button></div>
+      <pre>Pegue essa mesma tabela de pendências e transforme num painel visual em HTML, numa página só, que eu possa abrir no navegador e deixar aberta.
+
+Quero semáforo por prazo (atrasado, hoje, esta semana, depois), o nome do responsável em destaque e um total no topo. Sem instalar nada e sem eu escrever uma linha de código.
+
+Se precisar de alguma decisão minha sobre o visual ou sobre o que aparece, me pergunte tudo de uma vez, numerado, antes de montar. Depois monte aqui mesmo.</pre>
+    </div>
+  </div>
+</section>
+
+<section id="ecac">
+  <div class="wrap rv">
+    <span class="snum">02</span>
+    <h2 class="sec-h">A caixa postal do e-CAC</h2>
+    <p class="lead">O caso que mais rendeu na sala. As mensagens que caem no portal da Receita são muitas, chegam sem aviso e cada uma tem um prazo que corre. <b>O trabalho não é ler, é não deixar passar.</b></p>
+
+    <div class="callout"><b>Como isso funciona de verdade:</b> o Claude não entra no e-CAC no seu lugar. O acesso é seu, com o seu certificado. O que ele faz é o depois: você traz a lista de mensagens, ou o print, ou o PDF, e ele transforma aquilo em controle, com prazo, cliente e prioridade.</div>
+
+    <div class="prompt">
+      <div class="pl"><span>Pedido 04 · Da caixa do e-CAC para a lista de pendências</span><button class="copy">Copiar</button></div>
+      <pre>Vou te passar as mensagens que estão na caixa postal do e-CAC (posso colar o texto, subir o PDF ou mandar a relação em planilha).
+
+Organize tudo numa tabela de controle com: cliente, tipo da mensagem, data em que chegou, prazo final para responder, quantos dias faltam, o que precisa ser feito, quem faz aqui dentro e o risco se passar do prazo. Ordene pelo que vence primeiro e deixe em destaque o que vence nesta semana.
+
+No fim, me diga em três linhas o que eu preciso resolver hoje.
+
+Antes de fazer, me faça todas as perguntas que precisar para entender como a gente trabalha aqui. Faça todas de uma vez, numeradas, para eu responder tudo em uma única mensagem. Não invente prazo: se você não tiver certeza do prazo de algum tipo de mensagem, marque como "conferir" em vez de escrever um número errado.
+
+Depois faça aqui mesmo, nesta conversa.</pre>
+    </div>
+    <p class="pnote"><b>A regra vale para tudo o que envolve prazo:</b> quem confere é você. O Claude organiza, ordena e lembra. A conferência do prazo continua sendo da casa.</p>
+
+    <div class="prompt">
+      <div class="pl"><span>Pedido 05 · A rotina que pergunta toda segunda</span><button class="copy">Copiar</button></div>
+      <pre>Essa organização das mensagens do e-CAC eu repito toda semana.
+
+Escreva o passo a passo do jeito que deu certo agora, deixe registrado o que eu preciso te mandar em cada rodada (quais arquivos e quais informações), e me explique em português simples se vale transformar isso numa skill e como eu faço.
+
+Se der para deixar agendado, para me perguntar toda segunda de manhã, me mostre como. Termine sempre com perguntas fechadas, de sim ou não, para eu responder rápido.
+
+Me pergunte tudo o que precisar antes, de uma vez só e numerado. Depois faça aqui nesta conversa.</pre>
+    </div>
+
+    <div class="prompt">
+      <div class="pl"><span>Pedido 06 · O aviso pronto para o cliente</span><button class="copy">Copiar</button></div>
+      <pre>Para cada mensagem do e-CAC que exige alguma coisa do cliente, escreva o aviso que eu vou mandar para ele.
+
+Tom da MG: direto, sem juridiquês, explicando o que chegou, o que ele precisa providenciar e até quando. Uma versão curta para WhatsApp e uma versão para e-mail.
+
+Não use o nome de nenhum cliente que eu não tenha te passado, e não afirme nada sobre o caso dele que eu não tenha te contado.
+
+Me pergunte o que faltar, tudo de uma vez e numerado. Depois escreva aqui mesmo.</pre>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="mapa">
+  <div class="wrap rv">
+    <span class="snum">03</span>
+    <h2 class="sec-h">O mapa do seu processo</h2>
+    <p class="lead">A página que vocês preencheram continua no ar e <b>mudou desde a Tarde 01</b>. Antes ela terminava entregando um prompt para você colar em outro lugar. Agora não: o Claude pergunta tudo de uma vez e já começa a executar com você na mesma conversa.</p>
+
+    <div class="spot">
+      <div class="lab">Continua disponível</div>
+      <h3>Mapeie o seu <span>processo</span></h3>
+      <p>Quatro fases: o sonho, o raio-x, a decisão na matriz risco x repetição e a execução. No fim, a própria página monta o pedido com as suas respostas dentro. <b>Quem já preencheu pode voltar: as respostas ficam salvas no seu computador.</b></p>
+      <a class="btn" href="mapeie-seu-processo.html">Abrir o mapeamento</a>
+    </div>
+
+    <div class="prompt">
+      <div class="pl"><span>Pedido 07 · Antes de começar qualquer tarefa</span><button class="copy">Copiar</button></div>
+      <pre>Vou começar uma tarefa da minha rotina aqui na MG Contécnica: [descreva a tarefa em uma ou duas frases].
+
+Você pode me ajudar nessa tarefa? Como? Me mostre as formas de me ajudar, da mais simples à mais completa.
+
+Antes de responder, me faça todas as perguntas que precisar para entender o meu processo de verdade. Faça todas de uma vez, numeradas, para eu responder tudo em uma única mensagem. Se faltar informação, pergunte em vez de chutar.
+
+Escolhido o caminho, faça comigo aqui nesta conversa, começando pelo primeiro passo.</pre>
+    </div>
+    <p class="pnote">É o pedido que abre tudo. Não precisa saber a resposta antes: quem mostra o caminho é ele. A virada acontece assim, uma tarefa de cada vez.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap rv">
+    <span class="snum">04</span>
+    <h2 class="sec-h">As três regras que valem para tudo</h2>
+    <div class="rules">
+      <div class="rule"><div class="rn">Regra 01</div><h4>Quem confere é você</h4><p>Quanto maior o estrago se errar, <b>mais perto o humano fica</b>. Prazo, valor e número saem daqui conferidos, sempre.</p></div>
+      <div class="rule"><div class="rn">Regra 02</div><h4>Peça grande</h4><p>Pare de pedir uma coisinha por vez. <b>Pedido grande, várias tarefas juntas</b>, e deixe que ele pergunte o que faltar antes de começar.</p></div>
+      <div class="rule"><div class="rn">Regra 03</div><h4>Dado de cliente é dado da MG</h4><p>Vale a mesma regra do escritório: <b>o que não sairia num e-mail, não entra na conversa</b>. Na dúvida, troque o nome e o CNPJ antes de colar.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap rv">
+    <span class="snum">05</span>
+    <h2 class="sec-h">O que vem agora</h2>
+    <p class="lead">As duas tardes presenciais fecharam. O que ainda está de pé no nosso combinado são <b>duas mentorias online de uma hora</b>, e elas existem justamente para o que aparece agora, quando cada um começa a usar de verdade.</p>
+    <div class="steps">
+      <div class="st"><div class="stn">1</div><div class="stc"><h4>Use nesta semana</h4><p>Escolha um dos pedidos desta página e rode em cima do trabalho real. Uma vez só já basta para a coisa virar hábito.</p></div></div>
+      <div class="st"><div class="stn">2</div><div class="stc"><h4>Anote o que travou</h4><p>O que não saiu como você esperava é o material da mentoria. Guarde o print ou a conversa.</p></div></div>
+      <div class="st"><div class="stn">3</div><div class="stc"><h4>Volte ao material quando precisar</h4><p>Tudo continua no ar: <a href="index.html">a central da turma</a> reúne o deck, o manual, o mapeamento e esta página.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="close">
+  <div class="wrap rv">
+    <h2>Não é sobre <span>saber IA.</span><br>É sobre o seu <span>trabalho.</span></h2>
+    <p>Obrigada pelas duas tardes. O time da MG chegou com dor real e saiu com processo mapeado, e isso é bem mais raro do que parece.</p>
+    <div class="sig">MG Contécnica × A Virada IA · Agosto de 2026</div>
+  </div>
+</section>
+<div class="sign"><span class="ns">NEWSCALE</span><span>Material da turma · uso interno da MG Contécnica</span></div>
+
+<div class="toast" id="toast">Copiado. Cole no seu Claude.</div>
+
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    var pre=b.closest('.prompt').querySelector('pre');
+    navigator.clipboard.writeText(pre.textContent).then(function(){
+      var old=b.textContent;b.textContent='Copiado';b.classList.add('done');
+      var t=document.getElementById('toast');t.classList.add('on');
+      setTimeout(function(){b.textContent=old;b.classList.remove('done');t.classList.remove('on');},2400);
+    }).catch(function(){
+      var t=document.getElementById('toast');t.textContent='Não consegui copiar. Selecione o texto e copie na mão.';t.classList.add('on');
+      setTimeout(function(){t.classList.remove('on');},3000);
+    });
+  });
+});
+var obs=new IntersectionObserver(function(es){es.forEach(function(e,i){if(e.isIntersecting){setTimeout(function(){e.target.classList.add('in');},i*60);obs.unobserve(e.target);}});},{threshold:.1});
+document.querySelectorAll('.rv').forEach(function(el){obs.observe(el);});
+setTimeout(function(){document.querySelectorAll('.rv:not(.in)').forEach(function(el){el.classList.add('in');});},2200);
+</script>
+</body>
+</html>
