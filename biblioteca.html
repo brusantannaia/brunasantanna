@@ -67,15 +67,18 @@
             --bg:        #F3EEE3;   /* creme/bege */
             --bg-2:      #ECE5D6;
             --card:      #FBF9F3;
-            --ink:       #14373C;   /* verde petróleo Newscale */
+            --ink:       #14373C;   /* verde petróleo */
             --ink-2:     #2C4F54;
+            --ink-deep:  #0E282C;
             --green:     #435D51;   /* sálvia */
             --terra:     #B06E4A;   /* terracota - ação */
+            --terra-l:   #C4835E;
             --terra-d:   #985A3B;
             --text:      #233133;
             --muted:     #6E7A75;
             --line:      rgba(20,55,60,0.16);
             --shadow:    rgba(20,55,60,0.16);
+            --hh:        62px;      /* altura do header, medida em JS */
         }
 
         html { scroll-behavior: smooth; }
@@ -87,13 +90,15 @@
             -webkit-font-smoothing: antialiased;
         }
         ::selection { background: var(--terra); color: #fff; }
+        a { color: inherit; }
 
-        .wrap { max-width: 1080px; margin: 0 auto; padding: 0 30px; }
+        .wrap { max-width: 1180px; margin: 0 auto; padding: 0 30px; }
+        @media (max-width: 560px) { .wrap { padding: 0 18px; } }
 
         /* ---------- HEADER GLOBAL ---------- */
         .site-header {
             position: sticky; top: 0; z-index: 50;
-            background: rgba(243,238,227,0.92); backdrop-filter: blur(8px);
+            background: rgba(243,238,227,0.94); backdrop-filter: blur(8px);
             border-bottom: 2px solid var(--ink);
         }
         .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; max-width: 1280px; padding: 16px 0; }
@@ -128,291 +133,369 @@
             .nav-cta { margin-top: 12px; text-align: center; border-top: none !important; }
         }
 
-        /* ---------- GATE ---------- */
-        .gate { padding: 64px 0 90px; }
-        .gate-eyebrow {
-            display: inline-flex; align-items: center; gap: 8px;
-            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
-            color: var(--terra); margin-bottom: 26px;
+        /* ================= HERO COMPACTO =================
+           Regra desta página: o feed precisa aparecer já na primeira rolagem.
+           Por isso o hero cabe em ~1 tela e a busca já mora aqui. */
+        .hero { position: relative; padding: 46px 0 34px; overflow: hidden; }
+        .hero::before {
+            content: ''; position: absolute; top: -220px; right: -160px; width: 620px; height: 620px;
+            background: radial-gradient(circle, rgba(176,110,74,.15), transparent 62%);
+            pointer-events: none;
         }
-        .gate-eyebrow::before { content: ''; width: 26px; height: 2px; background: var(--terra); display: inline-block; }
+        .hero-grid { position: relative; display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: end; }
+        @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; gap: 26px; align-items: start; } }
+
+        .eyebrow {
+            display: inline-flex; align-items: center; gap: 9px;
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+            color: var(--terra); margin-bottom: 18px;
+        }
+        .eyebrow .dot {
+            width: 7px; height: 7px; border-radius: 50%; background: var(--terra);
+            box-shadow: 0 0 0 4px rgba(176,110,74,.18);
+        }
 
         h1 {
-            font-family: 'Anton', sans-serif;
-            font-weight: 400;
-            font-size: clamp(3.4rem, 12vw, 8rem);
-            line-height: 0.9;
-            letter-spacing: -0.01em;
-            text-transform: uppercase;
-            color: var(--ink);
-            margin-bottom: 26px;
+            font-family: 'Anton', sans-serif; font-weight: 400;
+            font-size: clamp(2.9rem, 7.4vw, 5.4rem);
+            line-height: 0.88; letter-spacing: -0.005em; text-transform: uppercase;
+            color: var(--ink); margin-bottom: 18px;
         }
         h1 .terra { color: var(--terra); }
-        h1 .out {
-            -webkit-text-stroke: 2px var(--ink); color: transparent;
+
+        .hero-lead { font-size: 1.08rem; font-weight: 400; color: var(--ink-2); max-width: 46ch; }
+        .hero-lead b { font-weight: 700; color: var(--ink); }
+
+        /* números da marca — células escuras, número em Anton.
+           Atenção: o padding é do FILHO DIRETO (.hero-stats > div). Se o seletor
+           pegar os divs de dentro, cada número herda o padding e a caixa incha. */
+        /* contagem + captura de e-mail sao UM objeto: faixa escura em cima,
+           form claro embaixo. Mora na coluna da direita do hero, que estava
+           vazia — assim a captura nao empurra o feed pra baixo. */
+        .hero-card {
+            width: 330px; background: var(--card);
+            border: 2px solid var(--ink); border-radius: 14px;
+            overflow: hidden; box-shadow: 6px 6px 0 var(--terra);
+        }
+        .hero-stats { display: grid; grid-auto-flow: column; gap: 2px; background: var(--ink); border-bottom: 2px solid var(--ink); }
+        .hero-stats > div { background: var(--ink); padding: 12px 20px 11px; text-align: center; min-width: 84px; }
+        .hs-num { font-family: 'Anton', sans-serif; font-size: 1.6rem; line-height: 1; color: var(--terra-l); }
+        .hs-lab { font-size: 0.56rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,.55); margin-top: 5px; line-height: 1.3; }
+
+        .hero-mail { padding: 15px 16px 14px; }
+        .hm-title { font-size: 0.88rem; font-weight: 700; color: var(--ink); line-height: 1.25; margin-bottom: 10px; }
+        .hm-title a { color: var(--terra-d); text-decoration: underline; text-underline-offset: 3px; }
+        .hm-form { display: flex; gap: 7px; }
+        .hm-form .field { flex: 1; min-width: 0; padding: 11px 15px; font-size: 0.88rem; }
+        .hm-form .btn { padding: 11px 17px; font-size: 0.72rem; white-space: nowrap; }
+        .hero-mail .fine { font-size: 0.7rem; color: var(--muted); margin-top: 9px; }
+
+        @media (max-width: 900px) {
+            .hero-card { justify-self: start; width: 100%; max-width: 420px; box-shadow: 5px 5px 0 var(--terra); }
+        }
+        @media (max-width: 400px) {
+            .hero-stats > div { padding: 11px 14px 10px; min-width: 0; }
+            .hs-num { font-size: 1.4rem; }
+            .hero-mail { padding: 13px 13px 12px; }
         }
 
-        .gate-lead {
-            font-size: 1.25rem; font-weight: 400; color: var(--ink-2);
-            max-width: 540px; margin-bottom: 38px;
+        /* ================= TOOLBAR STICKY (busca + filtros) ================= */
+        .toolbar {
+            position: sticky; top: var(--hh); z-index: 40;
+            background: rgba(243,238,227,0.96); backdrop-filter: blur(8px);
+            border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink);
+            padding: 13px 0; margin-bottom: 18px;
         }
-        .gate-lead strong { font-weight: 700; color: var(--ink); }
+        .toolbar-in { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
 
-        .gate-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: start; }
-        @media (max-width: 820px) { .gate-grid { grid-template-columns: 1fr; gap: 36px; } }
-
-        .stats { display: flex; gap: 30px; flex-wrap: wrap; margin-bottom: 6px; }
-        .stat-num { font-family: 'Anton', sans-serif; font-size: 2.6rem; color: var(--ink); line-height: 1; }
-        .stat-num span { color: var(--terra); }
-        .stat-label { font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
-
-        /* form card */
-        .gate-card {
-            background: var(--ink); color: #fff;
-            border-radius: 18px; padding: 34px 32px;
-            box-shadow: 8px 8px 0 var(--green);
+        .search { position: relative; flex: 1; min-width: 240px; }
+        .search svg { position: absolute; left: 17px; top: 50%; transform: translateY(-50%); width: 17px; height: 17px; stroke: var(--muted); fill: none; stroke-width: 2; pointer-events: none; }
+        #q {
+            width: 100%; font-family: inherit; font-size: 1rem; font-weight: 500; color: var(--ink);
+            background: var(--card); border: 2px solid var(--ink); border-radius: 100px;
+            padding: 13px 44px 13px 46px; outline: none; transition: box-shadow .18s, border-color .18s;
         }
-        .gate-card h3 { font-family: 'Anton', sans-serif; font-weight: 400; font-size: 1.7rem; text-transform: uppercase; line-height: 1; margin-bottom: 6px; }
-        .gate-card p { font-size: 0.9rem; color: rgba(255,255,255,0.7); margin-bottom: 22px; }
+        #q::placeholder { color: var(--muted); font-weight: 400; }
+        #q:focus { border-color: var(--terra); box-shadow: 0 0 0 4px rgba(176,110,74,.18); }
+        .search-clear {
+            position: absolute; right: 9px; top: 50%; transform: translateY(-50%);
+            background: var(--bg-2); border: none; border-radius: 50%; width: 26px; height: 26px;
+            color: var(--ink); font-size: .8rem; cursor: pointer; line-height: 1;
+        }
+        .search-clear:hover { background: var(--terra); color: #fff; }
+
+        .seg { display: flex; border: 2px solid var(--ink); border-radius: 100px; overflow: hidden; flex-shrink: 0; }
+        .seg button {
+            font-family: inherit; font-size: 0.78rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+            padding: 11px 18px; background: var(--card); color: var(--ink-2); border: none; cursor: pointer;
+            transition: background .16s, color .16s; border-right: 2px solid var(--ink);
+        }
+        .seg button:last-child { border-right: none; }
+        .seg button:hover { background: var(--bg-2); }
+        .seg button.active { background: var(--ink); color: #fff; }
+
+        /* fila de temas fica FORA da barra fixa: no celular a barra grudada
+           não pode comer um terço da tela. */
+        .temas { display: flex; gap: 7px; margin: 0 0 26px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+        .temas::-webkit-scrollbar { display: none; }
+        .chip {
+            font-family: inherit; font-size: 0.79rem; font-weight: 600; white-space: nowrap;
+            padding: 6px 14px; border: 1.5px solid var(--line); border-radius: 100px;
+            background: var(--card); color: var(--ink-2); cursor: pointer; transition: all .16s; flex-shrink: 0;
+        }
+        .chip:hover { border-color: var(--ink); }
+        .chip.active { background: var(--terra); color: #fff; border-color: var(--terra); }
+
+        .feed-count { font-size: 0.76rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+
+        /* no celular a barra fica em 2 linhas: busca em cima, formato + contador embaixo */
+        @media (max-width: 620px) {
+            .toolbar { padding: 10px 0; }
+            .toolbar-in { gap: 10px; }
+            .seg button { padding: 9px 13px; font-size: .74rem; }
+            .feed-count { font-size: .7rem; letter-spacing: .05em; }
+        }
+        /* tela bem estreita: o contador sai pra barra grudada não comer a tela */
+        @media (max-width: 400px) { .feed-count { display: none; } }
+
+        /* ================= FEED ================= */
+        .feed { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; padding-bottom: 10px; }
+        @media (max-width: 980px) { .feed { grid-template-columns: repeat(2, 1fr); gap: 18px; } }
+        @media (max-width: 620px) { .feed { grid-template-columns: 1fr; } }
+
+        .card {
+            position: relative; display: flex; flex-direction: column; overflow: hidden;
+            background: var(--card); border: 2px solid var(--ink); border-radius: 16px;
+            text-decoration: none; color: inherit;
+            box-shadow: 5px 5px 0 var(--shadow);
+            transition: transform .2s cubic-bezier(.2,.7,.2,1), box-shadow .2s;
+        }
+        .card:hover { transform: translateY(-5px); box-shadow: 9px 9px 0 var(--terra); }
+
+        /* capa tipográfica — cada tema tem sua cor; o número é a cota da biblioteca */
+        .cover {
+            position: relative; height: 122px; flex-shrink: 0; overflow: hidden;
+            background: linear-gradient(145deg, var(--a), var(--b));
+            border-bottom: 2px solid var(--ink);
+        }
+        .cover-num {
+            position: absolute; right: -8px; bottom: -26px;
+            font-family: 'Anton', sans-serif; font-size: 5.6rem; line-height: .8;
+            color: rgba(255,255,255,.11); letter-spacing: -.03em; pointer-events: none;
+        }
+        .cover-kind {
+            position: absolute; left: 16px; top: 15px;
+            font-size: 0.6rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase;
+            color: rgba(255,255,255,.9); border: 1.5px solid rgba(255,255,255,.42);
+            border-radius: 100px; padding: 4px 11px;
+        }
+        .cover-kind.novo { background: var(--terra); border-color: var(--terra); color: #fff; }
+        .cover-date {
+            position: absolute; right: 16px; top: 17px;
+            font-size: 0.64rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+            color: rgba(255,255,255,.55);
+        }
+        .cover-word {
+            position: absolute; left: 16px; bottom: 13px; right: 58px;
+            font-family: 'Anton', sans-serif; font-size: 1.5rem; line-height: .92;
+            text-transform: uppercase; color: #fff; letter-spacing: .005em;
+        }
+
+        .card-body { display: flex; flex-direction: column; flex: 1; padding: 20px 20px 18px; }
+        .card h3 {
+            font-size: 1.1rem; font-weight: 700; line-height: 1.24; color: var(--ink);
+            letter-spacing: -0.012em; margin-bottom: 8px;
+            display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+        }
+        .card .desc {
+            font-size: 0.875rem; color: var(--text); line-height: 1.5; opacity: .85; margin-bottom: 16px;
+            display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+        }
+        .card-foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 13px; border-top: 1.5px solid var(--line); }
+        .tags { font-size: 0.74rem; color: var(--muted); font-weight: 500; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        .go { font-size: 0.78rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: var(--terra); white-space: nowrap; }
+        .card:hover .go { color: var(--terra-d); }
+
+        /* card de prompt — abrir e copiar */
+        .card-action {
+            width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            padding: 11px 18px; border-radius: 100px; font-family: inherit;
+            font-size: 0.78rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase;
+            cursor: pointer; background: transparent; color: var(--ink); border: 2px solid var(--ink);
+            transition: all .16s; margin-top: auto;
+        }
+        .card-action:hover { background: var(--ink); color: #fff; }
+        .prompt-body {
+            display: none; margin-top: 14px; background: var(--bg-2); border: 1.5px solid var(--line);
+            border-left: 6px solid var(--terra); border-radius: 10px; padding: 16px;
+            font-size: 0.84rem; line-height: 1.6; white-space: pre-wrap; word-break: break-word;
+            max-height: 300px; overflow-y: auto; color: var(--ink-2);
+        }
+        .prompt-body.open { display: block; }
+        .btn-copy {
+            margin-top: 14px; padding: 10px 20px; border: none; border-radius: 100px; cursor: pointer;
+            font-family: inherit; font-size: 0.74rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
+            background: var(--terra); color: #fff; transition: background .2s;
+        }
+        .btn-copy:hover { background: var(--terra-d); }
+        .btn-copy.done { background: var(--green); }
+
+        /* ---- CARD DESTAQUE (Guia Definitivo) — ocupa 2 colunas ---- */
+        .card-hero {
+            grid-column: span 2; flex-direction: row; align-items: stretch;
+            background: var(--ink); border-color: var(--ink); color: #fff;
+            box-shadow: 7px 7px 0 var(--terra);
+        }
+        .card-hero:hover { box-shadow: 11px 11px 0 var(--terra); }
+        .card-hero .ch-mark {
+            flex-shrink: 0; width: 138px; position: relative; overflow: hidden;
+            background: linear-gradient(150deg, var(--terra), var(--terra-d));
+            border-right: 2px solid var(--ink); display: flex; align-items: flex-end;
+        }
+        .card-hero .ch-mark span {
+            font-family: 'Anton', sans-serif; font-size: 6.4rem; line-height: .74;
+            color: rgba(255,255,255,.22); margin: 0 0 -12px -6px;
+        }
+        .card-hero .ch-body { padding: 26px 28px; display: flex; flex-direction: column; justify-content: center; }
+        .card-hero .ch-kick { font-size: 0.68rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--terra-l); margin-bottom: 9px; }
+        .card-hero h3 { font-family: 'Anton', sans-serif; font-weight: 400; font-size: 1.95rem; line-height: .98; text-transform: uppercase; color: #fff; -webkit-line-clamp: 3; margin-bottom: 10px; }
+        .card-hero .desc { color: rgba(255,255,255,.75); opacity: 1; margin-bottom: 14px; }
+        .card-hero .go { color: var(--terra-l); }
+        .card-hero:hover .go { color: #fff; }
+        @media (max-width: 620px) {
+            .card-hero { grid-column: span 1; flex-direction: column; }
+            .card-hero .ch-mark { width: 100%; height: 86px; border-right: none; border-bottom: 2px solid var(--ink); }
+            .card-hero .ch-mark span { font-size: 5rem; }
+        }
+
+        /* ---- CARDS DE OFERTA DENTRO DO FEED ---- */
+        .card-offer { background: var(--ink); border-color: var(--ink); color: #fff; box-shadow: 6px 6px 0 var(--terra); }
+        .card-offer:hover { box-shadow: 10px 10px 0 var(--terra); }
+        .card-offer .cover { background: linear-gradient(145deg, var(--terra), var(--terra-d)); }
+        .card-offer h3 { color: #fff; font-family: 'Anton', sans-serif; font-weight: 400; font-size: 1.42rem; line-height: 1.02; text-transform: uppercase; }
+        .card-offer .desc { color: rgba(255,255,255,.75); opacity: 1; }
+        .card-offer .card-foot { border-top-color: rgba(255,255,255,.18); }
+        .card-offer .price { font-size: 0.76rem; font-weight: 700; color: rgba(255,255,255,.85); }
+        .card-offer .go { color: var(--terra-l); }
+        .card-offer:hover .go { color: #fff; }
+
+        .card-mail { background: var(--bg-2); box-shadow: 6px 6px 0 var(--green); }
+        .card-mail:hover { transform: none; box-shadow: 6px 6px 0 var(--green); }
+        .card-mail .cover { background: linear-gradient(145deg, var(--green), #35483F); }
+        .card-mail h3 { font-family: 'Anton', sans-serif; font-weight: 400; font-size: 1.42rem; line-height: 1.02; text-transform: uppercase; }
+        .card-mail .fine { font-size: .72rem; color: var(--muted); margin-top: 10px; }
+
+        /* form de email (inline e bloco final) */
+        .mail-form { display: flex; flex-direction: column; gap: 9px; margin-top: auto; }
         .field {
-            width: 100%; padding: 17px 20px; font-family: inherit; font-size: 1rem;
-            background: rgba(255,255,255,0.07); border: 1.5px solid rgba(255,255,255,0.22);
-            border-radius: 10px; color: #fff; outline: none; transition: border-color .2s, background .2s;
+            width: 100%; padding: 13px 17px; font-family: inherit; font-size: 0.95rem;
+            background: var(--card); border: 2px solid var(--ink); border-radius: 100px;
+            color: var(--ink); outline: none; transition: border-color .2s, box-shadow .2s;
         }
-        .field::placeholder { color: rgba(255,255,255,0.5); }
-        .field:focus { border-color: var(--terra); background: rgba(255,255,255,0.12); }
-
+        .field::placeholder { color: var(--muted); }
+        .field:focus { border-color: var(--terra); box-shadow: 0 0 0 4px rgba(176,110,74,.16); }
         .btn {
-            width: 100%; margin-top: 12px; padding: 17px 26px;
-            font-family: 'Hanken Grotesk', sans-serif; font-size: 0.86rem; font-weight: 700;
+            padding: 14px 26px; font-family: inherit; font-size: 0.8rem; font-weight: 800;
             letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer;
-            background: var(--terra); color: #fff; border: none; border-radius: 10px;
+            background: var(--terra); color: #fff; border: none; border-radius: 100px;
             transition: transform .15s, box-shadow .15s, background .2s;
-            box-shadow: 0 0 0 rgba(0,0,0,0);
         }
         .btn:hover { background: var(--terra-d); transform: translateY(-2px); box-shadow: 0 8px 22px rgba(176,110,74,0.35); }
         .btn:disabled { opacity: .6; cursor: not-allowed; transform: none; }
-        .gate-card .fine { margin-top: 14px; font-size: 0.76rem; color: rgba(255,255,255,0.55); text-align: center; }
+        .mail-done { display: none; }
+        .mail-done.show { display: block; }
+        .mail-done a { color: var(--terra-d); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
 
-        .gate-chips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 34px; max-width: 470px; }
-        .gate-chip {
-            font-size: 0.78rem; font-weight: 500; padding: 8px 10px; border-radius: 100px; text-align: center; white-space: nowrap;
-            border: 1.5px solid var(--line); color: var(--ink-2); background: var(--card);
-        }
-        @media (max-width: 760px) {
-            .gate-chips { grid-template-columns: repeat(2, 1fr); gap: 6px; max-width: 100%; margin-top: 28px; }
-            .gate-chip { font-size: 0.72rem; padding: 7px 8px; }
-        }
+        /* ---- ESTADO VAZIO DA BUSCA ---- */
+        .empty { grid-column: 1 / -1; text-align: center; padding: 62px 20px; border: 2px dashed var(--line); border-radius: 18px; }
+        .empty h3 { font-family: 'Anton', sans-serif; font-weight: 400; font-size: 1.9rem; text-transform: uppercase; color: var(--ink); margin-bottom: 8px; }
+        .empty p { color: var(--muted); font-size: .95rem; margin-bottom: 20px; }
 
-        .manifesto { margin-top: 80px; padding-top: 46px; border-top: 2px solid var(--ink); }
+        /* ================= FECHAMENTO / OFERTA ================= */
+        .closing { margin: 76px 0 0; }
+        .closing-head { text-align: center; margin-bottom: 30px; }
+        .closing-head .kick { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--terra); margin-bottom: 12px; }
+        .closing-head h2 {
+            font-family: 'Anton', sans-serif; font-weight: 400; text-transform: uppercase;
+            font-size: clamp(1.9rem, 5vw, 3rem); line-height: .98; color: var(--ink); max-width: 22ch; margin: 0 auto;
+        }
+        .closing-head h2 .terra { color: var(--terra); }
+        .closing-head p { color: var(--ink-2); max-width: 52ch; margin: 14px auto 0; font-size: 1rem; }
+
+        .courses { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+        @media (max-width: 820px) { .courses { grid-template-columns: 1fr; } }
+        .course {
+            display: flex; flex-direction: column; text-decoration: none;
+            background: var(--ink); color: #fff; border: 2px solid var(--ink); border-radius: 20px;
+            padding: 30px 30px 28px; box-shadow: 8px 8px 0 var(--terra);
+            transition: transform .2s cubic-bezier(.2,.7,.2,1), box-shadow .2s;
+        }
+        .course:hover { transform: translateY(-4px); box-shadow: 12px 12px 0 var(--terra); }
+        .course.alt { box-shadow: 8px 8px 0 var(--green); }
+        .course.alt:hover { box-shadow: 12px 12px 0 var(--green); }
+        .course .c-kick { font-size: 0.68rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--terra-l); margin-bottom: 11px; }
+        .course h3 { font-family: 'Anton', sans-serif; font-weight: 400; font-size: 1.75rem; line-height: 1; text-transform: uppercase; margin-bottom: 11px; }
+        .course > p { font-size: .93rem; color: rgba(255,255,255,.75); font-weight: 300; margin-bottom: 18px; }
+        .course ul { list-style: none; margin: 0 0 20px; display: grid; gap: 7px; }
+        .course li { font-size: .86rem; color: rgba(255,255,255,.82); padding-left: 20px; position: relative; }
+        .course li::before { content: '\2192'; position: absolute; left: 0; color: var(--terra-l); font-weight: 700; }
+        .course .c-price { margin-top: auto; font-size: .88rem; font-weight: 700; color: #fff; margin-bottom: 16px; }
+        .course .c-price b { color: var(--terra-l); }
+        .course .c-btn {
+            display: block; text-align: center; padding: 15px 24px; border-radius: 100px;
+            background: var(--terra); color: #fff; font-size: 0.82rem; font-weight: 800;
+            letter-spacing: .06em; text-transform: uppercase; transition: background .2s;
+        }
+        .course:hover .c-btn { background: var(--terra-d); }
+        .course.alt .c-btn { background: transparent; border: 2px solid var(--terra-l); color: var(--terra-l); }
+        .course.alt:hover .c-btn { background: var(--terra-l); color: var(--ink); }
+
+        /* bloco final de captura de email */
+        .pack {
+            margin-top: 30px; background: var(--card); border: 2px solid var(--ink); border-radius: 20px;
+            padding: 32px 34px; box-shadow: 8px 8px 0 var(--green);
+            display: flex; align-items: center; gap: 30px; flex-wrap: wrap;
+        }
+        .pack-body { flex: 1; min-width: 260px; }
+        .pack .kick { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--terra); margin-bottom: 9px; }
+        .pack h3 { font-family: 'Anton', sans-serif; font-weight: 400; font-size: 1.75rem; text-transform: uppercase; line-height: 1; color: var(--ink); margin-bottom: 8px; }
+        .pack p { font-size: 0.93rem; color: var(--ink-2); max-width: 46ch; }
+        .pack .mail-form { flex-direction: row; flex-wrap: wrap; gap: 10px; min-width: 300px; flex: 1; margin-top: 0; }
+        .pack .mail-form .field { flex: 1; min-width: 200px; }
+        .pack .mail-form .btn { white-space: nowrap; }
+        .pack .fine { font-size: .74rem; color: var(--muted); margin-top: 10px; flex-basis: 100%; }
+        @media (max-width: 560px) { .pack { padding: 26px 22px; } }
+
+        /* ================= MANIFESTO (fechamento) ================= */
+        .manifesto {
+            margin-top: 76px; padding: 52px 0;
+            border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink);
+            background: var(--bg-2);
+        }
+        .manifesto-in { max-width: 1180px; margin: 0 auto; padding: 0 30px; }
         .manifesto p {
             font-family: 'Anton', sans-serif; font-weight: 400; text-transform: uppercase;
-            font-size: clamp(1.7rem, 4.6vw, 3.1rem); line-height: 1.04; letter-spacing: 0.005em;
+            font-size: clamp(1.7rem, 4.6vw, 3.1rem); line-height: 1.04;
             color: var(--ink); max-width: 900px;
         }
         .manifesto span { color: var(--terra); }
+        @media (max-width: 560px) { .manifesto-in { padding: 0 18px; } }
 
-        /* ---------- CONTENT ---------- */
-        .content { display: block; padding: 8px 0 90px; }
-        @keyframes fade { from { opacity: 0; transform: translateY(14px);} to { opacity: 1; transform: none; } }
-
-        /* ---------- CARD PACK (email opcional) ---------- */
-        .pack {
-            background: var(--ink); color: #fff; border-radius: 18px;
-            padding: 34px 34px; margin: 0 0 56px;
-            box-shadow: 8px 8px 0 var(--green);
-        }
-        .pack.at-end { margin: 64px 0 0; box-shadow: 8px 8px 0 var(--terra); }
-
-        /* ── OFERTA DO CURSO ──────────────────────────────────────────────
-           Card CLARO de propósito: os cards escuros (.pack/.featured) são o
-           material gratuito; este é o único bloco pago da página, então ele
-           se distingue pela inversão de cor, não por mais um ink escuro. */
-        .curso-cta {
-            display: flex; align-items: center; gap: 30px; flex-wrap: wrap;
-            background: var(--card); color: var(--text);
-            border: 2px solid var(--ink); border-radius: 20px;
-            padding: 34px 38px; margin: 0 0 56px;
-            box-shadow: 8px 8px 0 var(--terra);
-        }
-        .curso-cta-body { flex: 1; min-width: 260px; }
-        .curso-cta .cc-kick {
-            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em;
-            text-transform: uppercase; color: var(--terra-d); margin-bottom: 10px;
-        }
-        .curso-cta h3 {
-            font-family: 'Anton', sans-serif; font-weight: 400;
-            font-size: clamp(1.5rem, 4vw, 2rem); text-transform: uppercase;
-            line-height: 1; color: var(--ink); margin-bottom: 10px; max-width: 22ch;
-        }
-        .curso-cta h3 .terra { color: var(--terra); }
-        .curso-cta p { font-size: 0.95rem; color: var(--muted); max-width: 50ch; margin: 0; }
-        .curso-cta .cc-price {
-            display: block; margin-top: 12px; font-size: 0.88rem;
-            font-weight: 700; color: var(--text);
-        }
-        .curso-cta .cc-price b { color: var(--terra-d); }
-        .curso-cta-action { flex-shrink: 0; }
-        .curso-cta .cc-btn {
-            display: inline-block; padding: 17px 30px;
-            font-family: 'Hanken Grotesk', sans-serif; font-size: 0.86rem; font-weight: 700;
-            letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap;
-            background: var(--terra); color: #fff; border-radius: 10px;
-            transition: transform .15s, box-shadow .15s, background .2s;
-        }
-        .curso-cta .cc-btn:hover { background: var(--terra-d); transform: translateY(-2px); box-shadow: 0 10px 24px rgba(176,110,74,.32); }
-        .curso-cta .cc-btn:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
-        @media (max-width: 640px) {
-            .curso-cta { padding: 28px 24px; }
-            .curso-cta-action, .curso-cta .cc-btn { width: 100%; text-align: center; }
-        }
-        .pack-kick { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--terra); margin-bottom: 10px; }
-        .pack h3 { font-family: 'Anton', sans-serif; font-weight: 400; font-size: 2rem; text-transform: uppercase; line-height: 1; margin-bottom: 10px; }
-        .pack p { font-size: 0.95rem; color: rgba(255,255,255,0.72); font-weight: 300; max-width: 520px; margin-bottom: 22px; }
-        .pack-form { display: flex; gap: 12px; flex-wrap: wrap; max-width: 560px; }
-        .pack-form .field { flex: 1; min-width: 220px; }
-        .pack-form .btn { width: auto; margin-top: 0; white-space: nowrap; }
-        @media (max-width: 360px) {
-            .pack-form .field { min-width: 0; }
-            .featured-body { min-width: 0 !important; }
-        }
-        .pack-done { display: none; }
-        .pack-done.show { display: block; }
-        .pack-done a { color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
-        .pack .fine { margin-top: 14px; font-size: 0.76rem; color: rgba(255,255,255,0.5); }
-
-        /* featured secondary link */
-        .featured-links { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
-        .featured .sec-link { font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.7); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
-        .featured .sec-link:hover { color: #fff; }
-
-        /* ---------- EXIT POPUP ---------- */
-        .exit-overlay {
-            display: none; position: fixed; inset: 0; z-index: 200;
-            background: rgba(20,55,60,0.6); backdrop-filter: blur(4px);
-            align-items: center; justify-content: center; padding: 24px;
-        }
-        .exit-overlay.show { display: flex; animation: fade .3s ease; }
-        .exit-card {
-            position: relative; background: var(--ink); color: #fff;
-            border-radius: 18px; padding: 40px 36px; max-width: 460px; width: 100%;
-            box-shadow: 8px 8px 0 var(--terra);
-        }
-        .exit-card h3 { font-family: 'Anton', sans-serif; font-weight: 400; font-size: 2rem; text-transform: uppercase; line-height: 1; margin-bottom: 10px; }
-        .exit-card p { font-size: 0.95rem; color: rgba(255,255,255,0.72); font-weight: 300; margin-bottom: 22px; }
-        .exit-card .btn { width: 100%; margin-top: 12px; }
-        .exit-card .fine { margin-top: 14px; font-size: 0.76rem; color: rgba(255,255,255,0.5); text-align: center; }
-        .exit-close {
-            position: absolute; top: 14px; right: 16px; background: none; border: none;
-            color: rgba(255,255,255,0.6); font-size: 1.5rem; cursor: pointer; line-height: 1; transition: color .18s;
-        }
-        .exit-close:hover { color: #fff; }
-
-        .section-kicker { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--terra); margin-bottom: 10px; }
-
-        /* destaque guia */
-        .featured {
-            display: flex; align-items: center; gap: 28px; flex-wrap: wrap;
-            background: var(--ink); color: #fff; border-radius: 20px;
-            padding: 38px 40px; margin-bottom: 56px;
-            box-shadow: 8px 8px 0 var(--terra);
-        }
-        .featured-body { flex: 1; min-width: 260px; }
-        .featured .fk { color: var(--terra); }
-        .featured h2 { font-family: 'Anton', sans-serif; font-weight: 400; font-size: 2.6rem; text-transform: uppercase; line-height: 0.95; margin: 6px 0 10px; }
-        .featured p { font-size: 0.95rem; color: rgba(255,255,255,0.72); font-weight: 300; max-width: 460px; }
-        .featured a {
-            white-space: nowrap; padding: 16px 30px; background: var(--terra); color: #fff;
-            border-radius: 10px; text-decoration: none; font-size: 0.85rem; font-weight: 700;
-            letter-spacing: 0.06em; text-transform: uppercase; transition: background .2s, transform .15s;
-        }
-        .featured a:hover { background: var(--terra-d); transform: translateY(-2px); }
-
-        /* filtros */
-        .filters-head { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 14px; margin-bottom: 20px; }
-        .filters-head h2 { font-family: 'Anton', sans-serif; font-weight: 400; font-size: 2.2rem; text-transform: uppercase; color: var(--ink); line-height: 1; }
-        .feed-count { font-size: 0.82rem; font-weight: 600; color: var(--muted); }
-
-        .filter-toggle {
-            font-family: 'Hanken Grotesk', sans-serif; font-size: 0.84rem; font-weight: 700;
-            letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer;
-            background: var(--card); color: var(--ink); border: 1.5px solid var(--ink);
-            padding: 9px 18px; border-radius: 100px; transition: all .18s;
-            display: inline-flex; align-items: center; gap: 7px;
-        }
-        .filter-toggle:hover, .filter-toggle[aria-expanded="true"] { background: var(--ink); color: #fff; }
-        .filter-toggle[aria-expanded="true"] #filterArrow { display:inline-block; transform: rotate(180deg); }
-        .filters { background: var(--card); border: 1.5px solid var(--line); border-radius: 14px; padding: 16px 18px 8px; margin-bottom: 6px; }
-        .filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; align-items: center; }
-        .filter-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); width: 56px; }
-        .chip {
-            font-family: 'Hanken Grotesk', sans-serif; font-size: 0.82rem; font-weight: 500;
-            padding: 8px 16px; border: 1.5px solid var(--line); border-radius: 100px;
-            background: var(--card); color: var(--ink-2); cursor: pointer; transition: all .18s;
-        }
-        .chip:hover { border-color: var(--ink); }
-        .chip.active { background: var(--ink); color: #fff; border-color: var(--ink); }
-
-        .feed { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 26px; }
-        @media (max-width: 900px) { .feed { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 600px) { .feed { grid-template-columns: 1fr; } }
-
-        .card {
-            background: var(--card); border: 1.5px solid var(--line); border-radius: 16px;
-            padding: 24px; display: flex; flex-direction: column;
-            transition: transform .18s, box-shadow .18s, border-color .18s;
-        }
-        .card:hover { transform: translateY(-4px); border-color: var(--ink); box-shadow: 6px 6px 0 var(--shadow); }
-
-        /* card do tipo GUIA — cidadão de primeira classe (link pra página) */
-        .card.card-guia {
-            text-decoration: none; border: 1.5px solid var(--ink);
-            box-shadow: 8px 8px 0 var(--shadow);
-        }
-        .card.card-guia:hover { transform: translateY(-4px); box-shadow: 10px 10px 0 var(--terra); }
-        .badge-guia { background: var(--ink); color: #fff; }
-        .card-guia .guia-data { font-size: 0.72rem; font-weight: 600; color: var(--muted); margin-left: auto; }
-        .card-guia h3 { font-size: 1.28rem; }
-        .card-guia .g-link { font-size: 0.84rem; font-weight: 700; color: var(--terra); text-transform: uppercase; letter-spacing: 0.04em; margin-top: auto; }
-
-        .card-top { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
-        .parte {
-            font-family: 'Anton', sans-serif; font-size: 0.92rem; letter-spacing: 0.03em;
-            background: var(--ink); color: #fff; padding: 3px 10px; border-radius: 6px; text-transform: uppercase;
-        }
-        .badge { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; }
-        .badge-tipo { background: rgba(176,110,74,0.14); color: var(--terra); }
-        .badge-cat  { color: var(--green); border: 1.5px solid var(--line); }
-
-        .card h3 { font-size: 1.22rem; font-weight: 700; line-height: 1.15; color: var(--ink); margin-bottom: 9px; letter-spacing: -0.01em; }
-        .card .desc { font-size: 0.9rem; color: var(--text); line-height: 1.5; margin-bottom: 16px; flex: 1; }
-        .card-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
-        .tag { font-size: 0.74rem; color: var(--muted); font-weight: 500; }
-        .tag::before { content: '#'; opacity: .5; }
-
-        .card-action {
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            padding: 12px 18px; border-radius: 10px; font-family: 'Hanken Grotesk', sans-serif;
-            font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
-            cursor: pointer; background: transparent; color: var(--ink); border: 1.5px solid var(--ink);
-            text-decoration: none; transition: all .18s;
-        }
-        .card-action:hover { background: var(--ink); color: #fff; }
-
-        .prompt-body {
-            display: none; margin-top: 14px; background: var(--bg-2); border: 1.5px solid var(--line);
-            border-radius: 10px; padding: 18px; font-size: 0.86rem; line-height: 1.6;
-            white-space: pre-wrap; word-break: break-word; max-height: 280px; overflow-y: auto; color: var(--ink-2);
-        }
-        .prompt-body.open { display: block; }
-        .prompt-body .btn { width: auto; margin-top: 14px; padding: 11px 20px; font-size: 0.76rem; }
-
-        footer { border-top: 2px solid var(--ink); padding: 30px 0 56px; }
+        footer { padding: 34px 0 56px; }
         .footer-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; }
         .footer-links { display: flex; gap: 22px; flex-wrap: wrap; }
         .footer-links a { font-size: 0.84rem; font-weight: 600; color: var(--ink); text-decoration: none; }
         .footer-links a:hover { color: var(--terra); }
         .footer-copy { font-size: 0.78rem; color: var(--muted); }
+
+        /* aparição suave dos cards */
+        @keyframes pop { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+        .feed > * { animation: pop .38s cubic-bezier(.2,.7,.2,1) backwards; }
+        @media (prefers-reduced-motion: reduce) {
+            .feed > * { animation: none; }
+            html { scroll-behavior: auto; }
+            .card:hover, .course:hover { transform: none; }
+        }
     </style>
 <!-- Meta Pixel Code -->
 <script>
@@ -447,166 +530,150 @@ src="https://www.facebook.com/tr?id=1175365551728800&ev=PageView&noscript=1"
             <a href="https://newscale.tech" target="_blank" rel="noopener">IA na sua Empresa</a>
             <a href="/comece" class="nav-cta">Cursos</a>
         </nav>
-        <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">☰</button>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">&#9776;</button>
     </div>
 </header>
 
+<!-- ===================== HERO (compacto: o feed começa logo abaixo) ===================== -->
+<section class="hero">
+    <div class="wrap hero-grid">
+        <div>
+            <span class="eyebrow"><span class="dot"></span>O blog do Claude &middot; guia novo toda semana</span>
+            <h1>A Biblioteca<br><span class="terra">do Claude</span></h1>
+            <p class="hero-lead"><b>Inteligência artificial pra quem não é dev.</b> Todo guia e todo prompt que eu uso, em português, aberto e sem cadastro. Veio de um Reel? Busca aqui a palavra que eu falei no vídeo.</p>
+        </div>
+        <div class="hero-card" id="packHero">
+            <div class="hero-stats">
+                <div><div class="hs-num" id="hsGuias">0</div><div class="hs-lab">Guias</div></div>
+                <div><div class="hs-num" id="hsPrompts">0</div><div class="hs-lab">Prompts</div></div>
+                <div><div class="hs-num">+10<span style="font-size:.5em">mil</span></div><div class="hs-lab">Pessoas aqui</div></div>
+            </div>
+            <div class="hero-mail">
+                <div class="pack-in">
+                    <p class="hm-title">Recebe os guias novos no e-mail</p>
+                    <form class="hm-form" data-pack novalidate>
+                        <input class="field" type="email" placeholder="Seu melhor e-mail" required autocomplete="email" aria-label="Seu e-mail">
+                        <button type="submit" class="btn">Quero</button>
+                    </form>
+                    <p class="fine">De brinde, o pack em PDF. Zero spam.</p>
+                </div>
+                <div class="mail-done">
+                    <p class="hm-title">&#10003; Prontinho!</p>
+                    <p class="fine">Baixa o pack agora: <a href="/guia-claude-bruna.pdf" target="_blank" rel="noopener">guia-claude-bruna.pdf &rarr;</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== BUSCA + FILTROS (grudam no topo ao rolar) ===================== -->
+<div class="toolbar" id="toolbar">
+    <div class="wrap">
+        <div class="toolbar-in">
+            <div class="search">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg>
+                <input id="q" type="search" autocomplete="off" placeholder="Buscar: gmail, skill, proposta, viagem, reel&hellip;" aria-label="Buscar na biblioteca">
+                <button class="search-clear" id="qClear" hidden aria-label="Limpar busca">&#10005;</button>
+            </div>
+            <div class="seg" id="segFormato" role="group" aria-label="Formato">
+                <button class="active" data-formato="all">Tudo</button>
+                <button data-formato="guia">Guias</button>
+                <button data-formato="prompt">Prompts</button>
+            </div>
+            <span class="feed-count" id="feedCount"></span>
+        </div>
+    </div>
+</div>
+
 <div class="wrap">
 
-    <!-- ===================== HERO ===================== -->
-    <section class="gate" id="gate">
-        <span class="gate-eyebrow">O blog do Claude · atualizado toda semana</span>
-        <h1>A Biblioteca<br><span class="terra">do Claude</span></h1>
+    <div class="temas" id="temaRow" role="group" aria-label="Tema"></div>
 
-        <p class="gate-lead"><strong>Inteligência artificial (IA) pra quem não é dev.</strong> Aprenda a colocar o Claude pra trabalhar por você — no seu emprego, no seu negócio, na sua rotina. Guias passo a passo e prompts prontos, em português, do jeito que eu uso todo dia.</p>
-        <div class="stats">
-            <div><div class="stat-num"><span>+</span>10mil</div><div class="stat-label">pessoas aprendendo aqui</div></div>
-        </div>
-        <div class="gate-chips">
-            <span class="gate-chip">🎯 Contexto</span>
-            <span class="gate-chip">♟️ Estratégia</span>
-            <span class="gate-chip">🔥 Crítica</span>
-            <span class="gate-chip">⚡ Produtividade</span>
-            <span class="gate-chip">🦋 Transformação</span>
-            <span class="gate-chip">🏠 Vida Real</span>
+    <div class="feed" id="feed"></div>
+
+    <!-- ===================== FECHAMENTO: OS CURSOS ===================== -->
+    <section class="closing">
+        <div class="closing-head">
+            <div class="kick">Depois dos guias</div>
+            <h2>Os guias te ensinam <span class="terra">tarefas</span>.<br>Os cursos te ensinam a <span class="terra">montar o sistema</span>.</h2>
+            <p>Tudo aqui em cima é grátis e continua sendo. Se você já tentou sozinho e sentiu que estava usando 10% da ferramenta, é aqui que o caminho inteiro começa.</p>
         </div>
 
-        <div class="manifesto">
-            <p>Quem aprende isso <span>agora</span> vai olhar para trás e ver este momento como <span>o ponto de virada</span>.</p>
+        <div class="courses">
+            <a href="/curso" class="course" data-cta="biblioteca-fim-curso">
+                <div class="c-kick">Curso &middot; do zero, sem programar</div>
+                <h3>Claude com Profundidade</h3>
+                <p>O caminho completo pra parar de usar a IA como buscador e começar a usar como equipe.</p>
+                <ul>
+                    <li>7 módulos gravados, no seu ritmo</li>
+                    <li>Do zero: nenhuma linha de código</li>
+                    <li>Acesso imediato</li>
+                </ul>
+                <div class="c-price"><b>12x de R$35,89</b> ou R$347 à vista</div>
+                <span class="c-btn">Ver o curso</span>
+            </a>
+
+            <a href="/sistema" class="course alt" data-cta="biblioteca-fim-sistema">
+                <div class="c-kick">Curso &middot; conteúdo no automático</div>
+                <h3>Motor de Conteúdo</h3>
+                <p>O sistema que eu uso aqui: agentes que acham a pauta, escrevem e editam o vídeo.</p>
+                <ul>
+                    <li>Agentes que criam o seu conteúdo</li>
+                    <li>Edição de vídeo automatizada</li>
+                    <li>Acesso imediato</li>
+                </ul>
+                <div class="c-price"><b>R$169</b></div>
+                <span class="c-btn">Ver o Motor</span>
+            </a>
         </div>
-    </section>
 
-    <!-- ===================== CONTENT ===================== -->
-    <section class="content" id="content">
-
-        <!-- CARD PACK (topo) -->
-        <div class="pack" id="packTop">
-            <div class="pack-in">
-                <div class="pack-kick">📦 Baixe o pack completo</div>
-                <h3>Leva a biblioteca com você</h3>
-                <p>Deixa seu email que eu te mando o pack em PDF pra consultar offline, com os melhores prompts organizados. De brinde, você entra na minha lista e recebe os novos em primeira mão.</p>
-                <form class="pack-form" data-pack novalidate>
-                    <input class="field" type="email" placeholder="Seu melhor email" required autocomplete="email">
+        <!-- captura de email -->
+        <div class="pack" id="packEnd">
+            <div class="pack-in" style="display:flex; align-items:center; gap:30px; flex-wrap:wrap; width:100%;">
+                <div class="pack-body">
+                    <div class="kick">Pack em PDF &middot; de graça</div>
+                    <h3>Leva a biblioteca com você</h3>
+                    <p>Deixa seu email que eu mando o pack em PDF com os melhores prompts organizados — e você recebe os guias novos assim que eu solto.</p>
+                </div>
+                <form class="mail-form" data-pack novalidate>
+                    <input class="field" type="email" placeholder="Seu melhor email" required autocomplete="email" aria-label="Seu email">
                     <button type="submit" class="btn">Quero o pack</button>
+                    <p class="fine">Zero spam. Só conteúdo que vale seu tempo.</p>
                 </form>
-                <p class="fine">Zero spam. Só conteúdo que vale seu tempo.</p>
             </div>
-            <div class="pack-done">
-                <div class="pack-kick">✓ Prontinho!</div>
+            <div class="mail-done">
+                <div class="kick">&#10003; Prontinho!</div>
                 <h3>Seu pack tá liberado</h3>
-                <p>Obrigada por entrar! Baixa agora: <a href="/guia-claude-bruna.pdf" target="_blank" rel="noopener">guia-claude-bruna.pdf →</a></p>
-            </div>
-        </div>
-
-        <!-- destaque guia -->
-        <div class="featured">
-            <div class="featured-body">
-                <div class="section-kicker fk">Comece por aqui</div>
-                <h2>O Guia Definitivo do Claude</h2>
-                <p>O material que já levou +10 mil pessoas a finalmente entender o Claude. Do zero ao uso prático, atualizado pra 2026.</p>
-            </div>
-            <div class="featured-links">
-                <a href="/claude">Ler o guia →</a>
-                <span class="sec-link" id="prefPdf">Prefere em PDF? Baixe o pack ↓</span>
-            </div>
-        </div>
-
-        <!-- OFERTA DO CURSO — única oferta paga da página -->
-        <div class="curso-cta">
-            <div class="curso-cta-body">
-                <div class="cc-kick">Claude com Profundidade · curso</div>
-                <h3>Os guias te ensinam <span class="terra">tarefas</span>. O curso te ensina a <span class="terra">pensar</span>.</h3>
-                <p>Tudo que está aqui embaixo é grátis e continua sendo. Se você já tentou e sentiu que estava usando 10% da ferramenta, o curso é o caminho inteiro: 7 módulos, do zero, sem programar.</p>
-                <span class="cc-price">Acesso imediato · <b>12x de R$35,89</b> ou R$347 à vista</span>
-            </div>
-            <div class="curso-cta-action">
-                <a href="/curso" class="cc-btn" data-cta="biblioteca">Ver o curso</a>
-            </div>
-        </div>
-
-        <div class="filters-head">
-            <h2>O feed</h2>
-            <div style="display:flex; align-items:center; gap:14px;">
-                <span class="feed-count" id="feedCount"></span>
-                <button class="filter-toggle" id="filterToggle" aria-expanded="false" aria-controls="filtersPanel">Filtrar <span id="filterArrow">▾</span></button>
-            </div>
-        </div>
-
-        <div class="filters" id="filtersPanel" hidden>
-            <div class="filter-row">
-                <span class="filter-label">Formato</span>
-                <button class="chip active" data-filter="formato" data-value="all">Todos</button>
-                <button class="chip" data-filter="formato" data-value="guia">📚 Guias</button>
-                <button class="chip" data-filter="formato" data-value="prompt">📋 Prompts</button>
-            </div>
-            <div class="filter-row" id="temaRow">
-                <span class="filter-label">Tema</span>
-                <button class="chip active" data-filter="tema" data-value="all">Todos</button>
-            </div>
-        </div>
-
-        <div class="feed" id="feed"></div>
-
-        <!-- CARD PACK (fim do feed) -->
-        <div class="pack at-end" id="packEnd">
-            <div class="pack-in">
-                <div class="pack-kick">📦 Baixe o pack completo</div>
-                <h3>Gostou? Leva tudo em PDF</h3>
-                <p>Chegou até aqui? Então esse pack é pra você. Deixa seu email que eu mando o guia em PDF com os melhores prompts — e você recebe os novos assim que eu solto.</p>
-                <form class="pack-form" data-pack novalidate>
-                    <input class="field" type="email" placeholder="Seu melhor email" required autocomplete="email">
-                    <button type="submit" class="btn">Quero o pack</button>
-                </form>
-                <p class="fine">Zero spam. Só conteúdo que vale seu tempo.</p>
-            </div>
-            <div class="pack-done">
-                <div class="pack-kick">✓ Prontinho!</div>
-                <h3>Seu pack tá liberado</h3>
-                <p>Obrigada por entrar! Baixa agora: <a href="/guia-claude-bruna.pdf" target="_blank" rel="noopener">guia-claude-bruna.pdf →</a></p>
+                <p>Obrigada por entrar! Baixa agora: <a href="/guia-claude-bruna.pdf" target="_blank" rel="noopener">guia-claude-bruna.pdf &rarr;</a></p>
             </div>
         </div>
     </section>
+</div>
 
+<section class="manifesto">
+    <div class="manifesto-in">
+        <p>Quem aprende isso <span>agora</span> vai olhar para trás e ver este momento como <span>o ponto de virada</span>.</p>
+    </div>
+</section>
+
+<div class="wrap">
     <footer>
         <div class="footer-row">
             <div class="footer-links">
                 <a href="/biblioteca">Biblioteca</a>
                 <a href="/claude">Guia do Claude</a>
                 <a href="/curso">Curso de Claude</a>
+                <a href="/sistema">Motor de Conteúdo</a>
                 <a href="/mentoria">Mentoria</a>
                 <a href="/comece">Comece por aqui</a>
                 <a href="https://instagram.com/brusantanna.ai" target="_blank" rel="noopener">Instagram</a>
                 <a href="https://newscale.tech" target="_blank" rel="noopener">NewScale</a>
                 <a href="mailto:eu@brunasantanna.com">Contato</a>
             </div>
-            <p class="footer-copy">© 2026 Bruna Santanna · A Virada IA</p>
+            <p class="footer-copy">&copy; 2026 Bruna Santanna &middot; A Virada IA</p>
         </div>
     </footer>
-
 </div>
-
-<!-- ===================== EXIT POPUP ===================== -->
-<div class="exit-overlay" id="exitOverlay" role="dialog" aria-modal="true" aria-labelledby="exitTitle">
-    <div class="exit-card">
-        <button class="exit-close" id="exitClose" aria-label="Fechar">✕</button>
-        <div class="exit-in">
-            <div class="pack-kick">Antes de ir…</div>
-            <h3 id="exitTitle">Leva o pack com você</h3>
-            <p>Você viu os prompts. Agora deixa seu email que eu te mando o pack completo em PDF pra usar quando quiser — e você recebe os novos em primeira mão.</p>
-            <form class="exit-form" data-pack novalidate>
-                <input class="field" type="email" id="exitEmail" placeholder="Seu melhor email" required autocomplete="email">
-                <button type="submit" class="btn">Quero o pack</button>
-            </form>
-            <p class="fine">Zero spam. Cancela quando quiser.</p>
-        </div>
-        <div class="pack-done">
-            <div class="pack-kick">✓ Prontinho!</div>
-            <h3>Seu pack tá liberado</h3>
-            <p>Obrigada! Baixa agora: <a href="/guia-claude-bruna.pdf" target="_blank" rel="noopener">guia-claude-bruna.pdf →</a></p>
-        </div>
-    </div>
-</div>
-
 <script>
     // ============================================================
     //  DADOS — cada conteúdo novo vira um objeto aqui (1 ficha).
@@ -719,7 +786,7 @@ src="https://www.facebook.com/tr?id=1175365551728800&ev=PageView&noscript=1"
           tags: ['automatizar','delegar'],
           conteudo: `Quero que você me ajude a auditar meu trabalho e descobrir quais tarefas eu deveria automatizar, quais delegar pra IA, e quais manter sob meu controle.
 
-Primeiro, me faça uma pergunta de cada vez pra entender o que eu faço:
+Primeiro, me faça todas as perguntas que precisar — de uma vez só, numeradas — pra entender o que eu faço:
 1. Qual é a minha função / cargo?
 2. Como é uma semana típica de trabalho minha? Me deixa listar tudo o que eu faço, até as tarefas pequenas e chatas.
 
@@ -1124,7 +1191,7 @@ Agora me faz 15-20 perguntas pra entender:
 - Por que isso é importante agora
 - O que acontece se eu não fizer nada
 
-Faz as perguntas uma de cada vez ou em blocos de 3-5.
+Me manda todas as perguntas de uma vez só, numeradas, pra eu responder tudo junto.
 Depois que eu responder todas, AÍ você me dá a solução/plano/conteúdo completo.
 
 E quando me entregar, explica como minhas respostas mudaram o que você criou pra mim.` },
@@ -1421,228 +1488,370 @@ Quando eu escolher, cria roteiro dia a dia com logística completa.` },
           conteudo: '' }
     ];
 
-    const feedEl = document.getElementById('feed');
-    const countEl = document.getElementById('feedCount');
-    let filtroFormato = 'all', filtroTema = 'all';
+    // ============================================================
+    //  BIBLIOTECA — busca, filtros e render do feed
+    //  Regra da página: o feed é o produto. Tudo aqui existe pra
+    //  encurtar o caminho entre chegar e achar o conteúdo certo.
+    // ============================================================
 
+    const feedEl  = document.getElementById('feed');
+    const countEl = document.getElementById('feedCount');
+    const qEl     = document.getElementById('q');
+    const qClear  = document.getElementById('qClear');
+
+    let filtroFormato = 'all', filtroTema = 'all', termo = '';
+
+    // ---- utilidades ----
+    const MESES = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
     function fmtData(d) {
-        const meses = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
         const [ano, mes] = d.split('-');
-        return `${meses[parseInt(mes,10)-1]}/${ano}`;
+        return MESES[parseInt(mes, 10) - 1] + '/' + ano.slice(2);
+    }
+    function norm(s) {
+        return (s || '').toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    }
+    function esc(s) {
+        return (s || '').toString().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+    function nn(n) { return n < 10 ? '0' + n : '' + n; }
+
+    // ---- paleta das capas ----------------------------------------
+    // Cada tema ganha uma cor fixa da paleta da marca, pra bater o olho
+    // e reconhecer o assunto. Tema novo cai no hash e ganha cor sozinho.
+    const PALETA = [
+        ['#14373C', '#0E282C'],  // petróleo
+        ['#B06E4A', '#8E5334'],  // terracota
+        ['#435D51', '#31463C'],  // sálvia
+        ['#2C4F54', '#1B383D'],  // petróleo claro
+        ['#7A4B33', '#5E3826'],  // terracota queimada
+        ['#4E5B47', '#3A4535']   // oliva
+    ];
+    const COR_FIXA = {
+        'Setup': 0, 'Prompts': 1, 'Claude Code': 3, 'Sistemas': 2, 'Modelos': 4,
+        'Conteúdo': 1, 'Produtividade': 2, 'Vendas': 4, 'Fundamentos': 0, 'Skills': 3,
+        'Contexto': 0, 'Estratégia': 3, 'Crítica': 1, 'Transformação': 4, 'Vida Real': 5
+    };
+    function corDoTema(tema) {
+        if (COR_FIXA[tema] !== undefined) return PALETA[COR_FIXA[tema]];
+        let h = 0;
+        const t = norm(tema);
+        for (let i = 0; i < t.length; i++) h = (h * 31 + t.charCodeAt(i)) % 997;
+        return PALETA[h % PALETA.length];
     }
 
-    // ---- FEED UNIFICADO ----------------------------------------
-    // Cada item ganha um 'formato' ('guia' | 'prompt') e um 'tema'
-    // pra filtrar tudo no mesmo grid. Guias vêm primeiro (destaque),
-    // ordenados por data desc; depois os prompts na ordem do array.
-    const guiaItems = POSTS.slice()
-        .sort((a, b) => b.data.localeCompare(a.data))
-        .map(g => ({ formato: 'guia', tema: g.tema, data: g.data, ref: g }));
+    // ---- monta o feed --------------------------------------------
+    const FEATURED = POSTS.find(p => p.slug === 'claude');
+    const guias = POSTS.filter(p => p.slug !== 'claude')
+                       .sort((a, b) => b.data.localeCompare(a.data));
 
-    const promptItems = ASSETS.map(a => ({
+    const guiaItems = guias.map((g, i) => ({
+        formato: 'guia',
+        tema: g.tema,
+        num: nn(guias.length - i),
+        novo: i < 3,
+        ref: g,
+        busca: norm([g.titulo, g.descricao, g.tema, g.slug].join(' '))
+    }));
+
+    const promptItems = ASSETS.map((a, i) => ({
         formato: 'prompt',
         tema: (CATS[a.categoria] || { label: a.categoria }).label,
+        num: nn(ASSETS.length - i),
+        novo: false,
         ref: a,
-        idx: ASSETS.indexOf(a)
+        idx: i,
+        busca: norm([a.titulo, a.descricao, (a.tags || []).join(' '), a.conteudo,
+                     (CATS[a.categoria] || {}).label].join(' '))
     }));
 
     const FEED = guiaItems.concat(promptItems);
 
-    // temas dinâmicos, na ordem em que aparecem (guias primeiro)
+    // temas na ordem em que aparecem (guias primeiro)
     const TEMAS = [];
-    FEED.forEach(it => { if (it.tema && !TEMAS.includes(it.tema)) TEMAS.push(it.tema); });
+    FEED.forEach(it => { if (it.tema && TEMAS.indexOf(it.tema) === -1) TEMAS.push(it.tema); });
 
-    function guiaCardHTML(g) {
-        const href = g.slug === 'claude' ? '/claude' : '/' + g.slug;
-        return `<a class="card card-guia" href="${href}">
-            <div class="card-top">
-                <span class="badge badge-guia">📚 Guia</span>
-                <span class="badge badge-cat">${g.tema}</span>
-                <span class="guia-data">${fmtData(g.data)}</span>
-            </div>
-            <h3>${g.titulo}</h3>
-            <p class="desc">${g.descricao}</p>
-            <span class="g-link">Ler o guia →</span>
-        </a>`;
+    // ---- cards ----------------------------------------------------
+    function coverHTML(it, kind) {
+        const cor = corDoTema(it.tema);
+        const tag = it.novo ? '<span class="cover-kind novo">Novo</span>'
+                            : '<span class="cover-kind">' + kind + '</span>';
+        const data = it.ref.data ? '<span class="cover-date">' + fmtData(it.ref.data) + '</span>' : '';
+        return '<div class="cover" style="--a:' + cor[0] + ';--b:' + cor[1] + '">' +
+                    tag + data +
+                    '<span class="cover-num">' + it.num + '</span>' +
+                    '<span class="cover-word">' + esc(it.tema) + '</span>' +
+               '</div>';
     }
 
-    function promptCardHTML(a, i) {
-        const cat = CATS[a.categoria] || { icon:'', label:a.categoria };
-        const tipoBadge = `<span class="badge badge-tipo">${TIPOS[a.tipo]}</span>`;
-        const catBadge = `<span class="badge badge-cat">${cat.icon} ${cat.label}</span>`;
-        const tags = (a.tags||[]).map(t => `<span class="tag">${t}</span>`).join('');
+    function guiaCardHTML(it) {
+        const g = it.ref;
+        return '<a class="card" href="/' + g.slug + '">' +
+            coverHTML(it, 'Guia') +
+            '<div class="card-body">' +
+                '<h3>' + esc(g.titulo) + '</h3>' +
+                '<p class="desc">' + esc(g.descricao) + '</p>' +
+                '<div class="card-foot"><span class="tags">' + esc(g.tema) + '</span><span class="go">Ler o guia &rarr;</span></div>' +
+            '</div></a>';
+    }
 
-        let action = '';
-        if (a.tipo === 'prompt' || a.tipo === 'dica') {
-            const label = a.tipo === 'prompt' ? 'Ver & copiar' : 'Ler a dica';
-            action = `<button class="card-action" data-act="toggle" data-i="${i}">${label}</button>
-                      <div class="prompt-body" id="pb-${i}">${a.conteudo}
-                        <div><button class="btn" data-act="copy" data-i="${i}">Copiar</button></div>
-                      </div>`;
-        } else if (a.tipo === 'link') {
-            action = `<a class="card-action" href="${a.url}" target="_blank" rel="noopener">Abrir recurso →</a>`;
+    function promptCardHTML(it) {
+        const a = it.ref, i = it.idx;
+        const tags = (a.tags || []).map(t => '#' + t).join(' ');
+        const label = a.tipo === 'prompt' ? 'Ver &amp; copiar' : (a.tipo === 'dica' ? 'Ler a dica' : 'Abrir recurso');
+        let acao;
+        if (a.tipo === 'link') {
+            acao = '<a class="card-action" href="' + esc(a.url) + '" target="_blank" rel="noopener">Abrir recurso &rarr;</a>';
+        } else {
+            acao = '<button class="card-action" data-act="toggle" data-i="' + i + '">' + label + '</button>' +
+                   '<div class="prompt-body" id="pb-' + i + '">' + esc(a.conteudo) +
+                       '<div><button class="btn-copy" data-act="copy" data-i="' + i + '">Copiar prompt</button></div>' +
+                   '</div>';
+        }
+        return '<article class="card">' +
+            coverHTML(it, a.tipo === 'prompt' ? 'Prompt' : (a.tipo === 'dica' ? 'Dica' : 'Recurso')) +
+            '<div class="card-body">' +
+                '<h3>' + esc(a.titulo) + '</h3>' +
+                '<p class="desc">' + esc(a.descricao) + '</p>' +
+                (tags ? '<div class="card-foot" style="margin-top:0;margin-bottom:14px;border-top:none;padding-top:0"><span class="tags">' + esc(tags) + '</span></div>' : '') +
+                acao +
+            '</div></article>';
+    }
+
+    function featuredCardHTML() {
+        return '<a class="card card-hero" href="/claude">' +
+            '<div class="ch-mark"><span>01</span></div>' +
+            '<div class="ch-body">' +
+                '<div class="ch-kick">Comece por aqui</div>' +
+                '<h3>O Guia Definitivo do Claude</h3>' +
+                '<p class="desc">O material que já levou +10 mil pessoas a finalmente entender o Claude. Do zero ao uso prático, atualizado pra 2026.</p>' +
+                '<span class="go">Ler o guia completo &rarr;</span>' +
+            '</div></a>';
+    }
+
+    // ofertas que entram no meio do feed (só quando a lista é longa)
+    function ofertaCursoHTML() {
+        return '<a class="card card-offer" href="/curso" data-cta="biblioteca-feed">' +
+            '<div class="cover">' +
+                '<span class="cover-kind">Curso</span>' +
+                '<span class="cover-num">&#9733;</span>' +
+                '<span class="cover-word">Claude com<br>Profundidade</span>' +
+            '</div>' +
+            '<div class="card-body">' +
+                '<h3>Os guias ensinam tarefas. O curso ensina a pensar.</h3>' +
+                '<p class="desc">7 módulos, do zero, sem programar. Pra quem já tentou sozinho e sentiu que estava usando 10% da ferramenta.</p>' +
+                '<div class="card-foot"><span class="price">12x de R$35,89</span><span class="go">Ver o curso &rarr;</span></div>' +
+            '</div></a>';
+    }
+
+    function ofertaPackHTML() {
+        return '<article class="card card-mail" id="packInline">' +
+            '<div class="cover">' +
+                '<span class="cover-kind">Grátis</span>' +
+                '<span class="cover-num">PDF</span>' +
+                '<span class="cover-word">O pack<br>completo</span>' +
+            '</div>' +
+            '<div class="card-body">' +
+                '<div class="pack-in">' +
+                    '<h3>Leva tudo em PDF</h3>' +
+                    '<p class="desc">Os melhores prompts organizados num PDF pra consultar offline — e os guias novos em primeira mão.</p>' +
+                    '<form class="mail-form" data-pack novalidate>' +
+                        '<input class="field" type="email" placeholder="Seu melhor email" required autocomplete="email" aria-label="Seu email">' +
+                        '<button type="submit" class="btn">Quero o pack</button>' +
+                    '</form>' +
+                    '<p class="fine">Zero spam. Cancela quando quiser.</p>' +
+                '</div>' +
+                '<div class="mail-done">' +
+                    '<h3>Prontinho!</h3>' +
+                    '<p class="desc">Baixa agora: <a href="/guia-claude-bruna.pdf" target="_blank" rel="noopener">guia-claude-bruna.pdf &rarr;</a></p>' +
+                '</div>' +
+            '</div></article>';
+    }
+
+    // ---- render ---------------------------------------------------
+    function render() {
+        const lista = FEED.filter(it =>
+            (filtroFormato === 'all' || it.formato === filtroFormato) &&
+            (filtroTema === 'all' || it.tema === filtroTema) &&
+            (termo === '' || it.busca.indexOf(termo) !== -1)
+        );
+
+        // o Guia Definitivo abre o feed sempre que couber no filtro
+        const featOk = (filtroFormato === 'all' || filtroFormato === 'guia') &&
+                       (filtroTema === 'all' || filtroTema === FEATURED.tema) &&
+                       (termo === '' || norm(FEATURED.titulo + ' ' + FEATURED.descricao + ' ' + FEATURED.tema).indexOf(termo) !== -1);
+
+        const total = lista.length + (featOk ? 1 : 0);
+
+        if (total === 0) {
+            feedEl.innerHTML = '<div class="empty"><h3>Nada com esse nome</h3>' +
+                '<p>Tenta uma palavra mais curta — &ldquo;gmail&rdquo;, &ldquo;skill&rdquo;, &ldquo;prompt&rdquo;, &ldquo;vídeo&rdquo;.</p>' +
+                '<button class="btn" data-act="reset">Ver tudo de novo</button></div>';
+            countEl.textContent = 'nenhum resultado';
+            return;
         }
 
-        return `<article class="card">
-            <div class="card-top">${tipoBadge}${catBadge}</div>
-            <h3>${a.titulo}</h3>
-            <p class="desc">${a.descricao}</p>
-            <div class="card-tags">${tags}</div>
-            ${action}
-        </article>`;
-    }
+        const html = lista.map(it => it.formato === 'guia' ? guiaCardHTML(it) : promptCardHTML(it));
 
-    function render() {
-        const list = FEED.filter(it =>
-            (filtroFormato === 'all' || it.formato === filtroFormato) &&
-            (filtroTema === 'all' || it.tema === filtroTema));
-        feedEl.innerHTML = list.map(it =>
-            it.formato === 'guia' ? guiaCardHTML(it.ref) : promptCardHTML(it.ref, it.idx)
-        ).join('');
-        countEl.textContent = `${list.length} ${list.length === 1 ? 'item' : 'itens'}`;
-    }
+        // ofertas entram no meio, e só quando há conteúdo suficiente em volta
+        if (html.length > 24) html.splice(20, 0, ofertaPackHTML());
+        if (html.length > 10) html.splice(8, 0, ofertaCursoHTML());
 
-    // contadores dinâmicos no hero (elementos opcionais — hero atual mostra só o +10mil)
-    const elGuias = document.getElementById('statGuias');
-    if (elGuias) elGuias.textContent = POSTS.length;
-    const elCount = document.getElementById('statCount');
-    if (elCount) elCount.textContent = ASSETS.length;
+        if (featOk) html.unshift(featuredCardHTML());
 
-    // popula os chips de TEMA dinamicamente
-    const temaRow = document.getElementById('temaRow');
-    const temaIcon = { Contexto:'🎯', 'Estratégia':'♟️', 'Crítica':'🔥', Produtividade:'⚡', 'Transformação':'🦋', 'Vida Real':'🏠' };
-    TEMAS.forEach(t => {
-        const b = document.createElement('button');
-        b.className = 'chip';
-        b.dataset.filter = 'tema';
-        b.dataset.value = t;
-        b.textContent = (temaIcon[t] ? temaIcon[t] + ' ' : '') + t;
-        temaRow.appendChild(b);
-    });
-
-    document.querySelectorAll('.chip[data-filter]').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const grp = this.dataset.filter;
-            document.querySelectorAll(`.chip[data-filter="${grp}"]`).forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            if (grp === 'formato') filtroFormato = this.dataset.value; else filtroTema = this.dataset.value;
-            render();
+        feedEl.innerHTML = html.join('');
+        // stagger da animação
+        Array.prototype.slice.call(feedEl.children, 0, 12).forEach((el, i) => {
+            el.style.animationDelay = (i * 35) + 'ms';
         });
+        countEl.textContent = total + (total === 1 ? ' conteúdo' : ' conteúdos');
+        refreshPackForms();
+    }
+
+    // ---- números do hero ------------------------------------------
+    document.getElementById('hsGuias').textContent = POSTS.length;
+    document.getElementById('hsPrompts').textContent = ASSETS.length;
+
+    // ---- chips de tema --------------------------------------------
+    const temaRow = document.getElementById('temaRow');
+    function addChip(rot, valor, ativo) {
+        const b = document.createElement('button');
+        b.className = 'chip' + (ativo ? ' active' : '');
+        b.dataset.tema = valor;
+        b.textContent = rot;
+        temaRow.appendChild(b);
+    }
+    addChip('Todos os temas', 'all', true);
+    TEMAS.forEach(t => addChip(t, t, false));
+
+    temaRow.addEventListener('click', e => {
+        const b = e.target.closest('.chip');
+        if (!b) return;
+        temaRow.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+        b.classList.add('active');
+        filtroTema = b.dataset.tema;
+        render();
     });
 
-    feedEl.addEventListener('click', function(e) {
+    // ---- segmento de formato --------------------------------------
+    const segFormato = document.getElementById('segFormato');
+    segFormato.addEventListener('click', e => {
+        const b = e.target.closest('button');
+        if (!b) return;
+        segFormato.querySelectorAll('button').forEach(x => x.classList.remove('active'));
+        b.classList.add('active');
+        filtroFormato = b.dataset.formato;
+        render();
+    });
+
+    // ---- busca ------------------------------------------------------
+    let tBusca;
+    qEl.addEventListener('input', () => {
+        clearTimeout(tBusca);
+        qClear.hidden = qEl.value === '';
+        tBusca = setTimeout(() => {
+            termo = norm(qEl.value.trim());
+            render();
+            if (termo) gtag('event', 'biblioteca_busca', { termo: termo.slice(0, 60) });
+        }, 130);
+    });
+    qClear.addEventListener('click', () => {
+        qEl.value = ''; termo = ''; qClear.hidden = true; qEl.focus(); render();
+    });
+
+    // ---- cliques dentro do feed -------------------------------------
+    feedEl.addEventListener('click', function (e) {
         const t = e.target.closest('[data-act]');
         if (!t) return;
+        const act = t.dataset.act;
+        if (act === 'reset') {
+            qEl.value = ''; termo = ''; qClear.hidden = true;
+            filtroFormato = 'all'; filtroTema = 'all';
+            segFormato.querySelectorAll('button').forEach((x, i) => x.classList.toggle('active', i === 0));
+            temaRow.querySelectorAll('.chip').forEach((c, i) => c.classList.toggle('active', i === 0));
+            render();
+            return;
+        }
         const i = t.dataset.i;
-        if (t.dataset.act === 'toggle') document.getElementById('pb-' + i).classList.toggle('open');
-        else if (t.dataset.act === 'copy') {
+        if (act === 'toggle') {
+            document.getElementById('pb-' + i).classList.toggle('open');
+        } else if (act === 'copy') {
             navigator.clipboard.writeText(ASSETS[i].conteudo).then(() => {
-                const old = t.textContent; t.textContent = '✓ Copiado!';
-                setTimeout(() => t.textContent = old, 1800);
+                t.textContent = 'Copiado!'; t.classList.add('done');
+                setTimeout(() => { t.textContent = 'Copiar prompt'; t.classList.remove('done'); }, 1800);
             });
         }
     });
 
-    // conteúdo aberto pra todo mundo — renderiza direto
-    render();
-
     // ============================================================
-    //  CAPTURA DE EMAIL — pack (topo, fim, exit)
+    //  CAPTURA DE EMAIL — pack (card do feed + bloco final)
     // ============================================================
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx90IdrA_L6n3jVdoYBinBPxPfWq0h6Iua1MrI8gQ7-RgBXhU1rOqF9dM2n7mLdAeMW/exec";
     const PACK_KEY = 'bib_pack_email';
 
     function markPackDone(card) {
         if (!card) return;
-        card.querySelectorAll('.pack-in, .exit-in').forEach(el => el.style.display = 'none');
-        const done = card.querySelector('.pack-done');
-        if (done) done.classList.add('show');
+        card.querySelectorAll('.pack-in').forEach(el => el.style.display = 'none');
+        card.querySelectorAll('.mail-done').forEach(el => el.classList.add('show'));
     }
+    // navegador com cookies bloqueados joga excecao no localStorage — o feed
+    // nao pode quebrar por causa disso.
+    function lsGet(k) { try { return localStorage.getItem(k); } catch (_) { return null; } }
+    function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (_) {} }
+
     function refreshPackForms() {
-        if (localStorage.getItem(PACK_KEY)) {
-            document.querySelectorAll('#packTop, #packEnd, #exitOverlay .exit-card').forEach(markPackDone);
-        }
+        if (!lsGet(PACK_KEY)) return;
+        ['packHero', 'packEnd', 'packInline'].forEach(id => markPackDone(document.getElementById(id)));
     }
-    refreshPackForms();
 
-    document.querySelectorAll('form[data-pack]').forEach(form => {
-        form.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const input = form.querySelector('input[type="email"]');
-            const btn = form.querySelector('button');
-            const email = input.value.trim();
-            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { input.focus(); return; }
-            btn.disabled = true; btn.textContent = 'Enviando...';
-            try {
-                await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email, list: 'biblioteca', timestamp: new Date().toISOString(), source: location.href }) });
-            } catch(_) {}
-            gtag('event', 'lead_capture', { list: 'biblioteca' });
-            if (typeof fbq === 'function') fbq('track', 'Lead', { content_name: 'biblioteca' });
-            localStorage.setItem(PACK_KEY, email);
-            refreshPackForms();
-        });
-    });
-
-    // link "Prefere em PDF?" rola até o card do pack
-    const prefPdf = document.getElementById('prefPdf');
-    if (prefPdf) prefPdf.addEventListener('click', () => {
-        const target = localStorage.getItem(PACK_KEY) ? document.getElementById('packEnd') : document.getElementById('packTop');
-        (target || document.getElementById('packTop')).scrollIntoView({ behavior: 'smooth', block: 'center' });
-    });
-
-    // ============================================================
-    //  EXIT-INTENT POPUP (dispara uma vez)
-    // ============================================================
-    const overlay = document.getElementById('exitOverlay');
-    const EXIT_KEY = 'bib_exit_shown';
-    let exitFired = false;
-
-    function openExit() {
-        if (exitFired || localStorage.getItem(EXIT_KEY) || localStorage.getItem(PACK_KEY)) return;
-        exitFired = true;
-        localStorage.setItem(EXIT_KEY, '1');
-        overlay.classList.add('show');
-        const inp = document.getElementById('exitEmail');
-        if (inp) setTimeout(() => inp.focus(), 60);
-    }
-    function closeExit() { overlay.classList.remove('show'); }
-
-    document.getElementById('exitClose').addEventListener('click', closeExit);
-    overlay.addEventListener('click', e => { if (e.target === overlay) closeExit(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape' && overlay.classList.contains('show')) closeExit(); });
-
-    if (!localStorage.getItem(EXIT_KEY) && !localStorage.getItem(PACK_KEY)) {
-        const isMobile = window.matchMedia('(max-width: 760px)').matches;
-        if (isMobile) {
-            setTimeout(openExit, 45000);
-            const onScroll = () => {
-                const scrolled = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
-                if (scrolled >= 0.6) { openExit(); window.removeEventListener('scroll', onScroll); }
-            };
-            window.addEventListener('scroll', onScroll, { passive: true });
-        } else {
-            document.addEventListener('mouseout', e => {
-                if (!e.relatedTarget && e.clientY <= 0) openExit();
+    document.addEventListener('submit', async function (e) {
+        const form = e.target.closest('form[data-pack]');
+        if (!form) return;
+        e.preventDefault();
+        const input = form.querySelector('input[type="email"]');
+        const btn = form.querySelector('button');
+        const email = input.value.trim();
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { input.focus(); return; }
+        btn.disabled = true; btn.textContent = 'Enviando...';
+        try {
+            await fetch(SCRIPT_URL, {
+                method: 'POST', mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, list: 'biblioteca', timestamp: new Date().toISOString(), source: location.href })
             });
-        }
-    }
-
-    // toggle dos filtros (colapsados por padrão)
-    const filterToggle = document.getElementById('filterToggle');
-    const filtersPanel = document.getElementById('filtersPanel');
-    filterToggle.addEventListener('click', () => {
-        const aberto = filtersPanel.hidden;
-        filtersPanel.hidden = !aberto;
-        filterToggle.setAttribute('aria-expanded', aberto ? 'true' : 'false');
+        } catch (_) {}
+        gtag('event', 'lead_capture', { list: 'biblioteca' });
+        if (typeof fbq === 'function') fbq('track', 'Lead', { content_name: 'biblioteca' });
+        lsSet(PACK_KEY, email);
+        refreshPackForms();
     });
+
+    // ============================================================
+    //  CHROME DA PÁGINA
+    // ============================================================
+    // a toolbar gruda logo abaixo do header — mede a altura real
+    const header = document.querySelector('.site-header');
+    function medirHeader() {
+        document.documentElement.style.setProperty('--hh', header.offsetHeight + 'px');
+    }
+    medirHeader();
+    window.addEventListener('resize', medirHeader);
+    window.addEventListener('load', medirHeader);
+    setTimeout(medirHeader, 400);   // o banner do promo entra depois
 
     // menu mobile
     const navToggle = document.getElementById('navToggle');
     const mainNav = document.getElementById('mainNav');
-    navToggle.addEventListener('click', () => mainNav.classList.toggle('open'));
+    navToggle.addEventListener('click', () => { mainNav.classList.toggle('open'); medirHeader(); });
     mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mainNav.classList.remove('open')));
+
+    // atalho: "/" foca a busca
+    document.addEventListener('keydown', e => {
+        if (e.key === '/' && document.activeElement !== qEl && !/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)) {
+            e.preventDefault(); qEl.focus();
+        }
+    });
+
+    render();
 </script>
 
 <script src="/promo-sistema.js" defer></script>
