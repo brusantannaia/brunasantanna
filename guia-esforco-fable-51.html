@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fable 5.1: o controle de esforço do Claude e quando usar cada nível | A Virada IA · Bruna Santanna</title>
+    <meta name="description" content="O Claude Fable 5.1 trouxe um controle de esforço com cinco níveis. Veja como trocar no meio da conversa e quando usar cada um sem estourar seu limite.">
+    <meta name="author" content="Bruna Santanna">
+    <link rel="canonical" href="https://brunasantanna.com/guia-esforco-fable-51">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://brunasantanna.com/guia-esforco-fable-51">
+    <meta property="og:title" content="Fable 5.1: o controle de esforço do Claude e quando usar cada nível | A Virada IA">
+    <meta property="og:description" content="O Claude Fable 5.1 trouxe um controle de esforço com cinco níveis. Veja como trocar no meio da conversa e quando usar cada um sem estourar seu limite.">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DCW0QVCWB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-7DCW0QVCWB');
+    </script>
+
+    <!-- JSON-LD: Article -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Fable 5.1: o controle de esforço do Claude e quando usar cada nível",
+        "description": "O Claude Fable 5.1 trouxe um controle de esforço com cinco níveis. Veja como trocar no meio da conversa e quando usar cada um sem estourar seu limite.",
+        "inLanguage": "pt-BR",
+        "url": "https://brunasantanna.com/guia-esforco-fable-51",
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://brunasantanna.com/guia-esforco-fable-51" },
+        "datePublished": "2026-09-02",
+        "dateModified": "2026-09-02",
+        "author": { "@type": "Person", "name": "Bruna Santanna", "url": "https://brunasantanna.com" },
+        "publisher": {
+            "@type": "Organization",
+            "name": "A Virada IA · Bruna Santanna",
+            "url": "https://brunasantanna.com"
+        },
+        "about": "Modelos"
+    }
+    </script>
+
+    <!-- JSON-LD: FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {"@type": "Question", "name": "Dá para mudar o esforço no meio da conversa?", "acceptedAnswer": {"@type": "Answer", "text": "Dá. Você clica no nome do modelo ao lado do botão de enviar, escolhe Esforço e troca o nível. A mudança passa a valer a partir da resposta seguinte do Claude, então você não precisa começar uma conversa nova nem repetir o contexto que já deu."}},
+            {"@type": "Question", "name": "Qual é o esforço padrão do Fable 5.1?", "acceptedAnswer": {"@type": "Answer", "text": "Médio no Claude Cowork e no claude.ai, e alto no Claude Code. Como quase ninguém abre esse menu, muita gente gasta esforço demais em tarefa mecânica e nunca pede esforço alto justamente na tarefa que precisava."}},
+            {"@type": "Question", "name": "Qual a diferença entre o Fable 5.1 e o Mythos 5.1?", "acceptedAnswer": {"@type": "Answer", "text": "É o mesmo modelo por baixo, com níveis diferentes de proteção. O Mythos 5.1 é liberado só por convite, dentro do Project Glasswing, para organizações verificadas de cibersegurança e de ciências da vida, e por enquanto apenas nos Estados Unidos. Você não vai usar e não está perdendo nada."}}
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg:#F3EEE3; --bg-2:#ECE5D6; --card:#FBF9F3;
+            --ink:#14373C; --ink-2:#2C4F54; --green:#435D51;
+            --terra:#B06E4A; --terra-l:#C4835E; --terra-d:#985A3B;
+            --text:#233133; --muted:#6E7A75; --line:rgba(20,55,60,0.16);
+            --cream:#F4F3EF;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family:'Hanken Grotesk',sans-serif; background:var(--bg); color:var(--text); line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+        img { max-width:100%; display:block; }
+        a { color:inherit; text-decoration:none; }
+        ::selection { background:var(--terra); color:#fff; }
+        .wrap { max-width:1100px; margin:0 auto; padding:0 30px; }
+        .kick { font-size:0.72rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--terra); }
+
+        /* ---------- HEADER ---------- */
+        .site-header { position:sticky; top:0; z-index:50; background:rgba(243,238,227,0.92); backdrop-filter:blur(8px); border-bottom:2px solid var(--ink); }
+        .header-inner { display:flex; align-items:center; justify-content:space-between; gap:24px; max-width:1100px; padding:16px 30px; }
+        .logo { display:inline-flex; align-items:center; white-space:nowrap; font-family:'Anton',sans-serif; font-size:1.2rem; letter-spacing:0.02em; text-transform:uppercase; color:var(--ink); }
+        .logo .brand-tag { font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:0.62rem; letter-spacing:0.12em; color:var(--terra); border:1.5px solid var(--terra); padding:3px 8px; border-radius:100px; margin-left:10px; }
+        .main-nav { display:flex; align-items:center; gap:14px; }
+        .main-nav a { font-size:0.86rem; font-weight:600; color:var(--ink-2); white-space:nowrap; transition:color .18s; }
+        .main-nav a:hover, .main-nav a.active { color:var(--terra); }
+        .nav-cta { background:var(--terra); color:#fff !important; padding:10px 18px; border-radius:100px; font-size:0.8rem !important; transition:background .2s, transform .15s; }
+        .nav-cta:hover { background:var(--terra-d); transform:translateY(-1px); }
+        .nav-toggle { display:none; background:none; border:none; font-size:1.5rem; color:var(--ink); cursor:pointer; line-height:1; }
+        @media (max-width: 1180px) {
+            .nav-toggle { display:block; }
+            .main-nav { display:none; position:absolute; top:100%; left:0; right:0; flex-direction:column; align-items:flex-start; gap:0; background:var(--bg); border-bottom:2px solid var(--ink); padding:8px 30px 20px; }
+            .main-nav.open { display:flex; box-shadow:0 28px 46px -20px rgba(20,55,60,0.55); max-height:calc(100dvh - 62px); overflow-y:auto; }
+            .site-header:has(.main-nav.open)::after { content:""; position:fixed; left:0; right:0; top:62px; bottom:0; background:rgba(20,55,60,0.38); z-index:40; pointer-events:none; }
+            .main-nav a { padding:12px 0; width:100%; border-top:1px solid var(--line); font-size:1rem; }
+            .nav-cta { margin-top:12px; text-align:center; border-top:none; }
+        }
+
+        /* botão genérico */
+        .btn { display:inline-flex; align-items:center; gap:9px; justify-content:center; font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:0.85rem; letter-spacing:0.04em; text-transform:uppercase; padding:15px 28px; border-radius:100px; border:none; cursor:pointer; transition:transform .15s, box-shadow .15s, background .2s; }
+        .btn-terra { background:var(--terra); color:#fff; }
+        .btn-terra:hover { background:var(--terra-d); transform:translateY(-2px); box-shadow:0 10px 26px rgba(176,110,74,.35); }
+        .btn-ink { background:var(--ink); color:#fff; }
+        .btn-ink:hover { background:var(--ink-2); transform:translateY(-2px); }
+
+        /* ---------- HERO COMPACTO ---------- */
+        .hero { position:relative; overflow:hidden; border-bottom:1.5px solid var(--line); }
+        .hero-glow { position:absolute; width:560px; height:560px; border-radius:50%; top:-240px; right:-160px; background:radial-gradient(circle,rgba(176,110,74,.13),transparent 62%); pointer-events:none; }
+        .hero .wrap { position:relative; z-index:2; padding:54px 30px 48px; max-width:820px; }
+        .hero-eyebrow { display:inline-flex; align-items:center; gap:9px; margin-bottom:20px; flex-wrap:wrap; }
+        .hero-eyebrow .dot { width:7px; height:7px; border-radius:50%; background:var(--terra); box-shadow:0 0 0 4px rgba(176,110,74,.18); }
+        .hero-eyebrow .sep { color:var(--line); }
+        .hero-eyebrow .data { font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); }
+        .hero h1 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(2.4rem,7vw,4.2rem); line-height:0.94; letter-spacing:-0.01em; text-transform:uppercase; color:var(--ink); }
+        .hero h1 .terra { color:var(--terra); }
+        .hero-sub { font-size:1.12rem; color:var(--ink-2); font-weight:300; max-width:54ch; margin-top:20px; }
+        .hero-sub b { color:var(--ink); font-weight:600; }
+
+        /* ---------- LAYOUT ARTIGO ---------- */
+        .artigo { padding:56px 0 40px; }
+        .artigo .wrap { max-width:760px; }
+
+        /* bloco do reel embedado */
+        .reel-embed { margin:0 auto 44px; max-width:540px; }
+        .reel-embed .instagram-media { margin:0 auto !important; }
+        .reel-placeholder { border:1.5px dashed var(--line); border-radius:16px; background:var(--card); padding:34px 26px; text-align:center; }
+        .reel-placeholder .rp-icon { font-size:1.7rem; margin-bottom:10px; }
+        .reel-placeholder b { display:block; font-family:'Anton',sans-serif; font-weight:400; font-size:1.15rem; text-transform:uppercase; color:var(--ink); letter-spacing:.01em; margin-bottom:6px; }
+        .reel-placeholder p { font-size:0.88rem; color:var(--muted); }
+
+        /* corpo do post */
+        .corpo { font-size:1.06rem; color:var(--text); line-height:1.75; }
+        .corpo > p { margin-bottom:20px; }
+        .corpo > p:first-of-type { font-size:1.16rem; color:var(--ink-2); }
+        .corpo h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.6rem,4.5vw,2.2rem); text-transform:uppercase; color:var(--ink); line-height:1.05; letter-spacing:-0.01em; margin:44px 0 16px; }
+        .corpo h3 { font-size:1.2rem; font-weight:700; color:var(--ink); margin:30px 0 10px; }
+        .corpo a { color:var(--terra-d); font-weight:600; border-bottom:1.5px solid var(--terra); }
+        .corpo a:hover { color:var(--terra); }
+        .corpo strong, .corpo b { color:var(--ink); font-weight:700; }
+        .corpo ul { list-style:none; margin:6px 0 22px; padding:0; }
+        .corpo ul li { position:relative; padding-left:26px; margin-bottom:12px; }
+        .corpo ul li::before { content:'→'; position:absolute; left:0; top:0; color:var(--terra); font-weight:800; }
+        .corpo ol { margin:6px 0 22px 22px; }
+        .corpo ol li { margin-bottom:12px; padding-left:6px; }
+        .corpo ol li::marker { color:var(--terra); font-weight:800; }
+
+        /* blocos didáticos */
+        .bloco { border-radius:14px; padding:22px 24px 22px 26px; margin:26px 0; border:1.5px solid var(--line); }
+        .bloco .bloco-tag { display:block; font-size:0.72rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:8px; }
+        .bloco p { font-size:0.98rem; line-height:1.65; margin:0; }
+        .bloco p + p { margin-top:10px; }
+        .bloco-dica { background:rgba(67,93,81,0.08); border-left:5px solid var(--green); }
+        .bloco-dica .bloco-tag { color:var(--green); }
+        .bloco-atencao { background:rgba(176,110,74,0.09); border-left:5px solid var(--terra); }
+        .bloco-atencao .bloco-tag { color:var(--terra-d); }
+        .bloco-case { background:var(--ink); border-left:5px solid var(--terra-l); border-color:var(--ink); }
+        .bloco-case .bloco-tag { color:var(--terra-l); }
+        .bloco-case p { color:rgba(244,243,239,.88); }
+        .bloco-case b { color:#fff; }
+
+        /* antes/depois */
+        .antes-depois { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:26px 0; }
+        @media (max-width:600px) { .antes-depois { grid-template-columns:1fr; } }
+        .ad-ruim, .ad-bom { border-radius:12px; padding:18px 20px; font-size:0.95rem; line-height:1.6; border:1.5px solid var(--line); }
+        .ad-ruim { background:rgba(150,90,59,0.06); }
+        .ad-bom { background:rgba(67,93,81,0.08); }
+        .ad-ruim .ad-label, .ad-bom .ad-label { display:block; font-size:0.74rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:8px; }
+        .ad-ruim .ad-label { color:var(--terra-d); }
+        .ad-bom .ad-label { color:var(--green); }
+
+        /* prompt box com botão copiar */
+        .prompt-box { background:var(--ink); border-radius:16px; padding:22px 24px; margin:28px 0; position:relative; box-shadow:8px 8px 0 var(--green); }
+        .prompt-box .pb-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; }
+        .prompt-box .pb-label { font-size:0.72rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--terra-l); }
+        .prompt-box pre { font-family:'Hanken Grotesk',ui-monospace,monospace; font-size:0.95rem; line-height:1.6; color:rgba(244,243,239,.92); white-space:pre-wrap; word-wrap:break-word; margin:0; }
+        .copy-btn { flex-shrink:0; display:inline-flex; align-items:center; gap:6px; background:var(--terra); color:#fff; border:none; border-radius:100px; padding:8px 16px; font-family:'Hanken Grotesk',sans-serif; font-size:0.74rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer; transition:background .2s, transform .15s; }
+        .copy-btn:hover { background:var(--terra-d); transform:translateY(-1px); }
+        .copy-btn.copied { background:var(--green); }
+
+        /* ---------- CONTENT UPGRADE (gated) ---------- */
+        .upgrade { margin:52px 0; }
+        .upgrade .wl-card { background:var(--ink); color:#fff; border-radius:18px; padding:34px 32px; box-shadow:8px 8px 0 var(--terra); }
+        .upgrade .wl-card .kick { color:var(--terra-l); display:block; margin-bottom:12px; }
+        .upgrade .wl-card h3 { font-family:'Anton',sans-serif; font-weight:400; font-size:1.7rem; text-transform:uppercase; line-height:1; margin-bottom:8px; }
+        .upgrade .wl-card .wl-sub { font-size:0.95rem; color:rgba(255,255,255,0.72); margin-bottom:22px; max-width:46ch; }
+        .upgrade .wl-form { display:flex; gap:10px; flex-wrap:wrap; }
+        .field { flex:1; min-width:220px; padding:16px 20px; font-family:inherit; font-size:1rem; background:rgba(255,255,255,0.07); border:1.5px solid rgba(255,255,255,0.22); border-radius:10px; color:#fff; outline:none; transition:border-color .2s, background .2s; }
+        .field::placeholder { color:rgba(255,255,255,0.5); }
+        .field:focus { border-color:var(--terra); background:rgba(255,255,255,0.12); }
+        .btn-form { padding:16px 26px; font-family:'Hanken Grotesk',sans-serif; font-size:0.82rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer; background:var(--terra); color:#fff; border:none; border-radius:10px; transition:transform .15s, box-shadow .15s, background .2s; white-space:nowrap; }
+        .btn-form:hover { background:var(--terra-d); transform:translateY(-2px); box-shadow:0 8px 22px rgba(176,110,74,0.35); }
+        .btn-form:disabled { opacity:.6; cursor:not-allowed; transform:none; }
+        .upgrade .fine { margin-top:14px; font-size:0.76rem; color:rgba(255,255,255,0.55); }
+        .wl-ok { display:none; background:rgba(67,93,81,0.35); border:1.5px solid var(--terra-l); border-radius:10px; padding:18px 20px; font-size:0.98rem; line-height:1.5; color:#fff; }
+        .wl-ok b { color:var(--terra-l); }
+        .wl-done .wl-ok { display:block; }
+        .wl-done .wl-form, .wl-done .fine { display:none; }
+
+        /* ---------- FAQ ---------- */
+        .faq-sec { padding:8px 0 20px; }
+        .faq-sec .wrap { max-width:760px; }
+        .faq-sec h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.6rem,4.5vw,2.2rem); text-transform:uppercase; color:var(--ink); line-height:1; margin-bottom:22px; }
+        .faq-list { max-width:760px; }
+        .faq-item { border:1.5px solid var(--line); border-radius:14px; background:var(--card); margin-bottom:12px; overflow:hidden; }
+        .faq-q { width:100%; display:flex; justify-content:space-between; align-items:center; gap:16px; text-align:left; background:none; border:none; cursor:pointer; padding:20px 24px; font-family:'Hanken Grotesk',sans-serif; font-size:1.02rem; font-weight:700; color:var(--ink); }
+        .faq-q .mark { font-family:'Anton',sans-serif; font-size:1.3rem; color:var(--terra); transition:transform .25s; flex-shrink:0; line-height:1; }
+        .faq-item.open .faq-q .mark { transform:rotate(45deg); }
+        .faq-a { display:none; padding:0 24px 22px; font-size:0.96rem; color:var(--ink-2); line-height:1.7; }
+        .faq-item.open .faq-a { display:block; }
+        .faq-a b { color:var(--ink); }
+
+        /* ---------- BANNER DO CURSO ---------- */
+        .curso-banner { background:var(--ink); color:var(--cream); margin:40px 0 0; }
+        .curso-banner .wrap { max-width:900px; padding:56px 30px; display:flex; align-items:center; justify-content:space-between; gap:30px; flex-wrap:wrap; }
+        .curso-banner .cb-text { flex:1; min-width:260px; }
+        .curso-banner .kick { color:var(--terra-l); display:block; margin-bottom:12px; }
+        .curso-banner h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.7rem,5vw,2.6rem); text-transform:uppercase; color:#fff; line-height:1; margin-bottom:12px; max-width:20ch; }
+        .curso-banner h2 .terra { color:var(--terra-l); }
+        .curso-banner p { color:rgba(244,243,239,.72); font-weight:300; font-size:1rem; max-width:46ch; }
+
+        /* volta pro hub */
+        .voltar-hub { text-align:center; padding:40px 0 8px; }
+        .voltar-hub a { font-size:0.9rem; font-weight:700; letter-spacing:0.02em; color:var(--ink); border-bottom:2px solid var(--terra); padding-bottom:3px; transition:color .18s; }
+        .voltar-hub a:hover { color:var(--terra); }
+
+        /* footer */
+        footer { background:var(--ink); color:rgba(244,243,239,.6); padding:40px 0 48px; margin-top:30px; }
+        .footer-row { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+        .footer-brand { font-family:'Anton',sans-serif; font-size:1.1rem; text-transform:uppercase; color:#fff; }
+        .footer-links { display:flex; gap:20px; flex-wrap:wrap; }
+        .footer-links a { font-size:0.84rem; font-weight:600; color:rgba(244,243,239,.7); }
+        .footer-links a:hover { color:var(--terra-l); }
+        .footer-copy { font-size:0.76rem; color:rgba(244,243,239,.4); margin-top:14px; }
+
+        /* reveal */
+        .rv { opacity:0; transform:translateY(22px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+        .rv.in { opacity:1; transform:none; }
+        @media (prefers-reduced-motion:reduce) { .rv { opacity:1; transform:none; } }
+    </style>
+<!-- Meta Pixel Code · NAO REMOVER. Todo guia publicado tem que sair com ele,
+     igual as outras paginas de brunasantanna.com, senao o publico de
+     remarketing dos anuncios nao pega quem leu o guia. -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1175365551728800');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1175365551728800&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Bruna Santanna",
+        "url": "https://brunasantanna.com",
+        "jobTitle": "Educadora de IA e fundadora da NewScale",
+        "description": "Educadora de inteligência artificial para não-programadores. Fundadora da NewScale, mentora e criadora de A Virada IA.",
+        "sameAs": [
+            "https://instagram.com/brusantanna.ai",
+            "https://www.linkedin.com/in/bruna-araujo-santanna/",
+            "https://newscale.tech"
+        ]
+    }
+    </script>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="wrap header-inner">
+        <a href="/" class="logo">Bruna Santanna<span class="brand-tag">A Virada IA</span></a>
+        <nav class="main-nav" id="mainNav">
+            <a href="/">Home</a>
+            <a href="/biblioteca">Biblioteca</a>
+            <a href="/claude">Guia do Claude</a>
+            <a href="/quem-sou">Quem Sou</a>
+            <a href="/treinamentos">Treinamentos Corporativos</a>
+            <a href="/mentoria">Mentoria</a>
+            <a href="https://newscale.tech" target="_blank" rel="noopener">IA na sua Empresa</a>
+            <a href="/comece" class="nav-cta">Cursos</a>
+        </nav>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">☰</button>
+    </div>
+</header>
+
+<!-- ========== HERO COMPACTO ========== -->
+<section class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="wrap">
+        <div class="hero-eyebrow rv">
+            <span class="dot"></span>
+            <span class="kick">Modelos</span>
+            <span class="sep">·</span>
+            <span class="data">Setembro de 2026</span>
+        </div>
+        <h1 class="rv">Fable 5.1: o controle de esforço do Claude e quando usar cada nível</h1>
+        <p class="hero-sub rv">O Claude Fable 5.1 trouxe um controle de esforço com cinco níveis. Veja como trocar no meio da conversa e quando usar cada um sem estourar seu limite.</p>
+    </div>
+</section>
+
+<!-- ========== ARTIGO ========== -->
+<article class="artigo">
+    <div class="wrap">
+
+        
+        <div class="corpo rv">
+            
+<p>O controle de esforço do Claude é um seletor que define quanto o modelo pensa antes de responder. No Fable 5.1 são cinco níveis, de baixo até máximo, e você troca clicando no nome do modelo ao lado do botão de enviar. A troca vale a partir da resposta seguinte, sem precisar começar conversa nova.</p>
+
+<h2>O que mudou com o Fable 5.1</h2>
+<p>O Claude Fable 5.1 saiu no dia 1 de setembro de 2026. Hoje o seu feed vai encher de gráfico de benchmark comparando ele com o modelo anterior, e nenhum desses gráficos muda o seu dia. Três coisas mudam, e a primeira é a que vale o seu tempo de leitura.</p>
+
+<h2>Como funciona o controle de esforço</h2>
+<p>Pense na diferença entre pedir uma resposta de cabeça e pedir para a pessoa sentar e pensar antes de falar. É exatamente isso. Esforço baixo entrega rápido, esforço alto faz o Claude gastar mais raciocínio antes de escrever a primeira palavra.</p>
+<p>Os cinco níveis que aparecem no aplicativo são <b>baixo, médio, alto, extra alto e máximo</b>. O seletor não é exclusividade do Fable 5.1: ele também aparece no Opus 5, no Sonnet 5, no Fable 5 e nos Opus 4.8, 4.7 e 4.6.</p>
+
+<h2>Onde fica o botão do esforço</h2>
+<p>É mais escondido do que deveria, e é por isso que quase ninguém mexe nele:</p>
+<ul>
+<li>→ Clique no <b>nome do modelo</b>, ali do lado do botão de enviar</li>
+<li>→ Escolha <b>Esforço</b></li>
+<li>→ Selecione o nível</li>
+</ul>
+<div class="bloco-dica">
+<b>→ DICA</b>
+<p>Você pode trocar o nível <b>no meio de uma conversa que já começou</b>. A mudança passa a valer na resposta seguinte do Claude, então dá para começar leve e subir o esforço quando a conversa ficar séria, sem repetir o contexto todo em um chat novo.</p>
+</div>
+
+<h2>Por que o padrão médio custa caro</h2>
+<p>Aqui está a parte que ninguém comenta. O Fable 5.1 vem no <b>esforço médio</b> no Claude Cowork e no claude.ai, e no <b>alto</b> no Claude Code. Como quase ninguém abre esse menu, todo mundo vive no que veio de fábrica.</p>
+<p>O resultado é o mesmo erro dos dois lados. Tem gente gastando esforço médio para formatar uma lista de manhã e chegando na tarefa que importa sem saldo. E tem gente recebendo resposta rasa em tarefa difícil sem saber que bastava pedir mais.</p>
+<div class="bloco-atencao">
+<b>⚠ ATENÇÃO</b>
+<p>Esforço alto em tudo não resolve. Ele consome mais do seu limite e demora mais para responder. A ideia é parar de pagar caro em tarefa barata, para sobrar limite onde faz diferença.</p>
+</div>
+
+<h2>Quando usar cada nível, na prática</h2>
+<p>É assim que eu distribuo no meu dia:</p>
+<div class="antes-depois">
+<div class="ad-ruim">
+<b>❌ Esforço baixo</b>
+<p>Tarefa mecânica, que já tem resposta certa: formatar um texto, resumir uma reunião, organizar uma lista, transformar anotação em tópicos, padronizar nome de arquivo.</p>
+</div>
+<div class="ad-bom">
+<b>✅ Esforço alto</b>
+<p>Quando você precisa que ele realmente pense: montar uma proposta comercial, achar o furo de um plano, comparar dois caminhos e defender um, revisar uma decisão que custa dinheiro.</p>
+</div>
+</div>
+<p>A pergunta que resolve na hora: <b>existe uma resposta certa que eu já sei conferir num relance?</b> Se existe, é esforço baixo. Se você precisa que ele descubra alguma coisa que você ainda não enxergou, é esforço alto.</p>
+
+<h2>Um prompt para cada ponta</h2>
+<p>Esse é o de tarefa mecânica, onde o esforço alto seria desperdício:</p>
+<div class="prompt-box">
+<pre>Use esforço baixo, isso aqui é mecânico.
+
+Pega o texto abaixo e devolve em tópicos curtos, mantendo
+as minhas palavras. Não acrescente nada que eu não escrevi,
+não melhore o tom e não invente exemplo.
+
+[cole o texto aqui]</pre>
+<button class="copy-btn">Copiar</button>
+</div>
+<p>E esse é o de tarefa que merece esforço alto. Repare que ele pede análise antes da escrita, que é onde o raciocínio a mais aparece:</p>
+<div class="prompt-box">
+<pre>Use esforço alto nessa.
+
+Abaixo está o rascunho da minha proposta comercial.
+
+Antes de reescrever qualquer coisa, me diga os três pontos
+onde um cliente cético diria não, e por quê. Depois reescreva
+só esses três trechos, mantendo o meu tom e sem alongar.
+
+[cole a proposta aqui]</pre>
+<button class="copy-btn">Copiar</button>
+</div>
+
+<h2>As outras duas mudanças do Fable 5.1</h2>
+<p><b>Ele ficou melhor em tarefa longa que roda sozinha.</b> É aquele trabalho que você deixa rodando no Cowork e vai fazer outra coisa. Segundo a Anthropic, o Fable 5.1 mantém os próprios registros, repriorizar conforme as coisas mudam e retoma de onde parou. Na prática: se você já tentou deixar ele fazendo algo demorado e ele se perdeu no meio, vale tentar de novo.</p>
+<p><b>Ele ficou mais barato de rodar.</b> A estimativa oficial é de cerca de <b>25% menos que o Fable 5</b> em cargas de trabalho normais, chegando a perto de <b>45%</b> em uso pesado de agentes. Isso vem principalmente da leitura de cache, que passou a custar 75% menos. No seu plano isso aparece de um jeito só: o limite durando mais.</p>
+
+<h2>Fable 5.1 e Mythos 5.1: por que saíram dois</h2>
+<p>Você vai ver os dois nomes na imprensa e vai achar que precisa escolher. Não precisa. É o <b>mesmo modelo por baixo</b>, com níveis diferentes de proteção.</p>
+<p>O Mythos 5.1 é liberado só por convite, dentro do Project Glasswing, para organizações verificadas que trabalham com cibersegurança e com ciências da vida, e por enquanto apenas nos Estados Unidos. Ou seja: não é uma versão melhor que você está perdendo. É uma versão com menos travas para quem tem motivo profissional para precisar delas.</p>
+
+<h2>Modelo novo não conserta pedido ruim</h2>
+<p>E aqui está o que importa mais do que tudo que está escrito acima.</p>
+<p>Se você pede mal, a versão nova entrega a mesma coisa errada. Só que mais rápido e mais barato. Esforço máximo em um pedido vago devolve um texto vago com mais parágrafos.</p>
+<p>O que muda o seu resultado continua sendo a mesma coisa chata de sempre: dizer o que você quer, dar um exemplo do que seria bom, e falar o que não pode aparecer na resposta. Isso vale mais que qualquer lançamento, e vale hoje, no modelo que você já tem aberto.</p>
+<div class="bloco-case">
+<b>✦ CASE REAL</b>
+<p>O teste honesto para saber se o problema é o modelo ou o pedido: pegue um resultado que te decepcionou, suba o esforço para alto e mande exatamente o mesmo prompt. Se voltar igual, o modelo nunca foi o problema. Era o pedido.</p>
+</div>
+
+        </div>
+
+        <!-- ─── CONTENT UPGRADE (gated → list: 'biblioteca') ───────────── -->
+        <div class="upgrade rv">
+            <div class="wl-card" id="upgradeCard">
+                <span class="kick">Guia grátis · PDF</span>
+                <h3>O Guia Completo do Claude em PDF</h3>
+                <p class="wl-sub">Meu guia do Claude do zero ao avançado, em PDF pra você salvar e consultar quando quiser. Deixa seu email que eu libero na hora, e você ainda entra na Biblioteca.</p>
+                <form class="wl-form" novalidate>
+                    <input class="field" type="email" placeholder="Seu melhor email" required autocomplete="email">
+                    <button type="submit" class="btn-form">Quero o guia do Claude</button>
+                </form>
+                <div class="wl-ok"><b>Prontinho, está dentro.</b> Baixa agora: <a href="/guia-claude-bruna.pdf" target="_blank" rel="noopener">o Guia Completo do Claude em PDF</a>. As próximas novidades da Biblioteca chegam no seu email.</div>
+                <p class="fine">Zero spam. Só o que vale a pena sobre IA na prática.</p>
+            </div>
+        </div>
+
+    </div>
+</article>
+
+<!-- ========== FAQ ========== -->
+<section class="faq-sec">
+    <div class="wrap">
+        <h2 class="rv">Dúvidas rápidas</h2>
+        <div class="faq-list rv">
+            
+            <div class="faq-item">
+                <button class="faq-q">Dá para mudar o esforço no meio da conversa?<span class="mark">+</span></button>
+                <div class="faq-a">Dá. Você clica no nome do modelo ao lado do botão de enviar, escolhe Esforço e troca o nível. A mudança passa a valer a partir da resposta seguinte do Claude, então você não precisa começar uma conversa nova nem repetir o contexto que já deu.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Qual é o esforço padrão do Fable 5.1?<span class="mark">+</span></button>
+                <div class="faq-a">Médio no Claude Cowork e no claude.ai, e alto no Claude Code. Como quase ninguém abre esse menu, muita gente gasta esforço demais em tarefa mecânica e nunca pede esforço alto justamente na tarefa que precisava.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Qual a diferença entre o Fable 5.1 e o Mythos 5.1?<span class="mark">+</span></button>
+                <div class="faq-a">É o mesmo modelo por baixo, com níveis diferentes de proteção. O Mythos 5.1 é liberado só por convite, dentro do Project Glasswing, para organizações verificadas de cibersegurança e de ciências da vida, e por enquanto apenas nos Estados Unidos. Você não vai usar e não está perdendo nada.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== LEIA TAMBEM ========== -->
+<div class="wrap" style="max-width:760px;margin:0 auto 8px;">
+    <div style="border:1.5px solid rgba(20,55,60,0.16);border-radius:16px;background:#FBF9F3;padding:24px 26px;">
+        <span style="display:block;font-size:0.72rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#B06E4A;margin-bottom:14px;">Continue aprendendo</span>
+        <a href="/guia-economizar-uso" style="display:block;font-size:1rem;font-weight:600;color:#14373C;padding:10px 0;border-top:1px solid rgba(20,55,60,0.10);">4 comandos pra nao estourar seu limite de uso no Claude &rarr;</a>
+        <a href="/guia-fable-5-sistemas" style="display:block;font-size:1rem;font-weight:600;color:#14373C;padding:10px 0;border-top:1px solid rgba(20,55,60,0.10);">Fable 5: pare de usar o modelo mais caro pra tarefa pequena &rarr;</a>
+        <a href="/guia-opus-5" style="display:block;font-size:1rem;font-weight:600;color:#14373C;padding:10px 0;border-top:1px solid rgba(20,55,60,0.10);">Claude Opus 5: o que mudou, quanto custa e quando vale usar &rarr;</a>
+        <a href="/claude" style="display:block;font-size:1rem;font-weight:600;color:#14373C;padding:10px 0;border-top:1px solid rgba(20,55,60,0.10);">O Guia Definitivo do Claude em Portugues &rarr;</a>
+        <a href="/biblioteca" style="display:block;font-size:1rem;font-weight:600;color:#14373C;padding:10px 0;border-top:1px solid rgba(20,55,60,0.10);">Todos os guias da Biblioteca &rarr;</a>
+    </div>
+</div>
+
+<!-- ========== BANNER DO CURSO ========== -->
+<section class="curso-banner">
+    <div class="wrap">
+        <div class="cb-text">
+            <span class="kick">Curso de Claude · Turma 1</span>
+            <h2>Quer ir <span class="terra">além</span> desse guia?</h2>
+            <p>No Claude com Profundidade você aprende a pensar e usar IA de verdade, do zero, sem programar. Zero tech, 100% prático.</p>
+        </div>
+        <a href="/curso" class="btn btn-terra">Quero o curso</a>
+    </div>
+</section>
+
+<!-- volta pro hub -->
+<div class="voltar-hub">
+    <a href="/biblioteca">← Voltar pra Biblioteca</a>
+</div>
+
+<footer>
+    <div class="wrap">
+        <div class="footer-row">
+            <span class="footer-brand">A Virada IA</span>
+            <nav class="footer-links">
+                <a href="/biblioteca">Biblioteca</a>
+                <a href="/claude">Guia do Claude</a>
+                <a href="/curso">Curso de Claude</a>
+                <a href="/mentoria">Mentoria</a>
+                <a href="/comece">Comece por aqui</a>
+                <a href="https://instagram.com/brusantanna.ai" target="_blank" rel="noopener">Instagram</a>
+                <a href="https://newscale.tech" target="_blank" rel="noopener">NewScale</a>
+                <a href="mailto:eu@brunasantanna.com">Contato</a>
+            </nav>
+        </div>
+        <p class="footer-copy">© 2026 Bruna Santanna · A Virada IA</p>
+    </div>
+</footer>
+
+<script>
+    // ===== Copiar prompt =====
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const box = btn.closest('.prompt-box');
+            const pre = box.querySelector('pre');
+            const text = pre ? pre.innerText : '';
+            navigator.clipboard.writeText(text).then(() => {
+                const original = btn.textContent;
+                btn.textContent = '✓ Copiado';
+                btn.classList.add('copied');
+                setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, 1800);
+            });
+        });
+    });
+
+    // ===== Content upgrade (Apps Script, list: 'biblioteca') =====
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx90IdrA_L6n3jVdoYBinBPxPfWq0h6Iua1MrI8gQ7-RgBXhU1rOqF9dM2n7mLdAeMW/exec";
+
+    document.querySelectorAll('.wl-form').forEach(form => {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const input = form.querySelector('input[type="email"]');
+            const btn = form.querySelector('button[type="submit"]');
+            const email = input.value.trim();
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { input.focus(); return; }
+            btn.disabled = true; btn.textContent = 'Enviando...';
+            try {
+                await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, list: 'biblioteca', timestamp: new Date().toISOString(), source: location.href }) });
+            } catch(_) {}
+            if (typeof gtag === 'function') gtag('event', 'lead_signup', { list: 'biblioteca' });
+            if (typeof fbq === 'function') fbq('track', 'Lead', { content_name: 'biblioteca' });
+            document.querySelectorAll('.upgrade .wl-card').forEach(c => c.classList.add('wl-done'));
+            localStorage.setItem('biblioteca_lead', '1');
+        });
+    });
+    if (localStorage.getItem('biblioteca_lead') === '1') {
+        document.querySelectorAll('.upgrade .wl-card').forEach(c => c.classList.add('wl-done'));
+    }
+
+    // ===== FAQ accordion =====
+    document.querySelectorAll('.faq-q').forEach(q => {
+        q.addEventListener('click', () => q.closest('.faq-item').classList.toggle('open'));
+    });
+
+    // ===== menu mobile =====
+    const navToggle = document.getElementById('navToggle'), mainNav = document.getElementById('mainNav');
+    navToggle.addEventListener('click', () => mainNav.classList.toggle('open'));
+    mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mainNav.classList.remove('open')));
+
+    // ===== reveal on scroll =====
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0, rootMargin:'0px 0px -40px 0px' });
+    document.querySelectorAll('.rv').forEach((el,i) => { el.style.transitionDelay = (i%3*70)+'ms'; io.observe(el); });
+    /* rv-safety: garante que o conteudo nunca fica invisivel */
+    setTimeout(function(){ document.querySelectorAll('.rv:not(.in)').forEach(function(el){ el.classList.add('in'); }); }, 2500);
+</script>
+
+<script src="/promo-sistema.js" defer></script>
+</body>
+</html>
