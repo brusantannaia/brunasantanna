@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF no Claude: por que ele queima o seu limite e como ler gastando quase nada | A Virada IA · Bruna Santanna</title>
+    <meta name="description" content="Jogar PDF direto na conversa é o que mais consome o seu limite de uso no Claude, e quase ninguém percebe. Entenda por que isso acontece e os dois jeitos de ler o mesmo arquivo gastando uma fração disso.">
+    <meta name="author" content="Bruna Santanna">
+    <link rel="canonical" href="https://brunasantanna.com/guia-pdf-token">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://brunasantanna.com/guia-pdf-token">
+    <meta property="og:title" content="PDF no Claude: por que ele queima o seu limite e como ler gastando quase nada | A Virada IA">
+    <meta property="og:description" content="Jogar PDF direto na conversa é o que mais consome o seu limite de uso no Claude, e quase ninguém percebe. Entenda por que isso acontece e os dois jeitos de ler o mesmo arquivo gastando uma fração disso.">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DCW0QVCWB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-7DCW0QVCWB');
+    </script>
+
+    <!-- Meta Pixel -->
+    <script src="/meta-pixel.js"></script>
+
+    <!-- JSON-LD: Article -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "PDF no Claude: por que ele queima o seu limite e como ler gastando quase nada",
+        "description": "Jogar PDF direto na conversa é o que mais consome o seu limite de uso no Claude, e quase ninguém percebe. Entenda por que isso acontece e os dois jeitos de ler o mesmo arquivo gastando uma fração disso.",
+        "inLanguage": "pt-BR",
+        "url": "https://brunasantanna.com/guia-pdf-token",
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://brunasantanna.com/guia-pdf-token" },
+        "datePublished": "2026-09-03",
+        "dateModified": "2026-09-03",
+        "author": { "@type": "Person", "name": "Bruna Santanna", "url": "https://brunasantanna.com" },
+        "publisher": {
+            "@type": "Organization",
+            "name": "A Virada IA · Bruna Santanna",
+            "url": "https://brunasantanna.com"
+        },
+        "about": "Tokens"
+    }
+    </script>
+
+    <!-- JSON-LD: FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            { "@type": "Question", "name": "Por que um PDF gasta tanto token se ele é só texto?", "acceptedAnswer": { "@type": "Answer", "text": "Porque para o Claude ele não é só texto. Além de extrair as palavras, o modelo precisa enxergar a página para entender tabela, gráfico, coluna e assinatura, e para isso cada página vira também uma imagem. Imagem custa muito mais caro que texto puro, e o preço se multiplica pelo número de páginas. Um relatório de trinta páginas entra na conversa pesando como dezenas de mensagens longas." } },
+            { "@type": "Question", "name": "Qual a diferença de anexar o PDF na conversa e deixar ele numa pasta?", "acceptedAnswer": { "@type": "Answer", "text": "Na conversa o arquivo vira parte do histórico, e o histórico é reenviado a cada nova mensagem que você manda. Numa pasta, com o Claude Code ou o Claude Cowork, o arquivo fica parado no seu computador e ele só abre o pedaço que precisa, quando precisa. É a diferença entre carregar o livro inteiro em toda pergunta e ir até a estante buscar a página certa." } },
+            { "@type": "Question", "name": "Vale a pena transformar o PDF em Markdown antes?", "acceptedAnswer": { "@type": "Answer", "text": "Vale, principalmente se for um arquivo que você vai consultar várias vezes. O Markdown é texto puro, então some o custo de imagem por página e sobra só o texto. Você converte uma vez, guarda o arquivo convertido na pasta e daí em diante todas as conversas em cima dele saem baratas. Não vale a pena quando o que importa é justamente o visual da página, como num contrato assinado ou num gráfico que precisa ser lido como imagem." } },
+            { "@type": "Question", "name": "Isso serve para qualquer plano do Claude?", "acceptedAnswer": { "@type": "Answer", "text": "Serve. O limite existe em todos os planos, muda só o tamanho dele. Quem está no plano mais barato sente na primeira tarde; quem está no mais caro sente quando abre um arquivo grande no meio de um projeto longo. A economia é a mesma nos dois casos." } }
+        ]
+    }
+    </script>
+
+    <!-- JSON-LD: Person (autoria consistente = entidade citavel) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Bruna Santanna",
+        "url": "https://brunasantanna.com",
+        "jobTitle": "Educadora de IA e fundadora da NewScale",
+        "description": "Educadora de inteligência artificial para não-programadores. Fundadora da NewScale, consultoria de IA para empresas.",
+        "sameAs": [
+            "https://instagram.com/brusantanna.ai",
+            "https://www.linkedin.com/in/bruna-araujo-santanna/",
+            "https://newscale.tech"
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg:#F3EEE3; --bg-2:#ECE5D6; --card:#FBF9F3;
+            --ink:#14373C; --ink-2:#2C4F54; --green:#435D51;
+            --terra:#B06E4A; --terra-l:#C4835E; --terra-d:#985A3B;
+            --text:#233133; --muted:#6E7A75; --line:rgba(20,55,60,0.16);
+            --cream:#F4F3EF;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family:'Hanken Grotesk',sans-serif; background:var(--bg); color:var(--text); line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+        img { max-width:100%; display:block; }
+        a { color:inherit; text-decoration:none; }
+        ::selection { background:var(--terra); color:#fff; }
+        .wrap { max-width:1100px; margin:0 auto; padding:0 30px; }
+        .kick { font-size:0.72rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--terra); }
+
+        /* ---------- HEADER ---------- */
+        .site-header { position:sticky; top:0; z-index:50; background:rgba(243,238,227,0.92); backdrop-filter:blur(8px); border-bottom:2px solid var(--ink); }
+        .header-inner { display:flex; align-items:center; justify-content:space-between; gap:24px; max-width:1100px; padding:16px 30px; }
+        .logo { display:inline-flex; align-items:center; white-space:nowrap; font-family:'Anton',sans-serif; font-size:1.2rem; letter-spacing:0.02em; text-transform:uppercase; color:var(--ink); }
+        .logo .brand-tag { font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:0.62rem; letter-spacing:0.12em; color:var(--terra); border:1.5px solid var(--terra); padding:3px 8px; border-radius:100px; margin-left:10px; }
+        .main-nav { display:flex; align-items:center; gap:14px; }
+        .main-nav a { font-size:0.86rem; font-weight:600; color:var(--ink-2); white-space:nowrap; transition:color .18s; }
+        .main-nav a:hover, .main-nav a.active { color:var(--terra); }
+        .nav-cta { background:var(--terra); color:#fff !important; padding:10px 18px; border-radius:100px; font-size:0.8rem !important; transition:background .2s, transform .15s; }
+        .nav-cta:hover { background:var(--terra-d); transform:translateY(-1px); }
+        .nav-toggle { display:none; background:none; border:none; font-size:1.5rem; color:var(--ink); cursor:pointer; line-height:1; }
+        @media (max-width: 1180px) {
+            .nav-toggle { display:block; }
+            .main-nav { display:none; position:absolute; top:100%; left:0; right:0; flex-direction:column; align-items:flex-start; gap:0; background:var(--bg); border-bottom:2px solid var(--ink); padding:8px 30px 20px; }
+            .main-nav.open { display:flex; box-shadow:0 28px 46px -20px rgba(20,55,60,0.55); max-height:calc(100dvh - 62px); overflow-y:auto; }
+            .site-header:has(.main-nav.open)::after { content:""; position:fixed; left:0; right:0; top:62px; bottom:0; background:rgba(20,55,60,0.38); z-index:40; pointer-events:none; }
+            .main-nav a { padding:12px 0; width:100%; border-top:1px solid var(--line); font-size:1rem; }
+            .nav-cta { margin-top:12px; text-align:center; border-top:none; }
+        }
+
+        /* botão genérico */
+        .btn { display:inline-flex; align-items:center; gap:9px; justify-content:center; font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:0.85rem; letter-spacing:0.04em; text-transform:uppercase; padding:15px 28px; border-radius:100px; border:none; cursor:pointer; transition:transform .15s, box-shadow .15s, background .2s; }
+        .btn-terra { background:var(--terra); color:#fff; }
+        .btn-terra:hover { background:var(--terra-d); transform:translateY(-2px); box-shadow:0 10px 26px rgba(176,110,74,.35); }
+        .btn-ink { background:var(--ink); color:#fff; }
+        .btn-ink:hover { background:var(--ink-2); transform:translateY(-2px); }
+
+        /* ---------- HERO COMPACTO ---------- */
+        .hero { position:relative; overflow:hidden; border-bottom:1.5px solid var(--line); }
+        .hero-glow { position:absolute; width:560px; height:560px; border-radius:50%; top:-240px; right:-160px; background:radial-gradient(circle,rgba(176,110,74,.13),transparent 62%); pointer-events:none; }
+        .hero .wrap { position:relative; z-index:2; padding:54px 30px 48px; max-width:820px; }
+        .hero-eyebrow { display:inline-flex; align-items:center; gap:9px; margin-bottom:20px; flex-wrap:wrap; }
+        .hero-eyebrow .dot { width:7px; height:7px; border-radius:50%; background:var(--terra); box-shadow:0 0 0 4px rgba(176,110,74,.18); }
+        .hero-eyebrow .sep { color:var(--line); }
+        .hero-eyebrow .data { font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); }
+        .hero h1 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(2.4rem,7vw,4.2rem); line-height:0.94; letter-spacing:-0.01em; text-transform:uppercase; color:var(--ink); }
+        .hero h1 .terra { color:var(--terra); }
+        .hero-sub { font-size:1.12rem; color:var(--ink-2); font-weight:300; max-width:54ch; margin-top:20px; }
+        .hero-sub b { color:var(--ink); font-weight:600; }
+
+        /* ---------- LAYOUT ARTIGO ---------- */
+        .artigo { padding:56px 0 40px; }
+        .artigo .wrap { max-width:760px; }
+
+        /* bloco do reel embedado */
+        .reel-embed { margin:0 auto 44px; max-width:540px; }
+        .reel-embed .instagram-media { margin:0 auto !important; }
+        .reel-placeholder { border:1.5px dashed var(--line); border-radius:16px; background:var(--card); padding:34px 26px; text-align:center; }
+        .reel-placeholder .rp-icon { font-size:1.7rem; margin-bottom:10px; }
+        .reel-placeholder b { display:block; font-family:'Anton',sans-serif; font-weight:400; font-size:1.15rem; text-transform:uppercase; color:var(--ink); letter-spacing:.01em; margin-bottom:6px; }
+        .reel-placeholder p { font-size:0.88rem; color:var(--muted); }
+
+        /* corpo do post */
+        .corpo { font-size:1.06rem; color:var(--text); line-height:1.75; }
+        .corpo > p { margin-bottom:20px; }
+        .corpo > p:first-of-type { font-size:1.16rem; color:var(--ink-2); }
+        .corpo h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.6rem,4.5vw,2.2rem); text-transform:uppercase; color:var(--ink); line-height:1.05; letter-spacing:-0.01em; margin:44px 0 16px; }
+        .corpo h3 { font-size:1.2rem; font-weight:700; color:var(--ink); margin:30px 0 10px; }
+        .corpo a { color:var(--terra-d); font-weight:600; border-bottom:1.5px solid var(--terra); }
+        .corpo a:hover { color:var(--terra); }
+        .corpo strong, .corpo b { color:var(--ink); font-weight:700; }
+        .corpo ul { list-style:none; margin:6px 0 22px; padding:0; }
+        .corpo ul li { position:relative; padding-left:26px; margin-bottom:12px; }
+        .corpo ul li::before { content:'→'; position:absolute; left:0; top:0; color:var(--terra); font-weight:800; }
+        .corpo ol { margin:6px 0 22px 22px; }
+        .corpo ol li { margin-bottom:12px; padding-left:6px; }
+        .corpo ol li::marker { color:var(--terra); font-weight:800; }
+
+        /* blocos didáticos */
+        .bloco { border-radius:14px; padding:22px 24px 22px 26px; margin:26px 0; border:1.5px solid var(--line); }
+        .bloco .bloco-tag { display:block; font-size:0.72rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:8px; }
+        .bloco p { font-size:0.98rem; line-height:1.65; margin:0; }
+        .bloco p + p { margin-top:10px; }
+        .bloco-dica { background:rgba(67,93,81,0.08); border-left:5px solid var(--green); }
+        .bloco-dica .bloco-tag { color:var(--green); }
+        .bloco-atencao { background:rgba(176,110,74,0.09); border-left:5px solid var(--terra); }
+        .bloco-atencao .bloco-tag { color:var(--terra-d); }
+        .bloco-case { background:var(--ink); border-left:5px solid var(--terra-l); border-color:var(--ink); }
+        .bloco-case .bloco-tag { color:var(--terra-l); }
+        .bloco-case p { color:rgba(244,243,239,.88); }
+        .bloco-case b { color:#fff; }
+
+        /* antes/depois */
+        .antes-depois { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:26px 0; }
+        @media (max-width:600px) { .antes-depois { grid-template-columns:1fr; } }
+        .ad-ruim, .ad-bom { border-radius:12px; padding:18px 20px; font-size:0.95rem; line-height:1.6; border:1.5px solid var(--line); }
+        .ad-ruim { background:rgba(150,90,59,0.06); }
+        .ad-bom { background:rgba(67,93,81,0.08); }
+        .ad-ruim .ad-label, .ad-bom .ad-label { display:block; font-size:0.74rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:8px; }
+        .ad-ruim .ad-label { color:var(--terra-d); }
+        .ad-bom .ad-label { color:var(--green); }
+
+        /* prompt box com botão copiar */
+        .prompt-box { background:var(--ink); border-radius:16px; padding:22px 24px; margin:28px 0; position:relative; box-shadow:8px 8px 0 var(--green); }
+        .prompt-box .pb-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; }
+        .prompt-box .pb-label { font-size:0.72rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--terra-l); }
+        .prompt-box pre { font-family:'Hanken Grotesk',ui-monospace,monospace; font-size:0.95rem; line-height:1.6; color:rgba(244,243,239,.92); white-space:pre-wrap; word-wrap:break-word; margin:0; }
+        .copy-btn { flex-shrink:0; display:inline-flex; align-items:center; gap:6px; background:var(--terra); color:#fff; border:none; border-radius:100px; padding:8px 16px; font-family:'Hanken Grotesk',sans-serif; font-size:0.74rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer; transition:background .2s, transform .15s; }
+        .copy-btn:hover { background:var(--terra-d); transform:translateY(-1px); }
+        .copy-btn.copied { background:var(--green); }
+
+        /* ---------- CONTENT UPGRADE (gated) ---------- */
+        .upgrade { margin:52px 0; }
+        .upgrade .wl-card { background:var(--ink); color:#fff; border-radius:18px; padding:34px 32px; box-shadow:8px 8px 0 var(--terra); }
+        .upgrade .wl-card .kick { color:var(--terra-l); display:block; margin-bottom:12px; }
+        .upgrade .wl-card h3 { font-family:'Anton',sans-serif; font-weight:400; font-size:1.7rem; text-transform:uppercase; line-height:1; margin-bottom:8px; }
+        .upgrade .wl-card .wl-sub { font-size:0.95rem; color:rgba(255,255,255,0.72); margin-bottom:22px; max-width:46ch; }
+        .upgrade .wl-form { display:flex; gap:10px; flex-wrap:wrap; }
+        .field { flex:1; min-width:220px; padding:16px 20px; font-family:inherit; font-size:1rem; background:rgba(255,255,255,0.07); border:1.5px solid rgba(255,255,255,0.22); border-radius:10px; color:#fff; outline:none; transition:border-color .2s, background .2s; }
+        .field::placeholder { color:rgba(255,255,255,0.5); }
+        .field:focus { border-color:var(--terra); background:rgba(255,255,255,0.12); }
+        .btn-form { padding:16px 26px; font-family:'Hanken Grotesk',sans-serif; font-size:0.82rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer; background:var(--terra); color:#fff; border:none; border-radius:10px; transition:transform .15s, box-shadow .15s, background .2s; white-space:nowrap; }
+        .btn-form:hover { background:var(--terra-d); transform:translateY(-2px); box-shadow:0 8px 22px rgba(176,110,74,0.35); }
+        .btn-form:disabled { opacity:.6; cursor:not-allowed; transform:none; }
+        .upgrade .fine { margin-top:14px; font-size:0.76rem; color:rgba(255,255,255,0.55); }
+        .wl-ok { display:none; background:rgba(67,93,81,0.35); border:1.5px solid var(--terra-l); border-radius:10px; padding:18px 20px; font-size:0.98rem; line-height:1.5; color:#fff; }
+        .wl-ok b { color:var(--terra-l); }
+        .wl-done .wl-ok { display:block; }
+        .wl-done .wl-form, .wl-done .fine { display:none; }
+
+        /* ---------- FAQ ---------- */
+        .faq-sec { padding:8px 0 20px; }
+        .faq-sec .wrap { max-width:760px; }
+        .faq-sec h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.6rem,4.5vw,2.2rem); text-transform:uppercase; color:var(--ink); line-height:1; margin-bottom:22px; }
+        .faq-list { max-width:760px; }
+        .faq-item { border:1.5px solid var(--line); border-radius:14px; background:var(--card); margin-bottom:12px; overflow:hidden; }
+        .faq-q { width:100%; display:flex; justify-content:space-between; align-items:center; gap:16px; text-align:left; background:none; border:none; cursor:pointer; padding:20px 24px; font-family:'Hanken Grotesk',sans-serif; font-size:1.02rem; font-weight:700; color:var(--ink); }
+        .faq-q .mark { font-family:'Anton',sans-serif; font-size:1.3rem; color:var(--terra); transition:transform .25s; flex-shrink:0; line-height:1; }
+        .faq-item.open .faq-q .mark { transform:rotate(45deg); }
+        .faq-a { display:none; padding:0 24px 22px; font-size:0.96rem; color:var(--ink-2); line-height:1.7; }
+        .faq-item.open .faq-a { display:block; }
+        .faq-a b { color:var(--ink); }
+
+        /* ---------- BANNER DO CURSO ---------- */
+        .curso-banner { background:var(--ink); color:var(--cream); margin:40px 0 0; }
+        .curso-banner .wrap { max-width:900px; padding:56px 30px; display:flex; align-items:center; justify-content:space-between; gap:30px; flex-wrap:wrap; }
+        .curso-banner .cb-text { flex:1; min-width:260px; }
+        .curso-banner .kick { color:var(--terra-l); display:block; margin-bottom:12px; }
+        .curso-banner h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.7rem,5vw,2.6rem); text-transform:uppercase; color:#fff; line-height:1; margin-bottom:12px; max-width:20ch; }
+        .curso-banner h2 .terra { color:var(--terra-l); }
+        .curso-banner p { color:rgba(244,243,239,.72); font-weight:300; font-size:1rem; max-width:46ch; }
+
+        /* volta pro hub */
+        .voltar-hub { text-align:center; padding:40px 0 8px; }
+        .voltar-hub a { font-size:0.9rem; font-weight:700; letter-spacing:0.02em; color:var(--ink); border-bottom:2px solid var(--terra); padding-bottom:3px; transition:color .18s; }
+        .voltar-hub a:hover { color:var(--terra); }
+
+        /* footer */
+        footer { background:var(--ink); color:rgba(244,243,239,.6); padding:40px 0 48px; margin-top:30px; }
+        .footer-row { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+        .footer-brand { font-family:'Anton',sans-serif; font-size:1.1rem; text-transform:uppercase; color:#fff; }
+        .footer-links { display:flex; gap:20px; flex-wrap:wrap; }
+        .footer-links a { font-size:0.84rem; font-weight:600; color:rgba(244,243,239,.7); }
+        .footer-links a:hover { color:var(--terra-l); }
+        .footer-copy { font-size:0.76rem; color:rgba(244,243,239,.4); margin-top:14px; }
+
+        /* reveal */
+        .rv { opacity:0; transform:translateY(22px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+        .rv.in { opacity:1; transform:none; }
+        @media (prefers-reduced-motion:reduce) { .rv { opacity:1; transform:none; } }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="wrap header-inner">
+        <a href="/" class="logo">Bruna Santanna<span class="brand-tag">A Virada IA</span></a>
+        <nav class="main-nav" id="mainNav">
+            <a href="/">Home</a>
+            <a href="/biblioteca">Biblioteca</a>
+            <a href="/claude">Guia do Claude</a>
+            <a href="/quem-sou">Quem Sou</a>
+            <a href="/treinamentos">Treinamentos Corporativos</a>
+            <a href="/mentoria">Mentoria</a>
+            <a href="https://newscale.tech" target="_blank" rel="noopener">IA na sua Empresa</a>
+            <a href="/comece" class="nav-cta">Cursos</a>
+        </nav>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">☰</button>
+    </div>
+</header>
+
+<!-- ========== HERO COMPACTO ========== -->
+<section class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="wrap">
+        <div class="hero-eyebrow rv">
+            <span class="dot"></span>
+            <span class="kick">Tokens</span>
+            <span class="sep">·</span>
+            <span class="data">Setembro de 2026</span>
+        </div>
+        <h1 class="rv">PDF no Claude: por que ele queima o seu limite e como ler gastando quase nada</h1>
+        <p class="hero-sub rv">Jogar PDF direto na conversa é o que mais consome o seu limite de uso no Claude, e quase ninguém percebe. Entenda por que isso acontece e os dois jeitos de ler o mesmo arquivo gastando uma fração disso.</p>
+    </div>
+</section>
+
+<!-- ========== ARTIGO ========== -->
+<article class="artigo">
+    <div class="wrap">
+
+
+        <div class="corpo rv">
+<p>Se você usa o Claude todo dia e ainda arrasta o PDF para dentro da conversa, é bem provável que seja isso que está queimando o seu limite antes da hora. Não é o tamanho das suas perguntas, não é o modelo, não é a quantidade de conversas abertas. É o arquivo.</p>
+
+<p>Esse guia explica o que acontece por baixo quando você anexa um PDF, e mostra os dois jeitos de ler o mesmo arquivo gastando uma fração do que você gasta hoje.</p>
+
+<h2>Token: a unidade que decide o seu dia</h2>
+
+<p>Token é a unidade que o Claude usa para contar tudo que entra e sai da conversa. Cada palavra que você escreve, cada palavra que ele responde e cada arquivo que você anexa vira uma quantidade de tokens, e é essa conta que enche o seu limite de uso.</p>
+
+<p>Enquanto você só conversa, essa conta sobe devagar. O salto acontece quando entra arquivo, e o PDF é o pior de todos.</p>
+
+<h2>Por que o PDF é o vilão</h2>
+
+<p>Quando você pede para o Claude ler um PDF anexado na conversa, ele não trata aquilo como um texto colado. Ele abre o arquivo e processa <b>cada página também como imagem</b>, porque é assim que ele consegue enxergar tabela, coluna, gráfico, carimbo e assinatura, coisas que se perdem se ele só puxasse as letras.</p>
+
+<p>Imagem custa caro. Uma única página pode consumir alguns milhares de tokens, e esse valor se multiplica pelo número de páginas. Um relatório de trinta páginas entra na sua conversa pesando como dezenas de mensagens longas, de uma vez só.</p>
+
+<div class="destaque">
+    <p><b>E tem a parte que quase ninguém vê:</b> na conversa, o arquivo passa a fazer parte do histórico. E o histórico é reenviado a cada nova mensagem sua. Você anexa o PDF uma vez, mas ele pode ser lido de novo a cada pergunta que você faz depois. Cinco perguntas em cima do mesmo relatório podem custar cinco relatórios.</p>
+</div>
+
+<h2>Jeito 1: tire o PDF da conversa e coloque numa pasta</h2>
+
+<p>Esse é o jeito que resolve a maior parte dos casos. Em vez de anexar o arquivo no chat, você deixa ele numa pasta do seu computador e usa o <b>Claude Code</b> ou o <b>Claude Cowork</b>, que são as versões do Claude que enxergam os seus arquivos.</p>
+
+<p>A diferença é enorme: em vez de engolir o documento inteiro, ele primeiro verifica se consegue extrair o texto direto do arquivo, que é a leitura barata. Só se não conseguir, aí sim ele parte para a leitura pesada, e mesmo assim só na parte que interessa.</p>
+
+<p>Abra o Claude Code ou o Claude Cowork na pasta onde está o arquivo e peça assim:</p>
+
+<div class="prompt-box">
+    <div class="pb-head">
+        <span class="pb-label">Prompt &middot; ler o PDF sem gastar à toa</span>
+        <button class="copy-btn">Copiar</button>
+    </div>
+    <pre>O arquivo relatorio.pdf está aqui nesta pasta. Não jogue o arquivo inteiro
+no contexto.
+
+Faça assim:
+1. Veja se dá para extrair o texto direto do PDF, que é a leitura barata.
+2. Se der, trabalhe só com o texto extraído.
+3. Se não der, me avise antes de partir para a leitura pesada e me diga
+   quantas páginas são.
+4. Depois me responda só isto: [escreva aqui o que você quer saber do
+   arquivo].
+
+E me diga no final qual dos dois caminhos você usou.</pre>
+</div>
+
+<p>O pedido para ele avisar antes da leitura pesada é o detalhe que mais economiza. Você descobre o custo antes de pagar por ele.</p>
+
+<h2>Jeito 2: converta o PDF em Markdown uma vez só</h2>
+
+<p>Se é um arquivo que você vai consultar várias vezes, a apostila do curso, o contrato padrão, o relatório do mês, vale converter uma vez e nunca mais pagar o preço da imagem.</p>
+
+<p>Markdown é texto puro. Sem página, sem imagem, sem peso. O mesmo documento que custava milhares de tokens por página passa a custar o que custa um texto comum.</p>
+
+<div class="prompt-box">
+    <div class="pb-head">
+        <span class="pb-label">Prompt &middot; converter para Markdown</span>
+        <button class="copy-btn">Copiar</button>
+    </div>
+    <pre>Converta o relatorio.pdf desta pasta em um arquivo Markdown chamado
+relatorio.md, preservando os títulos, as listas e as tabelas.
+
+Use a extração de texto, não a leitura por imagem. Se alguma parte não sair
+(um gráfico, uma imagem, uma página escaneada), não invente: escreva no
+lugar uma linha entre colchetes dizendo o que ficou de fora e em qual página.
+
+No final, me diga o tamanho do .md comparado com o PDF original.</pre>
+</div>
+
+<p>Daí em diante você conversa com o <code>.md</code> e esquece o PDF. A linha entre colchetes existe por um motivo: você precisa saber o que ficou de fora antes de tomar decisão em cima do arquivo convertido.</p>
+
+<h2>Quando o PDF na conversa continua sendo o certo</h2>
+
+<p>Não é para virar regra cega. Anexar o PDF direto continua sendo o melhor caminho quando:</p>
+
+<ul>
+<li>&rarr; O arquivo é <b>curto</b>, uma ou duas páginas, e é uma pergunta só</li>
+<li>&rarr; O que importa é o <b>visual da página</b>: um gráfico para ele interpretar, um layout para avaliar, um documento escaneado à mão</li>
+<li>&rarr; Você está no Claude do navegador, no celular, sem acesso aos seus arquivos</li>
+</ul>
+
+<p>O erro não é usar PDF. O erro é usar o modo caro por padrão, todo dia, sem saber que existe o barato.</p>
+
+<h2>O que fazer hoje</h2>
+
+<p>Abra a sua conversa mais pesada dos últimos dias, aquela em que você anexou um relatório e ficou fazendo perguntas em cima. Feche ela. Coloque o arquivo numa pasta, abra o Claude Code ou o Cowork ali dentro e refaça as mesmas perguntas com o primeiro prompt deste guia.</p>
+
+<p>Você vai fazer o mesmo trabalho e chegar no fim do dia com limite sobrando. É a mudança mais barata que existe: não custa ferramenta nova, não custa plano melhor, custa parar de arrastar arquivo para dentro do chat.</p>
+
+<h2>Continue aprendendo</h2>
+
+<ul>
+<li><a href="/guia-economizar-uso">4 comandos para não estourar seu limite de uso no Claude</a> (o resto da economia, além do PDF)</li>
+<li><a href="/guia-cowork-no-celular">O Claude Cowork no seu bolso</a> (onde essa leitura barata acontece)</li>
+<li><a href="/guia-prompt-por-resultado">Pare de escrever o passo a passo no prompt: diga o resultado</a></li>
+<li><a href="/claude">O Guia do Claude do zero ao avançado</a> e a <a href="/biblioteca">Biblioteca completa</a></li>
+</ul>
+        </div>
+
+        <!-- ─── CONTENT UPGRADE (gated → list: 'biblioteca') ───────────── -->
+        <div class="upgrade rv">
+            <div class="wl-card" id="upgradeCard">
+                <span class="kick">Guia grátis · PDF</span>
+                <h3>O Guia Completo do Claude em PDF</h3>
+                <p class="wl-sub">Meu guia do Claude do zero ao avançado, em PDF pra você salvar e consultar quando quiser. Deixa seu email que eu libero na hora, e você ainda entra na Biblioteca.</p>
+                <form class="wl-form" novalidate>
+                    <input class="field" type="email" placeholder="Seu melhor email" required autocomplete="email">
+                    <button type="submit" class="btn-form">Quero o guia do Claude</button>
+                </form>
+                <div class="wl-ok"><b>Prontinho, tá dentro.</b> Baixa agora: <a href="/guia-claude-bruna.pdf" target="_blank" rel="noopener">o Guia Completo do Claude em PDF</a>. As próximas novidades da Biblioteca chegam no seu email.</div>
+                <p class="fine">Zero spam. Só o que vale a pena sobre IA na prática.</p>
+            </div>
+        </div>
+
+    </div>
+</article>
+
+<!-- ========== FAQ ========== -->
+<section class="faq-sec">
+    <div class="wrap">
+        <h2 class="rv">Dúvidas rápidas</h2>
+        <div class="faq-list rv">
+            <div class="faq-item">
+                <button class="faq-q">Por que um PDF gasta tanto token se ele é só texto?<span class="mark">+</span></button>
+                <div class="faq-a">Porque para o Claude ele não é só texto. Além de extrair as palavras, o modelo precisa enxergar a página para entender tabela, gráfico, coluna e assinatura, e para isso cada página vira também uma imagem. Imagem custa muito mais caro que texto puro, e o preço se multiplica pelo número de páginas. Um relatório de trinta páginas entra na conversa pesando como dezenas de mensagens longas.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Qual a diferença de anexar o PDF na conversa e deixar ele numa pasta?<span class="mark">+</span></button>
+                <div class="faq-a">Na conversa o arquivo vira parte do histórico, e o histórico é reenviado a cada nova mensagem que você manda. Numa pasta, com o Claude Code ou o Claude Cowork, o arquivo fica parado no seu computador e ele só abre o pedaço que precisa, quando precisa. É a diferença entre carregar o livro inteiro em toda pergunta e ir até a estante buscar a página certa.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Vale a pena transformar o PDF em Markdown antes?<span class="mark">+</span></button>
+                <div class="faq-a">Vale, principalmente se for um arquivo que você vai consultar várias vezes. O Markdown é texto puro, então some o custo de imagem por página e sobra só o texto. Você converte uma vez, guarda o arquivo convertido na pasta e daí em diante todas as conversas em cima dele saem baratas. Não vale a pena quando o que importa é justamente o visual da página, como num contrato assinado ou num gráfico que precisa ser lido como imagem.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Isso serve para qualquer plano do Claude?<span class="mark">+</span></button>
+                <div class="faq-a">Serve. O limite existe em todos os planos, muda só o tamanho dele. Quem está no plano mais barato sente na primeira tarde; quem está no mais caro sente quando abre um arquivo grande no meio de um projeto longo. A economia é a mesma nos dois casos.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== BANNER DO CURSO ========== -->
+<section class="curso-banner">
+    <div class="wrap">
+        <div class="cb-text">
+            <span class="kick">Curso de Claude · Turma 1</span>
+            <h2>Quer ir <span class="terra">além</span> desse guia?</h2>
+            <p>No Claude com Profundidade você aprende a pensar e usar IA de verdade, do zero, sem programar. Zero tech, 100% prático.</p>
+        </div>
+        <a href="/curso" class="btn btn-terra">Quero o curso</a>
+    </div>
+</section>
+
+<!-- volta pro hub -->
+<div class="voltar-hub">
+    <a href="/biblioteca">← Voltar pra Biblioteca</a>
+</div>
+
+<footer>
+    <div class="wrap">
+        <div class="footer-row">
+            <span class="footer-brand">A Virada IA</span>
+            <nav class="footer-links">
+                <a href="/biblioteca">Biblioteca</a>
+                <a href="/claude">Guia do Claude</a>
+                <a href="/curso">Curso de Claude</a>
+                <a href="/mentoria">Mentoria</a>
+                <a href="/comece">Comece por aqui</a>
+                <a href="https://instagram.com/brusantanna.ai" target="_blank" rel="noopener">Instagram</a>
+                <a href="https://newscale.tech" target="_blank" rel="noopener">NewScale</a>
+                <a href="mailto:eu@brunasantanna.com">Contato</a>
+            </nav>
+        </div>
+        <p class="footer-copy">© 2026 Bruna Santanna · A Virada IA</p>
+    </div>
+</footer>
+
+<script>
+    // ===== Copiar prompt =====
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const box = btn.closest('.prompt-box');
+            const pre = box.querySelector('pre');
+            const text = pre ? pre.innerText : '';
+            navigator.clipboard.writeText(text).then(() => {
+                const original = btn.textContent;
+                btn.textContent = '✓ Copiado';
+                btn.classList.add('copied');
+                setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, 1800);
+            });
+        });
+    });
+
+    // ===== Content upgrade (Apps Script, list: 'biblioteca') =====
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx90IdrA_L6n3jVdoYBinBPxPfWq0h6Iua1MrI8gQ7-RgBXhU1rOqF9dM2n7mLdAeMW/exec";
+
+    document.querySelectorAll('.wl-form').forEach(form => {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const input = form.querySelector('input[type="email"]');
+            const btn = form.querySelector('button[type="submit"]');
+            const email = input.value.trim();
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { input.focus(); return; }
+            btn.disabled = true; btn.textContent = 'Enviando...';
+            try {
+                await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, list: 'biblioteca', timestamp: new Date().toISOString(), source: location.href }) });
+            } catch(_) {}
+            if (typeof gtag === 'function') gtag('event', 'lead_signup', { list: 'biblioteca' });
+            document.querySelectorAll('.upgrade .wl-card').forEach(c => c.classList.add('wl-done'));
+            localStorage.setItem('biblioteca_lead', '1');
+        });
+    });
+    if (localStorage.getItem('biblioteca_lead') === '1') {
+        document.querySelectorAll('.upgrade .wl-card').forEach(c => c.classList.add('wl-done'));
+    }
+
+    // ===== FAQ accordion =====
+    document.querySelectorAll('.faq-q').forEach(q => {
+        q.addEventListener('click', () => q.closest('.faq-item').classList.toggle('open'));
+    });
+
+    // ===== menu mobile =====
+    const navToggle = document.getElementById('navToggle'), mainNav = document.getElementById('mainNav');
+    navToggle.addEventListener('click', () => mainNav.classList.toggle('open'));
+    mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mainNav.classList.remove('open')));
+
+    // ===== reveal on scroll =====
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0, rootMargin:'0px 0px -40px 0px' });
+    document.querySelectorAll('.rv').forEach((el,i) => { el.style.transitionDelay = (i%3*70)+'ms'; io.observe(el); });
+    /* rv-safety: garante que o conteudo nunca fica invisivel */
+    setTimeout(function(){ document.querySelectorAll('.rv:not(.in)').forEach(function(el){ el.classList.add('in'); }); }, 2500);
+</script>
+
+<script src="/promo-sistema.js" defer></script>
+</body>
+</html>
