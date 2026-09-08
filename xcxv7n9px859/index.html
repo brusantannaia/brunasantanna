@@ -1,0 +1,947 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Páginas imersivas · Bruna Santanna</title>
+<meta name="description" content="Um motor no Claude que pesquisa a pauta, escreve o roteiro, monta o carrossel com a sua marca e edita o seu vídeo.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Motor de Conteúdo · Bruna Santanna">
+<meta property="og:description" content="Você aprova e grava. O sistema pesquisa, escreve, monta a arte com a sua marca e edita o vídeo.">
+<meta property="og:image" content="https://brunasantanna.com/fotos/v2/hero-sistema-full.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Instrument Serif local. O arquivo e TTF com extensao .woff2, por isso format('truetype') */
+@font-face{font-family:'Instrument Serif';font-style:normal;font-weight:400;
+  font-display:swap;src:url(instrument-0.woff2) format('truetype')}
+
+:root{
+  --paper:#F3EEE3; --soft:#ECE5D6; --card:#FBF9F3;
+  --ink:#14373C; --deep:#0E282C; --green:#435D51;
+  --terra:#985A3B; --clay:#B06E4A; --wash:#E0BBA4;
+  --pad:22px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font:16px/1.55 'Hanken Grotesk',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+img{display:block;width:100%;height:auto}
+h1,h2,h3,p,figure,blockquote,ul,ol{margin:0}
+ul,ol{padding:0;list-style:none}
+a{color:inherit}
+button{font:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--clay);outline-offset:4px}
+.display{font-family:'Instrument Serif',Georgia,serif;font-weight:400;
+  letter-spacing:-.03em;line-height:.96}
+.em{font-style:normal;color:var(--terra)}
+.wrap{padding-left:var(--pad);padding-right:var(--pad);max-width:1180px;margin:0 auto}
+
+/* kicker */
+.kicker{display:block;font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--terra);font-weight:600;margin-bottom:16px}
+.on-dark .kicker{color:var(--wash)}
+
+/* ---------- barra de revisao (some na publicacao) ---------- */
+.bar{position:sticky;top:0;z-index:60;background:var(--deep);color:var(--paper);
+  padding:9px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.bar span{font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.65}
+.bar div{display:flex;gap:5px}
+.bar button{min-height:40px;padding:8px 13px;border:1px solid #f3eee340;border-radius:30px;
+  background:none;color:var(--paper);font-size:12px}
+.bar button[aria-pressed=true]{background:var(--paper);color:var(--deep)}
+
+/* ============ 1 · HERO DE SANGRIA ============ */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;
+  justify-content:flex-end;padding:0 0 34px;overflow:hidden;isolation:isolate}
+.hero>picture{position:absolute;inset:0;z-index:-2;display:block}
+.hero picture img{width:100%;height:100%;object-fit:cover;object-position:var(--pos)}
+.hero:after{content:'';position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(180deg,#0e282c8f 0%,#0e282c2e 30%,#0e282cca 66%,#0e282cf5 100%)}
+.hero-top{position:absolute;top:0;left:0;right:0;padding:18px var(--pad);display:flex;
+  align-items:center;justify-content:space-between;color:var(--paper)}
+.hero-top b{font-family:'Instrument Serif',serif;font-weight:400;font-size:20px}
+.hero-top small{font-size:9px;letter-spacing:.18em}
+.hero-copy{padding:0 var(--pad);color:var(--paper);max-width:1180px;margin:0 auto;width:100%}
+.hero .kicker{color:var(--wash)}
+.hero h1{font-size:clamp(46px,12.8vw,94px);max-width:12ch}
+.hero h1 em{font-style:normal;color:var(--wash);display:block}
+.hero-sub{font-size:15px;line-height:1.5;margin:18px 0 22px;max-width:35ch;
+  color:#f3eee3e0;font-weight:300}
+.hero-cta{display:inline-flex;align-items:center;gap:16px;min-height:56px;padding:16px 26px;
+  border:1px solid #f3eee3;border-radius:60px;text-decoration:none;color:var(--paper);
+  font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:500}
+.hero-cta i{font-style:normal;font-size:17px}
+.hero-price{font-size:11.5px;margin-top:13px;color:#f3eee3b3;font-weight:300;line-height:1.5}
+
+/* ============ 2 · PROVAS EMPILHADAS ============ */
+.stackblock{padding:56px var(--pad) 66px}
+.stackblock h2{font-size:clamp(36px,9.8vw,58px);text-align:center;max-width:15ch;margin:0 auto 38px}
+.stackblock .kicker{text-align:center}
+.stack{position:relative;max-width:430px;margin:auto}
+.stack figure{background:var(--card);padding:9px 9px 0;box-shadow:0 18px 40px #14373c2e;margin:0}
+.stack figcaption{font-size:10.5px;padding:10px 4px 12px;color:var(--green);line-height:1.4}
+.stack figcaption b{display:block;margin-top:3px;font-weight:600;font-size:9.5px;
+  letter-spacing:.04em;text-transform:uppercase;color:var(--terra)}
+.stack img{aspect-ratio:1/1;object-fit:cover;object-position:top}
+.stack .s1{transform:rotate(-3.5deg);width:82%}
+.stack .s2{transform:rotate(2.5deg);width:78%;margin:-14px 0 0 auto;position:relative;z-index:2}
+.stack .s3{transform:rotate(-1.5deg);width:74%;margin:-10px auto 0;position:relative;z-index:3}
+.stack-note{font-size:11px;color:var(--green);text-align:center;margin-top:34px;font-weight:300}
+
+/* uma prova solta, para o curso */
+.oneproof{padding:44px var(--pad);background:var(--card);border-top:1px solid #14373c1f;
+  border-bottom:1px solid #14373c1f;text-align:center}
+.oneproof blockquote{font-size:clamp(24px,6.6vw,36px);line-height:1.14;max-width:20ch;margin:0 auto}
+.oneproof figcaption{font-size:12px;margin-top:18px;color:var(--green)}
+
+/* ============ 3 · DOR, UMA POR VEZ ============ */
+.pain{background:var(--deep);color:var(--paper);padding:70px var(--pad) 76px}
+.pain h2{font-size:clamp(38px,10.4vw,64px);max-width:14ch;margin-bottom:44px}
+.pain h2 em{font-style:normal;color:var(--wash)}
+.pain-item{padding:26px 0;border-top:1px solid #f3eee32b;max-width:44ch}
+.pain-item b{display:block;font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--wash);font-weight:600;margin-bottom:11px}
+.pain-item p{font-size:16px;font-weight:300;color:#f3eee3e6}
+.pain-end{margin-top:48px;font-size:clamp(28px,7.6vw,46px);line-height:1.06;max-width:18ch}
+.pain-end span{color:var(--wash)}
+
+/* ============ 4 · FRASE SOZINHA ============ */
+.solo{background:var(--soft);min-height:82svh;display:flex;flex-direction:column;
+  justify-content:center;padding:70px var(--pad)}
+.solo blockquote{font-size:clamp(36px,10.2vw,66px);line-height:1.03;max-width:16ch}
+.solo blockquote span{color:var(--terra)}
+.solo figcaption{font-size:12px;margin-top:30px;color:var(--green);font-weight:300}
+.solo.on-dark{background:var(--deep);color:var(--paper)}
+.solo.on-dark blockquote span{color:var(--wash)}
+.solo.on-dark figcaption{color:#f3eee395}
+
+/* ============ 5 · NUMERO GIGANTE ============ */
+.bignum{background:var(--paper);min-height:78svh;display:flex;flex-direction:column;
+  justify-content:center;padding:70px var(--pad);text-align:center}
+.bignum strong{font-family:'Instrument Serif',serif;font-weight:400;display:block;
+  font-size:clamp(90px,31vw,210px);line-height:.82;color:var(--terra)}
+.bignum b{display:block;font-family:'Instrument Serif',serif;font-weight:400;
+  font-size:clamp(28px,7.4vw,46px);line-height:1.06;margin-top:14px;letter-spacing:-.02em}
+.bignum p{font-size:13px;color:var(--green);margin:26px auto 0;max-width:32ch;font-weight:300}
+
+/* ============ 6 · VIDEO DE SANGRIA ============ */
+.videoblock{background:var(--deep);color:var(--paper);padding:66px 0 70px}
+.videoblock .head{padding:0 var(--pad);max-width:1180px;margin:0 auto 30px}
+.videoblock h2{font-size:clamp(36px,9.8vw,60px);max-width:13ch}
+.videoblock h2 em{font-style:normal;color:var(--wash)}
+.videoblock .head p{font-size:15px;margin-top:18px;max-width:38ch;
+  color:#f3eee3cc;font-weight:300}
+.videoblock video{width:100%;max-height:78svh;display:block;background:#0a1f22;object-fit:contain}
+.videonote{padding:16px var(--pad) 0;font-size:11px;color:#f3eee38f;max-width:1180px;
+  margin:0 auto;font-weight:300}
+
+/* ============ 7 · ENTREGAS ============ */
+.deliver{padding:70px 0 76px}
+.deliver .head{padding:0 var(--pad);max-width:1180px;margin:0 auto 34px}
+.deliver h2{font-size:clamp(38px,10.4vw,64px);max-width:13ch}
+.shotfull{margin:0 0 40px;position:relative;overflow:hidden}
+/* no celular a tela real entra ampliada e cortada, senao o texto fica ilegivel */
+.shotfull img{width:155%;max-width:none;height:auto}
+.shotfull figcaption{padding:12px var(--pad) 0;font-size:11px;color:var(--green);
+  max-width:1180px;margin:0 auto;font-weight:300}
+.items{padding:0 var(--pad);max-width:1180px;margin:0 auto}
+.item{display:grid;grid-template-columns:38px 1fr;gap:14px;padding:28px 0;
+  border-top:1px solid #14373c2b}
+.item>span{font-family:'Instrument Serif',serif;font-size:32px;color:var(--terra);line-height:1}
+.item b{display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--terra);font-weight:600;margin-bottom:8px}
+.item h3{font-size:20px;font-weight:600;line-height:1.2}
+.item p{font-size:15px;margin-top:10px;max-width:46ch;font-weight:300;color:#2c4f54}
+
+/* ============ 8 · ANTES E DEPOIS ============ */
+.beforeafter{background:var(--soft);padding:66px var(--pad) 72px}
+.beforeafter h2{font-size:clamp(36px,9.8vw,60px);max-width:13ch;margin-bottom:16px}
+.beforeafter>p{font-size:15px;max-width:38ch;margin-bottom:32px;font-weight:300;color:#2c4f54}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:600px}
+.pair video{width:100%;aspect-ratio:9/16;object-fit:contain;background:#0a1f22}
+.pair figcaption{font-size:11px;margin-top:10px;color:var(--green)}
+
+/* ============ 9 · GALERIA DE ARTES ============ */
+.artes{padding:70px 0 76px;background:var(--card)}
+.artes .head{padding:0 var(--pad);max-width:1180px;margin:0 auto 30px}
+.artes h2{font-size:clamp(38px,10.4vw,62px);max-width:12ch}
+.artes .head p{font-size:15px;margin-top:18px;max-width:40ch;font-weight:300;color:#2c4f54}
+.steps{padding:0 var(--pad);max-width:1180px;margin:0 auto 38px}
+.steps li{display:grid;grid-template-columns:26px 1fr;gap:12px;padding:13px 0;
+  border-top:1px solid #14373c22;font-size:15px;font-weight:300}
+.steps li b{font-family:'Instrument Serif',serif;font-size:20px;font-weight:400;color:var(--terra)}
+.rail{display:flex;gap:14px;overflow-x:auto;padding:0 var(--pad) 14px;
+  scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.rail figure{flex:0 0 74%;max-width:330px;scroll-snap-align:center;margin:0}
+.rail button{border:0;padding:0;background:none;width:100%;cursor:zoom-in}
+.rail img{aspect-ratio:4/5;object-fit:cover;box-shadow:0 14px 28px #14373c1f}
+.rail figcaption{font-size:11px;margin-top:11px;color:var(--green)}
+.railnote{padding:18px var(--pad) 0;font-size:11px;color:var(--green);
+  max-width:1180px;margin:0 auto;font-weight:300}
+
+/* ============ 10 · ETAPAS ============ */
+.flow{padding:70px var(--pad) 76px;background:var(--deep);color:var(--paper)}
+.flow h2{font-size:clamp(38px,10.4vw,62px);max-width:13ch;margin-bottom:38px}
+.flow h2 em{font-style:normal;color:var(--wash)}
+.flow article{padding:24px 0;border-top:1px solid #f3eee32b}
+.flow article b{font-family:'Instrument Serif',serif;font-size:19px;font-weight:400;
+  color:var(--wash);display:block;margin-bottom:8px}
+.flow h3{font-size:20px;font-weight:600}
+.flow article p{font-size:15px;margin-top:9px;max-width:46ch;font-weight:300;color:#f3eee3cc}
+
+/* ============ 11 · EXEMPLOS (curso) ============ */
+.cases{padding:70px 0 76px;background:var(--card)}
+.cases .head{padding:0 var(--pad);max-width:1180px;margin:0 auto 34px}
+.cases h2{font-size:clamp(38px,10.4vw,62px);max-width:12ch}
+.cases .head p{font-size:15px;margin-top:18px;max-width:40ch;font-weight:300;color:#2c4f54}
+.case{margin-bottom:44px}
+.case img{aspect-ratio:1.42;object-fit:cover;object-position:top}
+.case div{padding:0 var(--pad);max-width:1180px;margin:16px auto 0}
+.case b{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--terra);font-weight:600}
+.case h3{font-size:23px;font-weight:600;margin:10px 0 8px;line-height:1.18}
+.case p{font-size:15px;max-width:44ch;font-weight:300;color:#2c4f54}
+
+/* ============ 12 · CURRICULO ============ */
+.curr{padding:70px var(--pad) 76px}
+.curr h2{font-size:clamp(38px,10.4vw,62px);max-width:13ch;margin-bottom:14px}
+.curr>p{font-size:15px;max-width:38ch;margin-bottom:30px;font-weight:300;color:#2c4f54}
+.curr details{border-top:1px solid #14373c2b;padding:20px 0}
+.curr summary{cursor:pointer;min-height:44px;font-size:19px;font-weight:600;
+  list-style:none;display:flex;justify-content:space-between;gap:14px;align-items:baseline}
+.curr summary::-webkit-details-marker{display:none}
+.curr summary:after{content:'+';font-family:'Instrument Serif',serif;font-size:26px;
+  color:var(--terra);line-height:1}
+.curr details[open] summary:after{content:'–'}
+.curr summary em{font-style:normal;font-size:13px;font-weight:300;
+  display:block;margin-top:7px;color:var(--green)}
+.curr li{font-size:15px;padding:8px 0 8px 20px;position:relative;font-weight:300;color:#2c4f54}
+.curr li:before{content:'';position:absolute;left:0;top:15px;width:9px;height:1px;background:var(--terra)}
+.curr ul{margin-top:14px}
+
+/* ============ 13 · PROVAS EM CARTAO ============ */
+.cards{padding:70px var(--pad) 76px;background:var(--deep);color:var(--paper)}
+.cards h2{font-size:clamp(38px,10.4vw,62px);max-width:13ch;margin-bottom:14px}
+.cards h2 em{font-style:normal;color:var(--wash)}
+.cards>p{font-size:15px;max-width:38ch;margin-bottom:34px;color:#f3eee3c4;font-weight:300}
+.cardgrid{display:grid;gap:30px}
+.cardgrid figure{margin:0;background:var(--card);padding:10px 10px 0;
+  box-shadow:0 16px 34px #0004}
+.cardgrid img{max-height:520px;object-fit:contain;object-position:top;background:var(--card)}
+.cardgrid p{font-size:15px;font-weight:600;color:var(--ink);padding:13px 3px 0}
+.cardgrid figcaption{font-size:11px;color:var(--green);padding:7px 3px 12px;font-weight:300}
+
+/* ============ 14 · QUEM ENSINA ============ */
+.about{position:relative}
+.about>img{aspect-ratio:1/1.12;object-fit:cover;object-position:50% 22%}
+.about-copy{padding:44px var(--pad) 56px;max-width:1180px;margin:0 auto}
+.about h2{font-size:clamp(36px,9.8vw,60px);max-width:14ch;margin-bottom:22px}
+.about h2 em{font-style:normal;color:var(--terra)}
+.about p{font-size:15px;margin-top:16px;max-width:44ch;font-weight:300;color:#2c4f54}
+
+/* ============ 15 · PARA QUEM ============ */
+.forwho{padding:70px var(--pad) 76px;background:var(--soft)}
+.forwho h2{font-size:clamp(36px,9.6vw,60px);max-width:15ch;margin-bottom:36px}
+.forwho .col{margin-bottom:34px}
+.forwho h3{font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  font-weight:600;margin-bottom:16px;color:var(--terra)}
+.forwho .no h3{color:var(--green)}
+.forwho li{padding:13px 0 13px 26px;border-top:1px solid #14373c26;
+  font-size:15px;font-weight:300;position:relative;color:#2c4f54}
+.forwho li:before{content:'✓';position:absolute;left:0;top:13px;color:var(--terra);font-size:14px}
+.forwho .no li:before{content:'×';color:var(--green);font-size:17px;top:11px}
+
+/* ============ 16 · OFERTA ============ */
+.offer{padding:70px var(--pad) 80px}
+.offer h2{font-size:clamp(38px,10.4vw,64px);max-width:13ch;margin-bottom:34px}
+.offer h2 em{font-style:normal;color:var(--terra)}
+.vrow{display:grid;grid-template-columns:1fr auto;gap:16px;
+  border-top:1px solid #14373c2b;padding:19px 0}
+.vrow b{font-weight:600;font-size:15px}
+.vrow span{display:block;font-size:12.5px;margin-top:6px;color:var(--green);font-weight:300}
+.vrow strong{font-family:'Instrument Serif',serif;font-weight:400;font-size:25px;white-space:nowrap}
+.vtotal{display:flex;justify-content:space-between;gap:14px;align-items:baseline;
+  border-top:2px solid var(--ink);padding:22px 0;font-size:14px}
+.vtotal strong{font-family:'Instrument Serif',serif;font-weight:400;font-size:26px}
+.vnote{font-size:11.5px;color:var(--green);margin:12px 0 30px;max-width:46ch;font-weight:300}
+.card-offer{background:var(--deep);color:var(--paper);padding:34px 24px 30px}
+.card-offer .kicker{color:var(--wash)}
+.card-offer h3{font-size:24px;font-weight:600}
+.bigprice{font-family:'Instrument Serif',serif;font-weight:400;font-size:96px;
+  line-height:.86;margin:18px 0 8px}
+.bigprice small{font-size:19px;font-family:'Hanken Grotesk',sans-serif}
+.card-offer .pay{font-size:12.5px;color:#f3eee3b8;font-weight:300}
+.card-offer ul{margin:26px 0 28px}
+.card-offer li{padding:13px 0;border-top:1px solid #f3eee32b;font-size:15px;
+  font-weight:300;padding-left:24px;position:relative}
+.card-offer li:before{content:'✓';position:absolute;left:0;top:13px;color:var(--wash)}
+.buy{display:flex;align-items:center;justify-content:space-between;gap:18px;width:100%;
+  background:var(--paper);color:var(--deep);border:0;border-radius:60px;padding:18px 24px;
+  min-height:58px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.buy i{font-style:normal;font-size:19px}
+.status{font-size:11.5px;color:var(--wash);margin-top:14px;font-weight:300}
+.warranty{margin-top:26px;border-top:1px solid #f3eee32b;padding-top:22px}
+.warranty b{font-size:15px;font-weight:600}
+.warranty p{font-size:13px;margin-top:8px;color:#f3eee3bd;font-weight:300}
+
+/* ============ 17 · FAQ ============ */
+.faq{padding:70px var(--pad) 80px;background:var(--card)}
+.faq h2{font-size:clamp(38px,10.4vw,62px);max-width:11ch;margin-bottom:32px}
+.faq h2 em{font-style:normal;color:var(--terra)}
+.faq details{border-top:1px solid #14373c2b;padding:20px 0}
+.faq summary{cursor:pointer;min-height:44px;font-size:17px;font-weight:600;
+  list-style:none;display:flex;justify-content:space-between;gap:14px;align-items:baseline}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:'+';font-family:'Instrument Serif',serif;font-size:26px;
+  color:var(--terra);line-height:1}
+.faq details[open] summary:after{content:'–'}
+.faq p{font-size:15px;margin-top:14px;max-width:48ch;font-weight:300;color:#2c4f54}
+
+/* ============ rodape + barra fixa ============ */
+.foot{padding:36px var(--pad) 120px;text-align:center;font-size:12px;
+  color:var(--green);border-top:1px solid #14373c22;line-height:1.7;font-weight:300}
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--deep);
+  color:var(--paper);padding:11px 16px calc(11px + env(safe-area-inset-bottom));
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  border-top:1px solid #f3eee333}
+.sticky[hidden]{display:none}
+.sticky small{display:block;font-size:10px;color:#f3eee3a8}
+.sticky strong{font-family:'Instrument Serif',serif;font-weight:400;font-size:27px;line-height:1}
+.sticky a{background:var(--paper);color:var(--deep);text-decoration:none;padding:13px 19px;
+  border-radius:60px;font-size:11px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;min-height:44px;display:flex;align-items:center}
+
+dialog{border:0;padding:12px;background:var(--paper);max-width:min(94vw,620px);max-height:94svh}
+dialog::backdrop{background:#0e282ce6}
+dialog img{max-height:76svh;object-fit:contain}
+dialog button{display:block;margin:0 0 10px auto;min-height:44px;padding:9px 16px;
+  background:var(--ink);color:var(--paper);border:0;border-radius:30px;font-size:12px}
+
+@media(min-width:900px){
+  :root{--pad:60px}
+
+  /* HERO: foto larga, escurecida pela esquerda, texto em coluna propria */
+  .hero{min-height:100vh;justify-content:center}
+  .hero picture img{object-position:var(--pos-wide)}
+  .hero:after{background:
+    linear-gradient(90deg,#0b2225f2 0%,#0b2225d6 34%,#0b22255e 58%,#0b222512 78%),
+    linear-gradient(180deg,#0b222540 0%,#0b22250a 40%,#0b222573 100%)}
+  .hero-top{padding:30px 60px}
+  .hero-top b{font-size:24px}
+  .hero-copy{padding:0 60px}
+  .hero h1{font-size:clamp(64px,5.6vw,92px);max-width:11ch}
+  .hero-sub{font-size:18px;margin:26px 0 30px;max-width:38ch}
+  .hero-cta{font-size:12px;padding:18px 32px;min-height:62px}
+  .hero-price{font-size:13px;margin-top:18px}
+
+  /* PROVAS: os tres prints lado a lado, ainda tortos */
+  .stackblock{padding:96px 60px 104px}
+  .stackblock h2{font-size:clamp(52px,4.4vw,68px);margin-bottom:64px}
+  .stack{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;
+    max-width:1120px;align-items:start}
+  .stack figure{width:100%!important;margin:0!important;padding:11px 11px 0}
+  .stack .s1{transform:rotate(-2.2deg) translateY(14px)}
+  .stack .s2{transform:rotate(1.8deg)}
+  .stack .s3{transform:rotate(-1.2deg) translateY(22px)}
+  .stack figcaption{font-size:12px;padding:13px 5px 15px}
+  .stack figcaption b{font-size:10.5px}
+  .stack-note{margin-top:60px;font-size:12px}
+  .oneproof{padding:70px 60px}
+  .oneproof blockquote{font-size:clamp(34px,3vw,44px)}
+
+  /* DOR: titulo grande a esquerda, os tres itens em colunas */
+  .pain{padding:110px 60px 116px}
+  .pain h2{font-size:clamp(56px,5vw,78px);margin-bottom:64px;max-width:16ch}
+  .pain-list{display:grid;grid-template-columns:repeat(3,1fr);gap:44px}
+  .pain-item{border-top:1px solid #f3eee32b;padding-top:30px}
+  .pain-item p{font-size:17px}
+  .pain-end{margin-top:88px;font-size:clamp(44px,4vw,60px);max-width:24ch}
+
+  /* FRASE SOZINHA: centralizada, grande, com ar dos dois lados */
+  .solo{min-height:76vh;align-items:center;text-align:center;padding:120px 60px}
+  .solo blockquote{font-size:clamp(56px,5.4vw,86px);max-width:20ch}
+  .solo figcaption{font-size:13px;margin-top:40px}
+
+  /* NUMERO */
+  .bignum{min-height:72vh;padding:120px 60px}
+  .bignum strong{font-size:clamp(180px,15vw,260px)}
+  .bignum b{font-size:clamp(40px,3.4vw,56px);margin-top:22px}
+  .bignum p{font-size:14px;margin-top:34px;max-width:38ch}
+
+  /* VIDEO: texto de um lado, player vertical do outro */
+  .videoblock{padding:100px 0 106px}
+  .videoblock .inner{display:grid;grid-template-columns:1fr 370px;gap:70px;
+    align-items:center;padding:0 60px;max-width:1180px;margin:0 auto}
+  .videoblock .head{padding:0;margin:0;max-width:none}
+  .videoblock h2{font-size:clamp(52px,4.4vw,70px)}
+  .videoblock .head p{font-size:17px;margin-top:24px}
+  .videoblock video{width:100%;height:auto;aspect-ratio:9/16;max-height:none;border-radius:6px}
+  .videoblock h2{max-width:none}
+  .videonote{padding:26px 60px 0;font-size:12px}
+
+  /* ENTREGAS */
+  .deliver{padding:100px 0 106px}
+  .deliver .head{margin-bottom:52px}
+  .deliver h2{font-size:clamp(52px,4.6vw,74px)}
+  .shotfull img{width:100%}
+  .shotfull{margin-bottom:60px}
+  .shotfull figcaption{font-size:12px;padding-top:16px}
+  .items{display:grid;grid-template-columns:1fr 1fr;gap:0 70px}
+  .item{padding:34px 0}
+  .item h3{font-size:23px}
+  .item p{font-size:16px}
+
+  /* ANTES E DEPOIS */
+  .beforeafter{padding:100px 60px 106px}
+  .beforeafter .ba{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+  .beforeafter h2{font-size:clamp(48px,4.2vw,66px)}
+  .beforeafter .ba p{font-size:17px;max-width:40ch;margin-bottom:0}
+  .pair{max-width:100%}
+
+  /* ARTES */
+  .artes{padding:100px 0 106px}
+  .artes h2{font-size:clamp(52px,4.6vw,72px)}
+  .artes .head p{font-size:17px}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0 40px;margin-bottom:54px}
+  .steps li{font-size:16px}
+  .rail{gap:26px;overflow:visible;display:grid;grid-template-columns:repeat(3,1fr)}
+  .rail figure{flex:none;max-width:none}
+  .railnote{padding-top:26px;font-size:12px}
+
+  /* ETAPAS */
+  .flow{padding:100px 60px 106px}
+  .flow h2{font-size:clamp(52px,4.6vw,72px);margin-bottom:56px}
+  .flowgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 70px}
+  .flow article{padding:30px 0}
+  .flow h3{font-size:22px}
+  .flow article p{font-size:16px}
+
+  /* EXEMPLOS DO CURSO */
+  .cases{padding:100px 0 106px}
+  .cases h2{font-size:clamp(52px,4.6vw,72px)}
+  .cases .head p{font-size:17px}
+  .cases .grid{display:grid;grid-template-columns:1fr 1fr;gap:70px 50px;padding:0 60px}
+  .case{margin-bottom:0}
+  .case div{padding:0}
+  .case h3{font-size:26px}
+  .case p{font-size:16px}
+
+  /* CURRICULO e FAQ: coluna de leitura, nao a largura toda da tela */
+  .curr,.faq{padding:100px 60px 106px}
+  .curr h2,.faq h2{font-size:clamp(52px,4.6vw,72px)}
+  .curr .list,.faq .list{max-width:900px}
+  .curr>p{font-size:17px}
+  .curr summary,.faq summary{font-size:21px}
+  .curr li,.faq p{font-size:16px}
+
+  /* PROVAS EM CARTAO */
+  .cards{padding:100px 60px 106px}
+  .cards h2{font-size:clamp(52px,4.6vw,72px)}
+  .cards>p{font-size:17px}
+  .cardgrid{grid-template-columns:repeat(3,1fr)}
+  .cardgrid.two{grid-template-columns:1fr 1fr;max-width:820px}
+
+  /* QUEM ENSINA */
+  .about{display:grid;grid-template-columns:.85fr 1.15fr;align-items:stretch}
+  .about>img{aspect-ratio:auto;height:100%;min-height:620px}
+  .about-copy{padding:90px 70px}
+  .about h2{font-size:clamp(48px,4.2vw,64px)}
+  .about p{font-size:17px}
+
+  /* PARA QUEM */
+  .forwho{padding:100px 60px 106px}
+  .forwho h2{font-size:clamp(52px,4.6vw,72px);margin-bottom:56px}
+  .forwho .cols{display:grid;grid-template-columns:1fr 1fr;gap:70px}
+  .forwho .col{margin-bottom:0}
+  .forwho li{font-size:16px}
+
+  /* OFERTA */
+  .offer{padding:100px 60px 116px}
+  .offer h2{font-size:clamp(52px,4.6vw,74px);margin-bottom:56px}
+  .offer .layout{display:grid;grid-template-columns:1fr .85fr;gap:70px;align-items:start}
+  .vrow b{font-size:16px}
+  .card-offer{padding:48px 42px 40px;position:sticky;top:30px}
+  .bigprice{font-size:110px}
+  .card-offer li{font-size:16px}
+
+  .foot{padding:50px 60px 60px}
+  .sticky{left:auto;right:26px;bottom:26px;width:400px;border-radius:60px;
+    padding:12px 12px 12px 24px}
+}
+
+@media(min-width:1500px){
+  :root{--pad:80px}
+  .hero-copy{padding-left:80px;padding-right:80px}
+  .videoblock .inner{padding-left:80px;padding-right:80px}
+}
+
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <span>Prévia · checkout desligado</span>
+  <div>
+    <button data-p="motor" aria-pressed="true">Motor</button>
+    <button data-p="curso" aria-pressed="false">Curso</button>
+  </div>
+</div>
+
+<main id="page"></main>
+
+<dialog id="lightbox">
+  <button class="close" type="button">Fechar ×</button>
+  <img alt="Exemplo de arte ampliado">
+</dialog>
+
+<script>
+const IMG='/fotos/v2/';
+const VID='/videos/';
+
+/* =======================================================================
+   CONTEUDO
+   Tudo o que muda entre os dois produtos vive aqui. A ordem das secoes
+   e definida uma vez so, na funcao montar(), para nao repetir o problema
+   da versao anterior em que a dor caia depois das provas.
+   ======================================================================= */
+const DADOS={
+motor:{
+  nome:'Motor de Conteúdo', preco:197, ancora:1500,
+  heroFoto:'hero-sistema-full.jpg', heroPos:'52% 22%',
+  heroFotoWide:'hero-sistema-wide.jpg', heroPosWide:'62% 40%',
+  eyebrow:'Motor de Conteúdo',
+  h1:'Horas da sua semana', h1em:'de volta.',
+  sub:'Um motor no Claude que pesquisa a pauta, escreve o roteiro, monta o carrossel com a sua marca e edita o seu vídeo. Você aprova e grava.',
+  precoLinha:'Curso, skill construtora e editor de vídeo incluídos.<br>Pagamento único, à vista ou parcelado no cartão.',
+
+  provaTitulo:'Já está na rotina de quem comprou.',
+  provas:[
+    ['prova-iasmin.jpg','Iasmin Maionchi','Pautas, roteiro e edição no mesmo processo.'],
+    ['prova-luciana.jpg','Luciana','Gravou, editou e agendou pelo Metricool.'],
+    ['prova-lucas.jpg','Lucas','Dois carrosséis por dia, com a aprovação dele.']
+  ],
+
+  dorKicker:'O conteúdo não pode virar seu segundo emprego',
+  dorH2:'Você tem um negócio.', dorH2em:'E uma lista infinita de posts.',
+  dores:[
+    ['Antes de postar','Pesquisar a pauta, escrever o roteiro, gravar e editar. Um post ocupa o tempo de várias tarefas.'],
+    ['Depois de postar','Ainda faltam as outras redes. E olhar o resultado para decidir o próximo conteúdo.'],
+    ['Na semana seguinte','Você começa tudo de novo. Quando o negócio aperta, o conteúdo é o primeiro a parar.']
+  ],
+  dorFim:'Sua marca precisa aparecer.', dorFimEm:'Você precisa de tempo para trabalhar.',
+
+  soloQuote:'Eu passava horas decidindo o que postar.', soloQuoteEm:'Hoje eu aprovo e gravo.',
+  soloAutor:'Bruna Santanna · minha experiência usando o motor',
+
+  numero:'2 a 3', numeroLabel:'dias por semana<br>de volta.',
+  numeroNota:'Pelas minhas contas, na minha rotina, depois que o motor entrou.',
+
+  video:{arquivo:'video-venda.mp4', poster:'video-poster.jpg',
+    kicker:'Veja antes de decidir', h2:'97 segundos.', h2em:'O motor na minha tela.',
+    p:'Eu mostro o sistema que você vai aprender a montar com as aulas.',
+    nota:'Demonstração gravada na minha própria conta.'},
+
+  entregaKicker:'O que você recebe na compra',
+  entregaH2:'O motor.', entregaH2em:'E o caminho para montar.',
+  shot:{arquivo:'central-real.png', local:true, alt:'Tela real da Central do Aluno',
+    legenda:'Tela real da Central do Aluno, incluída na compra.'},
+  entregas:[
+    ['Curso · 3 horas','20 aulas para fazer junto','Eu mostro a montagem na tela. Você configura seu sistema e volta à aula quando precisar.'],
+    ['Sistema personalizado','A skill que constrói seu motor','Ela entrevista você e monta a estrutura com seu público, seu tom e sua identidade visual.'],
+    ['Bônus incluído','Seu editor de vídeo','Envie o vídeo cru. Peça os cortes, as legendas e o título conversando.'],
+    ['Material e operação','Central, painel e rotina','Mais de 20 prompts, pesquisa diária, dashboard e newsletter para colocar o processo em prática.']
+  ],
+
+  incluido:['20 aulas gravadas · 3 horas','Skill construtora do seu motor',
+    'Skill de edição de vídeo incluída','Central do Aluno · mais de 20 prompts',
+    'Painel, radar diário e newsletter'],
+  valores:[
+    ['20 aulas gravadas','Montagem e uso do sistema, passo a passo',400],
+    ['Skill construtora','Entrevista e personalização do seu motor',400],
+    ['Skill de edição de vídeo','Cortes, legendas e título',300],
+    ['Central do Aluno','20+ prompts e passo a passo, acesso vitalício',200],
+    ['Painel, radar diário e newsletter','Criação, distribuição e análise em rotina',200]
+  ],
+
+  paraQuem:['Você já tem um negócio ou um perfil e precisa aparecer com constância',
+    'Você quer manter a aprovação de tudo o que sai com o seu nome',
+    'Você grava vídeo, ou quer trabalhar só com carrossel, LinkedIn e blog',
+    'Você tem computador para montar e rodar o sistema'],
+  naoParaQuem:['Você quer um robô que publica sozinho, sem você olhar',
+    'Você não quer configurar nada e espera algo pronto no primeiro dia',
+    'Você quer as artes sem enviar a sua identidade visual'],
+
+  sobreP2:'O motor nasceu para organizar a minha produção de conteúdo. Nas aulas, eu mostro a configuração para você montar o seu.',
+
+  faq:[
+    ['Tenho que dar as pautas?','Você configura a pesquisa diária. O motor usa mercado, concorrentes e resultados dos seus conteúdos para sugerir pautas. Você também pode trazer um tema.'],
+    ['Como a arte fica com a minha marca?','Você envia sua identidade visual: logo, cores, fontes e referências. Ajusta e aprova o primeiro estilo. O motor usa esse padrão nas próximas artes.'],
+    ['Ele publica sem a minha aprovação?','A aprovação faz parte do processo. Os conteúdos aprovados seguem para as redes configuradas no Metricool. Eu ensino a conexão em detalhes.'],
+    ['Preciso aparecer em vídeo?','Você pode trabalhar com carrossel, LinkedIn e blog. Quando gravar um Reel, o editor de vídeo incluído cuida da edição.'],
+    ['Preciso pagar outras ferramentas?','A compra inclui o curso e os materiais descritos. Assinaturas de ferramentas são separadas. Você precisa configurar o Claude e o Metricool; os recursos dependem dos planos e permissões das suas contas.'],
+    ['Funciona só no celular?','Para montar e executar o sistema, você precisa de computador. As aulas gravadas podem ser assistidas no celular.']
+  ]
+},
+
+curso:{
+  nome:'Claude com Profundidade', preco:347, ancora:1750,
+  heroFoto:'hero-curso-full.jpg', heroPos:'50% 26%',
+  heroFotoWide:'band-riso.jpg', heroPosWide:'72% 32%',
+  eyebrow:'Claude com Profundidade',
+  h1:'Tire o trabalho', h1em:'do caminho.',
+  sub:'Das respostas genéricas às tarefas inteiras. Aprenda a usar projetos, skills, arquivos e agentes no seu trabalho, com aulas práticas e guias para fazer junto.',
+  precoLinha:'7 módulos, mais de 5 horas, gravado em estúdio.<br>Pagamento único, à vista ou parcelado no cartão.',
+
+  provaSolta:{frase:'Adorei a aula, a Bruna faz tudo parecer muito simples e fácil.',
+    autor:'Débora Nogueira Cobra · formação em IA com Bruna'},
+
+  dorKicker:'Você abriu a IA para ganhar tempo',
+  dorH2:'E ainda está copiando,', dorH2em:'colando e refazendo?',
+  dores:[
+    ['O contexto','Você explica quem é, o que faz e o que precisa. De novo, a cada conversa.'],
+    ['A entrega','O texto chega genérico. O relatório ainda precisa ser montado. A proposta continua pela metade.'],
+    ['A rotina','Você vê a IA fazendo coisas incríveis, mas ainda não sabe como aplicar no seu trabalho.']
+  ],
+  dorFim:'Você pode aprender a delegar', dorFimEm:'muito mais do que um parágrafo.',
+
+  soloQuote:'A diferença não está no prompt.', soloQuoteEm:'Está no contexto que você entrega.',
+  soloAutor:'Bruna Santanna · o que o curso ensina do começo ao fim',
+
+  entregaKicker:'O que você recebe na compra',
+  entregaH2:'O curso completo.', entregaH2em:'E material para praticar.',
+  shot:{arquivo:'guia-real.png', local:true, alt:'Tela real de um dos guias do curso',
+    legenda:'Tela real de um dos guias que acompanham o curso.'},
+  entregas:[
+    ['7 módulos · mais de 5 horas','O curso completo de Claude','Do primeiro pedido aos projetos, skills, Cowork, agentes e Claude Code. Gravado em estúdio.'],
+    ['Material para acompanhar','Guias com prompts e exercícios','Aprenda, copie o prompt e pratique no seu contexto. Com diagramas e desafios nos materiais.'],
+    ['Acompanhamento','Comunidade e atualizações','Troca de experiências na comunidade e 12 meses de atualizações do curso.']
+  ],
+
+  casos:[
+    ['shot-proposta.jpg','Contexto + skills','Proposta no seu padrão.','Use a reunião como contexto, ajuste o resultado e aprenda a salvar o processo em uma skill.'],
+    ['frente-biblioteca.jpg','Claude Code','Uma página para sua ideia.','Descreva o que precisa, veja a página ganhar forma e peça os ajustes por conversa.'],
+    ['shot-cosmos.jpg','Agentes + rotinas','Uma rotina que prepara o dia.','Combine instruções e tarefas agendadas para reunir informações e próximos passos.'],
+    ['shot-caixa.jpg','Cowork + análise','Dados que você consegue ler.','Organize arquivos e aprenda a transformar números soltos em uma análise útil.']
+  ],
+
+  modulos:[
+    ['Fundamentos','Pedidos melhores e respostas que você sabe avaliar.',['Como a IA pensa e onde erra','Contexto, prompts e segurança','Tokens e organização do uso']],
+    ['O Claude que te conhece','Seu contexto acompanha o trabalho.',['Projetos por cliente ou tema','Memória e preferências','Modelos e instruções']],
+    ['Skills e entregas','Transforme um bom resultado em um processo reutilizável.',['Skill ou projeto: quando usar','Criar, refinar e repetir','Artifacts, conectores e plugins']],
+    ['Cowork','Trabalhe com arquivos e tarefas inteiras.',['Pastas, dados e organização','Do arquivo ao painel','Chrome, Computer Use e tarefas agendadas']],
+    ['Loops e agentes','Monte rotinas com critérios de revisão.',['Projetos, skills e ferramentas conectadas','Loops de melhoria e checklists','Rotinas e tarefas em paralelo']],
+    ['Claude Code','Crie descrevendo o que precisa.',['Páginas e ajustes por conversa','Automação de tarefas','Planilhas e extração de dados']],
+    ['Juntando tudo','Conecte as peças na sua rotina.',['Seu sistema de trabalho','Como as partes se complementam','Prática e próximos passos']]
+  ],
+
+  provasCartao:{kicker:'Quem aprendeu com a Bruna',
+    h2:'A clareza da aula.', h2em:'O efeito no trabalho.',
+    p:'Relatos de mentorias e formações em IA conduzidas pela Bruna.',
+    itens:[['erico-feedback.jpg','','Érico Emílio · mentoria individual'],
+           ['prova-rafamagaldi.jpg','','Rafael Magaldi · treinamento corporativo']]},
+
+  incluido:['Curso completo · 7 módulos · mais de 5 horas','Guias com prompts e exercícios',
+    'Comunidade para troca de experiências','12 meses de atualizações'],
+  valores:[
+    ['Curso completo','7 módulos gravados em estúdio',800],
+    ['Material de apoio','Guias, prompts, diagramas e desafios',200],
+    ['Comunidade','Dúvidas e experiências de aplicação',250],
+    ['12 meses de atualizações','Atualizações do curso nesse período',500]
+  ],
+
+  paraQuem:['Você já usa IA no trabalho e sente que para no primeiro parágrafo',
+    'Você quer aplicar no seu contexto e não em exemplo genérico',
+    'Você prefere aprender fazendo junto, com guia aberto do lado',
+    'Você tem computador para praticar Cowork e Claude Code'],
+  naoParaQuem:['Você quer receber dashboards e agentes prontos, sem montar',
+    'Você procura só uma lista de prompts para copiar',
+    'Você quer acompanhar tudo apenas pelo celular'],
+
+  sobreP2:'Nas aulas, você acompanha as aplicações na tela e usa os guias para praticar no seu contexto.',
+
+  faq:[
+    ['Preciso saber programar?','Você aprende a descrever o que precisa e orientar a IA. Nas aulas de Claude Code, a criação e os ajustes são feitos por conversa.'],
+    ['Recebo os dashboards e agentes prontos?','Você recebe as aulas e os materiais para aprender a criar. Os exemplos mostram aplicações possíveis, que você adapta aos seus arquivos e necessidades.'],
+    ['É só sobre prompts?','O curso inclui fundamentos, projetos, memória, skills, conectores, Cowork, agentes, loops e Claude Code.'],
+    ['A assinatura do Claude está incluída?','Não. A compra é do curso e seus materiais. A assinatura da ferramenta é separada, e os recursos disponíveis dependem do plano.'],
+    ['Posso acompanhar só pelo celular?','Você pode assistir às aulas no celular. Para praticar Cowork e Claude Code, use um computador.']
+  ]
+}};
+
+const ESTILOS=['Claro e didático','Escuro e sóbrio','Cor chapada','Editorial','Print de tela','Mosaico'];
+const ETAPAS=[
+  ['Pesquisa todos os dias','Mercado, concorrentes e os conteúdos que funcionaram no seu perfil orientam as pautas.'],
+  ['Cria no seu tom','Roteiro de Reel, carrossel, LinkedIn e blog a partir da direção definida.'],
+  ['Espera sua aprovação','Você revisa. Com o estilo aprovado, o motor monta as artes na sua identidade.'],
+  ['Edita o vídeo','Você grava e envia. A skill incluída cuida dos cortes, das legendas e do título.'],
+  ['Agenda nas redes','Eu ensino a conectar o Metricool para distribuir nas redes que você configurar.'],
+  ['Monitora e aprende','O dashboard reúne os resultados para orientar a próxima rodada.']
+];
+
+const money=n=>'R$'+n.toLocaleString('pt-BR');
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+
+/* ---------- blocos ---------- */
+const bHero=d=>`<section class="hero">
+  <picture>
+    <source media="(min-width:900px)" srcset="${IMG+d.heroFotoWide}">
+    <img src="${IMG+d.heroFoto}" alt="Bruna Santanna" fetchpriority="high"
+      style="--pos:${d.heroPos};--pos-wide:${d.heroPosWide}">
+  </picture>
+  <div class="hero-top"><b>bruna santanna.</b><small>A VIRADA IA</small></div>
+  <div class="hero-copy">
+    <span class="kicker">${d.eyebrow}</span>
+    <h1 class="display">${d.h1} <em>${d.h1em}</em></h1>
+    <p class="hero-sub">${d.sub}</p>
+    <a class="hero-cta" href="#oferta">Ver a oferta · ${money(d.preco)} <i>&rarr;</i></a>
+    <p class="hero-price">${d.precoLinha}</p>
+  </div>
+</section>`;
+
+const bStack=d=>`<section class="stackblock">
+  <span class="kicker">Quem colocou para rodar</span>
+  <h2 class="display">${d.provaTitulo}</h2>
+  <div class="stack">${d.provas.map(([f,n,t],i)=>`<figure class="s${i+1}">
+    <img src="${IMG+f}" alt="Mensagem original de ${n}" loading="lazy">
+    <figcaption>${t}<b>${n} · relato individual</b></figcaption></figure>`).join('')}</div>
+  <p class="stack-note">Mensagens recebidas de quem comprou. Resultados variam conforme o uso.</p>
+</section>`;
+
+const bOneProof=d=>`<figure class="oneproof">
+  <blockquote class="display">“${d.provaSolta.frase}”</blockquote>
+  <figcaption>${d.provaSolta.autor}</figcaption>
+</figure>`;
+
+const bPain=d=>`<section class="pain on-dark">
+  <span class="kicker">${d.dorKicker}</span>
+  <h2 class="display">${d.dorH2}<br><em>${d.dorH2em}</em></h2>
+  <div class="pain-list">${d.dores.map(([t,p])=>
+    `<article class="pain-item"><b>${t}</b><p>${p}</p></article>`).join('')}</div>
+  <p class="pain-end display">${d.dorFim}<br><span>${d.dorFimEm}</span></p>
+</section>`;
+
+const bSolo=(d,dark)=>`<figure class="solo${dark?' on-dark':''}">
+  <blockquote class="display">${d.soloQuote} <span>${d.soloQuoteEm}</span></blockquote>
+  <figcaption>${d.soloAutor}</figcaption>
+</figure>`;
+
+const bNum=d=>`<section class="bignum">
+  <strong>${d.numero}</strong>
+  <b>${d.numeroLabel}</b>
+  <p>${d.numeroNota}</p>
+</section>`;
+
+const bVideo=d=>`<section class="videoblock on-dark">
+  <div class="inner">
+  <div class="head">
+    <span class="kicker">${d.video.kicker}</span>
+    <h2 class="display">${d.video.h2}<br><em>${d.video.h2em}</em></h2>
+    <p>${d.video.p}</p>
+  </div>
+  <video controls playsinline preload="metadata" poster="${d.video.poster}"
+    aria-label="Demonstração do Motor de Conteúdo"><source src="${VID+d.video.arquivo}" type="video/mp4"></video>
+  </div>
+  <p class="videonote">${d.video.nota}</p>
+</section>`;
+
+const bDeliver=d=>`<section class="deliver" id="pacote">
+  <div class="head">
+    <span class="kicker">${d.entregaKicker}</span>
+    <h2 class="display">${d.entregaH2}<br><em class="em">${d.entregaH2em}</em></h2>
+  </div>
+  <figure class="shotfull">
+    <img src="${d.shot.local?d.shot.arquivo:IMG+d.shot.arquivo}" alt="${d.shot.alt}" loading="lazy">
+    <figcaption>${d.shot.legenda}</figcaption>
+  </figure>
+  <div class="items">${d.entregas.map(([tag,t,p],i)=>`<article class="item">
+    <span>0${i+1}</span><div><b>${tag}</b><h3>${t}</h3><p>${p}</p></div></article>`).join('')}</div>
+</section>`;
+
+const bBeforeAfter=()=>`<section class="beforeafter">
+  <div class="ba">
+  <div>
+  <span class="kicker">Editor de vídeo · bônus incluído</span>
+  <h2 class="display">Você grava.<br><em class="em">A edição vem no pacote.</em></h2>
+  <p>Envie o vídeo cru. A skill faz cortes, legendas e título. Você pede os ajustes conversando.</p>
+  </div>
+  <div class="pair">
+    <figure><video controls playsinline preload="metadata" poster="edicao-poster-antes.png"
+      aria-label="Vídeo original"><source src="${VID}edicao-antes.mp4" type="video/mp4"></video>
+      <figcaption>01 / Vídeo original</figcaption></figure>
+    <figure><video controls playsinline preload="metadata" poster="edicao-poster-depois.png"
+      aria-label="Vídeo editado pela skill"><source src="${VID}edicao-depois.mp4" type="video/mp4"></video>
+      <figcaption>02 / Edição pela skill</figcaption></figure>
+  </div>
+  </div>
+</section>`;
+
+const bArtes=()=>`<section class="artes">
+  <div class="head">
+    <span class="kicker">O que sai do motor</span>
+    <h2 class="display">A arte sai pronta.<br><em class="em">Com a sua marca.</em></h2>
+    <p>Você envia logo, cores, fontes e referências. Aprova o primeiro estilo. O motor aplica essa identidade nos próximos carrosséis.</p>
+  </div>
+  <ol class="steps">
+    <li><b>1</b><span>Envie sua identidade visual.</span></li>
+    <li><b>2</b><span>Peça ajustes e aprove o estilo.</span></li>
+    <li><b>3</b><span>Receba as artes dos novos conteúdos.</span></li>
+  </ol>
+  <div class="rail">${ESTILOS.map((c,i)=>`<figure>
+    <button type="button" data-arte="${i+1}" aria-label="Ampliar exemplo ${c}">
+      <img src="${IMG}carrossel-${i+1}.jpg" alt="Exemplo de arte, estilo ${c}" loading="lazy"></button>
+    <figcaption>0${i+1} / ${c}</figcaption></figure>`).join('')}</div>
+  <p class="railnote">Exemplos de estilos. As suas artes usam a identidade visual que você enviar.</p>
+</section>`;
+
+const bFlow=()=>`<section class="flow on-dark">
+  <span class="kicker">A rotina completa, com sua aprovação</span>
+  <h2 class="display">Da pesquisa ao post.<br><em>Do resultado à próxima pauta.</em></h2>
+  <div class="flowgrid">${ETAPAS.map(([t,p],i)=>`<article>
+    <b>0${i+1}</b><h3>${t}</h3><p>${p}</p></article>`).join('')}</div>
+</section>`;
+
+const bCases=d=>`<section class="cases">
+  <div class="head">
+    <span class="kicker">O que você aprende a criar</span>
+    <h2 class="display">O próximo trabalho<br><em class="em">pode sair assim.</em></h2>
+    <p>Você aprende o processo para aplicar nas suas tarefas. Estes são exemplos de aplicação, não sistemas prontos incluídos na compra.</p>
+  </div>
+  <div class="grid">${d.casos.map(([f,tag,t,p])=>`<article class="case">
+    <img src="${IMG+f}" alt="${t}" loading="lazy">
+    <div><b>${tag}</b><h3>${t}</h3><p>${p}</p></div></article>`).join('')}</div>
+</section>`;
+
+const bCurr=d=>`<section class="curr">
+  <span class="kicker">Conteúdo do curso</span>
+  <h2 class="display">Um caminho completo.<br><em class="em">Uma aplicação de cada vez.</em></h2>
+  <p>Abra os blocos para conhecer o que você aprende.</p>
+  <div class="list">${d.modulos.map(([n,desc,itens],i)=>`<details${i===0?' open':''}>
+    <summary><span>0${i+1} / ${n}<em>${desc}</em></span></summary>
+    <ul>${itens.map(t=>'<li>'+t+'</li>').join('')}</ul></details>`).join('')}</div>
+</section>`;
+
+const bCards=d=>`<section class="cards on-dark">
+  <span class="kicker">${d.provasCartao.kicker}</span>
+  <h2 class="display">${d.provasCartao.h2}<br><em>${d.provasCartao.h2em}</em></h2>
+  <p>${d.provasCartao.p}</p>
+  <div class="cardgrid two">${d.provasCartao.itens.map(([f,t,cap])=>`<figure>
+    <img src="${IMG+f}" alt="Mensagem original: ${cap}" loading="lazy">
+    ${t?'<p>'+t+'</p>':''}<figcaption>${cap}</figcaption></figure>`).join('')}</div>
+</section>`;
+
+const bAbout=d=>`<section class="about">
+  <img src="${IMG}hero-sistema-full.jpg" alt="Bruna Santanna" loading="lazy">
+  <div class="about-copy">
+    <span class="kicker">Quem ensina</span>
+    <h2 class="display">Eu uso no meu trabalho.<br><em class="em">E ensino você a usar no seu.</em></h2>
+    <p>Sou Bruna Santanna, empresária e fundadora da NewScale. Construo soluções com IA para minha rotina e ensino profissionais e empresas a fazerem o mesmo.</p>
+    <p>${d.sobreP2}</p>
+  </div>
+</section>`;
+
+const bForWho=d=>`<section class="forwho">
+  <h2 class="display">Para quem é.<br><em class="em">E para quem não é.</em></h2>
+  <div class="cols">
+    <div class="col"><h3>Faz sentido se</h3><ul>${d.paraQuem.map(x=>'<li>'+x+'</li>').join('')}</ul></div>
+    <div class="col no"><h3>Não faz sentido se</h3><ul>${d.naoParaQuem.map(x=>'<li>'+x+'</li>').join('')}</ul></div>
+  </div>
+</section>`;
+
+const bOffer=d=>{
+  const total=d.valores.reduce((s,r)=>s+r[2],0);
+  return `<section class="offer" id="oferta">
+  <span class="kicker">O investimento</span>
+  <h2 class="display">O pacote completo.<br><em>Por ${money(d.preco)}, uma vez.</em></h2>
+  <div class="layout">
+    <div>
+      ${d.valores.map(([t,desc,v])=>`<div class="vrow"><div><b>${t}</b><span>${desc}</span></div>
+        <strong>${money(v)}</strong></div>`).join('')}
+      <div class="vtotal"><span>Valor estimado dos componentes</span><strong>${money(total)}</strong></div>
+      <p class="vnote">Valores estimados para apresentar a composição da oferta. Não são preços anteriores do curso. Você compra o conjunto por ${money(d.preco)}.</p>
+    </div>
+    <div class="card-offer">
+      <span class="kicker">Tudo incluído na compra</span>
+      <h3>${d.nome}</h3>
+      <div class="bigprice"><small>R$</small>${d.preco}</div>
+      <p class="pay">Pagamento único · acesso imediato</p>
+      <ul>${d.incluido.map(x=>'<li>'+x+'</li>').join('')}</ul>
+      <button class="buy" type="button" id="comprar">Quero ${d.preco===197?'meu motor':'o curso completo'} <i>&rarr;</i></button>
+      <p class="status" role="status">Prévia de revisão · compra ainda não conectada</p>
+      <div class="warranty"><b>7 dias para conhecer por dentro.</b>
+        <p>Você tem 7 dias para avaliar a compra. Se não for para você, peça o reembolso nesse prazo.</p></div>
+    </div>
+  </div>
+</section>`};
+
+const bFaq=d=>`<section class="faq">
+  <span class="kicker">Antes de começar</span>
+  <h2 class="display">Suas dúvidas.<br><em>Sem complicar.</em></h2>
+  <div class="list">${d.faq.map(([q,a])=>`<details><summary><span>${q}</span></summary><p>${a}</p></details>`).join('')}</div>
+</section>`;
+
+/* =======================================================================
+   ORDEM DAS SECOES, unica fonte da verdade
+   ======================================================================= */
+function montar(p){
+  const d=DADOS[p], motor=p==='motor';
+  return motor ? [
+    bHero(d), bStack(d), bPain(d), bSolo(d,false), bVideo(d), bNum(d),
+    bDeliver(d), bBeforeAfter(), bArtes(), bFlow(),
+    bAbout(d), bForWho(d), bOffer(d), bFaq(d)
+  ].join('') : [
+    bHero(d), bOneProof(d), bPain(d), bSolo(d,false),
+    bDeliver(d), bCases(d), bCurr(d), bCards(d),
+    bAbout(d), bForWho(d), bOffer(d), bFaq(d)
+  ].join('');
+}
+
+/* ---------- render ---------- */
+let produto=new URLSearchParams(location.search).get('p')==='curso'?'curso':'motor';
+let observer;
+
+function render(){
+  const d=DADOS[produto];
+  document.querySelectorAll('[data-p]').forEach(b=>
+    b.setAttribute('aria-pressed',b.dataset.p===produto));
+  document.title=d.nome+' · Bruna Santanna';
+  document.getElementById('page').innerHTML=montar(produto)+
+    `<div class="sticky" hidden><div><small>${d.nome}</small><strong>${money(d.preco)}</strong></div>
+      <a href="#oferta">Ver a oferta</a></div>
+     <footer class="foot">bruna santanna. · A Virada IA<br>
+      Prévia de revisão. Nenhuma alteração no site publicado.</footer>`;
+  ligar();
+}
+
+function ligar(){
+  const lb=document.getElementById('lightbox');
+  document.querySelectorAll('[data-arte]').forEach(b=>b.onclick=()=>{
+    lb.querySelector('img').src=IMG+'carrossel-'+b.dataset.arte+'.jpg';
+    lb.showModal();
+  });
+  lb.querySelector('.close').onclick=()=>lb.close();
+
+  const comprar=document.getElementById('comprar');
+  if(comprar) comprar.onclick=()=>{
+    document.querySelector('.status').textContent=
+      'Esta é a prévia. O checkout será conectado na versão de publicação.';
+  };
+
+  const barra=document.querySelector('.sticky'), hero=document.querySelector('.hero');
+  observer?.disconnect();
+  observer=new IntersectionObserver(e=>barra.hidden=e[0].isIntersecting);
+  observer.observe(hero);
+}
+
+document.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>{
+  produto=b.dataset.p;
+  history.replaceState(null,'','?p='+produto);
+  render(); scrollTo(0,0);
+});
+render();
+</script>
+</body>
+</html>
