@@ -143,11 +143,17 @@ button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var
 .deliver{padding:70px 0 76px}
 .deliver .head{padding:0 var(--pad);max-width:1180px;margin:0 auto 34px}
 .deliver h2{font-size:clamp(38px,10.4vw,64px);max-width:13ch}
-.shotfull{margin:0 0 40px;position:relative;overflow:hidden}
-/* no celular a tela real entra ampliada e cortada, senao o texto fica ilegivel */
-.shotfull img{width:155%;max-width:none;height:auto}
-.shotfull figcaption{padding:12px var(--pad) 0;font-size:11px;color:var(--green);
-  max-width:1180px;margin:0 auto;font-weight:300}
+/* faixa escura so para a tela real nao se confundir com o bege da pagina */
+.shotband{background:var(--deep);padding:44px var(--pad) 46px;margin:0 0 44px}
+.mock{max-width:900px;margin:0 auto;border-radius:9px;overflow:hidden;
+  background:#0a1f22;box-shadow:0 20px 44px #00000059}
+.mock .chrome{display:flex;align-items:center;gap:6px;padding:10px 13px}
+.mock .chrome i{width:9px;height:9px;border-radius:50%;background:#f3eee333;flex:none}
+.mock .chrome span{font-size:9px;letter-spacing:.15em;text-transform:uppercase;
+  color:#f3eee378;margin-left:10px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.mock img{width:100%;display:block}
+.shotband figcaption{font-size:11px;color:#f3eee395;font-weight:300;
+  max-width:900px;margin:16px auto 0;text-align:center}
 .items{padding:0 var(--pad);max-width:1180px;margin:0 auto}
 .item{display:grid;grid-template-columns:38px 1fr;gap:14px;padding:28px 0;
   border-top:1px solid #14373c2b}
@@ -386,9 +392,11 @@ dialog button{display:block;margin:0 0 10px auto;min-height:44px;padding:9px 16p
   .deliver{padding:100px 0 106px}
   .deliver .head{margin-bottom:52px}
   .deliver h2{font-size:clamp(52px,4.6vw,74px)}
-  .shotfull img{width:100%}
-  .shotfull{margin-bottom:60px}
-  .shotfull figcaption{font-size:12px;padding-top:16px}
+  .shotband{padding:70px 60px 72px;margin-bottom:64px}
+  .mock{max-width:1000px}
+  .mock .chrome{padding:13px 17px}
+  .mock .chrome i{width:11px;height:11px}
+  .shotband figcaption{font-size:12px;margin-top:22px;max-width:1000px}
   .items{display:grid;grid-template-columns:1fr 1fr;gap:0 70px}
   .item{padding:34px 0}
   .item h3{font-size:23px}
@@ -548,6 +556,7 @@ motor:{
   entregaKicker:'O que você recebe na compra',
   entregaH2:'O motor.', entregaH2em:'E o caminho para montar.',
   shot:{arquivo:'central-real.png', local:true, alt:'Tela real da Central do Aluno',
+    barra:'brunasantanna.com · central do aluno',
     legenda:'Tela real da Central do Aluno, incluída na compra.'},
   entregas:[
     ['Curso · 3 horas','20 aulas para fazer junto','Eu mostro a montagem na tela. Você configura seu sistema e volta à aula quando precisar.'],
@@ -614,6 +623,7 @@ curso:{
   entregaKicker:'O que você recebe na compra',
   entregaH2:'O curso completo.', entregaH2em:'E material para praticar.',
   shot:{arquivo:'guia-real.png', local:true, alt:'Tela real de um dos guias do curso',
+    barra:'brunasantanna.com · guia do curso',
     legenda:'Tela real de um dos guias que acompanham o curso.'},
   entregas:[
     ['7 módulos · mais de 5 horas','O curso completo de Claude','Do primeiro pedido aos projetos, skills, Cowork, agentes e Claude Code. Gravado em estúdio.'],
@@ -753,8 +763,11 @@ const bDeliver=d=>`<section class="deliver" id="pacote">
     <span class="kicker">${d.entregaKicker}</span>
     <h2 class="display">${d.entregaH2}<br><em class="em">${d.entregaH2em}</em></h2>
   </div>
-  <figure class="shotfull">
-    <img src="${d.shot.local?d.shot.arquivo:IMG+d.shot.arquivo}" alt="${d.shot.alt}" loading="lazy">
+  <figure class="shotband">
+    <div class="mock">
+      <div class="chrome"><i></i><i></i><i></i><span>${d.shot.barra}</span></div>
+      <img src="${d.shot.local?d.shot.arquivo:IMG+d.shot.arquivo}" alt="${d.shot.alt}" loading="lazy">
+    </div>
     <figcaption>${d.shot.legenda}</figcaption>
   </figure>
   <div class="items">${d.entregas.map(([tag,t,p],i)=>`<article class="item">
