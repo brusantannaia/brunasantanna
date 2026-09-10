@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#F3EEE3">
+<title>Diagnóstico de IA: qual é o seu nível de uso? · Bruna Santanna</title>
+<meta name="description" content="Teste gratuito de 7 perguntas: descubra em que nível você está usando IA hoje, o que está te segurando e qual é o próximo passo certo para você. Leva 1 minuto.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Qual é o seu nível de uso de IA?">
+<meta property="og:description" content="7 perguntas, 1 minuto. Descubra em que nível você está, o que está te segurando e o que fazer agora.">
+<meta property="og:url" content="https://brunasantanna.com/diagnostico">
+<meta property="og:image" content="https://brunasantanna.com/bruna-santanna.jpg">
+<link rel="canonical" href="https://brunasantanna.com/diagnostico">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7DCW0QVCWB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7DCW0QVCWB');
+</script>
+
+<!-- Meta Pixel -->
+<script src="/meta-pixel.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif&family=Manrope:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif&family=Manrope:wght@500;600;700&display=swap">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Diagnóstico de IA",
+  "applicationCategory": "BusinessApplication",
+  "description": "Teste gratuito que mede o nível de uso de inteligência artificial de um profissional e indica o próximo passo. O teste se adapta: quem cria conteúdo responde duas perguntas a mais.",
+  "url": "https://brunasantanna.com/diagnostico",
+  "inLanguage": "pt-BR",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "BRL" },
+  "author": { "@type": "Person", "name": "Bruna Santanna", "url": "https://brunasantanna.com" }
+}
+</script>
+
+<style>
+:root{--paper:#F3EEE3;--ink:#14373C;--terra:#985A3B;--clay:#B06E4A;--soft:#ECE5D6;--white:#FBF9F3;
+  --sand:#E0BBA4;--moss:#435D51;--line:#14373c30;--line2:#14373c35}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.55 'DM Sans',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,p,figure,ul,ol{margin:0}
+h1,h2{font-family:'Instrument Serif',Georgia,serif;font-weight:400;letter-spacing:-.025em;line-height:1}
+h1{font-size:clamp(44px,12.2vw,70px)}
+h2{font-size:clamp(36px,10vw,56px)}
+h3{font:600 19px/1.25 Manrope,system-ui,sans-serif}
+em{font-style:normal;color:var(--terra)}
+img{width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
+button,a{-webkit-tap-highlight-color:transparent}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--clay);outline-offset:4px}
+::selection{background:var(--clay);color:#fff}
+
+.label{font-size:10px;text-transform:uppercase;font-weight:600;letter-spacing:.13em;display:block;margin-bottom:14px}
+.brand{padding:18px 22px;display:flex;align-items:center;justify-content:space-between;max-width:1180px;margin:auto}
+.brand b{font-size:13px}
+.brand span{font-size:9px;letter-spacing:.16em}
+.section{padding:44px 22px;max-width:1120px;margin:auto}
+.section-header{max-width:600px;margin-bottom:28px}
+.dark{background:var(--ink);color:var(--paper)}
+.dark em{color:var(--sand)}
+.soft{background:var(--soft)}
+
+/* ---------- botao: pilula petroleo com seta ---------- */
+.button{background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:space-between;
+  gap:20px;padding:15px 19px;border-radius:30px;min-height:54px;font-size:13px;font-weight:600;width:100%;
+  text-align:left;transition:background .2s ease}
+.button span{font-size:23px;line-height:1;font-weight:400;flex:0 0 auto}
+.button:hover{background:#0E282C}
+.button.clay{background:var(--terra)}
+.button.clay:hover{background:var(--clay)}
+.button.ghost{background:none;color:var(--ink);border:1px solid var(--ink)}
+.button.ghost:hover{background:var(--ink);color:var(--paper)}
+.price-line{font-size:11px;margin:10px 0 0;line-height:1.6}
+
+/* ---------- telas ---------- */
+.screen{display:none}
+.screen.on{display:block;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ---------- capa ---------- */
+.hero{max-width:1180px;margin:auto;padding:18px 22px 32px}
+.hero h1{max-width:15ch}
+.hero .lead{font-size:15px;line-height:1.6;margin:19px 0 18px;max-width:42ch}
+.hero-composition{position:relative;margin:26px 0 0;padding:0 0 24px;isolation:isolate}
+.hero-portrait{width:67%;aspect-ratio:4/5;object-fit:cover;object-position:50% 22%;border-radius:130px 130px 0 0}
+.hero-aside{position:absolute;right:0;top:14px;width:34%;font:400 24px/1.03 'Instrument Serif',Georgia,serif}
+.hero-caption{position:absolute;bottom:0;left:0;font-size:9px;letter-spacing:.08em;text-transform:uppercase}
+.ribbon{padding:18px 22px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  display:flex;justify-content:center;gap:18px;flex-wrap:wrap;background:var(--soft)}
+.ribbon span{font-size:11px}
+.ribbon b{font-size:15px;font-weight:600;margin-right:4px;font-family:'Instrument Serif',serif}
+.niveis-lista{display:grid;gap:0;margin-top:8px}
+.niveis-lista article{display:grid;grid-template-columns:35px 1fr;gap:12px;padding:20px 0;border-top:1px solid var(--line2)}
+.niveis-lista span{font:400 30px/1 'Instrument Serif',Georgia,serif;color:var(--terra)}
+.niveis-lista p{font-size:14px;max-width:46ch}
+
+/* ---------- quiz ---------- */
+.qtop{max-width:1120px;margin:auto;padding:22px 22px 0}
+.bar{height:1px;background:var(--line)}
+.bar i{display:block;height:1px;width:0;background:var(--terra);transition:width .4s cubic-bezier(.2,.8,.3,1)}
+.qcount{display:flex;justify-content:space-between;align-items:center;margin-top:13px;
+  font-size:10px;text-transform:uppercase;font-weight:600;letter-spacing:.13em}
+.qcount button{font-size:10px;text-transform:uppercase;font-weight:600;letter-spacing:.13em;
+  min-height:44px;padding:0;color:var(--terra)}
+.qcount button[disabled]{opacity:.28;cursor:default;color:var(--ink)}
+.qbody{max-width:1120px;margin:auto;padding:26px 22px 50px}
+.qbody h2{max-width:17ch}
+.qbody .sub{font-size:13px;margin:14px 0 0;max-width:46ch;color:var(--moss)}
+.opts{display:grid;gap:0;margin-top:26px}
+.opt{display:grid;grid-template-columns:32px 1fr;gap:12px;align-items:start;width:100%;text-align:left;
+  padding:20px 8px 20px 0;border-top:1px solid var(--line2);min-height:64px;position:relative;
+  transition:padding-left .2s ease,color .2s ease}
+.opt:last-child{border-bottom:1px solid var(--line2)}
+.opt .k{font:400 26px/1 'Instrument Serif',Georgia,serif;color:var(--terra);padding-top:1px}
+.opt>span:last-child{font-size:15px;line-height:1.5}
+.opt::before{content:"";position:absolute;left:0;top:-1px;bottom:0;width:0;background:var(--terra);transition:width .2s ease}
+.opt:hover{padding-left:12px}
+.opt:hover::before{width:3px}
+.opt.sel{padding-left:12px;color:var(--terra)}
+.opt.sel::before{width:3px}
+
+/* ---------- e-mail ---------- */
+.gate{max-width:1120px;margin:auto;padding:34px 22px 60px}
+.gate h2{max-width:14ch}
+.gate .lead{font-size:15px;line-height:1.6;margin:18px 0 30px;max-width:40ch}
+.gcard{border-top:2px solid var(--ink);padding-top:26px;max-width:520px}
+.gcard label{display:block;font-size:10px;text-transform:uppercase;font-weight:600;letter-spacing:.13em;margin-bottom:9px}
+.gcard input{width:100%;padding:12px 0;border:0;border-bottom:1px solid var(--line);background:none;
+  font:400 17px 'DM Sans',sans-serif;color:var(--ink);margin-bottom:24px;border-radius:0}
+.gcard input:focus{outline:none;border-bottom-color:var(--terra)}
+.gcard input::placeholder{color:#14373c60}
+.gcard .err{color:var(--terra);font-weight:600;font-size:13px;margin-bottom:14px;display:none}
+.gcard .err.on{display:block}
+.load{display:none;padding:26px 0;font-size:10px;text-transform:uppercase;font-weight:600;letter-spacing:.13em}
+.load.on{display:block}
+.fine{font-size:11px;line-height:1.6;margin-top:14px;color:var(--moss)}
+
+/* ---------- resultado ---------- */
+.res-hero{max-width:1180px;margin:auto;padding:26px 22px 34px}
+.res-hero h1{max-width:13ch;margin-top:4px}
+.res-hero h1 .pre{display:block;font:600 10px/1.5 'DM Sans',sans-serif;text-transform:uppercase;
+  letter-spacing:.13em;color:var(--ink);margin-bottom:14px}
+.res-hero .diag{font-size:15px;line-height:1.62;margin:22px 0 0;max-width:44ch}
+
+.eixos{display:grid;gap:0;margin-top:8px}
+.mrow{padding:22px 0;border-top:1px solid var(--line2)}
+.mrow .ml{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:12px}
+.mrow .mn{font:600 15px/1.25 Manrope,sans-serif}
+.mrow .mv{font:400 30px/1 'Instrument Serif',Georgia,serif;color:var(--terra)}
+.mrow .mt{height:2px;background:#14373c1f}
+.mrow .mt i{display:block;height:2px;width:0;background:var(--ink);transition:width .9s cubic-bezier(.2,.8,.3,1)}
+.mrow .md{font-size:13px;margin-top:11px;color:var(--moss);max-width:46ch}
+
+.pain{display:grid;gap:0;margin-top:22px}
+.pain li{padding:17px 0;border-top:1px solid #f3eee333;font-size:15px;list-style:none;line-height:1.55}
+.pain li span{font-size:10px;letter-spacing:.13em;color:var(--sand);display:block;margin-bottom:7px;text-transform:uppercase}
+
+.offer h2{margin-bottom:4px}
+.offer .desc{font-size:15px;line-height:1.6;margin:18px 0 0;max-width:44ch}
+.offer ul{list-style:none;padding:0;margin:24px 0 0}
+.offer ul li{display:grid;grid-template-columns:22px 1fr;gap:10px;padding:14px 0;border-top:1px solid var(--line2);font-size:14px}
+.offer ul li::before{content:"·";font:400 22px/1 'Instrument Serif',serif;color:var(--terra)}
+.package-cta{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
+  border-top:2px solid var(--ink);padding-top:22px;margin-top:24px}
+.package-cta small{font-size:11px;display:block}
+.amount{font-family:'Instrument Serif',Georgia,serif;font-size:30px;line-height:1}
+.package-cta .button{min-width:200px;width:auto;flex:1 1 200px}
+
+.next{border-top:1px solid var(--line2);padding-top:22px;margin-top:34px}
+.next p{font-size:14px;line-height:1.6;margin:12px 0 12px;max-width:46ch}
+.next a{font-size:11px;text-transform:uppercase;font-weight:600;letter-spacing:.13em;color:var(--terra);
+  border-bottom:1px solid var(--terra);padding-bottom:3px}
+
+.steps{display:grid;gap:0;margin-top:8px;list-style:none;padding:0;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:35px 1fr;gap:12px;padding:20px 0;
+  border-top:1px solid var(--line2);font-size:14px;line-height:1.55}
+.steps li::before{content:"0" counter(s);font:400 30px/1 'Instrument Serif',Georgia,serif;color:var(--terra)}
+
+.track{display:grid;gap:0;margin-top:8px}
+.trow{display:grid;grid-template-columns:35px 1fr;gap:12px;padding:20px 0;border-top:1px solid var(--line2);opacity:.45}
+.trow.now{opacity:1}
+.trow .tn{font:400 30px/1 'Instrument Serif',Georgia,serif;color:var(--terra)}
+.trow .tt{font:600 17px/1.25 Manrope,sans-serif;display:block}
+.trow.now .tt{color:var(--terra)}
+.trow .ts{font-size:13px;margin-top:7px;color:var(--moss);max-width:44ch}
+.trow .tag{display:block;margin-top:9px;font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  font-weight:600;color:var(--terra)}
+
+.share h2{max-width:15ch}
+.share p{font-size:15px;line-height:1.6;margin:16px 0 22px;max-width:40ch}
+.share .button{max-width:420px}
+.sobre p{font-size:14px;line-height:1.65;margin-top:16px;max-width:60ch}
+.foot{padding:34px 22px 30px;max-width:1120px;margin:auto;border-top:1px solid var(--line2)}
+.foot .fl{display:flex;flex-wrap:wrap;gap:10px 22px;margin-bottom:16px}
+.foot .fl a{font-size:10px;text-transform:uppercase;font-weight:600;letter-spacing:.13em}
+.foot .fl a:hover{color:var(--terra)}
+.foot .cp{font-size:11px;color:var(--moss)}
+[hidden]{display:none!important}
+
+@media(min-width:760px){
+  .hero{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;padding:35px 35px 55px}
+  .hero-composition{margin:0}
+  .hero h1{font-size:70px}
+  .hero .lead{font-size:17px}
+  .hero .button{max-width:410px}
+  .hero-aside{font-size:40px}
+  .section,.qbody,.qtop,.gate,.res-hero,.foot{padding-left:35px;padding-right:35px}
+  .section{padding-top:62px;padding-bottom:62px}
+  .niveis-lista,.steps,.track,.eixos{grid-template-columns:1fr 1fr;gap:0 50px}
+  .pain{grid-template-columns:repeat(3,1fr);gap:30px}
+  .opts{grid-template-columns:1fr 1fr;gap:0 50px}
+  .offer ul{columns:2;column-gap:50px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<!-- PENDENTE: o Motor passou a R$197 na direcao aprovada de 08/09. Conferir se o checkout do Kiwify ja esta com esse valor antes de publicar. -->
+
+<header class="brand"><b>bruna santanna.</b><span>A VIRADA IA</span></header>
+
+<!-- ============ 1. CAPA ============ -->
+<section class="screen on" id="s-intro">
+  <div class="hero">
+    <div>
+      <span class="label">Diagnóstico gratuito</span>
+      <h1>Qual é o seu<br><em>nível de uso de IA?</em></h1>
+      <p class="lead">Quase todo mundo acha que está no nível 3. A maioria está no 2. São 7 perguntas para descobrir onde você está de verdade, o que está te segurando e qual é o próximo passo certo para você agora.</p>
+      <button class="button" id="btnStart">Começar o diagnóstico<span>↗</span></button>
+      <p class="price-line">Gratuito · resultado na tela em 1 minuto<br>O teste se adapta: quem cria conteúdo responde duas perguntas a mais.</p>
+    </div>
+    <div class="hero-composition">
+      <img class="hero-portrait" src="fotos/bruna-hero.jpg" alt="Bruna Santanna" width="900" height="1125" fetchpriority="high">
+      <div class="hero-aside">Onde você está.<br>E o que fazer agora.</div>
+      <span class="hero-caption">7 perguntas · 4 níveis · sem resposta genérica</span>
+    </div>
+  </div>
+  <div class="ribbon"><span><b>01</b> Responda</span><span><b>02</b> Receba o nível</span><span><b>03</b> Saiba o próximo passo</span></div>
+  <section class="section">
+    <div class="section-header"><span class="label">O que o teste mede</span><h2>Quatro níveis.<br><em>Um deles é o seu.</em></h2></div>
+    <div class="niveis-lista">
+      <article><span>01</span><div><h3>Turista de IA</h3><p>Você conversa com a IA, mas ela ainda não entrou no seu trabalho.</p></div></article>
+      <article><span>02</span><div><h3>Pergunta, copia, cola</h3><p>Você usa todo dia e ainda usa uma fração do que ela faz.</p></div></article>
+      <article><span>03</span><div><h3>Conteúdo no braço</h3><p>Você já tira coisa boa dela, mas o conteúdo consome a sua semana.</p></div></article>
+      <article><span>04</span><div><h3>Pronto para implantar</h3><p>Você já executa com IA e precisa colocar isso de pé no negócio.</p></div></article>
+    </div>
+  </section>
+</section>
+
+<!-- ============ 2. QUIZ ============ -->
+<section class="screen" id="s-quiz">
+  <div class="qtop">
+    <div class="bar"><i id="barFill"></i></div>
+    <div class="qcount">
+      <button id="btnBack" disabled>← Voltar</button>
+      <span id="qNum">Pergunta 1 de 7</span>
+    </div>
+  </div>
+  <div class="qbody">
+    <h2 id="qTitle"></h2>
+    <p class="sub" id="qSub"></p>
+    <div class="opts" id="qOpts"></div>
+  </div>
+</section>
+
+<!-- ============ 3. E-MAIL ============ -->
+<section class="screen" id="s-gate">
+  <div class="gate">
+    <span class="label">Última etapa</span>
+    <h2>O seu diagnóstico<br><em>está pronto.</em></h2>
+    <p class="lead">Diz para onde eu mando. Você vê o resultado completo aqui na tela, na hora.</p>
+    <div class="gcard" id="gcard">
+      <form id="gForm" novalidate>
+        <label for="gNome">Como você se chama</label>
+        <input type="text" id="gNome" name="nome" autocomplete="given-name" placeholder="Seu primeiro nome">
+        <label for="gEmail">Seu melhor e-mail</label>
+        <input type="email" id="gEmail" name="email" autocomplete="email" inputmode="email" placeholder="voce@email.com">
+        <div class="err" id="gErr">Confere o e-mail, parece que faltou alguma coisa.</div>
+        <button type="submit" class="button" id="gBtn">Ver o meu resultado<span>↗</span></button>
+      </form>
+      <div class="load" id="gLoad">Calculando o seu nível...</div>
+      <p class="fine">Você também entra na minha lista de e-mail. Escrevo uma vez por semana, sobre IA aplicada ao trabalho. Sai quando quiser, com um clique.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. RESULTADO ============ -->
+<section class="screen" id="s-res">
+  <div class="res-hero">
+    <span class="label" id="rBadge"></span>
+    <h1 id="rTitle"></h1>
+    <p class="diag" id="rDiag"></p>
+  </div>
+
+  <section class="section">
+    <div class="section-header"><span class="label" id="secEixos">O seu diagnóstico em três eixos</span>
+      <h2>O que os seus cliques<br><em>dizem de você.</em></h2></div>
+    <div class="eixos">
+      <div class="mrow">
+        <div class="ml"><span class="mn">Profundidade de uso</span><span class="mv" id="vP">0%</span></div>
+        <div class="mt"><i id="bP"></i></div>
+        <div class="md">O quanto você tira da IA hoje: da pergunta solta até a tarefa inteira executada.</div>
+      </div>
+      <div class="mrow" id="rowC">
+        <div class="ml"><span class="mn">Peso do conteúdo</span><span class="mv" id="vC">0%</span></div>
+        <div class="mt"><i id="bC"></i></div>
+        <div class="md">O quanto criar e publicar conteúdo pesa na sua semana hoje.</div>
+      </div>
+      <div class="mrow">
+        <div class="ml"><span class="mn">Prontidão para implantar</span><span class="mv" id="vN">0%</span></div>
+        <div class="mt"><i id="bN"></i></div>
+        <div class="md">Tamanho da operação, urgência e o quanto você já pode colocar IA rodando no negócio.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="dark"><section class="section">
+    <span class="label">O que está te segurando</span>
+    <h2>Não é falta de vontade.<br><em>É outra coisa.</em></h2>
+    <ul class="pain" id="rHolds"></ul>
+  </section></div>
+
+  <section class="section offer" id="rOffer">
+    <span class="label" id="oKick"></span>
+    <h2 id="oTitle"></h2>
+    <p class="desc" id="oDesc"></p>
+    <ul id="oList"></ul>
+    <div class="package-cta">
+      <div><small id="oPriceLabel">O seu próximo passo por</small><div class="amount" id="oPrice"></div></div>
+      <a class="button clay" id="oBtn" href="#" rel="noopener">Quero<span>↗</span></a>
+    </div>
+    <p class="fine" id="oFine"></p>
+    <div class="next">
+      <span class="label">E depois disso</span>
+      <p id="nDesc"></p>
+      <a id="nLink" href="#">Ver</a>
+    </div>
+  </section>
+
+  <div class="soft"><section class="section">
+    <div class="section-header"><span class="label">Comece por aqui, nesta ordem</span>
+      <h2>Três coisas<br><em>para esta semana.</em></h2></div>
+    <ol class="steps" id="rSteps"></ol>
+  </section></div>
+
+  <section class="section">
+    <div class="section-header"><span class="label">Onde você está na trilha</span>
+      <h2>Os quatro níveis,<br><em>e o seu.</em></h2></div>
+    <div class="track" id="rTrack"></div>
+  </section>
+
+  <div class="soft"><section class="section share">
+    <span class="label">Compartilhar</span>
+    <h2>Manda e compara com<br><em>quem trabalha com você.</em></h2>
+    <p>Quase ninguém acerta o próprio nível na primeira tentativa.</p>
+    <a class="button" id="btnShare" href="#" target="_blank" rel="noopener">Compartilhar no WhatsApp<span>↗</span></a>
+  </section></div>
+
+  <section class="section sobre">
+    <span class="label">Quem fez este diagnóstico</span>
+    <p>Sou a Bruna Santanna. Trabalho com IA aplicada a negócio de verdade: já treinei mais de 1.000 profissionais e times como Magalu, OLX, B3, Stoller, Corteva e Ismart. Eu só ensino o que eu uso todo dia. Este diagnóstico é o mesmo mapa que eu uso para entender onde uma pessoa está antes de dizer o que ela deveria fazer.</p>
+  </section>
+
+  <div class="foot">
+    <div class="fl">
+      <a href="/biblioteca">Biblioteca gratuita</a>
+      <a href="/curso">Curso de Claude</a>
+      <a href="/sistema">Motor de Conteúdo</a>
+      <a href="/mentoria">Mentoria</a>
+      <a href="/quem-sou">Quem sou</a>
+    </div>
+    <div class="cp">© Bruna Santanna · A Virada IA</div>
+  </div>
+</section>
+
+<script>
+/* ============================================================
+   DIAGNÓSTICO DE IA
+   Eixos: p = profundidade de uso | c = peso do conteúdo | n = prontidão para implantar
+   ============================================================ */
+
+var COLETOR = "https://script.google.com/macros/s/AKfycbys-WmyPMTqYAa6duYGAu6iT-83287ndt4r53mzJ_tpMxaK3wPdfdB6s5T-f5bDUexH0g/exec";
+var LISTA    = "https://script.google.com/macros/s/AKfycbx90IdrA_L6n3jVdoYBinBPxPfWq0h6Iua1MrI8gQ7-RgBXhU1rOqF9dM2n7mLdAeMW/exec";
+
+var Q = [
+ { t:"Com que frequência a IA entra no seu trabalho?", s:"Vale ChatGPT, Claude, Gemini, qualquer uma.",
+   o:[
+    {t:"Quase nunca. Já testei e parei.", p:0,c:0,n:0},
+    {t:"Uma ou duas vezes por semana, quando aperta.", p:1,c:0,n:0},
+    {t:"Todo dia. É a primeira aba que eu abro.", p:3,c:0,n:0},
+    {t:"Todo dia, e já tenho coisa rodando sem eu pedir.", p:6,c:0,n:1}
+   ]},
+ /* GARFO: define se o teste segue pelo caminho de conteúdo ou pelo caminho curto */
+ { t:"Você usa IA hoje para criar conteúdo?", s:"Post, vídeo, newsletter, LinkedIn: qualquer coisa que você precise publicar.",
+   o:[
+    {t:"Eu não crio conteúdo, e não é para onde eu quero ir.", p:0,c:0,n:0, ramo:"nao"},
+    {t:"Uso, e está resolvido. Conteúdo não é o meu problema hoje.", p:1,c:1,n:0, ramo:"nao"},
+    {t:"Crio conteúdo, mas ainda faço quase tudo na mão.", p:0,c:5,n:0, ramo:"sim"},
+    {t:"Uso IA e mesmo assim o conteúdo consome a minha semana.", p:1,c:6,n:0, ramo:"sim"}
+   ]},
+ { t:"Você já colocou a IA para trabalhar em cima dos seus arquivos?", s:"Planilha, PDF, transcrição de reunião, uma pasta inteira.",
+   o:[
+    {t:"Nunca. Eu só converso na caixinha de texto.", p:0,c:0,n:0},
+    {t:"Já colei o texto na mão dentro do chat.", p:2,c:0,n:0},
+    {t:"Subo o arquivo direto e peço a análise.", p:4,c:0,n:0},
+    {t:"Ela lê pastas inteiras da minha máquina e me devolve arquivo pronto.", p:7,c:0,n:1}
+   ]},
+ { t:"Skill é um manual que ensina a IA a fazer uma tarefa do seu jeito, sempre igual. E aí?", s:"Responde com sinceridade, isso muda o seu resultado.",
+   o:[
+    {t:"É a primeira vez que eu leio isso.", p:0,c:0,n:0},
+    {t:"Já ouvi falar, mas nunca fiz uma.", p:1,c:0,n:0},
+    {t:"Já montei uma ou duas.", p:4,c:0,n:1},
+    {t:"Tenho várias rodando toda semana.", p:7,c:0,n:2}
+   ]},
+ { ramo:"conteudo", t:"Quanto do seu tempo vai em conteúdo?", s:"Você faz conteúdo, então eu tenho mais duas perguntas sobre isso.",
+   o:[
+    {t:"Até 2 horas por semana.", p:0,c:1,n:0},
+    {t:"De 3 a 6 horas por semana.", p:0,c:3,n:0},
+    {t:"Mais que isso, toda semana.", p:0,c:5,n:0},
+    {t:"Perdi a conta. Virou um segundo emprego.", p:0,c:7,n:0}
+   ]},
+ { ramo:"conteudo", t:"Como o seu conteúdo sai hoje?", s:"",
+   o:[
+    {t:"Não sai. Eu sei que precisava, mas não sai.", p:0,c:5,n:0},
+    {t:"Sai quando dá, sem nenhuma constância.", p:0,c:6,n:0},
+    {t:"Sai constante, mas eu faço tudo no braço.", p:0,c:7,n:1},
+    {t:"Já tem processo e gente ajudando.", p:0,c:1,n:3}
+   ]},
+ { t:"Como está a sua operação hoje?", s:"",
+   o:[
+    {t:"Sou eu, começando agora.", p:0,c:0,n:0},
+    {t:"Sou eu, e o negócio já anda: tenho cliente e faturamento.", p:0,c:0,n:3},
+    {t:"Tenho sócio ou uma equipe pequena.", p:0,c:0,n:5},
+    {t:"Tenho time e processo, e a IA precisa entrar nisso.", p:0,c:0,n:7}
+   ]},
+ { t:"Se você fosse resolver isso hoje, o que faria mais sentido?", s:"",
+   o:[
+    {t:"Aprender no meu ritmo, com aula gravada, e aplicar sozinho.", p:0,c:0,n:0},
+    {t:"Instalar um sistema pronto e sair usando.", p:0,c:5,n:0},
+    {t:"Alguém do meu lado, olhando o meu caso, o meu negócio, a minha tela.", p:0,c:0,n:7},
+    {t:"Ainda quero entender melhor antes de decidir qualquer coisa.", p:0,c:0,n:0,f:"explorando"}
+   ]},
+ { t:"Qual é o seu prazo?", s:"",
+   o:[
+    {t:"Sem pressa. Estou explorando.", p:0,c:0,n:0},
+    {t:"Nos próximos meses.", p:0,c:0,n:1},
+    {t:"Este mês. Já decidi que vou mexer nisso.", p:0,c:0,n:3},
+    {t:"Ontem. Já está atrasado.", p:0,c:0,n:5}
+   ]}
+];
+
+var IDX_GARFO = 1;
+var MAXP = 21, MAXC = 25;
+var MAXN_CONTEUDO = 26, MAXN_CURTO = 23;
+
+var NIVEIS = {
+ 1:{
+  badge:"Nível 1 de 4",
+  nome:"Turista de IA",
+  diag:"Você já entrou na IA, olhou em volta e saiu. Ela responde bem quando você pergunta, mas não faz parte do seu trabalho. Comprar curso agora seria comprar mais uma coisa parada na sua lista. O seu problema não é falta de conteúdo avançado, é falta do primeiro hábito.",
+  holds:[
+   ["O USO","Você usa a IA como caixa de pergunta, e não como o lugar onde o trabalho acontece."],
+   ["A SEMANA","Nada do que você faz toda semana está dentro dela hoje."],
+   ["O HÁBITO","Você para na primeira resposta ruim e volta a fazer na mão."]
+  ],
+  offer:{
+   kick:"Gratuito, e é de verdade o passo certo",
+   titulo:"A Biblioteca do Claude",
+   desc:"Mais de 40 guias curtos, um por vez, sobre coisas que a IA faz de verdade no trabalho. Você escolhe um, faz hoje, e a IA começa a entrar na sua rotina.",
+   lista:["Mais de 40 guias prontos, de graça","Cada guia é uma coisa concreta para fazer hoje","Um e-mail por semana com o que mudou na IA"],
+   preco:"R$0",
+   precoSub:"sem cadastro complicado e sem pegadinha",
+   btn:"Abrir a biblioteca",
+   href:"/biblioteca",
+   ev:"biblioteca",
+   fine:"Volta neste diagnóstico daqui a 30 dias. O seu nível vai ter mudado."
+  },
+  next:{ t:"Quando a IA já for parte da sua rotina (e isso leva umas semanas, não meses), o passo 2 é o curso Virada IA 2.0: Claude com Profundidade. Ele começa exatamente onde a biblioteca para.", link:"Conhecer o curso", href:"/curso" },
+  steps:[
+   "Escolha um guia da biblioteca e faça hoje, com uma tarefa real sua.",
+   "Repita amanhã com outra tarefa. Duas semanas seguidas, e vira hábito.",
+   "Quando abrir a IA for automático, aí sim vale investir em curso."
+  ]
+ },
+ 2:{
+  badge:"Nível 2 de 4",
+  nome:"Pergunta, copia, cola",
+  diag:"Você usa IA todo dia e ainda usa uma fração do que ela faz. Ela responde, você copia, cola e formata: quem faz o trabalho ainda é você. O que falta não é prompt melhor, é profundidade. Fazer a IA ler os seus arquivos, executar a tarefa inteira e devolver pronto.",
+  holds:[
+   ["O CONTEXTO","A IA não olha os seus arquivos, então ela não conhece o seu contexto e responde genérico."],
+   ["A REPETIÇÃO","Tudo que você ensina hoje, você ensina de novo amanhã, do zero."],
+   ["O LIMITE","Você para na resposta. Não chega no arquivo pronto nem no processo rodando sozinho."]
+  ],
+  offer:{
+   kick:"O passo certo para você agora",
+   titulo:"Virada IA 2.0: Claude com Profundidade",
+   desc:"Curso gravado em estúdio para quem já usa IA e quer colocar ela para trabalhar de verdade: analisar, criar, automatizar e delegar. Sem código, sem terminal, sem virar técnico.",
+   lista:["7 módulos, mais de 5 horas, gravado em estúdio","Guias com prompts e exercícios para praticar","Material de apoio com mais de 40 prompts","12 meses de atualização","Garantia de 7 dias"],
+   preco:"R$347",
+   precoSub:"pagamento único, ou parcelado no cartão, com acesso imediato",
+   btn:"Quero o curso",
+   href:"https://pay.kiwify.com.br/gKnvjrm",
+   ev:"curso",
+   fine:"Acesso imediato. Se não for para você, você tem 7 dias para pedir o dinheiro de volta."
+  },
+  next:{ t:"Se o seu conteúdo também estiver pesando, o Motor de Conteúdo é o complemento natural depois do curso: ele instala uma linha de produção de conteúdo no seu Claude.", link:"Ver o Motor de Conteúdo", href:"/sistema" },
+  steps:[
+   "Faça o curso com uma tarefa real sua aberta do lado, não assistindo de braço cruzado.",
+   "Monte a sua primeira skill até o fim da primeira semana.",
+   "Escolha uma tarefa que você repete toda semana e delegue ela por inteiro."
+  ]
+ },
+ 3:{
+  badge:"Nível 3 de 4",
+  nome:"Conteúdo no braço",
+  diag:"Você já sabe puxar coisa boa da IA. O seu gargalo não é a ferramenta, é o volume: pensar, gravar, editar, publicar e distribuir, toda semana, começando do zero. Isso não se resolve com mais prompt. Se resolve com linha de produção.",
+  holds:[
+   ["ANTES DE POSTAR","O seu conteúdo depende de você estar com tempo e inspiração no mesmo dia."],
+   ["DEPOIS DE POSTAR","Você grava e não distribui, porque distribuir em cada rede dá um trabalho absurdo."],
+   ["NA SEMANA SEGUINTE","Toda semana começa do zero, em vez de rodar um processo que já existe."]
+  ],
+  offer:{
+   kick:"O passo certo para você agora",
+   titulo:"Curso Motor de Conteúdo",
+   desc:"Um motor de agentes instalado no seu Claude: pesquisa, escreve os roteiros, edita os vídeos, agenda em todas as redes e analisa o resultado. Personalizado para o seu negócio, rodando na sua máquina. Você só grava.",
+   lista:["20 aulas, 3 horas, para fazer junto","A skill que constrói o seu motor","Editor de vídeo incluído","Artes com a sua identidade visual","Central do Aluno com mais de 20 prompts, acesso vitalício","Garantia de 7 dias"],
+   preco:"R$197",
+   precoSub:"pagamento único, ou parcelado no cartão, com acesso imediato",
+   btn:"Quero o sistema",
+   href:"https://pay.kiwify.com.br/a9YefRy",
+   ev:"sistema",
+   fine:"Acesso imediato. Se não for para você, você tem 7 dias para pedir o dinheiro de volta."
+  },
+  next:{ t:"Depois que o conteúdo estiver girando sozinho, o curso Claude com Profundidade é o que leva essa mesma lógica para o resto do seu trabalho: relatório, proposta, análise, painel.", link:"Ver o curso de Claude", href:"/curso" },
+  steps:[
+   "Instale o motor com o seu negócio dentro dele, não com um exemplo genérico.",
+   "Rode um ciclo completo esta semana: pauta, roteiro, gravação, edição, distribuição.",
+   "Só depois do primeiro ciclo, ajuste o tom de voz e os formatos."
+  ]
+ },
+ 4:{
+  badge:"Nível 4 de 4",
+  nome:"Pronto para implantar",
+  diag:"Você não precisa de mais aula. Você já executa com IA, já entendeu o que ela faz, e o que está no caminho agora é implantação: tirar isso da sua cabeça e colocar de pé dentro do negócio, com prazo, com prioridade e com alguém que já fez isso antes olhando junto.",
+  holds:[
+   ["A DECISÃO","O que trava não é aprender, é decidir o que automatizar primeiro e o que deixar para depois."],
+   ["O GARGALO","Você é o gargalo: tudo passa por você e nada roda sem você."],
+   ["O PRAZO","Você tem prazo, e prazo não combina com descobrir sozinho por tentativa e erro."]
+  ],
+  offer:{
+   kick:"O passo certo para você agora",
+   titulo:"Mentoria individual com a Bruna",
+   desc:"Não é curso e não é grupo. Sou eu do seu lado, colocando o seu projeto de IA de pé: skills, automações e decisões, dentro do seu negócio. Mensal, normalmente 4 encontros. Poucas vagas, por aplicação.",
+   lista:["100% no seu contexto, sem aula genérica","Plano de implantação com prioridade e prazo","Skills e automações construídas junto com você","Mensal, normalmente 4 encontros"],
+   preco:"Vagas por aplicação",
+   precoSub:"a gente conversa antes de qualquer coisa, e só depois você decide",
+   btn:"Quero aplicar para a mentoria",
+   href:"/mentoria",
+   ev:"mentoria",
+   fine:"Você aplica, a gente conversa, e só aí decide. Sem checkout automático e sem pressão."
+  },
+  next:{ t:"Enquanto a sua vaga não abre, o curso Claude com Profundidade adianta o caminho e faz a mentoria render muito mais quando começar.", link:"Ver o curso de Claude", href:"/curso" },
+  steps:[
+   "Aplique para a mentoria e leve o seu problema mais caro, não o mais fácil.",
+   "Liste as 3 tarefas que mais consomem a sua semana antes da conversa.",
+   "Separe uma pessoa do time para ser dona do processo depois que ele existir."
+  ]
+ }
+};
+
+var TRILHA = [
+ {n:"01", t:"Turista de IA", s:"Usa quando lembra. A IA ainda não entrou no trabalho."},
+ {n:"02", t:"Pergunta, copia, cola", s:"Usa todo dia, mas só na superfície da ferramenta."},
+ {n:"03", t:"Conteúdo no braço", s:"Já tira coisa boa, mas o conteúdo consome a semana."},
+ {n:"04", t:"Pronto para implantar", s:"Já executa com IA. Falta colocar de pé no negócio."}
+];
+
+/* ---------- estado ---------- */
+var pos = 0, respostas = [], ramoConteudo = false, flags = {}, resultado = null, scores = null;
+var $ = function(id){ return document.getElementById(id); };
+
+/* a fila de perguntas muda conforme a resposta do garfo */
+function fila(){
+  var f = [];
+  for (var i=0;i<Q.length;i++){
+    if (!Q[i].ramo) f.push(i);
+    else if (ramoConteudo) f.push(i);
+  }
+  return f;
+}
+
+function tela(id){
+  var all = document.querySelectorAll('.screen');
+  for (var i=0;i<all.length;i++) all[i].classList.remove('on');
+  $(id).classList.add('on');
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+/* ---------- quiz ---------- */
+function render(){
+  var f = fila(), qi = f[pos], q = Q[qi];
+  $('qTitle').textContent = q.t;
+  $('qSub').textContent = q.s || '';
+  $('qSub').style.display = q.s ? 'block' : 'none';
+  $('qNum').textContent = 'Pergunta ' + (pos+1) + ' de ' + f.length;
+  $('barFill').style.width = (pos / f.length * 100) + '%';
+  $('btnBack').disabled = (pos === 0);
+
+  var box = $('qOpts');
+  box.innerHTML = '';
+  var letras = ['A','B','C','D'];
+  for (var i=0;i<q.o.length;i++){
+    (function(i){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'opt' + (respostas[qi] === i ? ' sel' : '');
+      b.innerHTML = '<span class="k">' + letras[i] + '</span><span>' + q.o[i].t + '</span>';
+      b.addEventListener('click', function(){
+        var ja = box.querySelectorAll('.opt');
+        for (var j=0;j<ja.length;j++) ja[j].classList.remove('sel');
+        b.classList.add('sel');
+        setTimeout(function(){ escolher(qi, i); }, 170);
+      });
+      box.appendChild(b);
+    })(i);
+  }
+}
+
+function escolher(qi, i){
+  respostas[qi] = i;
+  if (qi === IDX_GARFO){
+    var novoRamo = (Q[qi].o[i].ramo === 'sim');
+    if (novoRamo !== ramoConteudo){
+      /* trocou de caminho: limpa o que ja tinha sido respondido no ramo de conteudo */
+      for (var k=0;k<Q.length;k++) if (Q[k].ramo) respostas[k] = undefined;
+      ramoConteudo = novoRamo;
+    }
+  }
+  pos++;
+  if (pos < fila().length) render();
+  else { $('barFill').style.width = '100%'; tela('s-gate'); setTimeout(function(){ $('gNome').focus(); }, 200); }
+}
+
+$('btnStart').addEventListener('click', function(){
+  gtag('event','diagnostico_start',{event_category:'diagnostico'});
+  pos = 0; tela('s-quiz'); render();
+});
+$('btnBack').addEventListener('click', function(){ if (pos>0){ pos--; render(); } });
+
+/* ---------- cálculo ---------- */
+function calcular(){
+  var f = fila(), p=0,c=0,n=0; flags = {};
+  for (var i=0;i<f.length;i++){
+    var o = Q[f[i]].o[respostas[f[i]]];
+    if (!o) continue;
+    p += o.p; c += o.c; n += o.n;
+    if (o.f) flags[o.f] = true;
+  }
+  var maxN = ramoConteudo ? MAXN_CONTEUDO : MAXN_CURTO;
+  var pP = p/MAXP, pC = c/MAXC, pN = n/maxN;
+  var nivel;
+  if (pN >= 0.68) nivel = 4;
+  else if (pP < 0.20) nivel = 1;
+  else if (pN >= 0.55 && pP >= 0.35) nivel = 4;
+  /* o nivel 3 so existe para quem disse que conteudo faz parte do trabalho */
+  else if (ramoConteudo && pC >= 0.60) nivel = 3;
+  else nivel = 2;
+  /* quem ja esta muito fundo na ferramenta nao precisa do curso: precisa de implantacao */
+  if (nivel === 2 && pP >= 0.75) nivel = 4;
+  /* quem mal usa IA mas ja tem operacao andando entra pelo curso, nao pela biblioteca */
+  if (nivel === 1 && !flags.explorando && pP >= 0.15 && pN >= 0.40) nivel = 2;
+  scores = { p:p, c:c, n:n, pP:Math.round(pP*100), pC:Math.round(pC*100), pN:Math.round(pN*100) };
+  resultado = nivel;
+  return nivel;
+}
+
+/* ---------- envio ---------- */
+function enviar(nome, email){
+  var payload = { cliente:'diagnostico-ia', nome:nome, email:email,
+    nivel:resultado, nivel_nome:NIVEIS[resultado].nome,
+    score_profundidade:scores.pP, score_conteudo:scores.pC, score_operacao:scores.pN,
+    timestamp:new Date().toISOString(), source:location.href };
+  payload.caminho = ramoConteudo ? 'conteudo' : 'curto';
+  for (var i=0;i<Q.length;i++){
+    var o = Q[i].o[respostas[i]];
+    payload['p' + (i+1)] = o ? o.t : '';
+  }
+  try {
+    fetch(COLETOR, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
+  } catch(e){}
+  try {
+    fetch(LISTA, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({ email:email, list:'diagnostico', timestamp:new Date().toISOString(), source:location.href }) });
+  } catch(e){}
+}
+
+$('gForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  var nome = $('gNome').value.trim();
+  var email = $('gEmail').value.trim();
+  var err = $('gErr');
+  if (!nome){ err.textContent = 'Falta o seu nome.'; err.classList.add('on'); $('gNome').focus(); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ err.textContent = 'Confere o e-mail, parece que faltou alguma coisa.'; err.classList.add('on'); $('gEmail').focus(); return; }
+  err.classList.remove('on');
+  $('gForm').style.display = 'none';
+  $('gLoad').classList.add('on');
+
+  calcular();
+  enviar(nome, email);
+  gtag('event','diagnostico_email',{event_category:'diagnostico'});
+  gtag('event','diagnostico_result',{event_category:'diagnostico', event_label:'nivel-' + resultado});
+  try { localStorage.setItem('diagnostico_nivel', String(resultado)); } catch(e){}
+
+  setTimeout(function(){ mostrarResultado(nome); }, 900);
+});
+
+/* ---------- resultado ---------- */
+function mostrarResultado(nome){
+  var R = NIVEIS[resultado];
+  $('rBadge').textContent = R.badge;
+  var esc = { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' };
+  var nomeSeguro = String(nome).replace(/[&<>"]/g, function(m){ return esc[m]; });
+  $('rTitle').innerHTML = (nomeSeguro ? '<span class="pre">' + nomeSeguro + ', você está em</span>' : '') + '<em>' + R.nome + '</em>';
+  $('rDiag').textContent = R.diag;
+
+  $('vP').textContent = scores.pP + '%';
+  $('vC').textContent = scores.pC + '%';
+  $('vN').textContent = scores.pN + '%';
+  /* quem nao cria conteudo nao ve um eixo de conteudo zerado */
+  $('rowC').hidden = !ramoConteudo;
+  $('secEixos').textContent = ramoConteudo ? 'O seu diagnóstico em três eixos' : 'O seu diagnóstico em dois eixos';
+
+  var holds = $('rHolds'); holds.innerHTML = '';
+  for (var i=0;i<R.holds.length;i++){
+    var li = document.createElement('li');
+    var et = document.createElement('span'); et.textContent = R.holds[i][0];
+    li.appendChild(et);
+    li.appendChild(document.createTextNode(R.holds[i][1]));
+    holds.appendChild(li);
+  }
+
+  var of = R.offer;
+  $('oKick').textContent = of.kick;
+  $('oTitle').textContent = of.titulo;
+  $('oDesc').textContent = of.desc;
+  var ul = $('oList'); ul.innerHTML = '';
+  for (var j=0;j<of.lista.length;j++){
+    var l = document.createElement('li'); l.textContent = of.lista[j]; ul.appendChild(l);
+  }
+  $('oPrice').innerHTML = of.preco + '<small>' + of.precoSub + '</small>';
+  var btn = $('oBtn');
+  btn.innerHTML = of.btn + '<span>\u2197</span>';
+  btn.href = of.href;
+  btn.className = 'button clay cta-buy';
+  if (of.href.indexOf('http') === 0) btn.target = '_blank';
+  btn.addEventListener('click', function(){
+    gtag('event','checkout_click',{ event_category:of.ev, event_label:'diagnostico-nivel-' + resultado });
+  });
+  $('oFine').textContent = of.fine;
+
+  $('nDesc').textContent = R.next.t;
+  $('nLink').textContent = R.next.link + ' →';
+  $('nLink').href = R.next.href;
+
+  var st = $('rSteps'); st.innerHTML = '';
+  for (var k=0;k<R.steps.length;k++){
+    var s = document.createElement('li'); s.textContent = R.steps[k]; st.appendChild(s);
+  }
+
+  var tr = $('rTrack'); tr.innerHTML = '';
+  for (var m=0;m<TRILHA.length;m++){
+    var d = document.createElement('div');
+    d.className = 'trow' + ((m+1) === resultado ? ' now' : '');
+    d.innerHTML = '<span class="tn">' + TRILHA[m].n + '</span><span><span class="tt">' + TRILHA[m].t + '</span>' +
+      '<div class="ts">' + TRILHA[m].s + '</div>' + ((m+1) === resultado ? '<span class="tag">Você está aqui</span>' : '') + '</span>';
+    tr.appendChild(d);
+  }
+
+  var txt = 'Meu nível de uso de IA deu ' + resultado + ' de 4: ' + R.nome + '. Faz o seu, leva 1 minuto: https://brunasantanna.com/diagnostico';
+  $('btnShare').href = 'https://wa.me/?text=' + encodeURIComponent(txt);
+  $('btnShare').addEventListener('click', function(){ gtag('event','diagnostico_share',{event_category:'diagnostico'}); });
+
+  tela('s-res');
+  var alvos = [['bP',scores.pP],['bN',scores.pN]];
+  if (ramoConteudo) alvos.splice(1, 0, ['bC',scores.pC]);
+  function pintar(comAnimacao){
+    for (var a=0;a<alvos.length;a++){
+      var el = $(alvos[a][0]);
+      if (!comAnimacao) el.style.transition = 'none';
+      el.style.width = alvos[a][1] + '%';
+    }
+  }
+  setTimeout(function(){ pintar(true); }, 260);
+  // failsafe: se a barra nao pintou (transicao travada), aplica sem animacao
+  setTimeout(function(){
+    var travou = false;
+    for (var a=0;a<alvos.length;a++){
+      if (alvos[a][1] > 0 && $(alvos[a][0]).getBoundingClientRect().width < 1) travou = true;
+    }
+    if (travou) pintar(false);
+  }, 1600);
+}
+</script>
+
+</body>
+</html>

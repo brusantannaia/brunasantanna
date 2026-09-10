@@ -27,8 +27,8 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap">
 
 <script type="application/ld+json">
 {
@@ -70,29 +70,11 @@ h1,h2,h3,.anton{font-family:'Anton',sans-serif;font-weight:400;text-transform:up
   letter-spacing:.12em;text-transform:uppercase;text-align:center;padding:10px 16px;line-height:1.5}
 .topbar b{color:var(--terra-l);font-weight:700}
 
-/* ---------- HEADER (o mesmo do resto do site) ---------- */
-.site-header{position:sticky;top:0;z-index:50;background:rgba(243,238,227,.94);backdrop-filter:blur(8px);
-  border-bottom:2px solid var(--ink)}
-.header-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px 20px;
-  max-width:1280px;margin:0 auto}
-.logo{display:inline-flex;align-items:center;flex:0 1 auto;min-width:0}
-.logo img{height:24px;width:auto;max-width:100%;display:block}
-@media(min-width:900px){.logo img{height:30px}}
-.main-nav{display:flex;align-items:center;gap:20px}
-.main-nav a{font-size:.88rem;font-weight:600;color:var(--ink-2);white-space:nowrap;transition:color .18s}
-.main-nav a:hover{color:var(--terra)}
-.nav-cta{background:var(--terra);color:#fff!important;padding:10px 18px;border-radius:100px;font-size:.82rem!important}
-.nav-cta:hover{background:var(--terra-d)}
-.nav-toggle{display:none;background:none;border:none;font-size:1.5rem;color:var(--ink);line-height:1;padding:6px 4px}
-@media(max-width:900px){
-  .header-inner{position:relative}
-  .nav-toggle{display:block}
-  .main-nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:flex-start;
-    gap:0;background:var(--bg);border-bottom:2px solid var(--ink);padding:8px 20px 18px;margin:0 -20px}
-  .main-nav.open{display:flex}
-  .main-nav a{width:100%;padding:13px 0;border-top:1px solid var(--line);font-size:.95rem}
-  .nav-cta{margin-top:12px;text-align:center;border-top:none!important}
-}
+/* ---------- HEADER ---------- */
+.hd{display:flex;align-items:center;justify-content:center;gap:9px;padding:20px 0 6px}
+.hd .lg{font-family:'Anton',sans-serif;font-size:1.02rem;letter-spacing:.02em;text-transform:uppercase;color:var(--ink)}
+.hd .pill{font-weight:700;font-size:.56rem;letter-spacing:.12em;color:var(--terra);
+  border:1.5px solid var(--terra);padding:3px 8px;border-radius:100px}
 
 /* ---------- TELAS ---------- */
 .screen{display:none;padding-bottom:60px}
@@ -106,14 +88,14 @@ h1,h2,h3,.anton{font-family:'Anton',sans-serif;font-weight:400;text-transform:up
 .meta{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 10px;margin-bottom:26px}
 .meta span{font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);
   border:1.5px solid var(--line);border-radius:100px;padding:6px 13px;background:var(--card)}
-.btn{display:inline-flex;align-items:center;justify-content:center;width:100%;min-height:54px;
-  padding:15px 24px;border:none;border-radius:12px;font-weight:700;font-size:1rem;
-  letter-spacing:0;text-transform:none;line-height:1.3;transition:background .2s ease}
+.btn{display:inline-flex;align-items:center;justify-content:center;width:100%;min-height:56px;
+  padding:16px 28px;border:none;border-radius:100px;font-weight:700;font-size:.92rem;
+  letter-spacing:.05em;text-transform:uppercase;transition:transform .14s ease,background .2s ease}
 .btn-terra{background:var(--terra);color:#fff}
-.btn-terra:hover{background:var(--terra-d)}
+.btn-terra:hover{background:var(--terra-d);transform:translateY(-2px)}
 .btn-ink{background:var(--ink);color:var(--cream)}
-.btn-ink:hover{background:var(--ink-deep)}
-.btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.btn-ink:hover{background:var(--ink-deep);transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--ink);border:2px solid var(--ink)}
 .btn-ghost:hover{background:var(--ink);color:var(--cream)}
 .fine{font-size:13px;color:var(--muted);margin-top:12px;text-align:center;line-height:1.45}
 
@@ -146,15 +128,6 @@ h1,h2,h3,.anton{font-family:'Anton',sans-serif;font-weight:400;text-transform:up
 .opt:active,.opt.sel{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--terra);background:var(--bg-2)}
 .opt.sel{border-color:var(--terra)}
 .opt.sel .k{color:var(--ink)}
-
-/* ---------- CANETA: a reacao manuscrita depois de cada resposta ---------- */
-.caneta{position:relative;align-self:flex-start;margin:16px 0 4px 48px;max-width:calc(100% - 62px);
-  font-family:'Caveat',cursive;font-weight:600;font-size:1.7rem;line-height:1.4;color:var(--terra);
-  transform:rotate(-1.5deg);transform-origin:left center;opacity:0;animation:rabisco .3s ease forwards}
-.caneta .seta{position:absolute;left:-38px;top:-14px;width:34px;height:34px;stroke:var(--terra);
-  stroke-width:3.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
-@keyframes rabisco{from{opacity:0;transform:rotate(-1.5deg) translateY(7px)}to{opacity:1;transform:rotate(-1.5deg)}}
-@media(prefers-reduced-motion:reduce){.caneta{opacity:1;animation:none}}
 
 /* ---------- GATE ---------- */
 .gate{padding-top:30px}
@@ -222,122 +195,11 @@ h1,h2,h3,.anton{font-family:'Anton',sans-serif;font-weight:400;text-transform:up
 .trow .tag{display:inline-block;margin-top:7px;font-weight:700;font-size:11px;letter-spacing:.1em;
   text-transform:uppercase;color:var(--cream);background:var(--green);padding:4px 9px;border-radius:100px}
 
-/* ---------- VENDA: componentes levantados da /curso que esta no ar ---------- */
-.venda{margin-top:44px;padding-top:30px;border-top:2px solid var(--ink)}
-.venda .v-head{margin-bottom:8px}
-.venda .v-head h2{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;
-  font-size:clamp(1.8rem,7.2vw,2.4rem);line-height:1.08;color:var(--ink);margin:2px 0 0;max-width:19ch}
-.venda .v-lead{margin-top:16px;max-width:46ch;font-size:1rem;color:var(--ink-2);line-height:1.55}
-/* kicker com traço */
-.v-kicker{
-  font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.15em;
-  color:var(--terra);margin:0 0 14px;line-height:1.45;
-  display:flex;align-items:flex-start;gap:10px;
-}
-.v-kicker::before{content:"";width:26px;height:2px;background:var(--terra);flex:0 0 auto;margin-top:9px}
-/* ---------- janela leve para prints ---------- */
-.v-win{border-radius:14px;overflow:hidden;box-shadow:var(--soft);background:var(--bg-2)}
-.v-win img{width:100%;display:block}
-.v-win-bleed{margin-left:-20px;margin-right:-20px;width:calc(100% + 40px);border-radius:0}
-.v-win-bleed img{max-height:210px;object-fit:cover;object-position:top center}
-/* ---------- 2. o que vai saber fazer ---------- */
-.v-feats{margin-top:34px}
-.v-feat{padding:0 0 26px}
-.v-feat + .v-feat{border-top:1px solid var(--line);padding-top:24px}
-.v-feat-n{font-family:'Anton',sans-serif;font-size:1.45rem;line-height:1;color:var(--terra);letter-spacing:.06em;margin-bottom:10px}
-.v-feat h3{font-size:1.32rem;line-height:1.16;color:var(--ink);margin:0 0 14px;max-width:24ch}
-.v-feat-cap{font-size:14px;color:var(--muted);line-height:1.55;margin:16px 0 0}
-.v-feat-cap b{color:var(--ink);font-weight:600}
-/* mocks em CSS: borda fina, sem sombra hard */
-.v-mock{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#FBFAF6}
-.v-mock-hd{
-  background:rgba(176,110,74,.09);border-bottom:1px solid var(--line);
-  padding:11px 15px;font-size:12px;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--terra-d);display:flex;align-items:center;gap:8px;
-}
-.v-mock-hd .v-sq{width:9px;height:9px;background:var(--terra);border-radius:2px;flex:0 0 auto}
-.v-mock-bd{padding:15px}
-.v-trig{
-  display:block;border:1px solid var(--line);border-radius:100px;background:var(--bg);
-  padding:8px 14px;font-size:13px;color:var(--ink-2);margin-bottom:8px;line-height:1.35;
-}
-.v-trig:last-child{margin-bottom:0}
-.v-mock-ft{border-top:1px solid var(--line);padding:11px 15px;font-size:12px;color:var(--muted);background:rgba(20,55,60,.03)}
-.v-bubble{
-  background:var(--ink);color:var(--cream);border-radius:14px 14px 14px 4px;
-  padding:13px 15px;font-size:13.5px;line-height:1.5;font-weight:300;margin:0 0 14px;
-}
-.v-done-line{display:flex;align-items:flex-start;gap:9px;font-size:13px;color:var(--ink-2);margin-bottom:8px;line-height:1.4}
-.v-done-line:last-child{margin-bottom:0}
-.v-done-line svg{flex:0 0 auto;margin-top:2px}
-.v-done-line b{font-weight:600;color:var(--ink)}
-.v-offer{
-  background:var(--card);border:2px solid var(--ink);border-radius:18px;
-  box-shadow:7px 7px 0 var(--terra);max-width:520px;margin:26px auto 0;padding:28px 22px;
-}
-.v-offer h3{font-size:2rem;line-height:1;margin:0 0 20px;color:var(--ink)}
-.v-checks{list-style:none;padding:0;margin:0 0 24px}
-.v-checks li{display:flex;gap:11px;font-size:16px;line-height:1.5;margin-bottom:11px;color:var(--text)}
-.v-checks li::before{content:"\2713";color:var(--terra);font-weight:700;flex:0 0 auto;margin-top:1px}
-.v-price{font-family:'Anton',sans-serif;font-size:clamp(2.5rem,10.4vw,3.5rem);line-height:.95;color:var(--ink);text-transform:uppercase}
-.v-price-sub{font-size:16px;color:var(--ink-2);margin:8px 0 4px}
-.v-price-note{font-size:13px;color:var(--muted);margin:0 0 20px}
-.v-offer-ft{font-size:13px;color:var(--muted);text-align:center;margin:14px 0 0;line-height:1.5}
-/* garantia com nome */
-.v-gar{margin-top:22px;display:flex;gap:14px;align-items:flex-start;border-top:1px solid var(--line);padding-top:20px;text-align:left}
-.v-gar svg{flex:none;width:44px;height:44px;color:var(--terra)}
-.v-gar h4{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;font-size:1.15rem;color:var(--ink);margin:0 0 4px;line-height:1.1}
-.v-gar p{margin:0;font-size:14.5px;color:var(--ink-2);line-height:1.5}
-@media (min-width:900px){
-.v-feats{display:grid;grid-template-columns:1fr 1fr;gap:0 44px;margin-top:44px}
-.v-feat{padding:36px 0 40px;border-top:1px solid var(--line)}
-.v-feat + .v-feat{padding-top:36px}
-.v-feat:nth-child(1),.v-feat:nth-child(2){border-top:1px solid var(--line)}
-.v-feat h3{font-size:1.55rem}
-.v-feat-n{font-size:1.7rem}
-.v-win-bleed{margin:0;width:100%;border-radius:14px}
-}
-.venda .v-offer{margin-left:0;margin-right:0}
-.venda .vlink{display:block;text-align:center;margin-top:20px;font-weight:700;font-size:13px;
-  color:var(--ink-2);text-decoration:underline;text-underline-offset:4px}
-.venda .vlink:hover{color:var(--terra)}
-
-/* ---------- BLOCO DE EMPRESA (NewScale) ---------- */
-.empresa{background:var(--ink-deep);color:var(--cream);border-radius:20px;padding:30px 22px;margin-top:44px;
-  box-shadow:7px 7px 0 var(--green)}
-.empresa .ek{font-weight:700;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--terra-l)}
-.empresa h3{color:var(--cream);font-size:clamp(1.5rem,6vw,2rem);margin:12px 0 12px;text-wrap:balance}
-.empresa p{font-size:15.5px;color:rgba(244,243,239,.82);line-height:1.55}
-.empresa .logos{display:flex;flex-wrap:wrap;gap:8px 14px;margin:20px 0 22px;
-  font-weight:700;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(244,243,239,.55)}
-.empresa .acoes{display:flex;flex-direction:column;gap:10px}
-.empresa .btn-linha{background:transparent;color:var(--cream);border:1.5px solid rgba(244,243,239,.42)}
-.empresa .btn-linha:hover{background:var(--cream);color:var(--ink-deep);border-color:var(--cream)}
-
-/* ---------- VITRINE DOS PRODUTOS ---------- */
-.vitrine{display:flex;flex-direction:column;gap:12px;margin-top:6px}
-.pcard{position:relative;background:var(--card);border:2px solid var(--ink);border-radius:18px;padding:22px 20px;
-  box-shadow:5px 5px 0 var(--ink);transition:transform .14s ease,box-shadow .14s ease}
-.pcard:hover{transform:translate(-1px,-1px);box-shadow:7px 7px 0 var(--ink)}
-.pcard.rec{background:var(--bg-2);border-color:var(--terra);box-shadow:5px 5px 0 var(--terra)}
-.pcard .pt{display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap}
-.pcard h3{font-size:1.35rem;line-height:1.1}
-.pcard .pv{font-family:'Anton',sans-serif;font-size:1.15rem;color:var(--terra);white-space:nowrap}
-.pcard p{font-size:14.5px;color:var(--ink-2);margin:10px 0 14px;line-height:1.5}
-.pcard .pl{font-weight:700;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--terra);
-  border-bottom:2px solid var(--terra);padding-bottom:3px}
-.pcard .selo{display:inline-block;margin-bottom:10px;font-weight:700;font-size:10.5px;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--cream);background:var(--terra);padding:4px 10px;border-radius:100px}
-
 .share{background:var(--bg-2);border:2px solid var(--ink);border-radius:18px;padding:22px 20px;margin-top:34px;text-align:center;box-shadow:5px 5px 0 var(--ink)}
 .share h3{font-size:1.35rem;margin-bottom:8px}
 .share p{font-size:14.5px;color:var(--ink-2);margin-bottom:16px}
 
 .about{margin-top:40px;padding-top:26px;border-top:2px solid var(--ink)}
-.about-in{display:flex;gap:18px;align-items:flex-start}
-.about-foto{width:94px;height:94px;flex:0 0 auto;border-radius:50%;object-fit:cover;object-position:50% 18%;
-  border:2px solid var(--ink)}
-@media(min-width:620px){.about-foto{width:130px;height:130px}}
 .about .ak{font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--terra)}
 .about p{font-size:15.5px;color:var(--ink-2);margin-top:10px;line-height:1.55}
 .foot{text-align:center;padding:34px 0 20px;font-size:13px;color:var(--muted)}
@@ -357,10 +219,12 @@ h1,h2,h3,.anton{font-family:'Anton',sans-serif;font-weight:400;text-transform:up
 </style>
 </head>
 <body>
-<!-- PENDENTE: o DECISOES.md de 08/09 fixou o Motor em R$197, mas o checkout do Kiwify ainda cobra R$169. A pagina segue o checkout. Quando o Kiwify subir para 197, trocar preco e precoSub no nivel 3. -->
 
 <div class="topbar"><b>+1.000 profissionais treinados</b> · Magalu · OLX · B3 · Stoller · Corteva</div>
 
+<div class="wrap">
+  <div class="hd"><span class="lg">Bruna Santanna</span><span class="pill">A VIRADA IA</span></div>
+</div>
 
 <!-- ============ 1. CAPA ============ -->
 <section class="screen on" id="s-intro">
@@ -370,6 +234,7 @@ h1,h2,h3,.anton{font-family:'Anton',sans-serif;font-weight:400;text-transform:up
     <p class="lead">Quase todo mundo acha que está no nível 3. A maioria está no 2. São 7 perguntas para descobrir onde você está de verdade, o que está te segurando e qual é o próximo passo certo para você agora.</p>
     <div class="meta"><span>7 perguntas</span><span>1 minuto</span><span>Resultado na hora</span></div>
     <button class="btn btn-terra" id="btnStart">Começar o diagnóstico</button>
+    <p class="fine">Gratuito. O teste se adapta ao que você responde: quem cria conteúdo ganha duas perguntas a mais, quem não cria termina antes.</p>
 
     <div class="trilha-mini">
       <div class="t">Os 4 níveis</div>
@@ -424,23 +289,6 @@ h1,h2,h3,.anton{font-family:'Anton',sans-serif;font-weight:400;text-transform:up
 
 <!-- ============ 4. RESULTADO ============ -->
 <section class="screen" id="s-res">
-<header class="site-header">
-  <div class="wrap header-inner">
-    <a href="/" class="logo" aria-label="Bruna Santanna, A Virada IA"><img src="fotos/logo-virada-ia.png" width="916" height="84" alt="Bruna Santanna · A Virada IA"></a>
-    <nav class="main-nav" id="mainNav">
-      <a href="/">Home</a>
-      <a href="/diagnostico" class="active">Diagnóstico</a>
-      <a href="/biblioteca">Biblioteca</a>
-      <a href="/claude">Guia do Claude</a>
-      <a href="/quem-sou">Quem Sou</a>
-      <a href="/treinamentos">Treinamentos Corporativos</a>
-      <a href="/mentoria">Mentoria</a>
-      <a href="https://newscale.tech" target="_blank" rel="noopener">IA na sua Empresa</a>
-      <a href="/comece" class="nav-cta">Cursos</a>
-    </nav>
-    <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">&#9776;</button>
-  </div>
-</header>
   <div class="wrap res">
     <span class="badge" id="rBadge"></span>
     <h2 id="rTitle"></h2>
@@ -485,57 +333,11 @@ h1,h2,h3,.anton{font-family:'Anton',sans-serif;font-weight:400;text-transform:up
       <a id="nLink" href="#">Ver</a>
     </div>
 
-    <div class="venda" id="venda" hidden></div>
-
     <div class="sec-t">Comece por aqui, nesta ordem</div>
     <ul class="steps" id="rSteps"></ul>
 
     <div class="sec-t">Onde você está na trilha</div>
     <div class="track" id="rTrack"></div>
-
-    <div class="empresa" id="empresaBloco" hidden>
-      <span class="ek">Você marcou que tem equipe</span>
-      <h3>E se o problema <span class="terra">não for só seu?</span></h3>
-      <p>Quando só você aprende IA, você vira o gargalo da própria empresa. O time continua no mesmo ritmo, e tudo volta a passar por você. É por isso que eu levo IA para dentro das empresas junto com a NewScale: formação para o time inteiro, com as tarefas reais de vocês.</p>
-      <div class="logos"><span>Magalu</span><span>OLX</span><span>B3</span><span>Stoller</span><span>Corteva</span><span>Ismart</span></div>
-      <div class="acoes">
-        <a class="btn btn-terra" href="/treinamentos" id="btnEmpresa">Ver treinamentos para times</a>
-        <a class="btn btn-linha" href="https://newscale.tech" target="_blank" rel="noopener">Conhecer a NewScale</a>
-      </div>
-    </div>
-
-    <div class="sec-t">Tudo o que eu tenho hoje</div>
-    <div class="vitrine" id="vitrine">
-      <div class="pcard" data-n="1">
-        <span class="selo">Recomendado para você</span>
-        <div class="pt"><h3>A Biblioteca do Claude</h3><span class="pv">Grátis</span></div>
-        <p>Mais de 40 guias curtos sobre coisas que a IA faz de verdade no trabalho. Escolhe um e faz hoje.</p>
-        <a class="pl" href="/biblioteca">Abrir a biblioteca →</a>
-      </div>
-      <div class="pcard" data-n="2">
-        <span class="selo">Recomendado para você</span>
-        <div class="pt"><h3>Claude com Profundidade</h3><span class="pv">R$347</span></div>
-        <p>O curso para quem já usa IA e quer colocar ela para trabalhar: analisar, criar, automatizar e delegar.</p>
-        <a class="pl" href="/curso">Ver o curso →</a>
-      </div>
-      <div class="pcard" data-n="3">
-        <span class="selo">Recomendado para você</span>
-        <div class="pt"><h3>Motor de Conteúdo</h3><span class="pv">R$169</span></div>
-        <p>Uma linha de produção de conteúdo instalada no seu Claude. Você grava, o sistema faz o resto.</p>
-        <a class="pl" href="/sistema">Ver o sistema →</a>
-      </div>
-      <div class="pcard" data-n="4">
-        <span class="selo">Recomendado para você</span>
-        <div class="pt"><h3>Mentoria individual</h3><span class="pv">Por aplicação</span></div>
-        <p>Eu do seu lado, colocando o seu projeto de IA de pé dentro do seu negócio. Poucas vagas.</p>
-        <a class="pl" href="/mentoria">Aplicar para a mentoria →</a>
-      </div>
-      <div class="pcard" data-n="0">
-        <div class="pt"><h3>IA para a sua empresa</h3><span class="pv">Sob proposta</span></div>
-        <p>Formação e automação para times, com a NewScale. Já treinamos mais de 1.000 profissionais.</p>
-        <a class="pl" href="/treinamentos">Ver treinamentos →</a>
-      </div>
-    </div>
 
     <div class="share">
       <h3>Manda e compara com <span class="terra">quem trabalha com você.</span></h3>
@@ -544,13 +346,8 @@ h1,h2,h3,.anton{font-family:'Anton',sans-serif;font-weight:400;text-transform:up
     </div>
 
     <div class="about">
-      <div class="about-in">
-        <img class="about-foto" src="fotos/bruna-retrato.jpg" alt="Bruna Santanna" width="900" height="1125" loading="lazy">
-        <div>
       <span class="ak">Quem fez esse diagnóstico</span>
       <p>Sou a Bruna Santanna. Trabalho com IA aplicada a negócio de verdade: já treinei mais de 1.000 profissionais e times como Magalu, OLX, B3, Stoller, Corteva e Ismart. Eu só ensino o que eu uso todo dia. Esse diagnóstico é o mesmo mapa que eu uso para entender onde uma pessoa está antes de dizer o que ela deveria fazer.</p>
-        </div>
-      </div>
     </div>
 
     <div class="foot">
@@ -578,87 +375,101 @@ var LISTA    = "https://script.google.com/macros/s/AKfycbx90IdrA_L6n3jVdoYBinBPx
 var Q = [
  { t:"Com que frequência a IA entra no seu trabalho?", s:"Vale ChatGPT, Claude, Gemini, qualquer uma.",
    o:[
-    {t:"Quase nunca. Já testei e parei.", p:0,c:0,n:0, r:"acontece com muita gente"},
-    {t:"Uma ou duas vezes por semana, quando aperta.", p:1,c:0,n:0, r:"ela ainda é o plano B, né"},
-    {t:"Todo dia. É a primeira aba que eu abro.", p:3,c:0,n:0, r:"eu também abro antes do e-mail"},
-    {t:"Todo dia, e já tenho coisa rodando sem eu pedir.", p:6,c:0,n:1, r:"opa, gostei disso"}
+    {t:"Quase nunca. Já testei e parei.", p:0,c:0,n:0},
+    {t:"Uma ou duas vezes por semana, quando aperta.", p:1,c:0,n:0},
+    {t:"Todo dia. É a primeira aba que eu abro.", p:3,c:0,n:0},
+    {t:"Todo dia, e já tenho coisa rodando sem eu pedir.", p:6,c:0,n:1}
    ]},
  /* GARFO: define se o teste segue pelo caminho de conteúdo ou pelo caminho curto */
  { t:"Você usa IA hoje para criar conteúdo?", s:"Post, vídeo, newsletter, LinkedIn: qualquer coisa que você precise publicar.",
    o:[
-    {t:"Eu não crio conteúdo, e não é para onde eu quero ir.", p:0,c:0,n:0, ramo:"nao", r:"então eu pulo essa parte"},
-    {t:"Uso, e está resolvido. Conteúdo não é o meu problema hoje.", p:1,c:1,n:0, ramo:"nao", r:"ótimo, um problema a menos"},
-    {t:"Crio conteúdo, mas ainda faço quase tudo na mão.", p:0,c:5,n:0, ramo:"sim", r:"eu já morei nesse lugar"},
-    {t:"Uso IA e mesmo assim o conteúdo consome a minha semana.", p:1,c:6,n:0, ramo:"sim", r:"essa eu conheço bem demais"}
+    {t:"Eu não crio conteúdo, e não é para onde eu quero ir.", p:0,c:0,n:0, ramo:"nao"},
+    {t:"Uso, e está resolvido. Conteúdo não é o meu problema hoje.", p:1,c:1,n:0, ramo:"nao"},
+    {t:"Crio conteúdo, mas ainda faço quase tudo na mão.", p:0,c:5,n:0, ramo:"sim"},
+    {t:"Uso IA e mesmo assim o conteúdo consome a minha semana.", p:1,c:6,n:0, ramo:"sim"}
    ]},
  { t:"Você já colocou a IA para trabalhar em cima dos seus arquivos?", s:"Planilha, PDF, transcrição de reunião, uma pasta inteira.",
    o:[
-    {t:"Nunca. Eu só converso na caixinha de texto.", p:0,c:0,n:0, r:"tem coisa boa te esperando aí"},
-    {t:"Já colei o texto na mão dentro do chat.", p:2,c:0,n:0, r:"todo mundo começa colando"},
-    {t:"Subo o arquivo direto e peço a análise.", p:4,c:0,n:0, r:"boa, esse é o pulo do gato"},
-    {t:"Ela lê pastas inteiras da minha máquina e me devolve arquivo pronto.", p:7,c:0,n:1, r:"então você já brincou pra valer"}
+    {t:"Nunca. Eu só converso na caixinha de texto.", p:0,c:0,n:0},
+    {t:"Já colei o texto na mão dentro do chat.", p:2,c:0,n:0},
+    {t:"Subo o arquivo direto e peço a análise.", p:4,c:0,n:0},
+    {t:"Ela lê pastas inteiras da minha máquina e me devolve arquivo pronto.", p:7,c:0,n:1}
    ]},
  { t:"Skill é um manual que ensina a IA a fazer uma tarefa do seu jeito, sempre igual. E aí?", s:"Responde com sinceridade, isso muda o seu resultado.",
    o:[
-    {t:"É a primeira vez que eu leio isso.", p:0,c:0,n:0, r:"prazer, essa é a melhor parte"},
-    {t:"Já ouvi falar, mas nunca fiz uma.", p:1,c:0,n:0, r:"a primeira leva 15 minutos"},
-    {t:"Já montei uma ou duas.", p:4,c:0,n:1, r:"e agora não dá mais pra viver sem, né"},
-    {t:"Tenho várias rodando toda semana.", p:7,c:0,n:2, r:"você está bem à frente"}
+    {t:"É a primeira vez que eu leio isso.", p:0,c:0,n:0},
+    {t:"Já ouvi falar, mas nunca fiz uma.", p:1,c:0,n:0},
+    {t:"Já montei uma ou duas.", p:4,c:0,n:1},
+    {t:"Tenho várias rodando toda semana.", p:7,c:0,n:2}
    ]},
- { ramo:"conteudo", t:"Como o seu conteúdo sai hoje?", s:"Você faz conteúdo, então eu tenho mais uma pergunta sobre isso.",
+ { ramo:"conteudo", t:"Quanto do seu tempo vai em conteúdo?", s:"Você faz conteúdo, então eu tenho mais duas perguntas sobre isso.",
    o:[
-    {t:"Não sai. Eu sei que precisava, mas não sai.", p:0,c:5,n:0, r:"sem culpa, é o mais comum de todos"},
-    {t:"Sai quando dá, sem constância, e me toma umas horas.", p:0,c:6,n:0, r:"a vida acontece, eu sei"},
-    {t:"Sai constante, mas eu faço tudo manualmente e perco a semana nisso.", p:0,c:8,n:1, r:"que trabalheira, hein"},
-    {t:"Já tem processo e gente ajudando.", p:0,c:1,n:3, r:"então metade do caminho já está feita"}
+    {t:"Até 2 horas por semana.", p:0,c:1,n:0},
+    {t:"De 3 a 6 horas por semana.", p:0,c:3,n:0},
+    {t:"Mais que isso, toda semana.", p:0,c:5,n:0},
+    {t:"Perdi a conta. Virou um segundo emprego.", p:0,c:7,n:0}
+   ]},
+ { ramo:"conteudo", t:"Como o seu conteúdo sai hoje?", s:"",
+   o:[
+    {t:"Não sai. Eu sei que precisava, mas não sai.", p:0,c:5,n:0},
+    {t:"Sai quando dá, sem nenhuma constância.", p:0,c:6,n:0},
+    {t:"Sai constante, mas eu faço tudo no braço.", p:0,c:7,n:1},
+    {t:"Já tem processo e gente ajudando.", p:0,c:1,n:3}
    ]},
  { t:"Como está a sua operação hoje?", s:"",
    o:[
-    {t:"Sou eu, começando agora.", p:0,c:0,n:0, r:"melhor hora pra organizar isso"},
-    {t:"Sou eu, e o negócio já anda: tenho cliente e faturamento.", p:0,c:0,n:3, r:"boa, já tem de onde puxar"},
-    {t:"Tenho sócio ou uma equipe pequena.", p:0,c:0,n:5, time:true, r:"aí muda o jogo"},
-    {t:"Tenho time e processo, e a IA precisa entrar nisso.", p:0,c:0,n:7, time:true, r:"esse é o cenário que eu mais gosto"}
+    {t:"Sou eu, começando agora.", p:0,c:0,n:0},
+    {t:"Sou eu, e o negócio já anda: tenho cliente e faturamento.", p:0,c:0,n:3},
+    {t:"Tenho sócio ou uma equipe pequena.", p:0,c:0,n:5},
+    {t:"Tenho time e processo, e a IA precisa entrar nisso.", p:0,c:0,n:7}
    ]},
  { t:"Se você fosse resolver isso hoje, o que faria mais sentido?", s:"",
    o:[
-    {t:"Aprender no meu ritmo, com aula gravada, e aplicar sozinho.", p:0,c:0,n:0, r:"no seu tempo, do seu jeito"},
-    {t:"Instalar um sistema pronto e sair usando esta semana.", p:0,c:6,n:0, r:"gosto de gente com pressa"},
-    {t:"Alguém do meu lado, olhando o meu caso. E era para ontem.", p:0,c:0,n:8, r:"entendi, vamos direto ao ponto"},
-    {t:"Ainda quero entender melhor antes de decidir qualquer coisa.", p:0,c:0,n:0,f:"explorando", r:"faz muito sentido, sem pressa"}
+    {t:"Aprender no meu ritmo, com aula gravada, e aplicar sozinho.", p:0,c:0,n:0},
+    {t:"Instalar um sistema pronto e sair usando.", p:0,c:5,n:0},
+    {t:"Alguém do meu lado, olhando o meu caso, o meu negócio, a minha tela.", p:0,c:0,n:7},
+    {t:"Ainda quero entender melhor antes de decidir qualquer coisa.", p:0,c:0,n:0,f:"explorando"}
+   ]},
+ { t:"Qual é o seu prazo?", s:"",
+   o:[
+    {t:"Sem pressa. Estou explorando.", p:0,c:0,n:0},
+    {t:"Nos próximos meses.", p:0,c:0,n:1},
+    {t:"Este mês. Já decidi que vou mexer nisso.", p:0,c:0,n:3},
+    {t:"Ontem. Já está atrasado.", p:0,c:0,n:5}
    ]}
 ];
 
 var IDX_GARFO = 1;
-var MAXP = 21, MAXC = 20;
-var MAXN_CONTEUDO = 22, MAXN_CURTO = 19;
+var MAXP = 21, MAXC = 25;
+var MAXN_CONTEUDO = 26, MAXN_CURTO = 23;
 
 var NIVEIS = {
  1:{
   badge:"Nível 1 de 4",
   nome:"Turista de IA",
-  diag:"Você já entrou na IA, olhou em volta e saiu. Ela responde quando você pergunta, mas ainda não faz parte do seu trabalho. Isso não é falta de capacidade sua, é falta de método: ninguém te mostrou por onde começar, nem o que ela faz de verdade além de escrever texto.",
+  diag:"Você já entrou na IA, olhou em volta e saiu. Ela responde bem quando você pergunta, mas não faz parte do seu trabalho. Comprar curso agora seria comprar mais uma coisa parada na sua lista. O seu problema não é falta de conteúdo avançado, é falta do primeiro hábito.",
   holds:[
-   ["O USO","Você usa a IA como caixa de pergunta, e não como o lugar onde o trabalho acontece."],
-   ["A SEMANA","Nada do que você faz toda semana está dentro dela hoje."],
-   ["O COMEÇO","Você tenta, a primeira resposta vem sem graça, e você volta a fazer na mão."]
+   "Você usa a IA como caixa de pergunta, e não como o lugar onde o trabalho acontece.",
+   "Nada do que você faz toda semana está dentro dela hoje.",
+   "Você para na primeira resposta ruim e volta a fazer na mão."
   ],
   offer:{
-   kick:"O passo certo para você agora",
-   titulo:"Virada IA 2.0: Claude com Profundidade",
-   desc:"O curso começa do começo mesmo: a sua primeira conversa, como pedir para receber coisa boa, o que subir e o que não subir. E vai até a IA executando tarefa inteira e te devolvendo pronto. Sem código, sem terminal, sem virar técnico.",
-   lista:["Começa do básico, na sua primeira conversa","7 módulos, mais de 5 horas, gravado em estúdio","Guias com prompts e exercícios para praticar","Material de apoio com mais de 40 prompts","12 meses de atualização","Garantia de 7 dias"],
-   preco:"12x de R$35,89",
-   precoSub:"ou R$347 à vista, com acesso imediato",
-   btn:"Quero começar do início",
-   href:"https://pay.kiwify.com.br/gKnvjrm",
-   ev:"curso",
-   fine:"Acesso imediato. Se não for para você, você tem 7 dias para pedir o dinheiro de volta."
+   kick:"Gratuito, e é de verdade o passo certo",
+   titulo:"A Biblioteca do Claude",
+   desc:"Mais de 40 guias curtos, um por vez, sobre coisas que a IA faz de verdade no trabalho. Você escolhe um, faz hoje, e a IA começa a entrar na sua rotina.",
+   lista:["Mais de 40 guias prontos, de graça","Cada guia é uma coisa concreta para fazer hoje","Um e-mail por semana com o que mudou na IA"],
+   preco:"R$0",
+   precoSub:"sem cadastro complicado e sem pegadinha",
+   btn:"Abrir a biblioteca",
+   href:"/biblioteca",
+   ev:"biblioteca",
+   fine:"Volta neste diagnóstico daqui a 30 dias. O seu nível vai ter mudado."
   },
-  next:{ t:"E a biblioteca continua de graça, com mais de 40 guias curtos. É um bom lugar para começar hoje mesmo, enquanto você decide.", link:"Abrir a biblioteca", href:"/biblioteca" },
+  next:{ t:"Quando a IA já for parte da sua rotina (e isso leva umas semanas, não meses), o passo 2 é o curso Virada IA 2.0: Claude com Profundidade. Ele começa exatamente onde a biblioteca para.", link:"Conhecer o curso", href:"/curso" },
   steps:[
-   "Faça o módulo 1 hoje, com uma tarefa de verdade sua aberta do lado.",
-   "Repita amanhã com outra tarefa. Duas semanas seguidas, e abrir a IA vira automático.",
-   "Só depois disso vá para os módulos de skills e agentes."
+   "Escolha um guia da biblioteca e faça hoje, com uma tarefa real sua.",
+   "Repita amanhã com outra tarefa. Duas semanas seguidas, e vira hábito.",
+   "Quando abrir a IA for automático, aí sim vale investir em curso."
   ]
  },
  2:{
@@ -674,7 +485,7 @@ var NIVEIS = {
    kick:"O passo certo para você agora",
    titulo:"Virada IA 2.0: Claude com Profundidade",
    desc:"Curso gravado em estúdio para quem já usa IA e quer colocar ela para trabalhar de verdade: analisar, criar, automatizar e delegar. Sem código, sem terminal, sem virar técnico.",
-   lista:["7 módulos, mais de 5 horas, gravado em estúdio","Guias com prompts e exercícios para praticar","Material de apoio com mais de 40 prompts","12 meses de atualização","Garantia de 7 dias"],
+   lista:["7 módulos, mais de 20 aulas curtas","Pack de skills prontas para instalar","Material de apoio com prompts","12 meses de atualização","Garantia de 7 dias"],
    preco:"12x de R$35,89",
    precoSub:"ou R$347 à vista, com acesso imediato",
    btn:"Quero o curso",
@@ -684,14 +495,14 @@ var NIVEIS = {
   },
   next:{ t:"Se o seu conteúdo também estiver pesando, o Motor de Conteúdo é o complemento natural depois do curso: ele instala uma linha de produção de conteúdo no seu Claude.", link:"Ver o Motor de Conteúdo", href:"/sistema" },
   steps:[
-   "Faça o curso com uma tarefa real sua aberta do lado, não só assistindo.",
+   "Faça o curso com uma tarefa real sua aberta do lado, não assistindo de braço cruzado.",
    "Monte a sua primeira skill até o fim da primeira semana.",
    "Escolha uma tarefa que você repete toda semana e delegue ela por inteiro."
   ]
  },
  3:{
   badge:"Nível 3 de 4",
-  nome:"Conteúdo sem sistema",
+  nome:"Conteúdo no braço",
   diag:"Você já sabe puxar coisa boa da IA. O seu gargalo não é a ferramenta, é o volume: pensar, gravar, editar, publicar e distribuir, toda semana, começando do zero. Isso não se resolve com mais prompt. Se resolve com linha de produção.",
   holds:[
    "O seu conteúdo depende de você estar com tempo e inspiração no mesmo dia.",
@@ -702,7 +513,7 @@ var NIVEIS = {
    kick:"O passo certo para você agora",
    titulo:"Curso Motor de Conteúdo",
    desc:"Um motor de agentes instalado no seu Claude: pesquisa, escreve os roteiros, edita os vídeos, agenda em todas as redes e analisa o resultado. Personalizado para o seu negócio, rodando na sua máquina. Você só grava.",
-   lista:["20 aulas, 3 horas, para fazer junto","A skill que constrói o seu motor","Editor de vídeo incluído","Artes com a sua identidade visual","Central do Aluno com mais de 20 prompts, acesso vitalício","Garantia de 7 dias"],
+   lista:["A skill que monta o seu motor","A skill que edita os seus vídeos","Central do Aluno com mais de 20 prompts","Distribuição em Instagram, TikTok, YouTube, Threads","Garantia de 7 dias"],
    preco:"R$169",
    precoSub:"ou 12x de R$17,48, com acesso imediato",
    btn:"Quero o sistema",
@@ -747,109 +558,10 @@ var NIVEIS = {
  }
 };
 
-/* venda condensada: so os niveis com checkout tem */
-/* venda com os componentes da pagina de vendas, so nos niveis com checkout */
-var CHECK = '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7.4l3.2 3.2L12 3.8" stroke="#B06E4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-var ESCUDO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5l7.5 3v6c0 4.6-3.2 8.6-7.5 10-4.3-1.4-7.5-5.4-7.5-10v-6z"/><path d="M8.6 12.2l2.3 2.3 4.6-4.8"/></svg>';
-
-var VENDA = {
- 2:{
-  kick:"Feito de verdade, nas aulas",
-  h2:"Coisas que você vai saber fazer depois deste curso",
-  lead:"Nada de teoria. Eu faço na tela e você faz junto.",
-  feats:[
-   {t:"Dei um monte de números soltos e pedi um painel.",
-    img:"/fotos/v2/shot-conteudo.jpg",
-    alt:"Painel Central de Conteúdo gerado pelo Claude",
-    cap:'Painel em HTML com os números do meu Instagram. Atualiza sozinho. <b>Módulo 3.</b>'},
-   {t:"Ensinei uma vez. Ele repete para sempre.",
-    mock:'<div class="v-mock-hd"><span class="v-sq"></span>Skill · proposta-comercial</div>' +
-         '<div class="v-mock-bd"><span class="v-trig">monta a proposta da reunião de hoje</span>' +
-         '<span class="v-trig">adapta a proposta para o cliente X</span>' +
-         '<span class="v-trig">gera a proposta em HTML</span></div>' +
-         '<div class="v-mock-ft">criada em 12 minutos, usada toda semana</div>',
-    cap:'Um manual que ensina o Claude a fazer a tarefa do seu jeito, sempre igual. <b>Módulo 4.</b>'},
-   {t:"Entreguei uma pasta inteira e fui tomar um café.",
-    mock:'<div class="v-mock-hd"><span class="v-sq"></span>Cowork</div>' +
-         '<div class="v-mock-bd"><p class="v-bubble">Leia os 37 arquivos desta pasta, monte a planilha de leads e salve em /entregas</p>' +
-         '<div class="v-done-line">' + CHECK + '<span><b>leads.xlsx</b> criado · 37 linhas</span></div>' +
-         '<div class="v-done-line">' + CHECK + '<span><b>painel.html</b> criado</span></div>' +
-         '<div class="v-done-line">' + CHECK + '<span>skill <b>relatorio-mensal</b> criada</span></div></div>',
-    cap:'Chat é pedir conselho. Cowork é delegar e ir tomar um café. <b>Módulo 3.</b>'}
-  ],
-  oferta:{
-   nome:"Virada IA 2.0",
-   checks:["7 módulos, mais de 5 horas, gravado em estúdio","Guias com prompts e exercícios para praticar",
-           "Material de apoio com mais de 40 prompts","12 meses de atualizações",
-           "Acesso imediato, no seu e-mail","Garantia Sistema Montado: 7 dias"],
-   preco:"12x de R$35,89", precoSub:"ou R$347 à vista",
-   btn:"Começar agora",
-   garTitulo:"Garantia Sistema Montado",
-   garTexto:"7 dias para assistir, fazer o primeiro exercício e ver o seu Claude respondendo diferente. Não aconteceu? Me escreve e eu devolvo cada centavo."
-  },
-  link:"/curso", linkTexto:"Ver a página completa do curso"
- },
- 3:{
-  kick:"O sistema rodando, de verdade",
-  h2:"O que o motor faz enquanto você toca o seu negócio",
-  lead:"Você aprova e grava. O resto é ele.",
-  feats:[
-   {t:"Ele pesquisa a pauta antes de você acordar.",
-    mock:'<div class="v-mock-hd"><span class="v-sq"></span>Radar de pautas · hoje</div>' +
-         '<div class="v-mock-bd"><span class="v-trig">3 concorrentes postaram sobre o mesmo assunto</span>' +
-         '<span class="v-trig">o seu Reel de terça puxou 4x mais salvamentos</span>' +
-         '<span class="v-trig">pauta sugerida: o erro que todo mundo comete</span></div>' +
-         '<div class="v-mock-ft">mercado, concorrentes e os seus próprios números</div>',
-    cap:'Pesquisa diária que orienta o que vale a pena gravar nesta semana.'},
-   {t:"O vídeo cru vira Reel sem você abrir editor.",
-    mock:'<div class="v-mock-hd"><span class="v-sq"></span>Edição</div>' +
-         '<div class="v-mock-bd"><p class="v-bubble">corta as partes paradas, põe as legendas e o título</p>' +
-         '<div class="v-done-line">' + CHECK + '<span>34 cortes aplicados</span></div>' +
-         '<div class="v-done-line">' + CHECK + '<span>legendas queimadas</span></div>' +
-         '<div class="v-done-line">' + CHECK + '<span><b>reel-final.mp4</b> pronto</span></div></div>',
-    cap:'A mesma skill que edita os meus Reels vai instalada com você.'},
-   {t:"Um conteúdo aprovado viaja para todas as redes.",
-    mock:'<div class="v-mock-hd"><span class="v-sq"></span>Agendamento</div>' +
-         '<div class="v-mock-bd"><span class="v-trig">Instagram · Reel · terça, 19h</span>' +
-         '<span class="v-trig">TikTok · terça, 20h</span>' +
-         '<span class="v-trig">YouTube Shorts · terça, 20h</span>' +
-         '<span class="v-trig">LinkedIn · quarta, 8h</span></div>' +
-         '<div class="v-mock-ft">nada sobe sem o seu OK</div>',
-    cap:'Eu ensino a conectar o Metricool e distribuir nas redes que você usa.'}
-  ],
-  oferta:{
-   nome:"Motor de Conteúdo",
-   checks:["20 aulas, 3 horas, para fazer junto","A skill que constrói o seu motor",
-           "Editor de vídeo incluído","Artes com a sua identidade visual",
-           "Central do Aluno com mais de 20 prompts, acesso vitalício",
-           "Acesso imediato, no seu e-mail","Garantia de 7 dias"],
-   preco:"R$169", precoSub:"ou 12x de R$17,48",
-   btn:"Quero o sistema",
-   garTitulo:"Garantia de 7 dias",
-   garTexto:"7 dias para instalar o motor e rodar um ciclo com o seu negócio dentro. Não serviu? Me escreve e eu devolvo cada centavo."
-  },
-  link:"/sistema", linkTexto:"Ver a página completa do sistema"
- }
-};
-
-/* o nivel 1 compra o mesmo curso do nivel 2, com uma linha que fala do comeco */
-VENDA[1] = {
- kick: VENDA[2].kick,
- h2: VENDA[2].h2,
- lead: "Do primeiro pedido em diante. Eu faço na tela e você faz junto, sem pular etapa.",
- feats: VENDA[2].feats,
- oferta: VENDA[2].oferta,
- link: VENDA[2].link,
- linkTexto: VENDA[2].linkTexto
-};
-
-/* qual card da vitrine leva o selo de recomendado, por nivel */
-var CARD_REC = {1:2, 2:2, 3:3, 4:4};
-
 var TRILHA = [
  {n:"01", t:"Turista de IA", s:"Usa quando lembra. A IA ainda não entrou no trabalho."},
  {n:"02", t:"Pergunta, copia, cola", s:"Usa todo dia, mas só na superfície da ferramenta."},
- {n:"03", t:"Conteúdo sem sistema", s:"Já tira coisa boa da IA, mas o conteúdo consome a semana."},
+ {n:"03", t:"Conteúdo no braço", s:"Já tira coisa boa, mas o conteúdo consome a semana."},
  {n:"04", t:"Pronto para implantar", s:"Já executa com IA. Falta colocar de pé no negócio."}
 ];
 
@@ -894,27 +606,14 @@ function render(){
       b.className = 'opt' + (respostas[qi] === i ? ' sel' : '');
       b.innerHTML = '<span class="k">' + letras[i] + '</span><span>' + q.o[i].t + '</span>';
       b.addEventListener('click', function(){
-        if (box.querySelector('.caneta')) return;   /* ja escolheu, esta na animacao */
         var ja = box.querySelectorAll('.opt');
-        for (var j=0;j<ja.length;j++){ ja[j].classList.remove('sel'); ja[j].disabled = true; }
+        for (var j=0;j<ja.length;j++) ja[j].classList.remove('sel');
         b.classList.add('sel');
-        rabiscar(b, q.o[i].r);
-        setTimeout(function(){ escolher(qi, i); }, 1000);
+        setTimeout(function(){ escolher(qi, i); }, 170);
       });
       box.appendChild(b);
     })(i);
   }
-}
-
-/* a anotacao a mao, como se a Bruna tivesse rabiscado do lado da resposta */
-function rabiscar(botao, frase){
-  if (!frase) return;
-  var nota = document.createElement('div');
-  nota.className = 'caneta';
-  nota.innerHTML = '<svg class="seta" viewBox="0 0 46 46" aria-hidden="true">' +
-    '<path d="M7 5 C 10 21, 18 32, 36 38"/><path d="M36 38 L 27 38"/><path d="M36 38 L 30 30"/></svg>' +
-    frase;
-  botao.parentNode.insertBefore(nota, botao.nextSibling);
 }
 
 function escolher(qi, i){
@@ -932,10 +631,6 @@ function escolher(qi, i){
   else { $('barFill').style.width = '100%'; tela('s-gate'); setTimeout(function(){ $('gNome').focus(); }, 200); }
 }
 
-/* menu do header */
-var navBtn = $('navToggle');
-if (navBtn) navBtn.addEventListener('click', function(){ $('mainNav').classList.toggle('open'); });
-
 $('btnStart').addEventListener('click', function(){
   gtag('event','diagnostico_start',{event_category:'diagnostico'});
   pos = 0; tela('s-quiz'); render();
@@ -950,7 +645,6 @@ function calcular(){
     if (!o) continue;
     p += o.p; c += o.c; n += o.n;
     if (o.f) flags[o.f] = true;
-    if (o.time) flags.time = true;
   }
   var maxN = ramoConteudo ? MAXN_CONTEUDO : MAXN_CURTO;
   var pP = p/MAXP, pC = c/MAXC, pN = n/maxN;
@@ -977,7 +671,6 @@ function enviar(nome, email){
     score_profundidade:scores.pP, score_conteudo:scores.pC, score_operacao:scores.pN,
     timestamp:new Date().toISOString(), source:location.href };
   payload.caminho = ramoConteudo ? 'conteudo' : 'curto';
-  payload.tem_equipe = flags.time ? 'sim' : 'nao';
   for (var i=0;i<Q.length;i++){
     var o = Q[i].o[respostas[i]];
     payload['p' + (i+1)] = o ? o.t : '';
@@ -1067,53 +760,6 @@ function mostrarResultado(nome){
     d.innerHTML = '<span class="tn">' + TRILHA[m].n + '</span><span><span class="tt">' + TRILHA[m].t + '</span>' +
       '<div class="ts">' + TRILHA[m].s + '</div>' + ((m+1) === resultado ? '<span class="tag">Você está aqui</span>' : '') + '</span>';
     tr.appendChild(d);
-  }
-
-  /* venda com os componentes da pagina de vendas */
-  var V = VENDA[resultado], vbox = $('venda');
-  vbox.hidden = !V;
-  if (V){
-    var h = '<div class="v-head"><p class="v-kicker">' + V.kick + '</p><h2>' + V.h2 + '</h2>' +
-            '<p class="v-lead">' + V.lead + '</p></div><div class="v-feats">';
-    for (var a=0;a<V.feats.length;a++){
-      var f = V.feats[a];
-      h += '<article class="v-feat"><div class="v-feat-n">0' + (a+1) + '</div><h3>' + f.t + '</h3>';
-      if (f.img) h += '<div class="v-win v-win-bleed"><img src="' + f.img + '" loading="lazy" alt="' + f.alt + '"></div>';
-      else h += '<div class="v-mock">' + f.mock + '</div>';
-      h += '<p class="v-feat-cap">' + f.cap + '</p></article>';
-    }
-    h += '</div>';
-    var of2 = V.oferta;
-    h += '<div class="v-offer"><h3>' + of2.nome + '</h3><ul class="v-checks">';
-    for (var b=0;b<of2.checks.length;b++) h += '<li>' + of2.checks[b] + '</li>';
-    h += '</ul><div class="v-price">' + of2.preco + '</div>' +
-         '<p class="v-price-sub">' + of2.precoSub + '</p>' +
-         '<a class="btn btn-terra v-btn-block cta-buy" id="vBtn" href="' + of.href + '" target="_blank" rel="noopener">' + of2.btn + '</a>' +
-         '<p class="v-offer-ft">Pagamento seguro pelo Kiwify · Pix ou cartão · Nota fiscal</p>' +
-         '<div class="v-gar">' + ESCUDO + '<div><h4>' + of2.garTitulo + '</h4><p>' + of2.garTexto + '</p></div></div></div>' +
-         '<a class="vlink" href="' + V.link + '">' + V.linkTexto + '</a>';
-    vbox.innerHTML = h;
-    $('vBtn').addEventListener('click', function(){
-      gtag('event','checkout_click',{ event_category:of.ev, event_label:'diagnostico-venda-nivel-' + resultado });
-    });
-  }
-
-  /* quem marcou sócio, equipe ou time vê o bloco de empresa */
-  $('empresaBloco').hidden = !flags.time;
-  if (flags.time){
-    $('btnEmpresa').addEventListener('click', function(){
-      gtag('event','checkout_click',{ event_category:'empresa', event_label:'diagnostico-nivel-' + resultado });
-    });
-  }
-
-  /* a vitrine marca o produto recomendado e tira o selo dos outros */
-  var cards = document.querySelectorAll('#vitrine .pcard');
-  var recomendado = CARD_REC[resultado];
-  for (var v=0;v<cards.length;v++){
-    var n = parseInt(cards[v].getAttribute('data-n'), 10);
-    var selo = cards[v].querySelector('.selo');
-    if (n === recomendado){ cards[v].classList.add('rec'); if (selo) selo.hidden = false; }
-    else { cards[v].classList.remove('rec'); if (selo) selo.hidden = true; }
   }
 
   var txt = 'Meu nível de uso de IA deu ' + resultado + ' de 4: ' + R.nome + '. Faz o seu, leva 1 minuto: https://brunasantanna.com/diagnostico';
