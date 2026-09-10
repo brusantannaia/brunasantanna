@@ -635,29 +635,29 @@ var NIVEIS = {
  1:{
   badge:"Nível 1 de 4",
   nome:"Turista de IA",
-  diag:"Você já entrou na IA, olhou em volta e saiu. Ela responde bem quando você pergunta, mas não faz parte do seu trabalho. Comprar curso agora seria comprar mais uma coisa parada na sua lista. O seu problema não é falta de conteúdo avançado, é falta do primeiro hábito.",
+  diag:"Você já entrou na IA, olhou em volta e saiu. Ela responde quando você pergunta, mas ainda não faz parte do seu trabalho. Isso não é falta de capacidade sua, é falta de método: ninguém te mostrou por onde começar, nem o que ela faz de verdade além de escrever texto.",
   holds:[
-   "Você usa a IA como caixa de pergunta, e não como o lugar onde o trabalho acontece.",
-   "Nada do que você faz toda semana está dentro dela hoje.",
-   "Você para na primeira resposta ruim e volta a fazer na mão."
+   ["O USO","Você usa a IA como caixa de pergunta, e não como o lugar onde o trabalho acontece."],
+   ["A SEMANA","Nada do que você faz toda semana está dentro dela hoje."],
+   ["O COMEÇO","Você tenta, a primeira resposta vem sem graça, e você volta a fazer na mão."]
   ],
   offer:{
-   kick:"Gratuito, e é de verdade o passo certo",
-   titulo:"A Biblioteca do Claude",
-   desc:"Mais de 40 guias curtos, um por vez, sobre coisas que a IA faz de verdade no trabalho. Você escolhe um, faz hoje, e a IA começa a entrar na sua rotina.",
-   lista:["Mais de 40 guias prontos, de graça","Cada guia é uma coisa concreta para fazer hoje","Um e-mail por semana com o que mudou na IA"],
-   preco:"R$0",
-   precoSub:"sem cadastro complicado e sem pegadinha",
-   btn:"Abrir a biblioteca",
-   href:"/biblioteca",
-   ev:"biblioteca",
-   fine:"Volta neste diagnóstico daqui a 30 dias. O seu nível vai ter mudado."
+   kick:"O passo certo para você agora",
+   titulo:"Virada IA 2.0: Claude com Profundidade",
+   desc:"O curso começa do começo mesmo: a sua primeira conversa, como pedir para receber coisa boa, o que subir e o que não subir. E vai até a IA executando tarefa inteira e te devolvendo pronto. Sem código, sem terminal, sem virar técnico.",
+   lista:["Começa do básico, na sua primeira conversa","7 módulos, mais de 5 horas, gravado em estúdio","Guias com prompts e exercícios para praticar","Material de apoio com mais de 40 prompts","12 meses de atualização","Garantia de 7 dias"],
+   preco:"12x de R$35,89",
+   precoSub:"ou R$347 à vista, com acesso imediato",
+   btn:"Quero começar do início",
+   href:"https://pay.kiwify.com.br/gKnvjrm",
+   ev:"curso",
+   fine:"Acesso imediato. Se não for para você, você tem 7 dias para pedir o dinheiro de volta."
   },
-  next:{ t:"Quando a IA já for parte da sua rotina (e isso leva umas semanas, não meses), o passo 2 é o curso Virada IA 2.0: Claude com Profundidade. Ele começa exatamente onde a biblioteca para.", link:"Conhecer o curso", href:"/curso" },
+  next:{ t:"E a biblioteca continua de graça, com mais de 40 guias curtos. É um bom lugar para começar hoje mesmo, enquanto você decide.", link:"Abrir a biblioteca", href:"/biblioteca" },
   steps:[
-   "Escolha um guia da biblioteca e faça hoje, com uma tarefa real sua.",
-   "Repita amanhã com outra tarefa. Duas semanas seguidas, e vira hábito.",
-   "Quando abrir a IA for automático, aí sim vale investir em curso."
+   "Faça o módulo 1 hoje, com uma tarefa de verdade sua aberta do lado.",
+   "Repita amanhã com outra tarefa. Duas semanas seguidas, e abrir a IA vira automático.",
+   "Só depois disso vá para os módulos de skills e agentes."
   ]
  },
  2:{
@@ -830,6 +830,20 @@ var VENDA = {
   link:"/sistema", linkTexto:"Ver a página completa do sistema"
  }
 };
+
+/* o nivel 1 compra o mesmo curso do nivel 2, com uma linha que fala do comeco */
+VENDA[1] = {
+ kick: VENDA[2].kick,
+ h2: VENDA[2].h2,
+ lead: "Do primeiro pedido em diante. Eu faço na tela e você faz junto, sem pular etapa.",
+ feats: VENDA[2].feats,
+ oferta: VENDA[2].oferta,
+ link: VENDA[2].link,
+ linkTexto: VENDA[2].linkTexto
+};
+
+/* qual card da vitrine leva o selo de recomendado, por nivel */
+var CARD_REC = {1:2, 2:2, 3:3, 4:4};
 
 var TRILHA = [
  {n:"01", t:"Turista de IA", s:"Usa quando lembra. A IA ainda não entrou no trabalho."},
@@ -1093,10 +1107,11 @@ function mostrarResultado(nome){
 
   /* a vitrine marca o produto recomendado e tira o selo dos outros */
   var cards = document.querySelectorAll('#vitrine .pcard');
+  var recomendado = CARD_REC[resultado];
   for (var v=0;v<cards.length;v++){
     var n = parseInt(cards[v].getAttribute('data-n'), 10);
     var selo = cards[v].querySelector('.selo');
-    if (n === resultado){ cards[v].classList.add('rec'); if (selo) selo.hidden = false; }
+    if (n === recomendado){ cards[v].classList.add('rec'); if (selo) selo.hidden = false; }
     else { cards[v].classList.remove('rec'); if (selo) selo.hidden = true; }
   }
 
