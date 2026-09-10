@@ -75,10 +75,9 @@ h1,h2,h3,.anton{font-family:'Anton',sans-serif;font-weight:400;text-transform:up
   border-bottom:2px solid var(--ink)}
 .header-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px 20px;
   max-width:1280px;margin:0 auto}
-.logo{display:inline-flex;align-items:center;white-space:nowrap;font-family:'Anton',sans-serif;
-  font-size:1.15rem;letter-spacing:.02em;text-transform:uppercase;color:var(--ink)}
-.logo .brand-tag{font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:.6rem;letter-spacing:.12em;
-  color:var(--terra);border:1.5px solid var(--terra);padding:3px 8px;border-radius:100px;margin-left:10px}
+.logo{display:inline-flex;align-items:center;flex:0 1 auto;min-width:0}
+.logo img{height:24px;width:auto;max-width:100%;display:block}
+@media(min-width:900px){.logo img{height:30px}}
 .main-nav{display:flex;align-items:center;gap:20px}
 .main-nav a{font-size:.88rem;font-weight:600;color:var(--ink-2);white-space:nowrap;transition:color .18s}
 .main-nav a:hover{color:var(--terra)}
@@ -427,7 +426,7 @@ h1,h2,h3,.anton{font-family:'Anton',sans-serif;font-weight:400;text-transform:up
 <section class="screen" id="s-res">
 <header class="site-header">
   <div class="wrap header-inner">
-    <a href="/" class="logo">Bruna Santanna<span class="brand-tag">A Virada IA</span></a>
+    <a href="/" class="logo" aria-label="Bruna Santanna, A Virada IA"><img src="fotos/logo-virada-ia.png" width="916" height="84" alt="Bruna Santanna · A Virada IA"></a>
     <nav class="main-nav" id="mainNav">
       <a href="/">Home</a>
       <a href="/biblioteca">Biblioteca</a>
