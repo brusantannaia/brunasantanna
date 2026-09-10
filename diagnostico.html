@@ -366,8 +366,8 @@ h1,h2,h3,.anton{font-family:'Anton',sans-serif;font-weight:400;text-transform:up
 <section class="screen on" id="s-intro">
   <div class="wrap intro">
     <span class="kicker">Diagnóstico gratuito</span>
-    <h1>Qual é o seu <span class="terra">nível de uso de IA?</span></h1>
-    <p class="lead">Quase todo mundo acha que está no nível 3. A maioria está no 2. São 7 perguntas para descobrir onde você está de verdade, o que está te segurando e qual é o próximo passo certo para você agora.</p>
+    <h1 id="hTitulo">Qual é o seu <span class="terra">nível de uso de IA?</span></h1>
+    <p class="lead" id="hLead">Quase todo mundo acha que está no nível 3. A maioria está no 2. São 7 perguntas para descobrir onde você está de verdade, o que está te segurando e qual é o próximo passo certo para você agora.</p>
     <div class="meta"><span>7 perguntas</span><span>1 minuto</span><span>Resultado na hora</span></div>
     <button class="btn btn-terra" id="btnStart">Começar o diagnóstico</button>
 
@@ -936,9 +936,33 @@ function escolher(qi, i){
 var navBtn = $('navToggle');
 if (navBtn) navBtn.addEventListener('click', function(){ $('mainNav').classList.toggle('open'); });
 
+/* ---------- quem vem da DM: ?de= troca a abertura e ja responde a pergunta 1 ---------- */
+var DE = {
+ 'quase-nunca':   { i:0, h:'Você está começando. <span class="terra">E isso é uma vantagem.</span>',
+                    l:'Não é falta de interesse, é que ninguém te disse o que pedir. Em 1 minuto eu te mostro por onde começar.' },
+ 'quando-aperta': { i:1, h:'A IA ainda é o seu <span class="terra">plano B.</span>',
+                    l:'Ela funciona quando você lembra, e nunca virou rotina. Em 1 minuto eu te mostro o que falta pra ela virar.' },
+ 'todo-dia':      { i:2, h:'Você usa todo dia. <span class="terra">Mas quanto do que dá?</span>',
+                    l:'Muita gente usa todo dia e ainda está em 10% do que a ferramenta faz. Em 1 minuto você descobre onde está de verdade.' },
+ 'ja-rodando':    { i:3, h:'Você já tem coisa <span class="terra">rodando sozinha.</span>',
+                    l:'Então aqui o diagnóstico serve pra outra coisa: mostrar o que ainda dá pra construir em cima do que você já montou.' }
+};
+var deInicial = null;
+try {
+  var deChave = new URLSearchParams(location.search).get('de');
+  if (deChave && DE[deChave]) {
+    deInicial = DE[deChave];
+    respostas[0] = deInicial.i;                     /* a resposta 1 veio da DM */
+    if ($('hTitulo')) $('hTitulo').innerHTML = deInicial.h;
+    if ($('hLead'))   $('hLead').textContent = deInicial.l;
+    var chipQ = document.querySelector('#s-intro .meta span');
+    if (chipQ) chipQ.textContent = 'Você já respondeu a 1ª';
+  }
+} catch(e){}
+
 $('btnStart').addEventListener('click', function(){
   gtag('event','diagnostico_start',{event_category:'diagnostico'});
-  pos = 0; tela('s-quiz'); render();
+  pos = deInicial ? 1 : 0; tela('s-quiz'); render();
 });
 $('btnBack').addEventListener('click', function(){ if (pos>0){ pos--; render(); } });
 
@@ -980,7 +1004,8 @@ function enviar(nome, email){
   /* de onde a pessoa veio: vira coluna propria, sem precisar ler a URL na mao */
   try {
     var qs = new URLSearchParams(location.search);
-    payload.origem = qs.get('utm_content') || qs.get('utm_source') || 'direto';
+    payload.origem = qs.get('origem') || qs.get('utm_content') || qs.get('utm_source') || 'direto';
+    payload.de = qs.get('de') || '';
     payload.utm_source = qs.get('utm_source') || '';
     payload.utm_medium = qs.get('utm_medium') || '';
     payload.utm_campaign = qs.get('utm_campaign') || '';
