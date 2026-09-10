@@ -977,6 +977,15 @@ function enviar(nome, email){
     score_profundidade:scores.pP, score_conteudo:scores.pC, score_operacao:scores.pN,
     timestamp:new Date().toISOString(), source:location.href };
   payload.caminho = ramoConteudo ? 'conteudo' : 'curto';
+  /* de onde a pessoa veio: vira coluna propria, sem precisar ler a URL na mao */
+  try {
+    var qs = new URLSearchParams(location.search);
+    payload.origem = qs.get('utm_content') || qs.get('utm_source') || 'direto';
+    payload.utm_source = qs.get('utm_source') || '';
+    payload.utm_medium = qs.get('utm_medium') || '';
+    payload.utm_campaign = qs.get('utm_campaign') || '';
+    payload.utm_content = qs.get('utm_content') || '';
+  } catch(e){ payload.origem = 'direto'; }
   payload.tem_equipe = flags.time ? 'sim' : 'nao';
   for (var i=0;i<Q.length;i++){
     var o = Q[i].o[respostas[i]];
