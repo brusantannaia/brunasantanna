@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bruna Santanna · A Virada IA | Vim do TikTok</title>
+    <meta name="description" content="Veio do TikTok? O guia que eu prometi está na biblioteca. Os guias, os cursos e a biblioteca de Claude e IA da Bruna Santanna, num lugar só.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Bruna Santanna · A Virada IA">
+    <meta property="og:description" content="Veio do TikTok? O guia que eu prometi está na biblioteca.">
+    <link rel="canonical" href="https://brunasantanna.com/links-tiktok">
+    <meta name="robots" content="noindex, follow">
+    <!-- Origem: quem digita /tiktok sem UTM entra no GA4 como tiktok/bio, nao como "direto" -->
+    <script>
+      (function(){
+        try{
+          var q = new URLSearchParams(location.search);
+          if(!q.get('utm_source')){
+            q.set('utm_source','tiktok');
+            q.set('utm_medium','bio');
+            q.set('utm_campaign','organico');
+            history.replaceState(null,'',location.pathname+'?'+q.toString()+location.hash);
+          }
+        }catch(e){}
+      })();
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DCW0QVCWB"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-7DCW0QVCWB');
+    </script>
+
+    <!-- Meta Pixel -->
+    <script src="/meta-pixel.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg:#F3EEE3; --bg-2:#ECE5D6; --card:#FBF9F3;
+            --ink:#14373C; --ink-2:#2C4F54; --green:#435D51;
+            --terra:#B06E4A; --terra-l:#C4835E; --terra-d:#985A3B;
+            --text:#233133; --muted:#6E7A75; --line:rgba(20,55,60,0.14);
+            --cream:#F4F3EF; --wa:#25908A;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family:'Hanken Grotesk',sans-serif; color:var(--text); line-height:1.55;
+            -webkit-font-smoothing:antialiased; overflow-x:hidden;
+            background:var(--bg);
+            background-image:radial-gradient(circle at 12% -2%, rgba(176,110,74,0.09), transparent 40%),
+                             radial-gradient(circle at 92% 10%, rgba(67,93,81,0.07), transparent 38%);
+            background-attachment:fixed;
+        }
+        img { max-width:100%; display:block; }
+        a { color:inherit; text-decoration:none; }
+        ::selection { background:var(--terra); color:#fff; }
+
+        .shell { max-width:500px; margin:0 auto; padding:0 22px 72px; }
+
+        /* ---------- MINI-HEADER ---------- */
+        .topbar { display:flex; align-items:center; justify-content:center; padding:24px 0 4px; }
+        .topbar a { font-family:'Anton',sans-serif; font-size:1.05rem; letter-spacing:.02em; text-transform:uppercase; color:var(--ink); display:inline-flex; align-items:center; }
+        .topbar .brand-tag { font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:.54rem; letter-spacing:.13em; color:var(--terra); border:1.5px solid var(--terra); padding:3px 8px; border-radius:100px; margin-left:9px; }
+
+        /* ---------- PERFIL ---------- */
+        .profile { text-align:center; padding:26px 0 8px; }
+        .avatar { width:124px; height:124px; border-radius:50%; margin:0 auto 20px; overflow:hidden; border:3px solid var(--ink); box-shadow:7px 7px 0 var(--terra); background:linear-gradient(135deg,#1d4a4f,#14373C 55%,#0e2a2e); position:relative; }
+        .avatar img { position:relative; z-index:2; width:100%; height:100%; object-fit:cover; object-position:center 18%; }
+        .avatar .fallback { position:absolute; z-index:1; inset:0; display:flex; align-items:center; justify-content:center; font-family:'Anton',sans-serif; font-size:2.6rem; color:rgba(245,243,239,.9); }
+        .profile h1 { font-family:'Anton',sans-serif; font-weight:400; font-size:2.15rem; text-transform:uppercase; color:var(--ink); line-height:.98; letter-spacing:.01em; }
+        .profile .role { font-size:.68rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--terra); margin-top:10px; }
+        .profile .bio { font-size:.98rem; color:var(--ink-2); font-weight:400; margin-top:14px; max-width:33ch; margin-left:auto; margin-right:auto; }
+        .profile .bio b { color:var(--ink); font-weight:700; }
+
+        /* ---------- SOCIAIS ---------- */
+        .social { display:flex; justify-content:center; gap:12px; margin:22px 0 4px; }
+        .social a { width:47px; height:47px; border-radius:50%; background:var(--card); border:1.5px solid var(--ink); display:flex; align-items:center; justify-content:center; color:var(--ink); transition:transform .15s, background .2s, color .2s; }
+        .social a:hover { transform:translateY(-3px); background:var(--ink); color:#fff; }
+        .social svg { width:21px; height:21px; }
+
+        /* ---------- LABEL DE SEÇÃO (editorial) ---------- */
+        .grp { display:flex; align-items:center; gap:13px; margin:40px 2px 20px; }
+        .grp .tri { flex-shrink:0; color:var(--terra); font-size:.7rem; }
+        .grp span { font-family:'Anton',sans-serif; font-size:.92rem; letter-spacing:.13em; text-transform:uppercase; color:var(--ink); white-space:nowrap; }
+        .grp::after { content:''; flex:1; height:1.5px; background:var(--line); }
+
+        /* ---------- CARD DE CURSO (capa tipográfica, sem preço) ---------- */
+        .course { position:relative; display:block; border-radius:22px; overflow:hidden; margin-bottom:20px; border:2.5px solid var(--ink); box-shadow:7px 7px 0 var(--ink); transition:transform .16s ease, box-shadow .16s ease; -webkit-tap-highlight-color:transparent; }
+        .course:active { transform:translate(3px,3px); box-shadow:4px 4px 0 var(--ink); }
+        @media (hover:hover){ .course:hover { transform:translate(-2px,-2px); box-shadow:10px 10px 0 var(--ink); } }
+        .course .cover { position:relative; overflow:hidden; padding:22px 20px 20px; }
+        .course .cover .glow { position:absolute; width:280px; height:280px; border-radius:50%; top:-150px; right:-110px; pointer-events:none; }
+        .course .badge { position:relative; z-index:2; display:inline-flex; align-items:center; gap:7px; font-size:.6rem; font-weight:800; letter-spacing:.09em; text-transform:uppercase; padding:6px 12px; border-radius:100px; margin-bottom:14px; }
+        .course .badge .dot { width:6px; height:6px; border-radius:50%; }
+        .course .ctitle { position:relative; z-index:2; font-family:'Anton',sans-serif; font-weight:400; font-size:2rem; line-height:.94; text-transform:uppercase; letter-spacing:.005em; }
+        .course .ctitle .tt { display:block; font-size:.62em; opacity:.85; }
+        .course .body { padding:17px 20px 20px; }
+        .course .desc { font-size:.94rem; line-height:1.5; }
+        .course .desc b { font-weight:700; }
+        .course .chips { display:flex; flex-wrap:wrap; gap:6px; margin:14px 0 16px; }
+        .course .chips span { font-size:.68rem; font-weight:700; letter-spacing:.02em; padding:5px 10px; border-radius:100px; }
+        .course .go { display:flex; align-items:center; justify-content:space-between; gap:10px; font-family:'Hanken Grotesk',sans-serif; font-weight:800; font-size:.82rem; letter-spacing:.03em; text-transform:uppercase; padding:13px 18px; border-radius:100px; background:var(--terra); color:#fff; transition:background .2s; }
+        .course:hover .go { background:var(--terra-d); }
+        .course .go .arw { font-family:'Anton',sans-serif; }
+
+        /* variante ESCURA (Claude 2.0) */
+        .course.dark { background:var(--ink); }
+        .course.dark .cover .glow { background:radial-gradient(circle, rgba(196,131,94,.4), transparent 65%); }
+        .course.dark .badge { color:#fff; background:var(--terra); }
+        .course.dark .badge .dot { background:#fff; }
+        .course.dark .ctitle { color:#fff; }
+        .course.dark .body { background:var(--ink); }
+        .course.dark .desc { color:rgba(244,243,239,.82); }
+        .course.dark .desc b { color:#fff; }
+        .course.dark .chips span { color:var(--terra-l); background:rgba(196,131,94,.14); border:1px solid rgba(196,131,94,.3); }
+
+        /* variante CLARA (Motor) */
+        .course.light { background:var(--card); }
+        .course.light .cover { background:var(--terra); }
+        .course.light .cover .glow { background:radial-gradient(circle, rgba(255,255,255,.28), transparent 62%); }
+        .course.light .badge { color:var(--terra-d); background:#fff; }
+        .course.light .badge .dot { background:var(--terra); }
+        .course.light .ctitle { color:#fff; }
+        .course.light .body { background:var(--card); }
+        .course.light .desc { color:var(--ink-2); }
+        .course.light .desc b { color:var(--ink); }
+        .course.light .chips span { color:var(--green); background:rgba(67,93,81,.09); border:1px solid rgba(67,93,81,.22); }
+
+        /* ---------- CARD DE SERVIÇO (WhatsApp) ---------- */
+        .serv { display:flex; align-items:center; gap:15px; width:100%; padding:17px 18px; margin-bottom:13px; background:var(--card); border:2px solid var(--ink); border-radius:16px; box-shadow:4px 4px 0 var(--ink); transition:transform .14s ease, box-shadow .14s ease; -webkit-tap-highlight-color:transparent; }
+        .serv:active { transform:translate(2px,2px); box-shadow:2px 2px 0 var(--ink); }
+        @media (hover:hover){ .serv:hover { transform:translate(-1px,-1px); box-shadow:6px 6px 0 var(--ink); } }
+        .serv .ic { flex:0 0 auto; width:44px; height:44px; border-radius:13px; background:var(--bg-2); display:flex; align-items:center; justify-content:center; color:var(--ink); }
+        .serv .ic svg { width:23px; height:23px; }
+        .serv .txt { flex:1; min-width:0; }
+        .serv .t { display:block; font-weight:700; font-size:1.02rem; color:var(--ink); line-height:1.2; }
+        .serv .s { display:flex; align-items:center; gap:6px; font-size:.8rem; color:var(--wa); font-weight:700; margin-top:3px; }
+        .serv .s svg { width:14px; height:14px; }
+        .serv .s.site { color:var(--terra-d); }
+        .serv .arw { flex:0 0 auto; font-family:'Anton',sans-serif; color:var(--terra); font-size:1.15rem; }
+        /* card da NewScale: destaque escuro */
+        .serv.brand { background:var(--ink); border-color:var(--ink); box-shadow:4px 4px 0 var(--terra); }
+        .serv.brand .ic { background:rgba(255,255,255,.08); color:var(--terra-l); }
+        .serv.brand .t { color:#fff; }
+        .serv.brand .s.site { color:var(--terra-l); }
+        .serv.brand .arw { color:var(--terra-l); }
+        .serv.brand:active { box-shadow:2px 2px 0 var(--terra); }
+        @media (hover:hover){ .serv.brand:hover { box-shadow:6px 6px 0 var(--terra); } }
+
+        /* ---------- CARD SIMPLES (grátis) ---------- */
+        .link { display:flex; align-items:center; gap:15px; width:100%; padding:17px 18px; margin-bottom:13px; background:var(--card); border:2px solid var(--ink); border-radius:16px; box-shadow:4px 4px 0 var(--ink); transition:transform .14s ease, box-shadow .14s ease; -webkit-tap-highlight-color:transparent; }
+        .link:active { transform:translate(2px,2px); box-shadow:2px 2px 0 var(--ink); }
+        @media (hover:hover){ .link:hover { transform:translate(-1px,-1px); box-shadow:6px 6px 0 var(--ink); } }
+        .link .ic { flex:0 0 auto; width:44px; height:44px; border-radius:13px; display:flex; align-items:center; justify-content:center; }
+        .link .ic svg { width:23px; height:23px; }
+        .link .txt { flex:1; min-width:0; }
+        .link .t { display:block; font-weight:700; font-size:1.02rem; line-height:1.2; }
+        .link .s { display:block; font-size:.8rem; color:var(--muted); margin-top:3px; line-height:1.35; }
+        .link .arw { flex:0 0 auto; font-family:'Anton',sans-serif; color:var(--terra); font-size:1.15rem; }
+        .link.dark { background:var(--ink); border-color:var(--ink); box-shadow:4px 4px 0 var(--terra); }
+        .link.dark .ic { background:rgba(255,255,255,.08); color:var(--terra-l); }
+        .link.dark .t { color:#fff; } .link.dark .s { color:rgba(244,243,239,.6); } .link.dark .arw { color:var(--terra-l); }
+        .link.dark:active { box-shadow:2px 2px 0 var(--terra); }
+        @media (hover:hover){ .link.dark:hover { box-shadow:6px 6px 0 var(--terra); } }
+        .link.light .ic { background:var(--bg-2); color:var(--ink); }
+        .link.light .t { color:var(--ink); }
+
+        /* ---------- CAPTURA DE EMAIL ---------- */
+        .cap { background:var(--bg-2); border:2px solid var(--ink); border-radius:20px; padding:26px 22px; margin-top:36px; box-shadow:5px 5px 0 var(--ink); text-align:center; }
+        .cap h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:1.5rem; text-transform:uppercase; color:var(--ink); line-height:1; }
+        .cap p { font-size:.9rem; color:var(--ink-2); margin:10px 0 17px; }
+        .cap form { display:flex; flex-direction:column; gap:10px; }
+        .cap input { width:100%; padding:15px 16px; border:2px solid var(--ink); border-radius:12px; background:var(--card); font-family:inherit; font-size:1rem; color:var(--ink); }
+        .cap input:focus { outline:none; border-color:var(--terra); }
+        .cap button { width:100%; min-height:54px; padding:15px; border:none; border-radius:12px; background:var(--terra); color:#fff; font-family:'Hanken Grotesk',sans-serif; font-weight:800; font-size:.88rem; letter-spacing:.04em; text-transform:uppercase; cursor:pointer; transition:background .2s; -webkit-tap-highlight-color:transparent; }
+        .cap button:hover { background:var(--terra-d); }
+        .cap button:disabled { opacity:.6; }
+        .cap .done { color:var(--green); font-weight:700; font-size:.95rem; padding:8px 0; }
+        .cap .fine { font-size:.72rem; color:var(--muted); margin-top:11px; }
+
+        /* ---------- RODAPÉ ---------- */
+        .foot { text-align:center; padding:40px 0 0; }
+        .foot .fl { display:flex; flex-wrap:wrap; justify-content:center; gap:9px 18px; margin-bottom:16px; }
+        .foot .fl a { font-size:.82rem; font-weight:600; color:var(--ink-2); }
+        .foot .fl a:active, .foot .fl a:hover { color:var(--terra); }
+        .foot .cp { font-size:.72rem; color:var(--muted); }
+
+        /* reveal suave */
+        .rv { opacity:0; transform:translateY(16px); transition:opacity .6s cubic-bezier(.2,.7,.2,1), transform .6s cubic-bezier(.2,.7,.2,1); }
+        .rv.in { opacity:1; transform:none; }
+        @media (prefers-reduced-motion:reduce){ .rv { opacity:1; transform:none; transition:none; } }
+    </style>
+</head>
+<body>
+
+<div class="shell">
+
+    <!-- MINI-HEADER -->
+    <div class="topbar">
+        <a href="/">Bruna Santanna<span class="brand-tag">A Virada IA</span></a>
+    </div>
+
+    <!-- PERFIL -->
+    <div class="profile">
+        <div class="avatar rv">
+            <img src="fotos/bruna-retrato.jpg" alt="Bruna Santanna" onerror="this.remove()">
+            <div class="fallback">BS</div>
+        </div>
+        <h1 class="rv">Bruna Santanna</h1>
+        <div class="role rv">Estrategista de IA</div>
+        <p class="bio rv">Te ensino a usar o <b>Claude</b> e a IA de verdade — e a colocar a IA para trabalhar por você.</p>
+        <nav class="social rv" aria-label="Redes sociais">
+            <a href="https://instagram.com/brusantanna.ai" target="_blank" rel="noopener" aria-label="Instagram" data-label="instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/bruna-araujo-santanna/" target="_blank" rel="noopener" aria-label="LinkedIn" data-label="linkedin">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm6 0h3.8v1.7h.05c.53-1 1.83-2.05 3.76-2.05C20.4 8.65 22 10.5 22 14v7h-4v-6.2c0-1.48-.03-3.4-2.07-3.4-2.07 0-2.39 1.62-2.39 3.29V21H9V9Z"/></svg>
+            </a>
+            <a href="https://newscale.tech" target="_blank" rel="noopener" aria-label="NewScale" data-label="newscale-social">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V8l8-4 8 4v12"/><path d="M4 20h16"/><path d="M9 20v-5h6v5"/></svg>
+            </a>
+            <a href="mailto:eu@brunasantanna.com" aria-label="E-mail" data-label="email">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 5.5L20 7"/></svg>
+            </a>
+        </nav>
+    </div>
+
+    <!-- TIKTOK · onde esta o guia prometido no video -->
+    <div class="grp rv"><span class="tri">▶</span><span>Você veio do TikTok</span></div>
+    <a href="/biblioteca" class="link dark rv" data-label="tiktok-biblioteca">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H12v16H6.5A2.5 2.5 0 0 0 4 21.5V5.5Z"/><path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H12v16h5.5a2.5 2.5 0 0 1 2.5 2.5V5.5Z"/></svg></span>
+        <span class="txt"><span class="t">O guia que eu prometi está na biblioteca</span><span class="s">Todos os guias, de graça e em ordem de post · o do vídeo está lá dentro</span></span>
+        <span class="arw">→</span>
+    </a>
+
+    <!-- DIAGNOSTICO · teste de nivel de uso de IA -->
+    <div class="grp rv"><span class="tri">▶</span><span>Comece por aqui</span></div>
+    <a href="/diagnostico" class="link dark rv" data-label="diagnostico">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 1 0-9-9"/><path d="M3 12H1.5"/><path d="M12 12l4.5-4.5"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/></svg></span>
+        <span class="txt"><span class="t">Qual é o seu nível de uso de IA?</span><span class="s">Teste grátis de 6 perguntas · resultado na hora · leva 1 minuto</span></span>
+        <span class="arw">↗</span>
+    </a>
+
+    <!-- MEUS CURSOS -->
+    <div class="grp rv"><span class="tri">▶</span><span>Meus cursos</span></div>
+
+    <a href="/curso" class="course dark rv" data-label="curso-claude-2">
+        <div class="cover">
+            <div class="glow"></div>
+            <span class="badge"><span class="dot"></span>Gravado · acesso imediato</span>
+            <div class="ctitle">Claude com Profundidade <span class="tt">Virada IA 2.0</span></div>
+        </div>
+        <div class="body">
+            <p class="desc">O curso de Claude e IA para quem quer usar <b>com profundidade</b> — a forma de pensar, não só a ferramenta. Sem programar.</p>
+            <div class="chips"><span>7 módulos</span><span>+5 horas</span><span>Atualizado jul/2026</span><span>12x de R$35,89</span></div>
+            <span class="go">Quero conhecer <span class="arw">→</span></span>
+        </div>
+    </a>
+
+    <a href="/sistema" class="course light rv" data-label="curso-motor">
+        <div class="cover">
+            <div class="glow"></div>
+            <span class="badge"><span class="dot"></span>Novo · acesso imediato</span>
+            <div class="ctitle">Motor de Conteúdo</div>
+        </div>
+        <div class="body">
+            <p class="desc">Agentes de IA que <b>criam o seu conteúdo e editam os seus vídeos</b> em todas as redes. Você só grava.</p>
+            <div class="chips"><span>2 skills</span><span>Aula completa</span><span>Edição de vídeo</span></div>
+            <span class="go">Quero conhecer <span class="arw">→</span></span>
+        </div>
+    </a>
+
+    <!-- PARCERIAS · publis pagas ativas -->
+    <div class="grp rv"><span class="tri">▶</span><span>Parcerias</span></div>
+
+    <!-- MANUS · parceria paga (Reel 1, link de redeem com créditos) -->
+    <a href="https://manus.im/redeem?c=BSIA024W" target="_blank" rel="noopener" class="link light rv" data-label="manus-redeem">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 9h20"/><path d="M5.2 6.5h.01M7.7 6.5h.01M10.2 6.5h.01"/></svg></span>
+        <span class="txt"><span class="t">Manus · créditos pra criar seu site</span><span class="s">Foi o que eu usei no vídeo · resgate os créditos aqui · parceria paga</span></span>
+        <span class="arw">↗</span>
+    </a>
+
+    <!-- COURSERA · parceria paga (campanha GWG, janela 01/08 a 30/09/2026) -->
+    <a href="https://bit.ly/4bsxXny" target="_blank" rel="noopener" class="link dark rv" data-label="coursera-gwg">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 8l10 5 10-5-10-5Z"/><path d="M6 10.6V16c0 1.7 2.7 3 6 3s6-1.3 6-3v-5.4"/><path d="M22 8v6"/></svg></span>
+        <span class="txt"><span class="t">Google AI Professional Certificate</span><span class="s">Na Coursera · conteúdo do Google, no seu ritmo · parceria paga</span></span>
+        <span class="arw">↗</span>
+    </a>
+
+    <!-- COMO POSSO TE AJUDAR HOJE -->
+    <div class="grp rv"><span class="tri">▶</span><span>Como posso te ajudar hoje</span></div>
+
+    <a href="https://wa.me/5511971901020?text=Oi%20Bruna!%20Tenho%20interesse%20na%20mentoria%20individual.%20Trabalho%20com%3A%20" target="_blank" rel="noopener" class="serv rv" data-label="wa-mentoria">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M5.5 21a6.5 6.5 0 0 1 13 0"/></svg></span>
+        <span class="txt"><span class="t">Mentoria individual</span><span class="s"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Z"/></svg>Iniciar conversa no WhatsApp</span></span>
+        <span class="arw">→</span>
+    </a>
+
+    <a href="https://wa.me/5511971901020?text=Oi%20Bruna!%20Quero%20levar%20um%20treinamento%20de%20IA%20pra%20minha%20empresa.%20Me%20conta%20como%20funciona%3F" target="_blank" rel="noopener" class="serv rv" data-label="wa-corporativo">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V7l8-4 8 4v14"/><path d="M4 21h16"/><path d="M9 21v-4h6v4"/><path d="M8 10h.01M12 10h.01M16 10h.01M8 14h.01M16 14h.01"/></svg></span>
+        <span class="txt"><span class="t">Treinamentos corporativos</span><span class="s"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Z"/></svg>Iniciar conversa no WhatsApp</span></span>
+        <span class="arw">→</span>
+    </a>
+
+    <a href="https://wa.me/5511971901020?text=Oi%20Bruna!%20Gostaria%20de%20te%20convidar%20para%20uma%20palestra%2Fevento.%20" target="_blank" rel="noopener" class="serv rv" data-label="wa-palestras">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l14-7v16L3 13v5H1v-7h2Z"/><path d="M17 8a3 3 0 0 1 0 8"/></svg></span>
+        <span class="txt"><span class="t">Palestras e eventos</span><span class="s"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Z"/></svg>Iniciar conversa no WhatsApp</span></span>
+        <span class="arw">→</span>
+    </a>
+
+    <a href="https://wa.me/5511971901020?text=Oi%20Bruna!%20Tenho%20uma%20proposta%20de%20publicidade%2Fparceria.%20" target="_blank" rel="noopener" class="serv rv" data-label="wa-publicidade">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v2a1 1 0 0 0 1 1h2l4 4V6L6 10H4a1 1 0 0 0-1 1Z"/><path d="M14 8a4 4 0 0 1 0 8"/><path d="M17 5a8 8 0 0 1 0 14"/></svg></span>
+        <span class="txt"><span class="t">Publicidade e parcerias</span><span class="s"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Z"/></svg>Iniciar conversa no WhatsApp</span></span>
+        <span class="arw">→</span>
+    </a>
+
+    <a href="https://newscale.tech" target="_blank" rel="noopener" class="serv brand rv" data-label="newscale">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg></span>
+        <span class="txt"><span class="t">Automação de IA para empresas</span><span class="s site">NewScale · consultoria e implementação</span></span>
+        <span class="arw">↗</span>
+    </a>
+
+    <!-- GRÁTIS -->
+    <div class="grp rv"><span class="tri">▶</span><span>Grátis, para começar</span></div>
+
+    <a href="/biblioteca" class="link dark rv" data-label="biblioteca">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H12v16H6.5A2.5 2.5 0 0 0 4 21.5V5.5Z"/><path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H12v16h5.5a2.5 2.5 0 0 1 2.5 2.5V5.5Z"/></svg></span>
+        <span class="txt"><span class="t">Biblioteca completa</span><span class="s">Todos os guias e prompts, prontos para copiar</span></span>
+        <span class="arw">→</span>
+    </a>
+    <a href="/claude" class="link light rv" data-label="guia-do-claude">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 3H20v18H6.5A2.5 2.5 0 0 1 4 18.5v-13A2.5 2.5 0 0 1 6.5 3Z"/></svg></span>
+        <span class="txt"><span class="t">Guia do Claude</span><span class="s">Entenda de uma vez por que todo mundo fala do Claude</span></span>
+        <span class="arw">→</span>
+    </a>
+
+    <!-- CAPTURA DE EMAIL -->
+    <div class="cap rv">
+        <h2>Quer os guias novos?</h2>
+        <p>Deixa seu email. Te aviso quando sair. Sem spam.</p>
+        <form id="capForm">
+            <input type="email" id="capEmail" placeholder="seu@email.com" autocomplete="email" required>
+            <button type="submit" id="capBtn">Quero receber os guias</button>
+        </form>
+        <div class="fine">Um email de vez em quando. Você sai quando quiser.</div>
+    </div>
+
+    <!-- RODAPÉ -->
+    <div class="foot">
+        <nav class="fl">
+            <a href="/curso">Curso de Claude</a>
+            <a href="/sistema">Motor de Conteúdo</a>
+            <a href="/biblioteca">Biblioteca</a>
+            <a href="/quem-sou">Quem Sou</a>
+            <a href="/mentoria">Mentoria</a>
+        </nav>
+        <p class="cp">© 2026 Bruna Santanna · A Virada IA</p>
+    </div>
+
+</div>
+
+<script>
+    // ===== GA: clique em cada link (label por destino) =====
+    document.querySelectorAll('[data-label]').forEach(el => {
+        el.addEventListener('click', () => {
+            gtag('event', 'biolink_click', { label: el.getAttribute('data-label'), source: location.href });
+        });
+    });
+
+    // ===== CAPTURA DE EMAIL (list: 'comece') =====
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx90IdrA_L6n3jVdoYBinBPxPfWq0h6Iua1MrI8gQ7-RgBXhU1rOqF9dM2n7mLdAeMW/exec";
+    const CAP_KEY = 'comece_email';
+    const form = document.getElementById('capForm');
+    const cap = document.querySelector('.cap');
+
+    function showDone() {
+        cap.innerHTML = '<h2>Prontinho!</h2><div class="done">✓ Você está na lista. Já já te aviso dos guias novos.</div>';
+    }
+    if (localStorage.getItem(CAP_KEY)) showDone();
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const input = document.getElementById('capEmail');
+        const btn = document.getElementById('capBtn');
+        const email = input.value.trim();
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { input.focus(); return; }
+        btn.disabled = true; btn.textContent = 'Enviando...';
+        try {
+            await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, list: 'comece', timestamp: new Date().toISOString(), source: location.href }) });
+        } catch(_) {}
+        gtag('event', 'lead_capture', { list: 'comece' });
+        localStorage.setItem(CAP_KEY, email);
+        showDone();
+    });
+
+    // ===== reveal on scroll =====
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0, rootMargin:'0px 0px -30px 0px' });
+    document.querySelectorAll('.rv').forEach((el,i) => { el.style.transitionDelay = (i%4*60)+'ms'; io.observe(el); });
+    setTimeout(function(){ document.querySelectorAll('.rv:not(.in)').forEach(el => el.classList.add('in')); }, 2200);
+</script>
+
+</body>
+</html>
