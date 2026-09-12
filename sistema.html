@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#F3EEE3">
-<title>Curso Motor de Conteúdo · Seu conteúdo rodando sozinho, sem abrir o Canva · Bruna Santanna</title>
-<meta name="description" content="Curso gravado, acesso imediato: um motor de agentes de criação de conteúdo e edição de vídeo instalado no seu Claude. Ele pesquisa, escreve, monta o carrossel com arte pronta, edita vídeo, agenda e analisa. R$169.">
+<title>Curso Motor de Conteúdo · Seu conteúdo rodando sozinho, sem abrir editor de imagem · Bruna Santanna</title>
+<meta name="description" content="Curso gravado, acesso imediato: um agente de criação de conteúdo e edição de vídeo instalado no seu Claude. Ele pesquisa, escreve, monta o carrossel com arte pronta, edita vídeo, agenda e analisa. R$169.">
 <meta name="author" content="Bruna Santanna">
 <link rel="canonical" href="https://brunasantanna.com/sistema">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://brunasantanna.com/sistema">
-<meta property="og:title" content="Motor de Conteúdo: seu conteúdo rodando sozinho, sem abrir o Canva">
-<meta property="og:description" content="Um motor de agentes no seu Claude que pesquisa, escreve, edita vídeo, agenda e analisa. Curso gravado, acesso imediato, R$169.">
+<meta property="og:title" content="Motor de Conteúdo: seu conteúdo rodando sozinho, sem abrir editor de imagem">
+<meta property="og:description" content="Um agente de conteúdo no seu Claude que pesquisa, escreve, edita vídeo, agenda e analisa. Curso gravado, acesso imediato, R$169.">
 <meta property="og:locale" content="pt_BR">
 
 <!-- Google tag (gtag.js) -->
@@ -39,7 +39,7 @@
     {
       "@type": "Course",
       "name": "Curso Motor de Conteúdo",
-      "description": "Curso gravado com acesso imediato: um motor de agentes de criação de conteúdo e edição de vídeo instalado no seu Claude. Ele pesquisa, escreve os roteiros, edita os vídeos, agenda em todas as redes e analisa o resultado, sem exigir que você apareça. Inclui duas skills e a Central do Aluno.",
+      "description": "Curso gravado com acesso imediato: um agente de criação de conteúdo e edição de vídeo instalado no seu Claude. Ele pesquisa, escreve os roteiros, edita os vídeos, agenda em todas as redes e analisa o resultado, sem exigir que você apareça. Inclui duas skills e a Central do Aluno.",
       "inLanguage": "pt-BR",
       "url": "https://brunasantanna.com/sistema",
       "dateModified": "2026-09-04",
@@ -201,11 +201,13 @@ h2{font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercas
 .cardl{padding:20px 0;font-size:16px;line-height:1.5;color:var(--ink-2);border-top:1px solid var(--line);
   display:flex;gap:14px;align-items:flex-start}
 .cardl::before{content:'';flex:0 0 auto;display:block;width:22px;height:2px;background:var(--terra);margin-top:12px}
+.cardl b{color:var(--ink);font-weight:700}
 .dashbox{margin-top:26px;border-left:3px solid var(--terra);padding:4px 0 4px 18px;
   font-weight:600;font-size:1.05rem;color:var(--ink);line-height:1.45}
 
 /* ---------- loop ---------- */
 .loop-g{display:grid;gap:12px}
+.two-g{display:grid;gap:12px;margin-top:26px}
 .loop-c{background:transparent;border:1px solid var(--line);border-radius:16px;padding:22px 20px}
 .loop-n{font-family:'Anton',Impact,sans-serif;font-weight:400;display:block;line-height:.9;
   font-size:clamp(2.1rem,7.6vw,2.6rem);color:var(--terra);margin:0 0 10px}
@@ -372,6 +374,7 @@ h2{font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercas
 @media(min-width:760px){
   .grid1{grid-template-columns:1fr 1fr;column-gap:32px}
   .loop-g{grid-template-columns:repeat(3,1fr)}
+  .two-g{grid-template-columns:1fr 1fr;gap:16px}
   .cmp{grid-template-columns:repeat(3,1fr);column-gap:30px}
   .leva-g{grid-template-columns:repeat(3,1fr);column-gap:28px}
   .ents{grid-template-columns:1fr 1fr;column-gap:36px}
@@ -411,8 +414,9 @@ h2{font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercas
   .manif p{max-width:24ch}
 }
 .hd{position:absolute;left:0;right:0;z-index:3}
-.hd .logo b{color:#F4F3EF;text-shadow:0 1px 12px rgba(14,40,44,.5)}
-.hd .tagpill{color:#F4F3EF;border-color:rgba(244,243,239,.6)}
+.logo img{height:21px;width:auto;display:block;
+  filter:drop-shadow(0 0 3px rgba(243,238,227,.95)) drop-shadow(0 2px 12px rgba(243,238,227,.85))}
+@media(min-width:760px){.logo img{height:25px}}
 
 /* ---------- faixa de objecoes (marquee) ---------- */
 .mq{background:var(--deep);color:var(--cream);overflow:hidden;padding:13px 0;border-top:1px solid rgba(244,243,239,.14);border-bottom:1px solid rgba(244,243,239,.14)}
@@ -496,9 +500,8 @@ h2{font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercas
 
   <header class="hd">
     <div class="hd-in">
-      <a class="logo" href="https://brunasantanna.com">
-        <b>Bruna Santanna</b>
-        <span class="tagpill">A VIRADA IA</span>
+      <a class="logo" href="https://brunasantanna.com" aria-label="Bruna Santanna · A Virada IA">
+        <img src="/fotos/logo-virada-ia.png" width="916" height="84" alt="Bruna Santanna · A Virada IA">
       </a>
       <a class="btn btn-ink cta-buy" href="https://pay.kiwify.com.br/a9YefRy">Quero o sistema</a>
     </div>
@@ -506,9 +509,9 @@ h2{font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercas
 
   <div class="hero-in">
     <p class="kick"><span>+4.000 seguidores em 34 dias</span></p>
-    <p class="qual">Para quem faz o próprio conteúdo.</p>
-    <h1>Seu conteúdo rodando sozinho. <span class="terra">Você nem precisa abrir o Canva.</span></h1>
-    <p class="lead">Um motor de agentes no seu Claude: pesquisa a pauta, escreve, monta o carrossel com a arte pronta e agenda nas suas redes.</p>
+    <p class="qual">Para quem faz o próprio conteúdo, em qualquer nicho.</p>
+    <h1>Seu conteúdo rodando sozinho. <span class="terra">Você nem precisa abrir um editor de imagem.</span></h1>
+    <p class="lead">Um agente de conteúdo instalado no seu Claude: pesquisa a pauta, escreve, monta o carrossel com a arte pronta e agenda nas suas redes.</p>
     <div class="hero-actions">
       <a class="btn btn-terra btn-full cta-buy" id="heroCta" href="https://pay.kiwify.com.br/a9YefRy">Quero o sistema · R$169</a>
       <p class="sup">ou 12x de R$17,48 · acesso imediato · garantia de 7 dias</p>
@@ -536,14 +539,45 @@ h2{font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercas
   </div>
 </section>
 
+<!-- ============ 1B. O QUE E ============ -->
+<section style="padding-top:44px">
+  <div class="wrap">
+    <p class="kick rv"><span>O que é</span></p>
+    <h2 class="rv">Um agente de duas skills, <span class="terra">instalado no seu Claude.</span></h2>
+    <p class="lead rv">O Agente Motor de Conteúdo resolve a sua produção de conteúdo inteira: pesquisa, planeja, escreve, cria a arte, edita o vídeo, publica e mede.</p>
+
+    <div class="grid1" style="margin-top:24px">
+      <div class="cardl rv"><span><b>Uma skill que cria.</b> Você dá UM assunto. Ela devolve o Reel, o carrossel, o post de LinkedIn e o artigo, no seu tom de voz.</span></div>
+      <div class="cardl rv"><span><b>Uma skill que edita o seu vídeo.</b> Cortes nas partes paradas, legenda e título. Você grava e pede, conversando.</span></div>
+      <div class="cardl rv"><span><b>O agente pesquisa e planeja.</b> Vê o que está rendendo no seu nicho e monta o seu calendário de conteúdo.</span></div>
+      <div class="cardl rv"><span><b>Ele cria todas as artes.</b> Os carrosséis saem prontos na sua identidade: as suas cores, a sua fonte, o seu jeito. Nenhum editor de imagem aberto.</span></div>
+      <div class="cardl rv"><span><b>Ele distribui.</b> Todos os posts, em todas as redes, direto do Claude. Você aprova, ele publica.</span></div>
+      <div class="cardl rv"><span><b>O agente monta o seu painel.</b> Um dashboard com todos os números do seu conteúdo, para você ver o que repetir e o que cortar.</span></div>
+    </div>
+
+    <p class="dashbox rv">E eu ensino o passo a passo, em vídeos curtos e simples, para você personalizar o seu agente no detalhe, até a sua produção de conteúdo ficar praticamente 95% automatizada dentro do Claude.</p>
+
+    <div class="two-g">
+      <div class="loop-c rv">
+        <h3 class="loop-t">Funciona em qualquer nicho</h3>
+        <p>Advocacia, nutrição, agro, loja, imóveis, estética. O agente é montado com as suas respostas, então ele fala do seu assunto, para o seu público.</p>
+      </div>
+      <div class="loop-c rv">
+        <h3 class="loop-t">Tudo acontece dentro do Claude</h3>
+        <p>Pauta, texto, arte, edição de vídeo, agendamento e números. Um lugar só. Você não pula de aplicativo nem paga ferramenta por fora.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ 2. VIDEO DE VENDA ============ -->
 <section class="sec-2">
   <div class="wrap">
     <p class="kick rv"><span>97 segundos</span></p>
-    <h2 class="rv" style="font-size:clamp(1.6rem,6vw,2.4rem)">Eu mostro o sistema rodando.</h2>
+    <h2 class="rv" style="font-size:clamp(1.6rem,6vw,2.4rem)">Eu mostro o agente rodando.</h2>
 
     <!-- PENDENTE: hospedar o vídeo em player com streaming (YouTube não listado ou Vimeo) e trocar o src -->
-    <div class="vsell rv" id="vsell" role="button" tabindex="0" aria-label="Assistir ao vídeo de 97 segundos com o sistema rodando">
+    <div class="vsell rv" id="vsell" role="button" tabindex="0" aria-label="Assistir ao vídeo de 97 segundos com o agente rodando">
       <img src="/fotos/v2/hero-sistema-sofa.jpg" width="1200" height="1500" loading="lazy" decoding="async"
            alt="Bruna Santanna sentada no sofá, apoiada na mão, olhando para a câmera">
       <span class="play"><span>
@@ -607,7 +641,7 @@ h2{font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercas
   <div class="wrap">
     <p class="kick rv"><span>O mecanismo</span></p>
     <h2 class="rv">O Loop: uma linha de produção de conteúdo.</h2>
-    <p class="lead rv">Seis passos girando em loop. O seu momento é o 3: gravar.</p>
+    <p class="lead rv">Seis passos que o agente gira em loop. O seu momento é o 3: gravar.</p>
 
     <div class="loop-g" style="margin-top:28px">
       <div class="loop-c rv">
@@ -663,8 +697,8 @@ h2{font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercas
 <!-- faixa de objecoes -->
 <div class="mq" aria-label="O que você não precisa fazer">
   <div class="mq-t">
-    <span>Sem editar vídeo<i>·</i></span><span>Sem escrever do zero<i>·</i></span><span>Sem abrir o Canva<i>·</i></span><span>Sem abrir seis aplicativos<i>·</i></span><span>Sem contratar social media<i>·</i></span>
-    <span aria-hidden="true">Sem editar vídeo<i>·</i></span><span aria-hidden="true">Sem escrever do zero<i>·</i></span><span aria-hidden="true">Sem abrir o Canva<i>·</i></span><span aria-hidden="true">Sem abrir seis aplicativos<i>·</i></span><span aria-hidden="true">Sem contratar social media<i>·</i></span>
+    <span>Sem editar vídeo<i>·</i></span><span>Sem escrever do zero<i>·</i></span><span>Sem abrir o Canva<i>·</i></span><span>Sem abrir seis aplicativos<i>·</i></span><span>Sem sair do Claude<i>·</i></span><span>Sem contratar social media<i>·</i></span>
+    <span aria-hidden="true">Sem editar vídeo<i>·</i></span><span aria-hidden="true">Sem escrever do zero<i>·</i></span><span aria-hidden="true">Sem abrir o Canva<i>·</i></span><span aria-hidden="true">Sem abrir seis aplicativos<i>·</i></span><span aria-hidden="true">Sem sair do Claude<i>·</i></span><span aria-hidden="true">Sem contratar social media<i>·</i></span>
   </div>
 </div>
 
@@ -673,7 +707,7 @@ h2{font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercas
   <div class="wrap">
     <p class="kick rv"><span>O que sai do motor</span></p>
     <h2 class="rv">A arte sai pronta. Você não abre o Canva.</h2>
-    <p class="lead rv">Você escolhe o estilo uma vez. Depois é o motor que escreve e monta, no seu tom de voz e com a sua marca.</p>
+    <p class="lead rv">Você escolhe o estilo uma vez. Depois é o agente que escreve e monta, no seu tom de voz e com a sua marca.</p>
 
     <div class="cg rv">
       <figure><img src="/fotos/v2/carrossel-1.jpg" width="620" height="775" loading="lazy" alt="Carrossel claro com número grande, exemplo de nutrição"><figcaption>Claro e didático, para quem ensina passo a passo.</figcaption></figure>
@@ -684,7 +718,7 @@ h2{font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercas
       <figure><img src="/fotos/v2/carrossel-6.jpg" width="620" height="775" loading="lazy" alt="Carrossel em mosaico com quatro fotos e faixas de texto"><figcaption>Mosaico, para lista e resumo da semana.</figcaption></figure>
     </div>
 
-    <p class="capline rv">Seis dos estilos possíveis. O texto sai no seu tom de voz, porque o motor é montado com as suas respostas.</p>
+    <p class="capline rv">Seis dos estilos possíveis. O texto sai no seu tom de voz, porque o agente é montado com as suas respostas.</p>
     <div style="margin-top:26px"><a class="btn btn-terra cta-buy" href="https://pay.kiwify.com.br/a9YefRy">Quero o sistema · R$169</a></div>
   </div>
 </section>
@@ -693,7 +727,7 @@ h2{font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercas
 <section class="sec-2">
   <div class="wrap">
     <p class="kick rv"><span>A maior dor: distribuir</span></p>
-    <h2 class="rv">Ele posta em todas as redes por você.</h2>
+    <h2 class="rv">O agente posta em todas as redes por você.</h2>
 
     <div class="pills rv">
       <span class="pill">Instagram</span>
@@ -720,7 +754,7 @@ h2{font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercas
   <div class="wrap">
     <p class="kick rv"><span>Quem já está usando</span></p>
     <h2 class="rv">Não é promessa. <span class="terra">Já está rodando.</span></h2>
-    <p class="lead rv">Mensagens de quem montou o motor.</p>
+    <p class="lead rv">Mensagens de quem já montou o próprio agente.</p>
 
     <div class="shots">
       <div class="shot rv">
@@ -798,8 +832,8 @@ h2{font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercas
 <section>
   <div class="wrap">
     <p class="kick rv"><span>A oferta</span></p>
-    <h2 class="rv">Um sistema pronto que você personaliza.</h2>
-    <p class="lead rv">Não é um faça-do-zero. É um motor pronto que a skill molda para o seu negócio.</p>
+    <h2 class="rv">Um agente pronto que você personaliza.</h2>
+    <p class="lead rv">Não é um faça-do-zero. A skill entrevista você e molda o agente para o seu negócio.</p>
 
     <div class="offer-a rv" style="margin-top:28px">
       <h3 class="offer-h">A aula completa, do zero ao sistema rodando</h3>
@@ -854,7 +888,7 @@ h2{font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercas
     <ul class="ents rv">
       <li>
         <span class="ent-n">01</span>
-        <h3 class="ent-t">Seu motor de conteúdo</h3>
+        <h3 class="ent-t">Seu agente de conteúdo</h3>
         <p>Uma ideia vira Reel, carrossel, LinkedIn e blog, no seu tom.</p>
       </li>
       <li>
@@ -964,7 +998,7 @@ h2{font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercas
       <p class="kick rv"><span>Quem te ensina</span></p>
       <h2 class="rv">Bruna Santanna</h2>
       <p class="rv" style="font-size:16.5px;line-height:1.55;margin-bottom:12px">Eu não vim da tecnologia. Sou empresária, e tudo que construo nasce de facilitar a minha vida.</p>
-      <p class="rv" style="font-size:16.5px;line-height:1.55;margin-bottom:12px">Esse sistema existia só para me servir. Funcionou tão bem que virou este curso.</p>
+      <p class="rv" style="font-size:16.5px;line-height:1.55;margin-bottom:12px">Esse agente existia só para me servir. Funcionou tão bem que virou este curso.</p>
       <p class="rv" style="font-size:16.5px;line-height:1.55">Fundadora da NewScale, já treinei mais de 1.000 pessoas e ensino IA para quem não é de tecnologia.</p>
       <div class="pills rv" style="margin-bottom:0">
         <span class="pill">Fundadora da NewScale</span>
@@ -1190,7 +1224,7 @@ h2{font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercas
     if (!vs || vs.dataset.on) return;
     vs.dataset.on = '1';
     var v = document.createElement('video');
-    v.src = 'img/video-venda.mp4';
+    v.src = '/videos/video-venda.mp4';
     v.controls = true; v.autoplay = true; v.playsInline = true;
     v.setAttribute('playsinline',''); v.setAttribute('preload','auto');
     vs.innerHTML = '';
