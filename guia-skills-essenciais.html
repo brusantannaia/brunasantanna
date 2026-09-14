@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5 skills essenciais do Claude: o que cada uma faz e como instalar | A Virada IA · Bruna Santanna</title>
+    <meta name="description" content="Humanizer, Memory Management, PPTX, Frontend Design e Skill Creator: o que cada skill do Claude faz, quando usar, como instalar e um prompt pronto para testar.">
+    <meta name="author" content="Bruna Santanna">
+    <link rel="canonical" href="https://brunasantanna.com/guia-skills-essenciais">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://brunasantanna.com/guia-skills-essenciais">
+    <meta property="og:title" content="5 skills essenciais do Claude: o que cada uma faz e como instalar | A Virada IA">
+    <meta property="og:description" content="Humanizer, Memory Management, PPTX, Frontend Design e Skill Creator: o que cada skill do Claude faz, quando usar, como instalar e um prompt pronto para testar.">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DCW0QVCWB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-7DCW0QVCWB');
+    </script>
+
+    <!-- Meta Pixel -->
+    <script src="/meta-pixel.js"></script>
+
+    <!-- JSON-LD: Article -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "5 skills essenciais do Claude: o que cada uma faz e como instalar",
+        "description": "Humanizer, Memory Management, PPTX, Frontend Design e Skill Creator: o que cada skill do Claude faz, quando usar, como instalar e um prompt pronto para testar.",
+        "inLanguage": "pt-BR",
+        "url": "https://brunasantanna.com/guia-skills-essenciais",
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://brunasantanna.com/guia-skills-essenciais" },
+        "datePublished": "2026-09-15",
+        "dateModified": "2026-09-15",
+        "author": { "@type": "Person", "name": "Bruna Santanna", "url": "https://brunasantanna.com" },
+        "publisher": {
+            "@type": "Organization",
+            "name": "A Virada IA · Bruna Santanna",
+            "url": "https://brunasantanna.com"
+        },
+        "about": "Skills"
+    }
+    </script>
+
+    <!-- JSON-LD: FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            { "@type": "Question", "name": "Preciso pagar para usar essas skills?", "acceptedAnswer": { "@type": "Answer", "text": "Não existe cobrança por skill. O que conta é o seu plano do Claude: as skills usam o recurso de execução de código e criação de arquivos, que está nos planos pagos (Pro, Max, Team e Enterprise). Confira o seu plano antes de seguir o passo a passo, para não achar que você fez algo errado." } },
+            { "@type": "Question", "name": "Qual a diferença entre a memória do Claude e a Memory Management?", "acceptedAnswer": { "@type": "Answer", "text": "A memória do Claude é um recurso da conta: você liga nas configurações e ele guarda anotações sobre você entre as conversas. A Memory Management é uma skill do plugin Productivity que guarda a memória em arquivos dentro da pasta do projeto no Cowork, com pessoas, siglas e projetos. Uma não substitui a outra, e as duas podem ficar ligadas." } },
+            { "@type": "Question", "name": "Preciso chamar a skill pelo nome toda vez?", "acceptedAnswer": { "@type": "Answer", "text": "Não. Quando a tarefa aparece na conversa, o Claude reconhece e usa a skill sozinho. Se quiser garantir, digite uma barra e escolha a skill na lista, ou cite o nome dela no pedido." } }
+        ]
+    }
+    </script>
+
+    <!-- JSON-LD: Person (autoria consistente = entidade citavel) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Bruna Santanna",
+        "url": "https://brunasantanna.com",
+        "jobTitle": "Educadora de IA e fundadora da NewScale",
+        "description": "Educadora de inteligência artificial para não-programadores. Fundadora da NewScale, consultoria de IA para empresas.",
+        "sameAs": [
+            "https://instagram.com/brusantanna.ai",
+            "https://www.linkedin.com/in/bruna-araujo-santanna/",
+            "https://newscale.tech"
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg:#F3EEE3; --bg-2:#ECE5D6; --card:#FBF9F3;
+            --ink:#14373C; --ink-2:#2C4F54; --green:#435D51;
+            --terra:#B06E4A; --terra-l:#C4835E; --terra-d:#985A3B;
+            --text:#233133; --muted:#6E7A75; --line:rgba(20,55,60,0.16);
+            --cream:#F4F3EF;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family:'Hanken Grotesk',sans-serif; background:var(--bg); color:var(--text); line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+        img { max-width:100%; display:block; }
+        a { color:inherit; text-decoration:none; }
+        ::selection { background:var(--terra); color:#fff; }
+        .wrap { max-width:1100px; margin:0 auto; padding:0 30px; }
+        .kick { font-size:0.72rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--terra); }
+
+        /* ---------- HEADER ---------- */
+        .site-header { position:sticky; top:0; z-index:50; background:rgba(243,238,227,0.92); backdrop-filter:blur(8px); border-bottom:2px solid var(--ink); }
+        .header-inner { display:flex; align-items:center; justify-content:space-between; gap:24px; max-width:1100px; padding:16px 30px; }
+        .logo { display:inline-flex; align-items:center; white-space:nowrap; font-family:'Anton',sans-serif; font-size:1.2rem; letter-spacing:0.02em; text-transform:uppercase; color:var(--ink); }
+        .logo .brand-tag { font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:0.62rem; letter-spacing:0.12em; color:var(--terra); border:1.5px solid var(--terra); padding:3px 8px; border-radius:100px; margin-left:10px; }
+        .main-nav { display:flex; align-items:center; gap:14px; }
+        .main-nav a { font-size:0.86rem; font-weight:600; color:var(--ink-2); white-space:nowrap; transition:color .18s; }
+        .main-nav a:hover, .main-nav a.active { color:var(--terra); }
+        .nav-cta { background:var(--terra); color:#fff !important; padding:10px 18px; border-radius:100px; font-size:0.8rem !important; transition:background .2s, transform .15s; }
+        .nav-cta:hover { background:var(--terra-d); transform:translateY(-1px); }
+        .nav-toggle { display:none; background:none; border:none; font-size:1.5rem; color:var(--ink); cursor:pointer; line-height:1; }
+        @media (max-width: 1180px) {
+            .nav-toggle { display:block; }
+            .main-nav { display:none; position:absolute; top:100%; left:0; right:0; flex-direction:column; align-items:flex-start; gap:0; background:var(--bg); border-bottom:2px solid var(--ink); padding:8px 30px 20px; }
+            .main-nav.open { display:flex; box-shadow:0 28px 46px -20px rgba(20,55,60,0.55); max-height:calc(100dvh - 62px); overflow-y:auto; }
+            .site-header:has(.main-nav.open)::after { content:""; position:fixed; left:0; right:0; top:62px; bottom:0; background:rgba(20,55,60,0.38); z-index:40; pointer-events:none; }
+            .main-nav a { padding:12px 0; width:100%; border-top:1px solid var(--line); font-size:1rem; }
+            .nav-cta { margin-top:12px; text-align:center; border-top:none; }
+        }
+
+        /* botão genérico */
+        .btn { display:inline-flex; align-items:center; gap:9px; justify-content:center; font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:0.85rem; letter-spacing:0.04em; text-transform:uppercase; padding:15px 28px; border-radius:100px; border:none; cursor:pointer; transition:transform .15s, box-shadow .15s, background .2s; }
+        .btn-terra { background:var(--terra); color:#fff; }
+        .btn-terra:hover { background:var(--terra-d); transform:translateY(-2px); box-shadow:0 10px 26px rgba(176,110,74,.35); }
+        .btn-ink { background:var(--ink); color:#fff; }
+        .btn-ink:hover { background:var(--ink-2); transform:translateY(-2px); }
+
+        /* ---------- HERO COMPACTO ---------- */
+        .hero { position:relative; overflow:hidden; border-bottom:1.5px solid var(--line); }
+        .hero-glow { position:absolute; width:560px; height:560px; border-radius:50%; top:-240px; right:-160px; background:radial-gradient(circle,rgba(176,110,74,.13),transparent 62%); pointer-events:none; }
+        .hero .wrap { position:relative; z-index:2; padding:54px 30px 48px; max-width:820px; }
+        .hero-eyebrow { display:inline-flex; align-items:center; gap:9px; margin-bottom:20px; flex-wrap:wrap; }
+        .hero-eyebrow .dot { width:7px; height:7px; border-radius:50%; background:var(--terra); box-shadow:0 0 0 4px rgba(176,110,74,.18); }
+        .hero-eyebrow .sep { color:var(--line); }
+        .hero-eyebrow .data { font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); }
+        .hero h1 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(2.4rem,7vw,4.2rem); line-height:0.94; letter-spacing:-0.01em; text-transform:uppercase; color:var(--ink); }
+        .hero h1 .terra { color:var(--terra); }
+        .hero-sub { font-size:1.12rem; color:var(--ink-2); font-weight:300; max-width:54ch; margin-top:20px; }
+        .hero-sub b { color:var(--ink); font-weight:600; }
+
+        /* ---------- LAYOUT ARTIGO ---------- */
+        .artigo { padding:56px 0 40px; }
+        .artigo .wrap { max-width:760px; }
+
+        /* bloco do reel embedado */
+        .reel-embed { margin:0 auto 44px; max-width:540px; }
+        .reel-embed .instagram-media { margin:0 auto !important; }
+        .reel-placeholder { border:1.5px dashed var(--line); border-radius:16px; background:var(--card); padding:34px 26px; text-align:center; }
+        .reel-placeholder .rp-icon { font-size:1.7rem; margin-bottom:10px; }
+        .reel-placeholder b { display:block; font-family:'Anton',sans-serif; font-weight:400; font-size:1.15rem; text-transform:uppercase; color:var(--ink); letter-spacing:.01em; margin-bottom:6px; }
+        .reel-placeholder p { font-size:0.88rem; color:var(--muted); }
+
+        /* corpo do post */
+        .corpo { font-size:1.06rem; color:var(--text); line-height:1.75; }
+        .corpo > p { margin-bottom:20px; }
+        .corpo > p:first-of-type { font-size:1.16rem; color:var(--ink-2); }
+        .corpo h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.6rem,4.5vw,2.2rem); text-transform:uppercase; color:var(--ink); line-height:1.05; letter-spacing:-0.01em; margin:44px 0 16px; }
+        .corpo h3 { font-size:1.2rem; font-weight:700; color:var(--ink); margin:30px 0 10px; }
+        .corpo a { color:var(--terra-d); font-weight:600; border-bottom:1.5px solid var(--terra); }
+        .corpo a:hover { color:var(--terra); }
+        .corpo strong, .corpo b { color:var(--ink); font-weight:700; }
+        .corpo ul { list-style:none; margin:6px 0 22px; padding:0; }
+        .corpo ul li { position:relative; padding-left:26px; margin-bottom:12px; }
+        .corpo ul li::before { content:'→'; position:absolute; left:0; top:0; color:var(--terra); font-weight:800; }
+        .corpo ol { margin:6px 0 22px 22px; }
+        .corpo ol li { margin-bottom:12px; padding-left:6px; }
+        .corpo ol li::marker { color:var(--terra); font-weight:800; }
+
+        /* blocos didáticos */
+        .bloco { border-radius:14px; padding:22px 24px 22px 26px; margin:26px 0; border:1.5px solid var(--line); }
+        .bloco .bloco-tag { display:block; font-size:0.72rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:8px; }
+        .bloco p { font-size:0.98rem; line-height:1.65; margin:0; }
+        .bloco p + p { margin-top:10px; }
+        .bloco-dica { background:rgba(67,93,81,0.08); border-left:5px solid var(--green); }
+        .bloco-dica .bloco-tag { color:var(--green); }
+        .bloco-atencao { background:rgba(176,110,74,0.09); border-left:5px solid var(--terra); }
+        .bloco-atencao .bloco-tag { color:var(--terra-d); }
+        .bloco-case { background:var(--ink); border-left:5px solid var(--terra-l); border-color:var(--ink); }
+        .bloco-case .bloco-tag { color:var(--terra-l); }
+        .bloco-case p { color:rgba(244,243,239,.88); }
+        .bloco-case b { color:#fff; }
+
+        /* antes/depois */
+        .antes-depois { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:26px 0; }
+        @media (max-width:600px) { .antes-depois { grid-template-columns:1fr; } }
+        .ad-ruim, .ad-bom { border-radius:12px; padding:18px 20px; font-size:0.95rem; line-height:1.6; border:1.5px solid var(--line); }
+        .ad-ruim { background:rgba(150,90,59,0.06); }
+        .ad-bom { background:rgba(67,93,81,0.08); }
+        .ad-ruim .ad-label, .ad-bom .ad-label { display:block; font-size:0.74rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:8px; }
+        .ad-ruim .ad-label { color:var(--terra-d); }
+        .ad-bom .ad-label { color:var(--green); }
+
+        /* prompt box com botão copiar */
+        .prompt-box { background:var(--ink); border-radius:16px; padding:22px 24px; margin:28px 0; position:relative; box-shadow:8px 8px 0 var(--green); }
+        .prompt-box .pb-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; }
+        .prompt-box .pb-label { font-size:0.72rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--terra-l); }
+        .prompt-box pre { font-family:'Hanken Grotesk',ui-monospace,monospace; font-size:0.95rem; line-height:1.6; color:rgba(244,243,239,.92); white-space:pre-wrap; word-wrap:break-word; margin:0; }
+        .copy-btn { flex-shrink:0; display:inline-flex; align-items:center; gap:6px; background:var(--terra); color:#fff; border:none; border-radius:100px; padding:8px 16px; font-family:'Hanken Grotesk',sans-serif; font-size:0.74rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer; transition:background .2s, transform .15s; }
+        .copy-btn:hover { background:var(--terra-d); transform:translateY(-1px); }
+        .copy-btn.copied { background:var(--green); }
+
+        /* ---------- CONTENT UPGRADE (gated) ---------- */
+        .upgrade { margin:52px 0; }
+        .upgrade .wl-card { background:var(--ink); color:#fff; border-radius:18px; padding:34px 32px; box-shadow:8px 8px 0 var(--terra); }
+        .upgrade .wl-card .kick { color:var(--terra-l); display:block; margin-bottom:12px; }
+        .upgrade .wl-card h3 { font-family:'Anton',sans-serif; font-weight:400; font-size:1.7rem; text-transform:uppercase; line-height:1; margin-bottom:8px; }
+        .upgrade .wl-card .wl-sub { font-size:0.95rem; color:rgba(255,255,255,0.72); margin-bottom:22px; max-width:46ch; }
+        .upgrade .wl-form { display:flex; gap:10px; flex-wrap:wrap; }
+        .field { flex:1; min-width:220px; padding:16px 20px; font-family:inherit; font-size:1rem; background:rgba(255,255,255,0.07); border:1.5px solid rgba(255,255,255,0.22); border-radius:10px; color:#fff; outline:none; transition:border-color .2s, background .2s; }
+        .field::placeholder { color:rgba(255,255,255,0.5); }
+        .field:focus { border-color:var(--terra); background:rgba(255,255,255,0.12); }
+        .btn-form { padding:16px 26px; font-family:'Hanken Grotesk',sans-serif; font-size:0.82rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer; background:var(--terra); color:#fff; border:none; border-radius:10px; transition:transform .15s, box-shadow .15s, background .2s; white-space:nowrap; }
+        .btn-form:hover { background:var(--terra-d); transform:translateY(-2px); box-shadow:0 8px 22px rgba(176,110,74,0.35); }
+        .btn-form:disabled { opacity:.6; cursor:not-allowed; transform:none; }
+        .upgrade .fine { margin-top:14px; font-size:0.76rem; color:rgba(255,255,255,0.55); }
+        .wl-ok { display:none; background:rgba(67,93,81,0.35); border:1.5px solid var(--terra-l); border-radius:10px; padding:18px 20px; font-size:0.98rem; line-height:1.5; color:#fff; }
+        .wl-ok b { color:var(--terra-l); }
+        .wl-done .wl-ok { display:block; }
+        .wl-done .wl-form, .wl-done .fine { display:none; }
+
+        /* ---------- FAQ ---------- */
+        .faq-sec { padding:8px 0 20px; }
+        .faq-sec .wrap { max-width:760px; }
+        .faq-sec h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.6rem,4.5vw,2.2rem); text-transform:uppercase; color:var(--ink); line-height:1; margin-bottom:22px; }
+        .faq-list { max-width:760px; }
+        .faq-item { border:1.5px solid var(--line); border-radius:14px; background:var(--card); margin-bottom:12px; overflow:hidden; }
+        .faq-q { width:100%; display:flex; justify-content:space-between; align-items:center; gap:16px; text-align:left; background:none; border:none; cursor:pointer; padding:20px 24px; font-family:'Hanken Grotesk',sans-serif; font-size:1.02rem; font-weight:700; color:var(--ink); }
+        .faq-q .mark { font-family:'Anton',sans-serif; font-size:1.3rem; color:var(--terra); transition:transform .25s; flex-shrink:0; line-height:1; }
+        .faq-item.open .faq-q .mark { transform:rotate(45deg); }
+        .faq-a { display:none; padding:0 24px 22px; font-size:0.96rem; color:var(--ink-2); line-height:1.7; }
+        .faq-item.open .faq-a { display:block; }
+        .faq-a b { color:var(--ink); }
+
+        /* ---------- BANNER DO CURSO ---------- */
+        .curso-banner { background:var(--ink); color:var(--cream); margin:40px 0 0; }
+        .curso-banner .wrap { max-width:900px; padding:56px 30px; display:flex; align-items:center; justify-content:space-between; gap:30px; flex-wrap:wrap; }
+        .curso-banner .cb-text { flex:1; min-width:260px; }
+        .curso-banner .kick { color:var(--terra-l); display:block; margin-bottom:12px; }
+        .curso-banner h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.7rem,5vw,2.6rem); text-transform:uppercase; color:#fff; line-height:1; margin-bottom:12px; max-width:20ch; }
+        .curso-banner h2 .terra { color:var(--terra-l); }
+        .curso-banner p { color:rgba(244,243,239,.72); font-weight:300; font-size:1rem; max-width:46ch; }
+
+        /* volta para o hub */
+        .voltar-hub { text-align:center; padding:40px 0 8px; }
+        .voltar-hub a { font-size:0.9rem; font-weight:700; letter-spacing:0.02em; color:var(--ink); border-bottom:2px solid var(--terra); padding-bottom:3px; transition:color .18s; }
+        .voltar-hub a:hover { color:var(--terra); }
+
+        /* footer */
+        footer { background:var(--ink); color:rgba(244,243,239,.6); padding:40px 0 48px; margin-top:30px; }
+        .footer-row { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+        .footer-brand { font-family:'Anton',sans-serif; font-size:1.1rem; text-transform:uppercase; color:#fff; }
+        .footer-links { display:flex; gap:20px; flex-wrap:wrap; }
+        .footer-links a { font-size:0.84rem; font-weight:600; color:rgba(244,243,239,.7); }
+        .footer-links a:hover { color:var(--terra-l); }
+        .footer-copy { font-size:0.76rem; color:rgba(244,243,239,.4); margin-top:14px; }
+
+        /* reveal */
+        .rv { opacity:0; transform:translateY(22px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+        .rv.in { opacity:1; transform:none; }
+        @media (prefers-reduced-motion:reduce) { .rv { opacity:1; transform:none; } }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="wrap header-inner">
+        <a href="/" class="logo">Bruna Santanna<span class="brand-tag">A Virada IA</span></a>
+        <nav class="main-nav" id="mainNav">
+            <a href="/">Home</a>
+            <a href="/diagnostico">Diagnóstico</a>
+            <a href="/biblioteca">Biblioteca</a>
+            <a href="/claude">Guia do Claude</a>
+            <a href="/quem-sou">Quem Sou</a>
+            <a href="/treinamentos">Treinamentos Corporativos</a>
+            <a href="/mentoria">Mentoria</a>
+            <a href="https://newscale.tech" target="_blank" rel="noopener">IA na sua Empresa</a>
+            <a href="/comece" class="nav-cta">Cursos</a>
+        </nav>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">☰</button>
+    </div>
+</header>
+
+<!-- ========== HERO COMPACTO ========== -->
+<section class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="wrap">
+        <div class="hero-eyebrow rv">
+            <span class="dot"></span>
+            <span class="kick">Skills</span>
+            <span class="sep">·</span>
+            <span class="data">Setembro de 2026</span>
+        </div>
+        <h1 class="rv">5 skills essenciais do Claude: o que cada uma faz e <span class="terra">como instalar</span></h1>
+        <p class="hero-sub rv">Humanizer, Memory Management, PPTX, Frontend Design e Skill Creator. <b>Instalar cada uma leva segundos</b>, e muda o resultado de tudo o que você faz com IA.</p>
+    </div>
+</section>
+
+<!-- ========== ARTIGO ========== -->
+<article class="artigo">
+    <div class="wrap">
+
+
+        <div class="corpo rv">
+<p>As cinco skills do Claude que valem ser instaladas primeiro são: Humanizer, que tira a cara de IA dos textos; Memory Management, que guarda seus projetos entre as conversas; PPTX, com DOCX e XLSX, que devolvem arquivos de PowerPoint, Word e Excel; Frontend Design, que tira o visual genérico das páginas; e Skill Creator, que transforma uma tarefa num comando.</p>
+
+<p>O Claude tem uma biblioteca com milhares de skills prontas, e a maioria das pessoas nunca instalou nenhuma. Uma skill é um passo a passo salvo que o Claude usa sempre que aquela tarefa aparece, sem você explicar tudo de novo. Abaixo está cada uma das cinco com a situação em que ela entra, como instalar e um prompt pronto para testar.</p>
+
+<h2>Antes de começar: onde as skills ficam no Claude</h2>
+
+<ul>
+<li><b>Personalizar, no menu da esquerda.</b> Lá dentro tem três abas: Habilidades, Conectores e Plugins. Em Habilidades ficam as skills que você já tem. Em Plugins, com o filtro em Descobrir, aparecem os pacotes que você ainda não tem.</li>
+<li><b>Execução de código e criação de arquivos ligada.</b> As skills dependem desse recurso, que você liga em Configurações, na parte de Capacidades.</li>
+<li><b>A barra.</b> Numa conversa nova, digite uma barra e a lista do que o seu Claude já sabe fazer aparece na hora.</li>
+</ul>
+
+<h2>1 · Humanizer: como tirar a cara de IA dos seus textos?</h2>
+
+<h3>Quando usar</h3>
+
+<p>Você pediu uma legenda, um e-mail de proposta ou o texto do site, leu a resposta e pensou: dá para ver que foi a IA que escreveu. Travessão jogado no meio da frase, abertura que só repete o título, três adjetivos em fila. É nessa hora que o Humanizer entra.</p>
+
+<h3>O que ela faz</h3>
+
+<p>O Humanizer é uma skill feita a partir da página da Wikipedia que cataloga os sinais de texto escrito por IA. Ela reescreve o seu texto tirando o travessão solto, as frases de encher linguiça e o vocabulário que entrega na hora que talvez não tenha sido você quem escreveu. Os argumentos, os exemplos e a ordem continuam sendo os seus.</p>
+
+<h3>Como instalar</h3>
+
+<p>O Humanizer não é da Anthropic: é uma skill aberta, publicada no GitHub. Por isso ela não aparece na busca do Claude, e a instalação é por upload.</p>
+
+<ol>
+<li>Entre em <a href="https://github.com/blader/humanizer" target="_blank" rel="noopener">github.com/blader/humanizer</a>, clique no botão verde Code e depois em Download ZIP.</li>
+<li>No Claude, clique em Personalizar, no menu da esquerda, e fique na aba Habilidades.</li>
+<li>Clique em Adicionar, no canto de cima, e escolha Fazer upload de habilidade.</li>
+<li>Envie o arquivo .zip que você baixou.</li>
+</ol>
+
+<p>Para usar, abra uma conversa nova, digite uma barra, escolha humanizer e cole o texto. A lista completa dos vícios que ela corrige está no guia <a href="/guia-texto-sem-cara-de-ia">texto sem cara de IA</a>.</p>
+
+<div class="prompt-box">
+    <div class="pb-head">
+        <span class="pb-label">Prompt 1 · Humanizer</span>
+        <button class="copy-btn">Copiar</button>
+    </div>
+<pre>Use a skill humanizer no texto abaixo.
+
+Mantenha o meu conteúdo, os meus exemplos e a ordem das ideias. Tire o que denuncia texto de IA: travessão solto, frase que não fala nada, grupos de três por reflexo e vocabulário que ninguém usa falando.
+
+No fim, me mostre o que você mudou e por quê, trecho por trecho.
+
+[cole o seu texto aqui]</pre>
+</div>
+
+<h2>2 · Memory Management: como fazer o Claude lembrar dos seus projetos?</h2>
+
+<h3>Quando usar</h3>
+
+<p>Toda conversa nova começa com o mesmo parágrafo: quem você é, o que você faz, qual projeto está andando, quem é quem na sua equipe, o que aquela sigla significa. Se você cola esse contexto mais de uma vez por semana, esta é a sua.</p>
+
+<h3>O que ela faz</h3>
+
+<p>A Memory Management é uma skill da Anthropic que vem dentro do plugin Productivity. Ela monta uma memória em dois níveis na pasta do seu projeto: um arquivo principal com o essencial (quem você é, as pessoas, os termos que você usa, os projetos ativos e as suas preferências) e uma pasta de memória com o detalhe de cada projeto e de cada pessoa. Antes de responder, o Claude consulta essa memória, então um pedido curto, cheio de apelido e sigla, já chega entendido.</p>
+
+<div class="bloco bloco-dica">
+    <span class="bloco-tag">→ Não confunda</span>
+    <p>A <a href="/guia-memoria-claude">memória do Claude</a> é um recurso da conta, que você liga nas configurações. A Memory Management guarda a memória em arquivos dentro da pasta do projeto no Cowork. <b>Uma não substitui a outra</b>, e as duas podem ficar ligadas.</p>
+</div>
+
+<h3>Como instalar</h3>
+
+<ol>
+<li>No Claude, clique em Personalizar, no menu da esquerda.</li>
+<li>Clique na lupa (Pesquisar habilidades e plugins), busque por productivity e clique em Adicionar.</li>
+<li>No Cowork, abra um projeto apontando para a pasta onde você trabalha.</li>
+<li>Digite uma barra e escolha o start do productivity. Ele prepara a lista de tarefas, o painel e a memória dentro dessa pasta.</li>
+</ol>
+
+<div class="prompt-box">
+    <div class="pb-head">
+        <span class="pb-label">Prompt 2 · Memory Management</span>
+        <button class="copy-btn">Copiar</button>
+    </div>
+<pre>Quero que você passe a lembrar de mim e dos meus projetos entre as conversas. Monte a sua memória nesta pasta com:
+
+1. Quem eu sou e o que eu faço
+2. Os projetos que estão ativos agora
+3. As pessoas com quem eu trabalho e o papel de cada uma
+4. Os termos, siglas e apelidos que eu uso
+5. As minhas preferências de trabalho
+
+Antes de escrever, me faça todas as perguntas que precisar, de uma vez só, numeradas, em uma única mensagem, e eu respondo tudo junto.</pre>
+</div>
+
+<h2>3 · PPTX, DOCX e XLSX: como pedir um PowerPoint pronto ao Claude?</h2>
+
+<h3>Quando usar</h3>
+
+<p>A reunião é amanhã, o conteúdo está num documento e a apresentação não existe. Ou você precisa entregar um relatório em Word, ou uma planilha com as fórmulas funcionando, e não um texto para copiar e colar em outro programa.</p>
+
+<h3>O que ela faz</h3>
+
+<p>A PPTX é a skill da Anthropic que faz o Claude devolver o arquivo de PowerPoint de verdade: você pede a apresentação e recebe o arquivo pronto para abrir e editar. Junto com ela vêm a DOCX, para Word, e a XLSX, para Excel. As três também leem e editam arquivos que você já tem.</p>
+
+<h3>Como instalar</h3>
+
+<p>Essas três já vêm com o Claude. Abra Personalizar, vá na aba Habilidades e confira se pptx, docx e xlsx estão ligadas. Se o Claude responder que não consegue criar arquivos, ligue a execução de código e criação de arquivos em Configurações, na parte de Capacidades.</p>
+
+<div class="prompt-box">
+    <div class="pb-head">
+        <span class="pb-label">Prompt 3 · apresentação em PowerPoint</span>
+        <button class="copy-btn">Copiar</button>
+    </div>
+<pre>Crie uma apresentação em PowerPoint (.pptx) sobre [tema] para [público].
+
+Quero de 8 a 10 slides: capa, o problema, a proposta, os próximos passos e um slide final de contato. Frases curtas nos slides e o detalhe nas anotações do apresentador.
+
+Me entregue o arquivo pronto para abrir e editar.
+
+Antes de montar, me faça todas as perguntas que precisar, de uma vez só, numeradas, em uma única mensagem.</pre>
+</div>
+
+<p>Para Word ou Excel, é o mesmo pedido trocando o final: "em Word (.docx)" ou "em planilha de Excel (.xlsx), com as fórmulas funcionando".</p>
+
+<h2>4 · Frontend Design: como fazer páginas sem cara de Claude?</h2>
+
+<h3>Quando usar</h3>
+
+<p>Você pediu uma página de vendas, um painel ou a tela de um aplicativo, e o resultado saiu com o mesmo visual de todas as outras páginas feitas por IA. Mesmo pedindo "moderna e bonita". Se você cria qualquer coisa que alguém vai ver na tela, precisa desta.</p>
+
+<h3>O que ela faz</h3>
+
+<p>A Frontend Design é a skill da Anthropic que dá direção visual antes do código. Em vez de ir direto para o layout padrão, o Claude escolhe um conceito, uma tipografia, uma paleta e os detalhes que combinam com o seu projeto. É ela que faz a página e a tela pararem de sair todas com cara de Claude.</p>
+
+<h3>Como instalar</h3>
+
+<p>A Frontend Design está publicada no <a href="https://github.com/anthropics/skills" target="_blank" rel="noopener">repositório oficial de skills da Anthropic</a>, junto com a pptx, a docx, a xlsx e a skill-creator. A Anthropic informa que as skills desse repositório já ficam disponíveis nos planos pagos, então comece conferindo em Personalizar, na aba Habilidades, se a frontend-design já está na sua lista.</p>
+
+<p>Se ela não estiver, instale por upload:</p>
+
+<ol>
+<li>Entre em <a href="https://github.com/anthropics/skills" target="_blank" rel="noopener">github.com/anthropics/skills</a>, clique no botão verde Code e depois em Download ZIP.</li>
+<li>Descompacte o arquivo, abra a pasta skills e copie a pasta frontend-design para fora.</li>
+<li>Compacte só essa pasta em .zip.</li>
+<li>No Claude, vá em Personalizar, aba Habilidades, clique em Adicionar e escolha Fazer upload de habilidade.</li>
+</ol>
+
+<p>Se preferir criar do seu jeito, vale o primeiro dos <a href="/guia-criar-skill-do-seu-jeito">3 jeitos de criar uma skill</a>.</p>
+
+<div class="prompt-box">
+    <div class="pb-head">
+        <span class="pb-label">Prompt 4 · página sem cara de IA</span>
+        <button class="copy-btn">Copiar</button>
+    </div>
+<pre>Use a skill frontend-design para criar uma página de [objetivo, por exemplo: apresentar o meu serviço] para [o seu negócio].
+
+Antes de escrever qualquer código, me proponha uma direção visual: o conceito, a tipografia, a paleta e o detalhe que vai fazer a página ser lembrada. Fuja do visual padrão de página feita por IA.
+
+Me faça todas as perguntas que precisar, de uma vez só, numeradas, em uma única mensagem. Depois que eu responder, monte a página inteira.</pre>
+</div>
+
+<h2>5 · Skill Creator: como transformar uma tarefa num comando?</h2>
+
+<h3>Quando usar</h3>
+
+<p>Tem uma tarefa que você faz toda semana do mesmo jeito e explica do zero toda vez: o relatório de segunda, a legenda do post, o resumo da reunião. Quando você se pega repetindo a mesma explicação, é hora da Skill Creator.</p>
+
+<h3>O que ela faz</h3>
+
+<p>A Skill Creator é a skill da Anthropic que cria e melhora outras skills. O jeito que funciona: você faz a tarefa junto com o Claude uma vez, corrige no caminho e pede para salvar. Da segunda vez em diante, é só dar um comando que ele faz. A explicação completa do método está no guia dos <a href="/guia-criar-skill-do-seu-jeito">3 jeitos de criar uma skill</a>, e o passo a passo dos botões está em <a href="/guia-skills-claude">como criar uma Skill no Claude</a>.</p>
+
+<h3>Como instalar</h3>
+
+<p>Essa já está instalada para você. Se quiser conferir, abra Personalizar, aba Habilidades, e veja se a skill-creator está ligada.</p>
+
+<div class="prompt-box">
+    <div class="pb-head">
+        <span class="pb-label">Prompt 5 · salvar a tarefa como skill</span>
+        <button class="copy-btn">Copiar</button>
+    </div>
+<pre>Use a skill-creator. Você acabou de fazer essa tarefa exatamente do jeito que eu queria, e quero transformar isso numa skill.
+
+Antes de escrever, revise a nossa conversa e me liste:
+1. Os passos que você seguiu, na ordem real
+2. As correções que eu pedi e o que cada uma revela sobre o meu padrão
+3. Os erros que você cometeu e como evitar da próxima vez
+
+Depois escreva a skill com: quando usar (com as palavras que eu uso para pedir isso), o passo a passo, as minhas regras de gosto e uma seção com os erros que já aconteceram. Não invente nada que não aconteceu nessa conversa.
+
+Se faltar alguma informação, me faça todas as perguntas de uma vez só, numeradas, em uma única mensagem.</pre>
+</div>
+
+<div class="antes-depois">
+    <div class="ad-ruim">
+        <span class="ad-label">❌ Sem skill</span>
+        Toda semana você explica a mesma tarefa do zero, e o resultado muda de uma vez para a outra.
+    </div>
+    <div class="ad-bom">
+        <span class="ad-label">✅ Com skill</span>
+        Você ensina uma vez, corrigindo no caminho. Da segunda vez em diante é um comando, e sai no mesmo padrão.
+    </div>
+</div>
+
+<h2>Por onde começar</h2>
+
+<p>Comece pelas que já estão na sua conta: confira a Skill Creator e a PPTX em Habilidades e teste o prompt da apresentação. Depois adicione o Humanizer e a Memory Management, que mudam o seu dia a dia desde a primeira conversa. A Frontend Design fica para quando você for criar a próxima página ou tela.</p>
+
+<div class="bloco bloco-atencao">
+    <span class="bloco-tag">⚠ Atenção · confira o seu plano</span>
+    <p>As skills usam o recurso de execução de código e criação de arquivos, que está nos planos pagos do Claude. Se algum passo não aparecer para você, <b>confira o seu plano antes de achar que fez algo errado</b>.</p>
+</div>
+
+<h2>Continue aprendendo</h2>
+
+<ul>
+<li><a href="/guia-texto-sem-cara-de-ia">A skill humanizer</a> (os vícios de IA que ela corrige, um por um)</li>
+<li><a href="/guia-memoria-claude">A memória do Claude mudou</a> (como ligar, ver e limpar a memória da conta)</li>
+<li><a href="/guia-criar-skill-do-seu-jeito">3 jeitos de criar uma skill no Claude</a> (e por que só um funciona de verdade)</li>
+<li><a href="/guia-small-business">Claude for Small Business</a> (o caminho dos plugins com print de cada tela)</li>
+<li><a href="/claude">O Guia do Claude do zero ao avançado</a> e a <a href="/biblioteca">Biblioteca completa</a></li>
+</ul>
+        </div>
+
+        <!-- ─── CONTENT UPGRADE (gated → list: 'biblioteca') ───────────── -->
+        <div class="upgrade rv">
+            <div class="wl-card" id="upgradeCard">
+                <span class="kick">Guia grátis · PDF</span>
+                <h3>O Guia Completo do Claude em PDF</h3>
+                <p class="wl-sub">Meu guia do Claude do zero ao avançado, em PDF para você salvar e consultar quando quiser. Deixa seu email que eu libero na hora, e você ainda entra na Biblioteca.</p>
+                <form class="wl-form" novalidate>
+                    <input class="field" type="email" placeholder="Seu melhor email" required autocomplete="email">
+                    <button type="submit" class="btn-form">Quero o guia do Claude</button>
+                </form>
+                <div class="wl-ok"><b>Prontinho, tá dentro.</b> Baixa agora: <a href="/guia-claude-bruna.pdf" target="_blank" rel="noopener">o Guia Completo do Claude em PDF</a>. As próximas novidades da Biblioteca chegam no seu email.</div>
+                <p class="fine">Zero spam. Só o que vale a pena sobre IA na prática.</p>
+            </div>
+        </div>
+
+    </div>
+</article>
+
+<!-- ========== FAQ ========== -->
+<section class="faq-sec">
+    <div class="wrap">
+        <h2 class="rv">Dúvidas rápidas</h2>
+        <div class="faq-list rv">
+            <div class="faq-item">
+                <button class="faq-q">Preciso pagar para usar essas skills?<span class="mark">+</span></button>
+                <div class="faq-a">Não existe cobrança por skill. O que conta é o seu plano do Claude: as skills usam o recurso de execução de código e criação de arquivos, que está nos planos pagos (Pro, Max, Team e Enterprise). Confira o seu plano antes de seguir o passo a passo, para não achar que você fez algo errado.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Qual a diferença entre a memória do Claude e a Memory Management?<span class="mark">+</span></button>
+                <div class="faq-a">A memória do Claude é um recurso da conta: você liga nas configurações e ele guarda anotações sobre você entre as conversas. A Memory Management é uma skill do plugin Productivity que guarda a memória em arquivos dentro da pasta do projeto no Cowork, com pessoas, siglas e projetos. Uma não substitui a outra, e as duas podem ficar ligadas.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Preciso chamar a skill pelo nome toda vez?<span class="mark">+</span></button>
+                <div class="faq-a">Não. Quando a tarefa aparece na conversa, o Claude reconhece e usa a skill sozinho. Se quiser garantir, digite uma barra e escolha a skill na lista, ou cite o nome dela no pedido.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== BANNER DO CURSO ========== -->
+<section class="curso-banner">
+    <div class="wrap">
+        <div class="cb-text">
+            <span class="kick">Curso de Claude · Turma 1</span>
+            <h2>Quer ir <span class="terra">além</span> desse guia?</h2>
+            <p>No Claude com Profundidade você aprende a pensar e usar IA de verdade, do zero, sem programar. Zero tech, 100% prático.</p>
+        </div>
+        <a href="/curso" class="btn btn-terra">Quero o curso</a>
+    </div>
+</section>
+
+<!-- volta para o hub -->
+<div class="voltar-hub">
+    <a href="/biblioteca">← Voltar para a Biblioteca</a>
+</div>
+
+<footer>
+    <div class="wrap">
+        <div class="footer-row">
+            <span class="footer-brand">A Virada IA</span>
+            <nav class="footer-links">
+                <a href="/biblioteca">Biblioteca</a>
+                <a href="/claude">Guia do Claude</a>
+                <a href="/curso">Curso de Claude</a>
+                <a href="/mentoria">Mentoria</a>
+                <a href="/comece">Comece por aqui</a>
+                <a href="https://instagram.com/brusantanna.ai" target="_blank" rel="noopener">Instagram</a>
+                <a href="https://newscale.tech" target="_blank" rel="noopener">NewScale</a>
+                <a href="mailto:eu@brunasantanna.com">Contato</a>
+            </nav>
+        </div>
+        <p class="footer-copy">© 2026 Bruna Santanna · A Virada IA</p>
+    </div>
+</footer>
+
+<script>
+    // ===== Copiar prompt =====
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const box = btn.closest('.prompt-box');
+            const pre = box.querySelector('pre');
+            const text = pre ? pre.innerText : '';
+            navigator.clipboard.writeText(text).then(() => {
+                const original = btn.textContent;
+                btn.textContent = '✓ Copiado';
+                btn.classList.add('copied');
+                setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, 1800);
+            });
+        });
+    });
+
+    // ===== Content upgrade (Apps Script, list: 'biblioteca') =====
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx90IdrA_L6n3jVdoYBinBPxPfWq0h6Iua1MrI8gQ7-RgBXhU1rOqF9dM2n7mLdAeMW/exec";
+
+    document.querySelectorAll('.wl-form').forEach(form => {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const input = form.querySelector('input[type="email"]');
+            const btn = form.querySelector('button[type="submit"]');
+            const email = input.value.trim();
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { input.focus(); return; }
+            btn.disabled = true; btn.textContent = 'Enviando...';
+            try {
+                await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, list: 'biblioteca', timestamp: new Date().toISOString(), source: location.href }) });
+            } catch(_) {}
+            if (typeof gtag === 'function') gtag('event', 'lead_signup', { list: 'biblioteca' });
+            document.querySelectorAll('.upgrade .wl-card').forEach(c => c.classList.add('wl-done'));
+            localStorage.setItem('biblioteca_lead', '1');
+        });
+    });
+    if (localStorage.getItem('biblioteca_lead') === '1') {
+        document.querySelectorAll('.upgrade .wl-card').forEach(c => c.classList.add('wl-done'));
+    }
+
+    // ===== FAQ accordion =====
+    document.querySelectorAll('.faq-q').forEach(q => {
+        q.addEventListener('click', () => q.closest('.faq-item').classList.toggle('open'));
+    });
+
+    // ===== menu mobile =====
+    const navToggle = document.getElementById('navToggle'), mainNav = document.getElementById('mainNav');
+    navToggle.addEventListener('click', () => mainNav.classList.toggle('open'));
+    mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mainNav.classList.remove('open')));
+
+    // ===== reveal on scroll =====
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0, rootMargin:'0px 0px -40px 0px' });
+    document.querySelectorAll('.rv').forEach((el,i) => { el.style.transitionDelay = (i%3*70)+'ms'; io.observe(el); });
+    /* rv-safety: garante que o conteudo nunca fica invisivel */
+    setTimeout(function(){ document.querySelectorAll('.rv:not(.in)').forEach(function(el){ el.classList.add('in'); }); }, 2500);
+</script>
+
+<script src="/promo-sistema.js" defer></script>
+</body>
+</html>
