@@ -514,7 +514,15 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=1175365551728800&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
-</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7DCW0QVCWB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7DCW0QVCWB');
+</script></head>
 <body>
 
 <header class="site-header">
@@ -696,6 +704,8 @@ src="https://www.facebook.com/tr?id=1175365551728800&ev=PageView&noscript=1"
     //  Cada objeto é um card-link pra companion page /{slug}.
     // ============================================================
     const POSTS = [
+        { slug: 'guia-segundo-cerebro-claude-chatgpt', titulo: 'O mesmo segundo cérebro no Claude e no ChatGPT: o passo a passo', tema: 'Setup', data: '2026-09',
+          descricao: 'O Claude e o ChatGPT lendo a mesma memória, sem cópia e sem explicar duas vezes. Os 5 passos, o truque da pasta dentro do Google Drive e os prompts prontos.' },
         { slug: 'guia-skills-essenciais', titulo: '5 skills essenciais do Claude: o que cada uma faz e como instalar', tema: 'Skills', data: '2026-09',
           descricao: 'Humanizer, Memory Management, PPTX, Frontend Design e Skill Creator: quando usar cada uma, como instalar e um prompt pronto para testar.' },
         { slug: 'guia-dashboard-financeiro', titulo: 'Dashboard financeiro com o Claude: extratos e faturas viram análise em minutos', tema: 'Finanças', data: '2026-09',
