@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5 projetos para construir no Claude em um fim de semana | A Virada IA · Bruna Santanna</title>
+    <meta name="description" content="Painel do dia, segundo cérebro, agente de revisão, skill de marca e a sua biblioteca dentro do Claude: o passo a passo e o prompt pronto de cada um, na ordem do fim de semana.">
+    <meta name="author" content="Bruna Santanna">
+    <link rel="canonical" href="https://brunasantanna.com/guia-projetos-fim-de-semana">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://brunasantanna.com/guia-projetos-fim-de-semana">
+    <meta property="og:title" content="5 projetos para construir no Claude em um fim de semana | A Virada IA">
+    <meta property="og:description" content="Painel do dia, segundo cérebro, agente de revisão, skill de marca e a sua biblioteca dentro do Claude: o passo a passo e o prompt pronto de cada um, na ordem do fim de semana.">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DCW0QVCWB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-7DCW0QVCWB');
+    </script>
+
+    <!-- JSON-LD: Article -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "5 projetos para construir no Claude em um fim de semana",
+        "description": "Painel do dia, segundo cérebro, agente de revisão, skill de marca e a sua biblioteca dentro do Claude: o passo a passo e o prompt pronto de cada um, na ordem do fim de semana.",
+        "inLanguage": "pt-BR",
+        "url": "https://brunasantanna.com/guia-projetos-fim-de-semana",
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://brunasantanna.com/guia-projetos-fim-de-semana" },
+        "datePublished": "2026-09-20",
+        "dateModified": "2026-09-20",
+        "author": { "@type": "Person", "name": "Bruna Santanna", "url": "https://brunasantanna.com" },
+        "publisher": {
+            "@type": "Organization",
+            "name": "A Virada IA · Bruna Santanna",
+            "url": "https://brunasantanna.com"
+        },
+        "about": "Sistemas"
+    }
+    </script>
+
+    <!-- JSON-LD: FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            { "@type": "Question", "name": "Preciso saber programar para montar esses 5 projetos?", "acceptedAnswer": { "@type": "Answer", "text": "Não. Os cinco são feitos conversando com o Claude no aplicativo de computador: você liga os conectores, aponta uma pasta, cola o prompt e ajusta o resultado. O único passo técnico é instalar o Obsidian no projeto do segundo cérebro, e ele é gratuito e instala como qualquer outro programa." } },
+            { "@type": "Question", "name": "Dá tempo de fazer os cinco em um fim de semana?", "acceptedAnswer": { "@type": "Answer", "text": "Dá, se você seguir a ordem: painel do dia no sábado de manhã, segundo cérebro à tarde, agente de revisão à noite, skill de marca no domingo de manhã e a biblioteca à tarde. Se você tem só algumas horas, faça o painel do dia e pare: um projeto rodando vale mais do que cinco pela metade." } },
+            { "@type": "Question", "name": "O que eu preciso ter ligado antes de começar?", "acceptedAnswer": { "@type": "Answer", "text": "O Claude no computador, os conectores de agenda e e-mail autorizados, um projeto para cada sistema e o agendamento, que é o que faz o painel e a revisão rodarem sozinhos no horário que você marcar." } }
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg:#F3EEE3; --bg-2:#ECE5D6; --card:#FBF9F3;
+            --ink:#14373C; --ink-2:#2C4F54; --green:#435D51;
+            --terra:#B06E4A; --terra-l:#C4835E; --terra-d:#985A3B;
+            --text:#233133; --muted:#6E7A75; --line:rgba(20,55,60,0.16);
+            --cream:#F4F3EF;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family:'Hanken Grotesk',sans-serif; background:var(--bg); color:var(--text); line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+        img { max-width:100%; display:block; }
+        a { color:inherit; text-decoration:none; }
+        ::selection { background:var(--terra); color:#fff; }
+        .wrap { max-width:1100px; margin:0 auto; padding:0 30px; }
+        .kick { font-size:0.72rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--terra); }
+
+        /* ---------- HEADER ---------- */
+        .site-header { position:sticky; top:0; z-index:50; background:rgba(243,238,227,0.92); backdrop-filter:blur(8px); border-bottom:2px solid var(--ink); }
+        .header-inner { display:flex; align-items:center; justify-content:space-between; gap:24px; max-width:1100px; padding:16px 30px; }
+        .logo { display:inline-flex; align-items:center; white-space:nowrap; font-family:'Anton',sans-serif; font-size:1.2rem; letter-spacing:0.02em; text-transform:uppercase; color:var(--ink); }
+        .logo .brand-tag { font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:0.62rem; letter-spacing:0.12em; color:var(--terra); border:1.5px solid var(--terra); padding:3px 8px; border-radius:100px; margin-left:10px; }
+        .main-nav { display:flex; align-items:center; gap:14px; }
+        .main-nav a { font-size:0.86rem; font-weight:600; color:var(--ink-2); white-space:nowrap; transition:color .18s; }
+        .main-nav a:hover, .main-nav a.active { color:var(--terra); }
+        .nav-cta { background:var(--terra); color:#fff !important; padding:10px 18px; border-radius:100px; font-size:0.8rem !important; transition:background .2s, transform .15s; }
+        .nav-cta:hover { background:var(--terra-d); transform:translateY(-1px); }
+        .nav-toggle { display:none; background:none; border:none; font-size:1.5rem; color:var(--ink); cursor:pointer; line-height:1; }
+        @media (max-width: 1180px) {
+            .nav-toggle { display:block; }
+            .main-nav { display:none; position:absolute; top:100%; left:0; right:0; flex-direction:column; align-items:flex-start; gap:0; background:var(--bg); border-bottom:2px solid var(--ink); padding:8px 30px 20px; }
+            .main-nav.open { display:flex; box-shadow:0 28px 46px -20px rgba(20,55,60,0.55); max-height:calc(100dvh - 62px); overflow-y:auto; }
+            .site-header:has(.main-nav.open)::after { content:""; position:fixed; left:0; right:0; top:62px; bottom:0; background:rgba(20,55,60,0.38); z-index:40; pointer-events:none; }
+            .main-nav a { padding:12px 0; width:100%; border-top:1px solid var(--line); font-size:1rem; }
+            .nav-cta { margin-top:12px; text-align:center; border-top:none; }
+        }
+
+        /* botão genérico */
+        .btn { display:inline-flex; align-items:center; gap:9px; justify-content:center; font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:0.85rem; letter-spacing:0.04em; text-transform:uppercase; padding:15px 28px; border-radius:100px; border:none; cursor:pointer; transition:transform .15s, box-shadow .15s, background .2s; }
+        .btn-terra { background:var(--terra); color:#fff; }
+        .btn-terra:hover { background:var(--terra-d); transform:translateY(-2px); box-shadow:0 10px 26px rgba(176,110,74,.35); }
+        .btn-ink { background:var(--ink); color:#fff; }
+        .btn-ink:hover { background:var(--ink-2); transform:translateY(-2px); }
+
+        /* ---------- HERO COMPACTO ---------- */
+        .hero { position:relative; overflow:hidden; border-bottom:1.5px solid var(--line); }
+        .hero-glow { position:absolute; width:560px; height:560px; border-radius:50%; top:-240px; right:-160px; background:radial-gradient(circle,rgba(176,110,74,.13),transparent 62%); pointer-events:none; }
+        .hero .wrap { position:relative; z-index:2; padding:54px 30px 48px; max-width:820px; }
+        .hero-eyebrow { display:inline-flex; align-items:center; gap:9px; margin-bottom:20px; flex-wrap:wrap; }
+        .hero-eyebrow .dot { width:7px; height:7px; border-radius:50%; background:var(--terra); box-shadow:0 0 0 4px rgba(176,110,74,.18); }
+        .hero-eyebrow .sep { color:var(--line); }
+        .hero-eyebrow .data { font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); }
+        .hero h1 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(2.4rem,7vw,4.2rem); line-height:0.94; letter-spacing:-0.01em; text-transform:uppercase; color:var(--ink); }
+        .hero h1 .terra { color:var(--terra); }
+        .hero-sub { font-size:1.12rem; color:var(--ink-2); font-weight:300; max-width:54ch; margin-top:20px; }
+        .hero-sub b { color:var(--ink); font-weight:600; }
+
+        /* ---------- LAYOUT ARTIGO ---------- */
+        .artigo { padding:56px 0 40px; }
+        .artigo .wrap { max-width:760px; }
+
+        /* bloco do reel embedado */
+        .reel-embed { margin:0 auto 44px; max-width:540px; }
+        .reel-embed .instagram-media { margin:0 auto !important; }
+        .reel-placeholder { border:1.5px dashed var(--line); border-radius:16px; background:var(--card); padding:34px 26px; text-align:center; }
+        .reel-placeholder .rp-icon { font-size:1.7rem; margin-bottom:10px; }
+        .reel-placeholder b { display:block; font-family:'Anton',sans-serif; font-weight:400; font-size:1.15rem; text-transform:uppercase; color:var(--ink); letter-spacing:.01em; margin-bottom:6px; }
+        .reel-placeholder p { font-size:0.88rem; color:var(--muted); }
+
+        /* corpo do post */
+        .corpo { font-size:1.06rem; color:var(--text); line-height:1.75; }
+        .corpo > p { margin-bottom:20px; }
+        .corpo > p:first-of-type { font-size:1.16rem; color:var(--ink-2); }
+        .corpo h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.6rem,4.5vw,2.2rem); text-transform:uppercase; color:var(--ink); line-height:1.05; letter-spacing:-0.01em; margin:44px 0 16px; }
+        .corpo h3 { font-size:1.2rem; font-weight:700; color:var(--ink); margin:30px 0 10px; }
+        .corpo a { color:var(--terra-d); font-weight:600; border-bottom:1.5px solid var(--terra); }
+        .corpo a:hover { color:var(--terra); }
+        .corpo strong, .corpo b { color:var(--ink); font-weight:700; }
+        .corpo ul { list-style:none; margin:6px 0 22px; padding:0; }
+        .corpo ul li { position:relative; padding-left:26px; margin-bottom:12px; }
+        .corpo ul li::before { content:'→'; position:absolute; left:0; top:0; color:var(--terra); font-weight:800; }
+        .corpo ol { margin:6px 0 22px 22px; }
+        .corpo ol li { margin-bottom:12px; padding-left:6px; }
+        .corpo ol li::marker { color:var(--terra); font-weight:800; }
+
+        /* blocos didáticos */
+        .bloco { border-radius:14px; padding:22px 24px 22px 26px; margin:26px 0; border:1.5px solid var(--line); }
+        .bloco .bloco-tag { display:block; font-size:0.72rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:8px; }
+        .bloco p { font-size:0.98rem; line-height:1.65; margin:0; }
+        .bloco p + p { margin-top:10px; }
+        .bloco-dica { background:rgba(67,93,81,0.08); border-left:5px solid var(--green); }
+        .bloco-dica .bloco-tag { color:var(--green); }
+        .bloco-atencao { background:rgba(176,110,74,0.09); border-left:5px solid var(--terra); }
+        .bloco-atencao .bloco-tag { color:var(--terra-d); }
+        .bloco-case { background:var(--ink); border-left:5px solid var(--terra-l); border-color:var(--ink); }
+        .bloco-case .bloco-tag { color:var(--terra-l); }
+        .bloco-case p { color:rgba(244,243,239,.88); }
+        .bloco-case b { color:#fff; }
+
+        /* antes/depois */
+        .antes-depois { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:26px 0; }
+        @media (max-width:600px) { .antes-depois { grid-template-columns:1fr; } }
+        .ad-ruim, .ad-bom { border-radius:12px; padding:18px 20px; font-size:0.95rem; line-height:1.6; border:1.5px solid var(--line); }
+        .ad-ruim { background:rgba(150,90,59,0.06); }
+        .ad-bom { background:rgba(67,93,81,0.08); }
+        .ad-ruim .ad-label, .ad-bom .ad-label { display:block; font-size:0.74rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:8px; }
+        .ad-ruim .ad-label { color:var(--terra-d); }
+        .ad-bom .ad-label { color:var(--green); }
+
+        /* prompt box com botão copiar */
+        .prompt-box { background:var(--ink); border-radius:16px; padding:22px 24px; margin:28px 0; position:relative; box-shadow:8px 8px 0 var(--green); }
+        .prompt-box .pb-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; }
+        .prompt-box .pb-label { font-size:0.72rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--terra-l); }
+        .prompt-box pre { font-family:'Hanken Grotesk',ui-monospace,monospace; font-size:0.95rem; line-height:1.6; color:rgba(244,243,239,.92); white-space:pre-wrap; word-wrap:break-word; margin:0; }
+        .copy-btn { flex-shrink:0; display:inline-flex; align-items:center; gap:6px; background:var(--terra); color:#fff; border:none; border-radius:100px; padding:8px 16px; font-family:'Hanken Grotesk',sans-serif; font-size:0.74rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer; transition:background .2s, transform .15s; }
+        .copy-btn:hover { background:var(--terra-d); transform:translateY(-1px); }
+        .copy-btn.copied { background:var(--green); }
+
+        /* ---------- CONTENT UPGRADE (gated) ---------- */
+        .upgrade { margin:52px 0; }
+        .upgrade .wl-card { background:var(--ink); color:#fff; border-radius:18px; padding:34px 32px; box-shadow:8px 8px 0 var(--terra); }
+        .upgrade .wl-card .kick { color:var(--terra-l); display:block; margin-bottom:12px; }
+        .upgrade .wl-card h3 { font-family:'Anton',sans-serif; font-weight:400; font-size:1.7rem; text-transform:uppercase; line-height:1; margin-bottom:8px; }
+        .upgrade .wl-card .wl-sub { font-size:0.95rem; color:rgba(255,255,255,0.72); margin-bottom:22px; max-width:46ch; }
+        .upgrade .wl-form { display:flex; gap:10px; flex-wrap:wrap; }
+        .field { flex:1; min-width:220px; padding:16px 20px; font-family:inherit; font-size:1rem; background:rgba(255,255,255,0.07); border:1.5px solid rgba(255,255,255,0.22); border-radius:10px; color:#fff; outline:none; transition:border-color .2s, background .2s; }
+        .field::placeholder { color:rgba(255,255,255,0.5); }
+        .field:focus { border-color:var(--terra); background:rgba(255,255,255,0.12); }
+        .btn-form { padding:16px 26px; font-family:'Hanken Grotesk',sans-serif; font-size:0.82rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer; background:var(--terra); color:#fff; border:none; border-radius:10px; transition:transform .15s, box-shadow .15s, background .2s; white-space:nowrap; }
+        .btn-form:hover { background:var(--terra-d); transform:translateY(-2px); box-shadow:0 8px 22px rgba(176,110,74,0.35); }
+        .btn-form:disabled { opacity:.6; cursor:not-allowed; transform:none; }
+        .upgrade .fine { margin-top:14px; font-size:0.76rem; color:rgba(255,255,255,0.55); }
+        .wl-ok { display:none; background:rgba(67,93,81,0.35); border:1.5px solid var(--terra-l); border-radius:10px; padding:18px 20px; font-size:0.98rem; line-height:1.5; color:#fff; }
+        .wl-ok b { color:var(--terra-l); }
+        .wl-done .wl-ok { display:block; }
+        .wl-done .wl-form, .wl-done .fine { display:none; }
+
+        /* ---------- FAQ ---------- */
+        .faq-sec { padding:8px 0 20px; }
+        .faq-sec .wrap { max-width:760px; }
+        .faq-sec h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.6rem,4.5vw,2.2rem); text-transform:uppercase; color:var(--ink); line-height:1; margin-bottom:22px; }
+        .faq-list { max-width:760px; }
+        .faq-item { border:1.5px solid var(--line); border-radius:14px; background:var(--card); margin-bottom:12px; overflow:hidden; }
+        .faq-q { width:100%; display:flex; justify-content:space-between; align-items:center; gap:16px; text-align:left; background:none; border:none; cursor:pointer; padding:20px 24px; font-family:'Hanken Grotesk',sans-serif; font-size:1.02rem; font-weight:700; color:var(--ink); }
+        .faq-q .mark { font-family:'Anton',sans-serif; font-size:1.3rem; color:var(--terra); transition:transform .25s; flex-shrink:0; line-height:1; }
+        .faq-item.open .faq-q .mark { transform:rotate(45deg); }
+        .faq-a { display:none; padding:0 24px 22px; font-size:0.96rem; color:var(--ink-2); line-height:1.7; }
+        .faq-item.open .faq-a { display:block; }
+        .faq-a b { color:var(--ink); }
+
+        /* ---------- BANNER DO CURSO ---------- */
+        .curso-banner { background:var(--ink); color:var(--cream); margin:40px 0 0; }
+        .curso-banner .wrap { max-width:900px; padding:56px 30px; display:flex; align-items:center; justify-content:space-between; gap:30px; flex-wrap:wrap; }
+        .curso-banner .cb-text { flex:1; min-width:260px; }
+        .curso-banner .kick { color:var(--terra-l); display:block; margin-bottom:12px; }
+        .curso-banner h2 { font-family:'Anton',sans-serif; font-weight:400; font-size:clamp(1.7rem,5vw,2.6rem); text-transform:uppercase; color:#fff; line-height:1; margin-bottom:12px; max-width:20ch; }
+        .curso-banner h2 .terra { color:var(--terra-l); }
+        .curso-banner p { color:rgba(244,243,239,.72); font-weight:300; font-size:1rem; max-width:46ch; }
+
+        /* volta pro hub */
+        .voltar-hub { text-align:center; padding:40px 0 8px; }
+        .voltar-hub a { font-size:0.9rem; font-weight:700; letter-spacing:0.02em; color:var(--ink); border-bottom:2px solid var(--terra); padding-bottom:3px; transition:color .18s; }
+        .voltar-hub a:hover { color:var(--terra); }
+
+        /* footer */
+        footer { background:var(--ink); color:rgba(244,243,239,.6); padding:40px 0 48px; margin-top:30px; }
+        .footer-row { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+        .footer-brand { font-family:'Anton',sans-serif; font-size:1.1rem; text-transform:uppercase; color:#fff; }
+        .footer-links { display:flex; gap:20px; flex-wrap:wrap; }
+        .footer-links a { font-size:0.84rem; font-weight:600; color:rgba(244,243,239,.7); }
+        .footer-links a:hover { color:var(--terra-l); }
+        .footer-copy { font-size:0.76rem; color:rgba(244,243,239,.4); margin-top:14px; }
+
+        /* reveal */
+        .rv { opacity:0; transform:translateY(22px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+        .rv.in { opacity:1; transform:none; }
+        @media (prefers-reduced-motion:reduce) { .rv { opacity:1; transform:none; } }
+    </style>
+<!-- Meta Pixel Code · NAO REMOVER. Todo guia publicado tem que sair com ele,
+     igual as outras paginas de brunasantanna.com, senao o publico de
+     remarketing dos anuncios nao pega quem leu o guia. -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1175365551728800');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1175365551728800&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Bruna Santanna",
+        "url": "https://brunasantanna.com",
+        "jobTitle": "Educadora de IA para não-programadores",
+        "description": "Empresária há mais de 10 anos, fundadora da NewScale e criadora de A Virada IA. Já treinou mais de mil pessoas a usar IA no trabalho, sem programar.",
+        "alumniOf": ["ESPM", "USP"],
+        "knowsAbout": ["Claude", "Identidade visual", "Design com IA", "Inteligência Artificial", "Automação"],
+        "sameAs": [
+            "https://instagram.com/brusantanna.ai",
+            "https://www.linkedin.com/in/bruna-araujo-santanna/"
+        ]
+    }
+    </script>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="wrap header-inner">
+        <a href="/" class="logo">Bruna Santanna<span class="brand-tag">A Virada IA</span></a>
+        <nav class="main-nav" id="mainNav">
+            <a href="/">Home</a>
+            <a href="/biblioteca">Biblioteca</a>
+            <a href="/claude">Guia do Claude</a>
+            <a href="/quem-sou">Quem Sou</a>
+            <a href="/treinamentos">Treinamentos Corporativos</a>
+            <a href="/mentoria">Mentoria</a>
+            <a href="https://newscale.tech" target="_blank" rel="noopener">IA na sua Empresa</a>
+            <a href="/comece" class="nav-cta">Cursos</a>
+        </nav>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">☰</button>
+    </div>
+</header>
+
+<!-- ========== HERO COMPACTO ========== -->
+<section class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="wrap">
+        <div class="hero-eyebrow rv">
+            <span class="dot"></span>
+            <span class="kick">Sistemas</span>
+            <span class="sep">·</span>
+            <span class="data">Setembro de 2026</span>
+        </div>
+        <h1 class="rv">5 projetos para construir no Claude em um fim de semana</h1>
+        <p class="hero-sub rv">Painel do dia, segundo cérebro, agente de revisão, skill de marca e a sua biblioteca dentro do Claude: o passo a passo e o prompt pronto de cada um, na ordem do fim de semana.</p>
+    </div>
+</section>
+
+<!-- ========== ARTIGO ========== -->
+<article class="artigo">
+    <div class="wrap">
+
+        <div class="corpo rv">
+            <p>Se eu tivesse um fim de semana livre e quisesse ficar melhor do que 95% das pessoas que dizem que sabem IA, eu não ia assistir a mais um vídeo de prompt. Eu ia construir cinco coisas dentro do Claude. São estas cinco, e elas continuam trabalhando por você depois que o fim de semana acaba.</p>
+
+            <p>Nenhuma delas exige programar. Todas usam o que o Claude já faz: ler os seus arquivos, se conectar às suas ferramentas, virar skill e rodar sozinho no horário que você marcar. Abaixo está o passo a passo de cada uma, com o prompt pronto para copiar, e no fim a ordem em que eu faria se fosse começar hoje.</p>
+
+            <h2>O que você precisa ter antes de começar</h2>
+
+            <ul>
+                <li>→ O <b>Claude no computador</b> (o aplicativo de desktop). É ele que enxerga pasta, arquivo e conector.</li>
+                <li>→ Os <b>conectores ligados</b>: agenda, e-mail e o que mais você usar. Em Configurações, na parte de conectores, você autoriza uma vez e pronto.</li>
+                <li>→ Um <b>projeto</b> para cada coisa que você montar. Projeto é uma conversa com memória e com arquivos dentro: é o que faz o Claude não começar do zero toda vez.</li>
+                <li>→ O <b>agendamento</b> (as tarefas com horário marcado), para os projetos que precisam rodar sozinhos.</li>
+            </ul>
+
+            <p>Se você ainda não tem nada disso ligado, comece pelos <a href="/guia-setup-claude">5 primeiros passos para configurar o Claude</a>. São 40 minutos e destravam os cinco projetos de uma vez.</p>
+
+            <h2>Projeto 1: o painel da sua vida</h2>
+
+            <p>É um lugar só que puxa a sua agenda, os seus e-mails, as transcrições das reuniões do último dia, as suas tarefas e as suas ferramentas conectadas. Você configura o agendamento para ele atualizar sozinho toda manhã e, quando você senta, já tem o resumo do dia que tem pela frente: o que precisa fazer e para quem você prometeu alguma coisa numa reunião e precisa entregar hoje.</p>
+
+            <p>O passo a passo:</p>
+
+            <ul>
+                <li>→ Crie um projeto chamado "Painel do dia".</li>
+                <li>→ Confira se agenda e e-mail estão conectados, e diga onde ficam as transcrições das suas reuniões e a sua lista de tarefas.</li>
+                <li>→ Cole o prompt abaixo e ajuste as respostas.</li>
+                <li>→ Quando gostar do formato, peça para transformar em tarefa agendada, todo dia útil, no horário em que você acorda.</li>
+            </ul>
+
+            <div class="prompt-box">
+                <div class="pb-head">
+                    <span class="pb-label">Prompt · painel do dia</span>
+                    <button class="copy-btn">Copiar</button>
+                </div>
+                <pre>Você vai ser o meu guia diário. Todo dia de manhã, antes de eu sentar
+para trabalhar, você me entrega um painel do meu dia.
+
+Para montar, olhe:
+1. A minha agenda de hoje e de amanhã
+2. Os e-mails que chegaram desde ontem e que pedem resposta minha
+3. As transcrições das reuniões do último dia
+4. A minha lista de tarefas
+
+E me devolva, nesta ordem:
+- O dia em 3 linhas: o que é inegociável hoje
+- Compromissos, com o que eu preciso preparar antes de cada um
+- O que eu prometi em reunião e ainda não entreguei, com o nome
+  de quem está esperando
+- E-mails que pedem resposta hoje, com um rascunho de resposta
+  para cada um
+- Uma coisa que eu deveria fazer hoje e ainda não está em lugar nenhum
+
+Escreva curto, em tópicos, sem enrolação.
+
+Antes de montar o primeiro, me faça todas as perguntas que precisar
+sobre a minha rotina, as minhas ferramentas e onde ficam os meus
+arquivos: de uma vez só e numeradas, para eu responder todas juntas.</pre>
+            </div>
+
+            <div class="bloco bloco-dica">
+                <span class="bloco-tag">→ Dica</span>
+                <p>Rode na mão por três ou quatro dias antes de agendar. Cada vez que o painel trouxer algo que você não queria ver, fale, e ele corrige o formato. Agendar um painel que ainda não está do seu jeito só enche a sua manhã de texto que você não lê.</p>
+            </div>
+
+            <p>Eu detalhei esse projeto inteiro, com as três etapas de montagem, em <a href="/guia-briefing-manha">briefing matinal com o Claude</a>.</p>
+
+            <h2>Projeto 2: o segundo cérebro</h2>
+
+            <p>Joga a sua vida inteira dentro de uma pasta e entrega para o Claude criar os arquivos e conectar ao Obsidian. Depois você pergunta: quando vence o seguro do carro, o que eu prometi para o cliente naquela reunião, quanto eu paguei no ano passado naquele serviço. Fica tudo atualizado e ele tem acesso fácil para buscar a informação.</p>
+
+            <p>O passo a passo:</p>
+
+            <ul>
+                <li>→ Crie uma pasta no computador e jogue lá dentro o que você tem espalhado: contratos, apólices, notas, transcrições, anotações soltas, prints.</li>
+                <li>→ Abra o Claude no computador e aponte para essa pasta.</li>
+                <li>→ Peça para ele ler tudo, organizar em arquivos de texto por assunto e criar o índice.</li>
+                <li>→ Instale o Obsidian (é gratuito) e abra essa mesma pasta como vault. A partir daí, a busca é instantânea e você continua conversando com o Claude por cima dos mesmos arquivos.</li>
+            </ul>
+
+            <div class="prompt-box">
+                <div class="pb-head">
+                    <span class="pb-label">Prompt · segundo cérebro</span>
+                    <button class="copy-btn">Copiar</button>
+                </div>
+                <pre>Nesta pasta está a minha vida jogada: [descreva o que tem, por
+exemplo contratos, apólices, notas fiscais, transcrições de reunião,
+anotações soltas].
+
+Leia tudo e monte o meu segundo cérebro em arquivos de texto (.md),
+dentro desta mesma pasta, pronto para eu abrir no Obsidian:
+
+1. Organize por assunto, não por tipo de arquivo. Um arquivo por
+   assunto vivo (cada cliente, cada contrato, cada área da minha vida)
+2. Em cada arquivo, no topo: o que é, os números e datas que importam
+   e o que vence quando
+3. Um arquivo de índice ligando os outros
+4. Um arquivo só com prazos e vencimentos, em ordem de data
+5. Não invente nada: o que não estiver nos arquivos, escreva
+   "não encontrei" e me liste no fim
+
+Depois de montar, me mostre o índice e me diga o que ficou faltando
+para o cérebro ficar completo.</pre>
+            </div>
+
+            <div class="bloco bloco-atencao">
+                <span class="bloco-tag">⚠ Atenção</span>
+                <p>Essa pasta vai ter documento sensível. Deixe ela no seu computador ou na sua nuvem de trabalho, não num lugar compartilhado com gente que não precisa ver, e confira o que entrou antes de sair perguntando.</p>
+            </div>
+
+            <p>O passo a passo completo, com a estrutura de pastas que eu uso, está no <a href="/guia-segundo-cerebro">guia do segundo cérebro no Obsidian</a>. E se você usa Claude e ChatGPT, dá para os dois lerem a mesma memória: <a href="/guia-segundo-cerebro-claude-chatgpt">o passo a passo está aqui</a>.</p>
+
+            <h2>Projeto 3: o agente de revisão</h2>
+
+            <p>Esse é o que eu mais amo. Toda noite ele revisa com você o que deu certo e o que não deu certo no seu dia. E no fim de semana ele junta tudo e te entrega um plano de melhorias para a semana seguinte.</p>
+
+            <p>O meu lê transcrição de reunião, e-mail, projeto, proposta que aprovou, proposta que não aprovou e pagamento que entrou. Tudo. É por isso que a revisão dele não é conversa fiada: ela olha para o que aconteceu de verdade, não para o que eu lembro que aconteceu.</p>
+
+            <p>O passo a passo:</p>
+
+            <ul>
+                <li>→ Crie um projeto chamado "Revisão".</li>
+                <li>→ Liste para ele tudo o que ele pode olhar: agenda, e-mail, a pasta dos projetos, as transcrições, a planilha de propostas, o financeiro.</li>
+                <li>→ Cole o prompt e rode na mão à noite, por alguns dias.</li>
+                <li>→ Depois agende: a revisão do dia de segunda a sexta, no fim da tarde, e o plano da semana no sábado ou domingo.</li>
+            </ul>
+
+            <div class="prompt-box">
+                <div class="pb-head">
+                    <span class="pb-label">Prompt · agente de revisão</span>
+                    <button class="copy-btn">Copiar</button>
+                </div>
+                <pre>Você é o meu agente de revisão. Tem duas rotinas.
+
+ROTINA DA NOITE (todo dia útil, no fim da tarde)
+Olhe o que aconteceu hoje: agenda, e-mails enviados e recebidos,
+transcrições de reunião, o que mexeu nos meus projetos, proposta
+enviada, proposta aprovada, proposta recusada e pagamento que entrou.
+Me devolva:
+- O que deu certo hoje, com o fato que prova
+- O que não deu certo, sem suavizar
+- O que eu deixei passar e ninguém cobrou ainda
+- Uma pergunta para eu responder antes de fechar o dia
+
+ROTINA DO FIM DE SEMANA
+Junte as revisões da semana e me entregue:
+- O padrão que se repetiu (o bom e o ruim)
+- Onde eu perdi mais tempo, com número
+- O que travou dinheiro: proposta parada, cobrança não feita,
+  cliente sem resposta
+- Um plano para a semana seguinte com no máximo 3 mudanças,
+  cada uma com o primeiro passo concreto
+
+Seja direto comigo. Eu não quero elogio, quero ver o que está
+acontecendo de verdade.
+
+Antes de rodar a primeira vez, me faça todas as perguntas que
+precisar sobre o meu trabalho e as minhas fontes de informação:
+de uma vez só e numeradas.</pre>
+            </div>
+
+            <h2>Projeto 4: a skill de marca</h2>
+
+            <p>Você dá para o Claude a sua voz e os seus valores. Ele monta um kit com cor, fonte e componente, e passa a usar esse kit para criar qualquer material que você pedir. É por isso que tudo que sai aqui tem sempre a mesma carinha. Eu fiz isso entregando o meu brandbook mesmo para o Claude, para ele criar a skill. É muito fácil.</p>
+
+            <p>O passo a passo:</p>
+
+            <ul>
+                <li>→ Junte o que você já tem de marca: brandbook, logo, os códigos das cores, o nome das fontes, dois ou três materiais que ficaram do seu jeito.</li>
+                <li>→ Se você não tem nada disso, o Claude cria: peça três direções de identidade e escolha vendo aplicado.</li>
+                <li>→ Entregue tudo e peça a skill.</li>
+                <li>→ Instale a skill e, a partir daí, é só pedir a peça. Ela já sai na sua cor e na sua fonte.</li>
+            </ul>
+
+            <div class="prompt-box">
+                <div class="pb-head">
+                    <span class="pb-label">Prompt · skill de marca</span>
+                    <button class="copy-btn">Copiar</button>
+                </div>
+                <pre>Estou te entregando o material da minha marca: [brandbook, logo,
+cores, fontes e alguns materiais que ficaram do jeito que eu gosto].
+
+A minha voz: [como você fala, o que você nunca diz]
+Os meus valores: [3 ou 4, com uma frase cada]
+
+Leia tudo e crie uma SKILL da minha marca, para eu instalar no Claude
+e usar em qualquer material daqui para frente. A skill precisa trazer:
+
+1. As cores com o código hexadecimal e a função de cada uma
+   (fundo, texto, destaque, botão)
+2. As fontes com o nome exato e os tamanhos de título, subtítulo e texto
+3. Os componentes: como é um botão, um card, uma capa, um título
+4. O tom de voz, com exemplos do que escrever e do que não escrever
+5. Uma lista do que pode e do que não pode
+
+Escreva de um jeito que outra pessoa, ou outra IA, consiga seguir
+sem me perguntar nada. Depois me diga, em passos, como eu instalo
+essa skill.</pre>
+            </div>
+
+            <p>Se você nunca criou uma skill, o <a href="/guia-skills-claude">passo a passo de como criar uma skill no Claude</a> mostra como, sem programar. E se a sua marca ainda não existe no papel, comece pelo <a href="/guia-identidade-visual">guia da identidade visual com o Claude</a>.</p>
+
+            <div class="antes-depois">
+                <div class="ad-ruim">
+                    <span class="ad-label">❌ Sem a skill</span>
+                    "Faz o post com fundo bege, título em Anton, o destaque naquele terracota, o botão arredondado..." em todo pedido, para sempre.
+                </div>
+                <div class="ad-bom">
+                    <span class="ad-label">✅ Com a skill</span>
+                    "Faz o post sobre X seguindo a minha marca." E sai igual ao resto.
+                </div>
+            </div>
+
+            <h2>Projeto 5: o seu próprio NotebookLM dentro do Claude</h2>
+
+            <p>Você fala para ele ler os artigos, as newsletters e os vídeos que você gosta. Entrega os links, tudo. E depois pergunta qualquer coisa sobre aquele material, e ele te ajuda a relembrar. É a sua biblioteca particular, com alguém que leu tudo e não esquece.</p>
+
+            <p>O passo a passo:</p>
+
+            <ul>
+                <li>→ Crie um projeto com o nome do assunto que você acompanha.</li>
+                <li>→ Jogue lá os links: artigo, newsletter, vídeo do YouTube, PDF, o que você guardou para ler depois e nunca leu.</li>
+                <li>→ Peça para ele ler, fichar cada fonte e guardar o resumo dentro do projeto.</li>
+                <li>→ A partir daí, pergunte. E vá acrescentando link novo na mesma conversa, para a biblioteca crescer.</li>
+            </ul>
+
+            <div class="prompt-box">
+                <div class="pb-head">
+                    <span class="pb-label">Prompt · a sua biblioteca no Claude</span>
+                    <button class="copy-btn">Copiar</button>
+                </div>
+                <pre>Este projeto é a minha biblioteca sobre [assunto].
+
+Vou te entregar links de artigos, newsletters e vídeos que eu gosto.
+Para cada um, leia e guarde aqui no projeto uma ficha com:
+- Fonte, autor, data e link
+- A ideia principal em 3 linhas
+- O que é novo ou contraria o que todo mundo diz
+- Os números e nomes que valem lembrar
+- Como isso se aplica ao meu trabalho: [descreva o que você faz]
+
+Mantenha também um arquivo único com o mapa do assunto: o que já
+está consolidado, onde as fontes discordam e o que ainda está em aberto.
+
+Depois disso, eu vou te perguntar coisas sobre esse material. Quando
+responder, cite sempre de qual fonte veio, e me diga quando a resposta
+não estiver em nenhuma delas.
+
+Primeiros links: [cole aqui]</pre>
+            </div>
+
+            <div class="bloco bloco-dica">
+                <span class="bloco-tag">→ Dica</span>
+                <p>Vídeo do YouTube entra também. Peça a transcrição e a ficha, e o vídeo de uma hora vira meia página que você consulta em cinco segundos.</p>
+            </div>
+
+            <h2>A ordem para um fim de semana</h2>
+
+            <p>Se você tem os dois dias, essa é a sequência que eu faria. Cada projeto entrega alguma coisa no mesmo dia, então você não fica no escuro até domingo à noite.</p>
+
+            <ul>
+                <li>→ <b>Sábado de manhã:</b> conectores e o painel do dia. É o de resultado mais rápido e o que te dá vontade de continuar.</li>
+                <li>→ <b>Sábado à tarde:</b> o segundo cérebro. É o mais demorado, porque juntar os arquivos leva tempo, e é o que sustenta todos os outros.</li>
+                <li>→ <b>Sábado à noite:</b> ligue o agente de revisão e rode a primeira revisão, do próprio sábado.</li>
+                <li>→ <b>Domingo de manhã:</b> a skill de marca.</li>
+                <li>→ <b>Domingo à tarde:</b> a sua biblioteca, com os links que você vem guardando há meses.</li>
+            </ul>
+
+            <div class="bloco bloco-atencao">
+                <span class="bloco-tag">⚠ Atenção</span>
+                <p>Se você só tem algumas horas, não tente os cinco. Faça o painel do dia e pare. Um projeto terminado e rodando vale mais do que cinco começados, e o painel é o que te lembra dos outros quatro toda manhã.</p>
+            </div>
+
+            <h2>Por que esses cinco, e não outros</h2>
+
+            <p>Porque os cinco são a mesma ideia aplicada em lugares diferentes: dar contexto ao Claude uma vez e nunca mais repetir. O painel tem o contexto do seu dia, o segundo cérebro tem o da sua vida, a revisão tem o do seu histórico, a skill tem o da sua marca e a biblioteca tem o do que você estuda.</p>
+
+            <p>Quem acha a IA genérica quase sempre está conversando com ela sem contexto nenhum. Um fim de semana resolve isso, e o efeito não acaba no domingo.</p>
+
+            <p>Se você está começando agora, o <a href="/claude">guia completo do Claude</a> é o melhor ponto de partida. E tem mais guias como este na <a href="/biblioteca">Biblioteca</a>.</p>
+        </div>
+
+        <!-- ─── CONTENT UPGRADE (gated → list: 'biblioteca') ───────────── -->
+        <div class="upgrade rv">
+            <div class="wl-card" id="upgradeCard">
+                <span class="kick">Guia grátis · PDF</span>
+                <h3>O Guia Completo do Claude em PDF</h3>
+                <p class="wl-sub">Meu guia do Claude do zero ao avançado, em PDF pra você salvar e consultar quando quiser. Deixa seu email que eu libero na hora, e você ainda entra na Biblioteca.</p>
+                <form class="wl-form" novalidate>
+                    <input class="field" type="email" placeholder="Seu melhor email" required autocomplete="email">
+                    <button type="submit" class="btn-form">Quero o guia do Claude</button>
+                </form>
+                <div class="wl-ok"><b>Prontinho, tá dentro.</b> Baixa agora: <a href="/guia-claude-bruna.pdf" target="_blank" rel="noopener">o Guia Completo do Claude em PDF</a>. As próximas novidades da Biblioteca chegam no seu email.</div>
+                <p class="fine">Zero spam. Só o que vale a pena sobre IA na prática.</p>
+            </div>
+        </div>
+
+    </div>
+</article>
+
+<!-- ========== FAQ ========== -->
+<section class="faq-sec">
+    <div class="wrap">
+        <h2 class="rv">Dúvidas rápidas</h2>
+        <div class="faq-list rv">
+            <!-- ─── FAQ VISÍVEL ─────────────────────────────────────────────
+                 Escreva aqui as MESMAS perguntas do { "@type": "Question", "name": "Preciso saber programar para montar esses 5 projetos?", "acceptedAnswer": { "@type": "Answer", "text": "Não. Os cinco são feitos conversando com o Claude no aplicativo de computador: você liga os conectores, aponta uma pasta, cola o prompt e ajusta o resultado. O único passo técnico é instalar o Obsidian no projeto do segundo cérebro, e ele é gratuito e instala como qualquer outro programa." } },
+            { "@type": "Question", "name": "Dá tempo de fazer os cinco em um fim de semana?", "acceptedAnswer": { "@type": "Answer", "text": "Dá, se você seguir a ordem: painel do dia no sábado de manhã, segundo cérebro à tarde, agente de revisão à noite, skill de marca no domingo de manhã e a biblioteca à tarde. Se você tem só algumas horas, faça o painel do dia e pare: um projeto rodando vale mais do que cinco pela metade." } },
+            { "@type": "Question", "name": "O que eu preciso ter ligado antes de começar?", "acceptedAnswer": { "@type": "Answer", "text": "O Claude no computador, os conectores de agenda e e-mail autorizados, um projeto para cada sistema e o agendamento, que é o que faz o painel e a revisão rodarem sozinhos no horário que você marcar." } } (para bater com o schema).
+                 Repita o bloco .faq-item por pergunta. -->
+            <div class="faq-item">
+                <button class="faq-q">Preciso saber programar para montar esses 5 projetos?<span class="mark">+</span></button>
+                <div class="faq-a">Não. Os cinco são feitos conversando com o Claude no aplicativo de computador: você liga os conectores, aponta uma pasta, cola o prompt e ajusta o resultado. O único passo técnico é instalar o Obsidian no projeto do segundo cérebro, e ele é gratuito e instala como qualquer outro programa.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Dá tempo de fazer os cinco em um fim de semana?<span class="mark">+</span></button>
+                <div class="faq-a">Dá, se você seguir a ordem: painel do dia no sábado de manhã, segundo cérebro à tarde, agente de revisão à noite, skill de marca no domingo de manhã e a biblioteca à tarde. Se você tem só algumas horas, faça o painel do dia e pare: um projeto rodando vale mais do que cinco pela metade.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">O que eu preciso ter ligado antes de começar?<span class="mark">+</span></button>
+                <div class="faq-a">O Claude no computador, os conectores de agenda e e-mail autorizados, um projeto para cada sistema e o agendamento, que é o que faz o painel e a revisão rodarem sozinhos no horário que você marcar.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== BANNER DO CURSO ========== -->
+<section class="curso-banner">
+    <div class="wrap">
+        <div class="cb-text">
+            <span class="kick">Curso de Claude · Turma 1</span>
+            <h2>Quer ir <span class="terra">além</span> desse guia?</h2>
+            <p>No Claude com Profundidade você aprende a pensar e usar IA de verdade, do zero, sem programar. Zero tech, 100% prático.</p>
+        </div>
+        <a href="/curso" class="btn btn-terra">Quero o curso</a>
+    </div>
+</section>
+
+<!-- volta pro hub -->
+<div class="voltar-hub">
+    <a href="/biblioteca">← Voltar pra Biblioteca</a>
+</div>
+
+<footer>
+    <div class="wrap">
+        <div class="footer-row">
+            <span class="footer-brand">A Virada IA</span>
+            <nav class="footer-links">
+                <a href="/biblioteca">Biblioteca</a>
+                <a href="/claude">Guia do Claude</a>
+                <a href="/curso">Curso de Claude</a>
+                <a href="/mentoria">Mentoria</a>
+                <a href="/comece">Comece por aqui</a>
+                <a href="https://instagram.com/brusantanna.ai" target="_blank" rel="noopener">Instagram</a>
+                <a href="https://newscale.tech" target="_blank" rel="noopener">NewScale</a>
+                <a href="mailto:eu@brunasantanna.com">Contato</a>
+            </nav>
+        </div>
+        <p class="footer-copy">© 2026 Bruna Santanna · A Virada IA</p>
+    </div>
+</footer>
+
+<script>
+    // ===== Copiar prompt =====
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const box = btn.closest('.prompt-box');
+            const pre = box.querySelector('pre');
+            const text = pre ? pre.innerText : '';
+            navigator.clipboard.writeText(text).then(() => {
+                const original = btn.textContent;
+                btn.textContent = '✓ Copiado';
+                btn.classList.add('copied');
+                setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, 1800);
+            });
+        });
+    });
+
+    // ===== Content upgrade (Apps Script, list: 'biblioteca') =====
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx90IdrA_L6n3jVdoYBinBPxPfWq0h6Iua1MrI8gQ7-RgBXhU1rOqF9dM2n7mLdAeMW/exec";
+
+    document.querySelectorAll('.wl-form').forEach(form => {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const input = form.querySelector('input[type="email"]');
+            const btn = form.querySelector('button[type="submit"]');
+            const email = input.value.trim();
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { input.focus(); return; }
+            btn.disabled = true; btn.textContent = 'Enviando...';
+            try {
+                await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, list: 'biblioteca', timestamp: new Date().toISOString(), source: location.href }) });
+            } catch(_) {}
+            if (typeof gtag === 'function') gtag('event', 'lead_signup', { list: 'biblioteca' });
+            if (typeof fbq === 'function') fbq('track', 'Lead', { content_name: 'biblioteca' });
+            document.querySelectorAll('.upgrade .wl-card').forEach(c => c.classList.add('wl-done'));
+            localStorage.setItem('biblioteca_lead', '1');
+        });
+    });
+    if (localStorage.getItem('biblioteca_lead') === '1') {
+        document.querySelectorAll('.upgrade .wl-card').forEach(c => c.classList.add('wl-done'));
+    }
+
+    // ===== FAQ accordion =====
+    document.querySelectorAll('.faq-q').forEach(q => {
+        q.addEventListener('click', () => q.closest('.faq-item').classList.toggle('open'));
+    });
+
+    // ===== menu mobile =====
+    const navToggle = document.getElementById('navToggle'), mainNav = document.getElementById('mainNav');
+    navToggle.addEventListener('click', () => mainNav.classList.toggle('open'));
+    mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mainNav.classList.remove('open')));
+
+    // ===== reveal on scroll =====
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0, rootMargin:'0px 0px -40px 0px' });
+    document.querySelectorAll('.rv').forEach((el,i) => { el.style.transitionDelay = (i%3*70)+'ms'; io.observe(el); });
+    /* rv-safety: garante que o conteudo nunca fica invisivel */
+    setTimeout(function(){ document.querySelectorAll('.rv:not(.in)').forEach(function(el){ el.classList.add('in'); }); }, 2500);
+</script>
+
+<script src="/promo-sistema.js" defer></script>
+</body>
+</html>
