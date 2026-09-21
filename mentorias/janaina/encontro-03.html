@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Janaina · Encontro 03 · Mentoria A Virada IA</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#F3EEE3; --bg-2:#ECE5D6; --card:#FBF9F3;
+  --ink:#14373C; --ink-2:#2C4F54; --green:#435D51;
+  --terra:#B06E4A; --terra-l:#C4835E; --terra-d:#985A3B;
+  --text:#233133; --muted:#6E7A75;
+  --line:rgba(20,55,60,.16);
+  --anton:'Anton', sans-serif; --hank:'Hanken Grotesk', sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--hank);background:var(--bg);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+::selection{background:var(--terra);color:#fff;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 30px;}
+h1,h2,h3{font-family:var(--anton);font-weight:400;text-transform:uppercase;letter-spacing:-.01em;line-height:.92;}
+.terra{color:var(--terra);}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--terra);}
+.eyebrow::before{content:'';width:26px;height:2px;background:var(--terra);}
+#bar{position:fixed;top:0;left:0;height:4px;width:0;background:var(--terra);z-index:99;transition:width .1s linear;}
+
+.hd{position:sticky;top:0;z-index:50;background:rgba(243,238,227,.92);backdrop-filter:blur(8px);border-bottom:2px solid var(--ink);}
+.hd-in{display:flex;align-items:center;justify-content:space-between;padding:14px 30px;max-width:1180px;margin:0 auto;}
+.hd .logo{font-family:var(--anton);font-size:1.15rem;text-transform:uppercase;color:var(--ink);letter-spacing:.02em;display:inline-flex;align-items:center;}
+.hd .logo .tag{font-family:var(--hank);font-weight:700;font-size:.6rem;letter-spacing:.12em;color:var(--terra);border:1.5px solid var(--terra);padding:3px 8px;border-radius:100px;margin-left:10px;text-transform:uppercase;}
+.hd nav{display:flex;gap:20px;}
+.hd nav a{font-size:.82rem;font-weight:600;color:var(--ink-2);text-decoration:none;transition:.18s;}
+.hd nav a:hover{color:var(--terra);}
+@media(max-width:860px){.hd nav{display:none;}}
+
+section{padding:76px 0;position:relative;}
+.snum{font-family:var(--anton);font-size:clamp(3rem,8vw,5.5rem);color:var(--terra);line-height:.8;display:block;}
+.sec-h{font-size:clamp(2.1rem,6vw,3.6rem);color:var(--ink);margin:6px 0 14px;}
+.lead{font-size:1.15rem;color:var(--ink-2);max-width:56ch;}
+.lead b{color:var(--ink);font-weight:700;}
+.alt{background:var(--bg-2);}
+
+.hero{padding:64px 0 52px;}
+.hero h1{font-size:clamp(3rem,11vw,6.6rem);color:var(--ink);margin:18px 0 0;}
+.hero .sub{font-size:1.25rem;color:var(--ink-2);max-width:44ch;margin-top:22px;}
+.hero .sub b{color:var(--ink);font-weight:700;}
+.statrow{display:flex;gap:34px;flex-wrap:wrap;margin-top:38px;}
+.statrow .n{font-family:var(--anton);font-size:2.4rem;color:var(--ink);line-height:1;}
+.statrow .n span{color:var(--terra);}
+.statrow .l{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:5px;}
+
+.mani{background:var(--ink);padding:60px 0;}
+.mani p{font-family:var(--anton);text-transform:uppercase;font-size:clamp(1.7rem,5vw,3.2rem);line-height:1.02;color:#fff;max-width:26ch;}
+.mani p span{color:var(--terra-l);}
+.marq{background:var(--bg-2);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);padding:15px 0;overflow:hidden;}
+.marq-t{display:flex;gap:40px;width:max-content;animation:slide 30s linear infinite;align-items:center;}
+@keyframes slide{to{transform:translateX(-50%);}}
+.marq span{font-family:var(--anton);font-size:1.4rem;text-transform:uppercase;color:var(--ink);white-space:nowrap;}
+.marq span.d{color:var(--terra);}
+
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px;}
+@media(max-width:680px){.split{grid-template-columns:1fr;}}
+.col{border-radius:16px;padding:24px 26px;}
+.col.no{background:var(--bg-2);border:1.5px dashed var(--line);}
+.col.yes{background:var(--ink);color:#fff;box-shadow:7px 7px 0 var(--terra);}
+.alt .col.no{background:var(--card);}
+.col .lab{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;}
+.col.no .lab{color:var(--muted);} .col.yes .lab{color:var(--terra-l);}
+.col h4{font-family:var(--hank);font-weight:800;font-size:1.35rem;text-transform:uppercase;line-height:1.08;margin-bottom:8px;}
+.col.no h4{color:var(--ink);} .col.yes h4{color:#fff;}
+.col p{font-size:.95rem;} .col.no p{color:var(--ink-2);} .col.yes p{color:rgba(255,255,255,.85);}
+
+.callout{margin-top:20px;background:rgba(176,110,74,.1);border-left:4px solid var(--terra);border-radius:0 12px 12px 0;padding:15px 19px;font-size:1rem;color:var(--ink-2);}
+.callout b{color:var(--terra);}
+
+.spot{margin-top:26px;background:var(--ink);border-radius:18px;padding:32px 34px;box-shadow:7px 7px 0 var(--green);}
+.spot .lab{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra-l);margin-bottom:12px;}
+.spot h3{font-family:var(--anton);text-transform:uppercase;font-size:clamp(1.5rem,4vw,2.2rem);color:#fff;line-height:1;}
+.spot h3 span{color:var(--terra-l);}
+.spot p{color:rgba(255,255,255,.86);font-size:1.04rem;margin-top:14px;max-width:56ch;}
+.spot p b{color:#fff;}
+.spot .verbs{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;}
+.spot .verbs i{font-style:normal;font-family:var(--anton);text-transform:uppercase;letter-spacing:.04em;font-size:1rem;color:#fff;background:rgba(196,131,94,.22);border:1.5px solid var(--terra-l);border-radius:100px;padding:7px 18px;}
+
+.flow{display:flex;align-items:stretch;margin-top:28px;flex-wrap:wrap;}
+.fstep{flex:1;min-width:150px;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:18px;}
+.alt .fstep{background:var(--card);}
+.fstep.dark{background:var(--ink);box-shadow:7px 7px 0 var(--terra);border-color:var(--ink);}
+.fstep .fn{font-family:var(--anton);font-size:1.3rem;color:var(--terra);}
+.fstep.dark .fn{color:var(--terra-l);}
+.fstep .ft{font-family:var(--anton);text-transform:uppercase;font-size:1.02rem;color:var(--ink);margin-top:4px;line-height:1.02;}
+.fstep.dark .ft{color:#fff;}
+.fstep p{font-size:.83rem;color:var(--ink-2);margin-top:6px;}.fstep.dark p{color:rgba(255,255,255,.8);}
+.farrow{display:flex;align-items:center;justify-content:center;font-family:var(--anton);color:var(--terra);font-size:1.7rem;padding:0 12px;}
+@media(max-width:680px){.flow{flex-direction:column;}.farrow{transform:rotate(90deg);padding:8px 0;}}
+
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;}
+.chip{font-family:var(--hank);font-weight:700;font-size:.82rem;background:var(--bg-2);border:1.5px solid var(--line);border-radius:100px;padding:8px 16px;color:var(--ink);}
+.alt .chip{background:var(--card);}
+.chip.hot{background:var(--terra);color:#fff;border-color:var(--terra);}
+
+/* linhas do DRE */
+.lines{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:28px;}
+.lcard{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:22px 20px;transition:.2s;}
+.lcard:hover{border-color:var(--ink);box-shadow:6px 6px 0 var(--line);transform:translateY(-3px);}
+.lcard .num{font-family:var(--anton);font-size:2.6rem;color:var(--terra);line-height:.9;}
+.lcard .num small{font-family:var(--hank);font-size:.66rem;font-weight:700;letter-spacing:.14em;color:var(--muted);display:block;text-transform:uppercase;margin-bottom:2px;}
+.lcard h4{font-family:var(--anton);text-transform:uppercase;font-size:1.12rem;color:var(--ink);margin-top:8px;line-height:1.02;}
+.lcard p{font-size:.86rem;color:var(--ink-2);margin-top:6px;}
+.lcard.wide{grid-column:span 2;}
+@media(max-width:680px){.lcard.wide{grid-column:span 1;}}
+
+/* benchmark bars */
+.bench{margin-top:26px;display:grid;gap:16px;}
+.brow{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:18px 20px;}
+.alt .brow{background:var(--card);}
+.brow .bt{display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap;}
+.brow .bt h4{font-family:var(--anton);text-transform:uppercase;font-size:1.05rem;color:var(--ink);}
+.brow .bt em{font-style:normal;font-family:var(--anton);font-size:1.5rem;color:var(--terra);}
+.brow .track{margin-top:12px;height:14px;border-radius:100px;background:var(--bg-2);border:1.5px solid var(--line);overflow:hidden;}
+.brow .fill{height:100%;background:var(--terra);width:0;transition:width 1.1s cubic-bezier(.2,.8,.2,1);}
+.in .brow .fill.f12{width:12%;} .in .brow .fill.f15{width:15%;}
+.brow small{display:block;margin-top:8px;font-size:.82rem;color:var(--muted);}
+
+/* passos numerados */
+.steps{margin-top:30px;display:grid;gap:12px;counter-reset:st;}
+.st{display:flex;gap:18px;align-items:flex-start;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:20px 22px;}
+.alt .st{background:var(--card);}
+.st.key{background:var(--ink);box-shadow:7px 7px 0 var(--terra);border-color:var(--ink);}
+.st .stn{flex-shrink:0;width:38px;height:38px;border-radius:10px;background:var(--terra);color:#fff;font-family:var(--anton);font-size:1.25rem;display:flex;align-items:center;justify-content:center;line-height:1;}
+.st.key .stn{background:var(--terra-l);color:var(--ink);}
+.st .stc h4{font-family:var(--anton);text-transform:uppercase;font-size:1.16rem;color:var(--ink);line-height:1.02;}
+.st.key .stc h4{color:#fff;}
+.st .stc p{font-size:.95rem;color:var(--ink-2);margin-top:5px;}
+.st.key .stc p{color:rgba(255,255,255,.86);}
+.st .stc a{color:var(--terra);font-weight:700;text-decoration:none;border-bottom:2px solid var(--terra);}
+.st.key .stc a{color:var(--terra-l);border-color:var(--terra-l);}
+.st .stc a:hover{color:var(--terra-d);}
+
+/* árvore de pastas */
+.tree{margin-top:28px;background:var(--ink);border-radius:16px;padding:26px 28px;box-shadow:7px 7px 0 var(--terra);font-family:var(--hank);}
+.tree .row{display:flex;align-items:center;gap:9px;color:rgba(255,255,255,.9);font-size:.95rem;padding:5px 0;font-weight:600;}
+.tree .row.root{color:#fff;font-family:var(--anton);text-transform:uppercase;letter-spacing:.03em;font-size:1.05rem;}
+.tree .ic{width:20px;text-align:center;flex-shrink:0;color:var(--terra-l);}
+.tree .row.file{color:var(--terra-l);}
+.tree .ind1{padding-left:26px;} .tree .ind2{padding-left:52px;}
+.tree .note{color:rgba(255,255,255,.45);font-weight:400;font-size:.82rem;margin-left:6px;}
+
+/* prompt */
+.prompt{margin-top:22px;background:var(--card);border:1.5px solid var(--line);border-left:7px solid var(--terra);border-radius:0 14px 14px 0;overflow:hidden;}
+.prompt .pl{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;background:rgba(176,110,74,.1);}
+.prompt .pl span{font-family:var(--hank);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);display:inline-flex;align-items:center;gap:9px;flex-wrap:wrap;}
+.live{background:var(--terra);color:#fff;padding:3px 8px;border-radius:6px;letter-spacing:.06em;}
+.copy{font-family:var(--hank);font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--terra);border:none;border-radius:100px;padding:7px 16px;cursor:pointer;transition:.18s;white-space:nowrap;}
+.copy:hover{background:var(--terra-d);}.copy.done{background:var(--green);}
+.prompt pre{font-family:var(--hank);font-size:.93rem;line-height:1.58;color:var(--text);padding:20px;white-space:pre-wrap;word-break:break-word;}
+.pnote{font-size:.9rem;color:var(--muted);margin-top:10px;max-width:60ch;}
+
+/* regras de ouro */
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:30px;}
+.rule{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:24px 22px;transition:.2s;}
+.alt .rule{background:var(--card);}
+.rule:hover{border-color:var(--ink);box-shadow:6px 6px 0 var(--line);transform:translateY(-3px);}
+.rule .rn{font-family:var(--anton);font-size:.8rem;letter-spacing:.14em;color:var(--terra);text-transform:uppercase;}
+.rule h4{font-family:var(--anton);text-transform:uppercase;font-size:1.2rem;color:var(--ink);margin:6px 0 8px;line-height:1.02;}
+.rule p{font-size:.92rem;color:var(--ink-2);}
+.rule p b{color:var(--ink);font-weight:700;}
+
+.misscard{background:var(--ink);color:#fff;border-radius:20px;padding:40px;box-shadow:9px 9px 0 var(--green);}
+.misscard h2{color:#fff;font-size:clamp(1.8rem,5vw,2.8rem);}.misscard h2 span{color:var(--terra-l);}
+.misscard .msub{color:rgba(255,255,255,.75);margin-top:10px;font-size:1rem;}
+.check{margin-top:26px;display:grid;gap:11px;}
+.ck{display:flex;gap:14px;align-items:flex-start;}
+.ck .bx{flex-shrink:0;width:24px;height:24px;border-radius:6px;border:2px solid var(--terra-l);margin-top:1px;}
+.ck p{color:rgba(255,255,255,.9);font-size:1.02rem;}.ck p b{color:#fff;}
+
+.teaser{background:var(--bg-2);}
+.teaser .pill{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra);border:1.5px solid var(--terra);border-radius:100px;padding:5px 14px;margin-bottom:16px;}
+.teaser h2{font-size:clamp(2rem,5.5vw,3.4rem);color:var(--ink);max-width:22ch;}.teaser h2 span{color:var(--terra);}
+.teaser p{margin-top:14px;color:var(--ink-2);max-width:56ch;font-size:1.05rem;}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:26px;}
+.tg{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:20px;}
+.tg h4{font-family:var(--anton);text-transform:uppercase;font-size:1.08rem;color:var(--ink);}
+.tg p{font-size:.88rem;color:var(--ink-2);margin-top:6px;}
+
+.close{background:var(--ink);text-align:center;}
+.close h2{font-size:clamp(2.4rem,8vw,5rem);color:#fff;}.close h2 span{color:var(--terra-l);}
+.close .sig{margin-top:18px;font-size:.9rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra-l);}
+.sign{display:flex;align-items:center;justify-content:space-between;gap:12px;color:rgba(255,255,255,.85);font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;padding:18px 30px;background:#0E282C;flex-wrap:wrap;}
+.sign .ns{font-family:var(--anton);letter-spacing:.28em;color:var(--terra-l);font-size:1rem;}
+
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);}
+.rv.in{opacity:1;transform:none;}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;}.marq-t{animation:none;}.brow .fill{transition:none;}}
+</style></head>
+<body>
+<div id="bar"></div>
+
+<header class="hd">
+  <div class="hd-in">
+    <div class="logo">Bruna Santanna<span class="tag">A Virada IA</span></div>
+    <nav>
+      <a href='/mentorias/janaina/'>Todos os encontros</a>
+      <a href="#trouxe">O que voc&ecirc; trouxe</a>
+      <a href="#cerebro">Segundo c&eacute;rebro</a>
+      <a href="#publicar">Publicar</a>
+      <a href="#skills">Skills</a>
+      <a href="#prompts">Prompts</a>
+      <a href="#licao">Li&ccedil;&atilde;o de casa</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap rv">
+    <span class="eyebrow">Mentoria 1:1 &middot; Encontro 03 &middot; 18 de setembro de 2026</span>
+    <h1>O PAINEL<br>GANHOU LINK.<br>A NATURA GANHOU<br><span class="terra">UM C&Eacute;REBRO.</span></h1>
+    <p class="sub">Voc&ecirc; chegou de f&eacute;rias com o painel redesenhado e <b>623 comunicados da extranet j&aacute; extra&iacute;dos por conta pr&oacute;pria.</b> Neste encontro o painel virou um link pro franqueado abrir no celular, e os comunicados viraram uma mem&oacute;ria que o Claude consulta sozinho.</p>
+    <div class="statrow">
+      <div><div class="n"><span>613</span></div><div class="l">comunicados virando nota</div></div>
+      <div><div class="n">1</div><div class="l">painel publicado com link</div></div>
+      <div><div class="n"><span>2</span></div><div class="l">skills come&ccedil;adas</div></div>
+      <div><div class="n">5</div><div class="l">prompts novos</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="marq">
+  <div class="marq-t">
+    <span>PDF vira MD <span class="d">&middot;</span></span><span class="d">Obsidian &eacute; do Claude &middot;</span><span>Publicar no Vercel <span class="d">&middot;</span></span><span class="d">Link com senha &middot;</span><span>Tudo vira skill <span class="d">&middot;</span></span><span class="d">Claude Code &middot;</span>
+    <span>PDF vira MD <span class="d">&middot;</span></span><span class="d">Obsidian &eacute; do Claude &middot;</span><span>Publicar no Vercel <span class="d">&middot;</span></span><span class="d">Link com senha &middot;</span><span>Tudo vira skill <span class="d">&middot;</span></span><span class="d">Claude Code &middot;</span>
+  </div>
+</div>
+
+<!-- 01 O QUE VOCÊ TROUXE -->
+<section id="trouxe">
+  <div class="wrap rv">
+    <span class="snum">01</span>
+    <h2 class="sec-h">O que voc&ecirc; <span class="terra">trouxe pronto.</span></h2>
+    <p class="lead">Nada disso a gente fez na call: voc&ecirc; fez sozinha, entre um encontro e outro, <b>e de f&eacute;rias.</b> &Eacute; por isso que deu pra gastar o encontro inteiro com coisa nova.</p>
+
+    <div class="steps">
+      <div class="st key"><div class="stn">1</div><div class="stc"><h4>O painel redesenhado, nas cores da Natura</h4><p>Os ajustes do encontro 02 aplicados, o plano de a&ccedil;&atilde;o com a regra dos tr&ecirc;s n&atilde;os e as a&ccedil;&otilde;es em ciclo <b>quinzenal</b> em vez de semanal, pra n&atilde;o ficar repetitivo. A decis&atilde;o foi manter esse layout, s&oacute; com ajustes leves. Ficou com cara de produto que a Natura pagaria caro pra ter.</p></div></div>
+      <div class="st"><div class="stn">2</div><div class="stc"><h4>O simulador que fala em reais</h4><p>Ele mostra ao franqueado quanto entra a mais no caixa se o PA subir at&eacute; o alvo. A mensagem ficou clara: <b>n&atilde;o falta gente entrando na loja, falta cada cliente levar mais.</b></p></div></div>
+      <div class="st"><div class="stn">3</div><div class="stc"><h4>A extranet inteira extra&iacute;da</h4><p>Voc&ecirc; pediu ao Claude pra tirar do Conecta todos os comunicados de 2026, m&ecirc;s a m&ecirc;s, com um &iacute;ndice por tema. E testou: perguntou qual &eacute; o uniforme padr&atilde;o e ele achou o comunicado de agosto certo.</p></div></div>
+    </div>
+
+    <div class="split">
+      <div class="col no">
+        <div class="lab">O que ainda falta no painel</div>
+        <h4>O card&aacute;pio de a&ccedil;&otilde;es solto</h4>
+        <p>O painel lista as prioridades, mas quem l&ecirc; n&atilde;o sabe o que cada a&ccedil;&atilde;o significa na pr&aacute;tica. E o card&aacute;pio completo est&aacute; num PDF separado, <b>que ningu&eacute;m vai abrir junto.</b></p>
+      </div>
+      <div class="col yes">
+        <div class="lab">O ajuste que a gente mandou</div>
+        <h4>Clicou, entendeu</h4>
+        <p>Cada a&ccedil;&atilde;o do plano abre uma explica&ccedil;&atilde;o quando o franqueado clica nela. E o painel inteiro <b>adaptado pro celular</b>, porque &eacute; ali que o franqueado vai abrir. Prompt 10.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 SEGUNDO CÉREBRO -->
+<section id="cerebro" class="alt">
+  <div class="wrap rv">
+    <span class="snum">02</span>
+    <h2 class="sec-h">O segundo c&eacute;rebro <span class="terra">da Natura.</span></h2>
+    <p class="lead">O seu trabalho pede que voc&ecirc; saiba tudo da empresa: marketing, produto, log&iacute;stica. S&atilde;o centenas de comunicados por ano. <b>Voc&ecirc; continua lendo todos</b>, mas quando precisar achar uma coisa r&aacute;pido, quem procura &eacute; o Claude.</p>
+
+    <div class="split">
+      <div class="col no">
+        <div class="lab">Como estava</div>
+        <h4>600 PDFs numa pasta</h4>
+        <p>PDF &eacute; o pior formato pro Claude. Muitas vezes ele n&atilde;o consegue ler o texto e precisa &ldquo;fotografar&rdquo; a p&aacute;gina pra achar a informa&ccedil;&atilde;o. <b>&Eacute; um esmaga-token</b>, e foi o que fez o seu uso do dia chegar a 39% t&atilde;o cedo.</p>
+      </div>
+      <div class="col yes">
+        <div class="lab">Como ficou</div>
+        <h4>Uma nota por comunicado</h4>
+        <p>Cada comunicado virou um arquivo <b>MD</b> (Markdown), que &eacute; texto puro e o formato que o Claude l&ecirc; mais r&aacute;pido e mais barato. Com data e setor, e ligado aos outros que falam do mesmo assunto.</p>
+      </div>
+    </div>
+
+    <div class="flow">
+      <div class="fstep"><div class="fn">01</div><div class="ft">Conecta</div><p>O comunicado sai na extranet, como sempre.</p></div>
+      <div class="farrow">&rarr;</div>
+      <div class="fstep"><div class="fn">02</div><div class="ft">Nota MD</div><p>O Claude salva como texto, com data e setor.</p></div>
+      <div class="farrow">&rarr;</div>
+      <div class="fstep"><div class="fn">03</div><div class="ft">Cofre</div><p>O Obsidian organiza e liga uma nota na outra.</p></div>
+      <div class="farrow">&rarr;</div>
+      <div class="fstep dark"><div class="fn">04</div><div class="ft">Voc&ecirc; pergunta</div><p>&ldquo;Qual o uniforme padr&atilde;o?&rdquo; e ele responde citando o comunicado.</p></div>
+    </div>
+
+    <div class="lines">
+      <div class="lcard"><div class="num"><small>Notas</small>613</div><h4>Uma por comunicado</h4><p>Cada uma com a data e o setor que publicou.</p></div>
+      <div class="lcard"><div class="num"><small>Painel</small>1</div><h4>A p&aacute;gina de entrada</h4><p>Um painel principal, com &iacute;ndice por setor e por m&ecirc;s.</p></div>
+      <div class="lcard"><div class="num"><small>Agenda</small>9&ndash;17h</div><h4>A tarefa agendada</h4><p>Roda todo dia e te lembra da coleta r&aacute;pida quando tiver comunicado novo.</p></div>
+      <div class="lcard"><div class="num"><small>Formato</small>MD</div><h4>Nada de PDF novo</h4><p>Daqui pra frente, comunicado entra direto como nota de texto.</p></div>
+    </div>
+
+    <div class="spot">
+      <div class="lab">O pulo do gato do Obsidian</div>
+      <h3>Voc&ecirc; nem precisa abrir.<br><span>Quem usa &eacute; o Claude.</span></h3>
+      <p>O Obsidian &eacute; um cofre de notas. Aquele mapa de bolinhas &eacute; bonito de ver, mas n&atilde;o &eacute; ali que o trabalho acontece: <b>o Claude &eacute; quem guarda, organiza e consulta.</b> Voc&ecirc; s&oacute; abriu a pasta como cofre uma vez. E como tudo fica em arquivo de texto, o mesmo cofre serve pro ChatGPT ou pra qualquer outra IA que vier. Voc&ecirc; n&atilde;o fica ref&eacute;m de nenhuma.</p>
+      <div class="verbs"><i>Arquivo MD</i><i>Cofre &uacute;nico</i><i>Qualquer IA l&ecirc;</i><i>Menos token</i></div>
+    </div>
+
+    <div class="callout">
+      Duas coisas que travaram e j&aacute; t&ecirc;m resposta. <b>O login do Conecta cai</b>: quando ele n&atilde;o conseguir entrar, voc&ecirc; faz o login no Chrome e manda ele seguir. E o erro de acesso na call era <b>o endere&ccedil;o sem o &ldquo;https://&rdquo;</b>. Os dois v&atilde;o escritos na skill da coleta (Prompt 12), pra ele n&atilde;o errar de novo.
+    </div>
+  </div>
+</section>
+
+<!-- 03 CODE -->
+<section id="code">
+  <div class="wrap rv">
+    <span class="snum">03</span>
+    <h2 class="sec-h">Por que voc&ecirc; <span class="terra">foi pro Code.</span></h2>
+    <p class="lead">Voc&ecirc; j&aacute; est&aacute; alguns n&iacute;veis &agrave; frente de muita gente, ent&atilde;o a gente mudou de ambiente na call. <b>O jeito de usar &eacute; o mesmo:</b> conversa. O que muda &eacute; o quanto ele consegue fazer sozinho.</p>
+
+    <div class="split">
+      <div class="col no">
+        <div class="lab">Cowork</div>
+        <h4>Organiza&ccedil;&atilde;o</h4>
+        <p>Tem os projetos, que agrupam as conversas. &Eacute; &oacute;timo pra quem est&aacute; come&ccedil;ando e se perde entre assuntos. No Code isso n&atilde;o existe: <b>tudo se organiza pelas pastas.</b></p>
+      </div>
+      <div class="col yes">
+        <div class="lab">Code</div>
+        <h4>Autonomia &ldquo;pra fora&rdquo;</h4>
+        <p>Publicar um painel, conectar com outro servi&ccedil;o, baixar o programa que falta pra resolver um problema. <b>Tudo que sai do computador, o Code faz melhor</b> &mdash; ele vai atr&aacute;s da solu&ccedil;&atilde;o em vez de te devolver o problema.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      Skill funciona nos dois (e no chat tamb&eacute;m). O que voc&ecirc; criar num ambiente, o outro enxerga. E se o Claude te pedir pra &ldquo;rodar um script&rdquo;, a resposta &eacute; a que a gente deu na call: <b>&ldquo;eu n&atilde;o vou rodar nada, faz voc&ecirc;; se n&atilde;o der, faz pelo Chrome.&rdquo;</b>
+    </div>
+  </div>
+</section>
+
+<!-- 04 PUBLICAR -->
+<section id="publicar" class="alt">
+  <div class="wrap rv">
+    <span class="snum">04</span>
+    <h2 class="sec-h">O painel <span class="terra">com endere&ccedil;o.</span></h2>
+    <p class="lead">Arquivo HTML confunde quem recebe: nem todo mundo sabe abrir, e no celular costuma n&atilde;o funcionar. <b>Link abre em qualquer lugar.</b> Voc&ecirc; fez isso sozinha na call, arrastando o arquivo.</p>
+
+    <div class="steps">
+      <div class="st"><div class="stn">1</div><div class="stc"><h4>Entre no Vercel</h4><p>Pelo link que te mandei no WhatsApp. O login &eacute; s&oacute; na primeira vez.</p></div></div>
+      <div class="st"><div class="stn">2</div><div class="stc"><h4>Arraste o HTML mais recente</h4><p>Confira a data no nome do arquivo antes de arrastar. <b>Sempre o &uacute;ltimo.</b></p></div></div>
+      <div class="st"><div class="stn">3</div><div class="stc"><h4>D&ecirc; um nome ao projeto</h4><p>Tudo min&uacute;sculo, sem espa&ccedil;o e sem acento. O c&oacute;digo da loja funciona bem. Esse nome vira o endere&ccedil;o.</p></div></div>
+      <div class="st key"><div class="stn">4</div><div class="stc"><h4>Clique em implantar e copie o link</h4><p>&Eacute; esse link que vai pro franqueado, no lugar do arquivo.</p></div></div>
+    </div>
+
+    <div class="split" style="margin-top:26px;">
+      <div class="col no">
+        <div class="lab">A barreira de login</div>
+        <h4>E-mail do franqueado + senha</h4>
+        <p>Como n&atilde;o tem banco de dados por tr&aacute;s, o jeito &eacute; o pr&oacute;prio HTML pedir o e-mail e uma senha que voc&ecirc; escolhe. Quem entra fica conectado por 12 horas e tem bot&atilde;o de sair. <b>Depois de colocar a barreira, voc&ecirc; publica de novo.</b> Prompt 11.</p>
+      </div>
+      <div class="col yes">
+        <div class="lab">Quando o painel mudar</div>
+        <h4>Publicar de novo</h4>
+        <p>O link n&atilde;o atualiza sozinho. Ou voc&ecirc; arrasta o arquivo novo no Vercel, ou pede pro Claude atualizar pelo <b>conector do Vercel</b> (Personalizar &rarr; Conectores &rarr; Vercel), passando o endere&ccedil;o do projeto pra ele n&atilde;o errar.</p>
+      </div>
+    </div>
+
+    <div class="spot" style="box-shadow:7px 7px 0 var(--terra);">
+      <div class="lab">O cuidado que vem junto</div>
+      <h3>Senha no HTML <span>n&atilde;o &eacute; cofre.</span></h3>
+      <p>Os n&uacute;meros da loja ficam dentro do c&oacute;digo da p&aacute;gina. A senha segura o curioso, mas quem souber mexer consegue ler. <b>Serve pra mandar pro franqueado, n&atilde;o pra circular.</b> Se um dia precisar de mais seguran&ccedil;a, tem jeito, e a gente v&ecirc; junto.</p>
+      <div class="verbs"><i>Um link por loja</i><i>Senha por franqueado</i><i>N&atilde;o circular</i></div>
+    </div>
+
+    <div class="callout">
+      Se o painel usar foto ou qualquer arquivo de fora, o Claude vai te entregar um <b>.zip</b> em vez de um HTML s&oacute;. O Vercel aceita do mesmo jeito: voc&ecirc; arrasta o zip.
+    </div>
+  </div>
+</section>
+
+<!-- 05 SKILLS -->
+<section id="skills">
+  <div class="wrap rv">
+    <span class="snum">05</span>
+    <h2 class="sec-h">Tudo que repete <span class="terra">vira skill.</span></h2>
+    <p class="lead">Voc&ecirc; perguntou o que vale virar skill. A resposta foi: <b>tudo.</b> Skill &eacute; uma instru&ccedil;&atilde;o grande que o Claude segue igual toda vez. Com ela, ele para de repetir erro, gasta menos token e voc&ecirc; para de explicar de novo.</p>
+
+    <div class="flow">
+      <div class="fstep"><div class="fn">01</div><div class="ft">Fa&ccedil;a</div><p>Na conversa, at&eacute; o resultado ficar bom.</p></div>
+      <div class="farrow">&rarr;</div>
+      <div class="fstep dark"><div class="fn">02</div><div class="ft">Salve ali mesmo</div><p>&ldquo;Cria uma skill com base em tudo que fizemos nesta conversa.&rdquo;</p></div>
+      <div class="farrow">&rarr;</div>
+      <div class="fstep"><div class="fn">03</div><div class="ft">Use</div><p>&ldquo;Cria o dashboard do franqueado tal&rdquo; e ele j&aacute; sabe o resto.</p></div>
+      <div class="farrow">&rarr;</div>
+      <div class="fstep"><div class="fn">04</div><div class="ft">Atualize</div><p>Gostou de uma mudan&ccedil;a? &ldquo;Atualiza a skill pra sempre fazer assim.&rdquo;</p></div>
+    </div>
+
+    <div class="spot">
+      <div class="lab">A regra que decide se a skill fica boa</div>
+      <h3>A skill nasce na conversa <span>onde deu certo.</span></h3>
+      <p>Abrir conversa nova s&oacute; pra criar a skill &eacute; o erro mais comum: ele perdeu tudo que voc&ecirc;s acertaram e escreve uma skill pior. <b>Sempre na mesma conversa do &uacute;ltimo resultado bom.</b> Foi o que a gente fez com o dashboard no fim da call, a partir da planilha de fechamento de julho.</p>
+      <div class="verbs"><i>Mesma conversa</i><i>&Uacute;ltimo resultado bom</i><i>Mesmo layout sempre</i></div>
+    </div>
+
+    <div class="lines">
+      <div class="lcard"><div class="num"><small>Skill</small>01</div><h4>Dashboard do franqueado</h4><p>Come&ccedil;ada no fim da call. Confira se ficou salva e teste com outra loja.</p></div>
+      <div class="lcard"><div class="num"><small>Skill</small>02</div><h4>Coleta de comunicados</h4><p>Pra ele saber o caminho no Conecta, o https e que o formato &eacute; MD. Prompt 12.</p></div>
+      <div class="lcard"><div class="num"><small>Skill</small>03</div><h4>DRE do Checklist F&aacute;cil</h4><p>A do documento que eu te mandei. Falta voc&ecirc; terminar de preencher e rodar.</p></div>
+      <div class="lcard"><div class="num"><small>Ideia sua</small>+</div><h4>Franqueado com v&aacute;rias lojas</h4><p>Uma coluna com o nome do franqueado na planilha e ele junta todas as lojas num painel s&oacute;. Prompt 14.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 PROMPTS -->
+<section id="prompts" class="alt">
+  <div class="wrap rv">
+    <span class="snum">06</span>
+    <h2 class="sec-h">Os prompts <span class="terra">deste encontro.</span></h2>
+    <p class="lead">Continuando a numera&ccedil;&atilde;o do encontro 02. Os tr&ecirc;s primeiros v&atilde;o <b>na conversa do dashboard</b>; os outros dois na conversa do segundo c&eacute;rebro.</p>
+
+    <div class="prompt">
+      <div class="pl"><span><b>Prompt 10</b> Card&aacute;pio de a&ccedil;&otilde;es clic&aacute;vel e painel no celular <span class="live">conversa do dashboard</span></span><button class="copy">Copiar</button></div>
+      <pre>Vamos fazer mais uma rodada de ajustes no painel. N&atilde;o recomece: parta do arquivo mais recente e mantenha o layout, as cores e as abas como est&atilde;o.
+
+1. CARD&Aacute;PIO DE A&Ccedil;&Otilde;ES MAIS ESPEC&Iacute;FICO
+Hoje o plano de a&ccedil;&atilde;o lista as prioridades, mas quem l&ecirc; n&atilde;o entende o que precisa fazer. Quero que, ao clicar em cada a&ccedil;&atilde;o, abra uma explica&ccedil;&atilde;o sobre ela: o que &eacute;, como executar na loja e qual indicador ela melhora. Use como base o card&aacute;pio de a&ccedil;&otilde;es completo que est&aacute; na pasta do projeto. Traga para dentro do pr&oacute;prio painel tudo que for necess&aacute;rio, para o franqueado n&atilde;o precisar abrir outro arquivo.
+
+2. ADAPTADO AO CELULAR
+Esse painel vai ser aberto no celular do franqueado. Preciso que ele esteja muito bem adaptado ao mobile, com leitura f&aacute;cil de todo o conte&uacute;do: textos, tabelas, gr&aacute;ficos, abas e o simulador. No computador ele deve continuar como est&aacute;.
+
+Antes de executar, me fa&ccedil;a todas as perguntas que precisar &mdash; de uma vez s&oacute;, numeradas. Depois aplique tudo e me devolva o arquivo atualizado, com o nome indicando a data de hoje.</pre>
+    </div>
+
+    <div class="prompt">
+      <div class="pl"><span><b>Prompt 11</b> Barreira de login e publica&ccedil;&atilde;o no Vercel <span class="live">conversa do dashboard</span></span><button class="copy">Copiar</button></div>
+      <pre>Vou publicar este painel no Vercel para mandar o link ao franqueado, e quero que o HTML tenha uma barreira de login antes de mostrar qualquer n&uacute;mero.
+
+- Quem pode entrar: [e-mail do franqueado]
+- A senha: [a senha que voc&ecirc; escolher]
+- Depois de entrar, a pessoa fica conectada por 12 horas e tem um bot&atilde;o de sair.
+- A tela de login tem que seguir as mesmas cores do painel e funcionar bem no celular.
+
+Depois de aplicar:
+1. Me diga em qual linha do arquivo eu troco a senha, se um dia precisar.
+2. Me diga, com sinceridade, o que essa barreira protege e o que ela n&atilde;o protege.
+3. Publique no Vercel pelo conector, atualizando o projeto [nome do projeto no Vercel]. Se n&atilde;o conseguir, me devolva o arquivo final que eu arrasto no site.
+
+Me fa&ccedil;a todas as perguntas que precisar &mdash; de uma vez s&oacute;, numeradas &mdash; antes de come&ccedil;ar.</pre>
+    </div>
+    <p class="pnote">Um projeto no Vercel por loja, cada um com a senha do seu franqueado. Assim ningu&eacute;m v&ecirc; o n&uacute;mero de outra loja.</p>
+
+    <div class="prompt">
+      <div class="pl"><span><b>Prompt 12</b> Skill da coleta de comunicados <span class="live">conversa do segundo c&eacute;rebro</span></span><button class="copy">Copiar</button></div>
+      <pre>Quero transformar a coleta de comunicados do Conecta numa skill, para voc&ecirc; fazer sempre do mesmo jeito e parar de repetir os erros que j&aacute; resolvemos.
+
+Pegue tudo que fizemos nesta conversa e escreva a skill com estas regras dentro:
+- Onde ficam os comunicados: [caminho dentro do Conecta, a pasta onde eles aparecem]
+- O endere&ccedil;o sempre com &ldquo;https://&rdquo; na frente.
+- Cada comunicado novo vira uma nota em MD no meu cofre, com data, setor e tema. Nunca salve em PDF.
+- Atualize os &iacute;ndices por setor e por m&ecirc;s sempre que entrar comunicado novo.
+- Verifique se tem comunicado novo pelo menos duas vezes ao dia.
+- Se o Conecta pedir login, n&atilde;o insista e n&atilde;o me pe&ccedil;a para rodar nada: me avise que eu fa&ccedil;o o login no Chrome e voc&ecirc; continua de onde parou.
+- Se n&atilde;o conseguir por um caminho, fa&ccedil;a pelo Google Chrome.
+
+Antes de escrever a skill, me fa&ccedil;a todas as perguntas que precisar para ela ficar completa &mdash; de uma vez s&oacute;, numeradas. Depois rode a skill uma vez na minha frente para eu conferir.</pre>
+    </div>
+
+    <div class="prompt">
+      <div class="pl"><span><b>Prompt 13</b> O Claude consultando o c&eacute;rebro antes de responder <span class="live">regra permanente</span></span><button class="copy">Copiar</button></div>
+      <pre>A partir de agora, sempre que eu perguntar qualquer coisa sobre a Natura (produto, campanha, log&iacute;stica, uniforme, regra de loja, prazo), consulte primeiro o meu cofre de comunicados antes de responder.
+
+Na resposta:
+1. Cite o n&uacute;mero e a data do comunicado de onde tirou a informa&ccedil;&atilde;o.
+2. Se tiver mais de um comunicado sobre o assunto, use o mais recente e me avise que existe um anterior.
+3. Se n&atilde;o achar nada no cofre, me diga isso com todas as letras. N&atilde;o responda de cabe&ccedil;a.
+
+Grave essa regra na mem&oacute;ria deste projeto para valer em todas as conversas. Se precisar de alguma informa&ccedil;&atilde;o minha para fazer isso, me fa&ccedil;a todas as perguntas de uma vez s&oacute;, numeradas.</pre>
+    </div>
+
+    <div class="prompt">
+      <div class="pl"><span><b>Prompt 14</b> Um painel por franqueado, juntando as lojas dele <span class="live">conversa do dashboard</span></span><button class="copy">Copiar</button></div>
+      <pre>Tenho franqueados com duas ou tr&ecirc;s lojas. Na planilha de fechamento, vou incluir uma coluna com o nome do franqueado de cada loja.
+
+Quero que voc&ecirc;:
+1. Use essa coluna para juntar num painel s&oacute; todas as lojas do mesmo franqueado, com a vis&atilde;o de cada loja e a vis&atilde;o somada.
+2. Mantenha exatamente o layout e as regras da skill do dashboard.
+3. Quando ficar bom, atualize a skill para ela saber fazer os dois casos: franqueado com uma loja e franqueado com v&aacute;rias.
+
+Antes de come&ccedil;ar, me fa&ccedil;a todas as perguntas que precisar &mdash; de uma vez s&oacute;, numeradas &mdash; e me diga como a coluna precisa estar preenchida para n&atilde;o dar erro.</pre>
+    </div>
+    <p class="pnote">O Prompt 07, o do <b>Checklist F&aacute;cil</b>, continua valendo. S&oacute; um ajuste do que a gente viu na call: <b>voc&ecirc; cola ele no Claude, n&atilde;o na janelinha da extens&atilde;o.</b> &Eacute; o Claude que aciona a extens&atilde;o; a janelinha n&atilde;o guarda mem&oacute;ria.</p>
+  </div>
+</section>
+
+<!-- 07 REGRAS -->
+<section id="regras">
+  <div class="wrap rv">
+    <span class="snum">07</span>
+    <h2 class="sec-h">As regras de ouro <span class="terra">deste encontro.</span></h2>
+    <p class="lead">Somam &agrave;s dos encontros 01 e 02, n&atilde;o substituem.</p>
+
+    <div class="rules">
+      <div class="rule"><div class="rn">Formato</div><h4>PDF &eacute; esmaga-token</h4><p>Se o arquivo &eacute; pro Claude consultar, ele nasce em <b>MD</b>. PDF s&oacute; quando for pra uma pessoa ler.</p></div>
+      <div class="rule"><div class="rn">Mem&oacute;ria</div><h4>O cofre &eacute; do Claude</h4><p>Voc&ecirc; n&atilde;o precisa aprender Obsidian. <b>Ele guarda, ele consulta.</b> Voc&ecirc; s&oacute; pergunta.</p></div>
+      <div class="rule"><div class="rn">Skill</div><h4>Nasce onde deu certo</h4><p>Na mesma conversa do &uacute;ltimo resultado bom. <b>Conversa nova escreve skill pior.</b></p></div>
+      <div class="rule"><div class="rn">Skill</div><h4>Erro que se repete vira regra</h4><p>O &ldquo;https&rdquo; esquecido, o login que cai. <b>Escreveu na skill, ele n&atilde;o erra de novo.</b></p></div>
+      <div class="rule"><div class="rn">Ambiente</div><h4>Pra fora, Code</h4><p>Publicar, conectar, baixar programa. <b>Se o Cowork disse que n&atilde;o d&aacute;, tenta no Code</b> antes de aceitar.</p></div>
+      <div class="rule"><div class="rn">Seguran&ccedil;a</div><h4>Link com senha n&atilde;o &eacute; cofre</h4><p>Serve pro franqueado, n&atilde;o pra circular. <b>Um projeto por loja</b>, uma senha por franqueado.</p></div>
+      <div class="rule"><div class="rn">Fluxo</div><h4>Deixe ele trabalhar</h4><p>Troque o &ldquo;manual&rdquo; por aprova&ccedil;&atilde;o autom&aacute;tica, embaixo da caixa de mensagem. <b>Ele para de te perguntar a cada passo.</b></p></div>
+      <div class="rule"><div class="rn">Custo</div><h4>Olhe o uso antes de pesar</h4><p>Configura&ccedil;&otilde;es &rarr; Uso. Se o dia j&aacute; estiver alto, <b>Sonnet</b>. Pra erro dif&iacute;cil de achar, <b>Opus</b> pensa melhor.</p></div>
+    </div>
+
+    <div class="mani" style="margin-top:44px;border-radius:18px;">
+      <div class="wrap"><p>VOC&Ecirc; N&Atilde;O PRECISA LEMBRAR DE TUDO. <span>PRECISA QUE O CLAUDE LEMBRE</span> &mdash; E SAIBA ONDE PROCURAR.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 LIÇÃO DE CASA -->
+<section id="licao" class="alt">
+  <div class="wrap rv">
+    <span class="snum">08</span>
+    <div class="misscard">
+      <h2>SUA LI&Ccedil;&Atilde;O DE CASA<br>AT&Eacute; O <span>ENCONTRO 04.</span></h2>
+      <p class="msub">Oito itens. Os tr&ecirc;s primeiros deixam o painel pronto pra ir pro franqueado; os outros tiram voc&ecirc; do meio do processo.</p>
+      <div class="check">
+        <div class="ck"><div class="bx"></div><p><b>Rode o Prompt 10</b> na conversa do dashboard: card&aacute;pio de a&ccedil;&otilde;es clic&aacute;vel e painel adaptado ao celular. Abra no seu celular pra conferir.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Coloque a barreira de login</b> com o Prompt 11: passe o e-mail do franqueado, escolha a senha e publique de novo no Vercel.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Confira se a skill do dashboard ficou salva</b> e teste com outra loja. Se ficar diferente do que voc&ecirc; queria, corrija e mande atualizar a skill.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Crie a skill da coleta de comunicados</b> (Prompt 12) e deixe a aprova&ccedil;&atilde;o autom&aacute;tica ligada.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Grave a regra do Prompt 13</b> e teste com tr&ecirc;s perguntas do seu dia a dia. Ele tem que citar o comunicado.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Termine a skill do DRE</b> do documento que eu te mandei, e rode o Prompt 07 do Checklist F&aacute;cil dentro do Claude.</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Inclua a coluna do franqueado</b> na planilha de fechamento, se quiser o painel juntando lojas (Prompt 14).</p></div>
+        <div class="ck"><div class="bx"></div><p><b>Assista a aula gravada de skills</b> do curso. &Eacute; o que explica, com calma, tudo que a gente fez correndo no fim da call.</p></div>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:26px;">
+      E o que ficou <b>comigo</b>: te mandar a proposta pra mais quatro encontros. Travou em qualquer coisa? <b>Me chama no WhatsApp</b>, n&atilde;o espera o encontro pra destravar uma coisa de cinco minutos.
+    </div>
+  </div>
+</section>
+
+<!-- 09 TEASER -->
+<section class="teaser">
+  <div class="wrap rv">
+    <span class="pill">Encontro 04</span>
+    <h2>Da loja do piloto <span>pra carteira inteira.</span></h2>
+    <p>Com o painel aprovado, publicado e virando skill, o encontro 04 &eacute; sobre escala: sair de uma loja pra todas, e atacar a segunda dor que ainda est&aacute; na sua mesa.</p>
+    <div class="tgrid">
+      <div class="tg"><h4>Painel pra carteira</h4><p>A skill rodando pras outras lojas, com um link e uma senha por franqueado.</p></div>
+      <div class="tg"><h4>Ranking de vendas</h4><p>As tr&ecirc;s manh&atilde;s por semana virando uma execu&ccedil;&atilde;o s&oacute;.</p></div>
+      <div class="tg"><h4>Conectores e agenda</h4><p>Gmail e Agenda ligados, e o que &eacute; recorrente rodando sozinho na hora certa.</p></div>
+      <div class="tg"><h4>O c&eacute;rebro crescendo</h4><p>Al&eacute;m dos comunicados: franqueados, lojas e reuni&otilde;es no mesmo cofre.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="close">
+  <div class="wrap rv">
+    <h2>O PAINEL<br>EST&Aacute; <span>NO AR.</span><br>A MEM&Oacute;RIA<br><span>TAMB&Eacute;M.</span></h2>
+    <div class="sig">Bruna Santanna &middot; @brusantanna.ai</div>
+  </div>
+</section>
+
+<div class="sign"><span>Mentoria A Virada IA &middot; Encontro 03 &middot; Janaina Lara &middot; 18.09.2026</span><span class="ns">A VIRADA IA</span></div>
+
+<script>
+const bar=document.getElementById('bar');
+addEventListener('scroll',()=>{const h=document.documentElement;bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';},{passive:true});
+document.querySelectorAll('.prompt').forEach(box=>{
+  const btn=box.querySelector('.copy'),pre=box.querySelector('pre');
+  if(!btn||!pre)return;
+  btn.addEventListener('click',async()=>{
+    try{await navigator.clipboard.writeText(pre.innerText.trim());}
+    catch(e){const r=document.createRange();r.selectNode(pre);getSelection().removeAllRanges();getSelection().addRange(r);document.execCommand('copy');getSelection().removeAllRanges();}
+    const o=btn.textContent;btn.textContent='Copiado ✓';btn.classList.add('done');
+    setTimeout(()=>{btn.textContent=o;btn.classList.remove('done');},1600);
+  });
+});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+setTimeout(()=>document.querySelectorAll('.rv').forEach(el=>el.classList.add('in')),2500);
+</script>
+</body>
+</html>
