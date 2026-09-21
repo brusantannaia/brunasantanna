@@ -6,26 +6,41 @@
 
        <script src="/meta-pixel.js"></script>
 
-   Para trocar o pixel, mude só a constante PIXEL_ID abaixo. Não precisa
+   Para trocar o pixel, mude só a lista PIXEL_IDS abaixo. Não precisa
    editar página nenhuma.
 
    O que ele dispara sozinho, sem precisar mexer no HTML:
      PageView          todas as páginas
      ViewContent       guias, /curso, /sistema, /biblioteca (com nome e valor)
      Lead              qualquer formulário que tenha campo de e-mail
-     InitiateCheckout  qualquer clique em link do Kiwify
+     InitiateCheckout  qualquer clique em link do Kiwify (valor pelo produto do link)
 --------------------------------------------------------------------------- */
 
 (function () {
   'use strict';
 
-  // Pixel da business "Bruna Santanna". Trocar aqui se mudar de pixel.
-  var PIXEL_ID = '1341783077164816';
+  // Pixels que recebem os eventos. Todo fbq('track') vai para os dois.
+  //   1341783077164816  business "Bruna Santanna" (instalado em 02/09)
+  //   1175365551728800  "NewScale - Pixel Principal", o da conta de anúncios
+  //                     (o mesmo das páginas com o bloco inline do pixel)
+  // Para tirar um deles, basta apagar a linha.
+  var PIXEL_IDS = [
+    '1341783077164816',
+    '1175365551728800'
+  ];
 
   // Preço dos produtos, usado no valor dos eventos.
   var PRODUTOS = {
     '/curso':    { nome: 'Claude com Profundidade (Virada IA 2.0)', valor: 347.00 },
     '/sistema':  { nome: 'Motor de Conteúdo',                       valor: 169.00 }
+  };
+
+  // Código do checkout no Kiwify -> produto. Serve para o InitiateCheckout
+  // levar o valor certo mesmo quando o link está fora da página de venda
+  // (ex.: o botão do /diagnostico).
+  var CHECKOUTS = {
+    'a9YefRy': PRODUTOS['/sistema'],
+    'gKnvjrm': PRODUTOS['/curso']
   };
 
   /* --- código base do Meta (padrão da própria Meta) --------------------- */
@@ -39,7 +54,7 @@
     s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s);
   }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
 
-  fbq('init', PIXEL_ID);
+  for (var i = 0; i < PIXEL_IDS.length; i++) fbq('init', PIXEL_IDS[i]);
   fbq('track', 'PageView');
 
   /* --- identifica a página --------------------------------------------- */
@@ -88,9 +103,11 @@
     if (!link) return;
 
     var dados = { content_category: 'checkout' };
-    if (produto) {
-      dados.content_name = produto.nome;
-      dados.value = produto.valor;
+    var codigo = (link.getAttribute('href') || '').split('?')[0].split('/').pop();
+    var doLink = CHECKOUTS[codigo] || produto;
+    if (doLink) {
+      dados.content_name = doLink.nome;
+      dados.value = doLink.valor;
       dados.currency = 'BRL';
     } else {
       dados.content_name = path === '/' ? 'home' : path.slice(1);

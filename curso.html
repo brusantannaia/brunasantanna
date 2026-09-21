@@ -1355,6 +1355,7 @@ footer p{font-size:14px;color:var(--muted);margin:0 0 10px}
     if (!a) return;
     if (typeof gtag === 'function') {
       gtag('event','checkout_click',{ event_category:'curso', event_label:'claude-profundidade-2.0' });
+      gtag('event','begin_checkout',{ value:347, currency:'BRL', items:[{ item_name:'Claude com Profundidade (Virada IA 2.0)', price:347, quantity:1 }] });
     }
   });
 })();

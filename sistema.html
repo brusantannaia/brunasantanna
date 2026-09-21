@@ -1216,6 +1216,7 @@ h2{font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercas
     a.addEventListener('click', function(){
       if (typeof gtag === 'function') {
         gtag('event', 'checkout_click', { event_category: 'sistema', event_label: 'motor-de-conteudo' });
+        gtag('event', 'begin_checkout', { value: 169, currency: 'BRL', items: [{ item_name: 'Motor de Conteúdo', price: 169, quantity: 1 }] });
       }
     });
   });

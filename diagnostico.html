@@ -1045,6 +1045,17 @@ $('gForm').addEventListener('submit', function(e){
   setTimeout(function(){ mostrarResultado(nome); }, 900);
 });
 
+/* begin_checkout (GA4) com o valor do produto da oferta */
+var PRODUTO_OFERTA = {
+  curso:   { item_name:'Claude com Profundidade (Virada IA 2.0)', price:347 },
+  sistema: { item_name:'Motor de Conteúdo', price:169 }
+};
+function beginCheckout(ev){
+  var p = PRODUTO_OFERTA[ev];
+  if (!p || typeof gtag !== 'function') return;
+  gtag('event','begin_checkout',{ value:p.price, currency:'BRL', items:[{ item_name:p.item_name, price:p.price, quantity:1 }] });
+}
+
 /* ---------- resultado ---------- */
 function mostrarResultado(nome){
   var R = NIVEIS[resultado];
@@ -1082,6 +1093,7 @@ function mostrarResultado(nome){
   if (of.href.indexOf('http') === 0) btn.target = '_blank';
   btn.addEventListener('click', function(){
     if (typeof gtag === 'function') gtag('event','checkout_click',{ event_category:of.ev, event_label:'diagnostico-nivel-' + resultado });
+    beginCheckout(of.ev);
   });
   $('oFine').textContent = of.fine;
 
@@ -1129,6 +1141,7 @@ function mostrarResultado(nome){
     vbox.innerHTML = h;
     $('vBtn').addEventListener('click', function(){
       if (typeof gtag === 'function') gtag('event','checkout_click',{ event_category:of.ev, event_label:'diagnostico-venda-nivel-' + resultado });
+      beginCheckout(of.ev);
     });
   }
 
