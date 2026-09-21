@@ -19,15 +19,15 @@
 (function () {
   'use strict';
 
-  // Pixels que recebem os eventos. Todo fbq('track') vai para todos da lista.
-  //   1341783077164816  "META - PÌXEL", business "Bruna Santanna". É o do mesmo
-  //                     business da conta de anúncios "Manifeste II" (a que tem
-  //                     meio de pagamento) e tem histórico desde 03/2025.
-  // O "NewScale - Pixel Principal" (1175365551728800) fica de fora de propósito:
-  // é de outro business e só existe no bloco inline de 10 páginas antigas.
-  // Para somar um pixel, basta acrescentar uma linha.
+  // Pixels que recebem os eventos. Todo fbq('track') vai para os dois.
+  //   1175365551728800  "NewScale - Pixel Principal", business NewScale: é o da
+  //                     conta de anúncios que vai rodar o tráfego pago.
+  //   1341783077164816  "META - PÌXEL", business "Bruna Santanna": tem o
+  //                     histórico desde 03/2025, mantido para não perder público.
+  // Para tirar um deles, basta apagar a linha.
   var PIXEL_IDS = [
-    '1341783077164816'
+    '1341783077164816',
+    '1175365551728800'
   ];
 
   // Preço dos produtos, usado no valor dos eventos.
