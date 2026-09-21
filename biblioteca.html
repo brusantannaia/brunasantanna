@@ -377,6 +377,9 @@
         .card-offer .card-foot { border-top-color: rgba(255,255,255,.18); }
         .card-offer .price { font-size: 0.76rem; font-weight: 700; color: rgba(255,255,255,.85); }
         .card-offer .go { color: var(--terra-l); }
+        .card-offer.alt { box-shadow: 6px 6px 0 var(--green); }
+        .card-offer.alt:hover { box-shadow: 10px 10px 0 var(--green); }
+        .card-offer.alt .cover { background: linear-gradient(145deg, var(--green), #2F463B); }
         .card-offer:hover .go { color: #fff; }
 
         .card-mail { background: var(--bg-2); box-shadow: 6px 6px 0 var(--green); }
@@ -1675,8 +1678,22 @@ Quando eu escolher, cria roteiro dia a dia com logística completa.` },
             '</div>' +
             '<div class="card-body">' +
                 '<h3>Os guias ensinam tarefas. O curso ensina a pensar.</h3>' +
-                '<p class="desc">7 módulos, do zero, sem programar. Pra quem já tentou sozinho e sentiu que estava usando 10% da ferramenta.</p>' +
+                '<p class="desc">7 módulos, do zero, sem programar. Para quem já tentou por conta própria e sentiu que estava usando 10% da ferramenta.</p>' +
                 '<div class="card-foot"><span class="price">12x de R$35,89</span><span class="go">Ver o curso &rarr;</span></div>' +
+            '</div></a>';
+    }
+
+    function ofertaMotorHTML() {
+        return '<a class="card card-offer alt" href="/sistema" data-cta="biblioteca-feed-sistema">' +
+            '<div class="cover">' +
+                '<span class="cover-kind">Workshop</span>' +
+                '<span class="cover-num">&#9733;</span>' +
+                '<span class="cover-word">Motor de<br>Conteúdo</span>' +
+            '</div>' +
+            '<div class="card-body">' +
+                '<h3>O seu conteúdo rodando sozinho.</h3>' +
+                '<p class="desc">Um agente de duas skills no seu Claude: pesquisa a pauta, escreve, monta o carrossel com a arte pronta e edita o vídeo.</p>' +
+                '<div class="card-foot"><span class="price">R$169 ou 12x de R$17,48</span><span class="go">Ver o workshop &rarr;</span></div>' +
             '</div></a>';
     }
 
@@ -1690,7 +1707,7 @@ Quando eu escolher, cria roteiro dia a dia com logística completa.` },
             '<div class="card-body">' +
                 '<div class="pack-in">' +
                     '<h3>Leva tudo em PDF</h3>' +
-                    '<p class="desc">Os melhores prompts organizados num PDF pra consultar offline — e os guias novos em primeira mão.</p>' +
+                    '<p class="desc">Os melhores prompts organizados num PDF para consultar offline — e os guias novos em primeira mão.</p>' +
                     '<form class="mail-form" data-pack novalidate>' +
                         '<input class="field" type="email" placeholder="Seu melhor email" required autocomplete="email" aria-label="Seu email">' +
                         '<button type="submit" class="btn">Quero o pack</button>' +
@@ -1731,6 +1748,7 @@ Quando eu escolher, cria roteiro dia a dia com logística completa.` },
 
         // ofertas entram no meio, e só quando há conteúdo suficiente em volta
         if (html.length > 24) html.splice(20, 0, ofertaPackHTML());
+        if (html.length > 18) html.splice(14, 0, ofertaMotorHTML());
         if (html.length > 10) html.splice(8, 0, ofertaCursoHTML());
 
         if (featOk) html.unshift(featuredCardHTML());
