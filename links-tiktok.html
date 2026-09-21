@@ -400,6 +400,7 @@
                 body: JSON.stringify({ email, list: 'comece', timestamp: new Date().toISOString(), source: location.href }) });
         } catch(_) {}
         if (typeof gtag === 'function') gtag('event', 'lead_capture', { list: 'comece' });
+        if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_name: 'lead_capture', list: 'comece' });
         localStorage.setItem(CAP_KEY, email);
         showDone();
     });

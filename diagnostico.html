@@ -1040,6 +1040,7 @@ $('gForm').addEventListener('submit', function(e){
   calcular();
   enviar(nome, email);
   if (typeof gtag === 'function') gtag('event','diagnostico_email',{event_category:'diagnostico'});
+  if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_name: 'diagnostico_email' });
   if (typeof gtag === 'function') gtag('event','diagnostico_result',{event_category:'diagnostico', event_label:'nivel-' + resultado});
   try { localStorage.setItem('diagnostico_nivel', String(resultado)); } catch(e){}
 

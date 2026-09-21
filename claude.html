@@ -991,6 +991,7 @@
                     body: JSON.stringify({ email, list: 'pilar-claude', timestamp: new Date().toISOString(), source: location.href }) });
             } catch(_) {}
             if (typeof gtag === 'function') gtag('event', 'lead_magnet', { list: 'pilar-claude' });
+            if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_name: 'lead_magnet', list: 'pilar-claude' });
             localStorage.setItem('pilar_claude_lead', '1');
             markUpgradesDone();
         });

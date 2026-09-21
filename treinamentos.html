@@ -841,6 +841,7 @@
                     body: JSON.stringify({ email, list: 'corporativo', timestamp: new Date().toISOString(), source }) });
             } catch(_) {}
             if (typeof gtag === 'function') gtag('event', 'lead_capture', { list: 'corporativo' });
+            if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_name: 'lead_capture', list: 'corporativo' });
             document.querySelectorAll('.wl-card').forEach(c => c.classList.add('wl-done'));
             localStorage.setItem('corp_lead', '1');
         });

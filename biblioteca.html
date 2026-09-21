@@ -1857,6 +1857,7 @@ Quando eu escolher, cria roteiro dia a dia com logística completa.` },
             });
         } catch (_) {}
         if (typeof gtag === 'function') gtag('event', 'lead_capture', { list: 'biblioteca' });
+        if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_name: 'lead_capture', list: 'biblioteca' });
         if (typeof fbq === 'function') fbq('track', 'Lead', { content_name: 'biblioteca' });
         lsSet(PACK_KEY, email);
         refreshPackForms();

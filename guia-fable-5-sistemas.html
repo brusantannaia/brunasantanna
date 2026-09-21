@@ -577,6 +577,7 @@ Depois de construir, TESTE o seu próprio trabalho com um exemplo real e me most
                     body: JSON.stringify({ email, list: 'biblioteca', timestamp: new Date().toISOString(), source: location.href }) });
             } catch(_) {}
             if (typeof gtag === 'function') gtag('event', 'lead_signup', { list: 'biblioteca' });
+            if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_name: 'lead_signup', list: 'biblioteca' });
             document.querySelectorAll('.upgrade .wl-card').forEach(c => c.classList.add('wl-done'));
             localStorage.setItem('biblioteca_lead', '1');
         });

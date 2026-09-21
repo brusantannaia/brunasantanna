@@ -521,6 +521,7 @@ Seja direto e honesto. Se algum dado estiver faltando pra concluir, me diga qual
                     body: JSON.stringify({ email, list: 'biblioteca', timestamp: new Date().toISOString(), source: location.href }) });
             } catch(_) {}
             if (typeof gtag === 'function') gtag('event', 'lead_signup', { list: 'biblioteca' });
+            if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_name: 'lead_signup', list: 'biblioteca' });
             document.querySelectorAll('.upgrade .wl-card').forEach(c => c.classList.add('wl-done'));
             localStorage.setItem('biblioteca_lead', '1');
         });
@@ -587,6 +588,7 @@ Seja direto e honesto. Se algum dado estiver faltando pra concluir, me diga qual
                     body: JSON.stringify({ email: email, list:'curso', timestamp:new Date().toISOString(), source: location.href }) });
             } catch(_) {}
             if (typeof gtag === 'function') gtag('event', 'lead_signup', { list:'curso' });
+            if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_name: 'lead_signup', list:'curso' });
             card.classList.add('done');
         });
     })();
