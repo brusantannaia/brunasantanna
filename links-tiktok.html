@@ -371,7 +371,7 @@
     // ===== GA: clique em cada link (label por destino) =====
     document.querySelectorAll('[data-label]').forEach(el => {
         el.addEventListener('click', () => {
-            gtag('event', 'biolink_click', { label: el.getAttribute('data-label'), source: location.href });
+            if (typeof gtag === 'function') gtag('event', 'biolink_click', { label: el.getAttribute('data-label'), source: location.href });
         });
     });
 
@@ -398,7 +398,7 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, list: 'comece', timestamp: new Date().toISOString(), source: location.href }) });
         } catch(_) {}
-        gtag('event', 'lead_capture', { list: 'comece' });
+        if (typeof gtag === 'function') gtag('event', 'lead_capture', { list: 'comece' });
         localStorage.setItem(CAP_KEY, email);
         showDone();
     });

@@ -1786,7 +1786,7 @@ Quando eu escolher, cria roteiro dia a dia com logística completa.` },
         tBusca = setTimeout(() => {
             termo = norm(qEl.value.trim());
             render();
-            if (termo) gtag('event', 'biblioteca_busca', { termo: termo.slice(0, 60) });
+            if (termo && typeof gtag === 'function') gtag('event', 'biblioteca_busca', { termo: termo.slice(0, 60) });
         }, 130);
     });
     qClear.addEventListener('click', () => {
@@ -1854,7 +1854,7 @@ Quando eu escolher, cria roteiro dia a dia com logística completa.` },
                 body: JSON.stringify({ email, list: 'biblioteca', timestamp: new Date().toISOString(), source: location.href })
             });
         } catch (_) {}
-        gtag('event', 'lead_capture', { list: 'biblioteca' });
+        if (typeof gtag === 'function') gtag('event', 'lead_capture', { list: 'biblioteca' });
         if (typeof fbq === 'function') fbq('track', 'Lead', { content_name: 'biblioteca' });
         lsSet(PACK_KEY, email);
         refreshPackForms();

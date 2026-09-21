@@ -961,7 +961,7 @@ try {
 } catch(e){}
 
 $('btnStart').addEventListener('click', function(){
-  gtag('event','diagnostico_start',{event_category:'diagnostico'});
+  if (typeof gtag === 'function') gtag('event','diagnostico_start',{event_category:'diagnostico'});
   pos = deInicial ? 1 : 0; tela('s-quiz'); render();
 });
 $('btnBack').addEventListener('click', function(){ if (pos>0){ pos--; render(); } });
@@ -1038,8 +1038,8 @@ $('gForm').addEventListener('submit', function(e){
 
   calcular();
   enviar(nome, email);
-  gtag('event','diagnostico_email',{event_category:'diagnostico'});
-  gtag('event','diagnostico_result',{event_category:'diagnostico', event_label:'nivel-' + resultado});
+  if (typeof gtag === 'function') gtag('event','diagnostico_email',{event_category:'diagnostico'});
+  if (typeof gtag === 'function') gtag('event','diagnostico_result',{event_category:'diagnostico', event_label:'nivel-' + resultado});
   try { localStorage.setItem('diagnostico_nivel', String(resultado)); } catch(e){}
 
   setTimeout(function(){ mostrarResultado(nome); }, 900);
@@ -1081,7 +1081,7 @@ function mostrarResultado(nome){
   btn.className = 'btn btn-terra cta-buy';
   if (of.href.indexOf('http') === 0) btn.target = '_blank';
   btn.addEventListener('click', function(){
-    gtag('event','checkout_click',{ event_category:of.ev, event_label:'diagnostico-nivel-' + resultado });
+    if (typeof gtag === 'function') gtag('event','checkout_click',{ event_category:of.ev, event_label:'diagnostico-nivel-' + resultado });
   });
   $('oFine').textContent = of.fine;
 
@@ -1128,7 +1128,7 @@ function mostrarResultado(nome){
          '<a class="vlink" href="' + V.link + '">' + V.linkTexto + '</a>';
     vbox.innerHTML = h;
     $('vBtn').addEventListener('click', function(){
-      gtag('event','checkout_click',{ event_category:of.ev, event_label:'diagnostico-venda-nivel-' + resultado });
+      if (typeof gtag === 'function') gtag('event','checkout_click',{ event_category:of.ev, event_label:'diagnostico-venda-nivel-' + resultado });
     });
   }
 
@@ -1136,7 +1136,7 @@ function mostrarResultado(nome){
   $('empresaBloco').hidden = !flags.time;
   if (flags.time){
     $('btnEmpresa').addEventListener('click', function(){
-      gtag('event','checkout_click',{ event_category:'empresa', event_label:'diagnostico-nivel-' + resultado });
+      if (typeof gtag === 'function') gtag('event','checkout_click',{ event_category:'empresa', event_label:'diagnostico-nivel-' + resultado });
     });
   }
 
@@ -1152,7 +1152,7 @@ function mostrarResultado(nome){
 
   var txt = 'Meu nível de uso de IA deu ' + resultado + ' de 4: ' + R.nome + '. Faz o seu, leva 1 minuto: https://brunasantanna.com/diagnostico';
   $('btnShare').href = 'https://wa.me/?text=' + encodeURIComponent(txt);
-  $('btnShare').addEventListener('click', function(){ gtag('event','diagnostico_share',{event_category:'diagnostico'}); });
+  $('btnShare').addEventListener('click', function(){ if (typeof gtag === 'function') gtag('event','diagnostico_share',{event_category:'diagnostico'}); });
 
   tela('s-res');
   var alvos = [['bP',scores.pP],['bN',scores.pN]];
