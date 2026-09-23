@@ -1,0 +1,137 @@
+/* ============================================================
+   CAMADA LEVE — brunasantanna.com (set/2026)
+   Mesmas cores. Sai: sombra dura, borda grossa, botão em caixa alta.
+   Entra: fio fino, sombra difusa tingida, cantos maiores, botão em
+   frase normal. Carregada depois do <style> de cada página.
+   Par: /leve.js (marca botões em fundo escuro e troca sombra dura).
+   ============================================================ */
+:root {
+    --lv-ink: #14373C;
+    --lv-ink-2: #2C4F54;
+    --lv-cream: #F6F2EC;
+    --lv-hair: rgba(20,55,60,.09);
+    --lv-soft: 0 1px 2px rgba(20,55,60,.05), 0 14px 34px -16px rgba(20,55,60,.22);
+    --lv-soft-hover: 0 2px 4px rgba(20,55,60,.06), 0 26px 50px -20px rgba(20,55,60,.32);
+    --lv-ease: cubic-bezier(.2,.7,.2,1);
+}
+
+/* ---------- cabeçalho: fio fino e vidro fosco ---------- */
+.site-header {
+    border-bottom: 1px solid var(--lv-hair) !important;
+    background: rgba(243,238,227,.78) !important;
+    -webkit-backdrop-filter: saturate(1.4) blur(18px) !important; backdrop-filter: saturate(1.4) blur(18px) !important;
+}
+@media (max-width: 900px) { .main-nav { border-bottom: 1px solid var(--lv-hair) !important; } }
+
+/* ---------- BOTÕES: forma e texto ---------- */
+.btn, .btn-form, .nav-cta, .ps-cta, .btn-copy, #psBar a {
+    text-transform: none !important; letter-spacing: -0.005em !important; font-weight: 600 !important;
+}
+.btn, .btn-form, .ps-cta {
+    font-size: .95rem !important; padding: 13px 22px !important; border-radius: 100px !important;
+    transition: transform .2s var(--lv-ease), box-shadow .2s var(--lv-ease), background .2s !important;
+}
+.nav-cta { font-size: .85rem !important; padding: 9px 16px !important; }
+
+/* primário em fundo claro: pílula petróleo com brilho no topo */
+.btn-terra, .btn-form, .nav-cta, .ps-cta, .btn-copy,
+.btn:not(.btn-ink):not(.btn-ghost):not([class*="btn-"]) {
+    background: var(--lv-ink) !important; color: #fff !important; border: none !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 1px 2px rgba(20,55,60,.2), 0 8px 20px -10px rgba(20,55,60,.55) !important;
+}
+.btn-ink { box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 1px 2px rgba(20,55,60,.2), 0 8px 20px -10px rgba(20,55,60,.55) !important; border: none !important; }
+.btn-terra:hover, .btn-form:hover, .nav-cta:hover, .ps-cta:hover, .btn-copy:hover, .btn-ink:hover,
+.btn:not([class*="btn-"]):hover {
+    background: var(--lv-ink-2) !important; transform: translateY(-1px) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 2px 4px rgba(20,55,60,.2), 0 14px 28px -12px rgba(20,55,60,.6) !important;
+}
+.btn-copy.done { background: #435D51 !important; }
+.btn-form { border-radius: 100px !important; }
+
+/* secundário: vidro tingido, nunca um segundo bloco sólido */
+.btn + .btn-ink, .btn-ghost {
+    background: rgba(20,55,60,.07) !important; color: var(--lv-ink) !important;
+    border: none !important; box-shadow: none !important;
+}
+.btn + .btn-ink:hover, .btn-ghost:hover { background: rgba(20,55,60,.12) !important; }
+
+/* em fundo escuro (classe posta pelo leve.js) */
+.lv-dark.btn-terra, .lv-dark.btn-ink, .lv-dark.btn-form, .lv-dark.ps-cta, .lv-dark.btn-copy,
+.lv-dark.btn:not([class*="btn-"]) {
+    background: var(--lv-cream) !important; color: var(--lv-ink) !important;
+    box-shadow: 0 1px 2px rgba(0,0,0,.2), 0 10px 24px -12px rgba(0,0,0,.5) !important;
+}
+.lv-dark.btn-terra:hover, .lv-dark.btn-ink:hover, .lv-dark.btn-form:hover, .lv-dark.ps-cta:hover,
+.lv-dark.btn:not([class*="btn-"]):hover { background: #fff !important; }
+.lv-dark.btn-ghost, .btn.lv-dark + .btn-ink.lv-dark {
+    background: rgba(255,255,255,.1) !important; color: #fff !important; box-shadow: none !important;
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+}
+.lv-dark.btn-ghost:hover, .btn.lv-dark + .btn-ink.lv-dark:hover { background: rgba(255,255,255,.18) !important; }
+
+/* barra de promoção do topo (promo-sistema.js) */
+#psBar a { border: none !important; background: rgba(255,255,255,.12) !important; color: #fff !important; }
+#psBar a:first-of-type { background: rgba(196,131,94,.92) !important; }
+#psBar a:hover { background: rgba(255,255,255,.2) !important; }
+
+/* sombra dura trocada pelo leve.js ganha esta classe */
+.lv-soft { box-shadow: var(--lv-soft) !important; transition: transform .35s var(--lv-ease), box-shadow .35s var(--lv-ease) !important; }
+.lv-soft:hover { box-shadow: var(--lv-soft-hover) !important; }
+.lv-soft.lv-thin { border-width: 1px !important; border-color: var(--lv-hair) !important; }
+.lv-soft.lv-deep { box-shadow: 0 22px 44px -22px rgba(20,55,60,.5) !important; }
+.lv-soft.lv-deep:hover { box-shadow: 0 30px 56px -24px rgba(20,55,60,.6) !important; }
+
+/* ============ BIBLIOTECA ============ */
+.toolbar {
+    border-top: 1px solid var(--lv-hair) !important; border-bottom: 1px solid var(--lv-hair) !important;
+    background: rgba(243,238,227,.8) !important;
+    -webkit-backdrop-filter: saturate(1.4) blur(18px) !important; backdrop-filter: saturate(1.4) blur(18px) !important;
+}
+.feed .card { border: 1px solid var(--lv-hair) !important; border-radius: 22px !important; box-shadow: var(--lv-soft) !important;
+    transition: transform .35s var(--lv-ease), box-shadow .35s var(--lv-ease) !important; }
+.feed .card:not(.card-hero):not(.card-offer):not(.card-mail) { background: #FDFBF7 !important; }
+.feed .card:hover { transform: translateY(-3px) !important; box-shadow: var(--lv-soft-hover) !important; }
+.feed .cover { border-bottom: none !important; }
+.feed .cover-num { display: none !important; }
+.feed .cover-kind { border: none !important; background: rgba(255,255,255,.16) !important;
+    text-transform: none !important; letter-spacing: 0 !important; font-weight: 600 !important; }
+.feed .cover-kind.novo { background: #fff !important; color: #985A3B !important; }
+.feed .card-foot { border-top: 1px solid var(--lv-hair) !important; }
+.feed .go { text-transform: none !important; letter-spacing: 0 !important; font-weight: 600 !important; font-size: .88rem !important; }
+.feed .card-hero, .feed .card-offer { border: none !important; box-shadow: 0 24px 48px -22px rgba(20,55,60,.55) !important; }
+.feed .card-hero:hover, .feed .card-offer:hover { box-shadow: 0 32px 60px -24px rgba(20,55,60,.65) !important; }
+.feed .card-hero .ch-mark { display: none !important; }
+.feed .card-hero .ch-body { padding: 40px 42px !important; }
+@media (max-width: 620px) { .feed .card-hero .ch-body { padding: 28px 24px !important; } }
+.feed .card-mail:hover { transform: none !important; box-shadow: var(--lv-soft) !important; }
+.hero-card { border: 1px solid var(--lv-hair) !important; border-radius: 22px !important; box-shadow: var(--lv-soft-hover) !important; }
+.hero-stats { border-bottom: none !important; }
+#q { border: 1px solid var(--lv-hair) !important; background: #fff !important; box-shadow: 0 1px 2px rgba(20,55,60,.05) !important; }
+#q:focus { border-color: rgba(176,110,74,.5) !important; box-shadow: 0 0 0 4px rgba(176,110,74,.14) !important; }
+.seg { border: none !important; background: rgba(20,55,60,.07) !important; padding: 3px; gap: 2px; }
+.seg button { border: none !important; background: transparent !important; border-radius: 100px !important;
+    text-transform: none !important; letter-spacing: 0 !important; font-weight: 600 !important; }
+.seg button.active { background: #fff !important; color: var(--lv-ink) !important;
+    box-shadow: 0 1px 3px rgba(20,55,60,.16), 0 4px 10px -4px rgba(20,55,60,.2) !important; }
+#temaRow .chip { border: none !important; background: rgba(20,55,60,.06) !important; }
+#temaRow .chip:hover { background: rgba(20,55,60,.11) !important; }
+#temaRow .chip.active { background: var(--lv-ink) !important; color: #fff !important; }
+.hero-mail .field, .card-mail .field { border: 1px solid var(--lv-hair) !important; background: #fff !important; }
+
+/* ============ HOME: foto recortada, sem moldura ============ */
+.hero-photo.solta { position: relative; }
+.hero-photo.solta::before {
+    content: ""; position: absolute; inset: 12% 4% 0 4%; border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(196,131,94,.28), rgba(196,131,94,0));
+    filter: blur(10px); z-index: 0;
+}
+.hero-photo.solta .ph {
+    background: none !important; border-radius: 0 !important; box-shadow: none !important;
+    overflow: visible !important; aspect-ratio: auto !important; z-index: 1;
+}
+.hero-photo.solta .ph-tag { display: none !important; }
+.hero-photo.solta .ph > img {
+    position: static !important; width: 100% !important; height: auto !important; object-fit: contain !important;
+    filter: drop-shadow(0 30px 40px rgba(20,55,60,.28)) drop-shadow(0 6px 10px rgba(20,55,60,.12));
+}
+@media (max-width: 880px) { .hero-photo.solta { max-width: 420px; margin: 0 auto; } }
